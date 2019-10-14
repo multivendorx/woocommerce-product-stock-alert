@@ -1,0 +1,61 @@
+#dc_admin_footer {
+  bottom: 45px;
+  text-align: center;
+}
+
+#dc_admin_footer a {
+  text-decoration: none; 
+}
+
+#dc_admin_footer img {
+  border: none; 
+  margin-right: 5px;
+  vertical-align: bottom;
+}
+
+.required {
+  color: red; 
+}
+
+.no_subscriber {
+	font-size: 35px;
+	color: green;
+}
+
+.no_subscriber_zero {
+	font-size: 35px;
+	color: red;
+}
+
+.interested_person {
+	margin-top: 25px;
+}
+
+.stock_label {
+	text-align: center;
+	font-weight: bold;
+}
+
+.variation_no_subscriber {
+	text-align: center;
+  font-size: 3.5em;
+  margin: 20px;
+  color: green;
+}
+
+.variation_no_subscriber_zero {
+	text-align: center;
+  font-size: 3.5em;
+  margin: 20px;
+  color: red;
+}
+
+.stock_column {
+	color: green;
+	font-size: 15px;
+}
+
+.stock_column_zero {
+	color: red;
+	font-size: 15px;
+}

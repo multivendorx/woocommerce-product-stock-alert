@@ -1,0 +1,486 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-06-19 06:43+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: \n"
+"Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco - https://localise.biz/"
+
+#: admin/class-woo-product-stock-alert-settings-woo_product_stock_alert_general.php:28
+msgid "Basic settings"
+msgstr ""
+
+#: admin/class-woo-product-stock-alert-settings-woo_product_stock_alert_general.php:29
+msgid "Enable stock alert"
+msgstr ""
+
+#: admin/class-woo-product-stock-alert-settings-woo_product_stock_alert_general.php:30
+msgid "Enable with backorders"
+msgstr ""
+
+#: admin/class-woo-product-stock-alert-settings-woo_product_stock_alert_general.php:31
+msgid "Enable No. of Interest on Product Page"
+msgstr ""
+
+#: admin/class-woo-product-stock-alert-settings-woo_product_stock_alert_general.php:31
+msgid "How many person shown interest or subscribed for the product."
+msgstr ""
+
+#: admin/class-woo-product-stock-alert-settings-woo_product_stock_alert_general.php:34
+msgid "Form Customization"
+msgstr ""
+
+#: admin/class-woo-product-stock-alert-settings-woo_product_stock_alert_general.php:35
+msgid "Edit alert text"
+msgstr ""
+
+#: admin/class-woo-product-stock-alert-settings-woo_product_stock_alert_general.php:35
+msgid "Enter the text which you want to display as alert text."
+msgstr ""
+
+#: admin/class-woo-product-stock-alert-settings-woo_product_stock_alert_general.php:35
+msgid "It will represent alert text."
+msgstr ""
+
+#: admin/class-woo-product-stock-alert-settings-woo_product_stock_alert_general.php:36
+msgid "Choose alert text color"
+msgstr ""
+
+#: admin/class-woo-product-stock-alert-settings-woo_product_stock_alert_general.php:36
+msgid "Choose alert text color here."
+msgstr ""
+
+#: admin/class-woo-product-stock-alert-settings-woo_product_stock_alert_general.php:36
+msgid "This lets you choose alert text color."
+msgstr ""
+
+#: admin/class-woo-product-stock-alert-settings-woo_product_stock_alert_general.php:37
+msgid "Edit subscribe button text"
+msgstr ""
+
+#: admin/class-woo-product-stock-alert-settings-woo_product_stock_alert_general.php:37
+msgid "Enter the text which you want to display on subscribe button."
+msgstr ""
+
+#: admin/class-woo-product-stock-alert-settings-woo_product_stock_alert_general.php:37
+msgid "It will represent subscribe button text."
+msgstr ""
+
+#: admin/class-woo-product-stock-alert-settings-woo_product_stock_alert_general.php:38
+msgid "Edit unsubscribe button text"
+msgstr ""
+
+#: admin/class-woo-product-stock-alert-settings-woo_product_stock_alert_general.php:38
+msgid "Enter the text which you want to display on unsubscribe button."
+msgstr ""
+
+#: admin/class-woo-product-stock-alert-settings-woo_product_stock_alert_general.php:38
+msgid "It will represent unsubscribe button text."
+msgstr ""
+
+#: admin/class-woo-product-stock-alert-settings-woo_product_stock_alert_general.php:39
+msgid "Edit Shown Interest text"
+msgstr ""
+
+#: admin/class-woo-product-stock-alert-settings-woo_product_stock_alert_general.php:39
+#: classes/class-woo-product-stock-alert-frontend.php:51
+#: classes/class-woo-product-stock-alert-frontend.php:168
+#: classes/shortcode/class-woo-product-stock-alert-shortcode-display-stock-alert-form.php:49
+msgid "Already %no_of_subscribed% persons shown interest."
+msgstr ""
+
+#: admin/class-woo-product-stock-alert-settings-woo_product_stock_alert_general.php:39
+msgid ""
+"Enter the text which you want to display as shown interest text<br>Hint: Use "
+"%no_of_subscribed% as number of interest/subscribed persons."
+msgstr ""
+
+#: admin/class-woo-product-stock-alert-settings-woo_product_stock_alert_general.php:39
+msgid ""
+"Enter the text which you want to display as shown interest text<br>Hint: Use "
+"%no_of_subscribed% as number of interest/subscribed persons"
+msgstr ""
+
+#: admin/class-woo-product-stock-alert-settings-woo_product_stock_alert_general.php:40
+msgid "Choose button background color"
+msgstr ""
+
+#: admin/class-woo-product-stock-alert-settings-woo_product_stock_alert_general.php:40
+msgid "Choose alert button background color here."
+msgstr ""
+
+#: admin/class-woo-product-stock-alert-settings-woo_product_stock_alert_general.php:40
+msgid "This lets you choose alert button background color."
+msgstr ""
+
+#: admin/class-woo-product-stock-alert-settings-woo_product_stock_alert_general.php:41
+msgid "Choose button border color"
+msgstr ""
+
+#: admin/class-woo-product-stock-alert-settings-woo_product_stock_alert_general.php:41
+msgid "Choose alert button border color here."
+msgstr ""
+
+#: admin/class-woo-product-stock-alert-settings-woo_product_stock_alert_general.php:41
+msgid "This lets you choose alert button border color."
+msgstr ""
+
+#: admin/class-woo-product-stock-alert-settings-woo_product_stock_alert_general.php:42
+msgid "Choose button text color"
+msgstr ""
+
+#: admin/class-woo-product-stock-alert-settings-woo_product_stock_alert_general.php:42
+msgid "Choose alert button text color here."
+msgstr ""
+
+#: admin/class-woo-product-stock-alert-settings-woo_product_stock_alert_general.php:42
+msgid "This lets you choose alert button text color."
+msgstr ""
+
+#: admin/class-woo-product-stock-alert-settings-woo_product_stock_alert_general.php:43
+msgid "Choose button background color on hover"
+msgstr ""
+
+#: admin/class-woo-product-stock-alert-settings-woo_product_stock_alert_general.php:43
+msgid "Choose alert button background color on hover here."
+msgstr ""
+
+#: admin/class-woo-product-stock-alert-settings-woo_product_stock_alert_general.php:43
+msgid "This lets you choose alert button background color on hover."
+msgstr ""
+
+#: admin/class-woo-product-stock-alert-settings-woo_product_stock_alert_general.php:44
+msgid "Choose button border color on hover"
+msgstr ""
+
+#: admin/class-woo-product-stock-alert-settings-woo_product_stock_alert_general.php:44
+msgid "Choose alert button border color on hover here."
+msgstr ""
+
+#: admin/class-woo-product-stock-alert-settings-woo_product_stock_alert_general.php:44
+msgid "This lets you choose alert button border color on hover."
+msgstr ""
+
+#: admin/class-woo-product-stock-alert-settings-woo_product_stock_alert_general.php:45
+msgid "Choose button text color on hover"
+msgstr ""
+
+#: admin/class-woo-product-stock-alert-settings-woo_product_stock_alert_general.php:45
+msgid "Choose alert button text color on hover here."
+msgstr ""
+
+#: admin/class-woo-product-stock-alert-settings-woo_product_stock_alert_general.php:45
+msgid "This lets you choose alert button text color on hover."
+msgstr ""
+
+#: admin/class-woo-product-stock-alert-settings-woo_product_stock_alert_general.php:48
+msgid "Form Submission"
+msgstr ""
+
+#: admin/class-woo-product-stock-alert-settings-woo_product_stock_alert_general.php:49
+msgid "Edit alert text when form submitted successfully"
+msgstr ""
+
+#: admin/class-woo-product-stock-alert-settings-woo_product_stock_alert_general.php:49
+msgid ""
+"Hint: Use %product_title% as product title and %customer_email% as customer "
+"email.<br/> Example: Thank you for your interest in %product_title%, you "
+"will receive an email alert when it becomes available."
+msgstr ""
+
+#: admin/class-woo-product-stock-alert-settings-woo_product_stock_alert_general.php:50
+msgid "Edit alert text when email is already submitted"
+msgstr ""
+
+#: admin/class-woo-product-stock-alert-settings-woo_product_stock_alert_general.php:50
+msgid ""
+"Hint: Use %product_title% as product title and %customer_email% as customer "
+"email.<br/> Example: %customer_email% is already registered with "
+"%product_title%. Please try again."
+msgstr ""
+
+#: admin/class-woo-product-stock-alert-settings-woo_product_stock_alert_general.php:51
+msgid "Edit alert text for valid email check"
+msgstr ""
+
+#: admin/class-woo-product-stock-alert-settings-woo_product_stock_alert_general.php:51
+msgid ""
+"Hint: Use %product_title% as product title and %customer_email% as customer "
+"email.<br/> Example: Please enter a valid email id and try again."
+msgstr ""
+
+#: admin/class-woo-product-stock-alert-settings-woo_product_stock_alert_general.php:52
+msgid "Edit alert text for successful unsubscribe"
+msgstr ""
+
+#: admin/class-woo-product-stock-alert-settings-woo_product_stock_alert_general.php:52
+msgid ""
+"Hint: Use %customer_email% as customer email.<br/> Example: %customer_email% "
+"is successfully unregistered."
+msgstr ""
+
+#: admin/class-woo-product-stock-alert-settings-woo_product_stock_alert_general.php:130
+msgid "General settings updated"
+msgstr ""
+
+#: admin/class-woo-product-stock-alert-settings-woo_product_stock_alert_general.php:150
+msgid "Customize your stock alert form from here"
+msgstr ""
+
+#: admin/class-woo-product-stock-alert-settings.php:28
+#: admin/class-woo-product-stock-alert-settings.php:29
+msgid "WC Stock Alert"
+msgstr ""
+
+#: admin/class-woo-product-stock-alert-settings.php:41
+msgid "Product Stock Alert"
+msgstr ""
+
+#: classes/class-woo-product-stock-alert-frontend.php:37
+#: classes/class-woo-product-stock-alert-frontend.php:54
+#: classes/class-woo-product-stock-alert-frontend.php:154
+#: classes/class-woo-product-stock-alert-frontend.php:171
+#: classes/shortcode/class-woo-product-stock-alert-shortcode-display-stock-alert-form.php:35
+#: classes/shortcode/class-woo-product-stock-alert-shortcode-display-stock-alert-form.php:52
+msgid "Get an alert when the product is in stock:"
+msgstr ""
+
+#: classes/class-woo-product-stock-alert-frontend.php:39
+#: classes/class-woo-product-stock-alert-frontend.php:57
+#: classes/class-woo-product-stock-alert-frontend.php:156
+#: classes/class-woo-product-stock-alert-frontend.php:174
+#: classes/shortcode/class-woo-product-stock-alert-shortcode-display-stock-alert-form.php:37
+#: classes/shortcode/class-woo-product-stock-alert-shortcode-display-stock-alert-form.php:55
+msgid "Get an alert"
+msgstr ""
+
+#: classes/class-woo-product-stock-alert-frontend.php:40
+#: classes/class-woo-product-stock-alert-frontend.php:157
+#: classes/shortcode/class-woo-product-stock-alert-shortcode-display-stock-alert-form.php:38
+msgid "Unsubscribe"
+msgstr ""
+
+#: classes/class-woo-product-stock-alert-frontend.php:60
+#: classes/class-woo-product-stock-alert-frontend.php:177
+#: classes/shortcode/class-woo-product-stock-alert-shortcode-display-stock-alert-form.php:58
+msgid ""
+"Thank you for your interest in <b>%product_title%</b>, you will receive an "
+"email alert when it becomes available."
+msgstr ""
+
+#: classes/class-woo-product-stock-alert-frontend.php:63
+#: classes/class-woo-product-stock-alert-frontend.php:180
+#: classes/shortcode/class-woo-product-stock-alert-shortcode-display-stock-alert-form.php:61
+msgid ""
+"<b>%customer_email%</b> is already registered with <b>%product_title%</b>."
+msgstr ""
+
+#: classes/class-woo-product-stock-alert-frontend.php:66
+#: classes/class-woo-product-stock-alert-frontend.php:183
+#: classes/shortcode/class-woo-product-stock-alert-shortcode-display-stock-alert-form.php:64
+msgid "Please enter a valid email id and try again."
+msgstr ""
+
+#: classes/class-woo-product-stock-alert-frontend.php:69
+#: classes/class-woo-product-stock-alert-frontend.php:186
+#: classes/shortcode/class-woo-product-stock-alert-shortcode-display-stock-alert-form.php:67
+msgid "<b>%customer_email%</b> is successfully unregistered."
+msgstr ""
+
+#: classes/class-woo-product-stock-alert-frontend.php:98
+#: classes/shortcode/class-woo-product-stock-alert-shortcode-display-stock-alert-form.php:98
+msgid "Processing..."
+msgstr ""
+
+#: classes/class-woo-product-stock-alert-frontend.php:99
+#: classes/shortcode/class-woo-product-stock-alert-shortcode-display-stock-alert-form.php:99
+msgid "Some error occurs"
+msgstr ""
+
+#: classes/class-woo-product-stock-alert-frontend.php:100
+#: classes/shortcode/class-woo-product-stock-alert-shortcode-display-stock-alert-form.php:100
+msgid "Please try again."
+msgstr ""
+
+#: classes/class-woo-product-stock-alert-frontend.php:227
+msgid "Enter your email"
+msgstr ""
+
+#: classes/class-woo-product-stock-alert-export.php:15
+#: classes/class-woo-product-stock-alert-admin.php:143
+#: classes/class-woo-product-stock-alert-admin.php:143
+msgid "WC Stock Alert Export"
+msgstr ""
+
+#: classes/class-woo-product-stock-alert-export.php:16
+msgid ""
+"When you click the button below, this will export all out of stock products "
+"with subscribers email."
+msgstr ""
+
+#: classes/class-woo-product-stock-alert-export.php:17
+msgid "Export CSV"
+msgstr ""
+
+#: classes/class-woo-product-stock-alert-admin.php:61
+msgid "Powered by"
+msgstr ""
+
+#: classes/class-woo-product-stock-alert-admin.php:61
+msgid "WC Marketplace"
+msgstr ""
+
+#: classes/class-woo-product-stock-alert-admin.php:67
+msgid "Remove Subscribers"
+msgstr ""
+
+#: classes/class-woo-product-stock-alert-admin.php:93
+#, php-format
+msgid "Removed subscribers from %s product."
+msgid_plural "Removed subscribers from %s products."
+msgstr[0] ""
+msgstr[1] ""
+
+#: classes/class-woo-product-stock-alert-admin.php:116
+msgid "Interested Person(s)"
+msgstr ""
+
+#: classes/class-woo-product-stock-alert-admin.php:314
+msgid "Number of Interested Person(s)"
+msgstr ""
+
+#: classes/class-woo-product-stock-alert-admin.php:362
+msgid "Number of Interested Person(s) : "
+msgstr ""
+
+#: classes/emails/class-woo-product-stock-alert-subscriber-confirmation-email.php:32
+msgid "Confirm subscriber"
+msgstr ""
+
+#: classes/emails/class-woo-product-stock-alert-subscriber-confirmation-email.php:33
+msgid "Confirm customer when they subscribe a product"
+msgstr ""
+
+#: classes/emails/class-woo-product-stock-alert-subscriber-confirmation-email.php:69
+msgid "You have subscribed a product on {site_title}"
+msgstr ""
+
+#: classes/emails/class-woo-product-stock-alert-subscriber-confirmation-email.php:79
+#: classes/emails/class-woo-product-stock-alert-admin-email.php:81
+#: classes/emails/class-woo-product-stock-alert-email.php:79
+msgid "Welcome to {site_title}"
+msgstr ""
+
+#: classes/emails/class-woo-product-stock-alert-admin-email.php:33
+msgid "Alert admin"
+msgstr ""
+
+#: classes/emails/class-woo-product-stock-alert-admin-email.php:34
+msgid ""
+"Admin will get an alert when customer subscribe any out of stock product"
+msgstr ""
+
+#: classes/emails/class-woo-product-stock-alert-admin-email.php:71
+msgid "A Customer has subscribed a product on {site_title}"
+msgstr ""
+
+#: classes/emails/class-woo-product-stock-alert-email.php:32
+msgid "Alert Subscriber"
+msgstr ""
+
+#: classes/emails/class-woo-product-stock-alert-email.php:33
+msgid "Alert customer when their subscribed product becomes in stock"
+msgstr ""
+
+#: classes/emails/class-woo-product-stock-alert-email.php:69
+msgid "Your Subscribed product on {site_title} is available now"
+msgstr ""
+
+#: templates/emails/stock_alert_admin_email.php:15
+#: templates/emails/plain/stock_alert_admin_email.php:14
+msgid ""
+"Hi there. A customer has subscribed a product on your shop. Product details "
+"are shown below for your reference:"
+msgstr ""
+
+#: templates/emails/stock_alert_admin_email.php:29
+#: templates/emails/stock_alert_email.php:32
+#: templates/emails/stock_alert_email_subscriber_confirmation.php:33
+msgid "Product Details"
+msgstr ""
+
+#: templates/emails/stock_alert_admin_email.php:33
+#: templates/emails/stock_alert_email.php:36
+#: templates/emails/stock_alert_email_subscriber_confirmation.php:37
+msgid "Product"
+msgstr ""
+
+#: templates/emails/stock_alert_admin_email.php:34
+#: templates/emails/stock_alert_email.php:37
+#: templates/emails/stock_alert_email_subscriber_confirmation.php:38
+msgid "Price"
+msgstr ""
+
+#: templates/emails/stock_alert_admin_email.php:51
+#: templates/emails/stock_alert_email.php:53
+#: templates/emails/stock_alert_email_subscriber_confirmation.php:54
+msgid "Following is the product link : "
+msgstr ""
+
+#: templates/emails/stock_alert_admin_email.php:53
+msgid "Customer Details"
+msgstr ""
+
+#: templates/emails/stock_alert_admin_email.php:55
+#: templates/emails/stock_alert_email.php:57
+#: templates/emails/stock_alert_email_subscriber_confirmation.php:58
+msgid "Email"
+msgstr ""
+
+#: templates/emails/stock_alert_email.php:15
+#: templates/emails/plain/stock_alert_email.php:14
+msgid ""
+"Hi there. You have subscribed a product. Your subscribed product is "
+"available now. Product details are shown below for your reference:"
+msgstr ""
+
+#: templates/emails/stock_alert_email.php:55
+#: templates/emails/stock_alert_email_subscriber_confirmation.php:56
+msgid "Your Details"
+msgstr ""
+
+#: templates/emails/stock_alert_email_subscriber_confirmation.php:15
+#: templates/emails/plain/stock_alert_email_subscriber_confirmation.php:14
+msgid ""
+"Hi there. You have successfully subscribed a product. We will inform you "
+"when the product becomes available. Product details are shown below for your "
+"reference:"
+msgstr ""
+
+#. Name of the plugin
+msgid "WooCommerce Product Stock Alert"
+msgstr ""
+
+#. Description of the plugin
+msgid ""
+"Woocommerce plugin using which a customer can subscribe for interest on an "
+"out of stock product. When the product becomes available, subscribed "
+"customer will get an alert email."
+msgstr ""
+
+#. URI of the plugin
+#. Author URI of the plugin
+msgid "http://wc-marketplace.com/"
+msgstr ""
+
+#. Author of the plugin
+msgid "WC Marketplace, The Grey Parrots"
+msgstr ""
