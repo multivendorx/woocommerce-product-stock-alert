@@ -46,7 +46,7 @@ $is_prices_including_tax = get_option( 'woocommerce_prices_include_tax' );
                 echo "<br>".ucfirst(wc_attribute_label($label)).": <strong>".ucfirst($value)."</strong>";
               }
             } ?></th>
-			<th scope="col" style="text-align:left; border: 1px solid #eee;"><?php _e( $product_price, 'woocommerce-product-stock-alert' ); echo ( isset( $is_prices_including_tax ) && ($is_prices_including_tax == "yes" )) ? WC()->countries->ex_tax_or_vat() : WC()->countries->inc_tax_or_vat(); ?></th>
+			<th scope="col" style="text-align:left; border: 1px solid #eee;"><?php _e( $product_price, 'woocommerce-product-stock-alert' ); echo ( isset( $is_prices_including_tax ) && ($is_prices_including_tax != "yes" )) ? WC()->countries->ex_tax_or_vat() : WC()->countries->inc_tax_or_vat(); ?></th>
 		</tr>
 	</tbody>
 </table>
