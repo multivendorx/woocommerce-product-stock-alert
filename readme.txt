@@ -3,9 +3,9 @@
 Contributors: Dualcube, greyparrots, itzmekhokan
 Tags: wordpress, woocommerce, e-commerce, shop, stock, out of stock, in stock, stock alert, alert email, stock alert email
 Requires at least: 4.4
-Tested up to: 5.2.1
+Tested up to: 5.3.2
 Requires PHP: 5.6
-Stable tag: 1.6.0
+Stable tag: 1.6.1
 Donate link: http://wc-marketplace.com/
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -82,6 +82,10 @@ Yes, this plugin works with WooCommerce Subscription Product.
 15. Export subscribers' list
 
 == Changelog ==
+= 1.6.1 =
+* Woocommerce 3.8+ compatibility added
+* Fix : Stock alert mail price issue fix #1.
+
 = 1.6.0 =
 * Woocommerce 3.6+ compatibility added
 * Fix : Static Function issue.
