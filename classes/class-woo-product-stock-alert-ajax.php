@@ -83,13 +83,14 @@ class WOO_Product_Stock_Alert_Ajax {
 		if( isset( $get_subscribed_user ) && !empty( $get_subscribed_user ) ) {
 			foreach( $get_subscribed_user as $pro_id => $subscribers ) {
 				$product_type = get_post_type( $pro_id );
+				$product = wc_get_product($pro_id);
 				$sku = get_post_meta($pro_id, '_sku', true);
 				if($product_type == 'product') {
 					$prod_type = 'simple';
 					$product_name = get_the_title( $pro_id );
 				} else {
 					$prod_type = 'variation';
-					$product_name = get_the_excerpt( $pro_id );
+					$product_name = $product->get_name();
 				}
 				$subscribers_string = implode( ",", $subscribers );
 				$subscribers_lists = explode( ",", $subscribers_string );
