@@ -8,7 +8,6 @@ jQuery(document).ready(function($) {
 	  	var pro_id = $('.current_product_id').val();
 	  	if (variation == null) { 
 	  	    if($('#product-'+pro_id).is('.outofstock') || $('#product-'+pro_id).is('.onbackorder')){
-  	    		$('.onbackorder .cart').css('display', 'none');
 				$('.alert_container').css('display', 'block');
 	  	    }else{
 	  	        $('.alert_container').css('display', 'none');
