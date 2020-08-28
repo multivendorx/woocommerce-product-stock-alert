@@ -2,7 +2,7 @@
 /**
  * Stock Alert Email
  *
- * @author 		 WC Marketplace
+ * @author 	  WC Marketplace
  * @version   1.3.0
  */
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly

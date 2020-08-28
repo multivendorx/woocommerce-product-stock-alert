@@ -4,7 +4,7 @@
  *
  * All Standard HTML fields can be include in your frontend or backend pages 
  *
- * @author 		 WC Marketplace
+ * @author 		WC Marketplace
  * @category 	Library
  * @package 	lib/php
  * @version     1.0.2

@@ -11,7 +11,7 @@ if ( ! class_exists( 'WC_Subscriber_Confirmation_Email_Stock_Alert' ) ) :
  *
  * @class 		WC_Subscriber_Confirmation_Email_Stock_Alert
  * @version		1.3.0
- * @author 		 WC Marketplace
+ * @author 		WC Marketplace
  * @extends 	WC_Email
  */
 class WC_Subscriber_Confirmation_Email_Stock_Alert extends WC_Email {
