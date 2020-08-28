@@ -2,7 +2,7 @@
 /**
  * Stock Alert Email
  *
- * @author 		Dualcube
+ * @author 		 WC Marketplace
  * @version   1.3.0
  */
 
