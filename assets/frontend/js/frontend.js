@@ -17,7 +17,7 @@ jQuery(document).ready(function($) {
 			var var_id = '';
 			if(variation.hasOwnProperty('variation_id')){  
 				var_id = variation.variation_id;
-			}else{
+			} else {
 				var_id = variation.id; 
 			}
 			
@@ -109,7 +109,6 @@ jQuery(document).ready(function($) {
 		$('.alert_container').off('click').on('click','.stock_alert_button', function() {
 			
 			cus_email = $(this).parent().find('.stock_alert_email').val();
-			variation_id = variation_id;
 			pro_id = $(this).parent().find('.current_product_id').val();
 			pro_title = $(this).parent().find('.current_product_name').val();
 			register_html = $('.alert_container').html();
