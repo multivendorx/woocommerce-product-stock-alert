@@ -299,16 +299,6 @@ class WOO_Product_Stock_Alert_Frontend {
         $dc_settings = $this->dc_plugin_settings;
 
         if ($product) { 
-//            print_r(array(
-//                'managing_stock' => $product->managing_stock(), 
-//                'get_stock_quantity' => $product->get_stock_quantity(),
-//                'get_manage_stock' => $product->get_manage_stock(), 
-//                'get_stock_status' => $product->get_stock_status(),
-//                'woocommerce_notify_no_stock_amount' => get_option('woocommerce_notify_no_stock_amount'), 
-//                'backorders_allowed' => $product->backorders_allowed()
-//                )
-//            );
-//            print_r($product->get_availability());
             $managing_stock = $product->managing_stock();
             $stock_quantity = $product->get_stock_quantity();
             $manage_stock = $product->get_manage_stock();
@@ -327,28 +317,6 @@ class WOO_Product_Stock_Alert_Frontend {
                     }
                 }
             }
-            
-            
-            
-//            if (isset($stock_quantity) && $manage_stock) {
-//                if ($managing_stock && $stock_quantity <= (int) get_option('woocommerce_notify_no_stock_amount')) {
-//                    if ($product->backorders_allowed() && isset($dc_settings['is_enable_backorders']) && $dc_settings['is_enable_backorders'] == 'Enable') {
-//                        if ($stock_status == 'outofstock' || $stock_quantity <= 0) {
-//                            $display_stock_alert_form = true;
-//                        }
-//                    } else {
-//                        $display_stock_alert_form = true;
-//                    }
-//                } elseif ($stock_quantity <= 0) {
-//                    if ($product->backorders_allowed() && isset($dc_settings['is_enable_backorders']) && $dc_settings['is_enable_backorders'] == 'Enable') {
-//                        if ($stock_status == 'outofstock' || $stock_quantity <= 0) {
-//                            $display_stock_alert_form = true;
-//                        }
-//                    } else {
-//                        $display_stock_alert_form = true;
-//                    }
-//                }
-//            }
         }
 
         return $display_stock_alert_form;
