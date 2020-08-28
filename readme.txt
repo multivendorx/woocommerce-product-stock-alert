@@ -31,8 +31,8 @@ Never miss a sale now. This plugin lets prospective buyers subscribe to a produc
 *   Customer can unsubscribe a product which he/she already subscribed.
 
 = Compatibility =
-*   WordPress 5.2+
-*   WooCommerce 3.6+
+*   WordPress 5.5+
+*   WooCommerce 4.4+
 *   Multilingual Support is included with the plugin and is fully compatible with WPML.
 
 
@@ -82,7 +82,7 @@ Yes, this plugin works with WooCommerce Subscription Product.
 15. Export subscribers' list
 
 == Changelog ==
-= 1.7.0 - 2020-08-28 =
+= 1.7.0 - 2020-08-29 =
 * Fixed - Alert box display for backorder products also.
 * Fixed - Product - Variations name added for variable product in export file.
 * Added - WordPress 5.5 compatibility.
