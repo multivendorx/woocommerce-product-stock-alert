@@ -3,16 +3,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-19 06:43+0000\n"
+"POT-Creation-Date: 2020-08-28 11:48+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
 "Language: \n"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Loco - https://localise.biz/"
+"X-Generator: Loco https://localise.biz/"
 
 #: admin/class-woo-product-stock-alert-settings-woo_product_stock_alert_general.php:28
 msgid "Basic settings"
@@ -315,8 +315,8 @@ msgid "Enter your email"
 msgstr ""
 
 #: classes/class-woo-product-stock-alert-export.php:15
-#: classes/class-woo-product-stock-alert-admin.php:143
-#: classes/class-woo-product-stock-alert-admin.php:143
+#: classes/class-woo-product-stock-alert-admin.php:153
+#: classes/class-woo-product-stock-alert-admin.php:153
 msgid "WC Stock Alert Export"
 msgstr ""
 
@@ -334,6 +334,7 @@ msgstr ""
 msgid "Powered by"
 msgstr ""
 
+#. Author of the plugin
 #: classes/class-woo-product-stock-alert-admin.php:61
 msgid "WC Marketplace"
 msgstr ""
@@ -342,23 +343,84 @@ msgstr ""
 msgid "Remove Subscribers"
 msgstr ""
 
-#: classes/class-woo-product-stock-alert-admin.php:93
+#: classes/class-woo-product-stock-alert-admin.php:103
 #, php-format
 msgid "Removed subscribers from %s product."
 msgid_plural "Removed subscribers from %s products."
 msgstr[0] ""
 msgstr[1] ""
 
-#: classes/class-woo-product-stock-alert-admin.php:116
+#: classes/class-woo-product-stock-alert-admin.php:126
 msgid "Interested Person(s)"
 msgstr ""
 
-#: classes/class-woo-product-stock-alert-admin.php:314
+#: classes/class-woo-product-stock-alert-admin.php:324
 msgid "Number of Interested Person(s)"
 msgstr ""
 
-#: classes/class-woo-product-stock-alert-admin.php:362
+#: classes/class-woo-product-stock-alert-admin.php:372
 msgid "Number of Interested Person(s) : "
+msgstr ""
+
+#: templates/emails/stock_alert_email_subscriber_confirmation.php:15
+#: templates/emails/plain/stock_alert_email_subscriber_confirmation.php:14
+msgid ""
+"Hi there. You have successfully subscribed a product. We will inform you "
+"when the product becomes available. Product details are shown below for your "
+"reference:"
+msgstr ""
+
+#: templates/emails/stock_alert_email_subscriber_confirmation.php:33
+#: templates/emails/stock_alert_email.php:32
+#: templates/emails/stock_alert_admin_email.php:30
+msgid "Product Details"
+msgstr ""
+
+#: templates/emails/stock_alert_email_subscriber_confirmation.php:37
+#: templates/emails/stock_alert_email.php:36
+#: templates/emails/stock_alert_admin_email.php:34
+msgid "Product"
+msgstr ""
+
+#: templates/emails/stock_alert_email_subscriber_confirmation.php:38
+#: templates/emails/stock_alert_email.php:37
+#: templates/emails/stock_alert_admin_email.php:35
+msgid "Price"
+msgstr ""
+
+#: templates/emails/stock_alert_email_subscriber_confirmation.php:54
+#: templates/emails/stock_alert_email.php:53
+#: templates/emails/stock_alert_admin_email.php:52
+msgid "Following is the product link : "
+msgstr ""
+
+#: templates/emails/stock_alert_email_subscriber_confirmation.php:56
+#: templates/emails/stock_alert_email.php:55
+msgid "Your Details"
+msgstr ""
+
+#: templates/emails/stock_alert_email_subscriber_confirmation.php:58
+#: templates/emails/stock_alert_email.php:57
+#: templates/emails/stock_alert_admin_email.php:56
+msgid "Email"
+msgstr ""
+
+#: templates/emails/stock_alert_email.php:15
+#: templates/emails/plain/stock_alert_email.php:14
+msgid ""
+"Hi there. You have subscribed a product. Your subscribed product is "
+"available now. Product details are shown below for your reference:"
+msgstr ""
+
+#: templates/emails/stock_alert_admin_email.php:15
+#: templates/emails/plain/stock_alert_admin_email.php:14
+msgid ""
+"Hi there. A customer has subscribed a product on your shop. Product details "
+"are shown below for your reference:"
+msgstr ""
+
+#: templates/emails/stock_alert_admin_email.php:54
+msgid "Customer Details"
 msgstr ""
 
 #: classes/emails/class-woo-product-stock-alert-subscriber-confirmation-email.php:32
@@ -404,67 +466,6 @@ msgstr ""
 msgid "Your Subscribed product on {site_title} is available now"
 msgstr ""
 
-#: templates/emails/stock_alert_admin_email.php:15
-#: templates/emails/plain/stock_alert_admin_email.php:14
-msgid ""
-"Hi there. A customer has subscribed a product on your shop. Product details "
-"are shown below for your reference:"
-msgstr ""
-
-#: templates/emails/stock_alert_admin_email.php:29
-#: templates/emails/stock_alert_email.php:32
-#: templates/emails/stock_alert_email_subscriber_confirmation.php:33
-msgid "Product Details"
-msgstr ""
-
-#: templates/emails/stock_alert_admin_email.php:33
-#: templates/emails/stock_alert_email.php:36
-#: templates/emails/stock_alert_email_subscriber_confirmation.php:37
-msgid "Product"
-msgstr ""
-
-#: templates/emails/stock_alert_admin_email.php:34
-#: templates/emails/stock_alert_email.php:37
-#: templates/emails/stock_alert_email_subscriber_confirmation.php:38
-msgid "Price"
-msgstr ""
-
-#: templates/emails/stock_alert_admin_email.php:51
-#: templates/emails/stock_alert_email.php:53
-#: templates/emails/stock_alert_email_subscriber_confirmation.php:54
-msgid "Following is the product link : "
-msgstr ""
-
-#: templates/emails/stock_alert_admin_email.php:53
-msgid "Customer Details"
-msgstr ""
-
-#: templates/emails/stock_alert_admin_email.php:55
-#: templates/emails/stock_alert_email.php:57
-#: templates/emails/stock_alert_email_subscriber_confirmation.php:58
-msgid "Email"
-msgstr ""
-
-#: templates/emails/stock_alert_email.php:15
-#: templates/emails/plain/stock_alert_email.php:14
-msgid ""
-"Hi there. You have subscribed a product. Your subscribed product is "
-"available now. Product details are shown below for your reference:"
-msgstr ""
-
-#: templates/emails/stock_alert_email.php:55
-#: templates/emails/stock_alert_email_subscriber_confirmation.php:56
-msgid "Your Details"
-msgstr ""
-
-#: templates/emails/stock_alert_email_subscriber_confirmation.php:15
-#: templates/emails/plain/stock_alert_email_subscriber_confirmation.php:14
-msgid ""
-"Hi there. You have successfully subscribed a product. We will inform you "
-"when the product becomes available. Product details are shown below for your "
-"reference:"
-msgstr ""
-
 #. Name of the plugin
 msgid "WooCommerce Product Stock Alert"
 msgstr ""
@@ -479,8 +480,4 @@ msgstr ""
 #. URI of the plugin
 #. Author URI of the plugin
 msgid "http://wc-marketplace.com/"
-msgstr ""
-
-#. Author of the plugin
-msgid "WC Marketplace, The Grey Parrots"
 msgstr ""

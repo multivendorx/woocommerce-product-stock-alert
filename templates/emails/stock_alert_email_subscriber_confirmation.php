@@ -2,7 +2,7 @@
 /**
  * Stock Alert Email Subscriber Confirmation
  *
- * @author 		Dualcube
+ * @author 	  WC Marketplace
  * @version   1.3.0
  */
 
