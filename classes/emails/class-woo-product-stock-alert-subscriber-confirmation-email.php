@@ -119,4 +119,3 @@ class WC_Subscriber_Confirmation_Email_Stock_Alert extends WC_Email {
 
 endif;
 
-return new WC_Subscriber_Confirmation_Email_Stock_Alert();

@@ -66,8 +66,6 @@ class WOO_Product_Stock_Alert_Action {
         }
         
 
-        $admin_email = '';
-        $admin_email = get_option('admin_email');
         $dc_settings = get_dc_plugin_settings();
         if (!empty($get_subscribed_user) && is_array($get_subscribed_user)) {
             foreach ($get_subscribed_user as $id => $subscriber) {

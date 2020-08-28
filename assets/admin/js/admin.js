@@ -90,14 +90,6 @@ jQuery(document).ready(function($) {
   
   
   $('.wc_stock_alert_export_data').click(function(){
-  	
-		/* var export_data = {
-			action: 'export_subscribers'
-		}
-		
-		$.post( ajaxurl, export_data, function() {
-			
-		}); */
 		document.location.href = ajaxurl + '?action=export_subscribers';
   });
 

@@ -17,8 +17,6 @@ jQuery(document).ready(function($) {
 			var var_id = '';
 			if(variation.hasOwnProperty('variation_id')){  
 				var_id = variation.variation_id;
-			}else if(variation.hasOwnProperty('id')){
-				var_id = variation.id; 
 			}else{
 				var_id = variation.id; 
 			}
@@ -38,7 +36,6 @@ jQuery(document).ready(function($) {
 		  	initStockAlertVariation(var_id);
 		}
 	}).trigger( 'found_variation' );
-	//$('.variations_form').trigger( 'found_variation' );
 	initStockAlert();
 
 	$(document).on( 'click', '.alert_container .unsubscribe_button', function() { 
@@ -86,8 +83,6 @@ jQuery(document).ready(function($) {
 			alert_email_exist = alert_email_exist.replace( '%customer_email%', cus_email );
 			
 			if( cus_email && validateEmail(cus_email) ) {
-				//$(this).attr("value","Processing...");
-				//$(this).addClass("stk_disabled");
 				$(this).toggleClass('alert_loader').blur();	
 				var stock_alert = {
 					action: 'alert_ajax',
@@ -95,7 +90,6 @@ jQuery(document).ready(function($) {
 					product_id: pro_id
 				}
 				$.post(woo_stock_alert_script_data.ajax_url, stock_alert, function(response) { console.log(response);
-					//$(this).removeClass("stk_disabled");
 					$this.removeClass('alert_loader').blur();	
 					if( response == '0' ) {
 						$('.alert_container').html('<div class="registered_message">'+woo_stock_alert_script_data.error_occurs+'<a href="'+window.location+'"> '+woo_stock_alert_script_data.try_again+'</a></div>');
@@ -115,7 +109,6 @@ jQuery(document).ready(function($) {
 		$('.alert_container').off('click').on('click','.stock_alert_button', function() {
 			
 			cus_email = $(this).parent().find('.stock_alert_email').val();
-			//variation_id = $(this).parent().parent().parent().find('.variation_id').val();
 			variation_id = variation_id;
 			pro_id = $(this).parent().find('.current_product_id').val();
 			pro_title = $(this).parent().find('.current_product_name').val();

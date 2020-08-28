@@ -255,26 +255,6 @@ class WOO_Product_Stock_Alert_Ajax {
 					}
 				}
 			}
-
-//			if( isset($stock_quantity) && $manage_stock ) {
-//				if($managing_stock && $stock_quantity <= (int)get_option( 'woocommerce_notify_no_stock_amount' )){ 
-//					if( $child_obj->backorders_allowed() && isset($dc_settings['is_enable_backorders']) && $dc_settings['is_enable_backorders'] == 'Enable') {
-//						if( $stock_status == 'outofstock' || $stock_quantity  <= 0 ) {
-//							$display_stock_alert_form = 'true';
-//						}
-//					} else {
-//						$display_stock_alert_form = 'true';
-//					}
-//				}elseif( $stock_quantity <= 0 ) {
-//					if( $child_obj->backorders_allowed() && isset($dc_settings['is_enable_backorders']) && $dc_settings['is_enable_backorders'] == 'Enable') {
-//						if( $stock_status == 'outofstock' || $stock_quantity  <= 0 ) {
-//							$display_stock_alert_form = 'true';
-//						}
-//					} else {
-//						$display_stock_alert_form = 'true';
-//					}
-//				}
-//			}
 		}
 			
 		echo $display_stock_alert_form;
