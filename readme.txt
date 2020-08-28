@@ -42,7 +42,7 @@ WooCommerce Product Stock Alert has provided customizable email structure. Admin
 
 = Feedback =
 
-Thanks heaps for trying this plugin. I hope it could serve your purpose. If you find this plugin is helpful, appreciate us by giving a 5/5 star and feel free to comment as well as suggest additional features. If you find the plugin is buggy, please do mention the reason and we will add or change options and fix bugs. For more information and instructions on this plugin please visit www.dualcube.com. 
+Thanks heaps for trying this plugin. I hope it could serve your purpose. If you find this plugin is helpful, appreciate us by giving a 5/5 star and feel free to comment as well as suggest additional features. If you find the plugin is buggy, please do mention the reason and we will add or change options and fix bugs. For more information and instructions on this plugin please visit www.wc-marketplace.com. 
 
 == Installation ==
 1.  Upload your plugin folder to the '/wp-content/plugins' directory.
