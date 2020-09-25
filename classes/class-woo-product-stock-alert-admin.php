@@ -75,6 +75,8 @@ class WOO_Product_Stock_Alert_Admin {
         foreach ($post_ids as $post_id) {
             $product = wc_get_product($post_id);
             if($product && $product->get_parent_id() != 0 && get_post_meta( $post_id, '_product_subscriber', true )){
+                doWooStockAlertLOG('deleting post_meta for product_id '
+                    . $post_id. ' :: _product_subscriber=' . implode(";",get_post_meta($post_id, '_product_subscriber', true)));
                 delete_post_meta( $product->get_parent_id(), 'no_of_subscribers' );
                 delete_post_meta( $post_id, '_product_subscriber' );
             } if($product && $product->is_type('variable')) {
@@ -82,12 +84,16 @@ class WOO_Product_Stock_Alert_Admin {
                         $child_ids = $product->get_children();
                         if (isset($child_ids) && !empty($child_ids)) {
                             foreach ($child_ids as $child_id) {
+                                doWooStockAlertLOG('deleting post_meta for product_id '
+                                    . $child_id. ' :: _product_subscriber=' . implode(";",get_post_meta($child_id, '_product_subscriber', true)));
                                 delete_post_meta( $child_id, 'no_of_subscribers' );
                                 delete_post_meta( $child_id, '_product_subscriber' );
                             }
                         }
                     }
 			} else {
+                doWooStockAlertLOG('deleting post_meta for product_id '
+                    . $post_id . ' :: _product_subscriber=' . implode(";",get_post_meta($post_id, '_product_subscriber', true)));
                 delete_post_meta( $post_id, 'no_of_subscribers' );
                 delete_post_meta( $post_id, '_product_subscriber' );
             }
@@ -404,6 +410,8 @@ class WOO_Product_Stock_Alert_Admin {
                                         foreach ($product_subscriber as $to) {
                                             $email->trigger($to, $child_id);
                                         }
+                                        doWooStockAlertLOG('deleting post_meta for product_id '
+                                            . $child_id. ' :: _product_subscriber=' . implode(";",get_post_meta($child_id, '_product_subscriber', true)));
                                         delete_post_meta($child_id, '_product_subscriber');
                                         $parent_product_subscribers = get_post_meta($child_obj->get_parent_id(), 'no_of_subscribers', true);
                                         update_post_meta($child_obj->get_parent_id(), 'no_of_subscribers', $parent_product_subscribers - count($product_subscriber));
@@ -425,7 +433,10 @@ class WOO_Product_Stock_Alert_Admin {
                             foreach ($product_subscriber as $to) {
                                 $email->trigger($to, $post_id);
                             }
+                            doWooStockAlertLOG('deleting post_meta for product_id '
+                                . $post_id. ' :: _product_subscriber=' . implode(";", get_post_meta($post_id, '_product_subscriber', true)));
                             delete_post_meta($post_id, '_product_subscriber');
+                            delete_post_meta($post_id, 'no_of_subscribers');
                         }
                     }
                 }

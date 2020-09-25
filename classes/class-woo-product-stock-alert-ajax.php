@@ -135,6 +135,8 @@ class WOO_Product_Stock_Alert_Ajax {
 				update_post_meta($product_id, 'no_of_subscribers', $interest_persons);
 			}
 		} else {
+            doWooStockAlertLOG('12 deleting post_meta for product_id '
+                . $product_id. ' :: _product_subscriber=' . get_post_meta($product_id, '_product_subscriber', true));
 			delete_post_meta( $product_id, '_product_subscriber' );
 			delete_post_meta( $product_id, 'no_of_subscribers' );
 		}

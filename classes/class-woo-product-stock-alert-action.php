@@ -59,6 +59,8 @@ class WOO_Product_Stock_Alert_Action {
                         update_post_meta($all_product_id, 'no_of_subscribers', $interest_persons);
                     }
                 } else {
+                    doWooStockAlertLOG('deleting post_meta for product_id '
+                        . $all_product_id . ' :: _product_subscriber=' . implode(";",get_post_meta($all_product_id, '_product_subscriber', true)));
                     delete_post_meta($all_product_id, '_product_subscriber');
                     delete_post_meta($all_product_id, 'no_of_subscribers');
                 }
@@ -83,8 +85,10 @@ class WOO_Product_Stock_Alert_Action {
                                 foreach ($subscriber as $to) {
                                     $email->trigger($to, $id);
                                 }
-
+                                doWooStockAlertLOG('deleting post_meta for product_id '
+                                    . $id . ' :: _product_subscriber=' . implode(";",get_post_meta($id, '_product_subscriber', true)));
                                 delete_post_meta($id, '_product_subscriber');
+                                delete_post_meta($id, 'no_of_subscribers');
                             }
                         } else {
                             $email = WC()->mailer()->emails['WC_Email_Stock_Alert'];
@@ -92,7 +96,10 @@ class WOO_Product_Stock_Alert_Action {
                                 $email->trigger($to, $id);
                             }
 
+                            doWooStockAlertLOG('deleting post_meta for product_id '
+                                . $id . ' :: _product_subscriber=' . implode(";",get_post_meta($id, '_product_subscriber', true)));
                             delete_post_meta($id, '_product_subscriber');
+                            delete_post_meta($id, 'no_of_subscribers');
                         }
                     } elseif (!$managing_stock && $product_availability_stock > 0) {
                         if ($product->backorders_allowed() && isset($dc_settings['is_enable_backorders']) && $dc_settings['is_enable_backorders'] == 'Enable') {
@@ -102,7 +109,10 @@ class WOO_Product_Stock_Alert_Action {
                                     $email->trigger($to, $id);
                                 }
 
+                                doWooStockAlertLOG('deleting post_meta for product_id '
+                                    . $id . ' :: _product_subscriber=' . implode(";",get_post_meta($id, '_product_subscriber', true)));
                                 delete_post_meta($id, '_product_subscriber');
+                                delete_post_meta($id, 'no_of_subscribers');
                             }
                         } else {
                             $email = WC()->mailer()->emails['WC_Email_Stock_Alert'];
@@ -110,7 +120,10 @@ class WOO_Product_Stock_Alert_Action {
                                 $email->trigger($to, $id);
                             }
 
+                            doWooStockAlertLOG('deleting post_meta for product_id '
+                                . $id . ' :: _product_subscriber=' . implode(";",get_post_meta($id, '_product_subscriber', true)));
                             delete_post_meta($id, '_product_subscriber');
+                            delete_post_meta($id, 'no_of_subscribers');
                         }
                     }
                 }

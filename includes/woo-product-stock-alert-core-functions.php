@@ -162,26 +162,17 @@ if (!function_exists('display_stock_alert_form')) {
  */
 if (!function_exists('doWooStockAlertLOG')) {
 
-    function doWooStockAlertLOG($str) {
-        $file = plugin_dir_path(__FILE__) . 'stock_alert_log.log';
-        if (file_exists($file)) {
-            $temphandle = @fopen($file, 'w+'); // @codingStandardsIgnoreLine.
-            @fclose($temphandle); // @codingStandardsIgnoreLine.
-            if (defined('FS_CHMOD_FILE')) {
-                @chmod($file, FS_CHMOD_FILE); // @codingStandardsIgnoreLine.
-            }
-            // Open the file to get existing content
-            $current = file_get_contents($file);
-            // Append a new content to the file
-            $current .= "$str" . "\r\n";
-            $current .= "-------------------------------------\r\n";
-        } else {
-            $current = "$str" . "\r\n";
-            $current .= "-------------------------------------\r\n";
+    function doWooStockAlertLOG($str, $put_in_daily_log = true) {
+        $date = new DateTime();
+        $file = plugin_dir_path(__DIR__) . 'logs/stock_alert_log.log';
+        if ($put_in_daily_log) {
+            $file = plugin_dir_path(__DIR__) . 'logs/stock_alert_log-' . $date->format("Y-m-d") . '.log';
         }
-        // Write the contents back to the file
-        file_put_contents($file, $current);
-    }
+        $strToWrite = $date->format("Y-m-d H:i:s T") . " : " . $str . "\r\n";
 
+        // Append or create log file and save the content
+        file_put_contents($file, $strToWrite, (file_exists($file) ? FILE_APPEND : null));
+
+    }
 }
 ?>
