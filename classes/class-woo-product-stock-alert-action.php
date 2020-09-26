@@ -85,6 +85,7 @@ class WOO_Product_Stock_Alert_Action {
                                 }
 
                                 delete_post_meta($id, '_product_subscriber');
+                                delete_post_meta($id, 'no_of_subscribers');
                             }
                         } else {
                             $email = WC()->mailer()->emails['WC_Email_Stock_Alert'];
@@ -93,6 +94,7 @@ class WOO_Product_Stock_Alert_Action {
                             }
 
                             delete_post_meta($id, '_product_subscriber');
+                            delete_post_meta($id, 'no_of_subscribers');
                         }
                     } elseif (!$managing_stock && $product_availability_stock > 0) {
                         if ($product->backorders_allowed() && isset($dc_settings['is_enable_backorders']) && $dc_settings['is_enable_backorders'] == 'Enable') {
@@ -103,6 +105,7 @@ class WOO_Product_Stock_Alert_Action {
                                 }
 
                                 delete_post_meta($id, '_product_subscriber');
+                                delete_post_meta($id, 'no_of_subscribers');
                             }
                         } else {
                             $email = WC()->mailer()->emails['WC_Email_Stock_Alert'];
@@ -111,6 +114,7 @@ class WOO_Product_Stock_Alert_Action {
                             }
 
                             delete_post_meta($id, '_product_subscriber');
+                            delete_post_meta($id, 'no_of_subscribers');
                         }
                     }
                 }

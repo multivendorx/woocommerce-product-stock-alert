@@ -163,25 +163,22 @@ if (!function_exists('display_stock_alert_form')) {
 if (!function_exists('doWooStockAlertLOG')) {
 
     function doWooStockAlertLOG($str) {
-        $file = plugin_dir_path(__FILE__) . 'stock_alert_log.log';
+        global $WOO_Product_Stock_Alert;
+        $file = $WOO_Product_Stock_Alert->plugin_path . 'log/stock_alert_log.log';
         if (file_exists($file)) {
-            $temphandle = @fopen($file, 'w+'); // @codingStandardsIgnoreLine.
-            @fclose($temphandle); // @codingStandardsIgnoreLine.
-            if (defined('FS_CHMOD_FILE')) {
-                @chmod($file, FS_CHMOD_FILE); // @codingStandardsIgnoreLine.
-            }
             // Open the file to get existing content
             $current = file_get_contents($file);
-            // Append a new content to the file
-            $current .= "$str" . "\r\n";
-            $current .= "-------------------------------------\r\n";
-        } else {
-            $current = "$str" . "\r\n";
-            $current .= "-------------------------------------\r\n";
+            if ($current) {
+                // Append a new content to the file
+                $current .= "$str" . "\r\n";
+                $current .= "-------------------------------------\r\n";
+            } else {
+                $current = "$str" . "\r\n";
+                $current .= "-------------------------------------\r\n";
+            }
+            // Write the contents back to the file
+            file_put_contents($file, $current);
         }
-        // Write the contents back to the file
-        file_put_contents($file, $current);
     }
 
 }
-?>

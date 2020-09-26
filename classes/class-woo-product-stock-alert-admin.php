@@ -426,6 +426,7 @@ class WOO_Product_Stock_Alert_Admin {
                                 $email->trigger($to, $post_id);
                             }
                             delete_post_meta($post_id, '_product_subscriber');
+                            delete_post_meta($post_id, 'no_of_subscribers');
                         }
                     }
                 }
