@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-28 11:48+0000\n"
+"POT-Creation-Date: 2020-09-28 04:58+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -13,6 +13,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/"
+
+#: admin/class-woo-product-stock-alert-settings.php:28 
+#: admin/class-woo-product-stock-alert-settings.php:29
+msgid "WC Stock Alert"
+msgstr ""
+
+#: admin/class-woo-product-stock-alert-settings.php:41
+msgid "Product Stock Alert"
+msgstr ""
 
 #: admin/class-woo-product-stock-alert-settings-woo_product_stock_alert_general.php:28
 msgid "Basic settings"
@@ -91,8 +100,8 @@ msgid "Edit Shown Interest text"
 msgstr ""
 
 #: admin/class-woo-product-stock-alert-settings-woo_product_stock_alert_general.php:39
-#: classes/class-woo-product-stock-alert-frontend.php:51
-#: classes/class-woo-product-stock-alert-frontend.php:168
+#:  classes/class-woo-product-stock-alert-frontend.php:51 
+#: classes/class-woo-product-stock-alert-frontend.php:168 
 #: classes/shortcode/class-woo-product-stock-alert-shortcode-display-stock-alert-form.php:49
 msgid "Already %no_of_subscribed% persons shown interest."
 msgstr ""
@@ -235,87 +244,8 @@ msgstr ""
 msgid "Customize your stock alert form from here"
 msgstr ""
 
-#: admin/class-woo-product-stock-alert-settings.php:28
-#: admin/class-woo-product-stock-alert-settings.php:29
-msgid "WC Stock Alert"
-msgstr ""
-
-#: admin/class-woo-product-stock-alert-settings.php:41
-msgid "Product Stock Alert"
-msgstr ""
-
-#: classes/class-woo-product-stock-alert-frontend.php:37
-#: classes/class-woo-product-stock-alert-frontend.php:54
-#: classes/class-woo-product-stock-alert-frontend.php:154
-#: classes/class-woo-product-stock-alert-frontend.php:171
-#: classes/shortcode/class-woo-product-stock-alert-shortcode-display-stock-alert-form.php:35
-#: classes/shortcode/class-woo-product-stock-alert-shortcode-display-stock-alert-form.php:52
-msgid "Get an alert when the product is in stock:"
-msgstr ""
-
-#: classes/class-woo-product-stock-alert-frontend.php:39
-#: classes/class-woo-product-stock-alert-frontend.php:57
-#: classes/class-woo-product-stock-alert-frontend.php:156
-#: classes/class-woo-product-stock-alert-frontend.php:174
-#: classes/shortcode/class-woo-product-stock-alert-shortcode-display-stock-alert-form.php:37
-#: classes/shortcode/class-woo-product-stock-alert-shortcode-display-stock-alert-form.php:55
-msgid "Get an alert"
-msgstr ""
-
-#: classes/class-woo-product-stock-alert-frontend.php:40
-#: classes/class-woo-product-stock-alert-frontend.php:157
-#: classes/shortcode/class-woo-product-stock-alert-shortcode-display-stock-alert-form.php:38
-msgid "Unsubscribe"
-msgstr ""
-
-#: classes/class-woo-product-stock-alert-frontend.php:60
-#: classes/class-woo-product-stock-alert-frontend.php:177
-#: classes/shortcode/class-woo-product-stock-alert-shortcode-display-stock-alert-form.php:58
-msgid ""
-"Thank you for your interest in <b>%product_title%</b>, you will receive an "
-"email alert when it becomes available."
-msgstr ""
-
-#: classes/class-woo-product-stock-alert-frontend.php:63
-#: classes/class-woo-product-stock-alert-frontend.php:180
-#: classes/shortcode/class-woo-product-stock-alert-shortcode-display-stock-alert-form.php:61
-msgid ""
-"<b>%customer_email%</b> is already registered with <b>%product_title%</b>."
-msgstr ""
-
-#: classes/class-woo-product-stock-alert-frontend.php:66
-#: classes/class-woo-product-stock-alert-frontend.php:183
-#: classes/shortcode/class-woo-product-stock-alert-shortcode-display-stock-alert-form.php:64
-msgid "Please enter a valid email id and try again."
-msgstr ""
-
-#: classes/class-woo-product-stock-alert-frontend.php:69
-#: classes/class-woo-product-stock-alert-frontend.php:186
-#: classes/shortcode/class-woo-product-stock-alert-shortcode-display-stock-alert-form.php:67
-msgid "<b>%customer_email%</b> is successfully unregistered."
-msgstr ""
-
-#: classes/class-woo-product-stock-alert-frontend.php:98
-#: classes/shortcode/class-woo-product-stock-alert-shortcode-display-stock-alert-form.php:98
-msgid "Processing..."
-msgstr ""
-
-#: classes/class-woo-product-stock-alert-frontend.php:99
-#: classes/shortcode/class-woo-product-stock-alert-shortcode-display-stock-alert-form.php:99
-msgid "Some error occurs"
-msgstr ""
-
-#: classes/class-woo-product-stock-alert-frontend.php:100
-#: classes/shortcode/class-woo-product-stock-alert-shortcode-display-stock-alert-form.php:100
-msgid "Please try again."
-msgstr ""
-
-#: classes/class-woo-product-stock-alert-frontend.php:227
-msgid "Enter your email"
-msgstr ""
-
-#: classes/class-woo-product-stock-alert-export.php:15
-#: classes/class-woo-product-stock-alert-admin.php:153
+#: classes/class-woo-product-stock-alert-export.php:15 
+#: classes/class-woo-product-stock-alert-admin.php:153 
 #: classes/class-woo-product-stock-alert-admin.php:153
 msgid "WC Stock Alert Export"
 msgstr ""
@@ -328,6 +258,78 @@ msgstr ""
 
 #: classes/class-woo-product-stock-alert-export.php:17
 msgid "Export CSV"
+msgstr ""
+
+#: classes/class-woo-product-stock-alert-frontend.php:37 
+#: classes/class-woo-product-stock-alert-frontend.php:54 
+#: classes/class-woo-product-stock-alert-frontend.php:154 
+#: classes/class-woo-product-stock-alert-frontend.php:171 
+#: classes/shortcode/class-woo-product-stock-alert-shortcode-display-stock-alert-form.php:35
+#:  
+#: classes/shortcode/class-woo-product-stock-alert-shortcode-display-stock-alert-form.php:52
+msgid "Get an alert when the product is in stock:"
+msgstr ""
+
+#: classes/class-woo-product-stock-alert-frontend.php:39 
+#: classes/class-woo-product-stock-alert-frontend.php:57 
+#: classes/class-woo-product-stock-alert-frontend.php:156 
+#: classes/class-woo-product-stock-alert-frontend.php:174 
+#: classes/shortcode/class-woo-product-stock-alert-shortcode-display-stock-alert-form.php:37
+#:  
+#: classes/shortcode/class-woo-product-stock-alert-shortcode-display-stock-alert-form.php:55
+msgid "Get an alert"
+msgstr ""
+
+#: classes/class-woo-product-stock-alert-frontend.php:40 
+#: classes/class-woo-product-stock-alert-frontend.php:157 
+#: classes/shortcode/class-woo-product-stock-alert-shortcode-display-stock-alert-form.php:38
+msgid "Unsubscribe"
+msgstr ""
+
+#: classes/class-woo-product-stock-alert-frontend.php:60 
+#: classes/class-woo-product-stock-alert-frontend.php:177 
+#: classes/shortcode/class-woo-product-stock-alert-shortcode-display-stock-alert-form.php:58
+msgid ""
+"Thank you for your interest in <b>%product_title%</b>, you will receive an "
+"email alert when it becomes available."
+msgstr ""
+
+#: classes/class-woo-product-stock-alert-frontend.php:63 
+#: classes/class-woo-product-stock-alert-frontend.php:180 
+#: classes/shortcode/class-woo-product-stock-alert-shortcode-display-stock-alert-form.php:61
+msgid ""
+"<b>%customer_email%</b> is already registered with <b>%product_title%</b>."
+msgstr ""
+
+#: classes/class-woo-product-stock-alert-frontend.php:66 
+#: classes/class-woo-product-stock-alert-frontend.php:183 
+#: classes/shortcode/class-woo-product-stock-alert-shortcode-display-stock-alert-form.php:64
+msgid "Please enter a valid email id and try again."
+msgstr ""
+
+#: classes/class-woo-product-stock-alert-frontend.php:69 
+#: classes/class-woo-product-stock-alert-frontend.php:186 
+#: classes/shortcode/class-woo-product-stock-alert-shortcode-display-stock-alert-form.php:67
+msgid "<b>%customer_email%</b> is successfully unregistered."
+msgstr ""
+
+#: classes/class-woo-product-stock-alert-frontend.php:98 
+#: classes/shortcode/class-woo-product-stock-alert-shortcode-display-stock-alert-form.php:98
+msgid "Processing..."
+msgstr ""
+
+#: classes/class-woo-product-stock-alert-frontend.php:99 
+#: classes/shortcode/class-woo-product-stock-alert-shortcode-display-stock-alert-form.php:99
+msgid "Some error occurs"
+msgstr ""
+
+#: classes/class-woo-product-stock-alert-frontend.php:100 
+#: classes/shortcode/class-woo-product-stock-alert-shortcode-display-stock-alert-form.php:100
+msgid "Please try again."
+msgstr ""
+
+#: classes/class-woo-product-stock-alert-frontend.php:227
+msgid "Enter your email"
 msgstr ""
 
 #: classes/class-woo-product-stock-alert-admin.php:61
@@ -362,67 +364,6 @@ msgstr ""
 msgid "Number of Interested Person(s) : "
 msgstr ""
 
-#: templates/emails/stock_alert_email_subscriber_confirmation.php:15
-#: templates/emails/plain/stock_alert_email_subscriber_confirmation.php:14
-msgid ""
-"Hi there. You have successfully subscribed a product. We will inform you "
-"when the product becomes available. Product details are shown below for your "
-"reference:"
-msgstr ""
-
-#: templates/emails/stock_alert_email_subscriber_confirmation.php:33
-#: templates/emails/stock_alert_email.php:32
-#: templates/emails/stock_alert_admin_email.php:30
-msgid "Product Details"
-msgstr ""
-
-#: templates/emails/stock_alert_email_subscriber_confirmation.php:37
-#: templates/emails/stock_alert_email.php:36
-#: templates/emails/stock_alert_admin_email.php:34
-msgid "Product"
-msgstr ""
-
-#: templates/emails/stock_alert_email_subscriber_confirmation.php:38
-#: templates/emails/stock_alert_email.php:37
-#: templates/emails/stock_alert_admin_email.php:35
-msgid "Price"
-msgstr ""
-
-#: templates/emails/stock_alert_email_subscriber_confirmation.php:54
-#: templates/emails/stock_alert_email.php:53
-#: templates/emails/stock_alert_admin_email.php:52
-msgid "Following is the product link : "
-msgstr ""
-
-#: templates/emails/stock_alert_email_subscriber_confirmation.php:56
-#: templates/emails/stock_alert_email.php:55
-msgid "Your Details"
-msgstr ""
-
-#: templates/emails/stock_alert_email_subscriber_confirmation.php:58
-#: templates/emails/stock_alert_email.php:57
-#: templates/emails/stock_alert_admin_email.php:56
-msgid "Email"
-msgstr ""
-
-#: templates/emails/stock_alert_email.php:15
-#: templates/emails/plain/stock_alert_email.php:14
-msgid ""
-"Hi there. You have subscribed a product. Your subscribed product is "
-"available now. Product details are shown below for your reference:"
-msgstr ""
-
-#: templates/emails/stock_alert_admin_email.php:15
-#: templates/emails/plain/stock_alert_admin_email.php:14
-msgid ""
-"Hi there. A customer has subscribed a product on your shop. Product details "
-"are shown below for your reference:"
-msgstr ""
-
-#: templates/emails/stock_alert_admin_email.php:54
-msgid "Customer Details"
-msgstr ""
-
 #: classes/emails/class-woo-product-stock-alert-subscriber-confirmation-email.php:32
 msgid "Confirm subscriber"
 msgstr ""
@@ -436,9 +377,21 @@ msgid "You have subscribed a product on {site_title}"
 msgstr ""
 
 #: classes/emails/class-woo-product-stock-alert-subscriber-confirmation-email.php:79
+#:  classes/emails/class-woo-product-stock-alert-email.php:79 
 #: classes/emails/class-woo-product-stock-alert-admin-email.php:81
-#: classes/emails/class-woo-product-stock-alert-email.php:79
 msgid "Welcome to {site_title}"
+msgstr ""
+
+#: classes/emails/class-woo-product-stock-alert-email.php:32
+msgid "Alert Subscriber"
+msgstr ""
+
+#: classes/emails/class-woo-product-stock-alert-email.php:33
+msgid "Alert customer when their subscribed product becomes in stock"
+msgstr ""
+
+#: classes/emails/class-woo-product-stock-alert-email.php:69
+msgid "Your Subscribed product on {site_title} is available now"
 msgstr ""
 
 #: classes/emails/class-woo-product-stock-alert-admin-email.php:33
@@ -454,16 +407,65 @@ msgstr ""
 msgid "A Customer has subscribed a product on {site_title}"
 msgstr ""
 
-#: classes/emails/class-woo-product-stock-alert-email.php:32
-msgid "Alert Subscriber"
+#: templates/emails/stock_alert_email_subscriber_confirmation.php:15 
+#: templates/emails/plain/stock_alert_email_subscriber_confirmation.php:14
+msgid ""
+"Hi there. You have successfully subscribed a product. We will inform you "
+"when the product becomes available. Product details are shown below for your "
+"reference:"
 msgstr ""
 
-#: classes/emails/class-woo-product-stock-alert-email.php:33
-msgid "Alert customer when their subscribed product becomes in stock"
+#: templates/emails/stock_alert_email_subscriber_confirmation.php:33 
+#: templates/emails/stock_alert_admin_email.php:30 
+#: templates/emails/stock_alert_email.php:32
+msgid "Product Details"
 msgstr ""
 
-#: classes/emails/class-woo-product-stock-alert-email.php:69
-msgid "Your Subscribed product on {site_title} is available now"
+#: templates/emails/stock_alert_email_subscriber_confirmation.php:37 
+#: templates/emails/stock_alert_admin_email.php:34 
+#: templates/emails/stock_alert_email.php:36
+msgid "Product"
+msgstr ""
+
+#: templates/emails/stock_alert_email_subscriber_confirmation.php:38 
+#: templates/emails/stock_alert_admin_email.php:35 
+#: templates/emails/stock_alert_email.php:37
+msgid "Price"
+msgstr ""
+
+#: templates/emails/stock_alert_email_subscriber_confirmation.php:54 
+#: templates/emails/stock_alert_admin_email.php:52 
+#: templates/emails/stock_alert_email.php:53
+msgid "Following is the product link : "
+msgstr ""
+
+#: templates/emails/stock_alert_email_subscriber_confirmation.php:56 
+#: templates/emails/stock_alert_email.php:55
+msgid "Your Details"
+msgstr ""
+
+#: templates/emails/stock_alert_email_subscriber_confirmation.php:58 
+#: templates/emails/stock_alert_admin_email.php:56 
+#: templates/emails/stock_alert_email.php:57
+msgid "Email"
+msgstr ""
+
+#: templates/emails/stock_alert_admin_email.php:15 
+#: templates/emails/plain/stock_alert_admin_email.php:14
+msgid ""
+"Hi there. A customer has subscribed a product on your shop. Product details "
+"are shown below for your reference:"
+msgstr ""
+
+#: templates/emails/stock_alert_admin_email.php:54
+msgid "Customer Details"
+msgstr ""
+
+#: templates/emails/stock_alert_email.php:15 
+#: templates/emails/plain/stock_alert_email.php:14
+msgid ""
+"Hi there. You have subscribed a product. Your subscribed product is "
+"available now. Product details are shown below for your reference:"
 msgstr ""
 
 #. Name of the plugin
