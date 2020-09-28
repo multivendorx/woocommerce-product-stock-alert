@@ -1,5 +1,10 @@
 == Changelog ==
 -------------------------------------------------------------------------------------------------------------------
+= 1.7.1 - 2020-09-28 =
+* Fixed - Remove Product Subscribers #12.
+* Added - WooCommerce 4.5.2 compatibility.
+* Updated : Language files.
+
 = 1.7.0 - 2020-08-28 =
 * Fixed - Alert box display for backorder products also.
 * Fixed - Product - Variations name added for variable product in export file.
