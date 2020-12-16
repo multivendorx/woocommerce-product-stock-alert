@@ -92,7 +92,8 @@ class WC_Email_Stock_Alert extends WC_Email {
 			'product_id' => $this->product_id,
 			'customer_email' => $this->recipient,
 			'sent_to_admin' => false,
-			'plain_text' => false
+			'plain_text' => false,
+			'email' => $this,
 		), '', $this->template_base);
 		return ob_get_clean();
 	}
