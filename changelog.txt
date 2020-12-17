@@ -1,5 +1,10 @@
 == Changelog ==
 -------------------------------------------------------------------------------------------------------------------
+= 1.7.2 - 2020-12-17 =
+* Fixed - Email heading error #15.
+* Added - WooCommerce 4.8.0 compatibility.
+* Added - WordPress 5.6 compatibility.
+
 = 1.7.1 - 2020-09-28 =
 * Fixed - Remove Product Subscribers #12.
 * Added - WooCommerce 4.5.2 compatibility.
