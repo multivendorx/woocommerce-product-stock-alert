@@ -99,7 +99,7 @@ jQuery(document).ready(function($) {
 					}
 				});
 			} else {
-				$('.alert_container').html(alert_text_html+'<input type="text" class="stock_alert_email" name="alert_email" />'+button_html+'<p style="color:#e2401c;">'+valid_email+'</p><input type="hidden" class="current_product_id" value="'+pro_id+'" /><input type="hidden" class="current_product_name" value="'+pro_title+'" />');
+				$('.alert_container').html(alert_text_html+'<input type="text" class="stock_alert_email" name="alert_email" />'+button_html+'<p style="color:#e2401c;" class="stock_alert_error_message">'+valid_email+'</p><input type="hidden" class="current_product_id" value="'+pro_id+'" /><input type="hidden" class="current_product_name" value="'+pro_title+'" />');
 			}
 		});
 	}
@@ -144,7 +144,7 @@ jQuery(document).ready(function($) {
 					}
 				});
 			} else {
-				$('.alert_container').html(alert_text_html+'<input type="text" class="stock_alert_email" name="alert_email" />'+button_html+'<p style="color:#e2401c;">'+valid_email+'</p><input type="hidden" class="current_product_id" value="'+pro_id+'" /><input type="hidden" class="current_product_name" value="'+pro_title+'" />');
+				$('.alert_container').html(alert_text_html+'<input type="text" class="stock_alert_email" name="alert_email" />'+button_html+'<p style="color:#e2401c;" class="stock_alert_error_message">'+valid_email+'</p><input type="hidden" class="current_product_id" value="'+pro_id+'" /><input type="hidden" class="current_product_name" value="'+pro_title+'" />');
 			}
 		});
 	}
