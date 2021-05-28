@@ -3,9 +3,9 @@
 Contributors: wcmp
 Tags: wordpress, woocommerce, e-commerce, shop, stock, out of stock, in stock, stock alert, alert email, stock alert email
 Requires at least: 4.4
-Tested up to: 5.5.1
+Tested up to: 5.7.2
 Requires PHP: 5.6
-Stable tag: 1.7.1
+Stable tag: 1.7.2
 Donate link: http://wc-marketplace.com/
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -82,6 +82,14 @@ Yes, this plugin works with WooCommerce Subscription Product.
 15. Export subscribers' list
 
 == Changelog ==
+
+= 1.7.2 - 2021-05-28 =
+* Added - The dynamic setting for button font size.
+* Added - WooCommerce 5.3.0 compatibility.
+* Added - WordPress 5.7.2 compatibility.
+* Enhancement - HTML Markup improvements.
+* Enhancement - Escaping & securing output.
+* Updated : Language files.
 
 = 1.7.1 - 2020-09-28 =
 * Fixed - Remove Product Subscribers #12.
