@@ -1,5 +1,13 @@
 == Changelog ==
 -------------------------------------------------------------------------------------------------------------------
+= 1.7.2 - 2021-05-28 =
+* Added - The dynamic setting for button font size.
+* Added - WooCommerce 5.3.0 compatibility.
+* Added - WordPress 5.7.2 compatibility.
+* Enhancement - HTML Markup improvements.
+* Enhancement - Escaping & securing output.
+* Updated : Language files.
+
 = 1.7.1 - 2020-09-28 =
 * Fixed - Remove Product Subscribers #12.
 * Added - WooCommerce 4.5.2 compatibility.

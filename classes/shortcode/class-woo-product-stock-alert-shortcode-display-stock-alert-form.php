@@ -47,6 +47,7 @@ class WOO_Product_Stock_Alert_Display_Form {
             $valid_email = isset($dc_settings['valid_email']) ? $dc_settings['valid_email'] : '';
             $alert_unsubscribe_message = isset($dc_settings['alert_unsubscribe_message']) ? $dc_settings['alert_unsubscribe_message'] : '';
             $shown_interest_text = isset($dc_settings['shown_interest_text']) ? $dc_settings['shown_interest_text'] : __('Already %no_of_subscribed% persons shown interest.', 'woocommerce-product-stock-alert');
+            $button_font_size = isset($dc_settings['button_font_size']) && !empty($dc_settings['button_font_size']) ? $dc_settings['button_font_size'] : '';
         }
         if (empty($alert_text)) {
             $alert_text = __('Get an alert when the product is in stock:', 'woocommerce-product-stock-alert');
@@ -82,10 +83,10 @@ class WOO_Product_Stock_Alert_Display_Form {
         }
 
         if (!empty($button_background_color) && !empty($button_border_color) && !empty($button_text_color) && !empty($button_background_color_onhover) && !empty($button_text_color_onhover) && !empty($button_border_color_onhover)) {
-            $button_html = '<input type="button" style="background: ' . $button_background_color . '; color: ' . $button_text_color . '; border-color: ' . $button_border_color . '" class="stock_alert_button alert_button_hover" name="alert_button" value="' . $button_text . '" />';
+            $button_html = '<button style="background: ' . $button_background_color . '; color: ' . $button_text_color . '; border-color: ' . $button_border_color . '; font-size: '. $button_font_size .';" class="stock_alert_button alert_button_hover" name="alert_button">' . $button_text . '</button>';
             $unsubscribe_button_html = '<button class="unsubscribe_button" style="background: ' . $button_background_color . '; color: ' . $button_text_color . '; border-color: ' . $button_border_color . '">' . $unsubscribe_button_text . '</button>';
         } else {
-            $button_html = '<input type="button" class="stock_alert_button" name="alert_button" value="' . $button_text . '" />';
+            $button_html = '<button class="stock_alert_button" name="alert_button">' . $button_text . '</button>';
             $unsubscribe_button_html = '<button class="unsubscribe_button">' . $unsubscribe_button_text . '</button>';
         }
         

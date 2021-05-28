@@ -42,7 +42,8 @@ class WOO_Product_Stock_Alert_Settings_Gneral {
 																										"button_text_color" => array('title' => __('Choose button text color', 'woocommerce-product-stock-alert'), 'type' => 'colorpicker', 'default' => '#000000', 'hints' => __('Choose alert button text color here.', 'woocommerce-product-stock-alert'), 'desc' => __('This lets you choose alert button text color.', 'woocommerce-product-stock-alert')), // Colorpicker
 																										"button_background_color_onhover" => array('title' => __('Choose button background color on hover', 'woocommerce-product-stock-alert'), 'type' => 'colorpicker', 'default' => '#000000', 'hints' => __('Choose alert button background color on hover here.', 'woocommerce-product-stock-alert'), 'desc' => __('This lets you choose alert button background color on hover.', 'woocommerce-product-stock-alert')), // Colorpicker
 																										"button_border_color_onhover" => array('title' => __('Choose button border color on hover', 'woocommerce-product-stock-alert'), 'type' => 'colorpicker', 'default' => '#000000', 'hints' => __('Choose alert button border color on hover here.', 'woocommerce-product-stock-alert'), 'desc' => __('This lets you choose alert button border color on hover.', 'woocommerce-product-stock-alert')), // Colorpicker
-																										"button_text_color_onhover" => array('title' => __('Choose button text color on hover', 'woocommerce-product-stock-alert'), 'type' => 'colorpicker', 'default' => '#000000', 'hints' => __('Choose alert button text color on hover here.', 'woocommerce-product-stock-alert'), 'desc' => __('This lets you choose alert button text color on hover.', 'woocommerce-product-stock-alert')) // Colorpicker
+																										"button_text_color_onhover" => array('title' => __('Choose button text color on hover', 'woocommerce-product-stock-alert'), 'type' => 'colorpicker', 'default' => '#000000', 'hints' => __('Choose alert button text color on hover here.', 'woocommerce-product-stock-alert'), 'desc' => __('This lets you choose alert button text color on hover.', 'woocommerce-product-stock-alert')), // Colorpicker
+																										"button_font_size" => array('title' => __('Choose button font size', 'woocommerce-product-stock-alert'), 'type' => 'text', 'hints' => __('Choose button font size.', 'woocommerce-product-stock-alert'), 'desc' => __('This lets you choose button font size.', 'woocommerce-product-stock-alert'))
 																								 )
 																					 ),
 													  "form_submission" => array( "title" =>  __('Form Submission', 'woocommerce-product-stock-alert'), // Section one
@@ -108,6 +109,9 @@ class WOO_Product_Stock_Alert_Settings_Gneral {
 		if( isset( $input['button_text_color_onhover'] ) && !empty( $input['button_text_color_onhover'] ) )
 		  $new_input['button_text_color_onhover'] = sanitize_text_field( $input['button_text_color_onhover'] );
 		
+		if( isset( $input['button_font_size'] ) && !empty( $input['button_font_size'] ) )
+		  $new_input['button_font_size'] = sanitize_text_field( $input['button_font_size'] );
+
 		if( isset( $input['button_border_color_onhover'] ) && !empty( $input['button_border_color_onhover'] ) )
 		  $new_input['button_border_color_onhover'] = sanitize_text_field( $input['button_border_color_onhover'] );
 		
