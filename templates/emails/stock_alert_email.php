@@ -50,7 +50,7 @@ $is_prices_including_tax = get_option( 'woocommerce_prices_include_tax' );
 	</tbody>
 </table>
 
-<p style="margin-top: 15px !important;"><?php printf( __( "Following is the product link : ", 'woocommerce-product-stock-alert' ) ); ?><a href="<?php echo esc_url($product_link); ?>"><?php echo esc_html($product_name); ?></a></p>
+<p style="margin-top: 15px !important;"><?php printf( __( "Following is the product link : ", 'woocommerce-product-stock-alert' ) ); ?><a href="<?php echo esc_url($product_link); ?>"><?php echo esc_html(wp_strip_all_tags($product_name)); ?></a></p>
 
 <h3><?php esc_html_e( 'Your Details', 'woocommerce-product-stock-alert' ); ?></h3>
 <p>
