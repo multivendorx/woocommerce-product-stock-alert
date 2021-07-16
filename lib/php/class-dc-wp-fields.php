@@ -169,21 +169,29 @@ class DC_WP_Fields {
     
     // Custom attribute handling
     $custom_attributes = array();
+    $custom_tags = array();
     
     if ( ! empty( $field['custom_attributes'] ) && is_array( $field['custom_attributes'] ) )
       foreach ( $field['custom_attributes'] as $attribute => $value )
         $custom_attributes[] = 'data-' . esc_attr( $attribute ) . '="' . esc_attr( $value ) . '"';
+
+    if (!empty($field['custom_tags']) && is_array($field['custom_tags'])) {
+        foreach ($field['custom_tags'] as $tag => $value) {
+            $custom_tags[] = esc_attr($tag) . '="' . esc_attr($value) . '"';
+        }
+    }
     
     $field = $this->field_wrapper_start($field);
     
     printf(
-        '<input type="checkbox" id="%s" name="%s" class="%s" value="%s" %s %s />',
+        '<input type="checkbox" id="%s" name="%s" class="%s" value="%s" %s %s %s />',
         esc_attr($field['id']),
         esc_attr($field['name']),
         esc_attr($field['class']),
         esc_attr($field['value']),
         checked( $field['value'], $field['dfvalue'], false ),
-        implode( ' ', $custom_attributes )
+        implode( ' ', $custom_attributes ),
+        implode( ' ', $custom_tags )
     );
     
     $this->field_wrapper_end($field);
@@ -566,7 +574,26 @@ class DC_WP_Fields {
     
     do_action('field_wrapper_start');
     do_action('field_wrapper_start_' . $field['id']);
-      
+    
+    do_action('before_field');
+    do_action('before_field_' . $field['id']);
+    
+    if(isset($field['in_table']) && isset($field['label'])) printf('<td>');
+    else if(isset($field['in_table']) && !isset($field['label'])) printf('<td colspan="2">');
+    
+    do_action('field_start');
+    do_action('field_start_' . $field['id']);
+    
+    if(!isset($field['custom_attributes'])) $field['custom_attributes'] = array();
+    $field['custom_attributes'] = apply_filters('manupulate_custom_attributes', $field['custom_attributes']);
+    $field['custom_attributes'] = apply_filters('manupulate_custom_attributes_' . $field['id'], $field['custom_attributes']);
+    
+    return $field;
+  }
+  
+  public function field_wrapper_end($field) {
+    
+    // Help message
     if(isset($field['label'])) {
       do_action('before_field_label');
       do_action('before_field_label_' . $field['id']);
@@ -602,26 +629,6 @@ class DC_WP_Fields {
       do_action('after_field_label_' . $field['id']);
       do_action('after_field_label');
     }
-    
-    do_action('before_field');
-    do_action('before_field_' . $field['id']);
-    
-    if(isset($field['in_table']) && isset($field['label'])) printf('<td>');
-    else if(isset($field['in_table']) && !isset($field['label'])) printf('<td colspan="2">');
-    
-    do_action('field_start');
-    do_action('field_start_' . $field['id']);
-    
-    if(!isset($field['custom_attributes'])) $field['custom_attributes'] = array();
-    $field['custom_attributes'] = apply_filters('manupulate_custom_attributes', $field['custom_attributes']);
-    $field['custom_attributes'] = apply_filters('manupulate_custom_attributes_' . $field['id'], $field['custom_attributes']);
-    
-    return $field;
-  }
-  
-  public function field_wrapper_end($field) {
-    
-    // Help message
     if(!isset($field['label']) && isset($field['hints'])) {
       do_action('before_hints');
       do_action('before_hints_' . $field['id']);
