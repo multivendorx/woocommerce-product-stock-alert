@@ -29,7 +29,9 @@ class WOO_Product_Stock_Alert_Settings_Gneral {
 																				 "fields" => array("is_enable" => array('title' => __('Enable stock alert', 'woocommerce-product-stock-alert'), 'type' => 'checkbox', 'dfvalue' => 'Enable', 'value' => 'Enable'), // Checkbox
 																				 "is_enable_backorders" => array('title' => __('Enable with backorders', 'woocommerce-product-stock-alert'), 'type' => 'checkbox', 'value' => 'Enable'), // Checkbox
 																				 "is_enable_no_interest" => array('title' => __('Enable No. of Interest on Product Page', 'woocommerce-product-stock-alert'), 'type' => 'checkbox', 'value' => 'Enable', 'desc' => __('How many person shown interest or subscribed for the product.', 'woocommerce-product-stock-alert')), // Checkbox
-																				 "is_double_optin" => apply_filters('allow_stock_alert_double_optin', array( 'title' => 'Double opt-in', 'type' => 'checkbox', 'dfvalue' => 'Enable', 'value' => 'Enable', 'label' => __('Enable Double Opt-in flow for subscription confirmation, use <a href="//wc-marketplace.com/product/product/wcmp-vendor-stock-alert/"> WCMp Stock Alert </a>.', 'woocommerce-product-stock-alert'), 'hints' => __('Enable this option to send customers mail to seek permission for storing customer\'s mail id', 'woocommerce-product-stock-alert' ), 'custom_tags'=> array('disabled' => 'disabled') ) ),
+																				 "is_double_optin" => apply_filters('allow_stock_alert_double_optin', array( 'title' => __('Double opt-in', 'woocommerce-product-stock-alert'), 'type' => 'checkbox', 'dfvalue' => 'Enable', 'value' => 'Enable', 'label' => __('Enable Double Opt-in flow for subscription confirmation, use <a href="//wc-marketplace.com/product/product/wcmp-vendor-stock-alert/"> WCMp Stock Alert </a>.', 'woocommerce-product-stock-alert'), 'hints' => __('Enable this option to send customers mail to seek permission for storing customer\'s mail id', 'woocommerce-product-stock-alert' ), 'custom_tags'=> array('disabled' => 'disabled') ) ),
+																				 "is_remove_admin_email" => array('title' => __('Remove Admin Email', 'woocommerce-product-stock-alert'), 'type' =>'checkbox', 'value' => 'Enable', 'hints' => __('Remove admin email from stock alert reciever list.', 'woocommerce-product-stock-alert' )), // Checkbox	
+																				 "additional_alert_email" => array('title' => __('Additional Recivers Emails', 'woocommerce-product-stock-alert'), 'type' => 'textarea', 'desc' => __('Enter email address if you want to receive stock alert mail along with admin mail. You can add multiple commma seperated emails. Default: Admin emails.', 'woocommerce-product-stock-alert'), 'cols' => 70 ), // Textarea	
 																				 	)
 																				 ),
                                                       "form_customization" => array( "title" =>  __('Form Customization', 'woocommerce-product-stock-alert'), // Section one
@@ -82,6 +84,12 @@ class WOO_Product_Stock_Alert_Settings_Gneral {
 
 		if ( isset($input['is_double_optin'] ) && !empty( $input['is_double_optin'] ) ) 
             $new_input['is_double_optin'] = sanitize_text_field($input['is_double_optin']);
+
+        if( isset( $input['is_remove_admin_email'] ) && !empty( $input['is_remove_admin_email'] ) )
+        	$new_input['is_remove_admin_email'] = sanitize_text_field( $input['is_remove_admin_email'] );
+        
+        if ( isset($input['additional_alert_email'] ) && !empty( $input['additional_alert_email'] ) ) 
+        	$new_input['additional_alert_email'] = sanitize_text_field($input['additional_alert_email']);
 	
 		if( isset( $input['alert_text'] ) && !empty( $input['alert_text'] ) )
 		  $new_input['alert_text'] = $input['alert_text'];

@@ -145,12 +145,22 @@ class WOO_Product_Stock_Alert_Ajax {
 	}
 	
 	function stock_alert_function() {
+		$dc_settings = array();
 		$customer_email = sanitize_email($_POST['email']);
 		$product_id = (int)$_POST['product_id'];
 		$status = '';
 		$current_subscriber = array();
+		$dc_settings = get_dc_plugin_settings();
 		$admin_email = '';
-		$admin_email = get_option('admin_email');
+		if( isset( $dc_settings['is_remove_admin_email'] ) && $dc_settings['is_remove_admin_email'] == 'Enable' ) {
+			$admin_email = '';
+		} else {
+			$admin_email = get_option('admin_email');
+		}
+
+		if( isset($dc_settings['additional_alert_email']) ) {
+			$admin_email .= ','.$dc_settings['additional_alert_email'];	
+		}
 
 		$current_subscriber = get_post_meta( $product_id, '_product_subscriber', true );
 		$admin_mail = WC()->mailer()->emails['WC_Admin_Email_Stock_Alert'];
@@ -163,8 +173,9 @@ class WOO_Product_Stock_Alert_Ajax {
 			} else {
 				$current_subscriber = array( $customer_email );
 				$status = update_post_meta( $product_id, '_product_subscriber', $current_subscriber );
-
+				if( !empty($admin_email) )
 				$admin_mail->trigger( $admin_email, $product_id, $customer_email );
+
 				$cust_mail->trigger( $customer_email, $product_id );
 			}
 		} else {
@@ -174,8 +185,9 @@ class WOO_Product_Stock_Alert_Ajax {
 				} else {
 					array_push( $current_subscriber, $customer_email );
 					$status = update_post_meta( $product_id, '_product_subscriber', $current_subscriber );
-	
+					if( !empty($admin_email) )
 					$admin_mail->trigger( $admin_email, $product_id, $customer_email );
+				
 					$cust_mail->trigger( $customer_email, $product_id );
 				}
 			} else {

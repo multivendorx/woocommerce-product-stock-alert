@@ -51,6 +51,9 @@ class WOO_Product_Stock_Alert_Frontend {
             $shown_interest_text = isset($dc_settings['shown_interest_text']) ? $dc_settings['shown_interest_text'] : __('Already %no_of_subscribed% persons shown interest.', 'woocommerce-product-stock-alert');
             $button_font_size = isset($dc_settings['button_font_size']) && !empty($dc_settings['button_font_size']) ? $dc_settings['button_font_size'] : '';
         }
+        if (empty($unsubscribe_button_text)) {
+            $unsubscribe_button_text = __('Unsubscribe', 'woocommerce-product-stock-alert');
+        }
         if (empty($alert_text)) {
             $alert_text = __('Get an alert when the product is in stock:', 'woocommerce-product-stock-alert');
         }
@@ -168,6 +171,9 @@ class WOO_Product_Stock_Alert_Frontend {
             $alert_unsubscribe_message = isset($dc_settings['alert_unsubscribe_message']) ? $dc_settings['alert_unsubscribe_message'] : '';
             $shown_interest_text = isset($dc_settings['shown_interest_text']) ? $dc_settings['shown_interest_text'] : __('Already %no_of_subscribed% persons shown interest.', 'woocommerce-product-stock-alert');
             $button_font_size = isset($dc_settings['button_font_size']) && !empty($dc_settings['button_font_size']) ? $dc_settings['button_font_size'] : '';
+        }
+        if (empty($unsubscribe_button_text)) {
+            $unsubscribe_button_text = __('Unsubscribe', 'woocommerce-product-stock-alert');
         }
         if (empty($alert_text)) {
             $alert_text = __('Get an alert when the product is in stock:', 'woocommerce-product-stock-alert');
