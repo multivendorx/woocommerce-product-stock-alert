@@ -29,6 +29,7 @@ class WOO_Product_Stock_Alert_Settings_Gneral {
 																				 "fields" => array("is_enable" => array('title' => __('Enable stock alert', 'woocommerce-product-stock-alert'), 'type' => 'checkbox', 'dfvalue' => 'Enable', 'value' => 'Enable'), // Checkbox
 																				 "is_enable_backorders" => array('title' => __('Enable with backorders', 'woocommerce-product-stock-alert'), 'type' => 'checkbox', 'value' => 'Enable'), // Checkbox
 																				 "is_enable_no_interest" => array('title' => __('Enable No. of Interest on Product Page', 'woocommerce-product-stock-alert'), 'type' => 'checkbox', 'value' => 'Enable', 'desc' => __('How many person shown interest or subscribed for the product.', 'woocommerce-product-stock-alert')), // Checkbox
+																				 "is_double_optin" => apply_filters('allow_stock_alert_double_optin', array( 'title' => 'Double opt-in', 'type' => 'checkbox', 'dfvalue' => 'Enable', 'value' => 'Enable', 'label' => __('Enable Double Opt-in flow for subscription confirmation, use <a href="//wc-marketplace.com/product/product/wcmp-vendor-stock-alert/"> WCMp Stock Alert </a>.', 'woocommerce-product-stock-alert'), 'hints' => __('Enable this option to send customers mail to seek permission for storing customer\'s mail id', 'woocommerce-product-stock-alert' ), 'custom_tags'=> array('disabled' => 'disabled') ) ),
 																				 	)
 																				 ),
                                                       "form_customization" => array( "title" =>  __('Form Customization', 'woocommerce-product-stock-alert'), // Section one
@@ -78,6 +79,9 @@ class WOO_Product_Stock_Alert_Settings_Gneral {
 		
 		if( isset( $input['is_enable_no_interest'] ) && !empty( $input['is_enable_no_interest'] ) )
 		  $new_input['is_enable_no_interest'] = sanitize_text_field( $input['is_enable_no_interest'] );
+
+		if ( isset($input['is_double_optin'] ) && !empty( $input['is_double_optin'] ) ) 
+            $new_input['is_double_optin'] = sanitize_text_field($input['is_double_optin']);
 	
 		if( isset( $input['alert_text'] ) && !empty( $input['alert_text'] ) )
 		  $new_input['alert_text'] = $input['alert_text'];
