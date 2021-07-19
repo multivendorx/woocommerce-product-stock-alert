@@ -82,14 +82,14 @@ class WOO_Product_Stock_Alert_Settings_Gneral {
 		if( isset( $input['is_enable_no_interest'] ) && !empty( $input['is_enable_no_interest'] ) )
 		  $new_input['is_enable_no_interest'] = sanitize_text_field( $input['is_enable_no_interest'] );
 
-		if ( isset($input['is_double_optin'] ) && !empty( $input['is_double_optin'] ) ) 
-            $new_input['is_double_optin'] = sanitize_text_field($input['is_double_optin']);
+		if( isset($input['is_double_optin'] ) && !empty( $input['is_double_optin'] ) ) 
+            	  $new_input['is_double_optin'] = sanitize_text_field($input['is_double_optin']);
 
-        if( isset( $input['is_remove_admin_email'] ) && !empty( $input['is_remove_admin_email'] ) )
-        	$new_input['is_remove_admin_email'] = sanitize_text_field( $input['is_remove_admin_email'] );
+        	if( isset( $input['is_remove_admin_email'] ) && !empty( $input['is_remove_admin_email'] ) )
+        	  $new_input['is_remove_admin_email'] = sanitize_text_field( $input['is_remove_admin_email'] );
         
-        if ( isset($input['additional_alert_email'] ) && !empty( $input['additional_alert_email'] ) ) 
-        	$new_input['additional_alert_email'] = sanitize_text_field($input['additional_alert_email']);
+        	if( isset($input['additional_alert_email'] ) && !empty( $input['additional_alert_email'] ) ) 
+        	  $new_input['additional_alert_email'] = sanitize_text_field($input['additional_alert_email']);
 	
 		if( isset( $input['alert_text'] ) && !empty( $input['alert_text'] ) )
 		  $new_input['alert_text'] = $input['alert_text'];
