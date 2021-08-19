@@ -29,7 +29,9 @@ class WOO_Product_Stock_Alert_Settings_Gneral {
 																				 "fields" => array("is_enable" => array('title' => __('Enable stock alert', 'woocommerce-product-stock-alert'), 'type' => 'checkbox', 'dfvalue' => 'Enable', 'value' => 'Enable'), // Checkbox
 																				 "is_enable_backorders" => array('title' => __('Enable with backorders', 'woocommerce-product-stock-alert'), 'type' => 'checkbox', 'value' => 'Enable'), // Checkbox
 																				 "is_enable_no_interest" => array('title' => __('Enable No. of Interest on Product Page', 'woocommerce-product-stock-alert'), 'type' => 'checkbox', 'value' => 'Enable', 'desc' => __('How many person shown interest or subscribed for the product.', 'woocommerce-product-stock-alert')), // Checkbox
-																				 "is_double_optin" => apply_filters('allow_stock_alert_double_optin', array( 'title' => 'Double opt-in', 'type' => 'checkbox', 'dfvalue' => 'Enable', 'value' => 'Enable', 'label' => __('Enable Double Opt-in flow for subscription confirmation, use <a href="//wc-marketplace.com/product/product/wcmp-vendor-stock-alert/"> WCMp Stock Alert </a>.', 'woocommerce-product-stock-alert'), 'hints' => __('Enable this option to send customers mail to seek permission for storing customer\'s mail id', 'woocommerce-product-stock-alert' ), 'custom_tags'=> array('disabled' => 'disabled') ) ),
+																				 "is_double_optin" => apply_filters('allow_stock_alert_double_optin', array( 'title' => __('Double opt-in', 'woocommerce-product-stock-alert'), 'type' => 'checkbox', 'dfvalue' => 'Enable', 'value' => 'Enable', 'label' => __('Enable Double Opt-in flow for subscription confirmation, use <a href="//wc-marketplace.com/product/product/wcmp-vendor-stock-alert/"> WCMp Stock Alert </a>.', 'woocommerce-product-stock-alert'), 'hints' => __('Enable this option to send customers mail to seek permission for storing customer\'s mail id', 'woocommerce-product-stock-alert' ), 'custom_tags'=> array('disabled' => 'disabled') ) ),
+																				 "is_remove_admin_email" => array('title' => __('Remove Admin Email', 'woocommerce-product-stock-alert'), 'type' =>'checkbox', 'value' => 'Enable', 'hints' => __('Remove admin email from stock alert reciever list.', 'woocommerce-product-stock-alert' ) ), // Checkbox
+																				 "additional_alert_email" => array('title' => __('Additional Recivers Emails', 'woocommerce-product-stock-alert'), 'type' => 'textarea', 'desc' => __('Enter email address if you want to receive stock alert mail along with admin mail. You can add multiple commma seperated emails. Default: Admin emails.', 'woocommerce-product-stock-alert'), 'cols' => 70 ), // Textarea
 																				 	)
 																				 ),
                                                       "form_customization" => array( "title" =>  __('Form Customization', 'woocommerce-product-stock-alert'), // Section one
@@ -72,64 +74,70 @@ class WOO_Product_Stock_Alert_Settings_Gneral {
 		$hasError = false;
 		
 		if( isset( $input['is_enable'] ) && !empty( $input['is_enable'] ) )
-		  $new_input['is_enable'] = sanitize_text_field( $input['is_enable'] );
-		
-		if( isset( $input['is_enable_backorders'] ) && !empty( $input['is_enable_backorders'] ) )
-		  $new_input['is_enable_backorders'] = sanitize_text_field( $input['is_enable_backorders'] );
-		
-		if( isset( $input['is_enable_no_interest'] ) && !empty( $input['is_enable_no_interest'] ) )
-		  $new_input['is_enable_no_interest'] = sanitize_text_field( $input['is_enable_no_interest'] );
+			$new_input['is_enable'] = sanitize_text_field( $input['is_enable'] );
 
-		if ( isset($input['is_double_optin'] ) && !empty( $input['is_double_optin'] ) ) 
-            $new_input['is_double_optin'] = sanitize_text_field($input['is_double_optin']);
-	
+		if( isset( $input['is_enable_backorders'] ) && !empty( $input['is_enable_backorders'] ) )
+			$new_input['is_enable_backorders'] = sanitize_text_field( $input['is_enable_backorders'] );
+
+		if( isset( $input['is_enable_no_interest'] ) && !empty( $input['is_enable_no_interest'] ) )
+			$new_input['is_enable_no_interest'] = sanitize_text_field( $input['is_enable_no_interest'] );
+
+		if( isset( $input['is_double_optin'] ) && !empty( $input['is_double_optin'] ) ) 
+			$new_input['is_double_optin'] = sanitize_text_field($input['is_double_optin'] );
+
+		if( isset( $input['is_remove_admin_email'] ) && !empty( $input['is_remove_admin_email'] ) )
+			$new_input['is_remove_admin_email'] = sanitize_text_field( $input['is_remove_admin_email'] );
+
+		if( isset( $input['additional_alert_email'] ) && !empty( $input['additional_alert_email'] ) ) 
+			$new_input['additional_alert_email'] = sanitize_text_field($input['additional_alert_email']);
+
 		if( isset( $input['alert_text'] ) && !empty( $input['alert_text'] ) )
-		  $new_input['alert_text'] = $input['alert_text'];
-		
+			$new_input['alert_text'] = $input['alert_text'];
+
 		if( isset( $input['alert_text_color'] ) && !empty( $input['alert_text_color'] ) )
-		  $new_input['alert_text_color'] = sanitize_text_field( $input['alert_text_color'] );
-		
+			$new_input['alert_text_color'] = sanitize_text_field( $input['alert_text_color'] );
+
 		if( isset( $input['button_text'] ) && !empty( $input['button_text'] ) )
-		  $new_input['button_text'] = $input['button_text'];
-		
+			$new_input['button_text'] = $input['button_text'];
+
 		if( isset( $input['unsubscribe_button_text'] ) && !empty( $input['unsubscribe_button_text'] ) )
-		  $new_input['unsubscribe_button_text'] = $input['unsubscribe_button_text'];
-	
+			$new_input['unsubscribe_button_text'] = $input['unsubscribe_button_text'];
+
 		if( isset( $input['shown_interest_text'] ) && !empty( $input['shown_interest_text'] ) )
-		  $new_input['shown_interest_text'] = $input['shown_interest_text'];
-		
+			$new_input['shown_interest_text'] = $input['shown_interest_text'];
+
 		if( isset( $input['button_background_color'] ) && !empty( $input['button_background_color'] ) )
-		  $new_input['button_background_color'] = sanitize_text_field( $input['button_background_color'] );
-		
+			$new_input['button_background_color'] = sanitize_text_field( $input['button_background_color'] );
+
 		if( isset( $input['button_border_color'] ) && !empty( $input['button_border_color'] ) )
-		  $new_input['button_border_color'] = sanitize_text_field( $input['button_border_color'] );
-		
+			$new_input['button_border_color'] = sanitize_text_field( $input['button_border_color'] );
+
 		if( isset( $input['button_text_color'] ) && !empty( $input['button_text_color'] ) )
-		  $new_input['button_text_color'] = sanitize_text_field( $input['button_text_color'] );
-		
+			$new_input['button_text_color'] = sanitize_text_field( $input['button_text_color'] );
+
 		if( isset( $input['button_background_color_onhover'] ) && !empty( $input['button_background_color_onhover'] ) )
-		  $new_input['button_background_color_onhover'] = sanitize_text_field( $input['button_background_color_onhover'] );
-		
+			$new_input['button_background_color_onhover'] = sanitize_text_field( $input['button_background_color_onhover'] );
+
 		if( isset( $input['button_text_color_onhover'] ) && !empty( $input['button_text_color_onhover'] ) )
-		  $new_input['button_text_color_onhover'] = sanitize_text_field( $input['button_text_color_onhover'] );
-		
+			$new_input['button_text_color_onhover'] = sanitize_text_field( $input['button_text_color_onhover'] );
+
 		if( isset( $input['button_font_size'] ) && !empty( $input['button_font_size'] ) )
-		  $new_input['button_font_size'] = sanitize_text_field( $input['button_font_size'] );
+			$new_input['button_font_size'] = sanitize_text_field( $input['button_font_size'] );
 
 		if( isset( $input['button_border_color_onhover'] ) && !empty( $input['button_border_color_onhover'] ) )
-		  $new_input['button_border_color_onhover'] = sanitize_text_field( $input['button_border_color_onhover'] );
-		
+			$new_input['button_border_color_onhover'] = sanitize_text_field( $input['button_border_color_onhover'] );
+
 		if( isset( $input['alert_success'] ) && !empty( $input['alert_success'] ) )
-		  $new_input['alert_success'] = stripslashes($input['alert_success']);
-		
+			$new_input['alert_success'] = stripslashes($input['alert_success']);
+
 		if( isset( $input['alert_email_exist'] ) && !empty( $input['alert_email_exist'] ) )
-		  $new_input['alert_email_exist'] = stripslashes($input['alert_email_exist']);
-		
+			$new_input['alert_email_exist'] = stripslashes($input['alert_email_exist']);
+
 		if( isset( $input['valid_email'] ) && !empty( $input['valid_email'] ) )
-		  $new_input['valid_email'] = stripslashes($input['valid_email']);
-		
+			$new_input['valid_email'] = stripslashes($input['valid_email']);
+
 		if( isset( $input['alert_unsubscribe_message'] ) && !empty( $input['alert_unsubscribe_message'] ) )
-		  $new_input['alert_unsubscribe_message'] = stripslashes($input['alert_unsubscribe_message']);
+			$new_input['alert_unsubscribe_message'] = stripslashes($input['alert_unsubscribe_message']);
 		
 		if(!$hasError) {
 			add_settings_error(
