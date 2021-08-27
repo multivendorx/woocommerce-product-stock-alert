@@ -13,22 +13,23 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Alert your customer when a product of her choice is available again. 
 
 == Description ==
-Never miss a sale now. This plugin lets prospective buyers subscribe to a product when it is out of stock. Once subscribed, customers will get email notification when the product becomes available. On the admin side - you may view number of interested customers for any out of stock product.
+Never miss a sale now! This plugin lets prospective buyers subscribe to a product even when it is out of stock. Once subscribed, customers will get an email notification when the product becomes available. On the admin side – you may view several interested customers for any out of stock product.
 
 = Features =
 
-*   WooCommerce Product Stock Alert Plugin creates a form with an out of stock product. Interested customers can register with their email address. 
-*   When a customer subscribe any out of stock product on your site, an email will be sent to admin with customer email id and interested product.
-*   This plugin also creates a field to the inventory of edit product page to show number of interested persons. This will let you decide how many stock you want to add further.
+*   WooCommerce Product Stock Alert Plugin creates a form with an out of stock product. Interested customers can register with their email addresses.
+*   When a customer subscribes to any out of stock product on your site, an email will be sent to the admin with the customer email id and interesting product.
+*   This plugin also creates a field to the inventory of the edit product page to show various interested customers. This will let you decide how much stock you want to add further.
 *   As soon as the product becomes available, an alert email will be sent to the interested persons.
-*   This is an extremely light-weight plugin; it doesn't hamper the speed of your website and ensures smooth transition.
+*   This is an extremely lightweight plugin; it doesn’t hamper the speed of your website and ensures a smooth transition.
 *   This killer plugin is easy to set up, use and install. You need not be a coding or developing expert to understand how the plugin works. Just install and let it do the rest.
-*   You can customize the form heading message, button text, color, hover color, alert message after form submission and etc. from plugin settings page.
-*   You can customize email heading, email subject which will be sent to customers from WooCommerce email settings.
-*   WooCommerce Product Stock Alert Plugin will work if product Backorder option is enabled.
-*   You can change the default Stock Alert form position and display stock alert form in product page by using Shortcode [display_stock_alert_form].
-*   An export option is added inside 'Tools->WC Stock Alert Export' to export subscribers' list.
-*   Customer can unsubscribe a product which he/she already subscribed.
+*   You can customize the form heading message, button text, colour, hover colour, alert message after form submission, etc. from the plugin settings page.
+*   You can customize the email heading, email subject which will be sent to customers from WooCommerce email settings.
+*   WooCommerce Product Stock Alert Plugin will work if the product Backorder option is enabled.
+*   You can change the default Stock Alert form position and display the stock alert form on the product page by using Shortcode [display_stock_alert_form].
+*   Export list of subscribers via Wordpress’s Tools settings
+*   Customers can unsubscribe from a product to which he/she already subscribed.
+*   Double Opt In setting sends customers a confirmation mail inquiring if they would like to confirm their subscription to an Out of Stock product. To enable this feature you need to Install **[WCMp Vendor Stock Alert](https://wc-marketplace.com/product/wcmp-vendor-stock-alert/)**
 
 = Compatibility =
 *   WordPress 5.5+
