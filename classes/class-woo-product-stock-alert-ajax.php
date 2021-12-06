@@ -216,6 +216,14 @@ class WOO_Product_Stock_Alert_Ajax {
                             foreach ($child_ids as $child_id) {
                             	$no_of_subscribers = 0;
                             	$no_of_subscribers = get_post_meta( $child_id, 'no_of_subscribers', true );
+				    
+				    	//Modified code for not getting uncaught error  types string + int
+
+                            	if ($no_of_subscribers  > 0) {                                                  
+                            		$no_of_subscribers = intval($no_of_subscribers);
+                            		
+                            	}
+				    
                             	if($product_id == $child_id) $no_of_subscribers++;
                             	$no_of_total_subscribers += $no_of_subscribers;
                             	if($no_of_subscribers > 0) update_post_meta($child_id, 'no_of_subscribers', $no_of_subscribers);
