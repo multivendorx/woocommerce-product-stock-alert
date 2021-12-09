@@ -94,6 +94,7 @@ class WOO_Product_Stock_Alert_Display_Form {
         }
         
         wp_localize_script('stock_alert_frontend_js', 'woo_stock_alert_script_data', array('ajax_url' => admin_url('admin-ajax.php', 'relative'),
+            'additional_fields' => apply_filters('woocommerce_product_stock_alert_form_additional_fields', []),
             'alert_text_html' => $alert_text_html,
             'button_html' => $button_html,
             'alert_success' => $alert_success,
@@ -109,24 +110,19 @@ class WOO_Product_Stock_Alert_Display_Form {
         if (is_user_logged_in()) {
             $current_user = wp_get_current_user();
             $user_email = $current_user->data->user_email;
-            $stock_interest = '<div class="alert_container">
-									' . $alert_text_html . '
-									<input type="text" class="stock_alert_email" name="alert_email" value="' . $user_email . '" />
-									' . $button_html . '
-									<input type="hidden" class="current_product_id" value="' . $product->get_id() . '" />
-									<input type="hidden" class="current_product_name" value="' . $product->get_title() . '" />
-									' . $shown_interest_section . '
-								</div>';
+
         } else {
-            $stock_interest = '<div class="alert_container">
+            $user_email = '';
+        }
+
+        $stock_interest = apply_filters('woocommerce_product_stock_alert_form', '<div class="alert_container">
 									' . $alert_text_html . '
-									<input type="text" class="stock_alert_email" name="alert_email" placeholder="abc@example.com" />
+									<input type="text" class="stock_alert_email" name="alert_email" placeholder="abc@example.com" value="' . $user_email . '" />
 									' . $button_html . '
 									<input type="hidden" class="current_product_id" value="' . $product->get_id() . '" />
 									<input type="hidden" class="current_product_name" value="' . $product->get_title() . '" />
 									' . $shown_interest_section . '
-								</div>';
-        }
+								</div>', $alert_text_html, $user_email, $button_html, $product, $shown_interest_section);
 
         if ($product->is_type('simple')) {
             if (display_stock_alert_form($product)) {

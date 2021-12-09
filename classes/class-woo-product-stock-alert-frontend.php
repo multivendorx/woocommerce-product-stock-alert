@@ -94,6 +94,7 @@ class WOO_Product_Stock_Alert_Frontend {
                 wp_enqueue_script('stock_alert_frontend_js', $frontend_script_path . 'frontend.js', array('jquery'), $WOO_Product_Stock_Alert->version, true);
             
                 wp_localize_script('stock_alert_frontend_js', 'woo_stock_alert_script_data', array('ajax_url' => admin_url('admin-ajax.php', 'relative'),
+                    'additional_fields' => apply_filters('woocommerce_product_stock_alert_form_additional_fields', []),
                     'alert_text_html' => $alert_text_html,
                     'button_html' => $button_html,
                     'alert_success' => $alert_success,
@@ -234,14 +235,24 @@ class WOO_Product_Stock_Alert_Frontend {
         }
         $placeholder = __('Enter your email', 'woocommerce-product-stock-alert');
         $placeholder = apply_filters('wc_product_stock_alert_box_email_placeholder', $placeholder);
-        $stock_interest .= '<div class="alert_container">
+
+        $stock_interest .= apply_filters('woocommerce_product_stock_alert_form', '<div class="alert_container">
 								' . $alert_text_html . '
 								<input type="text" class="stock_alert_email" name="alert_email" value="' . $user_email . '" placeholder="' . $placeholder . '" />
 								' . $button_html . '
 								<input type="hidden" class="current_product_id" value="' . $product->get_id() . '" />
 								<input type="hidden" class="current_product_name" value="' . $product->get_title() . '" />
 								' . $shown_interest_section . '
-							</div>';
+							</div>', $alert_text_html, $user_email, $button_html, $product, $shown_interest_section);
+
+        /*$stock_interest .= '<div class="alert_container">
+								' . $alert_text_html . '
+								<input type="text" class="stock_alert_email" name="alert_email" value="' . $user_email . '" placeholder="' . $placeholder . '" />
+								' . $button_html . '
+								<input type="hidden" class="current_product_id" value="' . $product->get_id() . '" />
+								<input type="hidden" class="current_product_name" value="' . $product->get_title() . '" />
+								' . $shown_interest_section . '
+							</div>';*/
 
         if ($product->is_type('simple')) {
             if ($this->display_stock_alert_form($product)) {

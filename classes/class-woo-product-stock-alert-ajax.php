@@ -185,7 +185,8 @@ class WOO_Product_Stock_Alert_Ajax {
 
 				$cust_mail->trigger( $customer_email, $product_id );
 			}
-		} else {
+            do_action( 'woocommerce_product_stock_alert_form_process_additional_fields', $customer_email, $product_id );
+        } else {
 			if( !in_array( $customer_email, $current_subscriber ) ) {
 				if ( $do_complete_additional_task ) {
 					do_action( 'dc_wc_product_stock_alert_new_subscriber_added', $customer_email, $product_id );
@@ -198,7 +199,8 @@ class WOO_Product_Stock_Alert_Ajax {
 				
 					$cust_mail->trigger( $customer_email, $product_id );
 				}
-			} else {
+                do_action( 'woocommerce_product_stock_alert_form_process_additional_fields', $customer_email, $product_id );
+            } else {
 				$status = '/*?%already_registered%?*/';
 			}
 		}

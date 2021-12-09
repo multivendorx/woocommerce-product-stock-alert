@@ -80,7 +80,7 @@ jQuery(document).ready(function($) {
 			
 			alert_email_exist = alert_email_exist.replace( '%product_title%', pro_title );
 			alert_email_exist = alert_email_exist.replace( '%customer_email%', cus_email );
-			
+
 			if( cus_email && validateEmail(cus_email) ) {
 				$(this).toggleClass('alert_loader').blur();	
 				var stock_alert = {
@@ -88,6 +88,11 @@ jQuery(document).ready(function($) {
 					email: cus_email,
 					product_id: pro_id
 				}
+
+				for (var i=0; i<woo_stock_alert_script_data.additional_fields.length; i++){
+					stock_alert[woo_stock_alert_script_data.additional_fields[i]] = $(this).parent().find('.'+woo_stock_alert_script_data.additional_fields[i]).val();
+				}
+
 				$.post(woo_stock_alert_script_data.ajax_url, stock_alert, function(response) { console.log(response);
 					$this.removeClass('alert_loader').blur();	
 					if( response == '0' ) {
@@ -124,7 +129,7 @@ jQuery(document).ready(function($) {
 			
 			alert_email_exist = alert_email_exist.replace( '%product_title%', pro_title );
 			alert_email_exist = alert_email_exist.replace( '%customer_email%', cus_email );
-			
+
 			if( cus_email && validateEmail(cus_email) ) {
 				$(this).attr("value",woo_stock_alert_script_data.processing);
 				$(this).addClass("stk_disabled");	
@@ -133,6 +138,12 @@ jQuery(document).ready(function($) {
 					email: cus_email,
 					product_id: variation_id
 				}
+
+
+				for (var i=0; i<woo_stock_alert_script_data.additional_fields.length; i++){
+					stock_alert[woo_stock_alert_script_data.additional_fields[i]] = $(this).parent().find('.'+woo_stock_alert_script_data.additional_fields[i]).val();
+				}
+
 				$.post(woo_stock_alert_script_data.ajax_url, stock_alert, function(response) {
 					$(this).removeClass("stk_disabled");	
 					if( response == '0' ) {
