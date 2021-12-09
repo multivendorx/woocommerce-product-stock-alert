@@ -1,7 +1,6 @@
 == Changelog ==
 -------------------------------------------------------------------------------------------------------------------
 = 1.7.4 - 2021-12-09 =
-
 * Added - WooCommerce 5.9.0 compatibility.
 * Added - WordPress 5.8.2 compatibility.
 * Fixed - Fetal errors due to Uncaught TypeError
