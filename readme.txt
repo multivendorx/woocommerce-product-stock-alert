@@ -3,9 +3,9 @@
 Contributors: wcmp
 Tags: wordpress, woocommerce, e-commerce, shop, stock, out of stock, in stock, stock alert, alert email, stock alert email
 Requires at least: 4.4
-Tested up to: 5.8
+Tested up to: 5.8.2
 Requires PHP: 5.6
-Stable tag: 1.7.3
+Stable tag: 1.7.4
 Donate link: http://wc-marketplace.com/
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -84,7 +84,7 @@ Yes, this plugin works with WooCommerce Subscription Product.
 
 == Changelog ==
 
- 1.7.4 - 2021-12-09 =
+ 1.7.4 - 2021-12-10 =
 
 * Fixed - Fetal errors due to Uncaught TypeError.
 * Fixed - Jquery Issues #40.
@@ -94,7 +94,8 @@ Yes, this plugin works with WooCommerce Subscription Product.
 * Fixed - Qtip issues.
 * Added - WooCommerce 5.9.0 compatibility.
 * Added - WordPress 5.8.2 compatibility.
-* Updated - Language files.
+* Added - PHP 8.0.10 compatibility.
+
 
 = 1.7.3 - 2021-08-26 =
 * Fixed - HTML with product name in Stock alert mail.
