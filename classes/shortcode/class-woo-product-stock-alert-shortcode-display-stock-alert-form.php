@@ -24,7 +24,7 @@ class WOO_Product_Stock_Alert_Display_Form {
         if (empty($product))
             return;
 
-        $stock_interest = $alert_text_html = $button_html = '';
+        $stock_interest = $alert_text_html = $button_html = $user_email = '';
         $dc_settings = array();
         $alert_text = $button_text = $button_background_color = $button_border_color = $button_text_color = $unsubscribe_button_text = '';
         $alert_success = $alert_email_exist = $valid_email = $alert_unsubscribe_message = '';
