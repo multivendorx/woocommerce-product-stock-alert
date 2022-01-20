@@ -84,18 +84,16 @@ Yes, this plugin works with WooCommerce Subscription Product.
 
 == Changelog ==
 
- 1.7.4 - 2021-12-10 =
-
-* Fixed - Fetal errors due to Uncaught TypeError.
-* Fixed - Jquery Issues #40.
+ 1.7.4 - 2022-01-21 =
+* Added - WooCommerce 5.9.0 compatibility.
+* Added - WordPress 5.8.2 compatibility.
+* Added - PHP 8.0.10 compatibility.
 * Added - Woocommerce_product_stock_alert_form filter in order to customize alert form.
 * Added - Woocommerce_product_stock_alert_form_additional_fields in order to add additional fields sent in alert form.
 * Added - Woocommerce_product_stock_alert_form_process_additional_fields filter in order to process additional fields sent in the alert form.
 * Fixed - Qtip issues.
-* Added - WooCommerce 5.9.0 compatibility.
-* Added - WordPress 5.8.2 compatibility.
-* Added - PHP 8.0.10 compatibility.
-
+* Fixed - Fetal errors due to Uncaught TypeError #41.
+* Fixed - Jquery Issues #40.
 
 = 1.7.3 - 2021-08-26 =
 * Fixed - HTML with product name in Stock alert mail.
