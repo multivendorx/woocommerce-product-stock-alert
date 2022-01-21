@@ -24,7 +24,7 @@ class WOO_Product_Stock_Alert_Display_Form {
         if (empty($product))
             return;
 
-        $stock_interest = $alert_text_html = $button_html = '';
+        $stock_interest = $alert_text_html = $button_html = $user_email = '';
         $dc_settings = array();
         $alert_text = $button_text = $button_background_color = $button_border_color = $button_text_color = $unsubscribe_button_text = '';
         $alert_success = $alert_email_exist = $valid_email = $alert_unsubscribe_message = '';
@@ -110,9 +110,6 @@ class WOO_Product_Stock_Alert_Display_Form {
         if (is_user_logged_in()) {
             $current_user = wp_get_current_user();
             $user_email = $current_user->data->user_email;
-
-        } else {
-            $user_email = '';
         }
 
         $stock_interest = apply_filters('woocommerce_product_stock_alert_form', '<div class="alert_container">
