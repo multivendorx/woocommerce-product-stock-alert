@@ -17,7 +17,7 @@
 * Fixed - Unsubscribe button text.
 * Added - Settings for remove admin email Id and add additional email Id.
 * Added - vendor email with Stock alert admin mail.
-* Added - Double Optin setting modification for WCMp vendor stock alert.
+* Added - Double Optin setting modification for MVX vendor stock alert.
 * Added - Compatibility of WordPress 5.8.
 * Added - Compatibility of Woocommerce 5.6.0.
 * Updated - Language files.

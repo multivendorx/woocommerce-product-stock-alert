@@ -1,12 +1,12 @@
 === WooCommerce Product Stock Alert ===
 
-Contributors: wcmp
+Contributors: mvx
 Tags: wordpress, woocommerce, e-commerce, shop, stock, out of stock, in stock, stock alert, alert email, stock alert email
 Requires at least: 4.4
 Tested up to: 5.8.2
 Requires PHP: 5.6
 Stable tag: 1.7.4
-Donate link: http://wc-marketplace.com/
+Donate link: https://multivendorx.com/
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -29,7 +29,7 @@ Never miss a sale now! This plugin lets prospective buyers subscribe to a produc
 *   You can change the default Stock Alert form position and display the stock alert form on the product page by using Shortcode [display_stock_alert_form].
 *   Export list of subscribers via Wordpress’s Tools settings
 *   Customers can unsubscribe from a product to which he/she already subscribed.
-*   Double Opt In setting sends customers a confirmation mail inquiring if they would like to confirm their subscription to an Out of Stock product. To enable this feature you need to Install **[WCMp Vendor Stock Alert](https://wc-marketplace.com/product/wcmp-vendor-stock-alert/)**
+*   Double Opt In setting sends customers a confirmation mail inquiring if they would like to confirm their subscription to an Out of Stock product. To enable this feature you need to Install **[MVX Vendor Stock Alert](https://wc-marketplace.com/product/mvx-vendor-stock-alert/)**
 
 = Compatibility =
 *   WordPress 5.5+
@@ -101,7 +101,7 @@ Yes, this plugin works with WooCommerce Subscription Product.
 * Fixed - Unsubscribe button text.
 * Added - Settings for remove admin email Id and add additional email Id.
 * Added - vendor email with Stock alert admin mail.
-* Added - Double Optin setting modification for WCMp vendor stock alert.
+* Added - Double Optin setting modification for MVX vendor stock alert.
 * Added - Compatibility of WordPress 5.8.
 * Added - Compatibility of Woocommerce 5.6.0.
 * Updated - Language files.

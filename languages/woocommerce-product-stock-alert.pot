@@ -181,8 +181,8 @@ msgstr ""
 
 #: admin/class-woo-product-stock-alert-settings-woo_product_stock_alert_general.php:32
 msgid ""
-"Enable Double Opt-in flow for subscription confirmation, use <a href=\"//wc-marketplace.com/product/product/wcmp-vendor-stock-"
-"alert/\"> WCMp Stock Alert </a>."
+"Enable Double Opt-in flow for subscription confirmation, use <a href=\"//wc-marketplace.com/product/product/mvx-vendor-stock-"
+"alert/\"> MVX Stock Alert </a>."
 msgstr ""
 
 #: admin/class-woo-product-stock-alert-settings-woo_product_stock_alert_general.php:31
@@ -314,7 +314,7 @@ msgstr ""
 
 #. URI of the plugin
 #. Author URI of the plugin
-msgid "http://wc-marketplace.com/"
+msgid "https://multivendorx.com/"
 msgstr ""
 
 #: classes/class-woo-product-stock-alert-admin.php:126

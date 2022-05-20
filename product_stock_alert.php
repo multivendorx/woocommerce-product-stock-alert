@@ -1,15 +1,15 @@
 <?php
 /**
  * Plugin Name: WooCommerce Product Stock Alert
- * Plugin URI: http://wc-marketplace.com/
+ * Plugin URI: https://multivendorx.com/
  * Description: Woocommerce plugin using which a customer can subscribe for interest on an out of stock product. When the product becomes available, subscribed customer will get an alert email.
- * Author: WC Marketplace
+ * Author: MultivendorX
  * Version: 1.7.4
  * Requires at least: 4.4
  * Tested up to: 5.8.2
  * WC requires at least: 3.0
  * WC tested up to: 6.1.1
- * Author URI: http://wc-marketplace.com/
+ * Author URI: https://multivendorx.com/
  * Text Domain: woocommerce-product-stock-alert
  * Domain Path: /languages/
  */

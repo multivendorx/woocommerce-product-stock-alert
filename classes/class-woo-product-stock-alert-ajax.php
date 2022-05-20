@@ -162,8 +162,8 @@ class WOO_Product_Stock_Alert_Ajax {
 			$admin_email .= ','.$dc_settings['additional_alert_email'];	
 		}
 
-		if( function_exists( 'get_wcmp_product_vendors' ) ) {
-      		$vendor = get_wcmp_product_vendors( $product_id );
+		if( function_exists( 'get_mvx_product_vendors' ) ) {
+      		$vendor = get_mvx_product_vendors( $product_id );
       		if( $vendor && apply_filters( 'dc_wc_product_stock_alert_add_vendor', true ) ) {
         			$admin_email .= ','. sanitize_email( $vendor->user_data->user_email );  
       		}
