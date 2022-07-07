@@ -3,9 +3,9 @@
 Contributors: wcmp
 Tags: wordpress, woocommerce, e-commerce, shop, stock, out of stock, in stock, stock alert, alert email, stock alert email
 Requires at least: 4.4
-Tested up to: 5.8.2
+Tested up to: 6.0
 Requires PHP: 5.6
-Stable tag: 1.7.4
+Stable tag: 1.7.5
 Donate link: http://wc-marketplace.com/
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -83,6 +83,11 @@ Yes, this plugin works with WooCommerce Subscription Product.
 15. Export subscribers' list
 
 == Changelog ==
+
+= 1.7.5 - 2022-07-07 =
+* Added - WordPress 6.0 compatibility.
+* Added - WooCommerce 6.6.1 compatibility.
+* Fixed - Fatal errors due to Unsupported operand types #63.
 
 = 1.7.4 - 2022-01-21 =
 * Added - WordPress 5.8.2 compatibility.
