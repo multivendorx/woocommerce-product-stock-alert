@@ -1,5 +1,10 @@
 == Changelog ==
 -------------------------------------------------------------------------------------------------------------------
+= 1.7.5 - 2022-07-07 =
+* Added - WordPress 6.0 compatibility.
+* Added - WooCommerce 6.6.1 compatibility.
+* Fixed - Fatal errors due to Unsupported operand types #63.
+
 = 1.7.4 - 2022-01-21 =
 * Added - WordPress 5.8.2 compatibility.
 * Added - WooCommerce 6.1.1 compatibility.
