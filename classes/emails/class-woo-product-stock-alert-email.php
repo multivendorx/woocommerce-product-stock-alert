@@ -48,8 +48,11 @@ class WC_Email_Stock_Alert extends WC_Email {
 	 * @return void
 	 */
 	function trigger( $recipient, $product_id ) {
-		
+		$this->customer_email = $recipient;
 		$this->recipient = $recipient;
+        if( apply_filters( 'woocommerce_instock_alert_email_goes_to_admin', true) ) {
+            $this->recipient .= ',' . get_option('admin_email');
+        }
 		$this->product_id = $product_id;
 		
 		if ( ! $this->is_enabled() || ! $this->get_recipient() ) {
@@ -90,7 +93,7 @@ class WC_Email_Stock_Alert extends WC_Email {
 		wc_get_template( $this->template_html, array(
 			'email_heading' => $this->get_heading(),
 			'product_id' => $this->product_id,
-			'customer_email' => $this->recipient,
+			'customer_email' => $this->customer_email,
 			'sent_to_admin' => false,
 			'plain_text' => false,
 			'email' => $this,
@@ -109,7 +112,7 @@ class WC_Email_Stock_Alert extends WC_Email {
 		wc_get_template( $this->template_plain, array(
 			'email_heading' => $this->get_heading(),
 			'product_id' => $this->product_id,
-			'customer_email' => $this->recipient,
+			'customer_email' => $this->customer_email,
 			'sent_to_admin' => false,
 			'plain_text' => true
 		) ,'', $this->template_base );
@@ -119,4 +122,3 @@ class WC_Email_Stock_Alert extends WC_Email {
 }
 
 endif;
-

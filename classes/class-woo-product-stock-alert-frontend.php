@@ -123,23 +123,26 @@ class WOO_Product_Stock_Alert_Frontend {
     }
 
     function frontend_style() {
-        $dc_settings = array();
-        $button_background_color_onhover = $button_text_color_onhover = '';
+        if ( is_product() ) {
+            $dc_settings = array();
+            $button_background_color_onhover = $button_text_color_onhover = $button_background_color_css = '';
 
-        $dc_settings = $this->dc_plugin_settings;
-        if (isset($dc_settings) && !empty($dc_settings)) {
-            $button_background_color_onhover = !empty($dc_settings['button_background_color_onhover']) ? $dc_settings['button_background_color_onhover'] : '';
-            $button_text_color_onhover = !empty($dc_settings['button_text_color_onhover']) ? $dc_settings['button_text_color_onhover'] : '';
-            $button_border_color_onhover = !empty($dc_settings['button_border_color_onhover']) ? $dc_settings['button_border_color_onhover'] : '';
+            $dc_settings = $this->dc_plugin_settings;
+            if (isset($dc_settings) && !empty($dc_settings)) {
+                $button_background_color_onhover = !empty($dc_settings['button_background_color_onhover']) ? $dc_settings['button_background_color_onhover'] : '';
+                $button_text_color_onhover = !empty($dc_settings['button_text_color_onhover']) ? $dc_settings['button_text_color_onhover'] : '';
+                $button_border_color_onhover = !empty($dc_settings['button_border_color_onhover']) ? $dc_settings['button_border_color_onhover'] : '';
+            }
+            if (!empty($button_background_color_onhover))
+                $button_background_color_css .= 'background: ' . $button_background_color_onhover . ' !important;';
+            if (!empty($button_text_color_onhover))
+                $button_background_color_css .= 'color: ' . $button_text_color_onhover . ' !important;';
+            if (!empty($button_border_color_onhover))
+                $button_background_color_css .= 'border-color: ' . $button_border_color_onhover . ' !important;';
+            if ($button_background_color_css) {
+                echo '<style> button.alert_button_hover:hover, button.unsubscribe_button:hover {'.$button_background_color_css .' } </style>';
+            }
         }
-
-        echo '<style>
-			button.alert_button_hover:hover, button.unsubscribe_button:hover {
-				background: ' . $button_background_color_onhover . ' !important;
-				color: ' . $button_text_color_onhover . ' !important;
-				border-color: ' . $button_border_color_onhover . ' !important;
-			}
-		</style>';
     }
 
     function get_alert_form() {
