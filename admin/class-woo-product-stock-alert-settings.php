@@ -76,29 +76,7 @@ class WOO_Product_Stock_Alert_Settings {
    * Options page callback
    */
   public function create_woo_product_stock_alert_settings() {
-    global $WOO_Product_Stock_Alert;
-    ?>
-    <div class="wrap">
-      <?php $this->dc_settings_tabs(); ?>
-      <?php
-      $tab = ( isset( $_GET['tab'] ) ? $_GET['tab'] : 'woo_product_stock_alert_general' );
-      $this->options = get_option( "dc_{$tab}_settings_name" );
-      //print_r($this->options);
-      
-      // This prints out all hidden setting errors
-      settings_errors("dc_{$tab}_settings_name");
-      ?>
-      <form method="post" action="options.php">
-      <?php
-        // This prints out all hidden setting fields
-        settings_fields( "dc_{$tab}_settings_group" );   
-        do_settings_sections( "dc-{$tab}-settings-admin" );
-        submit_button();
-      ?>
-      </form>
-    </div>
-    <?php
-    do_action('woo_product_stock_alert_dualcube_admin_footer');
+    echo '<div id="mvx-admin-stockalert"></div>';
   }
 
   /**

@@ -110,12 +110,10 @@ class WOO_Product_Stock_Alert_Admin {
      */
     public function enqueue_admin_script() {
         global $WOO_Product_Stock_Alert;
-        $screen = get_current_screen();
-
-        $WOO_Product_Stock_Alert->library->load_qtip_lib();
-        $WOO_Product_Stock_Alert->library->load_colorpicker_lib();
-        wp_enqueue_script('stock_alert_admin_js', $WOO_Product_Stock_Alert->plugin_url . 'assets/admin/js/admin.js', array('jquery'), $WOO_Product_Stock_Alert->version, true);
-        wp_enqueue_style('stock_alert_admin_css', $WOO_Product_Stock_Alert->plugin_url . 'assets/admin/css/admin.css', array(), $WOO_Product_Stock_Alert->version);
+        if (get_current_screen()->id == 'woocommerce_page_woo-product-stock-alert-setting-admin') {
+            wp_enqueue_script( 'stock_alert_admin_js', $WOO_Product_Stock_Alert->plugin_url . 'build/index.js', array( 'wp-element' ), $WOO_Product_Stock_Alert->version, true );
+            wp_enqueue_style( 'mvx-catalog-style', $WOO_Product_Stock_Alert->plugin_url . 'build/index.css' );
+        }
     }
 
     /**

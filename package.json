@@ -1,0 +1,27 @@
+{
+  "name": "woocommerce-product-stock-alert",
+  "version": "1.0.0",
+  "description": "=== WooCommerce Product Stock Alert ===",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "wp-scripts build",
+    "start": "wp-scripts start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/multivendorx/woocommerce-product-stock-alert.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/multivendorx/woocommerce-product-stock-alert/issues"
+  },
+  "homepage": "https://github.com/multivendorx/woocommerce-product-stock-alert#readme",
+  "devDependencies": {
+    "@wordpress/scripts": "^25.5.1"
+  }
+}
