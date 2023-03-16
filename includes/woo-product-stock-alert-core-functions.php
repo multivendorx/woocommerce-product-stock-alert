@@ -11,10 +11,10 @@ if (!function_exists('woocommerce_inactive_notice')) {
 
 }
 
-if (!function_exists('get_dc_plugin_settings')) {
+if (!function_exists('get_mvx_product_alert_plugin_settings')) {
 
-    function get_dc_plugin_settings($key = '', $default = false) {
-        $dc_plugin_settings = array();
+    function get_mvx_product_alert_plugin_settings($key = '', $default = false) {
+        $mvx_plugin_settings = array();
         $all_options = apply_filters('mvx_woo_stock_alert_all_admin_options', array(
             'mvx_woo_stock_alert_form_customization_tab_settings',
             'mvx_woo_stock_alert_form_submission_tab_settings',
@@ -22,15 +22,15 @@ if (!function_exists('get_dc_plugin_settings')) {
             )
         );
         foreach ($all_options as $option_name) {
-            $dc_plugin_settings = array_merge($dc_plugin_settings, get_option($option_name, array()));
+            $mvx_plugin_settings = array_merge($mvx_plugin_settings, get_option($option_name, array()));
         }
         if (empty($key)) {
             return $default;
         }
-        if (!isset($dc_plugin_settings[$key]) || empty($dc_plugin_settings[$key])) {
+        if (!isset($mvx_plugin_settings[$key]) || empty($mvx_plugin_settings[$key])) {
             return $default;
         }
-        return $dc_plugin_settings[$key];
+        return $mvx_plugin_settings[$key];
     }
 
 }
@@ -39,22 +39,22 @@ if (!function_exists('get_woo_form_settings_array')) {
 
     function get_woo_form_settings_array() {
         $settings = array(
-            'alert_text' => get_dc_plugin_settings('alert_text') ? get_dc_plugin_settings('alert_text') : __('Get an alert when the product is in stock:', 'woocommerce-product-stock-alert'),
-            'alert_text_color' => get_dc_plugin_settings('alert_text_color')  ? get_dc_plugin_settings('alert_text_color') : '',
-            'button_text' => get_dc_plugin_settings('button_text') ? get_dc_plugin_settings('button_text') : __('Get an alert', 'woocommerce-product-stock-alert'),
-            'unsubscribe_button_text' => get_dc_plugin_settings('unsubscribe_button_text') ? get_dc_plugin_settings('unsubscribe_button_text') : __('Unsubscribe', 'woocommerce-product-stock-alert'),
-            'button_background_color' => get_dc_plugin_settings('button_background_color') ? get_dc_plugin_settings('button_background_color') : '',
-            'button_border_color' => get_dc_plugin_settings('button_border_color') ? get_dc_plugin_settings('button_border_color') : '',
-            'button_text_color' => get_dc_plugin_settings('button_text_color') ? get_dc_plugin_settings('button_text_color') : '',
-            'button_background_color_onhover' => get_dc_plugin_settings('button_background_color_onhover') ? get_dc_plugin_settings('button_background_color_onhover') : '',
-            'button_text_color_onhover' => get_dc_plugin_settings('button_text_color_onhover') ? get_dc_plugin_settings('button_text_color_onhover') : '',
-            'button_border_color_onhover' => get_dc_plugin_settings('button_border_color_onhover') ? get_dc_plugin_settings('button_border_color_onhover') : '',
-            'alert_success' => get_dc_plugin_settings('alert_success') ? get_dc_plugin_settings('alert_success') : '',
-            'alert_email_exist' => get_dc_plugin_settings('alert_email_exist') ? get_dc_plugin_settings('alert_email_exist') : '',
-            'valid_email' => get_dc_plugin_settings('valid_email') ? get_dc_plugin_settings('valid_email') : '',
-            'alert_unsubscribe_message' => get_dc_plugin_settings('alert_unsubscribe_message') ? get_dc_plugin_settings('alert_unsubscribe_message') : '',
-            'shown_interest_text' => get_dc_plugin_settings('shown_interest_text') ? get_dc_plugin_settings('shown_interest_text') : __('Already %no_of_subscribed% persons shown interest.', 'woocommerce-product-stock-alert'),
-            'button_font_size' => get_dc_plugin_settings('button_font_size') ? get_dc_plugin_settings('button_font_size'). 'px' : '',
+            'alert_text' => get_mvx_product_alert_plugin_settings('alert_text') ? get_mvx_product_alert_plugin_settings('alert_text') : __('Get an alert when the product is in stock:', 'woocommerce-product-stock-alert'),
+            'alert_text_color' => get_mvx_product_alert_plugin_settings('alert_text_color')  ? get_mvx_product_alert_plugin_settings('alert_text_color') : '',
+            'button_text' => get_mvx_product_alert_plugin_settings('button_text') ? get_mvx_product_alert_plugin_settings('button_text') : __('Get an alert', 'woocommerce-product-stock-alert'),
+            'unsubscribe_button_text' => get_mvx_product_alert_plugin_settings('unsubscribe_button_text') ? get_mvx_product_alert_plugin_settings('unsubscribe_button_text') : __('Unsubscribe', 'woocommerce-product-stock-alert'),
+            'button_background_color' => get_mvx_product_alert_plugin_settings('button_background_color') ? get_mvx_product_alert_plugin_settings('button_background_color') : '',
+            'button_border_color' => get_mvx_product_alert_plugin_settings('button_border_color') ? get_mvx_product_alert_plugin_settings('button_border_color') : '',
+            'button_text_color' => get_mvx_product_alert_plugin_settings('button_text_color') ? get_mvx_product_alert_plugin_settings('button_text_color') : '',
+            'button_background_color_onhover' => get_mvx_product_alert_plugin_settings('button_background_color_onhover') ? get_mvx_product_alert_plugin_settings('button_background_color_onhover') : '',
+            'button_text_color_onhover' => get_mvx_product_alert_plugin_settings('button_text_color_onhover') ? get_mvx_product_alert_plugin_settings('button_text_color_onhover') : '',
+            'button_border_color_onhover' => get_mvx_product_alert_plugin_settings('button_border_color_onhover') ? get_mvx_product_alert_plugin_settings('button_border_color_onhover') : '',
+            'alert_success' => get_mvx_product_alert_plugin_settings('alert_success') ? get_mvx_product_alert_plugin_settings('alert_success') : '',
+            'alert_email_exist' => get_mvx_product_alert_plugin_settings('alert_email_exist') ? get_mvx_product_alert_plugin_settings('alert_email_exist') : '',
+            'valid_email' => get_mvx_product_alert_plugin_settings('valid_email') ? get_mvx_product_alert_plugin_settings('valid_email') : '',
+            'alert_unsubscribe_message' => get_mvx_product_alert_plugin_settings('alert_unsubscribe_message') ? get_mvx_product_alert_plugin_settings('alert_unsubscribe_message') : '',
+            'shown_interest_text' => get_mvx_product_alert_plugin_settings('shown_interest_text') ? get_mvx_product_alert_plugin_settings('shown_interest_text') : __('Already %no_of_subscribed% persons shown interest.', 'woocommerce-product-stock-alert'),
+            'button_font_size' => get_mvx_product_alert_plugin_settings('button_font_size') ? get_mvx_product_alert_plugin_settings('button_font_size'). 'px' : '',
         );
 
         if (empty($settings['alert_success'])) {
@@ -92,7 +92,7 @@ if (!function_exists('get_no_subscribed_persons')) {
 
                         if (isset($product_availability_stock) && $manage_stock) {
                             if ($managing_stock && $product_availability_stock <= (int) get_option('woocommerce_notify_no_stock_amount')) {
-                                if ($child_obj->backorders_allowed() && get_dc_plugin_settings('is_enable_backorders') ) {
+                                if ($child_obj->backorders_allowed() && get_mvx_product_alert_plugin_settings('is_enable_backorders') ) {
                                     if ($stock_status == 'outofstock' || $product_availability_stock <= 0) {
                                         $product_subscriber = get_post_meta($child_id, '_product_subscriber', true);
                                         if (!empty($product_subscriber)) {
@@ -106,7 +106,7 @@ if (!function_exists('get_no_subscribed_persons')) {
                                     }
                                 }
                             } elseif ($product_availability_stock <= 0) {
-                                if ($child_obj->backorders_allowed() && get_dc_plugin_settings('is_enable_backorders')) {
+                                if ($child_obj->backorders_allowed() && get_mvx_product_alert_plugin_settings('is_enable_backorders')) {
                                     if ($stock_status == 'outofstock' || $product_availability_stock <= 0) {
                                         $product_subscriber = get_post_meta($child_id, '_product_subscriber', true);
                                         if (!empty($product_subscriber)) {
@@ -131,7 +131,7 @@ if (!function_exists('get_no_subscribed_persons')) {
 
                 if (isset($product_availability_stock) && $manage_stock) {
                     if ($managing_stock && $product_availability_stock <= (int) get_option('woocommerce_notify_no_stock_amount')) {
-                        if ($product->backorders_allowed() && get_dc_plugin_settings('is_enable_backorders') ) {
+                        if ($product->backorders_allowed() && get_mvx_product_alert_plugin_settings('is_enable_backorders') ) {
                             if ($stock_status == 'outofstock' || $product_availability_stock <= 0) {
                                 $product_subscriber = get_post_meta($product->get_id(), '_product_subscriber', true);
                                 if ($product_subscriber) {
@@ -145,7 +145,7 @@ if (!function_exists('get_no_subscribed_persons')) {
                             }
                         }
                     } elseif ($product_availability_stock <= 0) {
-                        if ($product->backorders_allowed() && get_dc_plugin_settings('is_enable_backorders')) {
+                        if ($product->backorders_allowed() && get_mvx_product_alert_plugin_settings('is_enable_backorders')) {
                             if ($stock_status == 'outofstock' || $product_availability_stock <= 0) {
                                 $product_subscriber = get_post_meta($product->get_id(), '_product_subscriber', true);
                                 if (!empty($product_subscriber)) {
@@ -180,7 +180,7 @@ if (!function_exists('display_stock_alert_form')) {
 
             if (isset($stock_quantity) && $manage_stock) {
                 if ($managing_stock && $stock_quantity <= (int) get_option('woocommerce_notify_no_stock_amount')) {
-                    if ($product->backorders_allowed() && get_dc_plugin_settings('is_enable_backorders')) {
+                    if ($product->backorders_allowed() && get_mvx_product_alert_plugin_settings('is_enable_backorders')) {
                         if ($stock_status == 'outofstock' || $stock_quantity <= 0) {
                             $display_stock_alert_form = true;
                         }
@@ -188,7 +188,7 @@ if (!function_exists('display_stock_alert_form')) {
                         $display_stock_alert_form = true;
                     }
                 } elseif ($stock_quantity <= 0) {
-                    if ($product->backorders_allowed() && get_dc_plugin_settings('is_enable_backorders')) {
+                    if ($product->backorders_allowed() && get_mvx_product_alert_plugin_settings('is_enable_backorders')) {
                         if ($stock_status == 'outofstock' || $stock_quantity <= 0) {
                             $display_stock_alert_form = true;
                         }

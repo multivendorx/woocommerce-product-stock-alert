@@ -7,7 +7,7 @@ class WOO_Product_Stock_Alert_Frontend {
         add_action('wp_enqueue_scripts', array(&$this, 'frontend_scripts'));
         //enqueue styles
         add_action('wp_enqueue_scripts', array(&$this, 'frontend_styles'));
-        if (get_dc_plugin_settings('is_enable')) {
+        if (get_mvx_product_alert_plugin_settings('is_enable')) {
             // Hover style
             add_action('wp_head', array($this, 'frontend_style'));
             //HTML for getting customer email
@@ -18,6 +18,7 @@ class WOO_Product_Stock_Alert_Frontend {
     function frontend_scripts() {
         global $WOO_Product_Stock_Alert;
         $frontend_script_path = $WOO_Product_Stock_Alert->plugin_url . 'assets/frontend/js/';
+        $suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
         $stock_interest = $alert_text_html = $button_html = '';
         $settings_array = get_woo_form_settings_array();
 
@@ -38,7 +39,7 @@ class WOO_Product_Stock_Alert_Frontend {
         if (function_exists('is_product')) {
             if (is_product()) {
                 // Enqueue your frontend javascript from here
-                wp_enqueue_script('stock_alert_frontend_js', $frontend_script_path . 'frontend.js', array('jquery'), $WOO_Product_Stock_Alert->version, true);
+                wp_enqueue_script('stock_alert_frontend_js', $frontend_script_path . 'frontend'. $suffix .'.js', array('jquery'), $WOO_Product_Stock_Alert->version, true);
             
                 wp_localize_script('stock_alert_frontend_js', 'woo_stock_alert_script_data', array('ajax_url' => admin_url('admin-ajax.php', 'relative'),
                     'additional_fields' => apply_filters('woocommerce_product_stock_alert_form_additional_fields', []),
@@ -60,11 +61,12 @@ class WOO_Product_Stock_Alert_Frontend {
     function frontend_styles() {
         global $WOO_Product_Stock_Alert;
         $frontend_style_path = $WOO_Product_Stock_Alert->plugin_url . 'assets/frontend/css/';
+        $suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
         if (function_exists('is_product')) {
             if (is_product()) {
                 // Enqueue your frontend stylesheet from here
-                wp_enqueue_style('stock_alert_frontend_css', $frontend_style_path . 'frontend.css', array(), $WOO_Product_Stock_Alert->version);
+                wp_enqueue_style('stock_alert_frontend_css', $frontend_style_path . 'frontend'. $suffix .'.css', array(), $WOO_Product_Stock_Alert->version);
             }
         }
     }
@@ -72,9 +74,9 @@ class WOO_Product_Stock_Alert_Frontend {
     function frontend_style() {
         $button_background_color_onhover = $button_text_color_onhover = '';
 
-        $button_background_color_onhover = get_dc_plugin_settings('button_background_color_onhover') ? get_dc_plugin_settings('button_background_color_onhover') : '';
-        $button_text_color_onhover = get_dc_plugin_settings('button_text_color_onhover') ? get_dc_plugin_settings('button_text_color_onhover') : '';
-        $button_border_color_onhover = get_dc_plugin_settings('button_border_color_onhover') ? get_dc_plugin_settings('button_border_color_onhover') : '';
+        $button_background_color_onhover = get_mvx_product_alert_plugin_settings('button_background_color_onhover') ? get_mvx_product_alert_plugin_settings('button_background_color_onhover') : '';
+        $button_text_color_onhover = get_mvx_product_alert_plugin_settings('button_text_color_onhover') ? get_mvx_product_alert_plugin_settings('button_text_color_onhover') : '';
+        $button_border_color_onhover = get_mvx_product_alert_plugin_settings('button_border_color_onhover') ? get_mvx_product_alert_plugin_settings('button_border_color_onhover') : '';
         
 
         echo '<style>
@@ -114,7 +116,7 @@ class WOO_Product_Stock_Alert_Frontend {
 
         $shown_interest_section = '';
         $shown_interest_text = $settings_array['shown_interest_text'];
-        if (get_dc_plugin_settings('is_enable_no_interest') && get_no_subscribed_persons($product->get_id()) != 0) {
+        if (get_mvx_product_alert_plugin_settings('is_enable_no_interest') && get_no_subscribed_persons($product->get_id()) != 0) {
             if ($shown_interest_text) {
                 $shown_interest_text = str_replace("%no_of_subscribed%", get_no_subscribed_persons($product->get_id()), $shown_interest_text);
                 $shown_interest_section = '<p>' . $shown_interest_text . '</p>';
@@ -221,11 +223,11 @@ class WOO_Product_Stock_Alert_Frontend {
             
             if ( ! $is_in_stock ) {
                     $display_stock_alert_form = true;
-            } elseif ( $managing_stock && $is_on_backorder && get_dc_plugin_settings('is_enable_backorders') ) {
+            } elseif ( $managing_stock && $is_on_backorder && get_mvx_product_alert_plugin_settings('is_enable_backorders') ) {
                     $display_stock_alert_form = true;
             } elseif ( $managing_stock ) {
                 if(get_option('woocommerce_notify_no_stock_amount')){
-                    if($stock_quantity <= (int) get_option('woocommerce_notify_no_stock_amount') && get_dc_plugin_settings('is_enable_backorders') ){
+                    if($stock_quantity <= (int) get_option('woocommerce_notify_no_stock_amount') && get_mvx_product_alert_plugin_settings('is_enable_backorders') ){
                         $display_stock_alert_form = true;
                     }
                 }

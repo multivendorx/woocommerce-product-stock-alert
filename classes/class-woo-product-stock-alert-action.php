@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Start Checking subscribed customer and alert about stock 
  *

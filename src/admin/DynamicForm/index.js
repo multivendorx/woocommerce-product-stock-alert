@@ -2,41 +2,14 @@
 import React from 'react';
 import axios from 'axios';
 
-const AnyReactComponent = ({ text }) => (
-	<img src={text} width="38" height="50" />
-);
 export default class DynamicForm extends React.Component {
 	state = {};
 	constructor(props) {
 		super(props);
 		this.state = {
 			from_loading: false,
-			statedrop: [],
-			errordisplay: '',
-			onmselect: 'Georgia, Serif'
+			errordisplay: ''
 		};
-
-		this.onSelectMchange = this.onSelectMchange.bind(this);
-		this.handleOMouseEnter = this.handleOMouseEnter.bind(this);
-		this.handleOMouseLeave = this.handleOMouseLeave.bind(this);
-	}
-
-	onSelectMchange(e) {
-		this.setState({
-			onmselect: e.target.value
-		});
-	}
-
-	handleOMouseEnter(e) {
-		this.setState({
-			hover_on: true
-		});
-	}
-
-	handleOMouseLeave(e) {
-		this.setState({
-			hover_on: false
-		});
 	}
 
 	onSubmit = (e) => {
@@ -244,26 +217,6 @@ export default class DynamicForm extends React.Component {
 				);
 			}
 
-			if (type === 'label') {
-				input = (
-					<div className="mvx-form-group-only-label">
-						<label
-							dangerouslySetInnerHTML={{ __html: m.valuename }}
-						></label>
-						<p
-							className="mvx-settings-metabox-description"
-							dangerouslySetInnerHTML={{ __html: m.desc }}
-						></p>
-					</div>
-				);
-			}
-
-			if (type === 'section') {
-				input = (
-					<div className="mvx-setting-section-divider">&nbsp;</div>
-				);
-			}
-
 			if (type === 'blocktext') {
 				input = (
 					<div className="mvx-blocktext-class">
@@ -273,52 +226,6 @@ export default class DynamicForm extends React.Component {
 								dangerouslySetInnerHTML={{
 									__html: m.blocktext,
 								}}
-							></p>
-						) : (
-							''
-						)}
-					</div>
-				);
-			}
-
-			if (type === 'toggle_rectangle') {
-				input = m.options.map((o) => {
-					const checked = o.value === value;
-					return (
-						<React.Fragment key={'fr' + o.key}>
-							<li>
-								<input
-									{...props}
-									className="mvx-setting-form-input"
-									id={`mvx-toggle-rectangle-${o.key}`}
-									type="radio"
-									key={o.key}
-									name={o.name}
-									checked={checked}
-									value={o.value}
-									onChange={(e) => {
-										this.onChange(e, o.name);
-									}}
-								/>
-								<label
-									htmlFor={`mvx-toggle-rectangle-${o.key}`}
-									key={'ll' + o.key}
-								>
-									{o.label}
-								</label>
-							</li>
-						</React.Fragment>
-					);
-				});
-				input = (
-					<div className="mvx-settings-mvx-form-group-radio">
-						<div className="mvx-toggle-rectangle-merge">
-							<ul>{input}</ul>
-						</div>
-						{m.desc ? (
-							<p
-								className="mvx-settings-metabox-description"
-								dangerouslySetInnerHTML={{ __html: m.desc }}
 							></p>
 						) : (
 							''
@@ -352,15 +259,6 @@ export default class DynamicForm extends React.Component {
 						) : (
 							''
 						)}
-					</div>
-				);
-			}
-
-			if (type === 'separator') {
-				input = (
-					<div className="mvx_regi_form_box">
-						<div className="clearboth"></div>
-						<h3 className="reg_header2"></h3>
 					</div>
 				);
 			}
@@ -461,85 +359,6 @@ export default class DynamicForm extends React.Component {
 								</div>
 							);
 						})}
-						{m.desc ? (
-							<p
-								className="mvx-settings-metabox-description"
-								dangerouslySetInnerHTML={{ __html: m.desc }}
-							></p>
-						) : (
-							''
-						)}
-					</div>
-				);
-			}
-
-			if (type === 'checkbox_select') {
-				input = (
-					<div className="mvx-select-deselect-checkbox-content">
-						<div className="mvx-select-de-box-and-checkbox">
-							<div className="mvx-select-deselect-checkbox-content-trigger ">
-								{m.select_deselect ? (
-									<div
-										className="mvx-select-deselect-trigger"
-										onClick={(e) => {
-											this.onSelectDeselectChange(e, m);
-										}}
-									>
-										Select / Deselect All
-									</div>
-								) : (
-									''
-								)}
-							</div>
-
-							<div className="mvx-select-deselect-checkbox-label-marge">
-								{m.options.map((o) => {
-									let checked = false;
-									if (value && value.length > 0) {
-										checked =
-											value.indexOf(o.value) > -1
-												? true
-												: false;
-									}
-									return (
-										<div className="mvx-col-50">
-											<React.Fragment key={'cfr' + o.key}>
-												<div className="mvx-wrap-checkbox-and-label d-flex">
-													<div className="mvx-normal-checkbox-content">
-														<input
-															{...props}
-															className={m.class}
-															type="checkbox"
-															id={`mvx-normal-switch-${o.key}`}
-															key={o.key}
-															name={o.name}
-															checked={checked}
-															value={o.value}
-															onChange={(e) => {
-																this.onChange(
-																	e,
-																	m.key,
-																	'multiple'
-																);
-															}}
-														/>
-													</div>
-													<div className="mvx-normal-checkbox-label">
-														<p
-															className="mvx-settings-checkbox-description pt-0"
-															dangerouslySetInnerHTML={{
-																__html: o.label,
-															}}
-														></p>
-													</div>
-												</div>
-											</React.Fragment>
-										</div>
-									);
-								})}
-							</div>
-						</div>
-
 						{m.desc ? (
 							<p
 								className="mvx-settings-metabox-description"

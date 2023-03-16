@@ -25,7 +25,6 @@ export default class TabSection extends Component {
 	}
 	
 	renderTab = () => {
-		const funtion_name = this.props.funtion_name;
 		const horizontally = this.props.horizontally;
 		const query_name = this.props.query_name;
 		

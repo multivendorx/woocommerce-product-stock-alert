@@ -161,10 +161,12 @@ class WOO_Product_Stock_Alert {
     public function stockalert_permission() {
 		return true;
 	}
+    
     public function mvx_stockalert_fetch_admin_tabs() {
 		$mvx_stockalert_tabs_data = mvx_stockalert_admin_tabs() ? mvx_stockalert_admin_tabs() : [];
         return rest_ensure_response( $mvx_stockalert_tabs_data );
 	}
+
     public function mvx_stockalert_save_stockalert($request) {
         $all_details = [];
         $modulename = $request->get_param('modulename');
@@ -175,6 +177,5 @@ class WOO_Product_Stock_Alert {
         $all_details['error'] = __('Settings Saved', 'multivendorx');
         return $all_details;
         die;
-
     }
 }

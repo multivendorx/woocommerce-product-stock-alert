@@ -150,19 +150,19 @@ class WOO_Product_Stock_Alert_Ajax {
 		$status = '';
 		$current_subscriber = array();
 		$admin_email = '';
-		if (get_dc_plugin_settings('is_remove_admin_email')) {
+		if (get_mvx_product_alert_plugin_settings('is_remove_admin_email')) {
 			$admin_email = '';
 		} else {
 			$admin_email = get_option('admin_email');
 		}
 
-		if (get_dc_plugin_settings('additional_alert_email')) {
-			$admin_email .= ','.get_dc_plugin_settings('additional_alert_email');	
+		if (get_mvx_product_alert_plugin_settings('additional_alert_email')) {
+			$admin_email .= ','.get_mvx_product_alert_plugin_settings('additional_alert_email');	
 		}
 
-		if (function_exists( 'get_wcmp_product_vendors' )) {
-      		$vendor = get_wcmp_product_vendors( $product_id );
-      		if ($vendor && apply_filters( 'dc_wc_product_stock_alert_add_vendor', true )) {
+		if (function_exists( 'get_mvx_product_vendors' )) {
+      		$vendor = get_mvx_product_vendors( $product_id );
+      		if ($vendor && apply_filters( 'mvx_wc_product_stock_alert_add_vendor', true )) {
         			$admin_email .= ','. sanitize_email( $vendor->user_data->user_email );  
       		}
     	}
@@ -170,11 +170,11 @@ class WOO_Product_Stock_Alert_Ajax {
 		$current_subscriber = get_post_meta( $product_id, '_product_subscriber', true );
 		$admin_mail = WC()->mailer()->emails['WC_Admin_Email_Stock_Alert'];
 		$cust_mail = WC()->mailer()->emails['WC_Subscriber_Confirmation_Email_Stock_Alert'];
-		$do_complete_additional_task = apply_filters( 'dc_wc_product_stock_alert_do_complete_additional_task', false );
+		$do_complete_additional_task = apply_filters( 'mvx_wc_product_stock_alert_do_complete_additional_task', false );
 		
 		if( empty($current_subscriber) ) {
 			if ( $do_complete_additional_task ) {
-				do_action( 'dc_wc_product_stock_alert_new_subscriber_added', $customer_email, $product_id );
+				do_action( 'mvx_wc_product_stock_alert_new_subscriber_added', $customer_email, $product_id );
 			} else {
 				$current_subscriber = array( $customer_email );
 				$status = update_post_meta( $product_id, '_product_subscriber', $current_subscriber );
@@ -187,7 +187,7 @@ class WOO_Product_Stock_Alert_Ajax {
         } else {
 			if( !in_array( $customer_email, $current_subscriber ) ) {
 				if ( $do_complete_additional_task ) {
-					do_action( 'dc_wc_product_stock_alert_new_subscriber_added', $customer_email, $product_id );
+					do_action( 'mvx_wc_product_stock_alert_new_subscriber_added', $customer_email, $product_id );
 				} else {
 					array_push( $current_subscriber, $customer_email );
 					$status = update_post_meta( $product_id, '_product_subscriber', $current_subscriber );
@@ -232,21 +232,18 @@ class WOO_Product_Stock_Alert_Ajax {
 		} else {
 			delete_post_meta( $product_id, 'no_of_subscribers' );
 		}
-		
 		echo $status;
-		
 		die();
 	}
 	
 	
 	function alert_box_function() {
-		
 		$child_id = (int)$_POST['child_id'];
 		$display_stock_alert_form = 'false';
 		
 		if( $child_id && !empty($child_id) ) {
 			$child_obj = new WC_Product_Variation($child_id);
-			$dc_settings = get_dc_plugin_settings();
+			$mvx_settings = get_mvx_product_alert_plugin_settings();
 			$stock_quantity = $child_obj->get_stock_quantity();
 			$manage_stock = $child_obj->get_manage_stock();
 			$managing_stock = $child_obj->managing_stock();
@@ -255,22 +252,19 @@ class WOO_Product_Stock_Alert_Ajax {
 			$is_in_stock = $child_obj->is_in_stock();
 			$is_on_backorder = $child_obj->is_on_backorder( 1 );
 
-			if ( ! $is_in_stock ) {
+			if (!$is_in_stock) {
 					$display_stock_alert_form = 'true';
-			} elseif ( $managing_stock && $is_on_backorder && isset($dc_settings['is_enable_backorders']) && $dc_settings['is_enable_backorders'] == 'Enable' ) {
+			} elseif ($managing_stock && $is_on_backorder && isset($mvx_settings['is_enable_backorders']) && $mvx_settings['is_enable_backorders'] == 'Enable') {
 					$display_stock_alert_form = 'true';
-			} elseif ( $managing_stock ) {
-				if(get_option('woocommerce_notify_no_stock_amount')){
-					if($stock_quantity <= (int) get_option('woocommerce_notify_no_stock_amount') && isset($dc_settings['is_enable_backorders']) && $dc_settings['is_enable_backorders'] == 'Enable' ){
+			} elseif ($managing_stock) {
+				if (get_option('woocommerce_notify_no_stock_amount')) {
+					if ($stock_quantity <= (int) get_option('woocommerce_notify_no_stock_amount') && isset($mvx_settings['is_enable_backorders']) && $mvx_settings['is_enable_backorders'] == 'Enable' ) {
 						$display_stock_alert_form = 'true';
 					}
 				}
 			}
-		}
-			
+		}		
 		echo $display_stock_alert_form;
-		
 		die();
 	}
-
 }

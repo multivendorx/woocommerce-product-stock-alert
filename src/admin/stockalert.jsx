@@ -15,19 +15,15 @@ class StockAlert_Backend_Endpoints_Load extends Component {
 	}
 	
 	Stockalert_backend_endpoint_load() {
-
 		// For active submneu pages
 		const $ = jQuery;
 		const menuRoot = $('woocommerce_page_' + 'product-stock-alert');
 		const currentUrl = window.location.href;
-
 		const currentPath = currentUrl.substr(currentUrl.indexOf('admin.php'));
 		
 		menuRoot.on('click', 'a', function () {
 			const self = $(this);
-
 			$('ul.wp-submenu li', menuRoot).removeClass('current');
-
 			if (self.hasClass('wp-has-submenu')) {
 				$('li.wp-first-item', menuRoot).addClass('current');
 			} else {
@@ -68,8 +64,7 @@ class StockAlert_Backend_Endpoints_Load extends Component {
 				subtab='general'
 				funtion_name={this}
 			/>;
-		}
-				
+		}			
 	}
 
 	render() {

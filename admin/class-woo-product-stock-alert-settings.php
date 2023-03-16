@@ -1,10 +1,6 @@
 <?php
 class WOO_Product_Stock_Alert_Settings {
   
-  private $tabs = array();
-  
-  private $options;
-  
   /**
    * Start up
    */
