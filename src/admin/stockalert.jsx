@@ -1,14 +1,82 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
+import { BrowserRouter as Router, useLocation } from 'react-router-dom';
+import MvxTab from './tabs';
 
 class StockAlert_Backend_Endpoints_Load extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {};
+		this.Stockalert_backend_endpoint_load = this.Stockalert_backend_endpoint_load.bind(this);
 	}
+
+	useQuery() {
+		return new URLSearchParams(useLocation().hash);
+	}
+	
+	Stockalert_backend_endpoint_load() {
+
+		// For active submneu pages
+		const $ = jQuery;
+		const menuRoot = $('woocommerce_page_' + 'product-stock-alert');
+		const currentUrl = window.location.href;
+
+		const currentPath = currentUrl.substr(currentUrl.indexOf('admin.php'));
+		
+		menuRoot.on('click', 'a', function () {
+			const self = $(this);
+
+			$('ul.wp-submenu li', menuRoot).removeClass('current');
+
+			if (self.hasClass('wp-has-submenu')) {
+				$('li.wp-first-item', menuRoot).addClass('current');
+			} else {
+				self.parents('li').addClass('current');
+			}
+		});
+
+		$('ul.wp-submenu a', menuRoot).each(function (index, el) {
+			if ($(el).attr('href') === currentPath) {
+				$(el).parent().addClass('current');
+			} else {
+				$(el).parent().removeClass('current');
+
+				// if user enter page=catalog
+				if (
+					$(el).parent().hasClass('wp-first-item') &&
+					currentPath === 'admin.php?page=product-stock-alert'
+				) {
+					$(el).parent().addClass('current');
+				}
+			}
+		});
+		const location = this.useQuery();
+		if (
+			location.get('tab') &&
+			location.get('tab') === 'settings'
+		) {
+			return <MvxTab
+				model='stock_alert-settings'
+				query_name={location.get('tab')}
+				subtab={location.get('subtab')}
+				funtion_name={this}
+			/>;
+		} else {
+			return <MvxTab
+				model='stock_alert-settings'
+				query_name='settings'
+				subtab='general'
+				funtion_name={this}
+			/>;
+		}
+				
+	}
+
 	render() {
 		return (
-			<div>Test Data</div>
+			<Router> 
+				<this.Stockalert_backend_endpoint_load />
+			</Router>
 		);
 	}
 }

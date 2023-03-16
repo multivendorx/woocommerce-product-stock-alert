@@ -34,14 +34,14 @@ class WOO_Product_Stock_Alert_Install {
 		global $WOO_Product_Stock_Alert;
 		$stock_alert_settings = array();
 
-		$stock_alert_settings['is_enable'] = 'Enable';
+		$stock_alert_settings = array(
+                'is_enable' => 'is_enable'
+            );
 
-		if( !get_option('dc_woo_product_stock_alert_general_settings_name') ) {
-			if( update_option( 'dc_woo_product_stock_alert_general_settings_name', $stock_alert_settings ) ) {
+		if( !get_option('mvx_woo_stock_alert_general_tab_settings') ) {
+			if( update_option( 'mvx_woo_stock_alert_general_tab_settings', $stock_alert_settings ) ) {
 				return 'true';
 			}
 		}
 	}
 }
-
-?>

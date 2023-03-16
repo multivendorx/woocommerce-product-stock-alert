@@ -23,7 +23,7 @@ class WOO_Product_Stock_Alert {
         $this->version = WOO_PRODUCT_STOCK_ALERT_PLUGIN_VERSION;
 
         add_action('init', array(&$this, 'init'), 0);
-
+        add_action( 'rest_api_init', array( $this, 'stock_alert_rest_routes_react_module' ) );
         // Woocommerce Email structure
         add_filter('woocommerce_email_classes', array(&$this, 'woo_product_stock_alert_mail'));
     }
@@ -32,7 +32,6 @@ class WOO_Product_Stock_Alert {
      * initilize plugin on WP init
      */
     function init() {
-
         // Init Text Domain
         $this->load_plugin_textdomain();
 
@@ -66,7 +65,7 @@ class WOO_Product_Stock_Alert {
         $this->action = new WOO_Product_Stock_Alert_Action();
 
         // DC Wp Fields
-        $this->dc_wp_fields = $this->library->load_wp_fields();
+       // $this->dc_wp_fields = $this->library->load_wp_fields();
     }
 
     /**
@@ -89,8 +88,6 @@ class WOO_Product_Stock_Alert {
             require_once ('class-' . esc_attr($this->token) . '-' . esc_attr($class_name) . '.php');
         } // End If Statement
     }
-
-// End load_class()
 
     /** Cache Helpers ******************************************************** */
 
@@ -148,4 +145,36 @@ class WOO_Product_Stock_Alert {
         return $emails;
     }
 
+    public function stock_alert_rest_routes_react_module() {
+        register_rest_route( 'mvx_stockalert/v1', '/fetch_admin_tabs', [
+            'methods' => WP_REST_Server::READABLE,
+            'callback' => array( $this, 'mvx_stockalert_fetch_admin_tabs' ),
+            'permission_callback' => array( $this, 'stockalert_permission' )
+        ] );
+        register_rest_route( 'mvx_stockalert/v1', '/save_stockalert', [
+            'methods' => WP_REST_Server::EDITABLE,
+            'callback' => array( $this, 'mvx_stockalert_save_stockalert' ),
+            'permission_callback' => array( $this, 'stockalert_permission' )
+        ] );
+    }
+
+    public function stockalert_permission() {
+		return true;
+	}
+    public function mvx_stockalert_fetch_admin_tabs() {
+		$mvx_stockalert_tabs_data = mvx_stockalert_admin_tabs() ? mvx_stockalert_admin_tabs() : [];
+        return rest_ensure_response( $mvx_stockalert_tabs_data );
+	}
+    public function mvx_stockalert_save_stockalert($request) {
+        $all_details = [];
+        $modulename = $request->get_param('modulename');
+        $modulename = str_replace("-", "_", $modulename);
+        $get_managements_data = $request->get_param( 'model' );
+        $optionname = 'mvx_woo_stock_alert_'.$modulename.'_tab_settings';
+        update_option($optionname, $get_managements_data);
+        $all_details['error'] = __('Settings Saved', 'multivendorx');
+        return $all_details;
+        die;
+
+    }
 }

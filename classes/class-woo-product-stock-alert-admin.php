@@ -1,13 +1,9 @@
 <?php
 
 class WOO_Product_Stock_Alert_Admin {
-
-    private $dc_plugin_settings;
     public $settings;
 
     public function __construct() {
-        // Get plugin settings
-        $this->dc_plugin_settings = get_dc_plugin_settings();
 
         //admin script and style
         add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_script'));
@@ -19,28 +15,26 @@ class WOO_Product_Stock_Alert_Admin {
 
         add_action('admin_menu', array($this, 'add_export_page'), 100);
 
-        if (isset($this->dc_plugin_settings) && !empty($this->dc_plugin_settings)) {
-            if (isset($this->dc_plugin_settings['is_enable']) && $this->dc_plugin_settings['is_enable'] == 'Enable') {
-                // create custom column
-                add_action('manage_edit-product_columns', array($this, 'custom_column'));
+        if (get_dc_plugin_settings('is_enable')) {
+            // create custom column
+            add_action('manage_edit-product_columns', array($this, 'custom_column'));
 
-                // manage stock alert column
-                add_action('manage_product_posts_custom_column', array($this, 'manage_custom_column'), 10, 2);
-                // manage interest column sortable
-                add_filter('manage_edit-product_sortable_columns', array($this, 'manage_interest_column_sorting'));
-                add_filter('request', array($this, 'manage_interest_column_orderby'));
+            // manage stock alert column
+            add_action('manage_product_posts_custom_column', array($this, 'manage_custom_column'), 10, 2);
+            // manage interest column sortable
+            add_filter('manage_edit-product_sortable_columns', array($this, 'manage_interest_column_sorting'));
+            add_filter('request', array($this, 'manage_interest_column_orderby'));
 
-                // show number of subscribers for individual product
-                add_action('woocommerce_product_options_stock_fields', array($this, 'product_subscriber_details'));
-                add_action('woocommerce_product_after_variable_attributes', array($this, 'manage_variation_custom_column'), 10, 3);
+            // show number of subscribers for individual product
+            add_action('woocommerce_product_options_stock_fields', array($this, 'product_subscriber_details'));
+            add_action('woocommerce_product_after_variable_attributes', array($this, 'manage_variation_custom_column'), 10, 3);
 
-                // check product stock status
-                add_action('save_post', array($this, 'check_product_stock_status'), 5, 2);
-                // bulk action to remove subscribers
-                add_filter('bulk_actions-edit-product', array($this, 'register_subscribers_bulk_actions'));
-                add_filter('handle_bulk_actions-edit-product', array($this, 'subscribers_bulk_action_handler'), 10, 3);
-                add_action('admin_notices', array($this, 'subscribers_bulk_action_admin_notice'));
-            }
+            // check product stock status
+            add_action('save_post', array($this, 'check_product_stock_status'), 5, 2);
+            // bulk action to remove subscribers
+            add_filter('bulk_actions-edit-product', array($this, 'register_subscribers_bulk_actions'));
+            add_filter('handle_bulk_actions-edit-product', array($this, 'subscribers_bulk_action_handler'), 10, 3);
+            add_action('admin_notices', array($this, 'subscribers_bulk_action_admin_notice'));
         }
     }
 
@@ -111,8 +105,17 @@ class WOO_Product_Stock_Alert_Admin {
     public function enqueue_admin_script() {
         global $WOO_Product_Stock_Alert;
         if (get_current_screen()->id == 'woocommerce_page_woo-product-stock-alert-setting-admin') {
-            wp_enqueue_script( 'stock_alert_admin_js', $WOO_Product_Stock_Alert->plugin_url . 'build/index.js', array( 'wp-element' ), $WOO_Product_Stock_Alert->version, true );
-            wp_enqueue_style( 'mvx-catalog-style', $WOO_Product_Stock_Alert->plugin_url . 'build/index.css' );
+            wp_enqueue_script( 'mvx-stockalert-script', $WOO_Product_Stock_Alert->plugin_url . 'build/index.js', array( 'wp-element' ), $WOO_Product_Stock_Alert->version, true );
+            wp_localize_script( 'mvx-stockalert-script', 'stockalertappLocalizer', apply_filters('stockalert_settings', [
+                'apiUrl' => home_url( '/wp-json' ),
+                'nonce' => wp_create_nonce( 'wp_rest' )  
+              ] ) );
+              wp_enqueue_style( 'mvx-stockalert-style', $WOO_Product_Stock_Alert->plugin_url . 'src/style/main.css' );
+        }
+        if (get_current_screen()->id == 'tools_page_woo-product-stock-alert-export-admin') {
+            wp_enqueue_script('stock_alert_admin_js', $WOO_Product_Stock_Alert->plugin_url . 'assets/admin/js/admin.js', array('jquery'), $WOO_Product_Stock_Alert->version, true);
+            wp_localize_script('stock_alert_admin_js', 'dc_params', array( 'ajaxurl'    => 'admin-ajax.php'
+            ));
         }
     }
 
@@ -161,7 +164,6 @@ class WOO_Product_Stock_Alert_Admin {
      * Manage custom column for Stock Alert
      */
     function manage_custom_column($column_name, $post_id) {
-        $dc_settings = get_dc_plugin_settings();
         $no_of_subscriber = 0;
         $product_subscriber = array();
         $index = 0;
@@ -183,7 +185,7 @@ class WOO_Product_Stock_Alert_Admin {
 
                                 if (isset($product_availability_stock) && $manage_stock) {
                                     if ($managing_stock && $product_availability_stock <= (int) get_option('woocommerce_notify_no_stock_amount')) {
-                                        if ($child_obj->backorders_allowed() && isset($dc_settings['is_enable_backorders']) && $dc_settings['is_enable_backorders'] == 'Enable') {
+                                        if ($child_obj->backorders_allowed() && get_dc_plugin_settings('is_enable_backorders')) {
                                             if ($stock_status == 'outofstock' || $product_availability_stock <= 0) {
                                                 $product_subscriber = get_post_meta($child_id, '_product_subscriber', true);
                                                 if (!empty($product_subscriber)) {
@@ -199,7 +201,7 @@ class WOO_Product_Stock_Alert_Admin {
                                             }
                                         }
                                     } elseif ($product_availability_stock <= 0) {
-                                        if ($child_obj->backorders_allowed() && isset($dc_settings['is_enable_backorders']) && $dc_settings['is_enable_backorders'] == 'Enable') {
+                                        if ($child_obj->backorders_allowed() && get_dc_plugin_settings('is_enable_backorders')) {
                                             if ($stock_status == 'outofstock' || $product_availability_stock <= 0) {
                                                 $product_subscriber = get_post_meta($child_id, '_product_subscriber', true);
                                                 if (!empty($product_subscriber)) {
@@ -233,7 +235,7 @@ class WOO_Product_Stock_Alert_Admin {
 
                         if (isset($stock_quantity) && $manage_stock) {
                             if ($managing_stock && $stock_quantity <= (int) get_option('woocommerce_notify_no_stock_amount')) {
-                                if ($product_obj->backorders_allowed() && isset($dc_settings['is_enable_backorders']) && $dc_settings['is_enable_backorders'] == 'Enable') {
+                                if ($product_obj->backorders_allowed() && get_dc_plugin_settings('is_enable_backorders')) {
                                     if ($stock_status == 'outofstock' || $stock_quantity <= 0) {
                                         $product_subscriber = get_post_meta($product_obj->get_id(), '_product_subscriber', true);
                                         if ($product_subscriber) {
@@ -253,7 +255,7 @@ class WOO_Product_Stock_Alert_Admin {
                                     }
                                 }
                             } elseif ($stock_quantity <= 0) {
-                                if ($product_obj->backorders_allowed() && isset($dc_settings['is_enable_backorders']) && $dc_settings['is_enable_backorders'] == 'Enable') {
+                                if ($product_obj->backorders_allowed() && get_dc_plugin_settings('is_enable_backorders')) {
                                     if ($stock_status == 'outofstock' || $stock_quantity <= 0) {
                                         $product_subscriber = get_post_meta($product_obj->get_id(), '_product_subscriber', true);
                                         if ($product_subscriber) {
@@ -284,7 +286,6 @@ class WOO_Product_Stock_Alert_Admin {
      */
     function product_subscriber_details() {
         global $post, $WOO_Product_Stock_Alert;
-        $dc_settings = get_dc_plugin_settings();
         $no_of_subscriber = 0;
         $flag = false;
         $product_obj = wc_get_product($post->ID);
@@ -296,7 +297,7 @@ class WOO_Product_Stock_Alert_Admin {
 
             if (isset($product_availability_stock) && $manage_stock) {
                 if ($managing_stock && $product_availability_stock <= (int) get_option('woocommerce_notify_no_stock_amount')) {
-                    if ($product_obj->backorders_allowed() && isset($dc_settings['is_enable_backorders']) && $dc_settings['is_enable_backorders'] == 'Enable') {
+                    if ($product_obj->backorders_allowed() && get_dc_plugin_settings('is_enable_backorders')) {
                         if ($stock_status == 'outofstock' || $product_availability_stock <= 0) {
                             $flag = true;
                         }
@@ -304,7 +305,7 @@ class WOO_Product_Stock_Alert_Admin {
                         $flag = true;
                     }
                 } elseif ($product_availability_stock <= 0) {
-                    if ($product_obj->backorders_allowed() && isset($dc_settings['is_enable_backorders']) && $dc_settings['is_enable_backorders'] == 'Enable') {
+                    if ($product_obj->backorders_allowed() && get_dc_plugin_settings('is_enable_backorders')) {
                         if ($stock_status == 'outofstock' || $product_availability_stock <= 0) {
                             $flag = true;
                         }
@@ -334,7 +335,6 @@ class WOO_Product_Stock_Alert_Admin {
      */
     function manage_variation_custom_column($loop, $variation_data, $variation) {
         global $WOO_Product_Stock_Alert;
-        $dc_settings = get_dc_plugin_settings();
         $flag = false;
         $variation_id = $variation->ID;
         $variation_obj = new WC_Product_Variation($variation_id);
@@ -345,7 +345,7 @@ class WOO_Product_Stock_Alert_Admin {
 
         if (isset($product_availability_stock) && $manage_stock) {
             if ($managing_stock && $product_availability_stock <= (int) get_option('woocommerce_notify_no_stock_amount')) {
-                if ($variation_obj->backorders_allowed() && isset($dc_settings['is_enable_backorders']) && $dc_settings['is_enable_backorders'] == 'Enable') {
+                if ($variation_obj->backorders_allowed() && get_dc_plugin_settings('is_enable_backorders')) {
                     if ($stock_status == 'outofstock' || $product_availability_stock <= 0) {
                         $flag = true;
                     }
@@ -353,7 +353,7 @@ class WOO_Product_Stock_Alert_Admin {
                     $flag = true;
                 }
             } elseif ($product_availability_stock <= 0) {
-                if ($variation_obj->backorders_allowed() && isset($dc_settings['is_enable_backorders']) && $dc_settings['is_enable_backorders'] == 'Enable') {
+                if ($variation_obj->backorders_allowed() && get_dc_plugin_settings('is_enable_backorders')) {
                     if ($stock_status == 'outofstock' || $product_availability_stock <= 0) {
                         $flag = true;
                     }

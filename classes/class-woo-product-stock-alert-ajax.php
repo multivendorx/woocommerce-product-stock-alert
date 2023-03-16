@@ -149,25 +149,23 @@ class WOO_Product_Stock_Alert_Ajax {
 		$product_id = (int)$_POST['product_id'];
 		$status = '';
 		$current_subscriber = array();
-		$dc_settings = array();
-		$dc_settings = get_dc_plugin_settings();
 		$admin_email = '';
-		if( isset( $dc_settings['is_remove_admin_email'] ) && $dc_settings['is_remove_admin_email'] == 'Enable' ){
+		if (get_dc_plugin_settings('is_remove_admin_email')) {
 			$admin_email = '';
 		} else {
 			$admin_email = get_option('admin_email');
 		}
 
-		if( isset( $dc_settings['additional_alert_email'] ) ) {
-			$admin_email .= ','.$dc_settings['additional_alert_email'];	
+		if (get_dc_plugin_settings('additional_alert_email')) {
+			$admin_email .= ','.get_dc_plugin_settings('additional_alert_email');	
 		}
 
-		if( function_exists( 'get_wcmp_product_vendors' ) ) {
+		if (function_exists( 'get_wcmp_product_vendors' )) {
       		$vendor = get_wcmp_product_vendors( $product_id );
-      		if( $vendor && apply_filters( 'dc_wc_product_stock_alert_add_vendor', true ) ) {
+      		if ($vendor && apply_filters( 'dc_wc_product_stock_alert_add_vendor', true )) {
         			$admin_email .= ','. sanitize_email( $vendor->user_data->user_email );  
       		}
-    		}
+    	}
 
 		$current_subscriber = get_post_meta( $product_id, '_product_subscriber', true );
 		$admin_mail = WC()->mailer()->emails['WC_Admin_Email_Stock_Alert'];
