@@ -4,7 +4,7 @@ if (!function_exists('woocommerce_inactive_notice')) {
     function woocommerce_inactive_notice() {
         ?>
         <div id="message" class="error">
-            <p><?php printf(__('%sWoocommerce Product Stock Alert is inactive.%s The %sWooCommerce plugin%s must be active for the Woocommerce Product Stock Alert to work. Please %sinstall & activate WooCommerce%s', WCS_TEXT_DOMAIN), '<strong>', '</strong>', '<a target="_blank" href="http://wordpress.org/extend/plugins/woocommerce/">', '</a>', '<a href="' . admin_url('plugins.php') . '">', '&nbsp;&raquo;</a>'); ?></p>
+            <p><?php printf(__('%sWoocommerce Product Stock Alert is inactive.%s The %sWooCommerce plugin%s must be active for the Woocommerce Product Stock Alert to work. Please %sinstall & activate WooCommerce%s', WOO_PRODUCT_STOCK_ALERT_TEXT_DOMAIN), '<strong>', '</strong>', '<a target="_blank" href="http://wordpress.org/extend/plugins/woocommerce/">', '</a>', '<a href="' . admin_url('plugins.php') . '">', '&nbsp;&raquo;</a>'); ?></p>
         </div>
         <?php
     }
@@ -70,6 +70,27 @@ if (!function_exists('get_woo_form_settings_array')) {
             $settings['alert_unsubscribe_message'] = __('<b>%customer_email%</b> is successfully unregistered.', 'woocommerce-product-stock-alert');
         }
         return $settings;
+    }
+}
+
+if (!function_exists('get_mvx_product_alert_old_plugin_settings')) {
+    function get_mvx_product_alert_old_plugin_settings($key = '', $default = false) {
+        $mvx_old_plugin_settings = array();
+        $mvx_old_plugin_settings = get_option('dc_woo_product_stock_alert_general_settings_name');
+
+        if (empty($key)) {
+            return $default;
+        }
+        if (!isset($mvx_old_plugin_settings[$key]) || empty($mvx_old_plugin_settings[$key])) {
+            return $default;
+        }
+        return $mvx_old_plugin_settings[$key];
+    }
+}
+
+if (!function_exists('save_mvx_product_alert_settings')) {
+    function save_mvx_product_alert_settings($key, $option_val) {
+        update_option( $key, $option_val );
     }
 }
 
@@ -236,7 +257,7 @@ if (!function_exists('mvx_stockalert_admin_tabs')) {
 				'tablabel'        =>  __('General', 'woocommerce-product-stock-alert'),
 				'apiurl'          =>  'save_stockalert',
 				'description'     =>  __('Configure basic product alert settings. ', 'woocommerce-product-stock-alert'),
-				'icon'            =>  'icon-general-tab',
+				'icon'            =>  'icon-general',
 				'submenu'         =>  'settings',
 				'modulename'      =>  [
 					[
@@ -343,7 +364,7 @@ if (!function_exists('mvx_stockalert_admin_tabs')) {
 				'tablabel'        =>  __('Form Customization', 'woocommerce-product-stock-alert'),
 				'apiurl'          =>  'save_stockalert',
 				'description'     =>  __('Configure form configaration settings. ', 'woocommerce-product-stock-alert'),
-				'icon'            =>  'icon-button-appearance-tab',
+				'icon'            =>  'icon-form-customization',
 				'submenu'         =>  'settings',
 				'modulename'      =>  [
 					[
@@ -437,7 +458,7 @@ if (!function_exists('mvx_stockalert_admin_tabs')) {
 				'tablabel'        =>  __('Form Submission', 'woocommerce-product-stock-alert'),
 				'apiurl'          =>  'save_stockalert',
 				'description'     =>  __('Configureform submission settings. ', 'woocommerce-product-stock-alert'),
-				'icon'            =>  'icon-enquiry-form-tab',
+				'icon'            =>  'icon-form-submission',
 				'submenu'         =>  'settings',
 				'modulename'      =>  [
 					[
@@ -483,7 +504,7 @@ if (!function_exists('mvx_stockalert_admin_tabs')) {
 			),
             'live-preview'  =>  array(
                 'tablabel'      =>  __('Live Preview', 'woocommerce-product-stock-alert'),
-                'icon'          =>  'icon-live-preview-tab',
+                'icon'          =>  'icon-live-preview',
                 'class'			=>	'stock_alert-live-preview',
                 'link'          =>  'https://multivendorx.com/product/',
             ),

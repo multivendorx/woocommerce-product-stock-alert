@@ -17,6 +17,10 @@ class WOO_Product_Stock_Alert_Install {
 		if (get_option( 'dc_product_stock_alert_installed' )) :
 			$this->start_cron_job();
 		endif;
+
+		if (!get_option('_is_updated_mvx_product_alert_settings')) {
+			$this->mvx_stock_alert_older_settings_migration();
+		}
 	}
 	
 	/*
@@ -42,4 +46,102 @@ class WOO_Product_Stock_Alert_Install {
 			}
 		}
 	}
+
+	function mvx_stock_alert_older_settings_migration() {
+        if (!get_option('_is_updated_mvx_product_alert_settings')) {
+            $genaral_settings = $customization_settings = $submit_settings = [];
+            if ( get_mvx_product_alert_old_plugin_settings('is_enable') &&  get_mvx_product_alert_old_plugin_settings('is_enable') == 'Enable' ) {
+                $genaral_settings['is_enable'] = array('is_enable');
+            }
+            if ( get_mvx_product_alert_old_plugin_settings('is_enable_backorders') &&  get_mvx_product_alert_old_plugin_settings('is_enable_backorders') == 'Enable' ) {
+                $genaral_settings['is_enable_backorders'] = array('is_enable_backorders');
+            }
+            if ( get_mvx_product_alert_old_plugin_settings('is_enable_no_interest') &&  get_mvx_product_alert_old_plugin_settings('is_enable_no_interest') == 'Enable' ) {
+                $genaral_settings['is_enable_no_interest'] = array('is_enable_no_interest');
+            }
+            if ( get_mvx_product_alert_old_plugin_settings('shown_interest_text') ) {
+                $genaral_settings['shown_interest_text'] = get_mvx_product_alert_old_plugin_settings('shown_interest_text');
+            }
+            if ( get_mvx_product_alert_old_plugin_settings('is_double_optin') &&  get_mvx_product_alert_old_plugin_settings('is_double_optin') == 'Enable' ) {
+                $genaral_settings['is_double_optin'] = array('is_double_optin');
+            }
+
+            if ( get_mvx_product_alert_old_plugin_settings('is_remove_admin_email') &&  get_mvx_product_alert_old_plugin_settings('is_remove_admin_email') == 'Enable' ) {
+                $genaral_settings['is_remove_admin_email'] = array('is_remove_admin_email');
+            }
+
+            if ( get_mvx_product_alert_old_plugin_settings('additional_alert_email') ) {
+                $genaral_settings['additional_alert_email'] = get_mvx_product_alert_old_plugin_settings('additional_alert_email');
+            }
+            if ($genaral_settings) {
+                save_mvx_product_alert_settings('mvx_woo_stock_alert_general_tab_settings', $genaral_settings);
+            }
+
+            if ( get_mvx_product_alert_old_plugin_settings('alert_text') ) {
+                $customization_settings['alert_text'] = get_mvx_product_alert_old_plugin_settings('alert_text');
+            }
+
+            if ( get_mvx_product_alert_old_plugin_settings('alert_text_color') ) {
+                $customization_settings['alert_text_color'] = get_mvx_product_alert_old_plugin_settings('alert_text_color');
+            }
+
+            if ( get_mvx_product_alert_old_plugin_settings('button_text') ) {
+                $customization_settings['button_text'] = get_mvx_product_alert_old_plugin_settings('button_text');
+            }
+
+            if ( get_mvx_product_alert_old_plugin_settings('unsubscribe_button_text') ) {
+                $customization_settings['unsubscribe_button_text'] = get_mvx_product_alert_old_plugin_settings('unsubscribe_button_text');
+            }
+
+            if ( get_mvx_product_alert_old_plugin_settings('button_background_color') ) {
+                $customization_settings['button_background_color'] = get_mvx_product_alert_old_plugin_settings('button_background_color');
+            }
+
+            if ( get_mvx_product_alert_old_plugin_settings('button_border_color') ) {
+                $customization_settings['button_border_color'] = get_mvx_product_alert_old_plugin_settings('button_border_color');
+            }
+
+            if ( get_mvx_product_alert_old_plugin_settings('button_text_color') ) {
+                $customization_settings['button_text_color'] = get_mvx_product_alert_old_plugin_settings('button_text_color');
+
+            }
+
+            if ( get_mvx_product_alert_old_plugin_settings('button_background_color_onhover') ) {
+                $customization_settings['button_background_color_onhover'] = get_mvx_product_alert_old_plugin_settings('button_background_color_onhover');
+            }
+
+            if ( get_mvx_product_alert_old_plugin_settings('button_border_color_onhover') ) {
+                $customization_settings['button_border_color_onhover'] = get_mvx_product_alert_old_plugin_settings('button_border_color_onhover');
+            }
+
+            if ( get_mvx_product_alert_old_plugin_settings('button_text_color_onhover') ) {
+                $customization_settings['button_text_color_onhover'] = get_mvx_product_alert_old_plugin_settings('button_text_color_onhover');
+            }
+
+            if ( get_mvx_product_alert_old_plugin_settings('button_font_size') ) {
+                $customization_settings['button_font_size'] = get_mvx_product_alert_old_plugin_settings('button_font_size');
+            }
+            if ( $customization_settings ) {
+                save_mvx_product_alert_settings('mvx_woo_stock_alert_form_customization_tab_settings', $customization_settings);
+            }
+
+            if ( get_mvx_product_alert_old_plugin_settings('alert_success') ) {
+                $submit_settings['alert_success'] = get_mvx_product_alert_old_plugin_settings('alert_success');
+            }
+            if ( get_mvx_product_alert_old_plugin_settings('alert_email_exist') ) {
+                $submit_settings['alert_email_exist'] = get_mvx_product_alert_old_plugin_settings('alert_email_exist');
+            }
+            if ( get_mvx_product_alert_old_plugin_settings('valid_email') ) {
+                $submit_settings['valid_email'] = get_mvx_product_alert_old_plugin_settings('valid_email');
+            }
+            if ( get_mvx_product_alert_old_plugin_settings('alert_unsubscribe_message') ) {
+                $submit_settings['alert_unsubscribe_message'] = get_mvx_product_alert_old_plugin_settings('alert_unsubscribe_message');    
+            }
+            if ($submit_settings) {
+                save_mvx_product_alert_settings('mvx_woo_stock_alert_form_submission_tab_settings', $submit_settings);
+            }
+
+            update_option('_is_updated_mvx_product_alert_settings', true);
+        }
+    }
 }

@@ -1,7 +1,7 @@
 @font-face {
   font-family: "mvx-woo-stockalert";
-  src: url("fonts/mvx-woo-stockalert.eot?kp4z05");
-  src: url("fonts/mvx-woo-stockalert.eot?kp4z05#iefix") format("embedded-opentype"), url("fonts/mvx-woo-stockalert.ttf?kp4z05") format("truetype"), url("fonts/mvx-woo-stockalert.woff?kp4z05") format("woff"), url("fonts/mvx-woo-stockalert.svg?kp4z05#mvx-woo-stockalert") format("svg");
+  src: url("fonts/mvx-woo-stockalert.eot?m5utwm");
+  src: url("fonts/mvx-woo-stockalert.eot?m5utwm#iefix") format("embedded-opentype"), url("fonts/mvx-woo-stockalert.ttf?m5utwm") format("truetype"), url("fonts/mvx-woo-stockalert.woff?m5utwm") format("woff"), url("fonts/mvx-woo-stockalert.svg?m5utwm#mvx-woo-stockalert") format("svg");
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -20,144 +20,20 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-next:before {
-  content: "\e906";
-}
-
-.icon-previous:before {
-  content: "\e907";
-}
-
-.icon-select:before {
-  content: "\e908";
-}
-
-.icon-success-notification:before {
-  content: "\e909";
-}
-
-.icon-button-appearance-tab:before {
+.icon-form-customization:before {
   content: "\e900";
 }
 
-.icon-enquiry-form-tab:before {
+.icon-form-submission:before {
   content: "\e901";
 }
 
-.icon-exclusion-tab:before {
+.icon-general:before {
   content: "\e902";
 }
 
-.icon-general-tab:before {
+.icon-live-preview:before {
   content: "\e903";
-}
-
-.icon-live-preview-tab:before {
-  content: "\e904";
-}
-
-.icon-upgrade-to-pro-tab:before {
-  content: "\e905";
-}
-
-.icon-drop-down:before {
-  content: "\e90a";
-}
-
-.icon-vendor-form-delete:before {
-  content: "\e90b";
-}
-
-.icon-vendor-form-copy:before {
-  content: "\e90c";
-}
-
-.icon-vendor-form-add:before {
-  content: "\e90d";
-}
-
-.icon-select-question-type:before {
-  content: "\e90e";
-}
-
-.icon-form-url:before {
-  content: "\e90f";
-}
-
-.icon-form-textbox:before {
-  content: "\e910";
-}
-
-.icon-form-textarea:before {
-  content: "\e911";
-}
-
-.icon-form-address01:before {
-  content: "\e912";
-}
-
-.icon-form-address02:before {
-  content: "\e913";
-}
-
-.icon-form-attachment:before {
-  content: "\e914";
-}
-
-.icon-form-checkboxes:before {
-  content: "\e915";
-}
-
-.icon-form-city:before {
-  content: "\e916";
-}
-
-.icon-form-country:before {
-  content: "\e917";
-}
-
-.icon-form-dropdown:before {
-  content: "\e918";
-}
-
-.icon-form-email:before {
-  content: "\e919";
-}
-
-.icon-form-multi-select:before {
-  content: "\e91a";
-}
-
-.icon-form-paypal-email:before {
-  content: "\e91b";
-}
-
-.icon-form-phone:before {
-  content: "\e91c";
-}
-
-.icon-form-postcode:before {
-  content: "\e91d";
-}
-
-.icon-form-radio:before {
-  content: "\e91e";
-}
-
-.icon-form-recaptcha:before {
-  content: "\e91f";
-}
-
-.icon-form-section:before {
-  content: "\e920";
-}
-
-.icon-form-state:before {
-  content: "\e921";
-}
-
-.icon-form-store-description:before {
-  content: "\e922";
 }
 
 @keyframes slide-right {
