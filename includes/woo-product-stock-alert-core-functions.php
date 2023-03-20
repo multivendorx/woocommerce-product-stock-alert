@@ -502,12 +502,6 @@ if (!function_exists('mvx_stockalert_admin_tabs')) {
                     ],
 				]
 			),
-            'live-preview'  =>  array(
-                'tablabel'      =>  __('Live Preview', 'woocommerce-product-stock-alert'),
-                'icon'          =>  'icon-live-preview',
-                'class'			=>	'stock_alert-live-preview',
-                'link'          =>  'https://multivendorx.com/product/',
-            ),
         ));
 
         if (!empty($stock_alert_settings_page_endpoint)) {
