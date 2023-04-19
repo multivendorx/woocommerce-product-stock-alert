@@ -94,7 +94,7 @@ jQuery(document).ready(function($) {
 				}
 
 				$.post(woo_stock_alert_script_data.ajax_url, stock_alert, function(response) { console.log(response);
-					$this.removeClass('alert_loader').blur();	
+					$this.removeClass('alert_loader').blur();
 					if( response == '0' ) {
 						$('.alert_container').html('<div class="registered_message">'+woo_stock_alert_script_data.error_occurs+'<a href="'+window.location+'"> '+woo_stock_alert_script_data.try_again+'</a></div>');
 					} else if( response == '/*?%already_registered%?*/' ) {

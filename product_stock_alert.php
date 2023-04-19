@@ -15,7 +15,7 @@
  */
 
 if ( ! class_exists( 'WC_Dependencies_Stock_Alert' ) )
-	require_once 'includes/class-dc-dependencies.php';
+	require_once 'includes/class-woo-stock-alert-dependencies.php';
 require_once 'includes/woo-product-stock-alert-core-functions.php';
 require_once 'product_stock_alert_config.php';
 if(!defined('ABSPATH')) exit; // Exit if accessed directly

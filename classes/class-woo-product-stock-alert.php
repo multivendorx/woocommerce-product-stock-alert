@@ -64,8 +64,14 @@ class WOO_Product_Stock_Alert {
         $this->load_class('action');
         $this->action = new WOO_Product_Stock_Alert_Action();
 
+        include_once $this->plugin_path . '/includes/class-woo-stock-alert-deprecated-filter-hooks.php';
+        include_once $this->plugin_path . '/includes/class-woo-stock-alert-deprecated-action-hooks.php';
+        include_once $this->plugin_path . '/includes/woo-stock-alert-deprecated-funtions.php';
+        $this->deprecated_hook_handlers['filters'] = new Stock_Alert_Deprecated_Filter_Hooks();
+        $this->deprecated_hook_handlers['actions'] = new Stock_Alert_Deprecated_Action_Hooks();
+
         // DC Wp Fields
-       // $this->dc_wp_fields = $this->library->load_wp_fields();
+        // $this->dc_wp_fields = $this->library->load_wp_fields();
     }
 
     /**

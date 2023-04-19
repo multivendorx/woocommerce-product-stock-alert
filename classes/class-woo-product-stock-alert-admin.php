@@ -94,7 +94,7 @@ class WOO_Product_Stock_Alert_Admin {
                 'apiUrl' => home_url( '/wp-json' ),
                 'nonce' => wp_create_nonce( 'wp_rest' )  
               ] ) );
-              wp_enqueue_style( 'mvx-stockalert-style', $WOO_Product_Stock_Alert->plugin_url . 'src/style/main'. $suffix .'.css' );
+              wp_enqueue_style( 'mvx-stockalert-style', $WOO_Product_Stock_Alert->plugin_url . 'build/index.css' );
         }
         if (get_current_screen()->id == 'tools_page_woo-product-stock-alert-export-admin') {
             wp_enqueue_script('stock_alert_admin_js', $WOO_Product_Stock_Alert->plugin_url . 'assets/admin/js/admin'. $suffix .'.js', array('jquery'), $WOO_Product_Stock_Alert->version, true);
