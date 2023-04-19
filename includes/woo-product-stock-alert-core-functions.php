@@ -261,13 +261,6 @@ if (!function_exists('mvx_stockalert_admin_tabs')) {
 				'submenu'         =>  'settings',
 				'modulename'      =>  [
 					[
-	                    'key'       =>  'woocommerce_stock_alert_general_settings',
-	                    'type'      =>  'blocktext',
-	                    'label'     =>  __( 'no_label', 'woocommerce-product-stock-alert' ),
-	                    'blocktext'      =>  __( "General Settings", 'woocommerce-product-stock-alert' ),
-	                    'database_value' => '',
-	                ],
-					[
 						'key'    => 'is_enable',
 						'label'   => __( "Enable stock alert", 'woocommerce-product-stock-alert' ),
 						'class'     => 'mvx-toggle-checkbox',
@@ -363,17 +356,10 @@ if (!function_exists('mvx_stockalert_admin_tabs')) {
             'form_customization' => array(
 				'tablabel'        =>  __('Form Customization', 'woocommerce-product-stock-alert'),
 				'apiurl'          =>  'save_stockalert',
-				'description'     =>  __('Configure form configaration settings. ', 'woocommerce-product-stock-alert'),
+				'description'     =>  __('Configure form settings. ', 'woocommerce-product-stock-alert'),
 				'icon'            =>  'icon-form-customization',
 				'submenu'         =>  'settings',
 				'modulename'      =>  [
-					[
-	                    'key'       =>  'woocommerce_stock_alert_form_settings',
-	                    'type'      =>  'blocktext',
-	                    'label'     =>  __( 'no_label', 'woocommerce-product-stock-alert' ),
-	                    'blocktext'      =>  __( "Form Customization", 'woocommerce-product-stock-alert' ),
-	                    'database_value' => '',
-	                ],
                     [
                         'key'       => 'alert_text',
                         'type'      => 'textarea',
@@ -457,17 +443,10 @@ if (!function_exists('mvx_stockalert_admin_tabs')) {
             'form_submission' => array(
 				'tablabel'        =>  __('Form Submission', 'woocommerce-product-stock-alert'),
 				'apiurl'          =>  'save_stockalert',
-				'description'     =>  __('Configureform submission settings. ', 'woocommerce-product-stock-alert'),
+				'description'     =>  __('Configure form submission settings. ', 'woocommerce-product-stock-alert'),
 				'icon'            =>  'icon-form-submission',
 				'submenu'         =>  'settings',
 				'modulename'      =>  [
-					[
-	                    'key'       =>  'woocommerce_stock_alert_form_submit_settings',
-	                    'type'      =>  'blocktext',
-	                    'label'     =>  __( 'no_label', 'woocommerce-product-stock-alert' ),
-	                    'blocktext'      =>  __( "Form Submission Settings", 'woocommerce-product-stock-alert' ),
-	                    'database_value' => '',
-	                ],
 					[
                         'key'       => 'alert_success',
                         'type'      => 'textarea',
