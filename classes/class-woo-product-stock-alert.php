@@ -9,9 +9,11 @@ class WOO_Product_Stock_Alert {
     public $text_domain;
     public $frontend;
     public $ajax;
+    public $templates;
     public $action;
     public $export;
     private $file;
+    public $deprecated_hook_handlers = array();
 
     public function __construct($file) {
 
@@ -59,6 +61,8 @@ class WOO_Product_Stock_Alert {
             $this->load_class('shortcode');
             $this->shortcode = new WOO_Product_Stock_Alert_Shortcode();
         }
+        $this->load_class('template');
+        $this->template = new WOO_Product_Stock_Alert_Template();
         
         // Init action
         $this->load_class('action');
@@ -71,7 +75,7 @@ class WOO_Product_Stock_Alert {
         $this->deprecated_hook_handlers['actions'] = new Stock_Alert_Deprecated_Action_Hooks();
 
         // DC Wp Fields
-        // $this->dc_wp_fields = $this->library->load_wp_fields();
+       // $this->dc_wp_fields = $this->library->load_wp_fields();
     }
 
     /**

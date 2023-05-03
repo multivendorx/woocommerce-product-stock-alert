@@ -1,15 +1,15 @@
 <?php
 /**
  * Plugin Name: WooCommerce Product Stock Alert
- * Plugin URI: http://wc-marketplace.com/
+ * Plugin URI: https://multivendorx.com/
  * Description: Woocommerce plugin using which a customer can subscribe for interest on an out of stock product. When the product becomes available, subscribed customer will get an alert email.
- * Author: WC Marketplace
- * Version: 1.7.5
+ * Author: MultiVendorX
+ * Version: 2.0.0
  * Requires at least: 4.4
  * Tested up to: 6.0
  * WC requires at least: 3.0
  * WC tested up to: 6.6.1
- * Author URI: http://wc-marketplace.com/
+ * Author URI: https://multivendorx.com/
  * Text Domain: woocommerce-product-stock-alert
  * Domain Path: /languages/
  */
@@ -28,7 +28,7 @@ if(!WC_Dependencies_Stock_Alert::woocommerce_plugin_active_check()) {
 
 add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'woo_product_stock_alert_settings' );
 function woo_product_stock_alert_settings( $links ) {
-	$plugin_links = array('<a href="' . admin_url( 'admin.php?page=woo-product-stock-alert-setting-admin' ) . '">' . __( 'Settings', WOO_PRODUCT_STOCK_ALERT_TEXT_DOMAIN ) . '</a>','<a href="http://dualcube.com/">' . __( 'Support', WOO_PRODUCT_STOCK_ALERT_TEXT_DOMAIN ) . '</a>');	
+	$plugin_links = array('<a href="' . admin_url( 'admin.php?page=woo-product-stock-alert-setting-admin' ) . '">' . __( 'Settings', WOO_PRODUCT_STOCK_ALERT_TEXT_DOMAIN ) . '</a>','<a href="http://dualcube.com/">' . __( 'Support', WOO_PRODUCT_STOCK_ALERT_TEXT_DOMAIN ) . '</a>');
 	return array_merge( $plugin_links, $links );
 }
 
