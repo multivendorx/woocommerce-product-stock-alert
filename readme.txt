@@ -1,6 +1,6 @@
 === WooCommerce Product Stock Alert ===
 
-Contributors: wcmp
+Contributors: wcmp, abhirup23
 Tags: wordpress, woocommerce, e-commerce, shop, stock, out of stock, in stock, stock alert, alert email, stock alert email
 Requires at least: 4.4
 Tested up to: 6.0

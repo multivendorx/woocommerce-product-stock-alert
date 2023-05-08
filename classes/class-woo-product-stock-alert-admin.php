@@ -91,7 +91,7 @@ class WOO_Product_Stock_Alert_Admin {
             wp_localize_script( 'mvx-stockalert-script', 'stockalertappLocalizer', apply_filters('stockalert_settings', [
                 'apiUrl' => home_url( '/wp-json' ),
                 'nonce' => wp_create_nonce( 'wp_rest' ),
-                //'banner_img' => $WOO_Product_Stock_Alert->plugin_url . 'assets/images/catalog-pro-add-admin-banner.jpg',
+                'banner_img' => $WOO_Product_Stock_Alert->plugin_url . 'assets/images/stock-alert-pro-banner.jpg',
               ] ) );
             wp_enqueue_style( 'mvx-stockalert-style', $WOO_Product_Stock_Alert->plugin_url . 'build/index.css' );
         }

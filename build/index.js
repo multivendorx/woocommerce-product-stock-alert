@@ -6644,6 +6644,43 @@ class DynamicForm extends (react__WEBPACK_IMPORTED_MODULE_2___default().Componen
 
 /***/ }),
 
+/***/ "./src/admin/banner.js":
+/*!*****************************!*\
+  !*** ./src/admin/banner.js ***!
+  \*****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+
+/* global stockalertappLocalizer */
+
+class Banner extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
+  render() {
+    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: "mvx-sidebar"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: "mvx-banner-right"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: "mvx-logo-right"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+      href: "https://multivendorx.com/contact-us/"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+      src: stockalertappLocalizer.banner_img,
+      alt: "right-banner"
+    })))));
+  }
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Banner);
+
+/***/ }),
+
 /***/ "./src/admin/stockalert.jsx":
 /*!**********************************!*\
   !*** ./src/admin/stockalert.jsx ***!
@@ -6743,12 +6780,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
-/* harmony import */ var _DynamicForm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./DynamicForm */ "./src/admin/DynamicForm/index.js");
-/* harmony import */ var react_spinners_PuffLoader__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-spinners/PuffLoader */ "./node_modules/react-spinners/PuffLoader.js");
-/* harmony import */ var react_spinners_PuffLoader__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_spinners_PuffLoader__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _emotion_react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @emotion/react */ "./node_modules/@emotion/react/dist/emotion-react.browser.esm.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
+/* harmony import */ var _banner__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./banner */ "./src/admin/banner.js");
+/* harmony import */ var _DynamicForm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./DynamicForm */ "./src/admin/DynamicForm/index.js");
+/* harmony import */ var react_spinners_PuffLoader__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-spinners/PuffLoader */ "./node_modules/react-spinners/PuffLoader.js");
+/* harmony import */ var react_spinners_PuffLoader__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_spinners_PuffLoader__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _emotion_react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @emotion/react */ "./node_modules/@emotion/react/dist/emotion-react.browser.esm.js");
 
 /* global stockalertappLocalizer */
 
@@ -6757,7 +6795,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const override = _emotion_react__WEBPACK_IMPORTED_MODULE_3__.css`
+
+const override = _emotion_react__WEBPACK_IMPORTED_MODULE_4__.css`
 	display: block;
 	margin: 0 auto;
 	border-color: red;
@@ -6777,7 +6816,7 @@ class TabSection extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
     const horizontally = this.props.horizontally;
     const query_name = this.props.query_name;
     if (this.props.subtab !== this.state.current_url) {
-      (0,axios__WEBPACK_IMPORTED_MODULE_4__["default"])({
+      (0,axios__WEBPACK_IMPORTED_MODULE_5__["default"])({
         url: `${stockalertappLocalizer.apiUrl}/mvx_stockalert/v1/fetch_admin_tabs`
       }).then(response => {
         this.setState({
@@ -6797,7 +6836,7 @@ class TabSection extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
     const TabUIContent = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: `mvx-general-wrapper mvx-${this.props.subtab}`
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "mvx-container"
+      className: "mvx-container mvx-tab-banner-wrap"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: `mvx-middle-container-wrapper ${horizontally ? 'mvx-horizontal-tabs' : 'mvx-vertical-tabs'}`
     }, this.props.tab_description && this.props.tab_description === 'no' ? '' : TabUI, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -6810,7 +6849,7 @@ class TabSection extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
         href: m[1].link
       }, m[1].icon ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("i", {
         className: `stock-alert ${m[1].icon}`
-      }) : '', m[1].tablabel) : (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
+      }) : '', m[1].tablabel) : (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Link, {
         className: this.props.subtab === m[0] ? 'active-current-tab' : '',
         to: `?page=woo-product-stock-alert-setting-admin#&tab=${query_name}&subtab=${m[0]}`
       }, m[1].icon ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("i", {
@@ -6818,7 +6857,7 @@ class TabSection extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
       }) : '', m[1].tablabel);
     }) : ''), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "mvx-tab-content"
-    }, model && Object.entries(model).length > 0 && this.props.subtab === this.state.current_url ? Object.entries(model).map((m, index) => m[0] === this.props.subtab && m[1].modulename && m[1].modulename.length > 0 ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_DynamicForm__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    }, model && Object.entries(model).length > 0 && this.props.subtab === this.state.current_url ? Object.entries(model).map((m, index) => m[0] === this.props.subtab && m[1].modulename && m[1].modulename.length > 0 ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_DynamicForm__WEBPACK_IMPORTED_MODULE_3__["default"], {
       key: `dynamic-form-${m[0]}`,
       title: m[1].tablabel,
       defaultValues: this.state.current,
@@ -6827,12 +6866,12 @@ class TabSection extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
       modulename: m[0],
       url: `mvx_stockalert/v1/${m[1].apiurl}`,
       submitbutton: "false"
-    }) : '') : (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)((react_spinners_PuffLoader__WEBPACK_IMPORTED_MODULE_6___default()), {
+    }) : '') : (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)((react_spinners_PuffLoader__WEBPACK_IMPORTED_MODULE_7___default()), {
       css: override,
       color: '#cd0000',
       size: 200,
       loading: true
-    }))))));
+    })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_banner__WEBPACK_IMPORTED_MODULE_2__["default"], null)));
     return TabUIContent;
   };
   render() {

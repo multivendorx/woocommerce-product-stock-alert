@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 import axios from 'axios';
+import BannerSection from './banner';
 import DynamicForm from './DynamicForm';
 import PuffLoader from 'react-spinners/PuffLoader';
 import { css } from '@emotion/react';
@@ -51,7 +52,7 @@ export default class TabSection extends Component {
 		}) : '';
 		const TabUIContent = (
 			<div className={`mvx-general-wrapper mvx-${this.props.subtab}`}>
-				<div className="mvx-container">
+				<div className="mvx-container mvx-tab-banner-wrap">
 					<div
 						className={`mvx-middle-container-wrapper ${
 							horizontally
@@ -145,6 +146,7 @@ export default class TabSection extends Component {
 							</div>
 						</div>
 					</div>
+					{ <BannerSection /> }
 				</div>
 			</div>
 		);
