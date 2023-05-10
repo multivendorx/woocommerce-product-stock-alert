@@ -1,5 +1,16 @@
 == Changelog ==
--------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------
+= 2.0.0 - 2023-05-13 =
+* Added - WordPress 6.2 compatibility.
+* Added - WooCommerce 7.7.0 compatibility.
+* Added - Whole new backend setting page user-friendly design.
+* Added - Admin as a receiver of In stock mail.
+* Added - Support bundle and subscription product types.
+* Fixed - Elementor Support.
+* Fixed - Alert button CSS issue.
+* Dev - Added `woocommerce_instock_alert_email_goes_to_admin` filter.
+* Updated - Language files.
+
 = 1.7.5 - 2022-07-07 =
 * Added - WordPress 6.0 compatibility.
 * Added - WooCommerce 6.6.1 compatibility.
@@ -22,7 +33,7 @@
 * Fixed - Unsubscribe button text.
 * Added - Settings for remove admin email Id and add additional email Id.
 * Added - vendor email with Stock alert admin mail.
-* Added - Double Optin setting modification for WCMp vendor stock alert.
+* Added - Double Optin setting modification for MVX-Pro vendor stock alert module.
 * Added - Compatibility of WordPress 5.8.
 * Added - Compatibility of Woocommerce 5.6.0.
 * Updated - Language files.
@@ -238,5 +249,3 @@
 
 = 1.0.0 =
 *   Initial release.
-
-
