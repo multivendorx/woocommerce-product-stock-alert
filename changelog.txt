@@ -1,6 +1,6 @@
 == Changelog ==
 ----------------------------------------------------------------------------------------------
-= 2.0.0 - 2023-05-13 =
+= 2.0.0 - 2023-05-15 =
 * Added - WordPress 6.2 compatibility.
 * Added - WooCommerce 7.7.0 compatibility.
 * Added - Whole new backend setting page user-friendly design.
@@ -8,6 +8,7 @@
 * Added - Support bundle and subscription product types.
 * Fixed - Elementor Support.
 * Fixed - Alert button CSS issue.
+* Fixed - Fixed some minor issues.
 * Dev - Added `woocommerce_instock_alert_email_goes_to_admin` filter.
 * Updated - Language files.
 
