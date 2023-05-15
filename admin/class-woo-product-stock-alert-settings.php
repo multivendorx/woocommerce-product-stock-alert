@@ -1,332 +1,50 @@
 <?php
 class WOO_Product_Stock_Alert_Settings {
   
-  private $tabs = array();
-  
-  private $options;
-  
   /**
    * Start up
    */
   public function __construct() {
     // Admin menu
     add_action( 'admin_menu', array( $this, 'add_settings_page' ), 100 );
-    add_action( 'admin_init', array( $this, 'settings_page_init' ) );
-    
-    // Settings tabs
-    add_action('settings_page_woo_product_stock_alert_general_tab_init', array(&$this, 'general_tab_init'), 10, 1);
   }
   
   /**
    * Add options page
    */
   public function add_settings_page() {
-    global $WOO_Product_Stock_Alert;
-    
-    add_submenu_page(
-    	'woocommerce',
-    	__('WC Stock Alert', 'woocommerce-product-stock-alert'),
-    	__('WC Stock Alert', 'woocommerce-product-stock-alert'),
-    	'manage_options',
-    	'woo-product-stock-alert-setting-admin',
-    	array( $this, 'create_woo_product_stock_alert_settings' )
+    add_menu_page(
+      __( 'Stock Alert', 'woocommerce-product-stock-alert' ),
+      __( 'Stock Alert', 'woocommerce-product-stock-alert' ),
+      'manage_options',
+      'woo-stock-alert-setting',
+      [ $this, 'create_woo_product_stock_alert_settings' ],
+      'data:image/svg+xml;base64,' . base64_encode('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><g fill="#9EA3A8" fill-rule="nonzero">
+      <path d="M19.9,5.7c0.2,0.9-0.3,1.8-1.1,2c-0.2,0.1-0.5,0.1-0.7,0c-0.6-0.1-1.1-0.5-1.3-1.2    c-0.2-0.6,0-1.2,0.4-1.6c0.2-0.2,0.4-0.3,0.7-0.4C18.8,4.3,19.7,4.8,19.9,5.7z M17.8,8.9l-3.2,9.9c-0.2,0.5-0.7,0.7-1.2,0.6
+          L0.6,15.2C0.1,15-0.1,14.5,0,14L4.3,1.2c0.2-0.5,0.7-0.7,1.2-0.6L16,4.1c-0.5,0.7-0.7,1.7-0.5,2.6C15.8,7.9,16.7,8.7,17.8,8.9z
+           M10.8,4.9c0.5,0.2,1,0.5,1.5,0.7c0.2-0.4,0-0.9-0.4-1.1C11.4,4.4,11,4.5,10.8,4.9z M9.5,15.2c-0.9-0.1-1.7-0.2-2.6-0.2
+          c0.1,0.7,0.6,1.2,1.2,1.2C8.7,16.2,9.3,15.8,9.5,15.2z M12.7,9c0-1.7-1.4-3.1-3.1-3.2c-1.2,0-2.2,0.5-2.8,1.5
+          c-0.6,0.9-1.1,1.8-1.7,2.7c-0.1,0.1-0.2,0.2-0.3,0.1c-0.5-0.2-0.8,0-1.1,0.6c-0.2,0.4,0,0.8,0.4,1c0.7,0.4,1.4,0.7,2.2,1.1
+          c1.4,0.7,2.8,1.4,4.2,2.1c0.4,0.2,0.8,0.1,1.1-0.4c0-0.1,0.1-0.1,0.1-0.2c0.1-0.3,0-0.7-0.3-0.9c-0.2-0.1-0.2-0.2-0.1-0.4
+          c0.4-1,0.8-2,1.1-3C12.7,9.7,12.7,9,12.7,9z"/></g></svg>'), 
+        50
     );
-    
-    $this->tabs = $this->get_dc_settings_tabs();
-  }
-  
-  function get_dc_settings_tabs() {
-    global $WOO_Product_Stock_Alert;
-    $tabs = apply_filters('woo_product_stock_alert_tabs', array(
-      'woo_product_stock_alert_general' => __('Product Stock Alert', 'woocommerce-product-stock-alert')
-    ));
-    return $tabs;
-  }
-  
-  function dc_settings_tabs( $current = 'woo_product_stock_alert_general' ) {
-  	
-    if ( isset ( $_GET['tab'] ) ) :
-      $current = $_GET['tab'];
-    else:
-      $current = 'woo_product_stock_alert_general';
-    endif;
-    
-    $links = array();
-    foreach( $this->tabs as $tab => $name ) :
-      if ( $tab == $current ) :
-        $links[] = "<a class='nav-tab nav-tab-active' href='?page=woo-product-stock-alert-setting-admin&tab=$tab'>$name</a>";
-      else :
-        $links[] = "<a class='nav-tab' href='?page=woo-product-stock-alert-setting-admin&tab=$tab'>$name</a>";
-      endif;
-    endforeach;
-    echo '<div class="icon32" id="dualcube_menu_ico"><br></div>';
-    echo '<h2 class="nav-tab-wrapper">';
-    foreach ( $links as $link )
-      echo $link;
-    echo '</h2>';
-    
-    foreach( $this->tabs as $tab => $name ) :
-      if ( $tab == $current ) :
-        echo "<h2>$name Settings</h2>";
-      endif;
-    endforeach;
-  }
 
+    add_submenu_page(
+      'woo-stock-alert-setting',                              // parent slug
+      __( 'Settings', 'woocommerce-product-stock-alert' ),    // page title
+      __( 'Settings', 'woocommerce-product-stock-alert' ),    // menu title
+      'manage_options',                                       // capability
+      'woo-stock-alert-setting#&tab=settings&subtab=general', // callback
+      '__return_null'                                         // position
+    );
+    remove_submenu_page( 'woo-stock-alert-setting', 'woo-stock-alert-setting' );
+  }
+  
   /**
    * Options page callback
    */
   public function create_woo_product_stock_alert_settings() {
     echo '<div id="mvx-admin-stockalert"></div>';
   }
-
-  /**
-   * Register and add settings
-   */
-  public function settings_page_init() { 
-    do_action('befor_settings_page_init');
-    
-    // Register each tab settings
-    foreach( $this->tabs as $tab => $name ) :
-      do_action("settings_page_{$tab}_tab_init", $tab);
-    endforeach;
-    
-    do_action('after_settings_page_init');
-  }
-  
-  /**
-   * Register and add settings fields
-   */
-  public function settings_field_init($tab_options) {
-    global $WOO_Product_Stock_Alert;
-    
-    if(!empty($tab_options) && isset($tab_options['tab']) && isset($tab_options['ref']) && isset($tab_options['sections'])) {
-      // Register tab options
-      register_setting(
-        "dc_{$tab_options['tab']}_settings_group", // Option group
-        "dc_{$tab_options['tab']}_settings_name", // Option name
-        array( $tab_options['ref'], "dc_{$tab_options['tab']}_settings_sanitize" ) // Sanitize
-      );
-      
-      foreach($tab_options['sections'] as $sectionID => $section) {
-        // Register section
-        add_settings_section(
-          $sectionID, // ID
-          $section['title'], // Title
-          array( $tab_options['ref'], "{$sectionID}_info" ), // Callback
-          "dc-{$tab_options['tab']}-settings-admin" // Page
-        );
-        
-        // Register fields
-        if(isset($section['fields'])) {
-          foreach($section['fields'] as $fieldID => $field) {
-            if(isset($field['type'])) {
-              $field = $WOO_Product_Stock_Alert->dc_wp_fields->check_field_id_name($fieldID, $field);
-              $field['tab'] = $tab_options['tab'];
-              $callbak = $this->get_field_callback_type($field['type']);
-              if(!empty($callbak)) {
-                add_settings_field(
-                  $fieldID,
-                  $field['title'],
-                  array( $this, $callbak ),
-                  "dc-{$tab_options['tab']}-settings-admin",
-                  $sectionID,
-                  $field
-                );
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-  
-  function general_tab_init($tab) {
-    global $WOO_Product_Stock_Alert;
-    
-    $WOO_Product_Stock_Alert->admin->load_class("settings-{$tab}", $WOO_Product_Stock_Alert->plugin_path, $WOO_Product_Stock_Alert->token);
-    new WOO_Product_Stock_Alert_Settings_Gneral($tab);
-  }
-  
-  function get_field_callback_type($fieldType) {
-    $callBack = '';
-    switch($fieldType) {
-      case 'input':
-      case 'text':
-      case 'email':
-      case 'number':
-      case 'file':
-      case 'url':
-        $callBack = 'text_field_callback';
-        break;
-        
-      case 'hidden':
-        $callBack = 'hidden_field_callback';
-        break;
-        
-      case 'textarea':
-        $callBack = 'textarea_field_callback';
-        break;
-        
-      case 'wpeditor':
-        $callBack = 'wpeditor_field_callback';
-        break;
-        
-      case 'checkbox':
-        $callBack = 'checkbox_field_callback';
-        break;
-        
-      case 'radio':
-        $callBack = 'radio_field_callback';
-        break;
-        
-      case 'select':
-        $callBack = 'select_field_callback';
-        break;
-        
-      case 'upload':
-        $callBack = 'upload_field_callback';
-        break;
-        
-      case 'colorpicker':
-        $callBack = 'colorpicker_field_callback';
-        break;
-        
-      case 'datepicker':
-        $callBack = 'datepicker_field_callback';
-        break;
-        
-      case 'multiinput':
-        $callBack = 'multiinput_callback';
-        break;
-        
-      default:
-        $callBack = '';
-        break;
-    }
-    
-    return $callBack;
-  }
-  
-  /** 
-   * Get the hidden field display
-   */
-  public function hidden_field_callback($field) {
-    global $WOO_Product_Stock_Alert;
-    $field['value'] = isset( $field['value'] ) ? esc_attr( $field['value'] ) : '';
-    $field['value'] = isset( $this->options[$field['name']] ) ? esc_attr( $this->options[$field['name']] ) : $field['value'];
-    $field['name'] = "dc_{$field['tab']}_settings_name[{$field['name']}]";
-    $WOO_Product_Stock_Alert->dc_wp_fields->hidden_input($field);
-  }
-  
-  /** 
-   * Get the text field display
-   */
-  public function text_field_callback($field) {
-    global $WOO_Product_Stock_Alert;
-    $field['value'] = isset( $field['value'] ) ? esc_attr( $field['value'] ) : '';
-    $field['value'] = isset( $this->options[$field['name']] ) ? esc_attr( $this->options[$field['name']] ) : $field['value'];
-    $field['name'] = "dc_{$field['tab']}_settings_name[{$field['name']}]";
-    $WOO_Product_Stock_Alert->dc_wp_fields->text_input($field);
-  }
-  
-  /** 
-   * Get the text area display
-   */
-  public function textarea_field_callback($field) {
-    global $WOO_Product_Stock_Alert;
-    $field['value'] = isset( $field['value'] ) ? stripslashes( $field['value'] ) : '';
-    $field['value'] = isset( $this->options[$field['name']] ) ? esc_textarea( $this->options[$field['name']] ) : $field['value'];
-    $field['name'] = "dc_{$field['tab']}_settings_name[{$field['name']}]";
-    $WOO_Product_Stock_Alert->dc_wp_fields->textarea_input($field);
-  }
-  
-  /** 
-   * Get the wpeditor display
-   */
-  public function wpeditor_field_callback($field) {
-    global $WOO_Product_Stock_Alert;
-    $field['value'] = isset( $field['value'] ) ? ( $field['value'] ) : '';
-    $field['value'] = isset( $this->options[$field['name']] ) ? ( $this->options[$field['name']] ) : $field['value'];
-    $field['name'] = "dc_{$field['tab']}_settings_name[{$field['name']}]";
-    $WOO_Product_Stock_Alert->dc_wp_fields->wpeditor_input($field);
-  }
-  
-  /** 
-   * Get the checkbox field display
-   */
-  public function checkbox_field_callback($field) {
-    global $WOO_Product_Stock_Alert;
-    $field['value'] = isset( $field['value'] ) ? esc_attr( $field['value'] ) : '';
-    $field['value'] = isset( $this->options[$field['name']] ) ? esc_attr( $this->options[$field['name']] ) : $field['value'];
-    $field['dfvalue'] = isset( $this->options[$field['name']] ) ? esc_attr( $this->options[$field['name']] ) : '';
-    $field['name'] = "dc_{$field['tab']}_settings_name[{$field['name']}]";
-    $WOO_Product_Stock_Alert->dc_wp_fields->checkbox_input($field);
-  }
-  
-  /** 
-   * Get the checkbox field display
-   */
-  public function radio_field_callback($field) {
-    global $WOO_Product_Stock_Alert;
-    $field['value'] = isset( $field['value'] ) ? esc_attr( $field['value'] ) : '';
-    $field['value'] = isset( $this->options[$field['name']] ) ? esc_attr( $this->options[$field['name']] ) : $field['value'];
-    $field['name'] = "dc_{$field['tab']}_settings_name[{$field['name']}]";
-    $WOO_Product_Stock_Alert->dc_wp_fields->radio_input($field);
-  }
-  
-  /** 
-   * Get the select field display
-   */
-  public function select_field_callback($field) {
-    global $WOO_Product_Stock_Alert;
-    $field['value'] = isset( $field['value'] ) ? esc_textarea( $field['value'] ) : '';
-    $field['value'] = isset( $this->options[$field['name']] ) ? esc_textarea( $this->options[$field['name']] ) : $field['value'];
-    $field['name'] = "dc_{$field['tab']}_settings_name[{$field['name']}]";
-    $WOO_Product_Stock_Alert->dc_wp_fields->select_input($field);
-  }
-  
-  /** 
-   * Get the upload field display
-   */
-  public function upload_field_callback($field) {
-    global $WOO_Product_Stock_Alert;
-    $field['value'] = isset( $field['value'] ) ? esc_attr( $field['value'] ) : '';
-    $field['value'] = isset( $this->options[$field['name']] ) ? esc_attr( $this->options[$field['name']] ) : $field['value'];
-    $field['name'] = "dc_{$field['tab']}_settings_name[{$field['name']}]";
-    $WOO_Product_Stock_Alert->dc_wp_fields->upload_input($field);
-  }
-  
-  /** 
-   * Get the multiinput field display
-   */
-  public function multiinput_callback($field) {
-    global $WOO_Product_Stock_Alert;
-    $field['value'] = isset( $field['value'] ) ? $field['value'] : array();
-    $field['value'] = isset( $this->options[$field['name']] ) ? $this->options[$field['name']] : $field['value'];
-    $field['name'] = "dc_{$field['tab']}_settings_name[{$field['name']}]";
-    $WOO_Product_Stock_Alert->dc_wp_fields->multi_input($field);
-  }
-  
-  /** 
-   * Get the colorpicker field display
-   */
-  public function colorpicker_field_callback($field) {
-    global $WOO_Product_Stock_Alert;
-    $field['value'] = isset( $field['value'] ) ? esc_attr( $field['value'] ) : '';
-    $field['value'] = isset( $this->options[$field['name']] ) ? esc_attr( $this->options[$field['name']] ) : $field['value'];
-    $field['name'] = "dc_{$field['tab']}_settings_name[{$field['name']}]";
-    $WOO_Product_Stock_Alert->dc_wp_fields->colorpicker_input($field);
-  }
-  
-  /** 
-   * Get the datepicker field display
-   */
-  public function datepicker_field_callback($field) {
-    global $WOO_Product_Stock_Alert;
-    $field['value'] = isset( $field['value'] ) ? esc_attr( $field['value'] ) : '';
-    $field['value'] = isset( $this->options[$field['name']] ) ? esc_attr( $this->options[$field['name']] ) : $field['value'];
-    $field['name'] = "dc_{$field['tab']}_settings_name[{$field['name']}]";
-    $WOO_Product_Stock_Alert->dc_wp_fields->datepicker_input($field);
-  }
-  
 }

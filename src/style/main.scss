@@ -1,3 +1,933 @@
-div{
-	color: red;
+@font-face {
+	font-family: 'mvx-woo-stockalert';
+	src:  url('fonts/mvx-woo-stockalert.eot?m5utwm');
+	src:  url('fonts/mvx-woo-stockalert.eot?m5utwm#iefix') format('embedded-opentype'),
+	  url('fonts/mvx-woo-stockalert.ttf?m5utwm') format('truetype'),
+	  url('fonts/mvx-woo-stockalert.woff?m5utwm') format('woff'),
+	  url('fonts/mvx-woo-stockalert.svg?m5utwm#mvx-woo-stockalert') format('svg');
+	font-weight: normal;
+	font-style: normal;
+	font-display: block;
+  }
+  
+  [class^="icon-"], [class*=" icon-"] {
+	/* use !important to prevent issues with browser extensions that change fonts */
+	font-family: 'mvx-woo-stockalert' !important;
+	speak: never;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+  
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+  }
+	
+   .icon-form-customization:before {
+	content: "\e900";
+  }
+  .icon-form-submission:before {
+	content: "\e901";
+  }
+  .icon-general:before {
+	content: "\e902";
+  }
+  .icon-live-preview:before {
+	content: "\e903";
+  }
+  
+  $base-color : #f2eff5;
+  $boder-color : #d4d1d9;
+  $border : 0.063rem solid #d4d1d9;
+  $title-color : #181718;
+  $paragraph-color : #5e5d60;
+  $border-radius :  0.25rem;
+  $button-border-radius :  0.25rem;
+  $fill-color : #fdfdfe;
+  $theme-color: #65438f;
+  $header-background: #f7f6f9;
+  $section-background:#fbfafc;
+  $code-back:#fdf9fb;
+  $code-line:#dfb1c7;
+  $purple-btn-hover:#795b9d;
+  $font-white:#f9f8fb;
+  $grey-icon:#8e8b91;
+  $rejected-vendor-font:#df5d65;
+  $rejected-vendor-back:#fefbfc;
+  $approve-font-color:#522c81;
+  $red-btn-back:#e35047;
+  $red-icon:#e26f76;
+  $code-font:#b74f82;
+  $small-code-back:#fbf5f8;
+  $blue-icon:#9f8ab9;
+  $scroll-color:#ece8f1;
+
+
+  
+  @mixin flexprops($align) {
+    display: flex;
+    align-items: $align;
+  }
+  @mixin staus {
+    padding: 0.344rem 0.5rem;
+    border-radius: $border-radius;
+  }
+  @mixin button {
+    transition: all 0.3s ease;
+    border-radius: $button-border-radius;
+    padding: 0.594rem 1rem;
+    cursor: pointer;
+    &:hover{
+      text-decoration: none;
+    }
+  }
+  @mixin description {
+    padding: 0.625rem 0 1.5rem;
+    font-size: 0.75rem;
+    color:$grey-icon;
+  }
+  @mixin scroll-height{
+    &::-webkit-scrollbar{
+      height: 0.5rem;
+    }
+    &::-webkit-scrollbar-thumb{
+      background-color: $scroll-color;
+      border-radius: $border-radius;
+    }
+  }
+  @mixin scroll-width {
+    &::-webkit-scrollbar{
+      width: 0.25rem;
+    }
+    &::-webkit-scrollbar-thumb{
+      background-color: $scroll-color;
+      border-radius: $border-radius;
+    }
+  }
+  @mixin mvx-addbtn {
+    background: $theme-color;
+    border-radius: $border-radius;
+    a {
+        color: $fill-color;
+        &:hover {
+            color: $fill-color;
+            text-decoration: none;
+        }
+        i {
+            padding-right: 0.5rem;
+            font-size: 1.2rem;
+        }
+    }
+  }
+  @mixin commission-heading {
+    font-size: 1rem;
+    border: $border;
+    background-color: $fill-color;
+    padding: 1rem;
+    margin: 1.5rem 0 0.25rem;
+    border-radius: $border-radius;
+  }
+  @mixin back-btn {
+    color: $title-color;
+    vertical-align: middle;
+    text-decoration: none;
+    border: $border;
+    padding: 0.5rem 1rem 0.5rem 0.6rem;
+    border-radius: $border-radius;
+   }
+   @mixin toggle-btn-disable {
+    input[type=checkbox]{
+        height: 0;
+        width: 0;
+        visibility: hidden;
+        display: none;
+    }
+    label {
+        cursor: pointer;
+        width: 3.3rem;
+        height: 1.5rem;
+        background: transparent;
+        display: block;
+        border-radius: 8rem;
+        position: relative;
+        border: 0.125rem solid $boder-color;
+    }
+    label:before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 0.5rem;
+        width: 0.17rem;
+        height: 0.57rem;
+        background: $fill-color;
+        -webkit-transition: 0.3s;
+        transition: 0.3s;
+    }
+    label:after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 0.313rem;
+        width: 0.875rem;
+        height: 0.875rem;
+        background: $boder-color;
+        border-radius: 90rem;
+        transition: 0.3s;
+        z-index: 1;
+    }
+    input:checked + label {
+        background: $theme-color;
+    }
+    input:checked + label:after {
+      left: calc(100% - 1.313rem);
+      transform: translatey(-50%);
+        background-color: $fill-color;
+    }
+    label:active:after {
+        width: 1.25rem;
+    }
+  }
+  @mixin toggle-btn {
+      input[type=checkbox]{
+          height: 0;
+          width: 0;
+          visibility: hidden;
+          display: none;
+      }
+      label {
+          cursor: pointer;
+          width: 3.3rem;
+          height: 1.5rem;
+          background: transparent;
+          display: block;
+          border-radius: 8rem;
+          position: relative;
+          border: 0.125rem solid $boder-color;
+      }
+      label:before {
+          content: '';
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          left: 0.5rem;
+          width: 0.17rem;
+          height: 0.57rem;
+          background: $fill-color;
+          -webkit-transition: 0.3s;
+          transition: 0.3s;
+      }
+      label:after {
+          content: '';
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          left: 0.313rem;
+          width: 0.875rem;
+          height: 0.875rem;
+          background: $theme-color;
+          border-radius: 90rem;
+          transition: 0.3s;
+          z-index: 1;
+      }
+      input:checked + label {
+          background: $theme-color;
+          border: 0.125rem solid $theme-color;
+      }
+      input:checked + label:after {
+        left: calc(100% - 1.313rem);
+        transform: translatey(-50%);
+          background-color: $fill-color;
+      }
+      label:active:after {
+          width: 1.25rem;
+      }
+  }
+  @mixin select-input {
+    border-radius: 0.25rem;
+    width: 100%;
+    padding: 0rem 0.75rem;
+    color: $grey-icon;
+    font-size: 0.875rem;
+    border: $border;
+    background-color:$fill-color;
+    line-height: 2.375;
+  }
+  @mixin moduleicon {
+      width: 3.5rem;
+      height: 3.5rem;
+      margin: auto;
+      line-height: 4.125;
+      background: rgb(63,20,115);
+      background: linear-gradient(138deg, rgba(63,20,115,1) 0%, rgba(175,59,116,1) 50%, rgba(219,75,84,1) 100%);
+      border-radius: $border-radius;
+      margin-bottom: 1rem;
+      & i {
+          font-size: 1.5rem;
+          color: $font-white;
+      }
+  }
+  @mixin datepicker {
+      width: 17.5rem;
+      height:auto;
+      background-color: $fill-color;
+      margin-left: auto;
+  }
+  @mixin border {
+      border: 0.063rem solid $boder-color;
+  }
+  @mixin iconcolor {
+      color: $theme-color;
+  }
+  @mixin input {
+    padding-left: 0.8rem;
+    border: $border;
+    border-radius: $border-radius;
+    height: 2.5rem;
+  }
+  @mixin red-btn {
+    background-color: $red-btn-back;
+    color: $font-white;
+    border: 0.06rem solid $red-btn-back;
+    &:hover{
+      background-color: #e6635b;
+      color: $font-white;
+    }
+  }
+  @mixin purple-btn {
+    background-color: $theme-color;
+    border: none;
+    color: $font-white;
+    &:hover{
+      background-color: $purple-btn-hover;
+      color: $font-white;
+    }
+  }
+  @mixin border-btn {
+    border: $border;
+    color: $title-color;
+    &:hover{
+      border-color: $title-color ;
+    }
+  }
+
+  //tab part start here
+  .mvx-container {
+    background-color: #f2eff5;
+    padding: 2rem 1.5rem;
+    min-height: 54rem;
+  }
+  .mvx-tab-banner-wrap {
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+  }
+
+.mvx-tab-description-start {
+  text-align: center;
+  background-color: $fill-color;
+  border-radius: $border-radius;
+  margin: 0 0 2rem 0;
+  border: $border;
+  padding: 2rem;
+}
+.mvx-vertical-tabs {
+  width:75%;
+  & .mvx-tab-description-start {
+    background-color: $header-background;
+  }
+  .mvx-middle-child-container{
+    display: flex;
+    flex-wrap:wrap;
+  .mvx-current-tab-lists{
+    width: 22%;
+    border-bottom: 0.06rem solid $boder-color;
+    margin-right: -0.06rem;
+    height: auto;
+      & a {
+        display: flex;
+        align-items: center;
+        background-color: $font-white;
+        border: $border;
+        transition: 0.3s;
+        padding: 1rem 1.2rem;
+        margin-bottom: 0;
+        border-bottom: 0;
+        text-decoration: none;
+        color:$title-color;
+        &:focus{
+          box-shadow: none;
+          outline: 0;
+        }
+        & i {
+          padding-right: .5rem;
+          color: $blue-icon;
+        }
+      }
+      & .active-current-tab{
+      background-color: $fill-color;
+      position: relative;
+          &:after {
+            content: "";
+            height: 100%;
+            width: 0.076rem;
+            background-color: #fdfdfe;
+            right: -0.07rem;
+            top: 0;
+            position: absolute;
+            z-index: 99;
+        }
+      }
+  }
+  & .mvx-tab-content {
+    width:63%;
+    flex: auto;
+    padding: 2.5rem;
+    border: 0.063rem solid $boder-color;
+    height: auto;
+    min-height: 63rem;
+    background-color: $fill-color;
+    position:relative;
+    input[type=text], input[type=url], input[type=email], input[type=number], textarea, select{
+      width: 100%;
+    }
+    & .mvx-dynamic-form {
+      tr, th{
+        height: 0;
+        text-align: left;
+      padding-bottom: 0.5rem;
+      }
+      th{
+        font-weight:500;
+      }
+      td{
+        height: 3.75rem;
+        color: $paragraph-color;
+      }
+      .mvx-form-button-group, .mvx-form-actions {
+        bottom: 0;
+        position: absolute;
+        width: 100%;
+        padding: 1rem;
+        right: 0;
+        background-color: $section-background;
+        border-top: 0.06rem solid $scroll-color;
+        .mvx-setting-section-divider{
+          display: none;
+        }
+    }
+      & .mvx-form-group {
+        display: flex;
+        justify-content: space-between;
+          flex-wrap: wrap;
+          gap: 0.5rem;
+        padding: 0.75rem 0;
+        & .mvx-settings-form-label {
+          width: 28%;
+          color: $title-color;
+          word-wrap: break-word;
+          & p {
+            font-size: 0.875rem;
+            color: $title-color;
+          }
+        }
+        & .mvx-settings-input-content {
+          width: 65%;
+          color: $paragraph-color;
+          .mvx-setting-form-input-label {
+            margin-bottom: 0.5rem;
+        }
+          .mvx-settings-mvx-form-group-radio {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            .mvx-radio-input-label-wrap input{
+              margin: 0 0.5rem 0 0;
+          }
+        }
+          & .mvx-toggle-checkbox-content {
+            margin-bottom: 0.625rem;
+          }
+          .mvx-toggle-checkbox {
+            width: 1rem;
+            height: 1rem;
+          }
+          .mvx-toggle-checkbox-content {
+            margin-left: auto;
+            position: relative;
+            @include toggle-btn;
+          }
+          .mvx-toggle-checkbox-content.disabled{
+            @include toggle-btn-disable();
+            &::after {
+              border-color: $boder-color;
+            }
+          }
+          .mvx-toggle-checkbox-content, span.wc-wizard-service-toggle{
+             &::after {
+            content: '';
+            position: absolute;
+            top: 0.55rem;
+            left: 2.3rem;
+            width: 0.25rem;
+            height: 0.25rem;
+            transform: translateY(50%);
+            border: 0.0625rem solid $theme-color;
+            border-radius: 8rem;
+            transition: 0.3s;
+            z-index: 0;
+          }
+        }
+          & .mvx-settings-basic-input-class {
+            & .mvx-settings-basic-child-wrap {
+              & .mvx-settings-basic-input-child-class {
+                margin: 0 0 1rem 0;
+              }
+            }
+          }
+        }
+        .mvx-settings-metabox-description {
+          margin-top: 0.625rem;
+          font-style: italic;
+          font-size: 0.75rem;
+          color: $grey-icon;
+        }
+        .mvx-setting-file-uploader-class {
+          .mvx-btn {
+            display: block;
+            margin: 1rem 0 0 0;
+          }
+        }
+      }
+      & .mvx-form-button-group {
+        & .mvx-settings-basic-input-class {
+          & .default-btn {
+            height: 2.5rem;
+            background-color: $red-btn-back;
+            width: 4.75rem;
+            color:$font-white;
+             float: right;
+        }
+        }
+      }
+    }
+    .mvx-form-group-radio-color {
+      @include flexprops(center);
+      flex-wrap: wrap;
+      & .mvx-settings-radio-color {
+        margin: 0.5rem 1rem 0.5rem 0;
+        width: calc(50% - 1rem);
+        box-sizing: border-box;
+        border: 0.063rem solid transparent;
+        border-radius: $border-radius;
+        transition: all 0.3s;
+        .mvx-merge-radio-color-input-label {
+          padding: 0.5rem;
+          input[type="radio"]{
+            margin: 0rem 0.5rem 0 0;
+          }
+        }
+        &:hover{
+          background: $font-white;
+        }
+        & .color-palette  {
+          width: 100%;
+          border-spacing: 0;
+          border-collapse: collapse;
+          @include flexprops(center);
+          margin-top: 0.5rem;
+          & div {
+            width: 25%;
+            height: 0.875rem;
+          }
+        }
+      }
+    }
+    .mvx-radioselect-class {
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      border-radius: $border-radius;
+      border: 0.06rem solid $base-color;
+      position: relative;
+      transition: .4s all ease-in-out;
+      & .mvx-setting-form-input {
+        position: absolute;
+        top: 1.5rem;
+        right: 0.813rem;
+        border-radius: 0.125rem;
+        opacity:0;
+        input:focus{
+          border: $border;
+          box-shadow: none;
+        }
+        &:checked::before {
+          content: '\e909';
+          color: $fill-color;
+          font-size: 0.625rem;
+          background-color: $theme-color !important;//redio btn style
+          border-radius: $border-radius;
+      }
+        &:checked{
+          opacity: 1;
+        }
+    }
+      & .mvx-radio-select-under-label-class {
+        & .mvx-radioselect-overlay-text {
+          @include flexprops(center);
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          top: 0;
+          left: 0;
+          background-color: #795b9d;
+          color: $font-white;
+          opacity: 0;
+          justify-content: center;
+          padding: 0.5rem;
+          border-radius: $border-radius;
+        }
+       &:hover {
+          & .mvx-radioselect-overlay-text {
+            opacity: 0.6;
+          }
+        }
+      }
+      & .mvx-section-img-fluid {
+        width: 100%;
+        margin-top: 0.5rem;
+      }
+    }
+    & .mvx-multi-nested-class {
+      & .mvx-boarder-parent {
+        @include flexprops(center);
+        flex-wrap:wrap;
+        gap:0.5rem;
+        position:relative;
+        label.mvx-setting-form-label {
+          width:25%;
+      } .mvx-setting-form-input{
+        width:49%;
+      }
+            .mvx-boarder-nested-child-start{
+              position:relative;
+              width:100%;
+              .mvx-boarder-nested-child-loop{
+                @include flexprops(center);
+                gap:0.5rem;
+                margin-bottom: 0.5rem;
+                width:95%;
+              }               
+            }
+            & .mvx-boarder-parent-loop {
+              width: 100%;
+              @include flexprops(center);
+            }
+        & .horizontal-class {
+          @include flexprops(center);
+          gap: 0.5rem;
+          position: absolute;
+          right: 0;
+          top: 0;
+          & .button-controls{
+            margin: 0;
+          }
+          & .button-controls a, .button-secondary {
+            background: transparent!important;// multi nested add button
+            border-color:$title-color !important;// multi nested add button;
+            margin:0.25rem 0;
+            color: $title-color !important;// multi nested add button;
+            min-width: 1.875rem;
+            text-align:center;
+            &:hover{
+              text-decoration:none;
+            }
+          }
+        }  }  }
+    .mvx-toggle-rectangle-merge {
+      & ul {
+        position: relative;
+        padding: 0 0.4rem;
+        border: $border;
+        border-radius: 0.125rem;
+        @include flexprops(center);
+        overflow: hidden;
+        width: max-content;
+        margin: 0;
+        & input:checked + label {
+          background: $theme-color;
+          color: $font-white;
+          border-color: $theme-color;
+        }
+        & li {
+          list-style-type: none;
+          padding: 1rem 0.1rem;
+          margin: 0;
+          & input {
+              display: none;
+          }
+          & label {
+            color: $title-color;
+            font-size: 1rem;
+            line-height: 1;
+            text-align: center;
+            padding: 0.5rem 1rem;
+            border-radius: 0.125rem;
+            border: 0.06rem solid $boder-color;
+            -webkit-transition: all 0.1s ease-in-out;
+            transition: all 0.1s ease-in-out;
+          }
+        }
+      }
+    }
+    & .mvx-select-deselect-checkbox-content {
+      & .mvx-select-de-box-and-checkbox {
+        & .mvx-select-deselect-checkbox-label-marge {
+          @include flexprops(center);
+          flex-wrap: wrap;
+          & .mvx-wrap-checkbox-and-label {
+            @include flexprops(center);
+            margin: 0.5rem 0;
+            & .mvx-normal-checkbox-label {
+              & .mvx-settings-checkbox-description {
+                margin: 0rem 0 0 0.5rem;
+              }
+            }
+          }
+          & .mvx-col-50 {
+            width: 50%;
+          }
+        }
+      }
+    }
+    .mvx-form-vendor-register {
+      & .mvx-top-part-registartion-from{
+        & .mvx-registration-content {
+          & .mvx-form-registration-group {
+            padding: 2rem;
+            background-color: $header-background;
+            border-radius: 0.4rem;
+            margin: 0.7rem 0;
+            border: 0.0625rem solid $boder-color;
+            & .mvx-untitle-content {
+              margin: 0 0 .5rem 0;
+            }
+          }
+        }
+      }
+    }
+    .mvx-form-left-line-active{
+      padding-bottom: 4.75rem !important;// to adjust form bottom
+      background-color: $font-white;
+    }
+    .mvx-top-part-registartion-from{
+      ::placeholder{
+        color: $title-color;
+      } }
+    .mvx-top-part-registartion-from, .mvx-form-vendor-register .mvx-option-part.mvx-form-left-line-active{
+         input[type="text"]{
+        font-size: 0.875rem;
+        border: solid $boder-color;
+        border-width: 0 0 0.06rem 0;
+        border-radius: 0;
+        background:transparent;
+      }
+    }
+      .mvx-form-vendor-register .mvx-option-part{
+        input[type="text"]{
+          border: 0;
+          background:transparent;
+          &:focus{
+            border: solid $boder-color;
+            border-radius:0;
+            border-width: 0 0 0.06rem 0;
+          }
+        }
+      }
+    .mvx-form-vendor-register .mvx-option-part, .mvx-top-part-registartion-from  {
+      padding: 1.5rem;
+      border-radius: 0.25rem;
+      border:0.06rem solid $base-color;
+      margin: 0.7rem 0;
+      position: relative;
+      input[type="text"].mvx-rgistration-form-title{
+        font-size: 1.25rem;
+      }
+      input[type="text"].mvx-question-title{
+      &::placeholder{
+          color: $title-color;
+        } 
+      }       
+      & .mvx-form-group{
+        display: flex;
+        flex-wrap: wrap;
+      }
+      & .mvx-question-input-items {
+          width: 100%;
+          margin: 0 .5rem 0 0;
+      }
+      & .mvx-vendor-form-input-field-container {
+        margin: 0 0 .5rem 0;
+        .mvx-form-type-wrap {
+          @include flexprops(center);
+          gap: 1rem;
+          padding:0.75rem 0;
+          flex-wrap: wrap;
+      }
+        & select, input[type="number"]{
+          margin: 0.5rem 0 0 0;
+        }
+        ul li{
+          display: flex;
+          column-gap: 0.8rem;
+          padding: 1rem 0;
+          input[type="radio"], input[type="checkbox"], .mvx-close-icon{
+            margin-top: 0.563rem;
+        }
+        }
+        .purple-btn{
+          text-decoration:underline;
+          cursor: pointer;
+        }
+      }
+      .mvx-registration-fileds-description, .mvx-registration-form-description{
+        @include description();
+        font-style:italic;
+      }      
+        & .mvx-footer-icon-form {
+              position: absolute;
+              bottom: 0;
+              left: 0;
+              right: 0;
+              padding: 1rem;
+              background-color: $section-background;
+              border-top: 0.06rem solid $scroll-color;
+              @include flexprops(center);
+                  & .mvx-perple-txt {
+                    margin-left: auto;
+                      & input[type="checkbox"] {
+                        border:$border;
+                        margin: 0 0.5rem 0.25rem;
+                      }
+                  }
+                & .mvx-font {
+                  color: $theme-color;
+                  padding: 0 0.5rem;
+                  font-size: 1rem;
+                  cursor: pointer;
+                }
+            }
+        &  select {
+          height: 2.5rem;
+          @include select-input();
+        }
+    }
+    .mvx-option-part{
+      &::before{
+        position: absolute;
+        content: "\e95b";
+        font-family: 'mvx-admin-font';
+        color: $blue-icon;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%)
+      }
+     
+    }
+  }
+}
+}
+// short despition code
+p.mvx-settings-metabox-description-code {
+  padding: 0.5rem 1rem;
+  margin: 0.5rem 0;
+  background: $code-back;
+  color: $code-font;
+  border-radius:$border-radius;
+  position:relative;
+  &:before{
+    position:absolute;
+    content:"";
+    left: 0;
+    top: 0;
+    width: 0.25rem;
+    border-radius:0.25rem;
+    background-color: $code-line;
+    height: 100%;
+  }
+}
+//loader---
+.mvx-tab-content > span{
+  display: block;
+  margin: 0 auto;
+}
+// setting saved 
+.mvx-notic-display-title {
+  background-color: #bf6290;
+  color: $font-white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.12rem;
+  position: fixed;
+  top: 15%;
+  right: 1rem;
+  z-index: 9999;
+  .mvx-font{
+    background-color: #c7769e;
+    padding: 0.25rem;
+    font-size:0.0.625rem;
+    margin-right: 0.5rem;
+    border-radius: 50%;
+  }
+}
+.mvx-notic-display-title span {
+  background-color: $code-back;
+  border-radius: 50%;
+  padding: 0.1rem;
+}
+// header tab
+.mvx-container .mvx-tab-name {
+  color: #181718;
+  font-size: 1.25rem;
+  font-weight: 500;
+  padding-bottom: 0.5rem;
+}
+
+// responsive started here
+@media only screen and (max-width: 992px) {
+  .mvx-tab-banner-wrap{
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .mvx-vertical-tabs {
+    width: 100%;
+    .mvx-middle-child-container {
+        .mvx-current-tab-lists{
+          width: 21%;
+        }
+    }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .mvx-vertical-tabs {
+    .mvx-middle-child-container {
+        .mvx-current-tab-lists{
+          width: 100%;
+        }
+        .mvx-tab-content {
+          width: 100%;
+          margin-top: -0.06rem;
+          padding: 1.5rem;
+          .mvx-settings-form-label, .mvx-settings-input-content {
+            width: 100% !important;
+        }
+        }
+    }
+  }
+
+}
+@media only screen and (max-width: 575px) {
+
 }

@@ -1,5 +1,5 @@
 <?php
-if ( ! defined( 'ABSPATH' ) ) exit;
+if (!defined('ABSPATH')) exit;
 
 
 class WOO_Product_Stock_Alert_Shortcode {
@@ -8,10 +8,8 @@ class WOO_Product_Stock_Alert_Shortcode {
 		// Product Stock Alert Form Shortcode
 		add_shortcode( 'display_stock_alert_form', array($this, 'display_stock_alert_form') );
 	}
-
 	function display_stock_alert_form($attr) {
 		global $WOO_Product_Stock_Alert;
-
 		$this->load_class('display-stock-alert-form');
 		return $this->shortcode_wrapper(array('WOO_Product_Stock_Alert_Display_Form', 'output'), $attr);
 	}
@@ -45,5 +43,3 @@ class WOO_Product_Stock_Alert_Shortcode {
 		}
 	}
 }
-
-?>

@@ -1,21 +1,21 @@
 <?php
 /**
  * Plugin Name: WooCommerce Product Stock Alert
- * Plugin URI: http://wc-marketplace.com/
+ * Plugin URI: https://multivendorx.com/
  * Description: Woocommerce plugin using which a customer can subscribe for interest on an out of stock product. When the product becomes available, subscribed customer will get an alert email.
- * Author: WC Marketplace
- * Version: 1.7.5
+ * Author: MultiVendorX
+ * Version: 2.0.0
  * Requires at least: 4.4
- * Tested up to: 6.0
+ * Tested up to: 6.2
  * WC requires at least: 3.0
- * WC tested up to: 6.6.1
- * Author URI: http://wc-marketplace.com/
+ * WC tested up to: 7.7.0
+ * Author URI: https://multivendorx.com/
  * Text Domain: woocommerce-product-stock-alert
  * Domain Path: /languages/
  */
 
 if ( ! class_exists( 'WC_Dependencies_Stock_Alert' ) )
-	require_once 'includes/class-dc-dependencies.php';
+	require_once 'includes/class-woo-stock-alert-dependencies.php';
 require_once 'includes/woo-product-stock-alert-core-functions.php';
 require_once 'product_stock_alert_config.php';
 if(!defined('ABSPATH')) exit; // Exit if accessed directly
@@ -28,7 +28,7 @@ if(!WC_Dependencies_Stock_Alert::woocommerce_plugin_active_check()) {
 
 add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'woo_product_stock_alert_settings' );
 function woo_product_stock_alert_settings( $links ) {
-	$plugin_links = array('<a href="' . admin_url( 'admin.php?page=woo-product-stock-alert-setting-admin' ) . '">' . __( 'Settings', WOO_PRODUCT_STOCK_ALERT_TEXT_DOMAIN ) . '</a>','<a href="http://dualcube.com/">' . __( 'Support', WOO_PRODUCT_STOCK_ALERT_TEXT_DOMAIN ) . '</a>');	
+	$plugin_links = array('<a href="' . admin_url( 'admin.php?page=woo-stock-alert-setting#&tab=settings&subtab=general' ) . '">' . __( 'Settings', WOO_PRODUCT_STOCK_ALERT_TEXT_DOMAIN ) . '</a>','<a href="https://multivendorx.com/support-forum/woocommerce-product-stock-alert">' . __( 'Support', WOO_PRODUCT_STOCK_ALERT_TEXT_DOMAIN ) . '</a>' ,'<a href="https://multivendorx.com/docs/knowledgebase/woocommerce-product-stock-alert">' . __( 'Docs', WOO_PRODUCT_STOCK_ALERT_TEXT_DOMAIN ) . '</a>');
 	return array_merge( $plugin_links, $links );
 }
 

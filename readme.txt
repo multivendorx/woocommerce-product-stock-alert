@@ -1,12 +1,12 @@
 === WooCommerce Product Stock Alert ===
 
-Contributors: wcmp
+Contributors: wcmp, abhirup23
 Tags: wordpress, woocommerce, e-commerce, shop, stock, out of stock, in stock, stock alert, alert email, stock alert email
 Requires at least: 4.4
-Tested up to: 6.0
+Tested up to: 6.2
 Requires PHP: 5.6
-Stable tag: 1.7.5
-Donate link: http://wc-marketplace.com/
+Stable tag: 2.0.0
+Donate link: https://multivendorx.com/donate/
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -29,7 +29,7 @@ Never miss a sale now! This plugin lets prospective buyers subscribe to a produc
 *   You can change the default Stock Alert form position and display the stock alert form on the product page by using Shortcode [display_stock_alert_form].
 *   Export list of subscribers via Wordpress’s Tools settings
 *   Customers can unsubscribe from a product to which he/she already subscribed.
-*   Double Opt In setting sends customers a confirmation mail inquiring if they would like to confirm their subscription to an Out of Stock product. To enable this feature you need to Install **[WCMp Vendor Stock Alert](https://wc-marketplace.com/product/wcmp-vendor-stock-alert/)**
+*   Double Opt In setting sends customers a confirmation mail inquiring if they would like to confirm their subscription to an Out of Stock product. To enable this feature you need to Install **[MVX-Pro Vendor Stock Alert](https://multivendorx.com/pricing/)**
 
 = Compatibility =
 *   WordPress 5.5+
@@ -84,6 +84,18 @@ Yes, this plugin works with WooCommerce Subscription Product.
 
 == Changelog ==
 
+= 2.0.0 - 2023-05-15 =
+* Added - WordPress 6.2 compatibility.
+* Added - WooCommerce 7.7.0 compatibility.
+* Added - Whole new backend setting page user-friendly design.
+* Added - Admin as a receiver of In stock mail.
+* Added - Support bundle and subscription product types.
+* Fixed - Elementor Support.
+* Fixed - Alert button CSS issue.
+* Fixed - Fixed some minor issues.
+* Dev - Added `woocommerce_instock_alert_email_goes_to_admin` filter.
+* Updated - Language files.
+
 = 1.7.5 - 2022-07-07 =
 * Added - WordPress 6.0 compatibility.
 * Added - WooCommerce 6.6.1 compatibility.
@@ -106,7 +118,7 @@ Yes, this plugin works with WooCommerce Subscription Product.
 * Fixed - Unsubscribe button text.
 * Added - Settings for remove admin email Id and add additional email Id.
 * Added - vendor email with Stock alert admin mail.
-* Added - Double Optin setting modification for WCMp vendor stock alert.
+* Added - Double Optin setting modification for MVX-Pro vendor stock alert.
 * Added - Compatibility of WordPress 5.8.
 * Added - Compatibility of Woocommerce 5.6.0.
 * Updated - Language files.

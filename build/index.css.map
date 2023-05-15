@@ -1,1 +1,0 @@
-{"version":3,"file":"index.css","mappings":";;;AAAA;EACC;AACD,C","sources":["webpack://woocommerce-product-stock-alert/./src/style/main.scss"],"sourcesContent":["div{\r\n\tcolor: red;\r\n}"],"names":[],"sourceRoot":""}
