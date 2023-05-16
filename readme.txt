@@ -84,7 +84,7 @@ Yes, this plugin works with WooCommerce Subscription Product.
 
 == Changelog ==
 
-= 2.0.0 - 2023-05-15 =
+= 2.0.0 - 2023-05-16 =
 * Added - WordPress 6.2 compatibility.
 * Added - WooCommerce 7.7.0 compatibility.
 * Added - Whole new backend setting page user-friendly design.
