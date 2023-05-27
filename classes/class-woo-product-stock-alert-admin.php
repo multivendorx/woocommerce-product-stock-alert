@@ -231,17 +231,8 @@ class WOO_Product_Stock_Alert_Admin {
                                 $product_availability_stock = $child_obj->get_stock_quantity();
                                 $manage_stock = $child_obj->get_manage_stock();
                                 $stock_status = $child_obj->get_stock_status();
-                                if ($stock_status == 'instock' ) {
-                                    if (isset($product_availability_stock) && $manage_stock) {
-                                        if ($product_availability_stock > 0) {
-                                            $email = WC()->mailer()->emails['WC_Email_Stock_Alert'];
-                                            foreach ($product_subscriber as $to) {
-                                                $email->trigger($to, $child_id);
-                                            }
-                                            delete_post_meta($child_id, '_product_subscriber');
-                                            delete_post_meta($child_id, 'no_of_subscribers');
-                                        }
-                                    } else {
+                                if (isset($product_availability_stock) && $manage_stock) {
+                                    if ($product_availability_stock > (int) get_option('woocommerce_notify_no_stock_amount')) {
                                         $email = WC()->mailer()->emails['WC_Email_Stock_Alert'];
                                         foreach ($product_subscriber as $to) {
                                             $email->trigger($to, $child_id);
@@ -249,6 +240,13 @@ class WOO_Product_Stock_Alert_Admin {
                                         delete_post_meta($child_id, '_product_subscriber');
                                         delete_post_meta($child_id, 'no_of_subscribers');
                                     }
+                                } elseif ($stock_status == 'instock' ) {
+                                    $email = WC()->mailer()->emails['WC_Email_Stock_Alert'];
+                                    foreach ($product_subscriber as $to) {
+                                        $email->trigger($to, $child_id);
+                                    }
+                                    delete_post_meta($child_id, '_product_subscriber');
+                                    delete_post_meta($child_id, 'no_of_subscribers');
                                 }
                             }
                         }
@@ -260,17 +258,8 @@ class WOO_Product_Stock_Alert_Admin {
                     $product_availability_stock = $product_obj->get_stock_quantity();
                     $manage_stock = $product_obj->get_manage_stock();
                     $stock_status = $product_obj->get_stock_status();
-                    if ($stock_status == 'instock' ) {
-                        if (isset($product_availability_stock) && $manage_stock) {
-                            if ($product_availability_stock > 0) {
-                                $email = WC()->mailer()->emails['WC_Email_Stock_Alert'];
-                                foreach ($product_subscriber as $to) {
-                                    $email->trigger($to, $post_id);
-                                }
-                                delete_post_meta($post_id, '_product_subscriber');
-                                delete_post_meta($post_id, 'no_of_subscribers');
-                            }
-                        } else {
+                    if (isset($product_availability_stock) && $manage_stock) {
+                        if ($product_availability_stock > (int) get_option('woocommerce_notify_no_stock_amount')) {
                             $email = WC()->mailer()->emails['WC_Email_Stock_Alert'];
                             foreach ($product_subscriber as $to) {
                                 $email->trigger($to, $post_id);
@@ -278,6 +267,13 @@ class WOO_Product_Stock_Alert_Admin {
                             delete_post_meta($post_id, '_product_subscriber');
                             delete_post_meta($post_id, 'no_of_subscribers');
                         }
+                    } elseif ($stock_status == 'instock' ) {
+                        $email = WC()->mailer()->emails['WC_Email_Stock_Alert'];
+                        foreach ($product_subscriber as $to) {
+                            $email->trigger($to, $post_id);
+                        }
+                        delete_post_meta($post_id, '_product_subscriber');
+                        delete_post_meta($post_id, 'no_of_subscribers');
                     }
                 }
             }

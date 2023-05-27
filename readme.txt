@@ -3,9 +3,9 @@
 Contributors: wcmp, abhirup23
 Tags: wordpress, woocommerce, e-commerce, shop, stock, out of stock, in stock, stock alert, alert email, stock alert email
 Requires at least: 4.4
-Tested up to: 6.2
+Tested up to: 6.2.2
 Requires PHP: 5.6
-Stable tag: 2.0.0
+Stable tag: 2.0.1
 Donate link: https://multivendorx.com/donate/
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -43,7 +43,7 @@ WooCommerce Product Stock Alert has provided customizable email structure. Admin
 
 = Feedback =
 
-Thanks heaps for trying this plugin. I hope it could serve your purpose. If you find this plugin is helpful, appreciate us by giving a 5/5 star and feel free to comment as well as suggest additional features. If you find the plugin is buggy, please do mention the reason and we will add or change options and fix bugs. For more information and instructions on this plugin please visit www.wc-marketplace.com. 
+Thanks heaps for trying this plugin. I hope it could serve your purpose. If you find this plugin is helpful, appreciate us by giving a 5/5 star and feel free to comment as well as suggest additional features. If you find the plugin is buggy, please do mention the reason and we will add or change options and fix bugs. For more information and instructions on this plugin please visit www.multivendorx.com. 
 
 == Installation ==
 1.  Upload your plugin folder to the '/wp-content/plugins' directory.
@@ -83,6 +83,13 @@ Yes, this plugin works with WooCommerce Subscription Product.
 15. Export subscribers' list
 
 == Changelog ==
+
+= 2.0.1 - 2023-05-27 =
+* Added - WordPress 6.2.2 compatibility.
+* Added - Email placeholder field.
+* Fixed - Single product page error issue.
+* Fixed - Fixed some minor issues.
+* Updated - Language files.
 
 = 2.0.0 - 2023-05-16 =
 * Added - WordPress 6.2 compatibility.

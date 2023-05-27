@@ -236,9 +236,7 @@ class WOO_Product_Stock_Alert_Frontend {
             $current_user = wp_get_current_user();
             $user_email = $current_user->data->user_email;
         }
-        $placeholder = __('Enter your email', 'woocommerce-product-stock-alert');
-        $placeholder = apply_filters('wc_product_stock_alert_box_email_placeholder', $placeholder);
-
+        $placeholder = $settings_array['email_placeholder_text'];
         $stock_interest .= apply_filters('woocommerce_product_stock_alert_form', '
             <div id="stock_notifier_main_form" style="border-radius:10px;" class="stock_notifier-subscribe-form ' . esc_attr( $variation_class ) .'">
                     ' . $alert_text_html . '
@@ -248,7 +246,6 @@ class WOO_Product_Stock_Alert_Frontend {
                     <input type="hidden" class="current_variation_id" value="' . $variation_id . '" />
                     <input type="hidden" class="current_product_name" value="' . $product->get_title() . '" />
                     ' . $shown_interest_section . '
-                </div>
             </div>', $alert_text_html, $user_email, $button_html, $product, $shown_interest_section);
         return $stock_interest;
     }
