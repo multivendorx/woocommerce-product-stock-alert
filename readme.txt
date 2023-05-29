@@ -84,11 +84,11 @@ Yes, this plugin works with WooCommerce Subscription Product.
 
 == Changelog ==
 
-= 2.0.1 - 2023-05-27 =
+= 2.0.1 - 2023-05-29 =
 * Added - WordPress 6.2.2 compatibility.
 * Added - Email placeholder field.
 * Fixed - Single product page error issue.
-* Fixed - Fixed some minor issues.
+* Fixed - Fixed backorder issues.
 * Updated - Language files.
 
 = 2.0.0 - 2023-05-16 =
