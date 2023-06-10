@@ -53,7 +53,7 @@ class WC_Email_Stock_Alert extends WC_Email {
 		$this->recipient = $recipient;
 		$this->product_id = $product_id;
 
-		if (apply_filters('woocommerce_instock_alert_email_goes_to_admin', true)) {
+		if (get_mvx_product_alert_plugin_settings('is_remove_admin_email') && apply_filters('woocommerce_instock_alert_email_goes_to_admin', true)) {
 			$this->recipient .= ',' . get_option('admin_email');
 		}
 		if ( ! $this->is_enabled() || ! $this->get_recipient() ) {
