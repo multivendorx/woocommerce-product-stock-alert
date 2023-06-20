@@ -177,7 +177,7 @@ class WOO_Product_Stock_Alert {
     public function stockalert_permission($request) {
         $user_can = $request->get_attributes() ? $request->get_attributes() : '';
         if ( isset($user_can['args']['user_can']) && empty($user_can['args']['user_can']) ) {
-            return new WP_Error( 'mvx_rest_cannot_update', __( 'Sorry, you cannot update vendors.', 'multivendorx' ), array( 'status' => rest_authorization_required_code() ) );
+            return new WP_Error( 'mvx_rest_cannot_update', __( 'Sorry, you cannot update.', 'woocommerce-product-stock-alert' ), array( 'status' => rest_authorization_required_code() ) );
         }
         return true;
     }
@@ -194,7 +194,7 @@ class WOO_Product_Stock_Alert {
         $get_managements_data = $request->get_param( 'model' );
         $optionname = 'mvx_woo_stock_alert_'.$modulename.'_tab_settings';
         update_option($optionname, $get_managements_data);
-        $all_details['error'] = __('Settings Saved', 'multivendorx');
+        $all_details['error'] = __('Settings Saved', 'woocommerce-product-stock-alert');
         return $all_details;
         die;
     }
