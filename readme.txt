@@ -84,7 +84,7 @@ Yes, this plugin works with WooCommerce Subscription Product.
 
 == Changelog ==
 
-= 2.0.2 - 2023-06-20 =
+= 2.0.2 - 2023-06-21 =
 * Added - WooCommerce 7.8.0 compatibility.
 * Fixed - Email send to admin issue.
 * Fixed - Vulnerability issues.
