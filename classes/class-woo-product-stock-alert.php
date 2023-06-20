@@ -175,12 +175,12 @@ class WOO_Product_Stock_Alert {
     }
 
     public function stockalert_permission($request) {
-		$user_can = $request->get_attributes() ? $request->get_attributes() : '';
+        $user_can = $request->get_attributes() ? $request->get_attributes() : '';
         if ( isset($user_can['args']['user_can']) && empty($user_can['args']['user_can']) ) {
             return new WP_Error( 'mvx_rest_cannot_update', __( 'Sorry, you cannot update vendors.', 'multivendorx' ), array( 'status' => rest_authorization_required_code() ) );
         }
         return true;
-	}
+    }
     
     public function mvx_stockalert_fetch_admin_tabs() {
 		$mvx_stockalert_tabs_data = mvx_stockalert_admin_tabs() ? mvx_stockalert_admin_tabs() : [];
