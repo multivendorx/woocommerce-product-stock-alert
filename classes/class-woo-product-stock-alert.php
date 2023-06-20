@@ -159,18 +159,28 @@ class WOO_Product_Stock_Alert {
         register_rest_route( 'mvx_stockalert/v1', '/fetch_admin_tabs', [
             'methods' => WP_REST_Server::READABLE,
             'callback' => array( $this, 'mvx_stockalert_fetch_admin_tabs' ),
-            'permission_callback' => array( $this, 'stockalert_permission' )
+            'permission_callback' => array( $this, 'stockalert_permission' ),
+            'args'     => [
+                'user_can' => current_user_can('manage_woocommerce') ? true : false
+            ],
         ] );
         register_rest_route( 'mvx_stockalert/v1', '/save_stockalert', [
             'methods' => WP_REST_Server::EDITABLE,
             'callback' => array( $this, 'mvx_stockalert_save_stockalert' ),
-            'permission_callback' => array( $this, 'stockalert_permission' )
+            'permission_callback' => array( $this, 'stockalert_permission' ),
+            'args'     => [
+                'user_can' => current_user_can('manage_woocommerce') ? true : false
+            ],
         ] );
     }
 
-    public function stockalert_permission() {
-		return true;
-	}
+    public function stockalert_permission($request) {
+        $user_can = $request->get_attributes() ? $request->get_attributes() : '';
+        if ( isset($user_can['args']['user_can']) && empty($user_can['args']['user_can']) ) {
+            return new WP_Error( 'mvx_rest_cannot_update', __( 'Sorry, you cannot update.', 'woocommerce-product-stock-alert' ), array( 'status' => rest_authorization_required_code() ) );
+        }
+        return true;
+    }
     
     public function mvx_stockalert_fetch_admin_tabs() {
 		$mvx_stockalert_tabs_data = mvx_stockalert_admin_tabs() ? mvx_stockalert_admin_tabs() : [];
@@ -184,7 +194,7 @@ class WOO_Product_Stock_Alert {
         $get_managements_data = $request->get_param( 'model' );
         $optionname = 'mvx_woo_stock_alert_'.$modulename.'_tab_settings';
         update_option($optionname, $get_managements_data);
-        $all_details['error'] = __('Settings Saved', 'multivendorx');
+        $all_details['error'] = __('Settings Saved', 'woocommerce-product-stock-alert');
         return $all_details;
         die;
     }

@@ -5,7 +5,7 @@ Tags: wordpress, woocommerce, e-commerce, shop, stock, out of stock, in stock, s
 Requires at least: 4.4
 Tested up to: 6.2.2
 Requires PHP: 5.6
-Stable tag: 2.0.1
+Stable tag: 2.0.2
 Donate link: https://multivendorx.com/donate/
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -83,6 +83,12 @@ Yes, this plugin works with WooCommerce Subscription Product.
 15. Export subscribers' list
 
 == Changelog ==
+
+= 2.0.2 - 2023-06-21 =
+* Added - WooCommerce 7.8.0 compatibility.
+* Fixed - Email send to admin issue.
+* Fixed - Vulnerability issues.
+* Updated - Language files.
 
 = 2.0.1 - 2023-05-29 =
 * Added - WordPress 6.2.2 compatibility.

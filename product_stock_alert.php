@@ -4,11 +4,11 @@
  * Plugin URI: https://multivendorx.com/
  * Description: Woocommerce plugin using which a customer can subscribe for interest on an out of stock product. When the product becomes available, subscribed customer will get an alert email.
  * Author: MultiVendorX
- * Version: 2.0.1
+ * Version: 2.0.2
  * Requires at least: 4.4
  * Tested up to: 6.2.2
  * WC requires at least: 3.0
- * WC tested up to: 7.7.0
+ * WC tested up to: 7.8.0
  * Author URI: https://multivendorx.com/
  * Text Domain: woocommerce-product-stock-alert
  * Domain Path: /languages/
