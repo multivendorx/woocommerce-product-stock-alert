@@ -25,7 +25,6 @@ class WOO_Product_Stock_Alert {
         $this->version = WOO_PRODUCT_STOCK_ALERT_PLUGIN_VERSION;
 
         add_action('init', array(&$this, 'init'), 0);
-        add_action( 'rest_api_init', array( $this, 'stock_alert_rest_routes_react_module' ) );
         // Woocommerce Email structure
         add_filter('woocommerce_email_classes', array(&$this, 'woo_product_stock_alert_mail'));
     }
@@ -74,8 +73,9 @@ class WOO_Product_Stock_Alert {
         $this->deprecated_hook_handlers['filters'] = new Stock_Alert_Deprecated_Filter_Hooks();
         $this->deprecated_hook_handlers['actions'] = new Stock_Alert_Deprecated_Action_Hooks();
 
-        // DC Wp Fields
-       // $this->dc_wp_fields = $this->library->load_wp_fields();
+        if (current_user_can('manage_options')) {
+            add_action( 'rest_api_init', array( $this, 'stock_alert_rest_routes_react_module' ) );
+        }
     }
 
     /**
@@ -99,7 +99,7 @@ class WOO_Product_Stock_Alert {
         } // End If Statement
     }
 
-    /** Cache Helpers ******************************************************** */
+    /*************************** Cache Helpers ************************** */
 
     /**
      * Sets a constant preventing some caching plugins from caching a page. Used on dynamic pages
@@ -114,7 +114,7 @@ class WOO_Product_Stock_Alert {
     }
 
     /**
-     * Install upon activation
+     * Function upon activation
      *
      */
     public static function activate_product_stock_alert() {
@@ -128,7 +128,7 @@ class WOO_Product_Stock_Alert {
     }
 
     /**
-     * Install upon deactivation
+     * Function upon deactivation
      *
      */
     public static function deactivate_product_stock_alert() {
@@ -160,25 +160,15 @@ class WOO_Product_Stock_Alert {
             'methods' => WP_REST_Server::READABLE,
             'callback' => array( $this, 'mvx_stockalert_fetch_admin_tabs' ),
             'permission_callback' => array( $this, 'stockalert_permission' ),
-            'args'     => [
-                'user_can' => current_user_can('manage_woocommerce') ? true : false
-            ],
         ] );
         register_rest_route( 'mvx_stockalert/v1', '/save_stockalert', [
             'methods' => WP_REST_Server::EDITABLE,
             'callback' => array( $this, 'mvx_stockalert_save_stockalert' ),
             'permission_callback' => array( $this, 'stockalert_permission' ),
-            'args'     => [
-                'user_can' => current_user_can('manage_woocommerce') ? true : false
-            ],
         ] );
     }
 
-    public function stockalert_permission($request) {
-        $user_can = $request->get_attributes() ? $request->get_attributes() : '';
-        if ( isset($user_can['args']['user_can']) && empty($user_can['args']['user_can']) ) {
-            return new WP_Error( 'mvx_rest_cannot_update', __( 'Sorry, you cannot update.', 'woocommerce-product-stock-alert' ), array( 'status' => rest_authorization_required_code() ) );
-        }
+    public function stockalert_permission() {
         return true;
     }
     
