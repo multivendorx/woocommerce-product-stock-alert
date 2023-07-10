@@ -84,7 +84,7 @@ Yes, this plugin works with WooCommerce Subscription Product.
 
 == Changelog ==
 
-= 2.0.2 - 2023-07-07 =
+= 2.0.2 - 2023-07-10 =
 * Added - WooCommerce 7.8.2 compatibility.
 * Fixed - Email send to admin issue.
 * Fixed - Enable with backorders not working.
