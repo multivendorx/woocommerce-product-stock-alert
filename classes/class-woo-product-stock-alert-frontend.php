@@ -141,7 +141,7 @@ class WOO_Product_Stock_Alert_Frontend {
     }
 
     /**
-     * Display Subscribe from in shop page and single product page.
+     * Display Subscribe form in shop page and single product page.
      *
      * @param object $product all product.
      * @param object $variation all Variabtion product.
@@ -149,14 +149,42 @@ class WOO_Product_Stock_Alert_Frontend {
      * @return html $html
      */
     public function display_subscribe_box( $product, $variation = [] ) {
-        $get_option_backorder = get_mvx_product_alert_plugin_settings('is_enable_backorders');
-        $visibility_backorder = isset( $get_option_backorder ) ? true : false;
-
-        if ( ! $variation && ! $product->is_in_stock() || ( ( ! $variation && ( ( $product->managing_stock() && $product->backorders_allowed() && $product->is_on_backorder( 1 ) ) || $product->is_on_backorder( 1 ) ) && $visibility_backorder ) ) ) {
+        if ( ! $variation && $this->is_stock_product( $product ) ) {
             return $this->html_subscribe_form( $product );
-        } elseif ( $variation && ! $variation->is_in_stock() || ( ( $variation && ( ( $variation->managing_stock() && $variation->backorders_allowed() && $variation->is_on_backorder( 1 ) ) || $variation->is_on_backorder( 1 ) ) && $visibility_backorder ) ) ) {
+        } elseif ( $variation && $this->is_stock_product( $variation ) ) {
             return $this->html_subscribe_form( $product, $variation );
         }
+    }
+
+    /**
+     * Display Subscribe form chacking.
+     *
+     * @param object $product
+     *
+     * @return boolen $flag
+     */
+    public function is_stock_product( $product ) {
+        $visibility_backorder = get_mvx_product_alert_plugin_settings('is_enable_backorders');
+        $flag = false;
+        if ($product) {
+            if (!$product->managing_stock()) {
+                $stock_status = $product->get_stock_status();
+                if ($stock_status && $stock_status == 'outofstock') {
+                    $flag = true;
+                } else if ($stock_status && $stock_status == 'onbackorder' && $visibility_backorder) {
+                   $flag = true;
+                }
+            } else {
+                if ($product->backorders_allowed() && $visibility_backorder) {
+                    $flag = true;
+                } else {
+                    if ($product->get_stock_quantity() < 1) {
+                        $flag = true;
+                    }
+                }
+            }
+        }        
+        return $flag;
     }
 
 
