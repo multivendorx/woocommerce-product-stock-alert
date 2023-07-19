@@ -184,7 +184,7 @@ class WOO_Product_Stock_Alert_Frontend {
                 }
             }
         }        
-        return $flag;
+        return apply_filters('woo_stock_alert_is_stock_product', $flag, $product);
     }
 
 
