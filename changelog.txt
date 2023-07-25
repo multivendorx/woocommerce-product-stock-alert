@@ -1,6 +1,10 @@
 == Changelog ==
 ----------------------------------------------------------------------------------------------
 
+= 2.0.3 - 2023-07-25 =
+* Added - WooCommerce 7.9.0 compatibility.
+* Fixed - Email send to admin issue.
+
 = 2.0.2 - 2023-07-10 =
 * Added - WooCommerce 7.8.2 compatibility.
 * Fixed - Email send to admin issue.
