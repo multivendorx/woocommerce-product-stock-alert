@@ -196,7 +196,11 @@ class WOO_Product_Stock_Alert_Install {
 
             if (!empty($get_subscribed_user) && is_array($get_subscribed_user)) {
                 foreach ($get_subscribed_user as $id => $subscriber) {
-                    insert_subscriber($subscriber, $id);
+                    if  (!empty($subscriber)) {
+                        foreach ($subscriber as $email) {
+                            insert_subscriber($email, $id);
+                        }
+                    }   
                 }
             }
             update_option('_is_updated_mvx_product_alert_database', true);
