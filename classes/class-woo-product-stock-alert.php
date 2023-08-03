@@ -1,5 +1,5 @@
 <?php
-use Automattic\WooCommerce\Utilities\FeaturesUtil;
+
 class WOO_Product_Stock_Alert {
 
     public $plugin_url;

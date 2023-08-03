@@ -32,7 +32,7 @@ var instock_notifier = {
         
         jQuery.post(woo_stock_alert_script_data.ajax_url, customer_data, function(response) {
             jQuery(this).removeClass("stk_disabled");    
-            if(response == 'true') {
+            if(response == true) {
                 jQuery('.stock_notifier-subscribe-form').html('<div class="registered_message">' + unsubscribe_successful_messsage + '</div>');
             } else {
                 jQuery('.stock_notifier-subscribe-form').html('<div class="registered_message">'+woo_stock_alert_script_data.error_occurs+'<a href="'+window.location+'"> '+woo_stock_alert_script_data.try_again+'</a></div>');
