@@ -21,11 +21,14 @@ class WOO_Product_Stock_Alert_Install {
 		if (!get_option('_is_updated_mvx_product_alert_settings')) {
 			$this->mvx_stock_alert_older_settings_migration();
 		}
+
+        if (!get_option('_is_updated_mvx_product_alert_database')) {
+            $this->mvx_stock_alert_older_data_migration();
+        }
 	}
 	
 	/*
 	 * This function will start the cron job
-	 *
 	 */
 	function start_cron_job() {
 		wp_clear_scheduled_hook('dc_start_stock_alert');	
@@ -47,6 +50,9 @@ class WOO_Product_Stock_Alert_Install {
 		}
 	}
 
+    /*
+     * This function will migrate older settings
+     */
 	function mvx_stock_alert_older_settings_migration() {
         if (!get_option('_is_updated_mvx_product_alert_settings')) {
             $genaral_settings = $customization_settings = $submit_settings = [];
@@ -142,6 +148,58 @@ class WOO_Product_Stock_Alert_Install {
             }
 
             update_option('_is_updated_mvx_product_alert_settings', true);
+        }
+    }
+
+    /*
+     * This function migrate older subscription data
+     */
+    function mvx_stock_alert_older_data_migration() {
+        if (!get_option('_is_updated_mvx_product_alert_database')) {
+            $all_products = array();
+            $all_products = get_posts(
+                array(
+                    'post_type' => 'product',
+                    'post_status' => 'publish',
+                    'numberposts' => -1
+                )
+            );
+            $all_product_ids = array();
+            if (!empty($all_products) && is_array($all_products)) {
+                foreach ($all_products as $products_each) {
+                    $child_ids = $product_obj = array();
+                    $product_obj = wc_get_product($products_each->ID);
+                    if ($product_obj && $product_obj->is_type('variable')) {
+                        if ($product_obj->has_child()) {
+                            $child_ids = $product_obj->get_children();
+                            if (isset($child_ids) && !empty($child_ids)) {
+                                foreach ($child_ids as $child_id) {
+                                    $all_product_ids[] = $child_id;
+                                }
+                            }
+                        }
+                    } else {
+                        $all_product_ids[] = $products_each->ID;
+                    }
+                }
+            }
+            
+            $get_subscribed_user = array();
+            if (!empty($all_product_ids) && is_array($all_product_ids)) {
+                foreach ($all_product_ids as $all_product_id) {
+                    $_product_subscriber = get_post_meta($all_product_id, '_product_subscriber', true);
+                    if ($_product_subscriber && !empty($_product_subscriber)) {
+                        $get_subscribed_user[$all_product_id] = get_post_meta($all_product_id, '_product_subscriber', true);
+                    }
+                }
+            }
+
+            if (!empty($get_subscribed_user) && is_array($get_subscribed_user)) {
+                foreach ($get_subscribed_user as $id => $subscriber) {
+                    insert_subscriber($subscriber, $id);
+                }
+            }
+            update_option('_is_updated_mvx_product_alert_database', true);
         }
     }
 }

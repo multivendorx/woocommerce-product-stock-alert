@@ -1,5 +1,5 @@
 .required {
-  color: red; 
+	color: red; 
 }
 
 .no_subscriber {
@@ -23,16 +23,16 @@
 
 .variation_no_subscriber {
 	text-align: center;
-  font-size: 3.5em;
-  margin: 20px;
-  color: green;
+	font-size: 3.5em;
+	margin: 20px;
+	color: green;
 }
 
 .variation_no_subscriber_zero {
 	text-align: center;
-  font-size: 3.5em;
-  margin: 20px;
-  color: red;
+	font-size: 3.5em;
+	margin: 20px;
+	color: red;
 }
 
 .stock_column {

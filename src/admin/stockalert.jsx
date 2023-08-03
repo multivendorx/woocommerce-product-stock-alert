@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter as Router, useLocation } from 'react-router-dom';
 import MvxTab from './tabs';
+import Subscriber from './subscriber';
 
 class StockAlert_Backend_Endpoints_Load extends Component {
 	constructor(props) {
@@ -59,6 +60,11 @@ class StockAlert_Backend_Endpoints_Load extends Component {
 				subtab={location.get('subtab')}
 				funtion_name={this}
 			/>;
+		} else if(
+			location.get('tab') &&
+			location.get('tab') === 'subscriber-list'
+		) {
+			return <Subscriber/>;
 		} else {
 			return <MvxTab
 				model='stock_alert-settings'

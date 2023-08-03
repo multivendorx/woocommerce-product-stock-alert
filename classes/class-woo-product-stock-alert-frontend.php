@@ -67,6 +67,9 @@ class WOO_Product_Stock_Alert_Frontend {
                     'alert_success' => $settings_array['alert_success'],
                     'alert_email_exist' => $settings_array['alert_email_exist'],
                     'valid_email' => $settings_array['valid_email'],
+                    'ban_email_domin' => $settings_array['ban_email_domin'],
+                    'ban_email_address' => $settings_array['ban_email_address'],
+                    'double_opt_in_success' => $settings_array['double_opt_in_success'],
                     'processing' => __('Processing...', 'woocommerce-product-stock-alert'),
                     'error_occurs' => __('Some error occurs', 'woocommerce-product-stock-alert'),
                     'try_again' => __('Please try again.', 'woocommerce-product-stock-alert'),
@@ -141,7 +144,7 @@ class WOO_Product_Stock_Alert_Frontend {
     }
 
     /**
-     * Display Subscribe form in shop page and single product page.
+     * Display Subscribe from in shop page and single product page.
      *
      * @param object $product all product.
      * @param object $variation all Variabtion product.
@@ -149,6 +152,9 @@ class WOO_Product_Stock_Alert_Frontend {
      * @return html $html
      */
     public function display_subscribe_box( $product, $variation = [] ) {
+        $get_option_backorder = get_mvx_product_alert_plugin_settings('is_enable_backorders');
+        $visibility_backorder = isset( $get_option_backorder ) ? true : false;
+
         if ( ! $variation && $this->is_stock_product( $product ) ) {
             return $this->html_subscribe_form( $product );
         } elseif ( $variation && $this->is_stock_product( $variation ) ) {
@@ -203,11 +209,11 @@ class WOO_Product_Stock_Alert_Frontend {
         $variation_class = '';
         if ( $variation ) {
             $variation_id = $variation->get_id();
-            $interested_person = get_no_subscribed_persons($variation->get_id());
+            $interested_person = get_no_subscribed_persons($variation->get_id(), 'woo_subscribed');
             $variation_class = 'stock_notifier-subscribe-form-' . $variation_id;
         } else {
             $variation_id = 0;
-            $interested_person = get_no_subscribed_persons($product->get_id());
+            $interested_person = get_no_subscribed_persons($product->get_id(), 'woo_subscribed');
         }
         $stock_interest = $alert_text_html = $button_html = $button_css = '';
         $dc_settings = array();
@@ -255,6 +261,9 @@ class WOO_Product_Stock_Alert_Frontend {
             'alert_success' => $settings_array['alert_success'],
             'alert_email_exist' => $settings_array['alert_email_exist'],
             'valid_email' => $settings_array['valid_email'],
+            'ban_email_domin' => $settings_array['ban_email_domin'],
+            'ban_email_address' => $settings_array['ban_email_address'],
+            'double_opt_in_success' => $settings_array['double_opt_in_success'],
             'unsubscribe_button' => $unsubscribe_button_html,
             'alert_unsubscribe_message' => $settings_array['alert_unsubscribe_message']
         ));

@@ -26,13 +26,32 @@ if(!WC_Dependencies_Stock_Alert::woocommerce_plugin_active_check()) {
   add_action( 'admin_notices', 'woocommerce_inactive_notice' );
 }
 
+/**
+ * Declare support for 'High-Performance order storage (COT)' in WooCommerce
+ */
+if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
+    add_action(
+	'before_woocommerce_init',
+		function () {
+			if ( class_exists( '\Automattic\WooCommerce\Utilities\FeaturesUtil' ) ) {
+				\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', plugin_basename( __FILE__ ), true );
+			}
+		}
+	);
+}
+
+
+
 add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'woo_product_stock_alert_settings' );
 function woo_product_stock_alert_settings( $links ) {
 	$plugin_links = array('<a href="' . admin_url( 'admin.php?page=woo-stock-alert-setting#&tab=settings&subtab=general' ) . '">' . __( 'Settings', WOO_PRODUCT_STOCK_ALERT_TEXT_DOMAIN ) . '</a>','<a href="https://multivendorx.com/support-forum/woocommerce-product-stock-alert">' . __( 'Support', WOO_PRODUCT_STOCK_ALERT_TEXT_DOMAIN ) . '</a>' ,'<a href="https://multivendorx.com/docs/knowledgebase/woocommerce-product-stock-alert">' . __( 'Docs', WOO_PRODUCT_STOCK_ALERT_TEXT_DOMAIN ) . '</a>');
+	if (apply_filters('is_stock_alert_pro_inactive', true)) {
+            $links['go_pro'] = '<a href="https://multivendorx.com/pricing/" class="stock-alert-pro-plugin">' . __('Get Stock Alert Pro', WOO_PRODUCT_STOCK_ALERT_TEXT_DOMAIN) . '</a>';
+        }
 	return array_merge( $plugin_links, $links );
 }
 
-if(!class_exists('WOO_Product_Stock_Alert')) {
+if(!class_exists('WOO_Product_Stock_Alert') && WC_Dependencies_Stock_Alert::woocommerce_plugin_active_check()) {
 	require_once( 'classes/class-woo-product-stock-alert.php' );
 	global $WOO_Product_Stock_Alert;
 	$WOO_Product_Stock_Alert = new WOO_Product_Stock_Alert( __FILE__ );

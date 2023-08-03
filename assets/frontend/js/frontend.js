@@ -53,6 +53,9 @@ var instock_notifier = {
         var alert_success = woo_stock_alert_script_data.alert_success;
         var alert_email_exist = woo_stock_alert_script_data.alert_email_exist;
         var valid_email = woo_stock_alert_script_data.valid_email;
+        var ban_email_domin = woo_stock_alert_script_data.ban_email_domin;
+        var ban_email_address = woo_stock_alert_script_data.ban_email_address;
+        var double_opt_in_text = woo_stock_alert_script_data.double_opt_in_success;
         var unsubscribe_button_html = woo_stock_alert_script_data.unsubscribe_button;
         
         var alert_success = alert_success.replace( '%product_title%', pro_title );
@@ -74,11 +77,17 @@ var instock_notifier = {
                 stock_alert[woo_stock_alert_script_data.additional_fields[i]] = jQuery(this).parent().find('.'+woo_stock_alert_script_data.additional_fields[i]).val();
             }
 
-            jQuery.post(woo_stock_alert_script_data.ajax_url, stock_alert, function(response) { console.log(response);   
+            jQuery.post(woo_stock_alert_script_data.ajax_url, stock_alert, function(response) {   
                 if( response == '0' ) {
                     jQuery('.stock_notifier-subscribe-form').html('<div class="registered_message">'+woo_stock_alert_script_data.error_occurs+'<a href="'+window.location+'"> '+woo_stock_alert_script_data.try_again+'</a></div>');
                 } else if( response == '/*?%already_registered%?*/' ) {
                     jQuery('.stock_notifier-subscribe-form').html('<div class="registered_message">'+alert_email_exist+'</div>'+unsubscribe_button_html+'<input type="hidden" class="subscribed_email" value="'+cus_email+'" /><input type="hidden" class="product_id" value="'+product_id+'" /><input type="hidden" class="variation_id" value="'+var_id+'" />');
+                } else if( response == '/*?%ban_email_address%?*/' ) {
+                    jQuery('.stock_notifier-subscribe-form').html(alert_text_html+'<input type="text" class="stock_alert_email" name="alert_email" />'+button_html+'<p style="color:#e2401c;" class="stock_alert_error_message">'+ban_email_address+'</p><input type="hidden" class="current_product_id" value="'+product_id+'" /><input type="hidden" class="current_product_name" value="'+pro_title+'" />');
+                } else if( response == '/*?%ban_email_domain%?*/' ) {
+                    jQuery('.stock_notifier-subscribe-form').html(alert_text_html+'<input type="text" class="stock_alert_email" name="alert_email" />'+button_html+'<p style="color:#e2401c;" class="stock_alert_error_message">'+ban_email_domin+'</p><input type="hidden" class="current_product_id" value="'+product_id+'" /><input type="hidden" class="current_product_name" value="'+pro_title+'" />');
+                } else if( response == '/*?%double_opt_in%?*/' ) {
+                    jQuery('.stock_notifier-subscribe-form').html('<div class="registered_message">'+double_opt_in_text+'</div>');
                 } else {
                     jQuery('.stock_notifier-subscribe-form').html('<div class="registered_message">'+alert_success+'</div>');
                 }

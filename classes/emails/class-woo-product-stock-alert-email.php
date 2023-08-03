@@ -52,11 +52,10 @@ class WC_Email_Stock_Alert extends WC_Email {
 		$this->customer_email = $recipient;
 		$this->recipient = $recipient;
 		$this->product_id = $product_id;
-		
+
 		if (get_mvx_product_alert_plugin_settings('is_remove_admin_email') == false) {
 			$this->recipient .= ',' . get_option('admin_email');
 		}
-
 		if ( ! $this->is_enabled() || ! $this->get_recipient() ) {
 			return;
 		}
