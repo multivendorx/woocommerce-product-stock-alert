@@ -430,9 +430,9 @@ if (!function_exists('mvx_stockalert_admin_tabs')) {
 						'type'    => 'checkbox',
 						'options' => array(
 								array(
-										'key'=> "is_enable",
-										'label'=> __('Enable this to activate stock alert.', 'woocommerce-product-stock-alert' ),
-										'value'=> "is_enable"
+									'key'=> "is_enable",
+									'label'=> __('Enable this to activate stock alert.', 'woocommerce-product-stock-alert' ),
+									'value'=> "is_enable"
 								),
 						),
 						'database_value' => array(),
@@ -444,9 +444,9 @@ if (!function_exists('mvx_stockalert_admin_tabs')) {
 						'type'    => 'checkbox',
 						'options' => array(
 								array(
-										'key'=> "is_enable_backorders",
-										'label'=>  __('Enable this to activate backorder with stock alert.', 'woocommerce-product-stock-alert' ),
-										'value'=> "is_enable_backorders"
+									'key'=> "is_enable_backorders",
+									'label'=>  __('Enable this to activate backorder with stock alert.', 'woocommerce-product-stock-alert' ),
+									'value'=> "is_enable_backorders"
 								),
 						),
 						'database_value' => array(),
@@ -458,9 +458,9 @@ if (!function_exists('mvx_stockalert_admin_tabs')) {
 						'type'    => 'checkbox',
 						'options' => array(
 								array(
-										'key'=> "is_enable_no_interest",
-										'label'=>  __('How many person shown interest or subscribed for the product.', 'woocommerce-product-stock-alert' ),
-										'value'=> "is_enable_no_interest"
+									'key'=> "is_enable_no_interest",
+									'label'=>  __('How many person shown interest or subscribed for the product.', 'woocommerce-product-stock-alert' ),
+									'value'=> "is_enable_no_interest"
 								),
 						),
 						'database_value' => array(),
@@ -484,10 +484,9 @@ if (!function_exists('mvx_stockalert_admin_tabs')) {
                         ),
 						'options' => array(
 								array(
-										'key'=> "is_double_optin",
-										// 'label'=> __('Enable this option to send customers mail to seek permission for storing customer\'s mail id.', 'woocommerce-product-stock-alert' ),
-                                        'label'=> apply_filters('allow_store_inventory_double_optin', __('Upgrade to MultiVendorX Pro and enable store inventory module to enable Double Opt-in flow for subscription confirmation.', 'woocommerce-product-stock-alert') ),
-										'value'=> "is_double_optin"
+									'key'=> "is_double_optin",
+                                    'label'=> apply_filters('allow_store_inventory_double_optin', __('Upgrade to Pro to enable Double Opt-in flow for subscription confirmation.', 'woocommerce-product-stock-alert') ),
+									'value'=> "is_double_optin"
 								),
 						),
 						'database_value' => array(),
@@ -499,9 +498,9 @@ if (!function_exists('mvx_stockalert_admin_tabs')) {
 						'type'    => 'checkbox',
 						'options' => array(
 								array(
-										'key'=> "is_remove_admin_email",
-										'label'=> __('Remove admin email from stock alert receivers list.', 'woocommerce-product-stock-alert' ),
-										'value'=> "is_remove_admin_email"
+									'key'=> "is_remove_admin_email",
+									'label'=> __('Remove admin email from stock alert receivers list.', 'woocommerce-product-stock-alert' ),
+									'value'=> "is_remove_admin_email"
 								),
 						),
 						'database_value' => array(),
