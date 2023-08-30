@@ -105,37 +105,37 @@ class WOO_Product_Stock_Alert_Ajax {
 	}
 
 	function unsubscribe_users() {
-
-		$customer_email = sanitize_email($_POST['customer_email']);
-		$product_id = (int)$_POST['product_id'];
-		$variation_id = (int)$_POST['var_id'];
+		$customer_email = isset($_POST['customer_email']) ? sanitize_email($_POST['customer_email']) : '';
+		$product_id = isset($_POST['product_id']) ? (int)$_POST['product_id'] : '';
+		$variation_id = isset($_POST['var_id']) ? (int)$_POST['var_id'] : 0;
 		$current_subscriber = array();
 		$success = 'false';
-
-		$product = wc_get_product($product_id);
-    	if ($product && $product->is_type( 'variable' ) && $variation_id > 0) {
-    		$success = customer_stock_alert_unsubscribe($variation_id, $customer_email);
-    	} else {
-    		$success = customer_stock_alert_unsubscribe($product_id, $customer_email);
-    	}
-
+		if ($product_id && !empty($product_id) && !empty($customer_email)) {
+			$product = wc_get_product($product_id);
+			if ($product && $product->is_type( 'variable' ) && $variation_id > 0) {
+				$success = customer_stock_alert_unsubscribe($variation_id, $customer_email);
+			} else {
+				$success = customer_stock_alert_unsubscribe($product_id, $customer_email);
+			}
+		}
 		echo $success;
-
 		die();
 	}
 	
 	function stock_alert_function() {
-		$customer_email = sanitize_email($_POST['email']);
-		$product_id = (int)$_POST['product_id'];
-		$variation_id = (int)$_POST['variation_id'];
+		$customer_email = isset($_POST['email']) ? sanitize_email($_POST['email']) : '';
+		$product_id = isset($_POST['product_id']) ? (int)$_POST['product_id'] : '';
+		$variation_id = isset($_POST['variation_id']) ? (int)$_POST['variation_id'] : 0;
 		$status = '';
-    	$product = wc_get_product($product_id);
-    	if ($product && $product->is_type( 'variable' ) && $variation_id > 0) {
-    		$status = customer_stock_alert_insert($variation_id, $customer_email);
-    	} else {
-    		$status = customer_stock_alert_insert($product_id, $customer_email);
-    	}
-    	echo $status;
+		if ($product_id && !empty($product_id) && !empty($customer_email)) {
+			$product = wc_get_product($product_id);
+			if ($product && $product->is_type( 'variable' ) && $variation_id > 0) {
+				$status = customer_stock_alert_insert($variation_id, $customer_email);
+			} else {
+				$status = customer_stock_alert_insert($product_id, $customer_email);
+			}
+		}
+		echo $status;
 		die();
 	}
 
