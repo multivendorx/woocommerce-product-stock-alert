@@ -388,6 +388,76 @@ if(!function_exists('is_activate_double_opt_in')) {
     }
 }
 
+if (!function_exists('woo_stock_alert_fileds')) {
+    function woo_stock_alert_fileds() {
+        $stock_alert_fields_array = array();
+        $stock_alert_field = $user_email = '';
+        $separator = apply_filters('woo_fileds_separator', '<br>');
+        $settings_array = get_woo_form_settings_array();
+        if (is_user_logged_in()) {
+            $current_user = wp_get_current_user();
+            $user_email = $current_user->data->user_email;
+        }
+        $placeholder = $settings_array['email_placeholder_text'];
+        $alert_fields = apply_filters('woo_stock_alert_fileds_array',array(
+                'alert_email' => array(
+                'type' => 'text',
+                'class'=> 'stock_alert_email woo-fields',
+                'value'=> $user_email,
+                'placeholder' => $placeholder
+                )
+            ), $settings_array);
+
+        if ($alert_fields) {
+            foreach ($alert_fields as $key => $fvalue) {
+                switch ($fvalue['type']) {
+                case 'text':
+                case 'number':
+                case 'email':
+                    $type = isset($fvalue['type']) ? esc_attr($fvalue['type']) : 'text';
+                    $class = isset($fvalue['class']) ? esc_attr($fvalue['class']) : 'stock_alert_' .$key ;
+                    $value = isset($fvalue['value']) ? esc_attr($fvalue['value']) : '';
+                    $placeholder = isset($fvalue['placeholder']) ? esc_attr($fvalue['placeholder']) : '';
+                    $stock_alert_fields_array[]= '<input type="'.$type.'" name="'.$key.'" class ="'.$class.'" value="'.$value.'" placeholder="'.$placeholder.'" >';
+                    break;
+                case 'recaptcha-v2':
+                    $recaptcha_type = isset($fvalue['version']) ? esc_attr($fvalue['version']) : 'v2';
+                    $sitekey = isset($fvalue['sitekey']) ? esc_attr($fvalue['sitekey']) : '';
+                    $secretkey = isset($fvalue['secretkey']) ? esc_attr($fvalue['secretkey']) : '';
+                    $script_url = 'https://www.google.com/recaptcha/api.js';
+
+                    $stock_alert_fields_array[]= '<script src="'.$script_url.'"></script>'.''.'
+                    <div class="g-recaptcha" data-sitekey="'.$sitekey.'"></div>';
+                    break;
+                case 'recaptcha-v3':
+                    $recaptcha_type = isset($fvalue['version']) ? esc_attr($fvalue['version']) : 'v3';
+                    $sitekey = isset($fvalue['sitekey']) ? esc_attr($fvalue['sitekey']) : '';
+                    $secretkey = isset($fvalue['secretkey']) ? esc_attr($fvalue['secretkey']) : '';
+                    $script_url = 'https://www.google.com/recaptcha/api.js?render='.$sitekey;
+
+                    $stock_alert_fields_array[]= '<script src="'.$script_url.'"></script>
+                    <script>
+                        grecaptcha.ready(function () {
+                        grecaptcha.execute("'. $sitekey.'").then(function (token) {
+                            var recaptchaResponse = document.getElementById("recaptchav3_response");
+                            recaptchaResponse.value = token;
+                        });
+                    });
+                    </script>'.''.
+                    '<input type="hidden" id="recaptchav3_response" name="recaptchav3_response" value="" />
+                    <input type="hidden" id="recaptchav3_sitekey" name="recaptchav3_sitekey" value="'.esc_html($sitekey).'" />
+                    <input type="hidden" id="recaptchav3_secretkey" name="recaptchav3_secretkey" value="'. esc_html($secretkey).'" />';
+                    break;
+                }
+            }
+        }
+        if ($stock_alert_fields_array) {
+            $stock_alert_field = implode($separator, $stock_alert_fields_array);
+        }
+        return $stock_alert_field;    
+    }
+}
+
 /**
  * Write to log file
  */

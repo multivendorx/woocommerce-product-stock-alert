@@ -16,6 +16,25 @@ class WOO_Product_Stock_Alert_Ajax {
 		//add fields for variation product shortcode
 		add_action( 'wp_ajax_nopriv_get_variation_box_ajax', array( $this, 'get_variation_box_ajax') );
 		add_action('wp_ajax_get_variation_box_ajax', array( $this, 'get_variation_box_ajax') );
+
+		//recaptcha version-3 validate
+		add_action( 'wp_ajax_recaptcha_validate_ajax', array($this, 'recaptcha_validate_ajax') );
+		add_action( 'wp_ajax_nopriv_recaptcha_validate_ajax', array($this, 'recaptcha_validate_ajax') );
+	}
+
+	function recaptcha_validate_ajax() {
+        $recaptcha_secret = isset($_POST['captcha_secret']) ? $_POST['captcha_secret'] : '';
+        $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
+        $recaptcha_response = isset($_POST['captcha_response']) ? $_POST['captcha_response'] : '';
+
+        $recaptcha = file_get_contents($recaptcha_url . '?secret=' . $recaptcha_secret . '&response=' . $recaptcha_response);
+        $recaptcha = json_decode($recaptcha);
+        if (!$recaptcha->success || $recaptcha->score < 0.5) {
+            echo 0;
+        } else {
+        	echo 1;
+        }
+        die();
 	}
 	
 	function export_stock_alert_data() {
