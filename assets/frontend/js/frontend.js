@@ -12,8 +12,12 @@ var instock_notifier = {
         jQuery('.stock_notifier-subscribe-form-' + vid).show(); //add subscribe form to show
     },
     is_email: function (email) {
-        var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-        return regex.test(email);
+        var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        if (!regex.test(email)) {
+            return false;
+        } else {
+            return true;
+        }
     },
 
     unsubscribe_form: function (e) {
@@ -44,6 +48,12 @@ var instock_notifier = {
         e.preventDefault();
         var recaptcha_enabled = woo_stock_alert_script_data.recaptcha_enabled;
         var recaptcha_version = woo_stock_alert_script_data.recaptcha_version;
+        
+        //required data
+        var cus_email = jQuery(this).closest('.stock_notifier-subscribe-form').find('.stock_alert_email').val();
+        var product_id = jQuery(this).closest('.stock_notifier-subscribe-form').find('.current_product_id').val();
+        var pro_title = jQuery(this).closest('.stock_notifier-subscribe-form').find('.current_product_name').val();
+        var var_id = jQuery(this).closest('.stock_notifier-subscribe-form').find('.current_variation_id').val();
 
         if (recaptcha_enabled) {
             if (recaptcha_version == 'v2') {
@@ -70,17 +80,11 @@ var instock_notifier = {
                 });
             }
         } else {
-            instock_notifier.process_form();
+            instock_notifier.process_form(cus_email, product_id, var_id, pro_title);
         }
     },
 
-    process_form: function() {
-        var cus_email = jQuery(this).closest('.stock_notifier-subscribe-form').find('.stock_alert_email').val();
-        var product_id = jQuery(this).closest('.stock_notifier-subscribe-form').find('.current_product_id').val();
-        var pro_title = jQuery(this).closest('.stock_notifier-subscribe-form').find('.current_product_name').val();
-        var var_id = jQuery(this).closest('.stock_notifier-subscribe-form').find('.current_variation_id').val();
-
-
+    process_form: function(cus_email, product_id, var_id, pro_title) {      
         var alert_text_html = woo_stock_alert_script_data.alert_text_html;
         var button_html = woo_stock_alert_script_data.button_html;
         var alert_success = woo_stock_alert_script_data.alert_success;
@@ -114,6 +118,7 @@ var instock_notifier = {
             }
 
             jQuery.post(woo_stock_alert_script_data.ajax_url, stock_alert, function(response) {   
+                
                 if( response == '0' ) {
                     jQuery('.stock_notifier-subscribe-form').html('<div class="registered_message">'+woo_stock_alert_script_data.error_occurs+'<a href="'+window.location+'"> '+woo_stock_alert_script_data.try_again+'</a></div>');
                 } else if( response == '/*?%already_registered%?*/' ) {
@@ -129,7 +134,7 @@ var instock_notifier = {
                 }
             });
         } else {
-            jQuery('.stock_notifier-subscribe-form').html(alert_text_html+''+alert_fields+'<p style="color:#e2401c;" class="stock_alert_error_message">'+valid_email+'</p>'+button_html+'<input type="hidden" class="current_product_id" value="'+product_id+'" /> <input type="hidden" class="current_variation_id" value="'+var_id+'" /><input type="hidden" class="current_product_name" value="'+pro_title+'" />');
+            jQuery('.stock_notifier-subscribe-form').html(alert_text_html+'<div class="woo_fields_wrap">'+alert_fields+''+button_html+'</div><p style="color:#e2401c;" class="stock_alert_error_message">'+valid_email+'</p><input type="hidden" class="current_product_id" value="'+product_id+'" /> <input type="hidden" class="current_variation_id" value="'+var_id+'" /><input type="hidden" class="current_product_name" value="'+pro_title+'" />');
         }
     }
 };
