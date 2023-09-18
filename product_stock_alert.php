@@ -4,11 +4,11 @@
  * Plugin URI: https://multivendorx.com/
  * Description: Woocommerce plugin using which a customer can subscribe for interest on an out of stock product. When the product becomes available, subscribed customer will get an alert email.
  * Author: MultiVendorX
- * Version: 2.0.3
+ * Version: 2.1.0
  * Requires at least: 4.4
- * Tested up to: 6.2.2
+ * Tested up to: 6.3.1
  * WC requires at least: 3.0
- * WC tested up to: 7.9.0
+ * WC tested up to: 8.1.1
  * Author URI: https://multivendorx.com/
  * Text Domain: woocommerce-product-stock-alert
  * Domain Path: /languages/
@@ -45,7 +45,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'woo_product_stock_alert_settings' );
 function woo_product_stock_alert_settings( $links ) {
 	$plugin_links = array('<a href="' . admin_url( 'admin.php?page=woo-stock-alert-setting#&tab=settings&subtab=general' ) . '">' . __( 'Settings', WOO_PRODUCT_STOCK_ALERT_TEXT_DOMAIN ) . '</a>','<a href="https://multivendorx.com/support-forum/woocommerce-product-stock-alert">' . __( 'Support', WOO_PRODUCT_STOCK_ALERT_TEXT_DOMAIN ) . '</a>' ,'<a href="https://multivendorx.com/docs/knowledgebase/woocommerce-product-stock-alert">' . __( 'Docs', WOO_PRODUCT_STOCK_ALERT_TEXT_DOMAIN ) . '</a>');
-	if (apply_filters('is_stock_alert_pro_inactive', true)) {
+	if (apply_filters('is_stock_alert_pro_inactive', false)) {
             $links['go_pro'] = '<a href="https://multivendorx.com/pricing/" class="stock-alert-pro-plugin">' . __('Get Stock Alert Pro', WOO_PRODUCT_STOCK_ALERT_TEXT_DOMAIN) . '</a>';
         }
 	return array_merge( $plugin_links, $links );

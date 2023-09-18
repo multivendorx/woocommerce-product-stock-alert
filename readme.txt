@@ -3,9 +3,9 @@
 Contributors: wcmp, abhirup23
 Tags: wordpress, woocommerce, e-commerce, shop, stock, out of stock, in stock, stock alert, alert email, stock alert email
 Requires at least: 4.4
-Tested up to: 6.2.2
+Tested up to: 6.3.1
 Requires PHP: 5.6
-Stable tag: 2.0.3
+Stable tag: 2.1.0
 Donate link: https://multivendorx.com/donate/
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -83,6 +83,15 @@ Yes, this plugin works with WooCommerce Subscription Product.
 15. Export subscribers' list
 
 == Changelog ==
+
+= 2.1.0 - 2023-09-18 =
+* Added - WordPress 6.3.1 compatibility.
+* Added - WooCommerce 8.1.1 compatibility.
+* Added - HPOS Support.
+* Fixed - Database structure.
+* Fixed - Backend setting structure.
+* Fixed - Plugin deactivation issue.
+* Updated - Language files.
 
 = 2.0.3 - 2023-07-25 =
 * Added - WooCommerce 7.9.0 compatibility.
