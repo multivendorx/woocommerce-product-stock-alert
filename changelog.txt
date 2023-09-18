@@ -1,6 +1,15 @@
 == Changelog ==
 ----------------------------------------------------------------------------------------------
 
+= 2.1.0 - 2023-09-18 =
+* Added - WordPress 6.3.1 compatibility.
+* Added - WooCommerce 8.1.1 compatibility.
+* Added - HPOS Support.
+* Fixed - Database structure.
+* Fixed - Backend setting structure.
+* Fixed - Plugin deactivation issue.
+* Updated - Language files.
+
 = 2.0.3 - 2023-07-25 =
 * Added - WooCommerce 7.9.0 compatibility.
 * Fixed - Email send to admin issue.
