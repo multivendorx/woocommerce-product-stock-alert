@@ -4,7 +4,6 @@ class WOO_Product_Stock_Alert_Admin {
     public $settings;
 
     public function __construct() {
-
         //admin script and style
         add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_script'));
         $this->load_class('settings');
@@ -31,8 +30,10 @@ class WOO_Product_Stock_Alert_Admin {
             add_filter('bulk_actions-edit-product', array($this, 'register_subscribers_bulk_actions'));
             add_filter('handle_bulk_actions-edit-product', array($this, 'subscribers_bulk_action_handler'), 10, 3);
             add_action('admin_notices', array($this, 'subscribers_bulk_action_admin_notice'));
+            add_action( 'admin_print_styles-plugins.php', array( $this, 'admin_plugin_page_style' ) );
         }
     }
+
 
     function load_class($class_name = '') {
         global $WOO_Product_Stock_Alert;
@@ -57,14 +58,22 @@ class WOO_Product_Stock_Alert_Admin {
                     $child_ids = $product->get_children();
                     if (isset($child_ids) && !empty($child_ids)) {
                         foreach ($child_ids as $child_id) {
-                            delete_post_meta( $child_id, 'no_of_subscribers' );
-                            delete_post_meta( $child_id, '_product_subscriber' );
+                            $subscribers_email = get_product_subscribers_email($child_id);
+                            if ($subscribers_email && !empty($subscribers_email)) {
+                                foreach ($subscribers_email as $alert_id => $to) {
+                                    update_subscriber($alert_id, 'woo_unsubscribed');
+                                }
+                            }
                         }
                     }
                 }
 			} else {
-                delete_post_meta( $post_id, 'no_of_subscribers' );
-                delete_post_meta( $post_id, '_product_subscriber' );
+                $subscribers_email = get_product_subscribers_email($post_id);
+                if ($subscribers_email && !empty($subscribers_email)) {
+                    foreach ($subscribers_email as $alert_id => $to) {
+                        update_subscriber($alert_id, 'woo_unsubscribed');
+                    }
+                }
             }
         }
         $redirect_to = add_query_arg('bulk_remove_subscribers', count($post_ids), $redirect_to);
@@ -80,20 +89,99 @@ class WOO_Product_Stock_Alert_Admin {
         }
     }
 
+    public function admin_plugin_page_style() {
+        ?>
+        <style>
+            a.stock-alert-pro-plugin{
+                font-weight: 700;
+                background: linear-gradient(110deg, rgb(63, 20, 115) 0%, 25%, rgb(175 59 116) 50%, 75%, rgb(219 75 84) 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+            a.stock-alert-pro-plugin:hover {
+                background: #3f1473;
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+            }
+        </style>
+        <?php
+    }
+
     /**
      * Admin Scripts
      */
     public function enqueue_admin_script() {
         global $WOO_Product_Stock_Alert;
         $suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+        $product_selection = '';
+        $product_query = new WP_Query(array('posts_per_page' => -1, 'post_type' => 'product', 'post_status' => 'publish'));
+            if ($product_query->get_posts()) {
+                $product_selection = mvx_convert_select_structure($product_query->get_posts(), '', true);
+            }
+        $columns_subscriber = apply_filters('woo_stock_alert_subscribers_list_headers', array(
+            array(
+                'name'      =>  __('Date', 'woocommerce-product-stock-alert'),
+                'selector'  =>  '',
+                'sortable'  =>  false,
+                'selector_choice'  => "date",
+            ),
+            array(
+                'name'      =>  __('Product', 'woocommerce-product-stock-alert'),
+                'selector'  =>  '',
+                'sortable'  =>  false,
+                'selector_choice'  => "product",
+            ),
+            array(
+                'name'      =>  __('Email', 'woocommerce-product-stock-alert'),
+                'selector'  =>  '',
+                'sortable'  =>  false,
+                'selector_choice'  => "email",
+            ),
+            array(
+                'name'      =>  __('Registred User', 'woocommerce-product-stock-alert'),
+                'selector'  =>  '',
+                'sortable'  =>  false,
+                'selector_choice'  => "reg_user",
+            ),
+            array(
+                'name'      =>  __('Status', 'woocommerce-product-stock-alert'),
+                'selector'  =>  '',
+                'sortable'  =>  false,
+                'selector_choice'  => "status",
+            )
+        ));
+        $subscription_statuses = array(
+            'subscribe'     =>  __('Subscribe', 'woocommerce-product-stock-alert'),
+            'unsubscribe'   =>  __('Unsubscribe', 'woocommerce-product-stock-alert'),
+            'mail_sent'     =>  __('Mail Sent', 'woocommerce-product-stock-alert'),
+            'trash'         =>  __('Trash', 'woocommerce-product-stock-alert'),
+        );
+        $subscription_status_list_action = mvx_convert_select_structure($subscription_statuses);
+        $subscription_page_string     =   array(
+            'all'           =>  __('All', 'woocommerce-product-stock-alert'),
+            'subscribe'     =>  __('Subscribe', 'woocommerce-product-stock-alert'),
+            'unsubscribe'   =>  __('Unsubscribe', 'woocommerce-product-stock-alert'),
+            'mail_sent'     =>  __('Mail Sent', 'woocommerce-product-stock-alert'),
+            'trash'         =>  __('Trash', 'woocommerce-product-stock-alert'),
+            'search'        =>  __('Search by Email', 'woocommerce-product-stock-alert'),
+            'show_product'  =>  __('Products', 'woocommerce-product-stock-alert'),
+            'product_select'=> $product_selection,
+        );
+        
         if (get_current_screen()->id == 'toplevel_page_woo-stock-alert-setting') {
             wp_enqueue_script( 'mvx-stockalert-script', $WOO_Product_Stock_Alert->plugin_url . 'build/index.js', array( 'wp-element' ), $WOO_Product_Stock_Alert->version, true );
             wp_localize_script( 'mvx-stockalert-script', 'stockalertappLocalizer', apply_filters('stockalert_settings', [
-                'apiUrl' => home_url( '/wp-json' ),
-                'nonce' => wp_create_nonce( 'wp_rest' ),
-                'banner_img' => $WOO_Product_Stock_Alert->plugin_url . 'assets/images/stock-alert-pro-banner.jpg',
+                'apiUrl'                    => home_url( '/wp-json' ),
+                'nonce'                     => wp_create_nonce( 'wp_rest' ),
+                'banner_img'                => $WOO_Product_Stock_Alert->plugin_url . 'assets/images/stock-alert-pro-banner.jpg',
+                'pro_active'                => apply_filters('woo_stock_alert_pro_active', 'free'),
+                'columns_subscriber'        => $columns_subscriber,
+                'subscription_page_string'  => $subscription_page_string,
+                'download_csv'              => __('Download CSV', 'woocommerce-product-stock-alert')     
               ] ) );
             wp_enqueue_style( 'mvx-stockalert-style', $WOO_Product_Stock_Alert->plugin_url . 'build/index.css' );
+            wp_enqueue_style('mvx_admin_rsuite_css', $WOO_Product_Stock_Alert->plugin_url . 'assets/admin/css/rsuite-default' . '.min' . '.css', array(), $WOO_Product_Stock_Alert->version);
         }
         if (get_current_screen()->id == 'tools_page_woo-product-stock-alert-export-admin') {
             wp_enqueue_script('stock_alert_admin_js', $WOO_Product_Stock_Alert->plugin_url . 'assets/admin/js/admin'. $suffix .'.js', array('jquery'), $WOO_Product_Stock_Alert->version, true);
@@ -226,7 +314,7 @@ class WOO_Product_Stock_Alert_Admin {
                     if (isset($child_ids) && !empty($child_ids)) {
                         foreach ($child_ids as $child_id) {
                             $child_obj = new WC_Product_Variation($child_id);
-                            $product_subscriber = get_post_meta($child_id, '_product_subscriber', true);
+                            $product_subscriber = get_product_subscribers_email( $child_id ); 
                             if (isset($product_subscriber) && !empty($product_subscriber)) {
                                 $product_availability_stock = $child_obj->get_stock_quantity();
                                 $manage_stock = $child_obj->get_manage_stock();
@@ -234,26 +322,26 @@ class WOO_Product_Stock_Alert_Admin {
                                 if (isset($product_availability_stock) && $manage_stock) {
                                     if ($product_availability_stock > (int) get_option('woocommerce_notify_no_stock_amount')) {
                                         $email = WC()->mailer()->emails['WC_Email_Stock_Alert'];
-                                        foreach ($product_subscriber as $to) {
+                                        foreach ($product_subscriber as $subscribe_id => $to) {
                                             $email->trigger($to, $child_id);
+                                            update_subscriber($subscribe_id, 'woo_mailsent');
+                                            delete_post_meta($child_id, 'no_of_subscribers');
                                         }
-                                        delete_post_meta($child_id, '_product_subscriber');
-                                        delete_post_meta($child_id, 'no_of_subscribers');
                                     }
                                 } elseif ($stock_status == 'instock' ) {
                                     $email = WC()->mailer()->emails['WC_Email_Stock_Alert'];
-                                    foreach ($product_subscriber as $to) {
+                                    foreach ($product_subscriber as $subscribe_id => $to) {
                                         $email->trigger($to, $child_id);
+                                        update_subscriber($subscribe_id, 'woo_mailsent');
+                                        delete_post_meta($child_id, 'no_of_subscribers');
                                     }
-                                    delete_post_meta($child_id, '_product_subscriber');
-                                    delete_post_meta($child_id, 'no_of_subscribers');
                                 }
                             }
                         }
                     }
                 }
             } else {
-                $product_subscriber = get_post_meta($post_id, '_product_subscriber', true);
+                $product_subscriber = get_product_subscribers_email( $post_id );
                 if (isset($product_subscriber) && !empty($product_subscriber)) {
                     $product_availability_stock = $product_obj->get_stock_quantity();
                     $manage_stock = $product_obj->get_manage_stock();
@@ -261,19 +349,19 @@ class WOO_Product_Stock_Alert_Admin {
                     if (isset($product_availability_stock) && $manage_stock) {
                         if ($product_availability_stock > (int) get_option('woocommerce_notify_no_stock_amount')) {
                             $email = WC()->mailer()->emails['WC_Email_Stock_Alert'];
-                            foreach ($product_subscriber as $to) {
+                            foreach ($product_subscriber as $subscribe_id => $to) {
                                 $email->trigger($to, $post_id);
+                                update_subscriber($subscribe_id, 'woo_mailsent');
+                                delete_post_meta($post_id, 'no_of_subscribers');
                             }
-                            delete_post_meta($post_id, '_product_subscriber');
-                            delete_post_meta($post_id, 'no_of_subscribers');
                         }
                     } elseif ($stock_status == 'instock' ) {
                         $email = WC()->mailer()->emails['WC_Email_Stock_Alert'];
-                        foreach ($product_subscriber as $to) {
+                        foreach ($product_subscriber as $subscribe_id => $to) {
                             $email->trigger($to, $post_id);
+                            update_subscriber($subscribe_id, 'woo_mailsent');
+                            delete_post_meta($post_id, 'no_of_subscribers');
                         }
-                        delete_post_meta($post_id, '_product_subscriber');
-                        delete_post_meta($post_id, 'no_of_subscribers');
                     }
                 }
             }

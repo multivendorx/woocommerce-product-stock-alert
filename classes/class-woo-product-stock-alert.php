@@ -76,7 +76,38 @@ class WOO_Product_Stock_Alert {
         if (current_user_can('manage_options')) {
             add_action( 'rest_api_init', array( $this, 'stock_alert_rest_routes_react_module' ) );
         }
+
+        register_post_status('woo_mailsent', array(
+            'label' => _x('Mail Sent', 'woostockalert', 'woocommerce-product-stock-alert'),
+            'public' => true,
+            'exclude_from_search' => false,
+            'show_in_admin_all_list' => true,
+            'show_in_admin_status_list' => true,
+            /* translators: %s: count */
+            'label_count' => _n_noop('Mail Sent <span class="count">(%s)</span>', 'Mail Sent <span class="count">(%s)</span>', 'woocommerce-product-stock-alert'),
+        ));
+
+        register_post_status('woo_subscribed', array(
+            'label' => _x('Subscribed', 'woostockalert', 'woocommerce-product-stock-alert'),
+            'public' => true,
+            'exclude_from_search' => false,
+            'show_in_admin_all_list' => true,
+            'show_in_admin_status_list' => true,
+            /* translators: %s: count */
+            'label_count' => _n_noop('Subscribed <span class="count">(%s)</span>', 'Subscribed <span class="count">(%s)</span>'),
+        ));
+
+        register_post_status('woo_unsubscribed', array(
+            'label' => _x('Unsubscribed', 'woostockalert', 'woocommerce-product-stock-alert'),
+            'public' => true,
+            'exclude_from_search' => false,
+            'show_in_admin_all_list' => true,
+            'show_in_admin_status_list' => true,
+            /* translators: %s: count */
+            'label_count' => _n_noop('Unsubscribed <span class="count">(%s)</span>', 'Unsubscribed <span class="count">(%s)</span>'),
+        ));
     }
+
 
     /**
      * Load Localisation files.
@@ -99,8 +130,7 @@ class WOO_Product_Stock_Alert {
         } // End If Statement
     }
 
-    /*************************** Cache Helpers ************************** */
-
+    /****************************Cache Helpers ******************************/
     /**
      * Sets a constant preventing some caching plugins from caching a page. Used on dynamic pages
      *
@@ -114,7 +144,7 @@ class WOO_Product_Stock_Alert {
     }
 
     /**
-     * Function upon activation
+     * Install upon activation
      *
      */
     public static function activate_product_stock_alert() {
@@ -128,7 +158,7 @@ class WOO_Product_Stock_Alert {
     }
 
     /**
-     * Function upon deactivation
+     * Install upon deactivation
      *
      */
     public static function deactivate_product_stock_alert() {
@@ -184,6 +214,7 @@ class WOO_Product_Stock_Alert {
         $get_managements_data = $request->get_param( 'model' );
         $optionname = 'mvx_woo_stock_alert_'.$modulename.'_tab_settings';
         update_option($optionname, $get_managements_data);
+        do_action('mvx_woo_stock_alert_settings_after_save', $modulename, $get_managements_data);
         $all_details['error'] = __('Settings Saved', 'woocommerce-product-stock-alert');
         return $all_details;
         die;

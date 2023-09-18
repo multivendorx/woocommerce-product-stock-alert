@@ -16,11 +16,30 @@ class WOO_Product_Stock_Alert_Ajax {
 		//add fields for variation product shortcode
 		add_action( 'wp_ajax_nopriv_get_variation_box_ajax', array( $this, 'get_variation_box_ajax') );
 		add_action('wp_ajax_get_variation_box_ajax', array( $this, 'get_variation_box_ajax') );
+
+		//recaptcha version-3 validate
+		add_action( 'wp_ajax_recaptcha_validate_ajax', array($this, 'recaptcha_validate_ajax') );
+		add_action( 'wp_ajax_nopriv_recaptcha_validate_ajax', array($this, 'recaptcha_validate_ajax') );
+	}
+
+	function recaptcha_validate_ajax() {
+        $recaptcha_secret = isset($_POST['captcha_secret']) ? $_POST['captcha_secret'] : '';
+        $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
+        $recaptcha_response = isset($_POST['captcha_response']) ? $_POST['captcha_response'] : '';
+
+        $recaptcha = file_get_contents($recaptcha_url . '?secret=' . $recaptcha_secret . '&response=' . $recaptcha_response);
+        $recaptcha = json_decode($recaptcha);
+        if (!$recaptcha->success || $recaptcha->score < 0.5) {
+            echo 0;
+        } else {
+        	echo 1;
+        }
+        die();
 	}
 	
 	function export_stock_alert_data() {
 		$headers_str = '';
-		$headers_arr = $all_products = $all_products = $get_subscribed_user = $stock_alert_export_datas = array();
+		$headers_arr = $all_products = $all_products = $get_subscribed_user = $stock_alert_export_datas = $subscribers_list =array();
 		$file_name = 'list_subscribers.csv';
 		
 		// Set page headers to force download of CSV
@@ -44,57 +63,54 @@ class WOO_Product_Stock_Alert_Ajax {
 		$headers_str = implode(',', $headers_arr);
 		
 		$all_products = get_posts(
-			array(
-				'post_type' => 'product',
-				'post_status' => 'publish',
-				'numberposts' => -1
-			)
-		);
-		
-		if( !empty($all_products) && is_array($all_products) ) {
-			foreach( $all_products as $products_each ) {
-				$child_ids = $product_obj = array();
-				$product_obj = wc_get_product( $products_each->ID );
-				if( $product_obj->is_type('variable') ) {
-					if( $product_obj->has_child() ) {
-						$child_ids = $product_obj->get_children();
-						if( isset($child_ids) && !empty($child_ids) ) {
-							foreach( $child_ids as $child_id ) {
-								$all_product_ids[] = $child_id;
-							}
-						}
-					}
-				} else {
-					$all_product_ids[] = $products_each->ID;
-				}
-			}
-		}
-		
-		if( !empty($all_product_ids) && is_array($all_product_ids) ) {
-			foreach( $all_product_ids as $all_product_id ) {
-				$_product_subscriber = get_post_meta($all_product_id, '_product_subscriber', true);
-				if ( $_product_subscriber && !empty($_product_subscriber) ) {
-					$get_subscribed_user[$all_product_id] = get_post_meta( $all_product_id, '_product_subscriber', true );
-				}
-			}
-		}
-		
-		if( isset( $get_subscribed_user ) && !empty( $get_subscribed_user ) ) {
-			foreach( $get_subscribed_user as $pro_id => $subscribers ) {
-				$product = wc_get_product($pro_id);
-				$subscribers_string = implode( ",", $subscribers );
-				$subscribers_lists = explode( ",", $subscribers_string );
-				foreach($subscribers_lists as $subscribers_list){
-					$stock_alert_export_datas[] = array(
-						'"'.$pro_id.'"',
-						'"'.$product->get_name().'"',
-						'"'.$product->get_sku().'"',
-						'"'.$product->get_type().'"',
-						'"'.$subscribers_list.'"'
-					);
-				}
-			}
-		}
+            array(
+                'post_type' => 'product',
+                'post_status' => 'publish',
+                'numberposts' => -1
+            )
+        );
+        
+        if( !empty($all_products) && is_array($all_products) ) {
+            foreach( $all_products as $products_each ) {
+                $child_ids = $product_obj = array();
+                $product_obj = wc_get_product( $products_each->ID );
+                if( $product_obj->is_type('variable') ) {
+                    if( $product_obj->has_child() ) {
+                        $child_ids = $product_obj->get_children();
+                        if( isset($child_ids) && !empty($child_ids) ) {
+                            foreach( $child_ids as $child_id ) {
+                                $all_product_ids[] = $child_id;
+                            }
+                        }
+                    }
+                } else {
+                    $all_product_ids[] = $products_each->ID;
+                }
+            }
+        }
+        
+        if ( !empty($all_product_ids) && is_array($all_product_ids) ) {
+            foreach( $all_product_ids as $product_id ) {
+                $subscribers = get_product_subscribers_email($product_id);
+                if ($subscribers && !empty($subscribers) ) {
+                    $get_subscribed_user[$product_id] = $subscribers; 
+                }
+            }
+        }
+
+        if( isset( $get_subscribed_user ) && !empty( $get_subscribed_user ) ) {
+            foreach ($get_subscribed_user as $pro_id => $value) {
+                $subscribers_list = implode(',',$value);
+                $product = wc_get_product($pro_id);
+                $stock_alert_export_datas[] = array(
+                    '"'.$pro_id.'"',
+                    '"'.$product->get_name().'"',
+                    '"'.$product->get_sku().'"',
+                    '"'.$product->get_type().'"',
+                    '"'.$subscribers_list.'"'
+                );
+            }
+        }
 		
 		echo $headers_str;
 		if( isset($stock_alert_export_datas) && !empty($stock_alert_export_datas) ) {
@@ -108,37 +124,37 @@ class WOO_Product_Stock_Alert_Ajax {
 	}
 
 	function unsubscribe_users() {
-
-		$customer_email = sanitize_email($_POST['customer_email']);
-		$product_id = (int)$_POST['product_id'];
-		$variation_id = (int)$_POST['var_id'];
+		$customer_email = isset($_POST['customer_email']) ? sanitize_email($_POST['customer_email']) : '';
+		$product_id = isset($_POST['product_id']) ? (int)$_POST['product_id'] : '';
+		$variation_id = isset($_POST['var_id']) ? (int)$_POST['var_id'] : 0;
 		$current_subscriber = array();
 		$success = 'false';
-
-		$product = wc_get_product($product_id);
-    	if ($product && $product->is_type( 'variable' ) && $variation_id > 0) {
-    		$success = customer_stock_alert_unsubscribe($variation_id, $customer_email);
-    	} else {
-    		$success = customer_stock_alert_unsubscribe($product_id, $customer_email);
-    	}
-
+		if ($product_id && !empty($product_id) && !empty($customer_email)) {
+			$product = wc_get_product($product_id);
+			if ($product && $product->is_type( 'variable' ) && $variation_id > 0) {
+				$success = customer_stock_alert_unsubscribe($variation_id, $customer_email);
+			} else {
+				$success = customer_stock_alert_unsubscribe($product_id, $customer_email);
+			}
+		}
 		echo $success;
-
 		die();
 	}
 	
 	function stock_alert_function() {
-		$customer_email = sanitize_email($_POST['email']);
-		$product_id = (int)$_POST['product_id'];
-		$variation_id = (int)$_POST['variation_id'];
+		$customer_email = isset($_POST['email']) ? sanitize_email($_POST['email']) : '';
+		$product_id = isset($_POST['product_id']) ? (int)$_POST['product_id'] : '';
+		$variation_id = isset($_POST['variation_id']) ? (int)$_POST['variation_id'] : 0;
 		$status = '';
-    	$product = wc_get_product($product_id);
-    	if ($product && $product->is_type( 'variable' ) && $variation_id > 0) {
-    		$status = customer_stock_alert_insert($variation_id, $customer_email);
-    	} else {
-    		$status = customer_stock_alert_insert($product_id, $customer_email);
-    	}
-    	echo $status;
+		if ($product_id && !empty($product_id) && !empty($customer_email)) {
+			$product = wc_get_product($product_id);
+			if ($product && $product->is_type( 'variable' ) && $variation_id > 0) {
+				$status = customer_stock_alert_insert($variation_id, $customer_email);
+			} else {
+				$status = customer_stock_alert_insert($product_id, $customer_email);
+			}
+		}
+		echo $status;
 		die();
 	}
 

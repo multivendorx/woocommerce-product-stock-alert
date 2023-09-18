@@ -61,17 +61,23 @@ class WOO_Product_Stock_Alert_Frontend {
                 wp_enqueue_script('stock_alert_frontend_js', $frontend_script_path . 'frontend' . $suffix . '.js', array('jquery'), $WOO_Product_Stock_Alert->version, true);
             
                 wp_localize_script('stock_alert_frontend_js', 'woo_stock_alert_script_data', array('ajax_url' => admin_url('admin-ajax.php', 'relative'),
+                    'alert_fields' => woo_stock_alert_fileds(),
                     'additional_fields' => apply_filters('woocommerce_product_stock_alert_form_additional_fields', []),
                     'alert_text_html' => $alert_text_html,
                     'button_html' => $button_html,
                     'alert_success' => $settings_array['alert_success'],
                     'alert_email_exist' => $settings_array['alert_email_exist'],
                     'valid_email' => $settings_array['valid_email'],
+                    'ban_email_domin' => $settings_array['ban_email_domin'],
+                    'ban_email_address' => $settings_array['ban_email_address'],
+                    'double_opt_in_success' => $settings_array['double_opt_in_success'],
                     'processing' => __('Processing...', 'woocommerce-product-stock-alert'),
                     'error_occurs' => __('Some error occurs', 'woocommerce-product-stock-alert'),
                     'try_again' => __('Please try again.', 'woocommerce-product-stock-alert'),
                     'unsubscribe_button' => $unsubscribe_button_html,
-                    'alert_unsubscribe_message' => $settings_array['alert_unsubscribe_message']
+                    'alert_unsubscribe_message' => $settings_array['alert_unsubscribe_message'],
+                    'recaptcha_enabled' => apply_filters('woo_stock_alert_recaptcha_enableed', false),
+                    'recaptcha_version' => apply_filters('woo_stock_alert_recaptcha_version', '')
                 ));
             }
         }
@@ -141,7 +147,7 @@ class WOO_Product_Stock_Alert_Frontend {
     }
 
     /**
-     * Display Subscribe form in shop page and single product page.
+     * Display Subscribe from in shop page and single product page.
      *
      * @param object $product all product.
      * @param object $variation all Variabtion product.
@@ -149,6 +155,9 @@ class WOO_Product_Stock_Alert_Frontend {
      * @return html $html
      */
     public function display_subscribe_box( $product, $variation = [] ) {
+        $get_option_backorder = get_mvx_product_alert_plugin_settings('is_enable_backorders');
+        $visibility_backorder = isset( $get_option_backorder ) ? true : false;
+
         if ( ! $variation && $this->is_stock_product( $product ) ) {
             return $this->html_subscribe_form( $product );
         } elseif ( $variation && $this->is_stock_product( $variation ) ) {
@@ -203,11 +212,11 @@ class WOO_Product_Stock_Alert_Frontend {
         $variation_class = '';
         if ( $variation ) {
             $variation_id = $variation->get_id();
-            $interested_person = get_no_subscribed_persons($variation->get_id());
+            $interested_person = get_no_subscribed_persons($variation->get_id(), 'woo_subscribed');
             $variation_class = 'stock_notifier-subscribe-form-' . $variation_id;
         } else {
             $variation_id = 0;
-            $interested_person = get_no_subscribed_persons($product->get_id());
+            $interested_person = get_no_subscribed_persons($product->get_id(), 'woo_subscribed');
         }
         $stock_interest = $alert_text_html = $button_html = $button_css = '';
         $dc_settings = array();
@@ -255,8 +264,14 @@ class WOO_Product_Stock_Alert_Frontend {
             'alert_success' => $settings_array['alert_success'],
             'alert_email_exist' => $settings_array['alert_email_exist'],
             'valid_email' => $settings_array['valid_email'],
+            'ban_email_domin' => $settings_array['ban_email_domin'],
+            'ban_email_address' => $settings_array['ban_email_address'],
+            'double_opt_in_success' => $settings_array['double_opt_in_success'],
             'unsubscribe_button' => $unsubscribe_button_html,
-            'alert_unsubscribe_message' => $settings_array['alert_unsubscribe_message']
+            'alert_unsubscribe_message' => $settings_array['alert_unsubscribe_message'],
+            'alert_fields' => woo_stock_alert_fileds(),
+            'recaptcha_enabled' => apply_filters('woo_stock_alert_recaptcha_enableed', false),
+            'recaptcha_version' => apply_filters('woo_stock_alert_recaptcha_version', '')
         ));
 
         $user_email = '';
@@ -264,17 +279,17 @@ class WOO_Product_Stock_Alert_Frontend {
             $current_user = wp_get_current_user();
             $user_email = $current_user->data->user_email;
         }
-        $placeholder = $settings_array['email_placeholder_text'];
-        $stock_interest .= apply_filters('woocommerce_product_stock_alert_form', '
+        $alert_fields = woo_stock_alert_fileds();
+        $stock_interest .= '
             <div id="stock_notifier_main_form" style="border-radius:10px;" class="stock_notifier-subscribe-form ' . esc_attr( $variation_class ) .'">
-                    ' . $alert_text_html . '
-                    <input type="text" class="stock_alert_email" name="alert_email" value="' . $user_email . '" placeholder="' . $placeholder . '" />
-                    ' . $button_html . '
-                    <input type="hidden" class="current_product_id" value="' . $product->get_id() . '" />
-                    <input type="hidden" class="current_variation_id" value="' . $variation_id . '" />
-                    <input type="hidden" class="current_product_name" value="' . $product->get_title() . '" />
-                    ' . $shown_interest_section . '
-            </div>', $alert_text_html, $user_email, $button_html, $product, $shown_interest_section);
+                ' . $alert_text_html . '
+                <div class="woo_fields_wrap"> ' . $alert_fields . '' . $button_html . '
+                </div>
+                <input type="hidden" class="current_product_id" value="' . $product->get_id() . '" />
+                <input type="hidden" class="current_variation_id" value="' . $variation_id . '" />
+                <input type="hidden" class="current_product_name" value="' . $product->get_title() . '" />
+                ' . $shown_interest_section . '
+            </div>';
         return $stock_interest;
     }
 

@@ -1,5 +1,6 @@
 /* global stockalertappLocalizer */
 import React from 'react';
+import Select from 'react-select';
 import axios from 'axios';
 
 export default class DynamicForm extends React.Component {
@@ -7,9 +8,23 @@ export default class DynamicForm extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			datamclist: [],
 			from_loading: false,
 			errordisplay: ''
 		};
+		this.handle_get_mailchimp_list = this.handle_get_mailchimp_list.bind(this);
+	}
+
+	handle_get_mailchimp_list() {
+		axios
+			.get(
+				`${stockalertappLocalizer.apiUrl}/mvx_stockalert_pro/v1/get_mailchimp_list`,
+			)
+			.then((response) => {
+				this.setState({
+					datamclist: response.data,
+				});
+			});
 	}
 
 	onSubmit = (e) => {
@@ -29,13 +44,6 @@ export default class DynamicForm extends React.Component {
 			data: {
 				model: this.state,
 				modulename: this.props.modulename,
-				vendor_id: this.props.vendor_id ? this.props.vendor_id : '',
-				announcement_id: this.props.announcement_id
-					? this.props.announcement_id
-					: '',
-				knowladgebase_id: this.props.knowladgebase_id
-					? this.props.knowladgebase_id
-					: '',
 			},
 		}).then((res) => {
 			this.setState({
@@ -58,11 +66,19 @@ export default class DynamicForm extends React.Component {
 				[m.key]: m.database_value,
 			});
 		});
+		this.handle_get_mailchimp_list();
 	}
 
 	onChange = (e, key, type = 'single', from_type = '', array_values = []) => {
 		if (type === 'single') {
 			if (from_type === 'select') {
+				this.setState(
+					{
+						[key]: array_values[e.index],
+					},
+					() => {}
+				);
+			} else if (from_type === 'mailchimp_select') {
 				this.setState(
 					{
 						[key]: array_values[e.index],
@@ -76,6 +92,20 @@ export default class DynamicForm extends React.Component {
 					},
 					() => {}
 				);
+			} else if (from_type === 'text_api') {
+				this.setState(
+					{
+						[key]: e.target.value,
+					},
+					() => {}
+				);
+				this.setState({
+					datamclist: [],
+				});
+				this.setState({
+					selected_mailchimp_list: '',
+				});
+				
 			} else {
 				this.setState(
 					{
@@ -126,8 +156,9 @@ export default class DynamicForm extends React.Component {
 			let input = '';
 
 			const target = key;
+			
 			value = this.state[target] || '';
-
+			
 			if (
 				m.restricted_page &&
 				m.restricted_page === this.props.location
@@ -249,6 +280,150 @@ export default class DynamicForm extends React.Component {
 							cols="50"
 							onChange={(e) => {
 								this.onChange(e, target);
+							}}
+						/>
+						{m.desc ? (
+							<p
+								className="mvx-settings-metabox-description"
+								dangerouslySetInnerHTML={{ __html: m.desc }}
+							></p>
+						) : (
+							''
+						)}
+					</div>
+				);
+			}
+
+			if (type === 'select') {
+				const options_data = [];
+				const defaultselect = [];
+				input = m.options.map((o, index) => {
+					if (o.selected) {
+						defaultselect[index] = {
+							value: o.value,
+							label: o.label,
+							index,
+						};
+					}
+					options_data[index] = {
+						value: o.value,
+						label: o.label,
+						index,
+					};
+				});
+				input = (
+					<div className="mvx-form-select-field-wrapper">
+						<Select
+							className={key}
+							value={value ? value : ''}
+							options={options_data}
+							onChange={(e) => {
+								this.onChange(
+									e,
+									m.key,
+									'single',
+									type,
+									options_data
+								);
+							}}
+						></Select>
+						{m.desc ? (
+							<p
+								className="mvx-settings-metabox-description"
+								dangerouslySetInnerHTML={{ __html: m.desc }}
+							></p>
+						) : (
+							''
+						)}
+					</div>
+				);
+			}
+
+			if (type === 'mailchimp_select') {
+				const options_data = [];
+				const defaultselect = [];
+				var selected_val = value;
+				input = this.state.datamclist.map((o, index) => {
+					if (o.selected) {
+						defaultselect[index] = {
+							value: o.value,
+							label: o.label,
+							index,
+						};
+					}
+					options_data[index] = {
+						value: o.value,
+						label: o.label,
+						index,
+					};
+				});
+				input = (
+					<div className="mvx-form-select-field-wrapper">
+						<Select
+							className={key}
+							value={selected_val ? selected_val : ''}
+							options={options_data}
+							onChange={(e) => {
+								this.onChange(
+									e,
+									m.key,
+									'single',
+									type,
+									options_data
+								);
+							}}
+						></Select>
+						{m.desc ? (
+							<p
+								className="mvx-settings-metabox-description"
+								dangerouslySetInnerHTML={{ __html: m.desc }}
+							></p>
+						) : (
+							''
+						)}
+					</div>
+				);
+			}
+
+			if (type === 'button') {
+				input = (
+					<div className="mvx-button">
+						<input
+							className="btn default-btn"
+							type="button"
+							value="Connect to Mailchimp"
+							onClick={(e) =>
+								this.handle_get_mailchimp_list()
+							}
+						/>
+						{m.desc ? (
+							<p
+								className="mvx-settings-metabox-description"
+								dangerouslySetInnerHTML={{
+									__html: m.desc,
+								}}
+							></p>
+						) : (
+							''
+						)}
+					</div>	
+				);
+			}
+
+			if (type === 'text_api') {
+				input = (
+					<div className="mvx-settings-basic-input-class">
+						<input
+							{...props}
+							className="mvx-setting-form-input"
+							type={type}
+							key={key}
+							id={m.id}
+							placeholder={placeholder}
+							name={name}
+							value={value}
+							onChange={(e) => {
+								this.onChange(e, target, 'single', type,);
 							}}
 						/>
 						{m.desc ? (

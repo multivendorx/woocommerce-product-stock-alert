@@ -38,6 +38,8 @@ class WOO_Product_Stock_Alert_Settings {
       'woo-stock-alert-setting#&tab=settings&subtab=general', // callback
       '__return_null'                                         // position
     );
+
+    
     remove_submenu_page( 'woo-stock-alert-setting', 'woo-stock-alert-setting' );
   }
   
