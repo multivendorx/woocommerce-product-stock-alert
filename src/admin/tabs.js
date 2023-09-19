@@ -22,7 +22,6 @@ export default class TabSection extends Component {
 			current: {},
 			current_url: '',
 		};
-		console.log(this.props.subtab);
 	}
 	
 	renderTab = () => {

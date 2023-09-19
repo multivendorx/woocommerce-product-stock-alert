@@ -198,7 +198,9 @@ class WOO_Product_Stock_Alert_Install {
                 foreach ($get_subscribed_user as $id => $subscriber) {
                     if  (!empty($subscriber)) {
                         foreach ($subscriber as $email) {
-                            insert_subscriber($email, $id);
+                            if (!is_already_subscribed($email, $id)) {
+                                insert_subscriber($email, $id);
+                            }
                         }
                     }   
                 }
