@@ -16,15 +16,17 @@ export default class DynamicForm extends React.Component {
 	}
 
 	handle_get_mailchimp_list() {
-		axios
-			.get(
-				`${stockalertappLocalizer.apiUrl}/mvx_stockalert_pro/v1/get_mailchimp_list`,
-			)
-			.then((response) => {
-				this.setState({
-					datamclist: response.data,
+		if (stockalertappLocalizer.pro_active != 'free' ) {
+			axios
+				.get(
+					`${stockalertappLocalizer.apiUrl}/mvx_stockalert_pro/v1/get_mailchimp_list`,
+				)
+				.then((response) => {
+					this.setState({
+						datamclist: response.data,
+					});
 				});
-			});
+		}		
 	}
 
 	onSubmit = (e) => {
