@@ -46,6 +46,7 @@ var instock_notifier = {
     },
     subscribe_form: function (e) {
         e.preventDefault();
+        jQuery(this).text(woo_stock_alert_script_data.processing);
         jQuery(this).addClass("stk_disabled");
         var recaptcha_enabled = woo_stock_alert_script_data.recaptcha_enabled;
         var recaptcha_version = woo_stock_alert_script_data.recaptcha_version;
