@@ -13,6 +13,8 @@ class WOO_Product_Stock_Alert_Settings {
    * Add options page
    */
   public function add_settings_page() {
+    $pro_sticker = apply_filters('is_stock_alert_pro_inactive', true) ? '<span class="stock-alert-pro-tag">Pro</span>' : '';
+
     add_menu_page(
       __( 'Stock Alert', 'woocommerce-product-stock-alert' ),
       __( 'Stock Alert', 'woocommerce-product-stock-alert' ),
@@ -41,8 +43,8 @@ class WOO_Product_Stock_Alert_Settings {
 
     add_submenu_page( 
       'woo-stock-alert-setting', 
-      __( 'Subscriber List', 'woocommerce-catalog-enquiry' ), 
-      __( 'Subscriber List', 'woocommerce-catalog-enquiry' ), 
+      __( 'Subscriber List', 'woocommerce-product-stock-alert' ), 
+      __( 'Subscriber List ' . $pro_sticker, 'woocommerce-product-stock-alert' ), 
       'manage_woocommerce', 
       'woo-stock-alert-setting#&tab=subscriber-list', 
       '__return_null' 

@@ -14,7 +14,7 @@ class Propopup extends Component {
                             <div className="mvx-image-overlay">
                                 <div className="mvx-overlay-content">
                                     <h1 className="banner-header">Unlock <span className="banner-pro-tag">Pro</span> </h1>
-                                    <h3 className="mvx-banner-thrd"> Upgrade to Stock Alert Pro</h3>
+                                    {/* <h3 className="mvx-banner-thrd"></h3> */}
                                     <div className="mvx-banner-content">
                                         <strong>Boost to Stock Alert Pro to access premium features and enhancements!</strong>
                                         <p>&nbsp;</p>

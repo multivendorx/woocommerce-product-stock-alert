@@ -88,7 +88,9 @@ export default class DynamicForm extends React.Component {
 				[m.key]: m.database_value,
 			});
 		});
-		this.handle_get_mailchimp_list();
+		if (stockalertappLocalizer.pro_active != 'free' ) {
+			this.handle_get_mailchimp_list();
+		}
 	}
 
 	CheckProActive = (e, key ) => {
