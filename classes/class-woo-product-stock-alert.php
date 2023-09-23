@@ -176,10 +176,11 @@ class WOO_Product_Stock_Alert {
      */
     function woo_product_stock_alert_mail($emails) {
         require_once( 'emails/class-woo-product-stock-alert-admin-email.php' );
-        $emails['WC_Admin_Email_Stock_Alert'] = new WC_Admin_Email_Stock_Alert();
         require_once( 'emails/class-woo-product-stock-alert-subscriber-confirmation-email.php' );
-        $emails['WC_Subscriber_Confirmation_Email_Stock_Alert'] = new WC_Subscriber_Confirmation_Email_Stock_Alert();
         require_once( 'emails/class-woo-product-stock-alert-email.php' );
+
+        $emails['WC_Admin_Email_Stock_Alert'] = new WC_Admin_Email_Stock_Alert();
+        $emails['WC_Subscriber_Confirmation_Email_Stock_Alert'] = new WC_Subscriber_Confirmation_Email_Stock_Alert();        
         $emails['WC_Email_Stock_Alert'] = new WC_Email_Stock_Alert();
 
         return $emails;

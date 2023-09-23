@@ -39,6 +39,15 @@ class WOO_Product_Stock_Alert_Settings {
       '__return_null'                                         // position
     );
 
+    add_submenu_page( 
+      'woo-stock-alert-setting', 
+      __( 'Subscriber List', 'woocommerce-catalog-enquiry' ), 
+      __( 'Subscriber List', 'woocommerce-catalog-enquiry' ), 
+      'manage_woocommerce', 
+      'woo-stock-alert-setting#&tab=subscriber-list', 
+      '__return_null' 
+    );
+
     
     remove_submenu_page( 'woo-stock-alert-setting', 'woo-stock-alert-setting' );
   }

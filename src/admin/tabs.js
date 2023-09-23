@@ -105,6 +105,14 @@ export default class TabSection extends Component {
 														''
 													)}
 													{m[1].tablabel}
+													{ (stockalertappLocalizer.pro_active == 'free' ) ?
+														(m[0] == 'email' || m[0] == 'mailchimp') ? 
+															<span class="stock-alert-pro-tag">Pro</span> 
+															: ''
+														: ''
+													}
+													
+													
 												</Link>
 											
 										);

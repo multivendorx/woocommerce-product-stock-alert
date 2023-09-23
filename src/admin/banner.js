@@ -6,9 +6,9 @@ class Banner extends Component {
 			<div className="mvx-sidebar">
 				<div className="mvx-banner-right">
 					<div className="mvx-logo-right">
-						<a href="https://multivendorx.com/contact-us/">
+						<a href={stockalertappLocalizer.pro_url}>
 							<img
-								src={ stockalertappLocalizer.banner_img }
+								src={stockalertappLocalizer.banner_img}
 								alt="right-banner"
 							/>
 						</a>

@@ -39,9 +39,6 @@ class WOO_Product_Stock_Alert_Install {
 	function stock_alert_activate() {
 		global $WOO_Product_Stock_Alert;
 		$stock_alert_settings = array();
-		$stock_alert_settings = array(
-                'is_enable' => 'is_enable'
-            );
 
 		if( !get_option('mvx_woo_stock_alert_general_tab_settings') ) {
 			if( update_option( 'mvx_woo_stock_alert_general_tab_settings', $stock_alert_settings ) ) {
@@ -56,9 +53,7 @@ class WOO_Product_Stock_Alert_Install {
 	function mvx_stock_alert_older_settings_migration() {
         if (!get_option('_is_updated_mvx_product_alert_settings')) {
             $genaral_settings = $customization_settings = $submit_settings = [];
-            if ( get_mvx_product_alert_old_plugin_settings('is_enable') &&  get_mvx_product_alert_old_plugin_settings('is_enable') == 'Enable' ) {
-                $genaral_settings['is_enable'] = array('is_enable');
-            }
+            
             if ( get_mvx_product_alert_old_plugin_settings('is_enable_backorders') &&  get_mvx_product_alert_old_plugin_settings('is_enable_backorders') == 'Enable' ) {
                 $genaral_settings['is_enable_backorders'] = array('is_enable_backorders');
             }

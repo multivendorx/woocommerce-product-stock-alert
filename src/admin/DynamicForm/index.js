@@ -2,17 +2,33 @@
 import React from 'react';
 import Select from 'react-select';
 import axios from 'axios';
+import Dialog from "@mui/material/Dialog";
+import Popoup from './popupcontent';
 
 export default class DynamicForm extends React.Component {
 	state = {};
 	constructor(props) {
 		super(props);
 		this.state = {
+			open_model: false,
 			datamclist: [],
 			from_loading: false,
 			errordisplay: ''
 		};
 		this.handle_get_mailchimp_list = this.handle_get_mailchimp_list.bind(this);
+		this.handleClose = this.handleClose.bind(this);
+	}
+
+	handleClose() {
+		this.setState({
+			open_model: false,
+		});
+	}
+
+	handleCloseDialog() {
+		this.setState({
+			open_model: false,
+		});
 	}
 
 	handle_get_mailchimp_list() {
@@ -26,6 +42,10 @@ export default class DynamicForm extends React.Component {
 						datamclist: response.data,
 					});
 				});
+		} else {
+			this.setState({
+				open_model: true,
+			});
 		}		
 	}
 
@@ -71,77 +91,93 @@ export default class DynamicForm extends React.Component {
 		this.handle_get_mailchimp_list();
 	}
 
-	onChange = (e, key, type = 'single', from_type = '', array_values = []) => {
-		if (type === 'single') {
-			if (from_type === 'select') {
-				this.setState(
-					{
-						[key]: array_values[e.index],
-					},
-					() => {}
-				);
-			} else if (from_type === 'mailchimp_select') {
-				this.setState(
-					{
-						[key]: array_values[e.index],
-					},
-					() => {}
-				);
-			} else if (from_type === 'multi-select') {
-				this.setState(
-					{
-						[key]: e,
-					},
-					() => {}
-				);
-			} else if (from_type === 'text_api') {
-				this.setState(
-					{
-						[key]: e.target.value,
-					},
-					() => {}
-				);
+	CheckProActive = (e, key ) => {
+		if (stockalertappLocalizer.pro_settings_list.includes(key)) {
+			if (stockalertappLocalizer.pro_active == 'free' ) {
 				this.setState({
-					datamclist: [],
-				});
-				this.setState({
-					selected_mailchimp_list: '',
-				});
-				
-			} else {
-				this.setState(
-					{
-						[key]: e.target.value,
-					},
-					() => {}
-				);
-			}
-		} else {
-			// Array of values (e.g. checkbox): TODO: Optimization needed.
-			const found = this.state[key]
-				? this.state[key].find((d) => d === e.target.value)
-				: false;
-
-			if (found) {
-				const data = this.state[key].filter((d) => {
-					return d !== found;
-				});
-				this.setState({
-					[key]: data,
-				});
-			} else {
-				const others = this.state[key] ? [...this.state[key]] : [];
-				this.setState({
-					[key]: [e.target.value, ...others],
+					open_model: true,
 				});
 			}
 		}
-		if (this.props.submitbutton && this.props.submitbutton === 'false') {
-			if (key != 'password') {
-				setTimeout(() => {
-					this.onSubmit('');
-				}, 10);
+	}
+
+	onChange = (e, key, type = 'single', from_type = '', array_values = []) => {
+		if (!stockalertappLocalizer.pro_settings_list.includes(key)) {
+			if (type === 'single') {
+				if (from_type === 'select') {
+					this.setState(
+						{
+							[key]: array_values[e.index],
+						},
+						() => {}
+					);
+				} else if (from_type === 'mailchimp_select') {
+					this.setState(
+						{
+							[key]: array_values[e.index],
+						},
+						() => {}
+					);
+				} else if (from_type === 'multi-select') {
+					this.setState(
+						{
+							[key]: e,
+						},
+						() => {}
+					);
+				} else if (from_type === 'text_api') {
+					this.setState(
+						{
+							[key]: e.target.value,
+						},
+						() => {}
+					);
+					this.setState({
+						datamclist: [],
+					});
+					this.setState({
+						selected_mailchimp_list: '',
+					});
+					
+				} else {
+					this.setState(
+						{
+							[key]: e.target.value,
+						},
+						() => {}
+					);
+				}
+			} else {
+				// Array of values (e.g. checkbox): TODO: Optimization needed.
+				const found = this.state[key]
+					? this.state[key].find((d) => d === e.target.value)
+					: false;
+
+				if (found) {
+					const data = this.state[key].filter((d) => {
+						return d !== found;
+					});
+					this.setState({
+						[key]: data,
+					});
+				} else {
+					const others = this.state[key] ? [...this.state[key]] : [];
+					this.setState({
+						[key]: [e.target.value, ...others],
+					});
+				}
 			}
+			if (this.props.submitbutton && this.props.submitbutton === 'false') {
+				if (key != 'password') {
+					setTimeout(() => {
+						this.onSubmit('');
+					}, 10);
+				}
+			}
+		} else {
+			this.setState({
+				open_model: true,
+			});
 		}
 	};
 
@@ -169,7 +205,28 @@ export default class DynamicForm extends React.Component {
 			}
 
 			// If no array key found
+			// If no array key found
 			if (!m.key) {
+				return false;
+			}
+
+			// for select selection
+			if (
+				m.depend &&
+				this.state[m.depend] &&
+				this.state[m.depend].value &&
+				this.state[m.depend].value != m.dependvalue
+			) {
+				return false;
+			}
+
+			// for radio button selection
+			if (
+				m.depend &&
+				this.state[m.depend] &&
+				!this.state[m.depend].value &&
+				this.state[m.depend] != m.dependvalue
+			) {
 				return false;
 			}
 
@@ -210,6 +267,9 @@ export default class DynamicForm extends React.Component {
 							onChange={(e) => {
 								this.onChange(e, target);
 							}}
+							onClick={(e) => { 
+								this.CheckProActive(e, target);
+							}}
 						/>
 						{m.desc ? (
 							<p
@@ -236,6 +296,9 @@ export default class DynamicForm extends React.Component {
 							value={value}
 							onChange={(e) => {
 								this.onChange(e, target);
+							}}
+							onClick={(e) => { 
+								this.CheckProActive(e, target);
 							}}
 						/>
 						{m.desc ? (
@@ -283,6 +346,9 @@ export default class DynamicForm extends React.Component {
 							onChange={(e) => {
 								this.onChange(e, target);
 							}}
+							onClick={(e) => { 
+								this.CheckProActive(e, target);
+							}}
 						/>
 						{m.desc ? (
 							<p
@@ -327,6 +393,9 @@ export default class DynamicForm extends React.Component {
 									type,
 									options_data
 								);
+							}}
+							onClick={(e) => { 
+								this.CheckProActive(e, target);
 							}}
 						></Select>
 						{m.desc ? (
@@ -508,6 +577,9 @@ export default class DynamicForm extends React.Component {
 														'multiple'
 													);
 												}}
+												onClick={(e) => { 
+													this.CheckProActive(e, target);
+												}}
 											/>
 											<label
 												htmlFor={`mvx-toggle-switch-${o.key}`}
@@ -574,25 +646,32 @@ export default class DynamicForm extends React.Component {
 				: 'true';
 		return (
 			<div className="mvx-dynamic-fields-wrapper">
-				{this.state.errordisplay ? (
-					<div className="mvx-notic-display-title">
-						<i className="mvx-woo-stock-alert icon-success-notification"></i>
-						{this.state.errordisplay}
-					</div>
-				) : (
-					''
-				)}
+				<Dialog
+					className="mvx-module-popup"
+					open={this.state.open_model}
+					onClose={this.handleClose}
+					aria-labelledby="form-dialog-title"
+				>	
+					<Popoup/>
+				</Dialog>
+					{this.state.errordisplay ? (
+						<div className="mvx-notic-display-title">
+							<i className="mvx-woo-stock-alert icon-success-notification"></i>
+							{this.state.errordisplay}
+						</div>
+					) : (
+						''
+					)}
 
-				<form
-					className="mvx-dynamic-form"
-					onSubmit={(e) => {
-						this.onSubmit(e);
-					}}
-				>
+					<form
+						className="mvx-dynamic-form"
+						onSubmit={(e) => {
+							this.onSubmit(e);
+						}}
+					>
+						{this.renderForm()}
 
-					{this.renderForm()}
-
-				</form>
+					</form>
 			</div>
 		);
 	}

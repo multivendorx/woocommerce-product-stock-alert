@@ -46,6 +46,7 @@ var instock_notifier = {
     },
     subscribe_form: function (e) {
         e.preventDefault();
+        jQuery(this).addClass("stk_disabled");
         var recaptcha_enabled = woo_stock_alert_script_data.recaptcha_enabled;
         var recaptcha_version = woo_stock_alert_script_data.recaptcha_version;
         
@@ -58,7 +59,7 @@ var instock_notifier = {
         if (recaptcha_enabled) {
             if (recaptcha_version == 'v2') {
                 if (grecaptcha && grecaptcha.getResponse().length > 0) {
-                    instock_notifier.process_form();
+                    instock_notifier.process_form(cus_email, product_id, var_id, pro_title);
                 } else {
                     alert('Oops, you have to check the recaptcha!');
                 }
@@ -73,7 +74,7 @@ var instock_notifier = {
 
                 jQuery.post(woo_stock_alert_script_data.ajax_url, recaptcha, function(response) {
                     if(response == 1) {
-                        instock_notifier.process_form();
+                        instock_notifier.process_form(cus_email, product_id, var_id, pro_title);
                     } else {
                         alert('Oops, recaptcha not varified!');
                     }
@@ -82,6 +83,7 @@ var instock_notifier = {
         } else {
             instock_notifier.process_form(cus_email, product_id, var_id, pro_title);
         }
+        jQuery(this).removeClass("stk_disabled");
     },
 
     process_form: function(cus_email, product_id, var_id, pro_title) {      
@@ -102,8 +104,6 @@ var instock_notifier = {
         var alert_email_exist = alert_email_exist.replace( '%product_title%', pro_title );
         var alert_email_exist = alert_email_exist.replace( '%customer_email%', cus_email );
 
-
-        jQuery(this).addClass("stk_disabled");
         if( cus_email && instock_notifier.is_email(cus_email) ) {
             jQuery(this).toggleClass('alert_loader').blur(); 
             var stock_alert = {

@@ -10,30 +10,27 @@ class WOO_Product_Stock_Alert_Admin {
         $this->settings = new WOO_Product_Stock_Alert_Settings();
         add_action('admin_menu', array($this, 'add_export_page'), 100);
 
-        if (get_mvx_product_alert_plugin_settings('is_enable')) {
-            // create custom column
-            add_action('manage_edit-product_columns', array($this, 'custom_column'));
-            // manage stock alert column
-            add_action('manage_product_posts_custom_column', array($this, 'manage_custom_column'), 10, 2);
-            // manage interest column 
-            add_filter('manage_edit-product_sortable_columns', array($this, 'manage_interest_column_sorting'));
-            add_filter('request', array($this, 'manage_interest_column_orderby'));
+        // create custom column
+        add_action('manage_edit-product_columns', array($this, 'custom_column'));
+        // manage stock alert column
+        add_action('manage_product_posts_custom_column', array($this, 'manage_custom_column'), 10, 2);
+        // manage interest column 
+        add_filter('manage_edit-product_sortable_columns', array($this, 'manage_interest_column_sorting'));
+        add_filter('request', array($this, 'manage_interest_column_orderby'));
 
-            // show number of subscribers for individual product
-            add_action('woocommerce_product_options_inventory_product_data', array($this, 'product_subscriber_details'));
-            add_action('woocommerce_product_after_variable_attributes', array($this, 'manage_variation_custom_column'), 10, 3);
+        // show number of subscribers for individual product
+        add_action('woocommerce_product_options_inventory_product_data', array($this, 'product_subscriber_details'));
+        add_action('woocommerce_product_after_variable_attributes', array($this, 'manage_variation_custom_column'), 10, 3);
 
-            // check product stock status
-            add_action('save_post', array($this, 'check_product_stock_status'), 5, 2);
+        // check product stock status
+        add_action('save_post', array($this, 'check_product_stock_status'), 5, 2);
 
-            // bulk action to remove subscribers
-            add_filter('bulk_actions-edit-product', array($this, 'register_subscribers_bulk_actions'));
-            add_filter('handle_bulk_actions-edit-product', array($this, 'subscribers_bulk_action_handler'), 10, 3);
-            add_action('admin_notices', array($this, 'subscribers_bulk_action_admin_notice'));
-            add_action( 'admin_print_styles-plugins.php', array( $this, 'admin_plugin_page_style' ) );
-        }
+        // bulk action to remove subscribers
+        add_filter('bulk_actions-edit-product', array($this, 'register_subscribers_bulk_actions'));
+        add_filter('handle_bulk_actions-edit-product', array($this, 'subscribers_bulk_action_handler'), 10, 3);
+        add_action('admin_notices', array($this, 'subscribers_bulk_action_admin_notice'));
+        add_action( 'admin_print_styles-plugins.php', array( $this, 'admin_plugin_page_style' ));  
     }
-
 
     function load_class($class_name = '') {
         global $WOO_Product_Stock_Alert;
@@ -168,6 +165,7 @@ class WOO_Product_Stock_Alert_Admin {
             'show_product'  =>  __('Products', 'woocommerce-product-stock-alert'),
             'product_select'=> $product_selection,
         );
+        $pro_settings_list = apply_filters('woocommerce_stock_alert_pro_settings_lists',  array( 'ban_email_domains', 'ban_email_domain_text', 'ban_email_addresses', 'ban_email_address_text', 'is_mailchimp_enable', 'mailchimp_api', 'get_mailchimp_list_button', 'selected_mailchimp_list'));
         
         if (get_current_screen()->id == 'toplevel_page_woo-stock-alert-setting') {
             wp_enqueue_script( 'mvx-stockalert-script', $WOO_Product_Stock_Alert->plugin_url . 'build/index.js', array( 'wp-element' ), $WOO_Product_Stock_Alert->version, true );
@@ -175,10 +173,16 @@ class WOO_Product_Stock_Alert_Admin {
                 'apiUrl'                    => home_url( '/wp-json' ),
                 'nonce'                     => wp_create_nonce( 'wp_rest' ),
                 'banner_img'                => $WOO_Product_Stock_Alert->plugin_url . 'assets/images/stock-alert-pro-banner.jpg',
+                'subscriber_list'           => $WOO_Product_Stock_Alert->plugin_url . 'assets/images/subscriber-list.jpg',
                 'pro_active'                => apply_filters('woo_stock_alert_pro_active', 'free'),
                 'columns_subscriber'        => $columns_subscriber,
                 'subscription_page_string'  => $subscription_page_string,
-                'download_csv'              => __('Download CSV', 'woocommerce-product-stock-alert')     
+                'download_csv'              => __('Download CSV', 'woocommerce-product-stock-alert'),
+                'pro_settings_list'         => $pro_settings_list,
+                'pro_coupon_code'           => __('UPGRADE15', 'woocommerce-product-stock-alert'),
+                'pro_coupon_text'           => __('Why wait, grab the 15% discount and enjoy using Pro
+                with unlimited features.', 'woocommerce-product-stock-alert'),
+                'pro_url'                   => esc_url(WOO_PRODUCT_STOCK_ALERT_PRO_SHOP_URL)
               ] ) );
             wp_enqueue_style( 'mvx-stockalert-style', $WOO_Product_Stock_Alert->plugin_url . 'build/index.css' );
             wp_enqueue_style('mvx_admin_rsuite_css', $WOO_Product_Stock_Alert->plugin_url . 'assets/admin/css/rsuite-default' . '.min' . '.css', array(), $WOO_Product_Stock_Alert->version);

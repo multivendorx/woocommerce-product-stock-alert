@@ -64,7 +64,7 @@ class StockAlert_Backend_Endpoints_Load extends Component {
 			location.get('tab') &&
 			location.get('tab') === 'subscriber-list'
 		) {
-			return <Subscriber/>;
+			return <Subscriber/>;	
 		} else {
 			return <MvxTab
 				model='stock_alert-settings'

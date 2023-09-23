@@ -8,26 +8,25 @@ class WOO_Product_Stock_Alert_Frontend {
         //enqueue styles
         add_action('wp_enqueue_scripts', array(&$this, 'frontend_styles'));
 
-        if (get_mvx_product_alert_plugin_settings('is_enable')) {
-            add_action( 'woocommerce_simple_add_to_cart', array( $this, 'display_in_simple_product' ), 31 );
-            add_action( 'woocommerce_bundle_add_to_cart', array( $this, 'display_in_simple_product' ), 31 );
-            add_action('woocommerce_subscription_add_to_cart', array($this, 'display_in_simple_product'), 31);
-            add_action( 'woocommerce_woosb_add_to_cart', array( $this, 'display_in_simple_product' ), 31 );
-            add_action( 'woocommerce_after_variations_form', array( $this, 'display_in_no_variation_product' ) );
-            add_filter( 'woocommerce_available_variation', array( $this, 'display_in_variation' ), 10, 3 );
-            // Some theme variation disabled by default if it is out of stock so for that workaround solution.
-            add_filter( 'woocommerce_variation_is_active', array( $this, 'enable_disabled_variation_dropdown' ), 100, 2 );
-            //support for grouped products
-            add_filter('woocommerce_grouped_product_list_column_price', array($this, 'display_in_grouped_product'), 10, 2);
-            // Hover style
-            add_action('wp_head', array($this, 'frontend_style'));
-        }
+        add_action( 'woocommerce_simple_add_to_cart', array( $this, 'display_in_simple_product' ), 31 );
+        add_action( 'woocommerce_bundle_add_to_cart', array( $this, 'display_in_simple_product' ), 31 );
+        add_action('woocommerce_subscription_add_to_cart', array($this, 'display_in_simple_product'), 31);
+        add_action( 'woocommerce_woosb_add_to_cart', array( $this, 'display_in_simple_product' ), 31 );
+        add_action( 'woocommerce_after_variations_form', array( $this, 'display_in_no_variation_product' ) );
+        add_filter( 'woocommerce_available_variation', array( $this, 'display_in_variation' ), 10, 3 );
+        // Some theme variation disabled by default if it is out of stock so for that workaround solution.
+        add_filter( 'woocommerce_variation_is_active', array( $this, 'enable_disabled_variation_dropdown' ), 100, 2 );
+        //support for grouped products
+        add_filter('woocommerce_grouped_product_list_column_price', array($this, 'display_in_grouped_product'), 10, 2);
+        // Hover style
+        add_action('wp_head', array($this, 'frontend_style'));
+            
     }
 
     function frontend_scripts() {
         global $WOO_Product_Stock_Alert;
         $frontend_script_path = $WOO_Product_Stock_Alert->plugin_url . 'assets/frontend/js/';
-        $suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '';
+        $suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
         $stock_interest = $alert_text_html = $button_html = $button_css = '';
         $settings_array = get_woo_form_settings_array();
 
@@ -86,11 +85,11 @@ class WOO_Product_Stock_Alert_Frontend {
     function frontend_styles() {
         global $WOO_Product_Stock_Alert;
         $frontend_style_path = $WOO_Product_Stock_Alert->plugin_url . 'assets/frontend/css/';
-
+        $suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
         if (function_exists('is_product')) {
             if (is_product()) {
                 // Enqueue your frontend stylesheet from here
-                wp_enqueue_style('stock_alert_frontend_css', $frontend_style_path . 'frontend.css', array(), $WOO_Product_Stock_Alert->version);
+                wp_enqueue_style('stock_alert_frontend_css', $frontend_style_path . 'frontend' . $suffix . '.css', array(), $WOO_Product_Stock_Alert->version);
             }
         }
     }
