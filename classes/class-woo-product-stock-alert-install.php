@@ -31,7 +31,6 @@ class WOO_Product_Stock_Alert_Install {
      * This function migrate older subscription data
      */
     function mvx_stock_alert_older_data_migration() {
-        wp_clear_scheduled_hook('mvx_stock_alert_older_data_migration');
         wp_schedule_single_event( time(), 'mvx_stock_alert_older_data_migration' );
     }
     
