@@ -100,7 +100,6 @@ class WOO_Product_Stock_Alert_Admin {
                 -webkit-background-clip: text;
                 -webkit-text-fill-color: transparent;
             }
-            }
         </style>
         <?php
     }
@@ -111,11 +110,7 @@ class WOO_Product_Stock_Alert_Admin {
     public function enqueue_admin_script() {
         global $WOO_Product_Stock_Alert;
         $suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
-        $product_selection = '';
-        $product_query = new WP_Query(array('posts_per_page' => -1, 'post_type' => 'product', 'post_status' => 'publish'));
-            if ($product_query->get_posts()) {
-                $product_selection = mvx_convert_select_structure($product_query->get_posts(), '', true);
-            }
+
         $columns_subscriber = apply_filters('woo_stock_alert_subscribers_list_headers', array(
             array(
                 'name'      =>  __('Date', 'woocommerce-product-stock-alert'),
@@ -160,10 +155,8 @@ class WOO_Product_Stock_Alert_Admin {
             'subscribe'     =>  __('Subscribe', 'woocommerce-product-stock-alert'),
             'unsubscribe'   =>  __('Unsubscribe', 'woocommerce-product-stock-alert'),
             'mail_sent'     =>  __('Mail Sent', 'woocommerce-product-stock-alert'),
-            'trash'         =>  __('Trash', 'woocommerce-product-stock-alert'),
             'search'        =>  __('Search by Email', 'woocommerce-product-stock-alert'),
-            'show_product'  =>  __('Products', 'woocommerce-product-stock-alert'),
-            'product_select'=> $product_selection,
+            'show_product'  =>  __('Search by Product Name', 'woocommerce-product-stock-alert'),
         );
         $pro_settings_list = apply_filters('woocommerce_stock_alert_pro_settings_lists',  array( 'ban_email_domains', 'ban_email_domain_text', 'ban_email_addresses', 'ban_email_address_text', 'is_mailchimp_enable', 'mailchimp_api', 'get_mailchimp_list_button', 'selected_mailchimp_list'));
         

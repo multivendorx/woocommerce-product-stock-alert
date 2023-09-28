@@ -23,7 +23,11 @@ class Subscriber extends Component {
         super(props);
         this.state = {
             subscriber_loading: false,
-            subscription_list_status_all: false,
+			subscribe_active: 'any',
+			subscription_list_status_all: true,
+			subscription_list_status_subscription: false,
+			subscription_list_status_unsubscription: false,
+			subscription_list_status_mail_sent: false,
             all_subscriber_list: [],
             data_subscriber: [],
 			data_unsubscriber: [],
@@ -85,12 +89,12 @@ class Subscriber extends Component {
 
     handlesubscriptionsearch(e, status) {
 		 if (status === 'searchproduct') {
-			if (e) {
+			if (e && e.target.value.length > 2) {
 				axios
 					.get(
 						`${stockalertappLocalizer.apiUrl}/mvx_stockalert_pro/v1/search_subscribe_by_product`,
 						{
-							params: { product: e.value, date_range: this.state.date_range },
+							params: { product: e.target.value, subscription_status: this.state.subscribe_active, date_range: this.state.date_range },
 						}
 					)
 					.then((response) => {
@@ -103,7 +107,7 @@ class Subscriber extends Component {
 				.get(
 					`${stockalertappLocalizer.apiUrl}/mvx_stockalert_pro/v1/show_subscribe_from_status_list`,
 					{
-						params: { date_range: this.state.date_range },
+						params: { date_range: this.state.date_range, subscription_status: this.state.subscribe_active },
 					}
 				).then((response) => {
 						this.setState({
@@ -148,11 +152,11 @@ class Subscriber extends Component {
 		if (type === 'subscribe') {
 
 			this.setState({
+				subscribe_active: 'woo_subscribed',
 				subscription_list_status_all: false,
 				subscription_list_status_subscription: true,
 				subscription_list_status_unsubscription: false,
 				subscription_list_status_mail_sent: false,
-				subscription_list_status_trush: false,
 			});
 			// subscribe status
 			axios
@@ -172,11 +176,11 @@ class Subscriber extends Component {
 		if (type === 'unsubscribe') {
 			// unsubscribe status
 			this.setState({
+				subscribe_active: 'woo_unsubscribed',
 				subscription_list_status_all: false,
 				subscription_list_status_subscription: false,
 				subscription_list_status_unsubscription: true,
 				subscription_list_status_mail_sent: false,
-				subscription_list_status_trush: false,
 			});
 			axios
 				.get(
@@ -195,11 +199,11 @@ class Subscriber extends Component {
 		if (type === 'mail_sent') {
 			// refunded status
 			this.setState({
+				subscribe_active: 'woo_mailsent',
 				subscription_list_status_all: false,
 				subscription_list_status_subscription: false,
 				subscription_list_status_unsubscription: false,
 				subscription_list_status_mail_sent: true,
-				subscription_list_status_trush: false,
 			});
 			axios
 				.get(
@@ -218,11 +222,11 @@ class Subscriber extends Component {
 		
 		if (type === 'all') {
 			this.setState({
-				commission_list_status_all: true,
-				commission_list_status_paid: false,
-				commission_list_status_unpaid: false,
-				commission_list_status_trash: false,
-				commission_list_status_refunded: false,
+				subscribe_active: 'any',
+				subscription_list_status_all: true,
+				subscription_list_status_subscription: false,
+				subscription_list_status_unsubscription: false,
+				subscription_list_status_mail_sent: false,
 			});
 
 			axios
@@ -499,21 +503,21 @@ class Subscriber extends Component {
 									</div>
 
 									<div className="mvx-wrap-bulk-all-date">
-										<Select
-											placeholder={
-												stockalertappLocalizer.subscription_page_string
-													.show_product
-											}
-											options={stockalertappLocalizer.subscription_page_string.product_select}
-											isClearable={true}
-											className="mvx-wrap-bulk-action"
-											onChange={(e) =>
-												this.handlesubscriptionsearch(
-													e,
-													'searchproduct'
-												)
-											}
-										/>
+										<div className="mvx-header-search-section">
+											<input
+												type="text"
+												placeholder={
+													stockalertappLocalizer.subscription_page_string
+														.show_product
+												}
+												onChange={(e) =>
+													this.handlesubscriptionsearch(
+														e,
+														'searchproduct'
+													)
+												}
+											/>
+										</div>
 										
 										<DateRangePicker
 											onChange={(e) => this.handleupdatesub(e)}
