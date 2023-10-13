@@ -586,6 +586,12 @@ export default class DynamicForm extends React.Component {
 											<label
 												htmlFor={`mvx-toggle-switch-${o.key}`}
 											></label>
+											{
+											props.disabled ?
+												<span className="table-content-pro-tag stock-alert-pro-tag">Pro</span> 
+												: ''
+											}
+											
 										</div>
 										{m.right_content ? (
 											''
