@@ -75,8 +75,7 @@ class WOO_Product_Stock_Alert_Frontend {
                     'try_again' => __('Please try again.', 'woocommerce-product-stock-alert'),
                     'unsubscribe_button' => $unsubscribe_button_html,
                     'alert_unsubscribe_message' => $settings_array['alert_unsubscribe_message'],
-                    'recaptcha_enabled' => apply_filters('woo_stock_alert_recaptcha_enableed', false),
-                    'recaptcha_version' => apply_filters('woo_stock_alert_recaptcha_version', '')
+                    'recaptcha_enabled' => apply_filters('woo_stock_alert_recaptcha_enableed', false)
                 ));
             }
         }

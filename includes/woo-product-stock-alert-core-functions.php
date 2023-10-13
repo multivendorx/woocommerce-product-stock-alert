@@ -358,22 +358,20 @@ if (!function_exists('woo_stock_alert_fileds')) {
             $user_email = $current_user->data->user_email;
         }
         $placeholder = $settings_array['email_placeholder_text'];
-        $alert_fields = apply_filters('woo_stock_alert_fileds_array',array(
-                'alert_email' => array(
+        $alert_fields = apply_filters('woo_stock_alert_fileds_array', array(
+            'alert_email' => array(
                 'type' => 'text',
                 'class'=> 'stock_alert_email woo-fields',
                 'value'=> $user_email,
                 'placeholder' => $placeholder
-                )
-            ), $settings_array);
-
+            )
+        ), $settings_array);
         if ($alert_fields) {
             foreach ($alert_fields as $key => $fvalue) {
-                $type = in_array($fvalue['type'], ['text', 'number', 'email']) ? esc_attr($fvalue['type']) : 'text';
+                $type = in_array($fvalue['type'], ['recaptcha-v3', 'text', 'number', 'email']) ? esc_attr($fvalue['type']) : 'text';
                 $class = isset($fvalue['class']) ? esc_attr($fvalue['class']) : 'stock_alert_' . $key;
                 $value = isset($fvalue['value']) ? esc_attr($fvalue['value']) : '';
                 $placeholder = isset($fvalue['placeholder']) ? esc_attr($fvalue['placeholder']) : '';
-
                 switch ($fvalue['type']) {
                     case 'recaptcha-v3':
                         $recaptcha_type = isset($fvalue['version']) ? esc_attr($fvalue['version']) : 'v3';

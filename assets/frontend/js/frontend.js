@@ -49,34 +49,27 @@ jQuery(function ($) {
             $(this).text(woo_stock_alert_script_data.processing);
             $(this).addClass("stk_disabled");
             var recaptcha_enabled = woo_stock_alert_script_data.recaptcha_enabled;
-            var recaptcha_version = woo_stock_alert_script_data.recaptcha_version;
             var form = $(this).closest('.stock_notifier-subscribe-form');
-            //required data
-            var cus_email = form.find('.stock_alert_email').val();
-            var product_id = form.find('.current_product_id').val();
-            var pro_title = form.find('.current_product_name').val();
-            var var_id = form.find('.current_variation_id').val();
 
             if (recaptcha_enabled) {
-                if (recaptcha_version == 'v3') {
-                    var recaptcha_secret = form.find('#recaptchav3_secretkey').val();
-                    var recaptcha_response = form.find('#recaptchav3_response').val();
-                    var recaptcha = {
-                        action: 'recaptcha_validate_ajax',
-                        captcha_secret : recaptcha_secret,
-                        captcha_response : recaptcha_response
-                    }
-
-                    $.post(woo_stock_alert_script_data.ajax_url, recaptcha, function(response) {
-                        if (response == 1) {
-                            instock_notifier.process_form(cus_email, product_id, var_id, pro_title);
-                        } else {
-                            alert('Oops, recaptcha not varified!');
-                        }
-                    });
+                var recaptcha_secret = form.find('#recaptchav3_secretkey').val();
+                var recaptcha_response = form.find('#recaptchav3_response').val();
+                var recaptcha = {
+                    action: 'recaptcha_validate_ajax',
+                    captcha_secret : recaptcha_secret,
+                    captcha_response : recaptcha_response
                 }
+
+                $.post(woo_stock_alert_script_data.ajax_url, recaptcha, function(response) {
+                    if (response == 1) {
+                        instock_notifier.process_form(form.find('.stock_alert_email').val(), form.find('.current_product_id').val(), form.find('.current_variation_id').val(), form.find('.current_product_name').val());
+                    } else {
+                        alert('Oops, recaptcha not varified!');
+                        $(this).removeClass("stk_disabled");
+                    }
+                });
             } else {
-                instock_notifier.process_form(cus_email, product_id, var_id, pro_title);
+                instock_notifier.process_form(form.find('.stock_alert_email').val(), form.find('.current_product_id').val(), form.find('.current_variation_id').val(), form.find('.current_product_name').val());
             }
             $(this).removeClass("stk_disabled");
         },
