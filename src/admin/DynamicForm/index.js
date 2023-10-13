@@ -654,6 +654,10 @@ export default class DynamicForm extends React.Component {
 					onClose={this.handleClose}
 					aria-labelledby="form-dialog-title"
 				>	
+					<span 
+						className="icon-cross stock-alert-popup-cross" 
+						onClick={this.handleClose}
+					></span>
 					<Popoup/>
 				</Dialog>
 					{this.state.errordisplay ? (

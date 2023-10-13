@@ -25,15 +25,13 @@
     "@wordpress/scripts": "^25.5.1"
   },
   "dependencies": {
-    "@emotion/react": "^11.11.0",
-    "@emotion/styled": "^11.11.0",
     "@mui/material": "^5.12.3",
     "axios": "^1.4.0",
     "react-csv": "^2.2.2",
     "react-data-table-component": "^7.5.3",
     "react-router-dom": "^6.11.1",
-    "react-select": "^5.7.4",
+    "react-select": "^5.7.7",
     "react-spinners": "^0.13.8",
-    "rsuite": "^5.37.3"
+    "rsuite": "^5.40.0"
   }
 }

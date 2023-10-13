@@ -43,7 +43,7 @@ class WOO_Product_Stock_Alert_Frontend {
         if (!empty($settings_array['button_border_color']))
             $button_css .= "border: 1px solid " . $settings_array['button_border_color'] . "; ";
         if (!empty($settings_array['button_font_size']))
-            $button_css .= "font-size:" . $settings_array['button_font_size'] . "; ";
+            $button_css .= "font-size:" . $settings_array['button_font_size'] . "px; ";
 
 
         if (!empty($button_css)) {
@@ -209,7 +209,7 @@ class WOO_Product_Stock_Alert_Frontend {
     public function html_subscribe_form( $product, $variation = [] ) {
         $stock_notifier_random_code = bin2hex( random_bytes( 12 ) );
         $variation_class = '';
-        if ( $variation ) {
+        if ($variation) {
             $variation_id = $variation->get_id();
             $interested_person = get_no_subscribed_persons($variation->get_id(), 'woo_subscribed');
             $variation_class = 'stock_notifier-subscribe-form-' . $variation_id;
@@ -222,7 +222,7 @@ class WOO_Product_Stock_Alert_Frontend {
         $alert_text = $button_text = $button_background_color = $button_border_color = $button_text_color = $unsubscribe_button_text = '';
         $alert_success = $alert_email_exist = $valid_email = $alert_unsubscribe_message = '';
         $settings_array = get_woo_form_settings_array();
-
+        $alert_fields = woo_stock_alert_fileds();
         if (!empty($settings_array['alert_text'])) {
             $alert_text_html = '<h5 style="color:' . $settings_array['alert_text_color'] . '" class="subscribe_for_interest_text">' . $settings_array['alert_text'] . '</h5>';
         } else {
@@ -236,8 +236,7 @@ class WOO_Product_Stock_Alert_Frontend {
         if (!empty($settings_array['button_border_color']))
             $button_css .= "border: 1px solid " . $settings_array['button_border_color'] . ";";
         if (!empty($settings_array['button_font_size']))
-            $button_css .= "font-size:" . $settings_array['button_font_size'] . ";";
-
+            $button_css .= "font-size:" . $settings_array['button_font_size'] . "px;";
 
         if (!empty($button_css)) {
             $button_html = '<button style="' . $button_css .'" class="stock_alert_button alert_button_hover" name="alert_button">' . $settings_array['button_text'] . '</button>';
@@ -256,8 +255,7 @@ class WOO_Product_Stock_Alert_Frontend {
             }
         }
 
-        wp_localize_script(
-            'stock_alert_frontend_js', 'form_submission_text', array(
+        $localization_data = array(
             'alert_text_html' => $alert_text_html,
             'button_html' => $button_html,
             'alert_success' => $settings_array['alert_success'],
@@ -268,17 +266,13 @@ class WOO_Product_Stock_Alert_Frontend {
             'double_opt_in_success' => $settings_array['double_opt_in_success'],
             'unsubscribe_button' => $unsubscribe_button_html,
             'alert_unsubscribe_message' => $settings_array['alert_unsubscribe_message'],
-            'alert_fields' => woo_stock_alert_fileds(),
+            'alert_fields' => $alert_fields,
             'recaptcha_enabled' => apply_filters('woo_stock_alert_recaptcha_enableed', false),
-            'recaptcha_version' => apply_filters('woo_stock_alert_recaptcha_version', '')
-        ));
+            'recaptcha_version' => apply_filters('woo_stock_alert_recaptcha_version', ''),
+        );
 
-        $user_email = '';
-        if (is_user_logged_in()) {
-            $current_user = wp_get_current_user();
-            $user_email = $current_user->data->user_email;
-        }
-        $alert_fields = woo_stock_alert_fileds();
+        wp_localize_script('stock_alert_frontend_js', 'form_submission_text', $localization_data);
+        
         $stock_interest .= '
             <div id="stock_notifier_main_form" style="border-radius:10px;" class="stock_notifier-subscribe-form ' . esc_attr( $variation_class ) .'">
                 ' . $alert_text_html . '

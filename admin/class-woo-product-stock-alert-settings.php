@@ -50,8 +50,17 @@ class WOO_Product_Stock_Alert_Settings {
       '__return_null' 
     );
 
-    
     remove_submenu_page( 'woo-stock-alert-setting', 'woo-stock-alert-setting' );
+
+    add_submenu_page(
+      'tools.php', 
+      __('WC Stock Alert Export', 'woocommerce-product-stock-alert'), 
+      __('WC Stock Alert Export', 'woocommerce-product-stock-alert'), 
+      'manage_options',
+      'woo-product-stock-alert-export-admin',
+      array($this, 'create_woo_product_stock_alert_export')
+    );
+    
   }
   
   /**
@@ -59,5 +68,17 @@ class WOO_Product_Stock_Alert_Settings {
    */
   public function create_woo_product_stock_alert_settings() {
     echo '<div id="mvx-admin-stockalert"></div>';
+  }
+
+  public function create_woo_product_stock_alert_export() { ?>
+      <div class="wrap">
+          <h1><?php _e('WC Stock Alert Export', 'woocommerce-product-stock-alert') ?></h1>
+          <p><?php _e('When you click the button below, this will export all out of stock products with subscribers email.', 'woocommerce-product-stock-alert') ?></p>
+          <form class="alert_export_data" id="alert_export_data" method="post" action="<?php echo admin_url( 'admin-ajax.php?action=export_subscribers' ) ?>">
+            <input type="hidden" name="export_csv" value="1">
+            <input type="submit" class="button-primary" value="<?php _e('Export CSV', 'woocommerce-product-stock-alert')  ?>">
+          </form>
+      </div>
+      <?php
   }
 }

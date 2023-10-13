@@ -16,4 +16,3 @@ class WC_Dependencies_Stock_Alert {
 		return false;
 	}
 }
-

@@ -1,7 +1,5 @@
 /*stockalertstockalertappLocalizer*/
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Link, useLocation } from 'react-router-dom';
-import Select from 'react-select';
 import axios from 'axios';
 import { CSVLink } from 'react-csv';
 import DataTable from 'react-data-table-component';
@@ -10,7 +8,6 @@ import { css } from '@emotion/react';
 import DateRangePicker from 'rsuite/DateRangePicker';
 import Dialog from "@mui/material/Dialog";
 import Popoup from './DynamicForm/popupcontent';
-
 
 const override = css`
     display: block;
@@ -351,11 +348,16 @@ class Subscriber extends Component {
 							onClose={this.handleClose}
 							aria-labelledby="form-dialog-title"
 						>	
+							<span 
+								className="icon-cross stock-alert-popup-cross" 
+								onClick={this.handleClose}
+							></span>
 							<Popoup/>
 						</Dialog>
 						<img
 							src={ stockalertappLocalizer.subscriber_list }
 							alt="subscriber-list"
+							className='subscriber-img'
 							onClick={(e) => { 
 								this.CheckProActive();
 							}}

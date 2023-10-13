@@ -8,7 +8,6 @@ class WOO_Product_Stock_Alert_Admin {
         add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_script'));
         $this->load_class('settings');
         $this->settings = new WOO_Product_Stock_Alert_Settings();
-        add_action('admin_menu', array($this, 'add_export_page'), 100);
 
         // create custom column
         add_action('manage_edit-product_columns', array($this, 'custom_column'));
@@ -29,7 +28,7 @@ class WOO_Product_Stock_Alert_Admin {
         add_filter('bulk_actions-edit-product', array($this, 'register_subscribers_bulk_actions'));
         add_filter('handle_bulk_actions-edit-product', array($this, 'subscribers_bulk_action_handler'), 10, 3);
         add_action('admin_notices', array($this, 'subscribers_bulk_action_admin_notice'));
-        add_action( 'admin_print_styles-plugins.php', array( $this, 'admin_plugin_page_style' ));  
+        add_action( 'admin_print_styles-plugins.php', array( $this, 'admin_plugin_page_style' ));
     }
 
     function load_class($class_name = '') {
@@ -143,13 +142,7 @@ class WOO_Product_Stock_Alert_Admin {
                 'selector_choice'  => "status",
             )
         ));
-        $subscription_statuses = array(
-            'subscribe'     =>  __('Subscribe', 'woocommerce-product-stock-alert'),
-            'unsubscribe'   =>  __('Unsubscribe', 'woocommerce-product-stock-alert'),
-            'mail_sent'     =>  __('Mail Sent', 'woocommerce-product-stock-alert'),
-            'trash'         =>  __('Trash', 'woocommerce-product-stock-alert'),
-        );
-        $subscription_status_list_action = mvx_convert_select_structure($subscription_statuses);
+
         $subscription_page_string     =   array(
             'all'           =>  __('All', 'woocommerce-product-stock-alert'),
             'subscribe'     =>  __('Subscribe', 'woocommerce-product-stock-alert'),
@@ -180,10 +173,7 @@ class WOO_Product_Stock_Alert_Admin {
             wp_enqueue_style( 'mvx-stockalert-style', $WOO_Product_Stock_Alert->plugin_url . 'build/index.css' );
             wp_enqueue_style('mvx_admin_rsuite_css', $WOO_Product_Stock_Alert->plugin_url . 'assets/admin/css/rsuite-default' . '.min' . '.css', array(), $WOO_Product_Stock_Alert->version);
         }
-        if (get_current_screen()->id == 'tools_page_woo-product-stock-alert-export-admin') {
-            wp_enqueue_script('stock_alert_admin_js', $WOO_Product_Stock_Alert->plugin_url . 'assets/admin/js/admin'. $suffix .'.js', array('jquery'), $WOO_Product_Stock_Alert->version, true);
-            wp_localize_script('stock_alert_admin_js', 'dc_params', array( 'ajaxurl'    => 'admin-ajax.php' ));
-        }
+        
         wp_enqueue_style('stock_alert_product_admin_css', $WOO_Product_Stock_Alert->plugin_url . 'assets/admin/css/admin'. $suffix .'.css' );
     }
 
@@ -210,22 +200,6 @@ class WOO_Product_Stock_Alert_Admin {
         }
 
         return $vars;
-    }
-
-    /**
-     * Add options page
-     */
-    public function add_export_page() {
-        global $WOO_Product_Stock_Alert;
-
-        add_submenu_page(
-                'tools.php', __('WC Stock Alert Export', 'woocommerce-product-stock-alert'), __('WC Stock Alert Export', 'woocommerce-product-stock-alert'), 'manage_options', 'woo-product-stock-alert-export-admin', array($this, 'create_woo_product_stock_alert_export')
-        );
-    }
-
-    function create_woo_product_stock_alert_export() {
-        global $WOO_Product_Stock_Alert;
-        new WOO_Product_Stock_Alert_Export();
     }
 
     /**

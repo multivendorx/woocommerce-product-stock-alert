@@ -8,7 +8,6 @@ if (!function_exists('woocommerce_inactive_notice')) {
         </div>
         <?php
     }
-
 }
 
 if (!function_exists('get_mvx_product_alert_plugin_settings')) {
@@ -36,61 +35,40 @@ if (!function_exists('get_mvx_product_alert_plugin_settings')) {
 
 }
 
-if (!function_exists('delete_mvx_product_alert_plugin_settings')) {
-
-    function delete_mvx_product_alert_plugin_settings($name = '', $tab = '') {
-        if (empty($name)) {
-            return;
-        }
-        if (!empty($tab)) {
-            $option_name = "mvx_woo_stock_alert_{$tab}_tab_settings";
-            $settings = get_option($option_name);
-        }
-        if ($settings && isset($settings[$name])) {
-            unset($settings[$name]);
-            update_option($option_name, $settings);
-        }
-    }
-}
-
 if (!function_exists('get_woo_form_settings_array')) {
-
     function get_woo_form_settings_array() {
+        $default_text = __('Enter your email', 'woocommerce-product-stock-alert');
+        $default_alert_text = __('Get an alert when the product is in stock:', 'woocommerce-product-stock-alert');
+        $default_button_text = __('Get an alert', 'woocommerce-product-stock-alert');
+        $default_unsubscribe_button_text = __('Unsubscribe', 'woocommerce-product-stock-alert');
+        $default_alert_success = __('Thank you for your interest in <b>%product_title%</b>, you will receive an email alert when it becomes available.', 'woocommerce-product-stock-alert');
+        $default_alert_email_exist = __('<b>%customer_email%</b> is already registered with <b>%product_title%</b>.', 'woocommerce-product-stock-alert');
+        $default_valid_email = __('Please enter a valid email id and try again.', 'woocommerce-product-stock-alert');
+        $default_alert_unsubscribe_message = __('<b>%customer_email%</b> is successfully unregistered.', 'woocommerce-product-stock-alert');
+        $default_shown_interest_text = __('Product in demand: %no_of_subscribed% waiting.', 'woocommerce-product-stock-alert');
+
         $settings = array(
-            'email_placeholder_text' => get_mvx_product_alert_plugin_settings('email_placeholder_text') ? get_mvx_product_alert_plugin_settings('email_placeholder_text') : __('Enter your email', 'woocommerce-product-stock-alert'),
-            'alert_text' => get_mvx_product_alert_plugin_settings('alert_text') ? get_mvx_product_alert_plugin_settings('alert_text') : __('Get an alert when the product is in stock:', 'woocommerce-product-stock-alert'),
-            'alert_text_color' => get_mvx_product_alert_plugin_settings('alert_text_color')  ? get_mvx_product_alert_plugin_settings('alert_text_color') : '',
-            'button_text' => get_mvx_product_alert_plugin_settings('button_text') ? get_mvx_product_alert_plugin_settings('button_text') : __('Get an alert', 'woocommerce-product-stock-alert'),
-            'unsubscribe_button_text' => get_mvx_product_alert_plugin_settings('unsubscribe_button_text') ? get_mvx_product_alert_plugin_settings('unsubscribe_button_text') : __('Unsubscribe', 'woocommerce-product-stock-alert'),
-            'button_background_color' => get_mvx_product_alert_plugin_settings('button_background_color') ? get_mvx_product_alert_plugin_settings('button_background_color') : '',
-            'button_border_color' => get_mvx_product_alert_plugin_settings('button_border_color') ? get_mvx_product_alert_plugin_settings('button_border_color') : '',
-            'button_text_color' => get_mvx_product_alert_plugin_settings('button_text_color') ? get_mvx_product_alert_plugin_settings('button_text_color') : '',
-            'button_background_color_onhover' => get_mvx_product_alert_plugin_settings('button_background_color_onhover') ? get_mvx_product_alert_plugin_settings('button_background_color_onhover') : '',
-            'button_text_color_onhover' => get_mvx_product_alert_plugin_settings('button_text_color_onhover') ? get_mvx_product_alert_plugin_settings('button_text_color_onhover') : '',
-            'button_border_color_onhover' => get_mvx_product_alert_plugin_settings('button_border_color_onhover') ? get_mvx_product_alert_plugin_settings('button_border_color_onhover') : '',
-            'alert_success' => get_mvx_product_alert_plugin_settings('alert_success') ? get_mvx_product_alert_plugin_settings('alert_success') : '',
-            'alert_email_exist' => get_mvx_product_alert_plugin_settings('alert_email_exist') ? get_mvx_product_alert_plugin_settings('alert_email_exist') : '',
-            'valid_email' => get_mvx_product_alert_plugin_settings('valid_email') ? get_mvx_product_alert_plugin_settings('valid_email') : '',
+            'email_placeholder_text' => get_mvx_product_alert_plugin_settings('email_placeholder_text', $default_text),
+            'alert_text' => get_mvx_product_alert_plugin_settings('alert_text', $default_alert_text),
+            'alert_text_color' => get_mvx_product_alert_plugin_settings('alert_text_color', ''),
+            'button_text' => get_mvx_product_alert_plugin_settings('button_text', $default_button_text),
+            'unsubscribe_button_text' => get_mvx_product_alert_plugin_settings('unsubscribe_button_text', $default_unsubscribe_button_text),
+            'button_background_color' => get_mvx_product_alert_plugin_settings('button_background_color', ''),
+            'button_border_color' => get_mvx_product_alert_plugin_settings('button_border_color', ''),
+            'button_text_color' => get_mvx_product_alert_plugin_settings('button_text_color', ''),
+            'button_background_color_onhover' => get_mvx_product_alert_plugin_settings('button_background_color_onhover', ''),
+            'button_text_color_onhover' => get_mvx_product_alert_plugin_settings('button_text_color_onhover', ''),
+            'button_border_color_onhover' => get_mvx_product_alert_plugin_settings('button_border_color_onhover', ''),
+            'alert_success' => get_mvx_product_alert_plugin_settings('alert_success', $default_alert_success),
+            'alert_email_exist' => get_mvx_product_alert_plugin_settings('alert_email_exist', $default_alert_email_exist),
+            'valid_email' => get_mvx_product_alert_plugin_settings('valid_email', $default_valid_email),
             'ban_email_domin' => apply_filters('stock_alert_ban_email_domin_text', ''),
             'ban_email_address' => apply_filters('stock_alert_ban_email_address_text', ''),
             'double_opt_in_success' => apply_filters('stock_alert_double_opt_in_success_text', ''),
-            'alert_unsubscribe_message' => get_mvx_product_alert_plugin_settings('alert_unsubscribe_message') ? get_mvx_product_alert_plugin_settings('alert_unsubscribe_message') : '',
-            'shown_interest_text' => get_mvx_product_alert_plugin_settings('shown_interest_text') ? get_mvx_product_alert_plugin_settings('shown_interest_text') : __('Product in demand: %no_of_subscribed% waiting.', 'woocommerce-product-stock-alert'),
-            'button_font_size' => get_mvx_product_alert_plugin_settings('button_font_size') ? get_mvx_product_alert_plugin_settings('button_font_size'). 'px' : '',
+            'alert_unsubscribe_message' => get_mvx_product_alert_plugin_settings('alert_unsubscribe_message', $default_alert_unsubscribe_message),
+            'shown_interest_text' => get_mvx_product_alert_plugin_settings('shown_interest_text', $default_shown_interest_text),
+            'button_font_size' => get_mvx_product_alert_plugin_settings('button_font_size', ''),
         );
-
-        if (empty($settings['alert_success'])) {
-            $settings['alert_success'] = __('Thank you for your interest in <b>%product_title%</b>, you will receive an email alert when it becomes available.', 'woocommerce-product-stock-alert');
-        }
-        if (empty($settings['alert_email_exist'])) {
-            $settings['alert_email_exist'] = __('<b>%customer_email%</b> is already registered with <b>%product_title%</b>.', 'woocommerce-product-stock-alert');
-        }
-        if (empty($settings['valid_email'])) {
-            $settings['valid_email'] = __('Please enter a valid email id and try again.', 'woocommerce-product-stock-alert');
-        }
-        if (empty($settings['alert_unsubscribe_message'])) {
-            $settings['alert_unsubscribe_message'] = __('<b>%customer_email%</b> is successfully unregistered.', 'woocommerce-product-stock-alert');
-        }
         return $settings;
     }
 }
@@ -125,29 +103,6 @@ if (!function_exists('update_subscriber')) {
         );
         $id = wp_update_post($args);
         return $id;
-    }
-}
-
-if (!function_exists('mvx_convert_select_structure')) {
-    function mvx_convert_select_structure($data_fileds = array(), $csv = false, $object = false) {
-        $is_csv = $csv ? 'key' : 'value';
-        $datafileds_initialize_array = [];
-        if ($data_fileds) {
-            foreach($data_fileds as $fileds_key => $fileds_value) {
-                if ($object) {
-                    $datafileds_initialize_array[] = array(
-                        'value' => $fileds_value->ID,
-                        'label' => $fileds_value->post_title
-                    );
-                } else {
-                    $datafileds_initialize_array[] = array(
-                        $is_csv => $csv ? $fileds_value : $fileds_key,
-                        'label' => $fileds_value
-                    );
-                }
-            }
-        }
-        return $datafileds_initialize_array;
     }
 }
 
@@ -257,25 +212,26 @@ if (!function_exists('get_no_subscribed_persons')) {
 }
 
 if (!function_exists('get_product_subscribers_email')) {
-    function get_product_subscribers_email( $product_id ) {
+    function get_product_subscribers_email($product_id) {
         $emails = array();
         $args = array(
-            'post_type' => 'woostockalert',
-            'fields' => 'ids',
-            'posts_per_page' => -1,
-            'post_status' => 'woo_subscribed',
-            'meta_query'      => array(
-                    array(
-                        'key'     => 'wooinstock_product_id',
-                        'value'   => ( $product_id > '0' || $product_id ) ? $product_id : 'no_data_found',
-                        'compare' => '='
-                    )
+            'post_type'     => 'woostockalert',
+            'fields'        => 'ids',
+            'posts_per_page'=> -1,
+            'post_status'   => 'woo_subscribed',
+            'meta_query'    => array(
+                array(
+                    'key'     => 'wooinstock_product_id',
+                    'value'   => ( $product_id > '0' || $product_id ) ? $product_id : 'no_data_found',
+                    'compare' => '='
                 )
+            )
         );
         $subsciber_post = get_posts($args);
         if ($subsciber_post && count($subsciber_post) > 0) {
             foreach ($subsciber_post as $subsciber_id) {
-                $emails[$subsciber_id] = get_post_meta( $subsciber_id, 'wooinstock_subscriber_email', true ) ? get_post_meta( $subsciber_id, 'wooinstock_subscriber_email', true ) : '';
+                $email = get_post_meta($subsciber_id, 'wooinstock_subscriber_email', true);
+                $emails[$subsciber_id] = $email ? $email : '';
             }
         }
 
@@ -320,62 +276,45 @@ if (!function_exists('customer_stock_alert_unsubscribe')) {
 }
 
 if (!function_exists('mvx_is_product_outofstock')) {
-
     function mvx_is_product_outofstock($product_id, $type = '') {
         $is_stock = true;
-        if ($product_id) {
-            if ($type == 'variation') {
-                $child_obj = new WC_Product_Variation($product_id);
-                $ch_managing_stock = $child_obj->managing_stock();
-                $ch_stock_quantity = intval($child_obj->get_stock_quantity());
-                $ch_manage_stock = $child_obj->get_manage_stock();
-                $ch_stock_status = $child_obj->get_stock_status();
-                if ($ch_manage_stock) {
-                    if ($child_obj->backorders_allowed() && get_mvx_product_alert_plugin_settings('is_enable_backorders')) {                            
-                        $is_stock = false; 
-                    } else {
-                        if ($ch_stock_quantity > (int) get_option('woocommerce_notify_no_stock_amount')) {
-                            $is_stock = false;
-                        } else {
-                            $is_stock = true;
 
-                        }
-                    }
-                } else {
-                    if( $ch_stock_status == 'onbackorder' && get_mvx_product_alert_plugin_settings('is_enable_backorders') ) {
-                        $is_stock = false;
-                    } elseif($ch_stock_status == 'instock') {
-                        $is_stock = false;
-                    }
-                }
-            } else {
-                $product = wc_get_product($product_id);
-                $stock_quantity = $product->get_stock_quantity();
-                $manage_stock = $product->get_manage_stock();
-                $stock_status = $product->get_stock_status();
-                if ($manage_stock) {
-                    if ($product->backorders_allowed() && get_mvx_product_alert_plugin_settings('is_enable_backorders')) {                            
-                        $is_stock = false; 
-                    } else {
-                        if ($stock_quantity > (int) get_option('woocommerce_notify_no_stock_amount')) {
-                            $is_stock = false;
-                        } else {
-                            $is_stock = true;
+        if (!$product_id) {
+            return $is_stock;
+        }
 
-                        }
-                    }
-                } else {
-                    if( $stock_status == 'onbackorder' && get_mvx_product_alert_plugin_settings('is_enable_backorders') ) {
-                        $is_stock = false;
-                    } elseif($stock_status == 'instock') {
-                        $is_stock = false;
-                    }
-                }
+        if ($type == 'variation') {
+            $child_obj = new WC_Product_Variation($product_id);
+            $manage_stock = $child_obj->managing_stock();
+            $stock_quantity = intval($child_obj->get_stock_quantity());
+            $stock_status = $child_obj->get_stock_status();
+        } else {
+            $product = wc_get_product($product_id);
+            $manage_stock = $product->get_manage_stock();
+            $stock_quantity = $product->get_stock_quantity();
+            $stock_status = $product->get_stock_status();
+        }
+
+        $is_enable_backorders = get_mvx_product_alert_plugin_settings('is_enable_backorders');
+
+        if ($manage_stock) {
+            if ($stock_quantity <= (int) get_option('woocommerce_notify_no_stock_amount')) {
+                $is_stock = false;
+            } elseif ($stock_quantity <= 0) {
+                $is_stock = false;
+            }
+        } else {
+            if ($stock_status == 'onbackorder' && $is_enable_backorders) {
+                $is_stock = false;
+            } elseif ($stock_status == 'instock') {
+                $is_stock = false;
             }
         }
+
         return $is_stock;
     }
 }
+
 
 if(!function_exists('is_activate_double_opt_in')) {
     function is_activate_double_opt_in() {
@@ -430,38 +369,36 @@ if (!function_exists('woo_stock_alert_fileds')) {
 
         if ($alert_fields) {
             foreach ($alert_fields as $key => $fvalue) {
+                $type = in_array($fvalue['type'], ['text', 'number', 'email']) ? esc_attr($fvalue['type']) : 'text';
+                $class = isset($fvalue['class']) ? esc_attr($fvalue['class']) : 'stock_alert_' . $key;
+                $value = isset($fvalue['value']) ? esc_attr($fvalue['value']) : '';
+                $placeholder = isset($fvalue['placeholder']) ? esc_attr($fvalue['placeholder']) : '';
+
                 switch ($fvalue['type']) {
-                case 'text':
-                case 'number':
-                case 'email':
-                    $type = isset($fvalue['type']) ? esc_attr($fvalue['type']) : 'text';
-                    $class = isset($fvalue['class']) ? esc_attr($fvalue['class']) : 'stock_alert_' .$key ;
-                    $value = isset($fvalue['value']) ? esc_attr($fvalue['value']) : '';
-                    $placeholder = isset($fvalue['placeholder']) ? esc_attr($fvalue['placeholder']) : '';
-                    $stock_alert_fields_array[]= '<input type="'.$type.'" name="'.$key.'" class ="'.$class.'" value="'.$value.'" placeholder="'.$placeholder.'" >';
-                    break;
-                case 'recaptcha-v2':
-                    $recaptcha_type = isset($fvalue['version']) ? esc_attr($fvalue['version']) : 'v2';
-                    $sitekey = isset($fvalue['sitekey']) ? esc_attr($fvalue['sitekey']) : '';
-                    $stock_alert_fields_array[]= '<div class="g-recaptcha" data-sitekey="'.$sitekey.'"></div>';
-                    break;
-                case 'recaptcha-v3':
-                    $recaptcha_type = isset($fvalue['version']) ? esc_attr($fvalue['version']) : 'v3';
-                    $sitekey = isset($fvalue['sitekey']) ? esc_attr($fvalue['sitekey']) : '';
-                    $secretkey = isset($fvalue['secretkey']) ? esc_attr($fvalue['secretkey']) : '';
-                    $stock_alert_fields_array[]= '
-                    <script>
-                        grecaptcha.ready(function () {
-                        grecaptcha.execute("'.$sitekey.'").then(function (token) {
-                            var recaptchaResponse = document.getElementById("recaptchav3_response");
-                            recaptchaResponse.value = token;
-                        });
-                    });
-                    </script>'.''.
-                    '<input type="hidden" id="recaptchav3_response" name="recaptchav3_response" value="" />
-                    <input type="hidden" id="recaptchav3_sitekey" name="recaptchav3_sitekey" value="'.esc_html($sitekey).'" />
-                    <input type="hidden" id="recaptchav3_secretkey" name="recaptchav3_secretkey" value="'. esc_html($secretkey).'" />';
-                    break;
+                    case 'recaptcha-v3':
+                        $recaptcha_type = isset($fvalue['version']) ? esc_attr($fvalue['version']) : 'v3';
+                        $sitekey = isset($fvalue['sitekey']) ? esc_attr($fvalue['sitekey']) : '';
+                        $secretkey = isset($fvalue['secretkey']) ? esc_attr($fvalue['secretkey']) : '';
+
+                        $recaptchaScript = '
+                        <script>
+                            grecaptcha.ready(function () {
+                                grecaptcha.execute("' . $sitekey . '").then(function (token) {
+                                    var recaptchaResponse = document.getElementById("recaptchav3_response");
+                                    recaptchaResponse.value = token;
+                                });
+                            });
+                        </script>';
+                        
+                        $recaptchaResponseInput = '<input type="hidden" id="recaptchav3_response" name="recaptchav3_response" value="" />';
+                        $recaptchaSiteKeyInput = '<input type="hidden" id="recaptchav3_sitekey" name="recaptchav3_sitekey" value="' . esc_html($sitekey) . '" />';
+                        $recaptchaSecretKeyInput = '<input type="hidden" id="recaptchav3_secretkey" name="recaptchav3_secretkey" value="' . esc_html($secretkey) . '" />';
+
+                        $stock_alert_fields_array[] = $recaptchaScript . $recaptchaResponseInput . $recaptchaSiteKeyInput . $recaptchaSecretKeyInput;
+                        break;
+                    default:
+                        $stock_alert_fields_array[] = '<input type="' . $type . '" name="' . $key . '" class="' . $class . '" value="' . $value . '" placeholder="' . $placeholder . '" >';
+                        break;
                 }
             }
         }
@@ -471,29 +408,36 @@ if (!function_exists('woo_stock_alert_fileds')) {
         return $stock_alert_field;    
     }
 }
+if (!function_exists('get_product_subscribers_array')) {
+    function get_product_subscribers_array() {
+        $all_product_ids = $get_subscribed_user = array();
 
-/**
- * Write to log file
- */
-if (!function_exists('doWooStockAlertLOG')) {
-
-    function doWooStockAlertLOG($str) {
-        global $WOO_Product_Stock_Alert;
-        $file = $WOO_Product_Stock_Alert->plugin_path . 'log/stock_alert_log.log';
-        if (file_exists($file)) {
-            // Open the file to get existing content
-            $current = file_get_contents($file);
-            if ($current) {
-                // Append a new content to the file
-                $current .= "$str" . "\r\n";
-                $current .= "-------------------------------------\r\n";
-            } else {
-                $current = "$str" . "\r\n";
-                $current .= "-------------------------------------\r\n";
+        $products = get_posts(array(
+            'post_type' => 'product',
+            'post_status' => 'publish',
+            'numberposts' => -1
+        ));
+        if ($products) {
+            foreach ($products as $product) {
+                $product_obj = wc_get_product($product->ID);
+                if ($product_obj->is_type('variable') && $product_obj->has_child()) {
+                    $child_ids = $product_obj->get_children();
+                    $all_product_ids = array_merge($all_product_ids, $child_ids);
+                } else {
+                    $all_product_ids[] = $product->ID;
+                }
             }
-            // Write the contents back to the file
-            file_put_contents($file, $current);
+
+            if (!empty($all_product_ids) && is_array($all_product_ids)) {
+                foreach ($all_product_ids as $product_id) {
+                    $subscribers = get_product_subscribers_email($product_id);
+                    if ($subscribers && !empty($subscribers)) {
+                        $get_subscribed_user[$product_id] = $subscribers; 
+                    }
+                }
+            }
         }
+        return $get_subscribed_user;
     }
 }
 

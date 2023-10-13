@@ -45,7 +45,7 @@ class WOO_Product_Stock_Alert_Display_Form {
             if (!empty($settings_array['button_border_color']))
                 $button_css .= "border: 1px solid" . $settings_array['button_border_color'] . ";";
             if (!empty($settings_array['button_text_color']))
-                $button_css .= "font-size:" . $settings_array['button_font_size'] . ";";
+                $button_css .= "font-size:" . $settings_array['button_font_size'] . "px;";
 
 
             if (!empty($button_css)) {
@@ -61,7 +61,8 @@ class WOO_Product_Stock_Alert_Display_Form {
                     // Enqueue your frontend javascript from here
                     wp_enqueue_script('stock_alert_shortcode_js', $frontend_script_path . 'shortcode' . $suffix . '.js', array('jquery'), $WOO_Product_Stock_Alert->version, true);
                 
-                    wp_localize_script('stock_alert_shortcode_js', 'stock_alert_sc_data', array('ajax_url' => admin_url('admin-ajax.php', 'relative'),
+                    wp_localize_script('stock_alert_shortcode_js', 'stock_alert_sc_data', array(
+                        'ajax_url' => admin_url('admin-ajax.php', 'relative'),
                         'product_id' => $product->get_id(),
                         'product_title' => $product->get_title(),
                         'additional_fields' => apply_filters('woocommerce_product_stock_alert_form_additional_fields', []),

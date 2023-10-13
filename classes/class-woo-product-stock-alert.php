@@ -6,12 +6,11 @@ class WOO_Product_Stock_Alert {
     public $plugin_path;
     public $version;
     public $token;
-    public $text_domain;
     public $frontend;
     public $ajax;
     public $templates;
     public $action;
-    public $export;
+    public $shortcode;
     private $file;
     public $deprecated_hook_handlers = array();
 
@@ -21,7 +20,6 @@ class WOO_Product_Stock_Alert {
         $this->plugin_url = trailingslashit(plugins_url('', $plugin = $file));
         $this->plugin_path = trailingslashit(dirname($file));
         $this->token = WOO_PRODUCT_STOCK_ALERT_PLUGIN_TOKEN;
-        $this->text_domain = WOO_PRODUCT_STOCK_ALERT_TEXT_DOMAIN;
         $this->version = WOO_PRODUCT_STOCK_ALERT_PLUGIN_VERSION;
 
         add_action('init', array(&$this, 'init'), 0);
@@ -36,10 +34,6 @@ class WOO_Product_Stock_Alert {
         // Init Text Domain
         $this->load_plugin_textdomain();
 
-        // Init library
-        $this->load_class('library');
-        $this->library = new WOO_Product_Stock_Alert_Library();
-
         // Init ajax
         if (defined('DOING_AJAX')) {
             $this->load_class('ajax');
@@ -49,8 +43,6 @@ class WOO_Product_Stock_Alert {
         if (is_admin()) {
             $this->load_class('admin');
             $this->admin = new WOO_Product_Stock_Alert_Admin();
-
-            $this->load_class('export');
         }
 
         if (!is_admin() || defined('DOING_AJAX')) {
@@ -67,9 +59,9 @@ class WOO_Product_Stock_Alert {
         $this->load_class('action');
         $this->action = new WOO_Product_Stock_Alert_Action();
 
-        include_once $this->plugin_path . '/includes/class-woo-stock-alert-deprecated-filter-hooks.php';
-        include_once $this->plugin_path . '/includes/class-woo-stock-alert-deprecated-action-hooks.php';
-        include_once $this->plugin_path . '/includes/woo-stock-alert-deprecated-funtions.php';
+        include_once $this->plugin_path . '/includes/class-woo-product-stock-alert-deprecated-filter-hooks.php';
+        include_once $this->plugin_path . '/includes/class-woo-product-stock-alert-deprecated-action-hooks.php';
+        include_once $this->plugin_path . '/includes/woo-product-stock-alert-deprecated-funtions.php';
         $this->deprecated_hook_handlers['filters'] = new Stock_Alert_Deprecated_Filter_Hooks();
         $this->deprecated_hook_handlers['actions'] = new Stock_Alert_Deprecated_Action_Hooks();
 
@@ -149,9 +141,7 @@ class WOO_Product_Stock_Alert {
      */
     public static function activate_product_stock_alert() {
         global $WOO_Product_Stock_Alert;
-
         update_option('dc_product_stock_alert_installed', 1);
-
         // Init install
         $WOO_Product_Stock_Alert->load_class('install');
         $WOO_Product_Stock_Alert->install = new WOO_Product_Stock_Alert_Install();
@@ -162,7 +152,6 @@ class WOO_Product_Stock_Alert {
      *
      */
     public static function deactivate_product_stock_alert() {
-
         if (get_option('dc_product_stock_alert_cron_start')) :
             wp_clear_scheduled_hook('dc_start_stock_alert');
             delete_option('dc_product_stock_alert_cron_start');

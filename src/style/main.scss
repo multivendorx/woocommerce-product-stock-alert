@@ -43,6 +43,10 @@
   .icon-mailchimp-setting:before {
     content: "\e905";
   }
+  .icon-cross:before {
+    content: "\ea0f";
+  }
+  
   
   $base-color : #f2eff5;
   $boder-color : #d4d1d9;
@@ -1249,8 +1253,11 @@ input.rs-picker-toggle-textbox {
 #wpcontent{  
   padding: 0
 }
-#adminmenu .wp-submenu li.current a{
-  font-weight: 500;
+#adminmenu .wp-submenu li.current a, #adminmenu .wp-submenu li.current a:hover{
+  font-weight: 500 !important;
+}
+#adminmenu .wp-submenu a{
+  position: relative;
 }
 .mvx-settings-basic-input-class input.mvx-setting-form-input{
   border-radius: 0.25rem;
@@ -1322,7 +1329,7 @@ margin: 1rem 0 1.5rem;
   .discount-tag {
     background: #fbedee;
     color: #e26f76;
-    font-size: 1.25rem;
+    font-size: 0.875rem;
     padding: 0.315rem 1.25rem;
     width: fit-content;
     margin: 0.5rem auto 1rem;
@@ -1380,16 +1387,26 @@ font-weight: 500;
 }
 span.stock-alert-pro-tag {
   position: absolute;
-  right: 1.2rem;
+  top: 0.25rem;
+  right: 0.5rem;
   background: #9f8ab9;
   color: #fdfdfe;
-  padding: 0.25rem 0.75rem;
+  padding: 0.125rem 0.5rem;
   border-radius: 0.625rem;
-  font-size: 0.8rem;
+  font-size: 0.625rem;
   text-align: center;
   line-height: 0.7rem;
   text-transform: capitalize;
 }
 .mvx-current-tab-lists a {
   position: relative;
+}
+img.subscriber-img {
+  object-fit: cover;
+  object-position: center center;
+  height: 100%;
+  width: 100%;
+}
+.stock-alert-popup-cross {
+  text-align: right;
 }
