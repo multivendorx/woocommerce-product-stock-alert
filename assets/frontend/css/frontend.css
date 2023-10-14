@@ -42,6 +42,10 @@ h5.subscribe_for_interest_text {
   animation: loading 1s linear infinite;
 }
 
+button.stock_alert_button {
+  margin: 5px;
+}
+
 @keyframes loading{
   0%{
     transform: rotate(0deg);

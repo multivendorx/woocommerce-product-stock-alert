@@ -14,19 +14,7 @@ do_action( 'woocommerce_email_header', $email_heading, $email ); ?>
 
 <p><?php printf( __( "Hi there. You have subscribed a product. Your subscribed product is available now. Product details are shown below for your reference:", 'woocommerce-product-stock-alert' ) );
 
-$product_obj = wc_get_product( $product_id );
-
-if( $product_obj->is_type('variation') ) {
-	$parent_id = $product_obj->get_parent_id();
-	$parent_obj = wc_get_product( $parent_id );
-	$product_link = $parent_obj->get_permalink();
-	$product_name = $product_obj->get_formatted_name();
-	$product_price = $product_obj->get_price_html();
-} else {
-	$product_link = $product_obj->get_permalink();
-	$product_name = $product_obj->get_formatted_name();
-	$product_price = $product_obj->get_price_html();
-}
+$product_data = woo_stock_product_data($product_id);
 $is_prices_including_tax = get_option( 'woocommerce_prices_include_tax' );
 ?>
 <h3><?php esc_html_e( 'Product Details', 'woocommerce-product-stock-alert' ); ?></h3>
@@ -39,20 +27,22 @@ $is_prices_including_tax = get_option( 'woocommerce_prices_include_tax' );
 	</thead>
 	<tbody>
 		<tr>
-			<th scope="col" style="text-align:left; border: 1px solid #eee;"><?php echo esc_html( $product_obj->get_name() ); ?>
-			<?php if ($product_obj->get_type() == 'variation') {
-              foreach ($product_obj->get_attributes() as $label => $value) {
-                echo "<br>".ucfirst(wc_attribute_label($label)).": <strong>".ucfirst($value)."</strong>";
-              }
-            } ?></th>
-           <th scope="col" style="text-align:left; border: 1px solid #eee;"><?php echo wp_kses_post( $product_price ); echo ( isset( $is_prices_including_tax ) && ($is_prices_including_tax != "yes" )) ? WC()->countries->ex_tax_or_vat() : WC()->countries->inc_tax_or_vat(); ?></th>
+			<th scope="col" style="text-align:left; border: 1px solid #eee;"><?php echo esc_html( $product_data['name'] ); ?>
+			
+			</th>
+			<th scope="col" style="text-align:left; border: 1px solid #eee;">
+				<?php 
+					echo wp_kses_post( $product_data['price']); 
+					echo ( isset( $is_prices_including_tax ) && ($is_prices_including_tax != "yes" )) ? WC()->countries->ex_tax_or_vat() : WC()->countries->inc_tax_or_vat(); 
+				?>
+			</th>
 		</tr>
 	</tbody>
 </table>
 
-<p style="margin-top: 15px !important;"><?php printf( __( "Following is the product link : ", 'woocommerce-product-stock-alert' ) ); ?><a href="<?php echo esc_url($product_link); ?>"><?php echo esc_html(wp_strip_all_tags($product_name)); ?></a></p>
+<p style="margin-top: 15px !important;"><?php printf( __( "Following is the product link : ", 'woocommerce-product-stock-alert' ) ); ?><a href="<?php echo esc_url($product_data['link']); ?>"><?php echo esc_html(wp_strip_all_tags($product_data['name'])); ?></a></p>
 
-<h3><?php esc_html_e( 'Your Details', 'woocommerce-product-stock-alert' ); ?></h3>
+<h3><?php esc_html_e( 'Customer Details', 'woocommerce-product-stock-alert' ); ?></h3>
 <p>
 	<strong><?php esc_html_e( 'Email', 'woocommerce-product-stock-alert' ); ?> : </strong>
 	<a target="_blank" href="mailto:<?php echo $customer_email; ?>"><?php echo esc_html($customer_email); ?></a>

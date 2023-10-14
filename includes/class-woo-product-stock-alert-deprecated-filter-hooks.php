@@ -21,8 +21,8 @@ class Stock_Alert_Deprecated_Filter_Hooks extends WC_Deprecated_Hooks {
 	 * @var array
 	 */
 	protected $deprecated_hooks = array(
-		'mvx_wc_product_stock_alert_do_complete_additional_task' => 'dc_wc_product_stock_alert_do_complete_additional_task',
-		'mvx_wc_product_stock_alert_add_vendor' => 'dc_wc_product_stock_alert_add_vendor',
+		'woo_product_stock_alert_do_complete_additional_task' => 'dc_wc_product_stock_alert_do_complete_additional_task',
+		'woo_product_stock_alert_add_vendor' => 'dc_wc_product_stock_alert_add_vendor',
 		
 	);
 

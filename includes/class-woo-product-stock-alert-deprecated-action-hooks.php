@@ -20,7 +20,7 @@ class Stock_Alert_Deprecated_Action_Hooks extends WC_Deprecated_Hooks {
 	 * @var array
 	 */
 	protected $deprecated_hooks = array(
-        'mvx_wc_product_stock_alert_new_subscriber_added' => 'dc_wc_product_stock_alert_new_subscriber_added'
+        'wc_product_stock_alert_new_subscriber_added' => 'dc_wc_product_stock_alert_new_subscriber_added'
 	);
 
 	/**

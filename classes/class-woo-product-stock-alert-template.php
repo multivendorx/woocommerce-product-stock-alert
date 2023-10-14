@@ -4,10 +4,9 @@ if (!defined('ABSPATH'))
     exit;
 
 /**
- * @class 		MVX Template Class
  *
  * @version		2.2.0
- * @package		MultivendorX
+ * @package		woocommer-product-stock-alert
  * @author 		MultiVendorX
  */
 class WOO_Product_Stock_Alert_Template {
@@ -65,7 +64,7 @@ class WOO_Product_Stock_Alert_Template {
         // Look within passed path within the theme - this is priority
         $template = locate_template(array(trailingslashit($template_path) . $template_name, $template_name));
         // Add support of third perty plugin
-        $template = apply_filters('mvx_locate_template', $template, $template_name, $template_path, $default_path);
+        $template = apply_filters('woo_locate_template', $template, $template_name, $template_path, $default_path);
         // Get default template
         if (!$template) {
             $template = $default_path . $template_name;
@@ -104,7 +103,7 @@ class WOO_Product_Stock_Alert_Template {
         // Look within passed path within the theme - this is priority
         $template = locate_template(array(trailingslashit($template_path) . $template_name, $template_name));
         // Add support of third perty plugin
-        $template = apply_filters('mvx_store_locate_template', $template, $template_name, $template_path, $default_path);
+        $template = apply_filters('woo_store_locate_template', $template, $template_name, $template_path, $default_path);
         // Get default template
         if (!$template) {
             $template = $default_path . $template_name;

@@ -6,12 +6,11 @@ class WOO_Product_Stock_Alert {
     public $plugin_path;
     public $version;
     public $token;
-    public $text_domain;
     public $frontend;
     public $ajax;
     public $templates;
     public $action;
-    public $export;
+    public $shortcode;
     private $file;
     public $deprecated_hook_handlers = array();
 
@@ -21,7 +20,6 @@ class WOO_Product_Stock_Alert {
         $this->plugin_url = trailingslashit(plugins_url('', $plugin = $file));
         $this->plugin_path = trailingslashit(dirname($file));
         $this->token = WOO_PRODUCT_STOCK_ALERT_PLUGIN_TOKEN;
-        $this->text_domain = WOO_PRODUCT_STOCK_ALERT_TEXT_DOMAIN;
         $this->version = WOO_PRODUCT_STOCK_ALERT_PLUGIN_VERSION;
 
         add_action('init', array(&$this, 'init'), 0);
@@ -35,11 +33,6 @@ class WOO_Product_Stock_Alert {
     function init() {
         // Init Text Domain
         $this->load_plugin_textdomain();
-
-        // Init library
-        $this->load_class('library');
-        $this->library = new WOO_Product_Stock_Alert_Library();
-
         // Init ajax
         if (defined('DOING_AJAX')) {
             $this->load_class('ajax');
@@ -49,8 +42,6 @@ class WOO_Product_Stock_Alert {
         if (is_admin()) {
             $this->load_class('admin');
             $this->admin = new WOO_Product_Stock_Alert_Admin();
-
-            $this->load_class('export');
         }
 
         if (!is_admin() || defined('DOING_AJAX')) {
@@ -67,9 +58,9 @@ class WOO_Product_Stock_Alert {
         $this->load_class('action');
         $this->action = new WOO_Product_Stock_Alert_Action();
 
-        include_once $this->plugin_path . '/includes/class-woo-stock-alert-deprecated-filter-hooks.php';
-        include_once $this->plugin_path . '/includes/class-woo-stock-alert-deprecated-action-hooks.php';
-        include_once $this->plugin_path . '/includes/woo-stock-alert-deprecated-funtions.php';
+        include_once $this->plugin_path . '/includes/class-woo-product-stock-alert-deprecated-filter-hooks.php';
+        include_once $this->plugin_path . '/includes/class-woo-product-stock-alert-deprecated-action-hooks.php';
+        include_once $this->plugin_path . '/includes/woo-product-stock-alert-deprecated-funtions.php';
         $this->deprecated_hook_handlers['filters'] = new Stock_Alert_Deprecated_Filter_Hooks();
         $this->deprecated_hook_handlers['actions'] = new Stock_Alert_Deprecated_Action_Hooks();
 
@@ -82,8 +73,7 @@ class WOO_Product_Stock_Alert {
             'public' => true,
             'exclude_from_search' => false,
             'show_in_admin_all_list' => true,
-            'show_in_admin_status_list' => true,
-            /* translators: %s: count */
+            'show_in_admin_status_list' => true, /* translators: %s: count */
             'label_count' => _n_noop('Mail Sent <span class="count">(%s)</span>', 'Mail Sent <span class="count">(%s)</span>', 'woocommerce-product-stock-alert'),
         ));
 
@@ -92,8 +82,7 @@ class WOO_Product_Stock_Alert {
             'public' => true,
             'exclude_from_search' => false,
             'show_in_admin_all_list' => true,
-            'show_in_admin_status_list' => true,
-            /* translators: %s: count */
+            'show_in_admin_status_list' => true, /* translators: %s: count */
             'label_count' => _n_noop('Subscribed <span class="count">(%s)</span>', 'Subscribed <span class="count">(%s)</span>'),
         ));
 
@@ -102,8 +91,7 @@ class WOO_Product_Stock_Alert {
             'public' => true,
             'exclude_from_search' => false,
             'show_in_admin_all_list' => true,
-            'show_in_admin_status_list' => true,
-            /* translators: %s: count */
+            'show_in_admin_status_list' => true, /* translators: %s: count */
             'label_count' => _n_noop('Unsubscribed <span class="count">(%s)</span>', 'Unsubscribed <span class="count">(%s)</span>'),
         ));
     }
@@ -149,9 +137,7 @@ class WOO_Product_Stock_Alert {
      */
     public static function activate_product_stock_alert() {
         global $WOO_Product_Stock_Alert;
-
-        update_option('dc_product_stock_alert_installed', 1);
-
+        update_option('woo_product_stock_alert_installed', 1);
         // Init install
         $WOO_Product_Stock_Alert->load_class('install');
         $WOO_Product_Stock_Alert->install = new WOO_Product_Stock_Alert_Install();
@@ -162,12 +148,11 @@ class WOO_Product_Stock_Alert {
      *
      */
     public static function deactivate_product_stock_alert() {
-
-        if (get_option('dc_product_stock_alert_cron_start')) :
-            wp_clear_scheduled_hook('dc_start_stock_alert');
-            delete_option('dc_product_stock_alert_cron_start');
+        if (get_option('woo_product_stock_alert_cron_start')) :
+            wp_clear_scheduled_hook('woo_start_stock_alert');
+            delete_option('woo_product_stock_alert_cron_start');
         endif;
-        delete_option('dc_product_stock_alert_installed');
+        delete_option('woo_product_stock_alert_installed');
     }
 
     /**
@@ -176,24 +161,25 @@ class WOO_Product_Stock_Alert {
      */
     function woo_product_stock_alert_mail($emails) {
         require_once( 'emails/class-woo-product-stock-alert-admin-email.php' );
-        $emails['WC_Admin_Email_Stock_Alert'] = new WC_Admin_Email_Stock_Alert();
         require_once( 'emails/class-woo-product-stock-alert-subscriber-confirmation-email.php' );
-        $emails['WC_Subscriber_Confirmation_Email_Stock_Alert'] = new WC_Subscriber_Confirmation_Email_Stock_Alert();
         require_once( 'emails/class-woo-product-stock-alert-email.php' );
+
+        $emails['WC_Admin_Email_Stock_Alert'] = new WC_Admin_Email_Stock_Alert();
+        $emails['WC_Subscriber_Confirmation_Email_Stock_Alert'] = new WC_Subscriber_Confirmation_Email_Stock_Alert();        
         $emails['WC_Email_Stock_Alert'] = new WC_Email_Stock_Alert();
 
         return $emails;
     }
 
     public function stock_alert_rest_routes_react_module() {
-        register_rest_route( 'mvx_stockalert/v1', '/fetch_admin_tabs', [
+        register_rest_route( 'woo_stockalert/v1', '/fetch_admin_tabs', [
             'methods' => WP_REST_Server::READABLE,
-            'callback' => array( $this, 'mvx_stockalert_fetch_admin_tabs' ),
+            'callback' => array( $this, 'woo_stockalert_fetch_admin_tabs' ),
             'permission_callback' => array( $this, 'stockalert_permission' ),
         ] );
-        register_rest_route( 'mvx_stockalert/v1', '/save_stockalert', [
+        register_rest_route( 'woo_stockalert/v1', '/save_stockalert', [
             'methods' => WP_REST_Server::EDITABLE,
-            'callback' => array( $this, 'mvx_stockalert_save_stockalert' ),
+            'callback' => array( $this, 'woo_stockalert_save_stockalert' ),
             'permission_callback' => array( $this, 'stockalert_permission' ),
         ] );
     }
@@ -202,19 +188,19 @@ class WOO_Product_Stock_Alert {
         return true;
     }
     
-    public function mvx_stockalert_fetch_admin_tabs() {
-		$mvx_stockalert_tabs_data = mvx_stockalert_admin_tabs() ? mvx_stockalert_admin_tabs() : [];
-        return rest_ensure_response( $mvx_stockalert_tabs_data );
+    public function woo_stockalert_fetch_admin_tabs() {
+		$woo_stockalert_tabs_data = woo_stockalert_admin_tabs() ? woo_stockalert_admin_tabs() : [];
+        return rest_ensure_response( $woo_stockalert_tabs_data );
 	}
 
-    public function mvx_stockalert_save_stockalert($request) {
+    public function woo_stockalert_save_stockalert($request) {
         $all_details = [];
         $modulename = $request->get_param('modulename');
         $modulename = str_replace("-", "_", $modulename);
         $get_managements_data = $request->get_param( 'model' );
-        $optionname = 'mvx_woo_stock_alert_'.$modulename.'_tab_settings';
+        $optionname = 'woo_stock_alert_'.$modulename.'_tab_settings';
         update_option($optionname, $get_managements_data);
-        do_action('mvx_woo_stock_alert_settings_after_save', $modulename, $get_managements_data);
+        do_action('woo_stock_alert_settings_after_save', $modulename, $get_managements_data);
         $all_details['error'] = __('Settings Saved', 'woocommerce-product-stock-alert');
         return $all_details;
         die;

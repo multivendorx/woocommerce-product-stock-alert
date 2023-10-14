@@ -1,49 +1,51 @@
 @font-face {
-	font-family: 'mvx-woo-stockalert';
-	src:  url('fonts/mvx-woo-stockalert.eot?m5utwm');
-	src:  url('fonts/mvx-woo-stockalert.eot?m5utwm#iefix') format('embedded-opentype'),
-	  url('fonts/mvx-woo-stockalert.ttf?m5utwm') format('truetype'),
-	  url('fonts/mvx-woo-stockalert.woff?m5utwm') format('woff'),
-	  url('fonts/mvx-woo-stockalert.svg?m5utwm#mvx-woo-stockalert') format('svg');
-	font-weight: normal;
-	font-style: normal;
-	font-display: block;
-  }
+  font-family: 'woo-stock-alert';
+  src:  url('fonts/woo-stock-alert.eot?mhdfd4');
+  src:  url('fonts/woo-stock-alert.eot?mhdfd4#iefix') format('embedded-opentype'),
+    url('fonts/woo-stock-alert.ttf?mhdfd4') format('truetype'),
+    url('fonts/woo-stock-alert.woff?mhdfd4') format('woff'),
+    url('fonts/woo-stock-alert.svg?mhdfd4#woo-stock-alert') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'woo-stock-alert' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-form-customization:before {
+  content: "\e900";
+}
+.icon-form-submission:before {
+  content: "\e901";
+}
+.icon-general:before {
+  content: "\e902";
+}
+.icon-live-preview:before {
+  content: "\e903";
+}
+.icon-email-setting:before {
+  content: "\e904";
+}
+.icon-mailchimp-setting:before {
+  content: "\e905";
+}
+ 
   
-  [class^="icon-"], [class*=" icon-"] {
-	/* use !important to prevent issues with browser extensions that change fonts */
-	font-family: 'mvx-woo-stockalert' !important;
-	speak: never;
-	font-style: normal;
-	font-weight: normal;
-	font-variant: normal;
-	text-transform: none;
-	line-height: 1;
-  
-	/* Better Font Rendering =========== */
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-  }
-	
-  .icon-form-customization:before {
-    content: "\e900";
-  }
-  .icon-form-submission:before {
-    content: "\e901";
-  }
-  .icon-general:before {
-    content: "\e902";
-  }
-  .icon-live-preview:before {
-    content: "\e903";
-  }
-  .icon-email-setting:before {
-    content: "\e904";
-  }
-  .icon-mailchimp-setting:before {
-    content: "\e905";
-  }
-  
+
   $base-color : #f2eff5;
   $boder-color : #d4d1d9;
   $border : 0.063rem solid #d4d1d9;
@@ -112,7 +114,7 @@
       border-radius: $border-radius;
     }
   }
-  @mixin mvx-addbtn {
+  @mixin woo-addbtn {
     background: $theme-color;
     border-radius: $border-radius;
     a {
@@ -321,18 +323,18 @@
   }
 
   //tab part start here
-  .mvx-container {
+  .woo-container {
     background-color: #f2eff5;
     padding: 2rem 1.5rem;
     min-height: 54rem;
   }
-  .mvx-tab-banner-wrap {
+  .woo-tab-banner-wrap {
     display: flex;
     gap: 1rem;
     justify-content: space-between;
   }
 
-.mvx-tab-description-start {
+.woo-tab-description-start {
   text-align: center;
   background-color: $fill-color;
   border-radius: $border-radius;
@@ -340,15 +342,15 @@
   border: $border;
   padding: 2rem;
 }
-.mvx-vertical-tabs {
+.woo-vertical-tabs {
   width:75%;
-  & .mvx-tab-description-start {
+  & .woo-tab-description-start {
     background-color: $header-background;
   }
-  .mvx-middle-child-container{
+  .woo-middle-child-container{
     display: flex;
     flex-wrap:wrap;
-  .mvx-current-tab-lists{
+  .woo-current-tab-lists{
     width: 22%;
     border-bottom: 0.06rem solid $boder-color;
     margin-right: -0.06rem;
@@ -388,7 +390,7 @@
         }
       }
   }
-  & .mvx-tab-content {
+  & .woo-tab-content {
     width:63%;
     flex: auto;
     padding: 2.5rem;
@@ -400,7 +402,7 @@
     input[type=text], input[type=url], input[type=email], input[type=number], input[type=text_api], textarea, select{
       width: 100%;
     }
-    & .mvx-dynamic-form {
+    & .woo-dynamic-form {
       tr, th{
         height: 0;
         text-align: left;
@@ -413,7 +415,7 @@
         height: 3.75rem;
         color: $paragraph-color;
       }
-      .mvx-form-button-group, .mvx-form-actions {
+      .woo-form-button-group, .woo-form-actions {
         bottom: 0;
         position: absolute;
         width: 100%;
@@ -421,17 +423,17 @@
         right: 0;
         background-color: $section-background;
         border-top: 0.06rem solid $scroll-color;
-        .mvx-setting-section-divider{
+        .woo-setting-section-divider{
           display: none;
         }
     }
-      & .mvx-form-group {
+      & .woo-form-group {
         display: flex;
         justify-content: space-between;
           flex-wrap: wrap;
           gap: 0.5rem;
         padding: 0.75rem 0;
-        & .mvx-settings-form-label {
+        & .woo-settings-form-label {
           width: 28%;
           color: $title-color;
           word-wrap: break-word;
@@ -440,39 +442,39 @@
             color: $title-color;
           }
         }
-        & .mvx-settings-input-content {
+        & .woo-settings-input-content {
           width: 65%;
           color: $paragraph-color;
-          .mvx-setting-form-input-label {
+          .woo-setting-form-input-label {
             margin-bottom: 0.5rem;
         }
-          .mvx-settings-mvx-form-group-radio {
+          .woo-settings-woo-form-group-radio {
             display: flex;
             gap: 1rem;
             flex-wrap: wrap;
-            .mvx-radio-input-label-wrap input{
+            .woo-radio-input-label-wrap input{
               margin: 0 0.5rem 0 0;
           }
         }
-          & .mvx-toggle-checkbox-content {
+          & .woo-toggle-checkbox-content {
             margin-bottom: 0.625rem;
           }
-          .mvx-toggle-checkbox {
+          .woo-toggle-checkbox {
             width: 1rem;
             height: 1rem;
           }
-          .mvx-toggle-checkbox-content {
+          .woo-toggle-checkbox-content {
             margin-left: auto;
             position: relative;
             @include toggle-btn;
           }
-          .mvx-toggle-checkbox-content.disabled{
+          .woo-toggle-checkbox-content.disabled{
             @include toggle-btn-disable();
             &::after {
               border-color: $boder-color;
             }
           }
-          .mvx-toggle-checkbox-content, span.wc-wizard-service-toggle{
+          .woo-toggle-checkbox-content, span.wc-wizard-service-toggle{
              &::after {
             content: '';
             position: absolute;
@@ -487,29 +489,29 @@
             z-index: 0;
           }
         }
-          & .mvx-settings-basic-input-class {
-            & .mvx-settings-basic-child-wrap {
-              & .mvx-settings-basic-input-child-class {
+          & .woo-settings-basic-input-class {
+            & .woo-settings-basic-child-wrap {
+              & .woo-settings-basic-input-child-class {
                 margin: 0 0 1rem 0;
               }
             }
           }
         }
-        .mvx-settings-metabox-description {
+        .woo-settings-metabox-description {
           margin-top: 0.625rem;
           font-style: italic;
           font-size: 0.75rem;
           color: $grey-icon;
         }
-        .mvx-setting-file-uploader-class {
-          .mvx-btn {
+        .woo-setting-file-uploader-class {
+          .woo-btn {
             display: block;
             margin: 1rem 0 0 0;
           }
         }
       }
-      & .mvx-form-button-group {
-        & .mvx-settings-basic-input-class {
+      & .woo-form-button-group {
+        & .woo-settings-basic-input-class {
           & .default-btn {
             height: 2.5rem;
             background-color: $red-btn-back;
@@ -520,17 +522,17 @@
         }
       }
     }
-    .mvx-form-group-radio-color {
+    .woo-form-group-radio-color {
       @include flexprops(center);
       flex-wrap: wrap;
-      & .mvx-settings-radio-color {
+      & .woo-settings-radio-color {
         margin: 0.5rem 1rem 0.5rem 0;
         width: calc(50% - 1rem);
         box-sizing: border-box;
         border: 0.063rem solid transparent;
         border-radius: $border-radius;
         transition: all 0.3s;
-        .mvx-merge-radio-color-input-label {
+        .woo-merge-radio-color-input-label {
           padding: 0.5rem;
           input[type="radio"]{
             margin: 0rem 0.5rem 0 0;
@@ -552,14 +554,14 @@
         }
       }
     }
-    .mvx-radioselect-class {
+    .woo-radioselect-class {
       margin-bottom: 1.5rem;
       padding: 1rem;
       border-radius: $border-radius;
       border: 0.06rem solid $base-color;
       position: relative;
       transition: .4s all ease-in-out;
-      & .mvx-setting-form-input {
+      & .woo-setting-form-input {
         position: absolute;
         top: 1.5rem;
         right: 0.813rem;
@@ -580,8 +582,8 @@
           opacity: 1;
         }
     }
-      & .mvx-radio-select-under-label-class {
-        & .mvx-radioselect-overlay-text {
+      & .woo-radio-select-under-label-class {
+        & .woo-radioselect-overlay-text {
           @include flexprops(center);
           position: absolute;
           width: 100%;
@@ -596,38 +598,38 @@
           border-radius: $border-radius;
         }
        &:hover {
-          & .mvx-radioselect-overlay-text {
+          & .woo-radioselect-overlay-text {
             opacity: 0.6;
           }
         }
       }
-      & .mvx-section-img-fluid {
+      & .woo-section-img-fluid {
         width: 100%;
         margin-top: 0.5rem;
       }
     }
-    & .mvx-multi-nested-class {
-      & .mvx-boarder-parent {
+    & .woo-multi-nested-class {
+      & .woo-boarder-parent {
         @include flexprops(center);
         flex-wrap:wrap;
         gap:0.5rem;
         position:relative;
-        label.mvx-setting-form-label {
+        label.woo-setting-form-label {
           width:25%;
-      } .mvx-setting-form-input{
+      } .woo-setting-form-input{
         width:49%;
       }
-            .mvx-boarder-nested-child-start{
+            .woo-boarder-nested-child-start{
               position:relative;
               width:100%;
-              .mvx-boarder-nested-child-loop{
+              .woo-boarder-nested-child-loop{
                 @include flexprops(center);
                 gap:0.5rem;
                 margin-bottom: 0.5rem;
                 width:95%;
               }               
             }
-            & .mvx-boarder-parent-loop {
+            & .woo-boarder-parent-loop {
               width: 100%;
               @include flexprops(center);
             }
@@ -652,7 +654,7 @@
             }
           }
         }  }  }
-    .mvx-toggle-rectangle-merge {
+    .woo-toggle-rectangle-merge {
       & ul {
         position: relative;
         padding: 0 0.4rem;
@@ -688,51 +690,51 @@
         }
       }
     }
-    & .mvx-select-deselect-checkbox-content {
-      & .mvx-select-de-box-and-checkbox {
-        & .mvx-select-deselect-checkbox-label-marge {
+    & .woo-select-deselect-checkbox-content {
+      & .woo-select-de-box-and-checkbox {
+        & .woo-select-deselect-checkbox-label-marge {
           @include flexprops(center);
           flex-wrap: wrap;
-          & .mvx-wrap-checkbox-and-label {
+          & .woo-wrap-checkbox-and-label {
             @include flexprops(center);
             margin: 0.5rem 0;
-            & .mvx-normal-checkbox-label {
-              & .mvx-settings-checkbox-description {
+            & .woo-normal-checkbox-label {
+              & .woo-settings-checkbox-description {
                 margin: 0rem 0 0 0.5rem;
               }
             }
           }
-          & .mvx-col-50 {
+          & .woo-col-50 {
             width: 50%;
           }
         }
       }
     }
-    .mvx-form-vendor-register {
-      & .mvx-top-part-registartion-from{
-        & .mvx-registration-content {
-          & .mvx-form-registration-group {
+    .woo-form-vendor-register {
+      & .woo-top-part-registartion-from{
+        & .woo-registration-content {
+          & .woo-form-registration-group {
             padding: 2rem;
             background-color: $header-background;
             border-radius: 0.4rem;
             margin: 0.7rem 0;
             border: 0.0625rem solid $boder-color;
-            & .mvx-untitle-content {
+            & .woo-untitle-content {
               margin: 0 0 .5rem 0;
             }
           }
         }
       }
     }
-    .mvx-form-left-line-active{
+    .woo-form-left-line-active{
       padding-bottom: 4.75rem !important;// to adjust form bottom
       background-color: $font-white;
     }
-    .mvx-top-part-registartion-from{
+    .woo-top-part-registartion-from{
       ::placeholder{
         color: $title-color;
       } }
-    .mvx-top-part-registartion-from, .mvx-form-vendor-register .mvx-option-part.mvx-form-left-line-active{
+    .woo-top-part-registartion-from, .woo-form-vendor-register .woo-option-part.woo-form-left-line-active{
          input[type="text"]{
         font-size: 0.875rem;
         border: solid $boder-color;
@@ -741,7 +743,7 @@
         background:transparent;
       }
     }
-      .mvx-form-vendor-register .mvx-option-part{
+      .woo-form-vendor-register .woo-option-part{
         input[type="text"]{
           border: 0;
           background:transparent;
@@ -752,31 +754,31 @@
           }
         }
       }
-    .mvx-form-vendor-register .mvx-option-part, .mvx-top-part-registartion-from  {
+    .woo-form-vendor-register .woo-option-part, .woo-top-part-registartion-from  {
       padding: 1.5rem;
       border-radius: 0.25rem;
       border:0.06rem solid $base-color;
       margin: 0.7rem 0;
       position: relative;
-      input[type="text"].mvx-rgistration-form-title{
+      input[type="text"].woo-rgistration-form-title{
         font-size: 1.25rem;
       }
-      input[type="text"].mvx-question-title{
+      input[type="text"].woo-question-title{
       &::placeholder{
           color: $title-color;
         } 
       }       
-      & .mvx-form-group{
+      & .woo-form-group{
         display: flex;
         flex-wrap: wrap;
       }
-      & .mvx-question-input-items {
+      & .woo-question-input-items {
           width: 100%;
           margin: 0 .5rem 0 0;
       }
-      & .mvx-vendor-form-input-field-container {
+      & .woo-vendor-form-input-field-container {
         margin: 0 0 .5rem 0;
-        .mvx-form-type-wrap {
+        .woo-form-type-wrap {
           @include flexprops(center);
           gap: 1rem;
           padding:0.75rem 0;
@@ -789,7 +791,7 @@
           display: flex;
           column-gap: 0.8rem;
           padding: 1rem 0;
-          input[type="radio"], input[type="checkbox"], .mvx-close-icon{
+          input[type="radio"], input[type="checkbox"], .woo-close-icon{
             margin-top: 0.563rem;
         }
         }
@@ -798,11 +800,11 @@
           cursor: pointer;
         }
       }
-      .mvx-registration-fileds-description, .mvx-registration-form-description{
+      .woo-registration-fileds-description, .woo-registration-form-description{
         @include description();
         font-style:italic;
       }      
-        & .mvx-footer-icon-form {
+        & .woo-footer-icon-form {
               position: absolute;
               bottom: 0;
               left: 0;
@@ -811,14 +813,14 @@
               background-color: $section-background;
               border-top: 0.06rem solid $scroll-color;
               @include flexprops(center);
-                  & .mvx-perple-txt {
+                  & .woo-perple-txt {
                     margin-left: auto;
                       & input[type="checkbox"] {
                         border:$border;
                         margin: 0 0.5rem 0.25rem;
                       }
                   }
-                & .mvx-font {
+                & .woo-font {
                   color: $theme-color;
                   padding: 0 0.5rem;
                   font-size: 1rem;
@@ -830,11 +832,11 @@
           @include select-input();
         }
     }
-    .mvx-option-part{
+    .woo-option-part{
       &::before{
         position: absolute;
         content: "\e95b";
-        font-family: 'mvx-admin-font';
+        font-family: 'woo-admin-font';
         color: $blue-icon;
         top: 0;
         left: 50%;
@@ -846,7 +848,7 @@
 }
 }
 // short despition code
-p.mvx-settings-metabox-description-code {
+p.woo-settings-metabox-description-code {
   padding: 0.5rem 1rem;
   margin: 0.5rem 0;
   background: $code-back;
@@ -865,12 +867,12 @@ p.mvx-settings-metabox-description-code {
   }
 }
 //loader---
-.mvx-tab-content > span{
+.woo-tab-content > span{
   display: block;
   margin: 0 auto;
 }
 // setting saved 
-.mvx-notic-display-title {
+.woo-notic-display-title {
   background-color: #bf6290;
   color: $font-white;
   padding: 0.5rem 1rem;
@@ -879,7 +881,7 @@ p.mvx-settings-metabox-description-code {
   top: 15%;
   right: 1rem;
   z-index: 9999;
-  .mvx-font{
+  .woo-font{
     background-color: #c7769e;
     padding: 0.25rem;
     font-size:0.0.625rem;
@@ -887,13 +889,13 @@ p.mvx-settings-metabox-description-code {
     border-radius: 50%;
   }
 }
-.mvx-notic-display-title span {
+.woo-notic-display-title span {
   background-color: $code-back;
   border-radius: 50%;
   padding: 0.1rem;
 }
 // header tab
-.mvx-container .mvx-tab-name {
+.woo-container .woo-tab-name {
   color: #181718;
   font-size: 1.25rem;
   font-weight: 500;
@@ -902,14 +904,14 @@ p.mvx-settings-metabox-description-code {
 
 // responsive started here
 @media only screen and (max-width: 992px) {
-  .mvx-tab-banner-wrap{
+  .woo-tab-banner-wrap{
     justify-content: center;
     flex-wrap: wrap;
   }
-  .mvx-vertical-tabs {
+  .woo-vertical-tabs {
     width: 100%;
-    .mvx-middle-child-container {
-        .mvx-current-tab-lists{
+    .woo-middle-child-container {
+        .woo-current-tab-lists{
           width: 21%;
         }
     }
@@ -917,16 +919,16 @@ p.mvx-settings-metabox-description-code {
 }
 
 @media only screen and (max-width: 767px) {
-  .mvx-vertical-tabs {
-    .mvx-middle-child-container {
-        .mvx-current-tab-lists{
+  .woo-vertical-tabs {
+    .woo-middle-child-container {
+        .woo-current-tab-lists{
           width: 100%;
         }
-        .mvx-tab-content {
+        .woo-tab-content {
           width: 100%;
           margin-top: -0.06rem;
           padding: 1.5rem;
-          .mvx-settings-form-label, .mvx-settings-input-content {
+          .woo-settings-form-label, .woo-settings-input-content {
             width: 100% !important;
         }
         }
@@ -939,10 +941,10 @@ p.mvx-settings-metabox-description-code {
 }
 // subscriber list
 
-.mvx-container .mvx-search-and-multistatus-wrap .mvx-multistatus-ul {
+.woo-container .woo-search-and-multistatus-wrap .woo-multistatus-ul {
   cursor: pointer;
 }
-.mvx-button {
+.woo-button {
   text-align: right;
   margin-bottom: 1.5rem;
   input.btn.default-btn{
@@ -953,22 +955,22 @@ p.mvx-settings-metabox-description-code {
   }
 }
 
-.mvx-search-and-multistatus-wrap {
+.woo-search-and-multistatus-wrap {
   @include flexprops(center);
   gap:1rem;
   justify-content: space-between;
   padding: 2rem 0;
   flex-wrap:wrap;
 
-  .mvx-multistatus-ul {
+  .woo-multistatus-ul {
     margin: 0;
     cursor: pointer;
     @include flexprops(center);
     flex-wrap: wrap;
-    .mvx-multistatus-item.status-active {
+    .woo-multistatus-item.status-active {
       color: $theme-color;
   }
-    .mvx-multistatus-item {
+    .woo-multistatus-item {
       margin: 0;
       font-size: 0.875rem;
       color: $paragraph-color;
@@ -976,7 +978,7 @@ p.mvx-settings-metabox-description-code {
         padding:0;
       }
     }
-    .mvx-divider {
+    .woo-divider {
       width: 0.051rem;
       background-color: $paragraph-color;
       margin: 0 0.4rem;
@@ -984,13 +986,13 @@ p.mvx-settings-metabox-description-code {
     }
   }
 }
-.mvx-wrap-bulk-all-date {
+.woo-wrap-bulk-all-date {
   @include flexprops(center);
   gap:0.5rem 0.5rem;
   flex-wrap:wrap;
   padding-bottom: 0.5rem;
 }
-.mvx-page-title {
+.woo-page-title {
   @include flexprops(center);
   p {
     font-size: 1.5rem;
@@ -999,7 +1001,7 @@ p.mvx-settings-metabox-description-code {
   }
   .pull-right{
     margin: 0.4rem 0 0 auto;
-    .mvx-btn.btn-purple{
+    .woo-btn.btn-purple{
       @include purple-btn();
       @include button();
       font-size: 0.875rem;
@@ -1043,12 +1045,12 @@ input.rs-picker-toggle-textbox {
   vertical-align: middle;
 }
 //for loader purpose-----
-.mvx-middle-container-wrapper > span {
+.woo-middle-container-wrapper > span {
   display: block;
   margin: 0 auto;
 }
 // Start - Header
-.mvx-header-search-section {
+.woo-header-search-section {
   @include flexprops(center);
   @include input;
   position:relative;
@@ -1069,7 +1071,7 @@ input.rs-picker-toggle-textbox {
       box-shadow: none;
     }
   }
-  .mvx-search-content {
+  .woo-search-content {
     background: $fill-color;
     border: $border;
     z-index: 99;
@@ -1080,7 +1082,7 @@ input.rs-picker-toggle-textbox {
     width: 100%;
     height: 16rem;
    @include scroll-width();
-    .mvx-header-search-content-wrapper{
+    .woo-header-search-content-wrapper{
         padding: 0.75rem;
         border-bottom: 0.06rem solid $boder-color;
       a{
@@ -1090,12 +1092,12 @@ input.rs-picker-toggle-textbox {
         &:hover{
           text-decoration: none;
         }
-        .mvx-header-search-contetnt-label {
+        .woo-header-search-contetnt-label {
           margin: 1.75rem 0 0.25rem;
           color: $title-color;
           font-weight: 500;
       }
-      p.mvx-header-search-contetnt-desc {
+      p.woo-header-search-contetnt-desc {
         h5{
         position: absolute;
         padding:0 0.25rem;
@@ -1116,11 +1118,11 @@ input.rs-picker-toggle-textbox {
     }
 }
 }
-.mvx-wrap-bulk-action.css-b62m3t-container {
+.woo-wrap-bulk-action.css-b62m3t-container {
   min-width: 9.7rem;
 }
 //css for table purpose--
-.mvx-backend-datatable-wrapper {
+.woo-backend-datatable-wrapper {
   .rdt_Pagination{
     background: transparent;
     border: none;
@@ -1202,11 +1204,11 @@ input.rs-picker-toggle-textbox {
           img{
             margin: 0 0.5rem 0 0;
           }
-          .mvx-vendor-action-icon {
+          .woo-vendor-action-icon {
             @include flexprops(center);
             min-width: 7rem;
             column-gap:0.25rem;
-            .mvx-vendor-icon-name {
+            .woo-vendor-icon-name {
               @include flexprops(start);
               padding: 0.25rem 0;
              word-break: break-word;
@@ -1226,7 +1228,7 @@ input.rs-picker-toggle-textbox {
             }
           }
         }
-        .mvx-vendor-icon-name {
+        .woo-vendor-icon-name {
           img {
             border-radius: $border-radius;
             margin-right: 0.4rem;
@@ -1249,10 +1251,13 @@ input.rs-picker-toggle-textbox {
 #wpcontent{  
   padding: 0
 }
-#adminmenu .wp-submenu li.current a{
-  font-weight: 500;
+#adminmenu .wp-submenu li.current a, #adminmenu .wp-submenu li.current a:hover{
+  font-weight: 500 !important;
 }
-.mvx-settings-basic-input-class input.mvx-setting-form-input{
+#adminmenu .wp-submenu a{
+  position: relative;
+}
+.woo-settings-basic-input-class input.woo-setting-form-input{
   border-radius: 0.25rem;
   width: 100%;
   padding: 0 0.75rem;
@@ -1273,4 +1278,133 @@ input:focus, textarea:focus{
 #adminmenu .wp-submenu li a:hover {
   font-weight: 500 !important;
   color: #1675e0 !important;
+}
+//popup css are started here
+.MuiDialogContent-root:has(.woo-image-overlay){
+  &::-webkit-scrollbar{
+    width: 0;
+  }
+}
+.woo-image-overlay {
+  .woo-overlay-content {
+    background: #fff;
+    padding: 0rem 1rem;
+    text-align: center;
+    border-radius: 0.25rem;
+    max-width: 26rem;
+    position: relative;
+    .woo-modal.cross {
+      position: absolute;
+      right: 1.5rem;
+      top: 1.5rem;
+      color: #181819;
+  }
+ 
+}
+
+h1.banner-header {
+font-size: 2rem;
+span.banner-pro-tag {
+  line-height: 0;
+  background: #65438f;
+  color: #f9f8fb !important;
+  padding: 0 0.25rem;
+  border-radius: 0.25rem;
+  margin-left: 0.125rem;
+  box-shadow: 0.25rem 0.25rem 0.875rem rgb(63 20 115 / 25%);
+  }
+}
+h2 {
+font-size: 1.5rem;
+margin: 1rem 0 1.5rem;
+}
+
+  h3 {
+    color: #181819;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+  .discount-tag {
+    background: #fbedee;
+    color: #e26f76;
+    font-size: 0.875rem;
+    padding: 0.315rem 1.25rem;
+    width: fit-content;
+    margin: 0.5rem auto 1rem;
+    border-radius: 2rem;
+    b{
+      font-weight: 600;
+    }
+}
+
+  p {
+    color: #5e5d60;
+    font-size: 1rem;
+  }
+  .woo-banner-offer {
+    margin: 1.5rem 0 1rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #181819;
+}
+.upgrade{
+  color: #181718;
+}
+.woo-banner-content{
+  font-size: 1rem;
+line-height: 1.6;
+letter-spacing: 0.02rem;
+font-weight: 500;
+  p {
+  font-size: 0.9rem;
+  margin: 0 0 0.25rem;
+  text-align: left;
+  letter-spacing: 0;
+  font-weight: 400;
+  font-style: italic;
+}}
+  a.woo-go-pro-btn {
+    background: #e35047;
+    color: #f9f8fb;
+    text-decoration: none;
+    padding: 0.5rem 1.5rem;
+    line-height: 1.6;
+    border-radius: 0.25rem;
+    font-size: 1.25rem;
+    margin: 2rem auto 0rem;
+    display: block;
+    width: fit-content;
+    box-shadow: 0.25rem 0.25rem 1.5rem rgb(227 80 71 / 50%);
+  }
+}
+.MuiPaper-root{
+  padding: 2rem;
+}
+.woo-module-dialog-title {
+  text-align: center;
+}
+span.stock-alert-pro-tag {
+  position: absolute;
+  top: 0.25rem;
+  right: 0.5rem;
+  background: #9f8ab9;
+  color: #fdfdfe;
+  padding: 0.125rem 0.5rem;
+  border-radius: 0.625rem;
+  font-size: 0.625rem;
+  text-align: center;
+  line-height: 0.7rem;
+  text-transform: capitalize;
+}
+.woo-current-tab-lists a {
+  position: relative;
+}
+img.subscriber-img {
+  object-fit: cover;
+  object-position: center center;
+  height: 100%;
+  width: 100%;
+}
+.stock-alert-popup-cross {
+  text-align: right;
 }

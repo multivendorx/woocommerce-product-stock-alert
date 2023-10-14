@@ -6,17 +6,14 @@ class WOO_Product_Stock_Alert_Ajax {
 		// Save customer email in database
 		add_action( 'wp_ajax_alert_ajax', array(&$this, 'stock_alert_function') );
 		add_action( 'wp_ajax_nopriv_alert_ajax', array(&$this, 'stock_alert_function') );
-
 		// Delete unsubscribed users
 		add_action( 'wp_ajax_unsubscribe_button', array($this, 'unsubscribe_users') );
 		add_action( 'wp_ajax_nopriv_unsubscribe_button', array($this, 'unsubscribe_users') );
 		// Export data
 		add_action( 'wp_ajax_export_subscribers', array($this, 'export_stock_alert_data') );
-
 		//add fields for variation product shortcode
 		add_action( 'wp_ajax_nopriv_get_variation_box_ajax', array( $this, 'get_variation_box_ajax') );
 		add_action('wp_ajax_get_variation_box_ajax', array( $this, 'get_variation_box_ajax') );
-
 		//recaptcha version-3 validate
 		add_action( 'wp_ajax_recaptcha_validate_ajax', array($this, 'recaptcha_validate_ajax') );
 		add_action( 'wp_ajax_nopriv_recaptcha_validate_ajax', array($this, 'recaptcha_validate_ajax') );
@@ -39,7 +36,7 @@ class WOO_Product_Stock_Alert_Ajax {
 	
 	function export_stock_alert_data() {
 		$headers_str = '';
-		$headers_arr = $all_products = $all_products = $get_subscribed_user = $stock_alert_export_datas = $subscribers_list =array();
+		$headers_arr = $stock_alert_export_datas = $subscribers_list = array();
 		$file_name = 'list_subscribers.csv';
 		
 		// Set page headers to force download of CSV
@@ -61,42 +58,7 @@ class WOO_Product_Stock_Alert_Ajax {
 			$headers_arr[] = '"' . $header . '"';
 		}
 		$headers_str = implode(',', $headers_arr);
-		
-		$all_products = get_posts(
-            array(
-                'post_type' => 'product',
-                'post_status' => 'publish',
-                'numberposts' => -1
-            )
-        );
-        
-        if( !empty($all_products) && is_array($all_products) ) {
-            foreach( $all_products as $products_each ) {
-                $child_ids = $product_obj = array();
-                $product_obj = wc_get_product( $products_each->ID );
-                if( $product_obj->is_type('variable') ) {
-                    if( $product_obj->has_child() ) {
-                        $child_ids = $product_obj->get_children();
-                        if( isset($child_ids) && !empty($child_ids) ) {
-                            foreach( $child_ids as $child_id ) {
-                                $all_product_ids[] = $child_id;
-                            }
-                        }
-                    }
-                } else {
-                    $all_product_ids[] = $products_each->ID;
-                }
-            }
-        }
-        
-        if ( !empty($all_product_ids) && is_array($all_product_ids) ) {
-            foreach( $all_product_ids as $product_id ) {
-                $subscribers = get_product_subscribers_email($product_id);
-                if ($subscribers && !empty($subscribers) ) {
-                    $get_subscribed_user[$product_id] = $subscribers; 
-                }
-            }
-        }
+		$get_subscribed_user = get_product_subscribers_array();
 
         if( isset( $get_subscribed_user ) && !empty( $get_subscribed_user ) ) {
             foreach ($get_subscribed_user as $pro_id => $value) {
@@ -119,7 +81,6 @@ class WOO_Product_Stock_Alert_Ajax {
 				echo implode(",", $stock_alert_export_data);
 			}
 		}
-		
 		exit();
 	}
 
@@ -174,11 +135,11 @@ class WOO_Product_Stock_Alert_Ajax {
 
 			if ( ! $is_in_stock ) {
 					$display_stock_alert_form = true;
-			} elseif ( $managing_stock && $is_on_backorder && get_mvx_product_alert_plugin_settings('is_enable_backorders') ) {
+			} elseif ( $managing_stock && $is_on_backorder && get_woo_product_alert_plugin_settings('is_enable_backorders') ) {
 					$display_stock_alert_form = true;
 			} elseif ( $managing_stock ) {
-				if(get_option('woocommerce_notify_no_stock_amount')){
-					if($stock_quantity <= (int) get_option('woocommerce_notify_no_stock_amount') && get_mvx_product_alert_plugin_settings('is_enable_backorders')){
+				if (get_option('woocommerce_notify_no_stock_amount')) {
+					if ($stock_quantity <= (int) get_option('woocommerce_notify_no_stock_amount') && get_woo_product_alert_plugin_settings('is_enable_backorders')) {
 						$display_stock_alert_form = true;
 					}
 				}

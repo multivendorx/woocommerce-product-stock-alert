@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { render } from 'react-dom';
 import { BrowserRouter as Router, useLocation } from 'react-router-dom';
-import MvxTab from './tabs';
+import WOOTab from './tabs';
 import Subscriber from './subscriber';
 
 class StockAlert_Backend_Endpoints_Load extends Component {
@@ -54,7 +53,7 @@ class StockAlert_Backend_Endpoints_Load extends Component {
 			location.get('tab') &&
 			location.get('tab') === 'settings'
 		) {
-			return <MvxTab
+			return <WOOTab
 				model='stock_alert-settings'
 				query_name={location.get('tab')}
 				subtab={location.get('subtab')}
@@ -64,9 +63,9 @@ class StockAlert_Backend_Endpoints_Load extends Component {
 			location.get('tab') &&
 			location.get('tab') === 'subscriber-list'
 		) {
-			return <Subscriber/>;
+			return <Subscriber/>;	
 		} else {
-			return <MvxTab
+			return <WOOTab
 				model='stock_alert-settings'
 				query_name='settings'
 				subtab='general'
