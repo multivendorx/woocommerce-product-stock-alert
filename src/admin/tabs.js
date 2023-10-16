@@ -153,7 +153,7 @@ export default class TabSection extends Component {
 							</div>
 						</div>
 					</div>
-					{ <BannerSection /> }
+					{ stockalertappLocalizer.pro_active == 'free' ? <BannerSection /> : '' }
 				</div>
 			</div>
 		);

@@ -30,6 +30,9 @@ class WOO_Product_Stock_Alert_Install {
     }
 
     function woo_stock_alert_option_migration() {
+        //cron
+        wp_clear_scheduled_hook('dc_start_stock_alert');
+
         if (get_option('dc_product_stock_alert_activate')) {
             update_option('woo_product_stock_alert_activate', true);
         }
@@ -64,6 +67,7 @@ class WOO_Product_Stock_Alert_Install {
             $form_submit_option = get_option('mvx_woo_stock_alert_form_submission_tab_settings');
             update_option( 'woo_stock_alert_form_submission_tab_settings', $form_submit_option );
         }
+        update_option('woo_stock_alert_data_migrate', true);
     }
 
     /*

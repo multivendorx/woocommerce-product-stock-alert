@@ -57,5 +57,8 @@ span.stock-alert-pro-tag {
     font-size: .625rem;
     text-align: center;
     line-height: .7rem;
-    text-transform: capitalize;*
+    text-transform: capitalize;
 }
+#adminmenu .wp-submenu li{
+	position: relative;
+  }

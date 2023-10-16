@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'woo-stock-alert';
-  src:  url('fonts/woo-stock-alert.eot?mhdfd4');
-  src:  url('fonts/woo-stock-alert.eot?mhdfd4#iefix') format('embedded-opentype'),
-    url('fonts/woo-stock-alert.ttf?mhdfd4') format('truetype'),
-    url('fonts/woo-stock-alert.woff?mhdfd4') format('woff'),
-    url('fonts/woo-stock-alert.svg?mhdfd4#woo-stock-alert') format('svg');
+  src:  url('fonts/woo-stock-alert.eot?r0aunu');
+  src:  url('fonts/woo-stock-alert.eot?r0aunu#iefix') format('embedded-opentype'),
+    url('fonts/woo-stock-alert.ttf?r0aunu') format('truetype'),
+    url('fonts/woo-stock-alert.woff?r0aunu') format('woff'),
+    url('fonts/woo-stock-alert.svg?r0aunu#woo-stock-alert') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -43,6 +43,10 @@
 .icon-mailchimp-setting:before {
   content: "\e905";
 }
+.icon-cross:before {
+  content: "\ea0f";
+}
+
  
   
 
@@ -344,6 +348,7 @@
 }
 .woo-vertical-tabs {
   width:75%;
+  flex: auto;
   & .woo-tab-description-start {
     background-color: $header-background;
   }
