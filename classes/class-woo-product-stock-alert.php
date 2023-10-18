@@ -8,7 +8,8 @@ class WOO_Product_Stock_Alert {
     public $token;
     public $frontend;
     public $ajax;
-    public $templates;
+    public $template;
+    public $admin;
     public $action;
     public $shortcode;
     private $file;
