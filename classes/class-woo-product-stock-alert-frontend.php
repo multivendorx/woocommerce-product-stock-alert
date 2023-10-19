@@ -187,7 +187,7 @@ class WOO_Product_Stock_Alert_Frontend {
                 if ($product->backorders_allowed() && $visibility_backorder) {
                     $flag = true;
                 } else {
-                    if ($product->get_stock_quantity() < 1) {
+                    if (!$product->backorders_allowed() && $product->get_stock_quantity() < 1) {
                         $flag = true;
                     }
                 }
