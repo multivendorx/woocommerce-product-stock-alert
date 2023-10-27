@@ -3,6 +3,8 @@ import React from 'react';
 import Select from 'react-select';
 import axios from 'axios';
 import Dialog from "@mui/material/Dialog";
+import Slider from '@mui/material/Slider';
+import Typography from '@mui/material/Typography';
 import Popoup from './popupcontent';
 
 export default class DynamicForm extends React.Component {
@@ -13,10 +15,81 @@ export default class DynamicForm extends React.Component {
 			open_model: false,
 			datamclist: [],
 			from_loading: false,
-			errordisplay: ''
+			errordisplay: '',
+			alert_text_color: '',
+			button_background_color: '',
+			button_border_color: '',
+			button_text_color: '',
+			button_background_color_onhover: '',
+			button_border_color_onhover: '',
+			button_text_color_onhover: '',
+			button_font_size: '',
+			button_border_radious: '',
+			button_border_size: '',
 		};
+
+		this.handleOMouseEnter = this.handleOMouseEnter.bind( this );
+		this.handleOMouseLeave = this.handleOMouseLeave.bind( this );
 		this.handle_get_mailchimp_list = this.handle_get_mailchimp_list.bind(this);
 		this.handleClose = this.handleClose.bind(this);
+		this.handleOnChangedada = this.handleOnChangedada.bind(this);
+		this.handle_get_button_color_state = this.handle_get_button_color_state.bind(this);
+	}
+
+	handleOMouseEnter( e ) {
+		this.setState( {
+			hover_on: true,
+		} );
+	}
+
+	handleOMouseLeave( e ) {
+		this.setState( {
+			hover_on: false,
+		} );
+	}
+
+	handle_get_button_color_state() {
+		axios
+			.get(
+				`${stockalertappLocalizer.apiUrl}/woo_stockalert/v1/get_button_data`,
+			)
+			.then((response) => {
+				this.setState({
+					alert_text_color: response.data.alert_text_color,
+					button_background_color: response.data.button_background_color,
+					button_border_color: response.data.button_border_color,
+					button_text_color: response.data.button_text_color,
+					button_background_color_onhover: response.data.button_background_color_onhover,
+					button_text_color_onhover: response.data.button_text_color_onhover,
+					button_border_color_onhover: response.data.button_border_color_onhover,
+
+					button_font_size: response.data.button_font_size,
+					button_border_radious: response.data.button_border_radious,
+					button_border_size: response.data.button_border_size,
+				});
+			});
+	}
+
+	handleOnChangedada( e, target ) {
+		this.setState({
+			alert_text_color: target === 'alert_text_color' ? e.target.value : this.state.alert_text_color,
+			button_background_color: target === 'button_background_color' ? e.target.value : this.state.button_background_color,
+			button_border_color: target === 'button_border_color' ? e.target.value : this.state.button_border_color,
+			button_text_color: target === 'button_text_color' ? e.target.value : this.state.button_text_color,
+			button_background_color_onhover: target === 'button_background_color_onhover' ? e.target.value : this.state.button_background_color_onhover,
+			button_border_color_onhover: target === 'button_border_color_onhover' ? e.target.value : this.state.button_border_color_onhover,
+			button_text_color_onhover: target === 'button_text_color_onhover' ? e.target.value : this.state.button_text_color_onhover,
+
+			button_font_size: target === 'button_font_size' ? e.target.value : this.state.button_font_size,
+			button_border_radious: target === 'button_border_radious' ? e.target.value : this.state.button_border_radious,
+			button_border_size: target === 'button_border_size' ? e.target.value : this.state.button_border_size,
+		});
+
+		if ( this.props.submitbutton && this.props.submitbutton === 'false' ) {
+			setTimeout( () => {
+				this.onSubmit( '' );
+			}, 10 );
+		}
 	}
 
 	handleClose() {
@@ -82,12 +155,14 @@ export default class DynamicForm extends React.Component {
 	};
 
 	componentDidMount() {
+		this.handle_get_button_color_state();
 		//Fetch all datas
 		this.props.model.map((m) => {
 			this.setState({
 				[m.key]: m.database_value,
 			});
 		});
+
 		if (stockalertappLocalizer.pro_active != 'free' ) {
 			this.handle_get_mailchimp_list();
 		}
@@ -207,7 +282,6 @@ export default class DynamicForm extends React.Component {
 			}
 
 			// If no array key found
-			// If no array key found
 			if (!m.key) {
 				return false;
 			}
@@ -282,6 +356,170 @@ export default class DynamicForm extends React.Component {
 							''
 						)}
 					</div>
+				);
+			}
+
+			if (type === 'color_table') {
+				input = (
+					<div class="editor-left side">
+						<div className="woo-color-picker-wrap">
+							<Typography>Alert Text</Typography>
+							<input
+								{ ...props }
+								className="woo-setting-color-picker"
+								type="color"
+								onChange={ ( e ) => {
+									this.handleOnChangedada(
+										e,
+										'alert_text_color'
+									);
+								} }
+								value={this.state.alert_text_color}
+							/>
+						</div>
+						<div className="woo-color-picker-wrap">
+							<Typography>Button Background</Typography>
+							<input
+								{ ...props }
+								className="woo-setting-color-picker"
+								type="color"
+								onChange={ ( e ) => {
+									this.handleOnChangedada(
+										e,
+										'button_background_color'
+									);
+								} }
+								value={this.state.button_background_color}
+							/>
+						</div>
+						<div className="woo-color-picker-wrap">
+							<Typography>Button Border</Typography>
+							<input
+								{ ...props }
+								className="woo-setting-color-picker"
+								type="color"
+								onChange={ ( e ) => {
+									this.handleOnChangedada(
+										e,
+										'button_border_color'
+									);
+								} }
+								value={this.state.button_border_color}
+							/>
+						</div>
+						<div className="woo-color-picker-wrap">
+							<Typography>Button Text</Typography>
+							<input
+								{ ...props }
+								className="woo-setting-color-picker"
+								type="color"
+								onChange={ ( e ) => {
+									this.handleOnChangedada(
+										e,
+										'button_text_color'
+									);
+								} }
+								value={this.state.button_text_color}
+							/>
+						</div>
+						<div className="woo-color-picker-wrap">
+							<Typography>Button Background on Hover</Typography>
+							<input
+								{ ...props }
+								className="woo-setting-color-picker"
+								type="color"
+								onChange={ ( e ) => {
+									this.handleOnChangedada(
+										e,
+										'button_background_color_onhover'
+									);
+								} }
+								value={this.state.button_background_color_onhover}
+							/>
+						</div>
+						<div className="woo-color-picker-wrap">
+							<Typography>Button Border on Hover</Typography>
+							<input
+								{ ...props }
+								className="woo-setting-color-picker"
+								type="color"
+								onChange={ ( e ) => {
+									this.handleOnChangedada(
+										e,
+										'button_border_color_onhover'
+									);
+								} }
+								value={this.state.button_border_color_onhover}
+							/>
+						</div>
+						<div className="woo-color-picker-wrap">
+							<Typography>Button Text on Hover</Typography>
+							<input
+								{ ...props }
+								className="woo-setting-color-picker"
+								type="color"
+								onChange={ ( e ) => {
+									this.handleOnChangedada(
+										e,
+										'button_text_color_onhover'
+									);
+								} }
+								value={this.state.button_text_color_onhover}
+							/>
+						</div>
+					</div>			
+				);
+			}
+
+			if (type === 'size_table') {
+				input = (
+					<div class="editor-left side">
+						<div className="woo-size-picker-wrap">
+							<Typography gutterBottom>Font Size</Typography>
+							<Slider
+								defaultValue={ 18 }
+								aria-label="Default"
+								valueLabelDisplay="auto"
+								onChange={ ( e ) => {
+									this.handleOnChangedada(
+										e,
+										'button_font_size'
+									);
+								} }
+								value={this.state.button_font_size}
+							/>
+						</div>
+						<div className="woo-size-picker-wrap">
+							<Typography gutterBottom>Border Radius</Typography>
+							<Slider
+								defaultValue={ 2 }
+								aria-label="Default"
+								valueLabelDisplay="auto"
+								onChange={ ( e ) => {
+									this.handleOnChangedada(
+										e,
+										'button_border_radious'
+									);
+								} }
+								value={this.state.button_border_radious}
+							/>
+						</div>
+						<div className="woo-size-picker-wrap">
+						<Typography gutterBottom>Border Size</Typography>
+							<Slider
+								defaultValue={ 2 }
+								aria-label="Default"
+								valueLabelDisplay="auto"
+								onChange={ ( e ) => {
+									this.handleOnChangedada(
+										e,
+										'button_border_size'
+									);
+								} }
+								value={this.state.button_border_size}
+							/>
+						</div>
+					</div>			
 				);
 			}
 
@@ -626,6 +864,52 @@ export default class DynamicForm extends React.Component {
 						)}
 					</div>
 				);
+			}
+
+			if ( type === 'example_form' ) {
+				input = (
+					<div className="woo-settings-example-button-class">
+						{ <div class="example_form_view">
+							<div class="example_form_alert_text" style={{
+								color: this.state.alert_text_color,
+							}}>
+								{this.state.alert_text ? this.state.alert_text : stockalertappLocalizer.default_alert_text}
+							</div>
+							<div class="example_form">
+								<div class="example_form_email">
+									<input type="text" value={this.state.email_placeholder_text ? this.state.email_placeholder_text : stockalertappLocalizer.default_email_place} readOnly/>
+								</div>
+								<div className='example_alert_button'
+									onMouseEnter={ this.handleOMouseEnter }
+									onMouseLeave={ this.handleOMouseLeave }
+									style={ {
+										color:
+											this.state.hover_on
+												? this.state.button_text_color_onhover
+												: this.state.button_text_color,
+										fontSize:
+											this.state.button_font_size +'px',
+										borderRadius:
+											this.state.button_border_radious,
+										border: `${ this.state.button_border_size }px solid ${ this.state.button_border_color }`,
+										
+										background: 
+											this.state.hover_on 
+												? this.state.button_background_color_onhover
+												: this.state.button_background_color,
+										verticalAlign: 'middle',
+										textDecoration: 'none',
+										width: 'fit-content',
+									} }
+								>
+									{this.state.button_text ? this.state.button_text : stockalertappLocalizer.default_alert_button}
+								</div>
+							</div>
+						</div>
+						}
+					</div>
+				);
+				
 			}
 
 			return m.type === 'section' || m.label === 'no_label' ? (

@@ -941,8 +941,10 @@ p.woo-settings-metabox-description-code {
   }
 
 }
-@media only screen and (max-width: 575px) {
-
+@media only screen and (max-width: 668px) {
+  .editor-left.side {
+    padding: 1rem 0.5rem;
+  }
 }
 // subscriber list
 
@@ -1412,4 +1414,43 @@ img.subscriber-img {
 }
 .stock-alert-popup-cross {
   text-align: right;
+}
+.woo-color-picker-wrap {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.25rem 0;
+}
+.editor-left.side {
+  border: 0.06rem solid #d4d1d9;
+  border-radius: 0.25rem;
+  padding: 2rem;
+}
+.example_form_view {
+  border: 0.06rem solid #d4d1d9;
+  border-radius: 0.25rem;
+  padding: 2rem;
+}
+.example_form_email {
+  width: 70%;
+}
+.example_form_alert_text{
+  margin-bottom: 5px;;
+}
+.example_form{
+  display: flex;
+  gap: 0.3rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.woo-size-picker-wrap {
+  padding: 0 0 1rem;
+}
+.example_form_email input {
+  min-height: 40px;
+  padding: 0.25rem 1rem;
+  background: transparent;
+  border: 0.06rem solid #D4D9CF;
+}
+.example_alert_button{
+  padding:0.75rem;
 }

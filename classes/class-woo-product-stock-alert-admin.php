@@ -158,6 +158,9 @@ class WOO_Product_Stock_Alert_Admin {
             wp_localize_script( 'woo-stockalert-script', 'stockalertappLocalizer', apply_filters('stockalert_settings', [
                 'apiUrl'                    => home_url( '/wp-json' ),
                 'nonce'                     => wp_create_nonce( 'wp_rest' ),
+                'default_alert_text'        => __('Get an alert when the product is in stock:', 'woocommerce-product-stock-alert'),
+                'default_email_place'       => __('Enter your email', 'woocommerce-product-stock-alert'),
+                'default_alert_button'      => __('Get an alert', 'woocommerce-product-stock-alert'),
                 'banner_img'                => $WOO_Product_Stock_Alert->plugin_url . 'assets/images/stock-alert-pro-banner.jpg',
                 'subscriber_list'           => $WOO_Product_Stock_Alert->plugin_url . 'assets/images/subscriber-list.jpg',
                 'pro_active'                => apply_filters('woo_stock_alert_pro_active', 'free'),

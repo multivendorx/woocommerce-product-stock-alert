@@ -183,6 +183,11 @@ class WOO_Product_Stock_Alert {
             'callback' => array( $this, 'woo_stockalert_save_stockalert' ),
             'permission_callback' => array( $this, 'stockalert_permission' ),
         ] );
+        register_rest_route( 'woo_stockalert/v1', '/get_button_data', [
+            'methods' => WP_REST_Server::READABLE,
+            'callback' => array( $this, 'woo_stockalert_get_button_data' ),
+            'permission_callback' => array( $this, 'stockalert_permission' ),
+        ] );
     }
 
     public function stockalert_permission() {
@@ -193,6 +198,22 @@ class WOO_Product_Stock_Alert {
 		$woo_stockalert_tabs_data = woo_stockalert_admin_tabs() ? woo_stockalert_admin_tabs() : [];
         return rest_ensure_response( $woo_stockalert_tabs_data );
 	}
+
+    public function woo_stockalert_get_button_data() {
+        $button_data = array(
+            'alert_text_color' => get_woo_product_alert_plugin_settings('alert_text_color', ''),
+            'button_background_color' => get_woo_product_alert_plugin_settings('button_background_color', ''),
+            'button_border_color' => get_woo_product_alert_plugin_settings('button_border_color', ''),
+            'button_text_color' => get_woo_product_alert_plugin_settings('button_text_color', ''),
+            'button_background_color_onhover' => get_woo_product_alert_plugin_settings('button_background_color_onhover', ''),
+            'button_text_color_onhover' => get_woo_product_alert_plugin_settings('button_text_color_onhover', ''),
+            'button_border_color_onhover' => get_woo_product_alert_plugin_settings('button_border_color_onhover', ''),
+			'button_font_size' => get_woo_product_alert_plugin_settings('button_font_size', ''),
+			'button_border_radious' => get_woo_product_alert_plugin_settings('button_border_radious', ''),
+			'button_border_size' => get_woo_product_alert_plugin_settings('button_border_size', ''),
+        );
+        return rest_ensure_response($button_data);
+    }
 
     public function woo_stockalert_save_stockalert($request) {
         $all_details = [];

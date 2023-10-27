@@ -19,15 +19,14 @@ class WOO_Product_Stock_Alert_Frontend {
         //support for grouped products
         add_filter('woocommerce_grouped_product_list_column_price', array($this, 'display_in_grouped_product'), 10, 2);
         // Hover style
-        add_action('wp_head', array($this, 'frontend_style'));
-            
+        add_action('wp_head', array($this, 'frontend_style'));    
     }
 
     function frontend_scripts() {
         global $WOO_Product_Stock_Alert;
         $frontend_script_path = $WOO_Product_Stock_Alert->plugin_url . 'assets/frontend/js/';
         $suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
-        $stock_interest = $alert_text_html = $button_html = $button_css = '';
+        $stock_interest = $alert_text_html = $button_html = $border_size = $button_css = '';
         $settings_array = get_woo_form_settings_array();
 
         if (!empty($settings_array['alert_text'])) {
@@ -36,14 +35,18 @@ class WOO_Product_Stock_Alert_Frontend {
             $alert_text_html = '<h5 class="subscribe_for_interest_text">' . $settings_array['alert_text'] . '</h5>';
         }
 
+        $border_size = (!empty($settings_array['button_border_size'])) ? $settings_array['button_border_size'].'px' : '1px';
+
         if (!empty($settings_array['button_background_color']))
             $button_css .= "background:" . $settings_array['button_background_color'] . "; ";
         if (!empty($settings_array['button_text_color']))
             $button_css .= "color:" . $settings_array['button_text_color'] . "; ";
         if (!empty($settings_array['button_border_color']))
-            $button_css .= "border: 1px solid " . $settings_array['button_border_color'] . "; ";
+            $button_css .= "border: " . $border_size . " solid " . $settings_array['button_border_color'] . "; ";
         if (!empty($settings_array['button_font_size']))
             $button_css .= "font-size:" . $settings_array['button_font_size'] . "px; ";
+        if (!empty($settings_array['button_border_redious']))
+            $button_css .= "border-radius:" . $settings_array['button_border_redious'] . "px;";
 
 
         if (!empty($button_css)) {
@@ -95,13 +98,15 @@ class WOO_Product_Stock_Alert_Frontend {
 
     function frontend_style() {
         $settings_array = get_woo_form_settings_array();
-        $button_onhover_style = '';
+        $button_onhover_style = $border_size = '';
+        $border_size = (!empty($settings_array['button_border_size'])) ? $settings_array['button_border_size'].'px' : '1px';
+
         if (isset($settings_array['button_background_color_onhover']))
             $button_onhover_style .= !empty($settings_array['button_background_color_onhover']) ? 'background: ' . $settings_array['button_background_color_onhover'] . ' !important;' : '';
         if (isset($settings_array['button_text_color_onhover']))
             $button_onhover_style .= !empty($settings_array['button_text_color_onhover']) ? ' color: ' . $settings_array['button_text_color_onhover'] . ' !important;' : '';
         if (isset($settings_array['button_border_color_onhover']))
-            $button_onhover_style .= !empty($settings_array['button_border_color_onhover']) ? 'border: 1px solid' . $settings_array['button_border_color_onhover'] . ' !important;' : '';
+            $button_onhover_style .= !empty($settings_array['button_border_color_onhover']) ? 'border: ' . $border_size . ' solid' . $settings_array['button_border_color_onhover'] . ' !important;' : '';
         if ($button_onhover_style) {
             echo '<style>
                 button.alert_button_hover:hover, button.unsubscribe_button:hover {
@@ -206,7 +211,6 @@ class WOO_Product_Stock_Alert_Frontend {
      * @version 1.0.0
      */
     public function html_subscribe_form( $product, $variation = [] ) {
-        $stock_notifier_random_code = bin2hex( random_bytes( 12 ) );
         $variation_class = '';
         if ($variation) {
             $variation_id = $variation->get_id();
@@ -219,7 +223,7 @@ class WOO_Product_Stock_Alert_Frontend {
         $stock_interest = $alert_text_html = $button_html = $button_css = '';
         $dc_settings = array();
         $alert_text = $button_text = $button_background_color = $button_border_color = $button_text_color = $unsubscribe_button_text = '';
-        $alert_success = $alert_email_exist = $valid_email = $alert_unsubscribe_message = '';
+        $alert_success = $alert_email_exist = $valid_email = $alert_unsubscribe_message = $border_size = '';
         $settings_array = get_woo_form_settings_array();
         $alert_fields = woo_stock_alert_fileds();
         if (!empty($settings_array['alert_text'])) {
@@ -228,14 +232,19 @@ class WOO_Product_Stock_Alert_Frontend {
             $alert_text_html = '<h5 class="subscribe_for_interest_text">' . $settings_array['alert_text'] . '</h5>';
         }
 
+        $border_size = (!empty($settings_array['button_border_size'])) ? $settings_array['button_border_size'].'px' : '1px';
+
         if (!empty($settings_array['button_background_color']))
             $button_css .= "background:" . $settings_array['button_background_color'] . ";";
         if (!empty($settings_array['button_text_color']))
             $button_css .= "color:" . $settings_array['button_text_color'] . ";";
         if (!empty($settings_array['button_border_color']))
-            $button_css .= "border: 1px solid " . $settings_array['button_border_color'] . ";";
+            $button_css .= "border: " . $border_size . " solid " . $settings_array['button_border_color'] . ";";
         if (!empty($settings_array['button_font_size']))
             $button_css .= "font-size:" . $settings_array['button_font_size'] . "px;";
+        if (!empty($settings_array['button_border_redious']))
+            $button_css .= "border-radius:" . $settings_array['button_border_redious'] . "px;";
+            
 
         if (!empty($button_css)) {
             $button_html = '<button style="' . $button_css .'" class="stock_alert_button alert_button_hover" name="alert_button">' . $settings_array['button_text'] . '</button>';
