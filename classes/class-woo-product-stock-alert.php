@@ -208,9 +208,9 @@ class WOO_Product_Stock_Alert {
             'button_background_color_onhover' => get_woo_product_alert_plugin_settings('button_background_color_onhover', ''),
             'button_text_color_onhover' => get_woo_product_alert_plugin_settings('button_text_color_onhover', ''),
             'button_border_color_onhover' => get_woo_product_alert_plugin_settings('button_border_color_onhover', ''),
-			'button_font_size' => get_woo_product_alert_plugin_settings('button_font_size', ''),
-			'button_border_radious' => get_woo_product_alert_plugin_settings('button_border_radious', ''),
-			'button_border_size' => get_woo_product_alert_plugin_settings('button_border_size', ''),
+            'button_font_size' => get_woo_product_alert_plugin_settings('button_font_size', ''),
+            'button_border_radious' => get_woo_product_alert_plugin_settings('button_border_radious', ''),
+            'button_border_size' => get_woo_product_alert_plugin_settings('button_border_size', ''),
         );
         return rest_ensure_response($button_data);
     }

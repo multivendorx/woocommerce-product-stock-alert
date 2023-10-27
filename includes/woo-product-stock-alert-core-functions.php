@@ -565,12 +565,12 @@ if (!function_exists('woo_stockalert_admin_tabs')) {
                         'database_value' => '',
                     ],
                     [
-						'key'       => 'custom_example_form',
-						'type'      => 'example_form',
-						'class'     =>  'woo-setting-own-class',
-						'desc'      => __('', 'woocommerce-product-stock-alert'),
-						'label'     => __( 'Demo Form', 'woocommerce-product-stock-alert' )
-					],
+                        'key'       => 'custom_example_form',
+                        'type'      => 'example_form',
+                        'class'     =>  'woo-setting-own-class',
+                        'desc'      => __('', 'woocommerce-product-stock-alert'),
+                        'label'     => __( 'Demo Form', 'woocommerce-product-stock-alert' )
+                    ],
                     [
                         'key'       =>  'button_color_section',
                         'type'      =>  'color_table',
