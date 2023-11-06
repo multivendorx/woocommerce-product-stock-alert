@@ -444,89 +444,89 @@ if (!function_exists('woo_stockalert_admin_tabs')) {
     function woo_stockalert_admin_tabs(){
         $stock_alert_settings_page_endpoint = apply_filters('woo_stockalert_endpoint_fields_before_value', array(
             'general' => array(
-            'tablabel'        =>  __('General', 'woocommerce-product-stock-alert'),
-            'apiurl'          =>  'save_stockalert',
-            'description'     =>  __('Configure basic product alert settings. ', 'woocommerce-product-stock-alert'),
-            'icon'            =>  'icon-general',
-            'submenu'         =>  'settings',
-            'modulename'      =>  [
-                [
-                    'key'       => 'is_enable_backorders',
-                    'label'     => __("Allow Subscription for Backorders Product", 'woocommerce-product-stock-alert'),
-                    'class'     => 'woo-toggle-checkbox',
-                    'type'      => 'checkbox',
-                    'options'   => array(
-                        array(
-                            'key'   => "is_enable_backorders",
-                            'label' => __('Enabling this setting allows users to subscribe to out-of-stock products, even when the backorder option is enabled.', 'woocommerce-product-stock-alert'),
-                            'value' => "is_enable_backorders"
+                'tablabel'        =>  __('General', 'woocommerce-product-stock-alert'),
+                'apiurl'          =>  'save_stockalert',
+                'description'     =>  __('Configure basic product alert settings. ', 'woocommerce-product-stock-alert'),
+                'icon'            =>  'icon-general',
+                'submenu'         =>  'settings',
+                'modulename'      =>  [
+                    [
+                        'key'       => 'is_enable_backorders',
+                        'label'     => __("Allow Subscription for Backorders Product", 'woocommerce-product-stock-alert'),
+                        'class'     => 'woo-toggle-checkbox',
+                        'type'      => 'checkbox',
+                        'options'   => array(
+                            array(
+                                'key'   => "is_enable_backorders",
+                                'label' => __('Enabling this setting allows users to subscribe to out-of-stock products, even when the backorder option is enabled.', 'woocommerce-product-stock-alert'),
+                                'value' => "is_enable_backorders"
+                            ),
                         ),
-                    ),
-                    'database_value' => array(),
-                ],
-                [
-                    'key'       => 'is_enable_no_interest',
-                    'label'     => __("Showcase Subscriber Count for Out of Stock Items", 'woocommerce-product-stock-alert'),
-                    'class'     => 'woo-toggle-checkbox',
-                    'type'      => 'checkbox',
-                    'options'   => array(
-                        array(
-                            'key'   => "is_enable_no_interest",
-                            'label' => __('Enabling this setting shows the subscriber count on the single product page.', 'woocommerce-product-stock-alert'),
-                            'value' => "is_enable_no_interest"
+                        'database_value' => array(),
+                    ],
+                    [
+                        'key'       => 'is_enable_no_interest',
+                        'label'     => __("Showcase Subscriber Count for Out of Stock Items", 'woocommerce-product-stock-alert'),
+                        'class'     => 'woo-toggle-checkbox',
+                        'type'      => 'checkbox',
+                        'options'   => array(
+                            array(
+                                'key'   => "is_enable_no_interest",
+                                'label' => __('Enabling this setting shows the subscriber count on the single product page.', 'woocommerce-product-stock-alert'),
+                                'value' => "is_enable_no_interest"
+                            ),
                         ),
-                    ),
-                    'database_value' => array(),
-                ],
-                [
-                    'key'       => 'shown_interest_text',
-                    'type'      => 'textarea',
-                    'class'     =>  'woo-setting-wpeditor-class',
-                    'depend_checkbox'   => 'is_enable_no_interest',
-                    'label'     => __('Subscriber Count Notification Message', 'woocommerce-product-stock-alert' ),
-                    'desc'      => __('Personalize the notification text to let users know about the quantity of subscribers for out-of-stock item. Note: Use %no_of_subscribed% as number of interest/subscribed persons.', 'woocommerce-product-stock-alert'),
-                    'database_value' => '',
-                ],
-                [
-                    'key'       => 'is_double_optin',
-                    'label'     => __("Subscriber Double Opt-in", 'woocommerce-product-stock-alert'),
-                    'class'     => 'woo-toggle-checkbox',
-                    'type'      => 'checkbox',
-                    'props'     => array(
-                        'disabled'  => apply_filters('is_stock_alert_pro_inactive', true)
-                    ),
-                    'options' => array(
-                        array(
-                            'key'   => "is_double_optin",
-                            'label' => apply_filters('allow_store_inventory_double_optin', __('Upgrade to Pro to enable Double Opt-in flow for subscription confirmation.', 'woocommerce-product-stock-alert')),
-                            'value' => "is_double_optin"
+                        'database_value' => array(),
+                    ],
+                    [
+                        'key'       => 'shown_interest_text',
+                        'type'      => 'textarea',
+                        'class'     =>  'woo-setting-wpeditor-class',
+                        'depend_checkbox'   => 'is_enable_no_interest',
+                        'label'     => __('Subscriber Count Notification Message', 'woocommerce-product-stock-alert' ),
+                        'desc'      => __('Personalize the notification text to let users know about the quantity of subscribers for out-of-stock item. Note: Use %no_of_subscribed% as number of interest/subscribed persons.', 'woocommerce-product-stock-alert'),
+                        'database_value' => '',
+                    ],
+                    [
+                        'key'       => 'is_double_optin',
+                        'label'     => __("Subscriber Double Opt-in", 'woocommerce-product-stock-alert'),
+                        'class'     => 'woo-toggle-checkbox',
+                        'type'      => 'checkbox',
+                        'props'     => array(
+                            'disabled'  => apply_filters('is_stock_alert_pro_inactive', true)
                         ),
-                    ),
-                    'database_value' => array(),
-                ],
-                [
-                    'key'       => 'is_remove_admin_email',
-                    'label'     => __("Remove Admin Email", 'woocommerce-product-stock-alert'),
-                    'class'     => 'woo-toggle-checkbox',
-                    'type'      => 'checkbox',
-                    'options'   => array(
-                        array(
-                            'key'   => "is_remove_admin_email",
-                            'label' => __('Remove admin email from stock alert receivers list.', 'woocommerce-product-stock-alert'),
-                            'value' => "is_remove_admin_email"
+                        'options' => array(
+                            array(
+                                'key'   => "is_double_optin",
+                                'label' => apply_filters('allow_store_inventory_double_optin', __('Upgrade to Pro to enable Double Opt-in flow for subscription confirmation.', 'woocommerce-product-stock-alert')),
+                                'value' => "is_double_optin"
+                            ),
                         ),
-                    ),
-                    'database_value' => array(),
-                ],
-                [
-                    'key'       => 'additional_alert_email',
-                    'type'      => 'textarea',
-                    'class'     => 'woo-setting-wpeditor-class',
-                    'desc'      => __('Enter email address if you want to receive stock alert mail along with admin mail. You can add multiple commma seperated emails. Default: Admin emails.', 'woocommerce-product-stock-alert'),
-                    'label'     => __( 'Additional Receivers Emails', 'woocommerce-product-stock-alert' ),
-                    'database_value' => '',
-                ],
-            ]
+                        'database_value' => array(),
+                    ],
+                    [
+                        'key'       => 'is_remove_admin_email',
+                        'label'     => __("Remove Admin Email", 'woocommerce-product-stock-alert'),
+                        'class'     => 'woo-toggle-checkbox',
+                        'type'      => 'checkbox',
+                        'options'   => array(
+                            array(
+                                'key'   => "is_remove_admin_email",
+                                'label' => __('Remove admin email from stock alert receivers list.', 'woocommerce-product-stock-alert'),
+                                'value' => "is_remove_admin_email"
+                            ),
+                        ),
+                        'database_value' => array(),
+                    ],
+                    [
+                        'key'       => 'additional_alert_email',
+                        'type'      => 'textarea',
+                        'class'     => 'woo-setting-wpeditor-class',
+                        'desc'      => __('Enter email address if you want to receive stock alert mail along with admin mail. You can add multiple commma seperated emails. Default: Admin emails.', 'woocommerce-product-stock-alert'),
+                        'label'     => __( 'Additional Receivers Emails', 'woocommerce-product-stock-alert' ),
+                        'database_value' => '',
+                    ],
+                ]
             ),
             'form_customization' => array(
                 'tablabel'        => __('Form Customization', 'woocommerce-product-stock-alert'),
