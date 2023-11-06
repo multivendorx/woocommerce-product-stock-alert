@@ -51,6 +51,7 @@ export default class TabSection extends Component {
 		}) : '';
 		const TabUIContent = (
 			<div className={`woo-general-wrapper woo-${this.props.subtab}`}>
+				{ stockalertappLocalizer.pro_active == 'free' ? <BannerSection /> : '' }
 				<div className="woo-container woo-tab-banner-wrap">
 					<div
 						className={`woo-middle-container-wrapper ${
@@ -153,7 +154,6 @@ export default class TabSection extends Component {
 							</div>
 						</div>
 					</div>
-					{ stockalertappLocalizer.pro_active == 'free' ? <BannerSection /> : '' }
 				</div>
 			</div>
 		);

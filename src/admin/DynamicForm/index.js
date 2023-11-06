@@ -3,8 +3,6 @@ import React from 'react';
 import Select from 'react-select';
 import axios from 'axios';
 import Dialog from "@mui/material/Dialog";
-import Slider from '@mui/material/Slider';
-import Typography from '@mui/material/Typography';
 import Popoup from './popupcontent';
 
 export default class DynamicForm extends React.Component {
@@ -166,6 +164,26 @@ export default class DynamicForm extends React.Component {
 		if (stockalertappLocalizer.pro_active != 'free' ) {
 			this.handle_get_mailchimp_list();
 		}
+		
+		let $ = jQuery;
+		$(document).ready(function () {
+			const allRanges = document.querySelectorAll(".woo-progress-picker-wrap");
+			allRanges.forEach(wrap => {
+				const range = wrap.querySelector("input.woo-setting-range-picker");
+				const bubble = wrap.querySelector(".bubble");
+
+				range.addEventListener("input", () => {
+					setBubble(range, bubble);
+				});
+				setBubble(range, bubble);
+			});
+
+			function setBubble(range, bubble) {
+				const max = range.max ? range.max : 100;
+				bubble.style.left = range.value / max * 100 + "%";
+			}
+
+		});	
 	}
 
 	CheckProActive = (e, key ) => {
@@ -359,165 +377,180 @@ export default class DynamicForm extends React.Component {
 				);
 			}
 
-			if (type === 'color_table') {
+			if (type === 'form_customize_table') {
 				input = (
 					<div class="editor-left side">
-						<div className="woo-color-picker-wrap">
-							<Typography>Alert Text</Typography>
-							<input
-								{ ...props }
-								className="woo-setting-color-picker"
-								type="color"
-								onChange={ ( e ) => {
-									this.handleOnChangedada(
-										e,
-										'alert_text_color'
-									);
-								} }
-								value={this.state.alert_text_color}
-							/>
+						<div class="left_side_wrap">
+							<div className="woo-color-picker-wrap">
+								Alert Text
+								<input
+									{ ...props }
+									className="woo-setting-color-picker"
+									type="color"
+									onChange={ ( e ) => {
+										this.handleOnChangedada(
+											e,
+											'alert_text_color'
+										);
+									} }
+									value={this.state.alert_text_color}
+								/>
+							</div>
+							<div className="woo-color-picker-wrap">
+								Background
+								<input
+									{ ...props }
+									className="woo-setting-color-picker"
+									type="color"
+									onChange={ ( e ) => {
+										this.handleOnChangedada(
+											e,
+											'button_background_color'
+										);
+									} }
+									value={this.state.button_background_color}
+								/>
+							</div>
+							<div className="woo-color-picker-wrap">
+								Border
+								<input
+									{ ...props }
+									className="woo-setting-color-picker"
+									type="color"
+									onChange={ ( e ) => {
+										this.handleOnChangedada(
+											e,
+											'button_border_color'
+										);
+									} }
+									value={this.state.button_border_color}
+								/>
+							</div>
+							<div className="woo-color-picker-wrap">
+								Text
+								<input
+									{ ...props }
+									className="woo-setting-color-picker"
+									type="color"
+									onChange={ ( e ) => {
+										this.handleOnChangedada(
+											e,
+											'button_text_color'
+										);
+									} }
+									value={this.state.button_text_color}
+								/>
+							</div>
+							<div className="woo-color-picker-wrap">
+								Hover Background
+								<input
+									{ ...props }
+									className="woo-setting-color-picker"
+									type="color"
+									onChange={ ( e ) => {
+										this.handleOnChangedada(
+											e,
+											'button_background_color_onhover'
+										);
+									} }
+									value={this.state.button_background_color_onhover}
+								/>
+							</div>
+							<div className="woo-color-picker-wrap">
+								Hover Border
+								<input
+									{ ...props }
+									className="woo-setting-color-picker"
+									type="color"
+									onChange={ ( e ) => {
+										this.handleOnChangedada(
+											e,
+											'button_border_color_onhover'
+										);
+									} }
+									value={this.state.button_border_color_onhover}
+								/>
+							</div>
+							<div className="woo-color-picker-wrap">
+								Hover Text
+								<input
+									{ ...props }
+									className="woo-setting-color-picker"
+									type="color"
+									onChange={ ( e ) => {
+										this.handleOnChangedada(
+											e,
+											'button_text_color_onhover'
+										);
+									} }
+									value={this.state.button_text_color_onhover}
+								/>
+							</div>
 						</div>
-						<div className="woo-color-picker-wrap">
-							<Typography>Button Background</Typography>
-							<input
-								{ ...props }
-								className="woo-setting-color-picker"
-								type="color"
-								onChange={ ( e ) => {
-									this.handleOnChangedada(
-										e,
-										'button_background_color'
-									);
-								} }
-								value={this.state.button_background_color}
-							/>
-						</div>
-						<div className="woo-color-picker-wrap">
-							<Typography>Button Border</Typography>
-							<input
-								{ ...props }
-								className="woo-setting-color-picker"
-								type="color"
-								onChange={ ( e ) => {
-									this.handleOnChangedada(
-										e,
-										'button_border_color'
-									);
-								} }
-								value={this.state.button_border_color}
-							/>
-						</div>
-						<div className="woo-color-picker-wrap">
-							<Typography>Button Text</Typography>
-							<input
-								{ ...props }
-								className="woo-setting-color-picker"
-								type="color"
-								onChange={ ( e ) => {
-									this.handleOnChangedada(
-										e,
-										'button_text_color'
-									);
-								} }
-								value={this.state.button_text_color}
-							/>
-						</div>
-						<div className="woo-color-picker-wrap">
-							<Typography>Button Background on Hover</Typography>
-							<input
-								{ ...props }
-								className="woo-setting-color-picker"
-								type="color"
-								onChange={ ( e ) => {
-									this.handleOnChangedada(
-										e,
-										'button_background_color_onhover'
-									);
-								} }
-								value={this.state.button_background_color_onhover}
-							/>
-						</div>
-						<div className="woo-color-picker-wrap">
-							<Typography>Button Border on Hover</Typography>
-							<input
-								{ ...props }
-								className="woo-setting-color-picker"
-								type="color"
-								onChange={ ( e ) => {
-									this.handleOnChangedada(
-										e,
-										'button_border_color_onhover'
-									);
-								} }
-								value={this.state.button_border_color_onhover}
-							/>
-						</div>
-						<div className="woo-color-picker-wrap">
-							<Typography>Button Text on Hover</Typography>
-							<input
-								{ ...props }
-								className="woo-setting-color-picker"
-								type="color"
-								onChange={ ( e ) => {
-									this.handleOnChangedada(
-										e,
-										'button_text_color_onhover'
-									);
-								} }
-								value={this.state.button_text_color_onhover}
-							/>
-						</div>
-					</div>			
-				);
-			}
-
-			if (type === 'size_table') {
-				input = (
-					<div class="editor-left side">
-						<div className="woo-size-picker-wrap">
-							<Typography gutterBottom>Font Size</Typography>
-							<Slider
-								defaultValue={ 18 }
-								aria-label="Default"
-								valueLabelDisplay="auto"
-								onChange={ ( e ) => {
-									this.handleOnChangedada(
-										e,
-										'button_font_size'
-									);
-								} }
-								value={this.state.button_font_size}
-							/>
-						</div>
-						<div className="woo-size-picker-wrap">
-							<Typography gutterBottom>Border Radius</Typography>
-							<Slider
-								defaultValue={ 2 }
-								aria-label="Default"
-								valueLabelDisplay="auto"
-								onChange={ ( e ) => {
-									this.handleOnChangedada(
-										e,
-										'button_border_radious'
-									);
-								} }
-								value={this.state.button_border_radious}
-							/>
-						</div>
-						<div className="woo-size-picker-wrap">
-						<Typography gutterBottom>Border Size</Typography>
-							<Slider
-								defaultValue={ 2 }
-								aria-label="Default"
-								valueLabelDisplay="auto"
-								onChange={ ( e ) => {
-									this.handleOnChangedada(
-										e,
-										'button_border_size'
-									);
-								} }
-								value={this.state.button_border_size}
-							/>
+						<div class="right_side_wrap">
+							<div className="woo-size-picker-wrap">
+								Font Size
+								<div className="woo-progress-picker-wrap">
+									<input 
+										{ ...props }
+										className="woo-setting-range-picker"
+										id="button_font_size"
+										type="range"
+										min="0"
+										max="30"
+										value={this.state.button_font_size}
+										onChange={ ( e ) => {
+											this.handleOnChangedada(
+												e,
+												'button_font_size'
+											);
+										} }
+									/>
+									<output class="bubble">{this.state.button_font_size}px</output>
+								</div>
+							</div>
+							<div className="woo-size-picker-wrap">
+								Border Radius
+								<div className="woo-progress-picker-wrap">
+									<input 
+										{ ...props }
+										className="woo-setting-range-picker"
+										id="button_border_radious"
+										type="range"
+										min="0"
+										max="100"
+										value={this.state.button_border_radious}
+										onChange={ ( e ) => {
+											this.handleOnChangedada(
+												e,
+												'button_border_radious'
+											);
+										} }
+									/>
+									<output class="bubble">{this.state.button_border_radious}px</output>
+								</div>
+							</div>
+							<div className="woo-size-picker-wrap">
+								Border Size
+								<div className="woo-progress-picker-wrap">
+									<input 
+										{ ...props }
+										className="woo-setting-range-picker"
+										id="button_border_size"
+										type="range"
+										min="0"
+										max="10"
+										value={this.state.button_border_size}
+										onChange={ ( e ) => {
+											this.handleOnChangedada(
+												e,
+												'button_border_size'
+											);
+										} }
+									/>
+									<output class="bubble">{this.state.button_border_size}px</output>
+								</div>
+							</div>
 						</div>
 					</div>			
 				);
@@ -871,7 +904,7 @@ export default class DynamicForm extends React.Component {
 					<div className="woo-settings-example-button-class">
 						{ <div class="example_form_view">
 							<div class="example_form_alert_text" style={{
-								color: this.state.alert_text_color,
+								color: this.state.alert_text_color
 							}}>
 								{this.state.alert_text ? this.state.alert_text : stockalertappLocalizer.default_alert_text}
 							</div>
@@ -884,17 +917,17 @@ export default class DynamicForm extends React.Component {
 									onMouseLeave={ this.handleOMouseLeave }
 									style={ {
 										color:
-											this.state.hover_on
+											this.state.hover_on && this.state.button_text_color_onhover
 												? this.state.button_text_color_onhover
 												: this.state.button_text_color,
 										fontSize:
 											this.state.button_font_size +'px',
 										borderRadius:
-											this.state.button_border_radious,
-										border: `${ this.state.button_border_size }px solid ${ this.state.button_border_color }`,
+											this.state.button_border_radious + 'px',
+										border: `${ this.state.button_border_size }px solid ${ this.state.hover_on && this.state.button_border_color_onhover ? this.state.button_border_color_onhover : this.state.button_border_color }`,
 										
 										background: 
-											this.state.hover_on 
+											this.state.hover_on && this.state.button_background_color_onhover
 												? this.state.button_background_color_onhover
 												: this.state.button_background_color,
 										verticalAlign: 'middle',

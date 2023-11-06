@@ -282,13 +282,13 @@ class WOO_Product_Stock_Alert_Frontend {
         wp_localize_script('stock_alert_frontend_js', 'form_submission_text', $localization_data);
         
         $stock_interest .= '
-            <div id="stock_notifier_main_form" style="border-radius:10px;" class="stock_notifier-subscribe-form ' . esc_attr( $variation_class ) .'">
+            <div id="stock_notifier_main_form" style="border-radius:10px;" class="stock_notifier-subscribe-form ' . esc_attr($variation_class) .'">
                 ' . $alert_text_html . '
                 <div class="woo_fields_wrap"> ' . $alert_fields . '' . $button_html . '
                 </div>
-                <input type="hidden" class="current_product_id" value="' . $product->get_id() . '" />
-                <input type="hidden" class="current_variation_id" value="' . $variation_id . '" />
-                <input type="hidden" class="current_product_name" value="' . $product->get_title() . '" />
+                <input type="hidden" class="current_product_id" value="' . esc_attr($product->get_id()) . '" />
+                <input type="hidden" class="current_variation_id" value="' . esc_attr($variation_id) . '" />
+                <input type="hidden" class="current_product_name" value="' . esc_attr($product->get_title()) . '" />
                 ' . $shown_interest_section . '
             </div>';
         return $stock_interest;

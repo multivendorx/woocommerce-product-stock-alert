@@ -37,7 +37,7 @@ if (!function_exists('get_woo_product_alert_plugin_settings')) {
 if (!function_exists('get_woo_form_settings_array')) {
     function get_woo_form_settings_array() {
         $default_text = __('Enter your email', 'woocommerce-product-stock-alert');
-        $default_alert_text = __('Get an alert when the product is in stock:', 'woocommerce-product-stock-alert');
+        $default_alert_text = __('Get an alert when the product is in stock.', 'woocommerce-product-stock-alert');
         $default_button_text = __('Get an alert', 'woocommerce-product-stock-alert');
         $default_unsubscribe_button_text = __('Unsubscribe', 'woocommerce-product-stock-alert');
         $default_alert_success = __('Thank you for your interest in <b>%product_title%</b>, you will receive an email alert when it becomes available.', 'woocommerce-product-stock-alert');
@@ -565,24 +565,22 @@ if (!function_exists('woo_stockalert_admin_tabs')) {
                         'database_value' => '',
                     ],
                     [
+                        'key'       =>  'alertbox_customization',
+                        'type'      =>  'blocktext',
+                        'label'     =>  __( 'no_label', 'woocommerce-product-stock-alert' ),
+                        'blocktext'      =>  __( "Alert Box Customization", 'woocommerce-product-stock-alert' ),
+                        'database_value' => '',
+                    ],
+                    [
                         'key'       => 'custom_example_form',
                         'type'      => 'example_form',
                         'class'     =>  'woo-setting-own-class',
-                        'desc'      => __('', 'woocommerce-product-stock-alert'),
                         'label'     => __( 'Demo Form', 'woocommerce-product-stock-alert' )
                     ],
                     [
                         'key'       =>  'button_color_section',
-                        'type'      =>  'color_table',
-                        'label'     =>  __( 'Color Section', 'woocommerce-product-stock-alert' ),
-                        'blocktext'      =>  __( "Color Section", 'woocommerce-product-stock-alert' ),
-                        'database_value' => '',
-                    ],
-                    [
-                        'key'       =>  'button_size_selection',
-                        'type'      =>  'size_table',
-                        'label'     =>  __( 'Size Selection', 'woocommerce-product-stock-alert' ),
-                        'blocktext'      =>  __( "Size Selection", 'woocommerce-product-stock-alert' ),
+                        'type'      =>  'form_customize_table',
+                        'label'     =>  __( 'Customization Settings', 'woocommerce-product-stock-alert' ),
                         'database_value' => '',
                     ],
 				]
