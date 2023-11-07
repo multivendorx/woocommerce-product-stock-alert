@@ -41,8 +41,8 @@ class Stock_Alert_Deprecated_Filter_Hooks extends WC_Deprecated_Hooks {
 	 *
 	 * @param string $hook_name Hook name.
 	 */
-	public function hook_in( $hook_name ) {
-		add_filter( $hook_name, array( $this, 'maybe_handle_deprecated_hook' ), -1000, 8 );
+	public function hook_in($hook_name) {
+		add_filter($hook_name, array($this, 'maybe_handle_deprecated_hook'), -1000, 8);
 	}
 
 	/**
@@ -54,10 +54,10 @@ class Stock_Alert_Deprecated_Filter_Hooks extends WC_Deprecated_Hooks {
 	 * @param  mixed  $return_value      Returned value.
 	 * @return mixed
 	 */
-	public function handle_deprecated_hook( $new_hook, $old_hook, $new_callback_args, $return_value ) {
-		if ( has_filter( $old_hook ) ) {
-			$this->display_notice( $old_hook, $new_hook );
-			$return_value = $this->trigger_hook( $old_hook, $new_callback_args );
+	public function handle_deprecated_hook($new_hook, $old_hook, $new_callback_args, $return_value) {
+		if (has_filter($old_hook)) {
+			$this->display_notice($old_hook, $new_hook);
+			$return_value = $this->trigger_hook($old_hook, $new_callback_args);
 		}
 		return $return_value;
 	}
@@ -69,7 +69,7 @@ class Stock_Alert_Deprecated_Filter_Hooks extends WC_Deprecated_Hooks {
 	 * @param  array  $new_callback_args New callback args.
 	 * @return mixed
 	 */
-	protected function trigger_hook( $old_hook, $new_callback_args ) {
-		return apply_filters_ref_array( $old_hook, $new_callback_args );
+	protected function trigger_hook($old_hook, $new_callback_args) {
+		return apply_filters_ref_array($old_hook, $new_callback_args);
 	}
 }

@@ -4,19 +4,19 @@ class WOO_Product_Stock_Alert_Ajax {
 	public function __construct() {
 		
 		// Save customer email in database
-		add_action( 'wp_ajax_alert_ajax', array(&$this, 'stock_alert_function') );
-		add_action( 'wp_ajax_nopriv_alert_ajax', array(&$this, 'stock_alert_function') );
+		add_action('wp_ajax_alert_ajax', array(&$this, 'stock_alert_function'));
+		add_action('wp_ajax_nopriv_alert_ajax', array(&$this, 'stock_alert_function'));
 		// Delete unsubscribed users
-		add_action( 'wp_ajax_unsubscribe_button', array($this, 'unsubscribe_users') );
-		add_action( 'wp_ajax_nopriv_unsubscribe_button', array($this, 'unsubscribe_users') );
+		add_action('wp_ajax_unsubscribe_button', array($this, 'unsubscribe_users'));
+		add_action('wp_ajax_nopriv_unsubscribe_button', array($this, 'unsubscribe_users'));
 		// Export data
-		add_action( 'wp_ajax_export_subscribers', array($this, 'export_stock_alert_data') );
+		add_action('wp_ajax_export_subscribers', array($this, 'export_stock_alert_data'));
 		//add fields for variation product shortcode
-		add_action( 'wp_ajax_nopriv_get_variation_box_ajax', array( $this, 'get_variation_box_ajax') );
-		add_action('wp_ajax_get_variation_box_ajax', array( $this, 'get_variation_box_ajax') );
+		add_action('wp_ajax_nopriv_get_variation_box_ajax', array( $this, 'get_variation_box_ajax'));
+		add_action('wp_ajax_get_variation_box_ajax', array($this, 'get_variation_box_ajax'));
 		//recaptcha version-3 validate
-		add_action( 'wp_ajax_recaptcha_validate_ajax', array($this, 'recaptcha_validate_ajax') );
-		add_action( 'wp_ajax_nopriv_recaptcha_validate_ajax', array($this, 'recaptcha_validate_ajax') );
+		add_action('wp_ajax_recaptcha_validate_ajax', array($this, 'recaptcha_validate_ajax'));
+		add_action('wp_ajax_nopriv_recaptcha_validate_ajax', array($this, 'recaptcha_validate_ajax'));
 	}
 
 	function recaptcha_validate_ajax() {
@@ -54,13 +54,13 @@ class WOO_Product_Stock_Alert_Ajax {
 		);
 
 		
-		foreach($headers as $header) { 
+		foreach ($headers as $header) { 
 			$headers_arr[] = '"' . $header . '"';
 		}
 		$headers_str = implode(',', $headers_arr);
 		$get_subscribed_user = get_product_subscribers_array();
 
-        if( isset( $get_subscribed_user ) && !empty( $get_subscribed_user ) ) {
+        if (isset($get_subscribed_user) && !empty($get_subscribed_user)) {
             foreach ($get_subscribed_user as $pro_id => $value) {
                 $subscribers_list = implode(',',$value);
                 $product = wc_get_product($pro_id);
@@ -75,8 +75,8 @@ class WOO_Product_Stock_Alert_Ajax {
         }
 		
 		echo $headers_str;
-		if( isset($stock_alert_export_datas) && !empty($stock_alert_export_datas) ) {
-			foreach( $stock_alert_export_datas as $stock_alert_export_data ) {
+		if (isset($stock_alert_export_datas) && !empty($stock_alert_export_datas)) {
+			foreach ($stock_alert_export_datas as $stock_alert_export_data) {
 				echo "\r\n";
 				echo implode(",", $stock_alert_export_data);
 			}
@@ -126,18 +126,18 @@ class WOO_Product_Stock_Alert_Ajax {
 		$product = wc_get_product( $product_id );
 		$display_stock_alert_form = false;
 		
-		if( $child_id && !empty($child_id) ) {
+		if ($child_id && !empty($child_id)) {
 			$child_obj = new WC_Product_Variation($child_id);
 			$stock_quantity = $child_obj->get_stock_quantity();
 			$managing_stock = $child_obj->managing_stock();
 			$is_in_stock = $child_obj->is_in_stock();
 			$is_on_backorder = $child_obj->is_on_backorder( 1 );
 
-			if ( ! $is_in_stock ) {
+			if (!$is_in_stock) {
 					$display_stock_alert_form = true;
-			} elseif ( $managing_stock && $is_on_backorder && get_woo_product_alert_plugin_settings('is_enable_backorders') ) {
+			} elseif ($managing_stock && $is_on_backorder && get_woo_product_alert_plugin_settings('is_enable_backorders')) {
 					$display_stock_alert_form = true;
-			} elseif ( $managing_stock ) {
+			} elseif ($managing_stock) {
 				if (get_option('woocommerce_notify_no_stock_amount')) {
 					if ($stock_quantity <= (int) get_option('woocommerce_notify_no_stock_amount') && get_woo_product_alert_plugin_settings('is_enable_backorders')) {
 						$display_stock_alert_form = true;

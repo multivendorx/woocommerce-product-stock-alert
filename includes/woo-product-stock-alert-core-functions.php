@@ -444,12 +444,12 @@ if (!function_exists('woo_stockalert_admin_tabs')) {
     function woo_stockalert_admin_tabs(){
         $stock_alert_settings_page_endpoint = apply_filters('woo_stockalert_endpoint_fields_before_value', array(
             'general' => array(
-                'tablabel'        =>  __('General', 'woocommerce-product-stock-alert'),
-                'apiurl'          =>  'save_stockalert',
-                'description'     =>  __('Configure basic product alert settings. ', 'woocommerce-product-stock-alert'),
-                'icon'            =>  'icon-general',
-                'submenu'         =>  'settings',
-                'modulename'      =>  [
+                'tablabel'        => __('General', 'woocommerce-product-stock-alert'),
+                'apiurl'          => 'save_stockalert',
+                'description'     => __('Configure basic product alert settings. ', 'woocommerce-product-stock-alert'),
+                'icon'            => 'icon-general',
+                'submenu'         => 'settings',
+                'modulename'      => [
                     [
                         'key'       => 'is_enable_backorders',
                         'label'     => __("Allow Subscription for Backorders Product", 'woocommerce-product-stock-alert'),
@@ -481,7 +481,7 @@ if (!function_exists('woo_stockalert_admin_tabs')) {
                     [
                         'key'       => 'shown_interest_text',
                         'type'      => 'textarea',
-                        'class'     =>  'woo-setting-wpeditor-class',
+                        'class'     => 'woo-setting-wpeditor-class',
                         'depend_checkbox'   => 'is_enable_no_interest',
                         'label'     => __('Subscriber Count Notification Message', 'woocommerce-product-stock-alert' ),
                         'desc'      => __('Personalize the notification text to let users know about the quantity of subscribers for out-of-stock item. Note: Use %no_of_subscribed% as number of interest/subscribed persons.', 'woocommerce-product-stock-alert'),
@@ -586,18 +586,18 @@ if (!function_exists('woo_stockalert_admin_tabs')) {
                 ]
             ),
             'form_submission' => array(
-                'tablabel'        =>  __('Post-Form Submission Messages', 'woocommerce-product-stock-alert'),
-                'apiurl'          =>  'save_stockalert',
-                'description'     =>  __('Customize message that appears after user submits the form.', 'woocommerce-product-stock-alert'),
-                'icon'            =>  'icon-form-submission',
-                'submenu'         =>  'settings',
-                'modulename'      =>  [
+                'tablabel'        => __('Post-Form Submission Messages', 'woocommerce-product-stock-alert'),
+                'apiurl'          => 'save_stockalert',
+                'description'     => __('Customize message that appears after user submits the form.', 'woocommerce-product-stock-alert'),
+                'icon'            => 'icon-form-submission',
+                'submenu'         => 'settings',
+                'modulename'      => [
                     [
                         'key'       => 'alert_success',
                         'type'      => 'textarea',
                         'class'     => 'woo-setting-wpeditor-class',
                         'desc'      => __('Tip: You can insert %product_title% for the product title and %customer_email% for the customers email. <br/> Example:Thank you for expressing interest in %product_title%. We will notify you via email once it is back in stock.', 'woocommerce-product-stock-alert'),
-                        'label'     => __('Edit Alert Text When Form Submitted Successfully', 'woocommerce-product-stock-alert'),
+                        'label'     => __('Alert Text on Successful Form Submission', 'woocommerce-product-stock-alert'),
                         'database_value' => '',
                     ],
                     [

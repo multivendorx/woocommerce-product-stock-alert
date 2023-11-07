@@ -8,14 +8,14 @@ class WOO_Product_Stock_Alert_Frontend {
         //enqueue styles
         add_action('wp_enqueue_scripts', array(&$this, 'frontend_styles'));
 
-        add_action( 'woocommerce_simple_add_to_cart', array( $this, 'display_in_simple_product' ), 31 );
-        add_action( 'woocommerce_bundle_add_to_cart', array( $this, 'display_in_simple_product' ), 31 );
+        add_action('woocommerce_simple_add_to_cart', array($this, 'display_in_simple_product'), 31 );
+        add_action('woocommerce_bundle_add_to_cart', array($this, 'display_in_simple_product'), 31 );
         add_action('woocommerce_subscription_add_to_cart', array($this, 'display_in_simple_product'), 31);
-        add_action( 'woocommerce_woosb_add_to_cart', array( $this, 'display_in_simple_product' ), 31 );
-        add_action( 'woocommerce_after_variations_form', array( $this, 'display_in_no_variation_product' ) );
-        add_filter( 'woocommerce_available_variation', array( $this, 'display_in_variation' ), 10, 3 );
+        add_action('woocommerce_woosb_add_to_cart', array($this, 'display_in_simple_product'), 31);
+        add_action('woocommerce_after_variations_form', array($this, 'display_in_no_variation_product'));
+        add_filter('woocommerce_available_variation', array($this, 'display_in_variation'), 10, 3);
         // Some theme variation disabled by default if it is out of stock so for that workaround solution.
-        add_filter( 'woocommerce_variation_is_active', array( $this, 'enable_disabled_variation_dropdown' ), 100, 2 );
+        add_filter('woocommerce_variation_is_active', array($this, 'enable_disabled_variation_dropdown'), 100, 2);
         //support for grouped products
         add_filter('woocommerce_grouped_product_list_column_price', array($this, 'display_in_grouped_product'), 10, 2);
         // Hover style
@@ -87,7 +87,7 @@ class WOO_Product_Stock_Alert_Frontend {
     function frontend_styles() {
         global $WOO_Product_Stock_Alert;
         $frontend_style_path = $WOO_Product_Stock_Alert->plugin_url . 'assets/frontend/css/';
-        $suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+        $suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
         if (function_exists('is_product')) {
             if (is_product()) {
                 // Enqueue your frontend stylesheet from here
@@ -123,10 +123,10 @@ class WOO_Product_Stock_Alert_Frontend {
      */
     public function display_in_simple_product() {
         global $product;
-        echo _e( $this->display_subscribe_box( $product ) );
+        echo _e($this->display_subscribe_box($product));
     }
 
-    public function display_in_grouped_product( $value, $child) {
+    public function display_in_grouped_product($value, $child) {
         $value = $value . $this->display_subscribe_box($child, array());
         return $value;
     }
@@ -140,11 +140,11 @@ class WOO_Product_Stock_Alert_Frontend {
         global $product;
         $product_type = $product->get_type();
         // Get Available variations?
-        if ( 'variable' == $product_type ) {
-            $get_variations = count( $product->get_children() ) <= apply_filters( 'woocommerce_ajax_variation_threshold', 30, $product );
+        if ('variable' == $product_type) {
+            $get_variations = count($product->get_children()) <= apply_filters('woocommerce_ajax_variation_threshold', 30, $product);
             $get_variations = $get_variations ? $product->get_available_variations() : false;
-            if ( ! $get_variations ) {
-                echo _e( $this->display_subscribe_box( $product ) );
+            if (!$get_variations) {
+                echo _e($this->display_subscribe_box($product));
             }
         }
     }
@@ -159,12 +159,12 @@ class WOO_Product_Stock_Alert_Frontend {
      */
     public function display_subscribe_box( $product, $variation = [] ) {
         $get_option_backorder = get_woo_product_alert_plugin_settings('is_enable_backorders');
-        $visibility_backorder = isset( $get_option_backorder ) ? true : false;
+        $visibility_backorder = isset($get_option_backorder) ? true : false;
 
-        if ( ! $variation && $this->is_stock_product( $product ) ) {
-            return $this->html_subscribe_form( $product );
-        } elseif ( $variation && $this->is_stock_product( $variation ) ) {
-            return $this->html_subscribe_form( $product, $variation );
+        if (!$variation && $this->is_stock_product($product)) {
+            return $this->html_subscribe_form($product);
+        } elseif ($variation && $this->is_stock_product($variation)) {
+            return $this->html_subscribe_form($product, $variation);
         }
     }
 
@@ -175,7 +175,7 @@ class WOO_Product_Stock_Alert_Frontend {
      *
      * @return boolen $flag
      */
-    public function is_stock_product( $product ) {
+    public function is_stock_product($product) {
         $visibility_backorder = get_woo_product_alert_plugin_settings('is_enable_backorders');
         $flag = false;
         if ($product) {
@@ -210,7 +210,7 @@ class WOO_Product_Stock_Alert_Frontend {
      *
      * @version 1.0.0
      */
-    public function html_subscribe_form( $product, $variation = [] ) {
+    public function html_subscribe_form($product, $variation = []) {
         $variation_class = '';
         if ($variation) {
             $variation_id = $variation->get_id();
@@ -306,7 +306,7 @@ class WOO_Product_Stock_Alert_Frontend {
      */
     public function display_in_variation( $atts, $product, $variation ) {
         $get_stock                 = $atts['availability_html'];
-        $atts['availability_html'] = $get_stock . $this->display_subscribe_box( $product, $variation );
+        $atts['availability_html'] = $get_stock . $this->display_subscribe_box($product, $variation);
         return $atts;
     }
 
@@ -319,8 +319,8 @@ class WOO_Product_Stock_Alert_Frontend {
      */
     public function enable_disabled_variation_dropdown( $active, $variation ) {
         $get_disabled_variation    = get_option( 'stock_notifier_ignore_disabled_variation' );
-        $ignore_disabled_variation = isset( $get_disabled_variation ) && '1' == $get_disabled_variation ? true : false;
-        if ( ! $ignore_disabled_variation ) {
+        $ignore_disabled_variation = isset($get_disabled_variation) && '1' == $get_disabled_variation ? true : false;
+        if (!$ignore_disabled_variation) {
             $active = true;
         }
         return $active;
