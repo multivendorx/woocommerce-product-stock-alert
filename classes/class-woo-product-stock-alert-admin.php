@@ -150,6 +150,7 @@ class WOO_Product_Stock_Alert_Admin {
             'mail_sent'     =>  __('Mail Sent', 'woocommerce-product-stock-alert'),
             'search'        =>  __('Search by Email', 'woocommerce-product-stock-alert'),
             'show_product'  =>  __('Search by Product Name', 'woocommerce-product-stock-alert'),
+            'daterenge'     =>  __('YYYY-MM-DD ~ YYYY-MM-DD', 'woocommerce-product-stock-alert'),
         );
         $pro_settings_list = apply_filters('woocommerce_stock_alert_pro_settings_lists',  array( 'ban_email_domains', 'ban_email_domain_text', 'ban_email_addresses', 'ban_email_address_text', 'is_mailchimp_enable', 'mailchimp_api', 'get_mailchimp_list_button', 'selected_mailchimp_list'));
         

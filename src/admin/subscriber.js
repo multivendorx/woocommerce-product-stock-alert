@@ -5,7 +5,7 @@ import { CSVLink } from 'react-csv';
 import DataTable from 'react-data-table-component';
 import PuffLoader from 'react-spinners/PuffLoader';
 import { css } from '@emotion/react';
-import DateRangePicker from 'rsuite/DateRangePicker';
+import { DateRangePicker } from 'rsuite';
 import Dialog from "@mui/material/Dialog";
 import Popoup from './DynamicForm/popupcontent';
 
@@ -522,6 +522,7 @@ class Subscriber extends Component {
 										</div>
 										
 										<DateRangePicker
+											placeholder={stockalertappLocalizer.subscription_page_string.daterenge}
 											onChange={(e) => this.handleupdatesub(e)}
 										/>
 									</div>
