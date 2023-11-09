@@ -1,338 +1,398 @@
 @font-face {
-	font-family: 'mvx-woo-stockalert';
-	src:  url('fonts/mvx-woo-stockalert.eot?m5utwm');
-	src:  url('fonts/mvx-woo-stockalert.eot?m5utwm#iefix') format('embedded-opentype'),
-	  url('fonts/mvx-woo-stockalert.ttf?m5utwm') format('truetype'),
-	  url('fonts/mvx-woo-stockalert.woff?m5utwm') format('woff'),
-	  url('fonts/mvx-woo-stockalert.svg?m5utwm#mvx-woo-stockalert') format('svg');
-	font-weight: normal;
-	font-style: normal;
-	font-display: block;
-  }
-  
-  [class^="icon-"], [class*=" icon-"] {
-	/* use !important to prevent issues with browser extensions that change fonts */
-	font-family: 'mvx-woo-stockalert' !important;
-	speak: never;
-	font-style: normal;
-	font-weight: normal;
-	font-variant: normal;
-	text-transform: none;
-	line-height: 1;
-  
-	/* Better Font Rendering =========== */
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-  }
-	
-  .icon-form-customization:before {
-    content: "\e900";
-  }
-  .icon-form-submission:before {
-    content: "\e901";
-  }
-  .icon-general:before {
-    content: "\e902";
-  }
-  .icon-live-preview:before {
-    content: "\e903";
-  }
-  .icon-email-setting:before {
-    content: "\e904";
-  }
-  .icon-mailchimp-setting:before {
-    content: "\e905";
-  }
-  
-  $base-color : #f2eff5;
-  $boder-color : #d4d1d9;
-  $border : 0.063rem solid #d4d1d9;
-  $title-color : #181718;
-  $paragraph-color : #5e5d60;
-  $border-radius :  0.25rem;
-  $button-border-radius :  0.25rem;
-  $fill-color : #fdfdfe;
-  $theme-color: #65438f;
-  $header-background: #f7f6f9;
-  $section-background:#fbfafc;
-  $code-back:#fdf9fb;
-  $code-line:#dfb1c7;
-  $purple-btn-hover:#795b9d;
-  $font-white:#f9f8fb;
-  $grey-icon:#8e8b91;
-  $rejected-vendor-font:#df5d65;
-  $rejected-vendor-back:#fefbfc;
-  $approve-font-color:#522c81;
-  $red-btn-back:#e35047;
-  $red-icon:#e26f76;
-  $code-font:#b74f82;
-  $small-code-back:#fbf5f8;
-  $blue-icon:#9f8ab9;
-  $scroll-color:#ece8f1;
+  font-family: 'woo-stock-alert';
+  src: url('fonts/woo-stock-alert.eot?r0aunu');
+  src: url('fonts/woo-stock-alert.eot?r0aunu#iefix') format('embedded-opentype'),
+    url('fonts/woo-stock-alert.ttf?r0aunu') format('truetype'),
+    url('fonts/woo-stock-alert.woff?r0aunu') format('woff'),
+    url('fonts/woo-stock-alert.svg?r0aunu#woo-stock-alert') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="icon-"],
+[class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'woo-stock-alert' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-left-arrow:before {
+  content: "\e906";
+}
+
+.icon-right-arrow:before {
+  content: "\e907";
+}
+
+.icon-form-customization:before {
+  content: "\e900";
+}
+
+.icon-form-submission:before {
+  content: "\e901";
+}
+
+.icon-general:before {
+  content: "\e902";
+}
+
+.icon-live-preview:before {
+  content: "\e903";
+}
+
+.icon-email-setting:before {
+  content: "\e904";
+}
+
+.icon-mailchimp-setting:before {
+  content: "\e905";
+}
+
+.icon-cross:before {
+  content: "\ea0f";
+}
+
+$base-color : #f2eff5;
+$boder-color : #d4d1d9;
+$border : 0.063rem solid #d4d1d9;
+$title-color : #181718;
+$paragraph-color : #5e5d60;
+$border-radius : 0.25rem;
+$button-border-radius : 0.25rem;
+$fill-color : #fdfdfe;
+$theme-color: #65438f;
+$header-background: #f7f6f9;
+$section-background: #fbfafc;
+$code-back: #fdf9fb;
+$code-line: #dfb1c7;
+$purple-btn-hover: #795b9d;
+$font-white: #f9f8fb;
+$grey-icon: #8e8b91;
+$rejected-vendor-font: #df5d65;
+$rejected-vendor-back: #fefbfc;
+$approve-font-color: #522c81;
+$red-btn-back: #e35047;
+$red-icon: #e26f76;
+$code-font: #b74f82;
+$small-code-back: #fbf5f8;
+$blue-icon: #9f8ab9;
+$scroll-color: #ece8f1;
 
 
-  
-  @mixin flexprops($align) {
-    display: flex;
-    align-items: $align;
+
+@mixin flexprops($align) {
+  display: flex;
+  align-items: $align;
+}
+
+@mixin staus {
+  padding: 0.344rem 0.5rem;
+  border-radius: $border-radius;
+}
+
+@mixin button {
+  transition: all 0.3s ease;
+  border-radius: $button-border-radius;
+  padding: 0.594rem 1rem;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: none;
   }
-  @mixin staus {
-    padding: 0.344rem 0.5rem;
+}
+
+@mixin description {
+  padding: 0.625rem 0 1.5rem;
+  font-size: 0.75rem;
+  color: $grey-icon;
+}
+
+@mixin scroll-height {
+  &::-webkit-scrollbar {
+    height: 0.5rem;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $scroll-color;
     border-radius: $border-radius;
   }
-  @mixin button {
-    transition: all 0.3s ease;
-    border-radius: $button-border-radius;
-    padding: 0.594rem 1rem;
-    cursor: pointer;
-    &:hover{
+}
+
+@mixin scroll-width {
+  &::-webkit-scrollbar {
+    width: 0.25rem;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $scroll-color;
+    border-radius: $border-radius;
+  }
+}
+
+@mixin woo-addbtn {
+  background: $theme-color;
+  border-radius: $border-radius;
+
+  a {
+    color: $fill-color;
+
+    &:hover {
+      color: $fill-color;
       text-decoration: none;
     }
-  }
-  @mixin description {
-    padding: 0.625rem 0 1.5rem;
-    font-size: 0.75rem;
-    color:$grey-icon;
-  }
-  @mixin scroll-height{
-    &::-webkit-scrollbar{
-      height: 0.5rem;
-    }
-    &::-webkit-scrollbar-thumb{
-      background-color: $scroll-color;
-      border-radius: $border-radius;
+
+    i {
+      padding-right: 0.5rem;
+      font-size: 1.2rem;
     }
   }
-  @mixin scroll-width {
-    &::-webkit-scrollbar{
-      width: 0.25rem;
-    }
-    &::-webkit-scrollbar-thumb{
-      background-color: $scroll-color;
-      border-radius: $border-radius;
-    }
+}
+
+@mixin commission-heading {
+  font-size: 1rem;
+  border: $border;
+  background-color: $fill-color;
+  padding: 1rem;
+  margin: 1.5rem 0 0.25rem;
+  border-radius: $border-radius;
+}
+
+@mixin back-btn {
+  color: $title-color;
+  vertical-align: middle;
+  text-decoration: none;
+  border: $border;
+  padding: 0.5rem 1rem 0.5rem 0.6rem;
+  border-radius: $border-radius;
+}
+
+@mixin toggle-btn-disable {
+  input[type=checkbox] {
+    height: 0;
+    width: 0;
+    visibility: hidden;
+    display: none;
   }
-  @mixin mvx-addbtn {
+
+  label {
+    cursor: pointer;
+    width: 3.3rem;
+    height: 1.5rem;
+    background: transparent;
+    display: block;
+    border-radius: 8rem;
+    position: relative;
+    border: 0.125rem solid $boder-color;
+  }
+
+  label:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0.5rem;
+    width: 0.17rem;
+    height: 0.57rem;
+    background: $fill-color;
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+  }
+
+  label:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0.313rem;
+    width: 0.875rem;
+    height: 0.875rem;
+    background: $boder-color;
+    border-radius: 90rem;
+    transition: 0.3s;
+    z-index: 1;
+  }
+
+  input:checked+label {
     background: $theme-color;
-    border-radius: $border-radius;
-    a {
-        color: $fill-color;
-        &:hover {
-            color: $fill-color;
-            text-decoration: none;
-        }
-        i {
-            padding-right: 0.5rem;
-            font-size: 1.2rem;
-        }
-    }
   }
-  @mixin commission-heading {
-    font-size: 1rem;
-    border: $border;
+
+  input:checked+label:after {
+    left: calc(100% - 1.313rem);
+    transform: translatey(-50%);
     background-color: $fill-color;
-    padding: 1rem;
-    margin: 1.5rem 0 0.25rem;
-    border-radius: $border-radius;
-  }
-  @mixin back-btn {
-    color: $title-color;
-    vertical-align: middle;
-    text-decoration: none;
-    border: $border;
-    padding: 0.5rem 1rem 0.5rem 0.6rem;
-    border-radius: $border-radius;
-   }
-   @mixin toggle-btn-disable {
-    input[type=checkbox]{
-        height: 0;
-        width: 0;
-        visibility: hidden;
-        display: none;
-    }
-    label {
-        cursor: pointer;
-        width: 3.3rem;
-        height: 1.5rem;
-        background: transparent;
-        display: block;
-        border-radius: 8rem;
-        position: relative;
-        border: 0.125rem solid $boder-color;
-    }
-    label:before {
-        content: '';
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        left: 0.5rem;
-        width: 0.17rem;
-        height: 0.57rem;
-        background: $fill-color;
-        -webkit-transition: 0.3s;
-        transition: 0.3s;
-    }
-    label:after {
-        content: '';
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        left: 0.313rem;
-        width: 0.875rem;
-        height: 0.875rem;
-        background: $boder-color;
-        border-radius: 90rem;
-        transition: 0.3s;
-        z-index: 1;
-    }
-    input:checked + label {
-        background: $theme-color;
-    }
-    input:checked + label:after {
-      left: calc(100% - 1.313rem);
-      transform: translatey(-50%);
-        background-color: $fill-color;
-    }
-    label:active:after {
-        width: 1.25rem;
-    }
-  }
-  @mixin toggle-btn {
-      input[type=checkbox]{
-          height: 0;
-          width: 0;
-          visibility: hidden;
-          display: none;
-      }
-      label {
-          cursor: pointer;
-          width: 3.3rem;
-          height: 1.5rem;
-          background: transparent;
-          display: block;
-          border-radius: 8rem;
-          position: relative;
-          border: 0.125rem solid $boder-color;
-      }
-      label:before {
-          content: '';
-          position: absolute;
-          top: 50%;
-          transform: translateY(-50%);
-          left: 0.5rem;
-          width: 0.17rem;
-          height: 0.57rem;
-          background: $fill-color;
-          -webkit-transition: 0.3s;
-          transition: 0.3s;
-      }
-      label:after {
-          content: '';
-          position: absolute;
-          top: 50%;
-          transform: translateY(-50%);
-          left: 0.313rem;
-          width: 0.875rem;
-          height: 0.875rem;
-          background: $theme-color;
-          border-radius: 90rem;
-          transition: 0.3s;
-          z-index: 1;
-      }
-      input:checked + label {
-          background: $theme-color;
-          border: 0.125rem solid $theme-color;
-      }
-      input:checked + label:after {
-        left: calc(100% - 1.313rem);
-        transform: translatey(-50%);
-          background-color: $fill-color;
-      }
-      label:active:after {
-          width: 1.25rem;
-      }
-  }
-  @mixin select-input {
-    border-radius: 0.25rem;
-    width: 100%;
-    padding: 0rem 0.75rem;
-    color: $grey-icon;
-    font-size: 0.875rem;
-    border: $border;
-    background-color:$fill-color;
-    line-height: 2.375;
-  }
-  @mixin moduleicon {
-      width: 3.5rem;
-      height: 3.5rem;
-      margin: auto;
-      line-height: 4.125;
-      background: rgb(63,20,115);
-      background: linear-gradient(138deg, rgba(63,20,115,1) 0%, rgba(175,59,116,1) 50%, rgba(219,75,84,1) 100%);
-      border-radius: $border-radius;
-      margin-bottom: 1rem;
-      & i {
-          font-size: 1.5rem;
-          color: $font-white;
-      }
-  }
-  @mixin datepicker {
-      width: 17.5rem;
-      height:auto;
-      background-color: $fill-color;
-      margin-left: auto;
-  }
-  @mixin border {
-      border: 0.063rem solid $boder-color;
-  }
-  @mixin iconcolor {
-      color: $theme-color;
-  }
-  @mixin input {
-    padding-left: 0.8rem;
-    border: $border;
-    border-radius: $border-radius;
-    height: 2.5rem;
-  }
-  @mixin red-btn {
-    background-color: $red-btn-back;
-    color: $font-white;
-    border: 0.06rem solid $red-btn-back;
-    &:hover{
-      background-color: #e6635b;
-      color: $font-white;
-    }
-  }
-  @mixin purple-btn {
-    background-color: $theme-color;
-    border: none;
-    color: $font-white;
-    &:hover{
-      background-color: $purple-btn-hover;
-      color: $font-white;
-    }
-  }
-  @mixin border-btn {
-    border: $border;
-    color: $title-color;
-    &:hover{
-      border-color: $title-color ;
-    }
   }
 
-  //tab part start here
-  .mvx-container {
-    background-color: #f2eff5;
-    padding: 2rem 1.5rem;
-    min-height: 54rem;
+  label:active:after {
+    width: 1.25rem;
   }
-  .mvx-tab-banner-wrap {
-    display: flex;
-    gap: 1rem;
-    justify-content: space-between;
+}
+
+@mixin toggle-btn {
+  input[type=checkbox] {
+    height: 0;
+    width: 0;
+    visibility: hidden;
+    display: none;
   }
 
-.mvx-tab-description-start {
+  label {
+    cursor: pointer;
+    width: 3.3rem;
+    height: 1.5rem;
+    background: transparent;
+    display: block;
+    border-radius: 8rem;
+    position: relative;
+    border: 0.125rem solid $boder-color;
+  }
+
+  label:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0.5rem;
+    width: 0.17rem;
+    height: 0.57rem;
+    background: $fill-color;
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+  }
+
+  label:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0.313rem;
+    width: 0.875rem;
+    height: 0.875rem;
+    background: $theme-color;
+    border-radius: 90rem;
+    transition: 0.3s;
+    z-index: 1;
+  }
+
+  input:checked+label {
+    background: $theme-color;
+    border: 0.125rem solid $theme-color;
+  }
+
+  input:checked+label:after {
+    left: calc(100% - 1.313rem);
+    transform: translatey(-50%);
+    background-color: $fill-color;
+  }
+
+  label:active:after {
+    width: 1.25rem;
+  }
+}
+
+@mixin select-input {
+  border-radius: 0.25rem;
+  width: 100%;
+  padding: 0rem 0.75rem;
+  color: $grey-icon;
+  font-size: 0.875rem;
+  border: $border;
+  background-color: $fill-color;
+  line-height: 2.375;
+}
+
+@mixin moduleicon {
+  width: 3.5rem;
+  height: 3.5rem;
+  margin: auto;
+  line-height: 4.125;
+  background: rgb(63, 20, 115);
+  background: linear-gradient(138deg, rgba(63, 20, 115, 1) 0%, rgba(175, 59, 116, 1) 50%, rgba(219, 75, 84, 1) 100%);
+  border-radius: $border-radius;
+  margin-bottom: 1rem;
+
+  & i {
+    font-size: 1.5rem;
+    color: $font-white;
+  }
+}
+
+@mixin datepicker {
+  width: 17.5rem;
+  height: auto;
+  background-color: $fill-color;
+  margin-left: auto;
+}
+
+@mixin border {
+  border: 0.063rem solid $boder-color;
+}
+
+@mixin iconcolor {
+  color: $theme-color;
+}
+
+@mixin input {
+  padding-left: 0.8rem;
+  border: $border;
+  border-radius: $border-radius;
+  height: 2.5rem;
+}
+
+@mixin red-btn {
+  background-color: $red-btn-back;
+  color: $font-white;
+  border: 0.06rem solid $red-btn-back;
+
+  &:hover {
+    background-color: #e6635b;
+    color: $font-white;
+  }
+}
+
+@mixin purple-btn {
+  background-color: $theme-color;
+  border: none;
+  color: $font-white;
+
+  &:hover {
+    background-color: $purple-btn-hover;
+    color: $font-white;
+  }
+}
+
+@mixin border-btn {
+  border: $border;
+  color: $title-color;
+
+  &:hover {
+    border-color: $title-color ;
+  }
+}
+
+//tab part start here
+.woo-container {
+  background-color: #f2eff5;
+  padding: 2rem 1.5rem;
+  min-height: 54rem;
+}
+
+.woo-tab-banner-wrap {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+.woo-tab-description-start {
   text-align: center;
   background-color: $fill-color;
   border-radius: $border-radius;
@@ -340,19 +400,25 @@
   border: $border;
   padding: 2rem;
 }
-.mvx-vertical-tabs {
-  width:75%;
-  & .mvx-tab-description-start {
+
+.woo-vertical-tabs {
+  width: 75%;
+  flex: auto;
+
+  & .woo-tab-description-start {
     background-color: $header-background;
   }
-  .mvx-middle-child-container{
+
+  .woo-middle-child-container {
     display: flex;
-    flex-wrap:wrap;
-  .mvx-current-tab-lists{
-    width: 22%;
-    border-bottom: 0.06rem solid $boder-color;
-    margin-right: -0.06rem;
-    height: fit-content;
+    flex-wrap: wrap;
+
+    .woo-current-tab-lists {
+      width: 22%;
+      border-bottom: 0.06rem solid $boder-color;
+      margin-right: -0.06rem;
+      height: fit-content;
+
       & a {
         display: flex;
         align-items: center;
@@ -363,514 +429,625 @@
         margin-bottom: 0;
         border-bottom: 0;
         text-decoration: none;
-        color:$title-color;
-        &:focus{
+        color: $title-color;
+
+        &:focus {
           box-shadow: none;
           outline: 0;
         }
+
         & i {
           padding-right: .5rem;
           color: $blue-icon;
         }
       }
-      & .active-current-tab{
+
+      & .active-current-tab {
+        background-color: $fill-color;
+        position: relative;
+
+        &:after {
+          content: "";
+          height: 100%;
+          width: 0.076rem;
+          background-color: #fdfdfe;
+          right: -0.07rem;
+          top: 0;
+          position: absolute;
+          z-index: 99;
+        }
+      }
+    }
+
+    & .woo-tab-content {
+      width: 63%;
+      flex: auto;
+      padding: 2.5rem;
+      border: 0.063rem solid $boder-color;
+      height: auto;
+      min-height: 63rem;
       background-color: $fill-color;
       position: relative;
-          &:after {
-            content: "";
-            height: 100%;
-            width: 0.076rem;
-            background-color: #fdfdfe;
-            right: -0.07rem;
-            top: 0;
-            position: absolute;
-            z-index: 99;
-        }
-      }
-  }
-  & .mvx-tab-content {
-    width:63%;
-    flex: auto;
-    padding: 2.5rem;
-    border: 0.063rem solid $boder-color;
-    height: auto;
-    min-height: 63rem;
-    background-color: $fill-color;
-    position:relative;
-    input[type=text], input[type=url], input[type=email], input[type=number], input[type=text_api], textarea, select{
-      width: 100%;
-    }
-    & .mvx-dynamic-form {
-      tr, th{
-        height: 0;
-        text-align: left;
-      padding-bottom: 0.5rem;
-      }
-      th{
-        font-weight:500;
-      }
-      td{
-        height: 3.75rem;
-        color: $paragraph-color;
-      }
-      .mvx-form-button-group, .mvx-form-actions {
-        bottom: 0;
-        position: absolute;
+
+      input[type=text],
+      input[type=url],
+      input[type=email],
+      input[type=number],
+      input[type=text_api],
+      textarea,
+      select {
         width: 100%;
-        padding: 1rem;
-        right: 0;
-        background-color: $section-background;
-        border-top: 0.06rem solid $scroll-color;
-        .mvx-setting-section-divider{
-          display: none;
+      }
+
+      & .woo-dynamic-form {
+
+        tr,
+        th {
+          height: 0;
+          text-align: left;
+          padding-bottom: 0.5rem;
         }
-    }
-      & .mvx-form-group {
-        display: flex;
-        justify-content: space-between;
-          flex-wrap: wrap;
-          gap: 0.5rem;
-        padding: 0.75rem 0;
-        & .mvx-settings-form-label {
-          width: 28%;
-          color: $title-color;
-          word-wrap: break-word;
-          & p {
-            font-size: 0.875rem;
-            color: $title-color;
-          }
+
+        th {
+          font-weight: 500;
         }
-        & .mvx-settings-input-content {
-          width: 65%;
+
+        td {
+          height: 3.75rem;
           color: $paragraph-color;
-          .mvx-setting-form-input-label {
-            margin-bottom: 0.5rem;
         }
-          .mvx-settings-mvx-form-group-radio {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            .mvx-radio-input-label-wrap input{
-              margin: 0 0.5rem 0 0;
+
+        .woo-form-button-group,
+        .woo-form-actions {
+          bottom: 0;
+          position: absolute;
+          width: 100%;
+          padding: 1rem;
+          right: 0;
+          background-color: $section-background;
+          border-top: 0.06rem solid $scroll-color;
+
+          .woo-setting-section-divider {
+            display: none;
           }
         }
-          & .mvx-toggle-checkbox-content {
-            margin-bottom: 0.625rem;
-          }
-          .mvx-toggle-checkbox {
-            width: 1rem;
-            height: 1rem;
-          }
-          .mvx-toggle-checkbox-content {
-            margin-left: auto;
-            position: relative;
-            @include toggle-btn;
-          }
-          .mvx-toggle-checkbox-content.disabled{
-            @include toggle-btn-disable();
-            &::after {
-              border-color: $boder-color;
+
+        & .woo-form-group {
+          display: flex;
+          justify-content: space-between;
+          flex-wrap: wrap;
+          gap: 0.5rem;
+          padding: 0.75rem 0;
+
+          & .woo-settings-form-label {
+            width: 28%;
+            color: $title-color;
+            word-wrap: break-word;
+
+            & p {
+              font-size: 0.875rem;
+              color: $title-color;
             }
           }
-          .mvx-toggle-checkbox-content, span.wc-wizard-service-toggle{
-             &::after {
-            content: '';
-            position: absolute;
-            top: 0.55rem;
-            left: 2.3rem;
-            width: 0.25rem;
-            height: 0.25rem;
-            transform: translateY(50%);
-            border: 0.0625rem solid $theme-color;
-            border-radius: 8rem;
-            transition: 0.3s;
-            z-index: 0;
-          }
-        }
-          & .mvx-settings-basic-input-class {
-            & .mvx-settings-basic-child-wrap {
-              & .mvx-settings-basic-input-child-class {
-                margin: 0 0 1rem 0;
+
+          & .woo-settings-input-content {
+            width: 65%;
+            color: $paragraph-color;
+
+            .woo-setting-form-input-label {
+              margin-bottom: 0.5rem;
+            }
+
+            .woo-settings-woo-form-group-radio {
+              display: flex;
+              gap: 1rem;
+              flex-wrap: wrap;
+
+              .woo-radio-input-label-wrap input {
+                margin: 0 0.5rem 0 0;
+              }
+            }
+
+            & .woo-toggle-checkbox-content {
+              margin-bottom: 0.625rem;
+            }
+
+            .woo-toggle-checkbox {
+              width: 1rem;
+              height: 1rem;
+            }
+
+            .woo-toggle-checkbox-content {
+              margin-left: auto;
+              position: relative;
+              @include toggle-btn;
+            }
+
+            .woo-toggle-checkbox-content.disabled {
+              @include toggle-btn-disable();
+
+              &::after {
+                border-color: $boder-color;
+              }
+            }
+
+            .woo-toggle-checkbox-content,
+            span.wc-wizard-service-toggle {
+              &::after {
+                content: '';
+                position: absolute;
+                top: 0.55rem;
+                left: 2.3rem;
+                width: 0.25rem;
+                height: 0.25rem;
+                transform: translateY(50%);
+                border: 0.0625rem solid $theme-color;
+                border-radius: 8rem;
+                transition: 0.3s;
+                z-index: 0;
+              }
+            }
+
+            & .woo-settings-basic-input-class {
+              & .woo-settings-basic-child-wrap {
+                & .woo-settings-basic-input-child-class {
+                  margin: 0 0 1rem 0;
+                }
               }
             }
           }
+
+          .woo-settings-metabox-description {
+            margin-top: 0.625rem;
+            font-style: italic;
+            font-size: 0.75rem;
+            color: $grey-icon;
+          }
+
+          .woo-setting-file-uploader-class {
+            .woo-btn {
+              display: block;
+              margin: 1rem 0 0 0;
+            }
+          }
         }
-        .mvx-settings-metabox-description {
-          margin-top: 0.625rem;
-          font-style: italic;
-          font-size: 0.75rem;
-          color: $grey-icon;
-        }
-        .mvx-setting-file-uploader-class {
-          .mvx-btn {
-            display: block;
-            margin: 1rem 0 0 0;
+
+        & .woo-form-button-group {
+          & .woo-settings-basic-input-class {
+            & .default-btn {
+              height: 2.5rem;
+              background-color: $red-btn-back;
+              width: 4.75rem;
+              color: $font-white;
+              float: right;
+            }
           }
         }
       }
-      & .mvx-form-button-group {
-        & .mvx-settings-basic-input-class {
-          & .default-btn {
-            height: 2.5rem;
-            background-color: $red-btn-back;
-            width: 4.75rem;
-            color:$font-white;
-             float: right;
-        }
+
+      .woo-form-group-radio-color {
+        @include flexprops(center);
+        flex-wrap: wrap;
+
+        & .woo-settings-radio-color {
+          margin: 0.5rem 1rem 0.5rem 0;
+          width: calc(50% - 1rem);
+          box-sizing: border-box;
+          border: 0.063rem solid transparent;
+          border-radius: $border-radius;
+          transition: all 0.3s;
+
+          .woo-merge-radio-color-input-label {
+            padding: 0.5rem;
+
+            input[type="radio"] {
+              margin: 0rem 0.5rem 0 0;
+            }
+          }
+
+          &:hover {
+            background: $font-white;
+          }
+
+          & .color-palette {
+            width: 100%;
+            border-spacing: 0;
+            border-collapse: collapse;
+            @include flexprops(center);
+            margin-top: 0.5rem;
+
+            & div {
+              width: 25%;
+              height: 0.875rem;
+            }
+          }
         }
       }
-    }
-    .mvx-form-group-radio-color {
-      @include flexprops(center);
-      flex-wrap: wrap;
-      & .mvx-settings-radio-color {
-        margin: 0.5rem 1rem 0.5rem 0;
-        width: calc(50% - 1rem);
-        box-sizing: border-box;
-        border: 0.063rem solid transparent;
+
+      .woo-radioselect-class {
+        margin-bottom: 1.5rem;
+        padding: 1rem;
         border-radius: $border-radius;
-        transition: all 0.3s;
-        .mvx-merge-radio-color-input-label {
-          padding: 0.5rem;
-          input[type="radio"]{
-            margin: 0rem 0.5rem 0 0;
-          }
-        }
-        &:hover{
-          background: $font-white;
-        }
-        & .color-palette  {
-          width: 100%;
-          border-spacing: 0;
-          border-collapse: collapse;
-          @include flexprops(center);
-          margin-top: 0.5rem;
-          & div {
-            width: 25%;
-            height: 0.875rem;
-          }
-        }
-      }
-    }
-    .mvx-radioselect-class {
-      margin-bottom: 1.5rem;
-      padding: 1rem;
-      border-radius: $border-radius;
-      border: 0.06rem solid $base-color;
-      position: relative;
-      transition: .4s all ease-in-out;
-      & .mvx-setting-form-input {
-        position: absolute;
-        top: 1.5rem;
-        right: 0.813rem;
-        border-radius: 0.125rem;
-        opacity:0;
-        input:focus{
-          border: $border;
-          box-shadow: none;
-        }
-        &:checked::before {
-          content: '\e909';
-          color: $fill-color;
-          font-size: 0.625rem;
-          background-color: $theme-color !important;//redio btn style
-          border-radius: $border-radius;
-      }
-        &:checked{
-          opacity: 1;
-        }
-    }
-      & .mvx-radio-select-under-label-class {
-        & .mvx-radioselect-overlay-text {
-          @include flexprops(center);
-          position: absolute;
-          width: 100%;
-          height: 100%;
-          top: 0;
-          left: 0;
-          background-color: #795b9d;
-          color: $font-white;
-          opacity: 0;
-          justify-content: center;
-          padding: 0.5rem;
-          border-radius: $border-radius;
-        }
-       &:hover {
-          & .mvx-radioselect-overlay-text {
-            opacity: 0.6;
-          }
-        }
-      }
-      & .mvx-section-img-fluid {
-        width: 100%;
-        margin-top: 0.5rem;
-      }
-    }
-    & .mvx-multi-nested-class {
-      & .mvx-boarder-parent {
-        @include flexprops(center);
-        flex-wrap:wrap;
-        gap:0.5rem;
-        position:relative;
-        label.mvx-setting-form-label {
-          width:25%;
-      } .mvx-setting-form-input{
-        width:49%;
-      }
-            .mvx-boarder-nested-child-start{
-              position:relative;
-              width:100%;
-              .mvx-boarder-nested-child-loop{
-                @include flexprops(center);
-                gap:0.5rem;
-                margin-bottom: 0.5rem;
-                width:95%;
-              }               
-            }
-            & .mvx-boarder-parent-loop {
-              width: 100%;
-              @include flexprops(center);
-            }
-        & .horizontal-class {
-          @include flexprops(center);
-          gap: 0.5rem;
-          position: absolute;
-          right: 0;
-          top: 0;
-          & .button-controls{
-            margin: 0;
-          }
-          & .button-controls a, .button-secondary {
-            background: transparent!important;// multi nested add button
-            border-color:$title-color !important;// multi nested add button;
-            margin:0.25rem 0;
-            color: $title-color !important;// multi nested add button;
-            min-width: 1.875rem;
-            text-align:center;
-            &:hover{
-              text-decoration:none;
-            }
-          }
-        }  }  }
-    .mvx-toggle-rectangle-merge {
-      & ul {
+        border: 0.06rem solid $base-color;
         position: relative;
-        padding: 0 0.4rem;
-        border: $border;
-        border-radius: 0.125rem;
-        @include flexprops(center);
-        overflow: hidden;
-        width: max-content;
-        margin: 0;
-        & input:checked + label {
-          background: $theme-color;
-          color: $font-white;
-          border-color: $theme-color;
+        transition: .4s all ease-in-out;
+
+        & .woo-setting-form-input {
+          position: absolute;
+          top: 1.5rem;
+          right: 0.813rem;
+          border-radius: 0.125rem;
+          opacity: 0;
+
+          input:focus {
+            border: $border;
+            box-shadow: none;
+          }
+
+          &:checked::before {
+            content: '\e909';
+            color: $fill-color;
+            font-size: 0.625rem;
+            background-color: $theme-color !important; //redio btn style
+            border-radius: $border-radius;
+          }
+
+          &:checked {
+            opacity: 1;
+          }
         }
-        & li {
-          list-style-type: none;
-          padding: 1rem 0.1rem;
-          margin: 0;
-          & input {
-              display: none;
+
+        & .woo-radio-select-under-label-class {
+          & .woo-radioselect-overlay-text {
+            @include flexprops(center);
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background-color: #795b9d;
+            color: $font-white;
+            opacity: 0;
+            justify-content: center;
+            padding: 0.5rem;
+            border-radius: $border-radius;
           }
-          & label {
-            color: $title-color;
-            font-size: 1rem;
-            line-height: 1;
-            text-align: center;
-            padding: 0.5rem 1rem;
-            border-radius: 0.125rem;
-            border: 0.06rem solid $boder-color;
-            -webkit-transition: all 0.1s ease-in-out;
-            transition: all 0.1s ease-in-out;
+
+          &:hover {
+            & .woo-radioselect-overlay-text {
+              opacity: 0.6;
+            }
           }
+        }
+
+        & .woo-section-img-fluid {
+          width: 100%;
+          margin-top: 0.5rem;
         }
       }
-    }
-    & .mvx-select-deselect-checkbox-content {
-      & .mvx-select-de-box-and-checkbox {
-        & .mvx-select-deselect-checkbox-label-marge {
+
+      & .woo-multi-nested-class {
+        & .woo-boarder-parent {
           @include flexprops(center);
           flex-wrap: wrap;
-          & .mvx-wrap-checkbox-and-label {
+          gap: 0.5rem;
+          position: relative;
+
+          label.woo-setting-form-label {
+            width: 25%;
+          }
+
+          .woo-setting-form-input {
+            width: 49%;
+          }
+
+          .woo-boarder-nested-child-start {
+            position: relative;
+            width: 100%;
+
+            .woo-boarder-nested-child-loop {
+              @include flexprops(center);
+              gap: 0.5rem;
+              margin-bottom: 0.5rem;
+              width: 95%;
+            }
+          }
+
+          & .woo-boarder-parent-loop {
+            width: 100%;
             @include flexprops(center);
-            margin: 0.5rem 0;
-            & .mvx-normal-checkbox-label {
-              & .mvx-settings-checkbox-description {
-                margin: 0rem 0 0 0.5rem;
+          }
+
+          & .horizontal-class {
+            @include flexprops(center);
+            gap: 0.5rem;
+            position: absolute;
+            right: 0;
+            top: 0;
+
+            & .button-controls {
+              margin: 0;
+            }
+
+            & .button-controls a,
+            .button-secondary {
+              background: transparent !important; // multi nested add button
+              border-color: $title-color !important; // multi nested add button;
+              margin: 0.25rem 0;
+              color: $title-color !important; // multi nested add button;
+              min-width: 1.875rem;
+              text-align: center;
+
+              &:hover {
+                text-decoration: none;
               }
             }
           }
-          & .mvx-col-50 {
-            width: 50%;
-          }
         }
       }
-    }
-    .mvx-form-vendor-register {
-      & .mvx-top-part-registartion-from{
-        & .mvx-registration-content {
-          & .mvx-form-registration-group {
-            padding: 2rem;
-            background-color: $header-background;
-            border-radius: 0.4rem;
-            margin: 0.7rem 0;
-            border: 0.0625rem solid $boder-color;
-            & .mvx-untitle-content {
-              margin: 0 0 .5rem 0;
+
+      .woo-toggle-rectangle-merge {
+        & ul {
+          position: relative;
+          padding: 0 0.4rem;
+          border: $border;
+          border-radius: 0.125rem;
+          @include flexprops(center);
+          overflow: hidden;
+          width: max-content;
+          margin: 0;
+
+          & input:checked+label {
+            background: $theme-color;
+            color: $font-white;
+            border-color: $theme-color;
+          }
+
+          & li {
+            list-style-type: none;
+            padding: 1rem 0.1rem;
+            margin: 0;
+
+            & input {
+              display: none;
+            }
+
+            & label {
+              color: $title-color;
+              font-size: 1rem;
+              line-height: 1;
+              text-align: center;
+              padding: 0.5rem 1rem;
+              border-radius: 0.125rem;
+              border: 0.06rem solid $boder-color;
+              -webkit-transition: all 0.1s ease-in-out;
+              transition: all 0.1s ease-in-out;
             }
           }
         }
       }
-    }
-    .mvx-form-left-line-active{
-      padding-bottom: 4.75rem !important;// to adjust form bottom
-      background-color: $font-white;
-    }
-    .mvx-top-part-registartion-from{
-      ::placeholder{
-        color: $title-color;
-      } }
-    .mvx-top-part-registartion-from, .mvx-form-vendor-register .mvx-option-part.mvx-form-left-line-active{
-         input[type="text"]{
-        font-size: 0.875rem;
-        border: solid $boder-color;
-        border-width: 0 0 0.06rem 0;
-        border-radius: 0;
-        background:transparent;
+
+      & .woo-select-deselect-checkbox-content {
+        & .woo-select-de-box-and-checkbox {
+          & .woo-select-deselect-checkbox-label-marge {
+            @include flexprops(center);
+            flex-wrap: wrap;
+
+            & .woo-wrap-checkbox-and-label {
+              @include flexprops(center);
+              margin: 0.5rem 0;
+
+              & .woo-normal-checkbox-label {
+                & .woo-settings-checkbox-description {
+                  margin: 0rem 0 0 0.5rem;
+                }
+              }
+            }
+
+            & .woo-col-50 {
+              width: 50%;
+            }
+          }
+        }
       }
-    }
-      .mvx-form-vendor-register .mvx-option-part{
-        input[type="text"]{
+
+      .woo-form-vendor-register {
+        & .woo-top-part-registartion-from {
+          & .woo-registration-content {
+            & .woo-form-registration-group {
+              padding: 2rem;
+              background-color: $header-background;
+              border-radius: 0.4rem;
+              margin: 0.7rem 0;
+              border: 0.0625rem solid $boder-color;
+
+              & .woo-untitle-content {
+                margin: 0 0 .5rem 0;
+              }
+            }
+          }
+        }
+      }
+
+      .woo-form-left-line-active {
+        padding-bottom: 4.75rem !important; // to adjust form bottom
+        background-color: $font-white;
+      }
+
+      .woo-top-part-registartion-from {
+        ::placeholder {
+          color: $title-color;
+        }
+      }
+
+      .woo-top-part-registartion-from,
+      .woo-form-vendor-register .woo-option-part.woo-form-left-line-active {
+        input[type="text"] {
+          font-size: 0.875rem;
+          border: solid $boder-color;
+          border-width: 0 0 0.06rem 0;
+          border-radius: 0;
+          background: transparent;
+        }
+      }
+
+      .woo-form-vendor-register .woo-option-part {
+        input[type="text"] {
           border: 0;
-          background:transparent;
-          &:focus{
+          background: transparent;
+
+          &:focus {
             border: solid $boder-color;
-            border-radius:0;
+            border-radius: 0;
             border-width: 0 0 0.06rem 0;
           }
         }
       }
-    .mvx-form-vendor-register .mvx-option-part, .mvx-top-part-registartion-from  {
-      padding: 1.5rem;
-      border-radius: 0.25rem;
-      border:0.06rem solid $base-color;
-      margin: 0.7rem 0;
-      position: relative;
-      input[type="text"].mvx-rgistration-form-title{
-        font-size: 1.25rem;
-      }
-      input[type="text"].mvx-question-title{
-      &::placeholder{
-          color: $title-color;
-        } 
-      }       
-      & .mvx-form-group{
-        display: flex;
-        flex-wrap: wrap;
-      }
-      & .mvx-question-input-items {
+
+      .woo-form-vendor-register .woo-option-part,
+      .woo-top-part-registartion-from {
+        padding: 1.5rem;
+        border-radius: 0.25rem;
+        border: 0.06rem solid $base-color;
+        margin: 0.7rem 0;
+        position: relative;
+
+        input[type="text"].woo-rgistration-form-title {
+          font-size: 1.25rem;
+        }
+
+        input[type="text"].woo-question-title {
+          &::placeholder {
+            color: $title-color;
+          }
+        }
+
+        & .woo-form-group {
+          display: flex;
+          flex-wrap: wrap;
+        }
+
+        & .woo-question-input-items {
           width: 100%;
           margin: 0 .5rem 0 0;
-      }
-      & .mvx-vendor-form-input-field-container {
-        margin: 0 0 .5rem 0;
-        .mvx-form-type-wrap {
-          @include flexprops(center);
-          gap: 1rem;
-          padding:0.75rem 0;
-          flex-wrap: wrap;
-      }
-        & select, input[type="number"]{
-          margin: 0.5rem 0 0 0;
         }
-        ul li{
-          display: flex;
-          column-gap: 0.8rem;
-          padding: 1rem 0;
-          input[type="radio"], input[type="checkbox"], .mvx-close-icon{
-            margin-top: 0.563rem;
-        }
-        }
-        .purple-btn{
-          text-decoration:underline;
-          cursor: pointer;
-        }
-      }
-      .mvx-registration-fileds-description, .mvx-registration-form-description{
-        @include description();
-        font-style:italic;
-      }      
-        & .mvx-footer-icon-form {
-              position: absolute;
-              bottom: 0;
-              left: 0;
-              right: 0;
-              padding: 1rem;
-              background-color: $section-background;
-              border-top: 0.06rem solid $scroll-color;
-              @include flexprops(center);
-                  & .mvx-perple-txt {
-                    margin-left: auto;
-                      & input[type="checkbox"] {
-                        border:$border;
-                        margin: 0 0.5rem 0.25rem;
-                      }
-                  }
-                & .mvx-font {
-                  color: $theme-color;
-                  padding: 0 0.5rem;
-                  font-size: 1rem;
-                  cursor: pointer;
-                }
+
+        & .woo-vendor-form-input-field-container {
+          margin: 0 0 .5rem 0;
+
+          .woo-form-type-wrap {
+            @include flexprops(center);
+            gap: 1rem;
+            padding: 0.75rem 0;
+            flex-wrap: wrap;
+          }
+
+          & select,
+          input[type="number"] {
+            margin: 0.5rem 0 0 0;
+          }
+
+          ul li {
+            display: flex;
+            column-gap: 0.8rem;
+            padding: 1rem 0;
+
+            input[type="radio"],
+            input[type="checkbox"],
+            .woo-close-icon {
+              margin-top: 0.563rem;
             }
-        &  select {
+          }
+
+          .purple-btn {
+            text-decoration: underline;
+            cursor: pointer;
+          }
+        }
+
+        .woo-registration-fileds-description,
+        .woo-registration-form-description {
+          @include description();
+          font-style: italic;
+        }
+
+        & .woo-footer-icon-form {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          padding: 1rem;
+          background-color: $section-background;
+          border-top: 0.06rem solid $scroll-color;
+          @include flexprops(center);
+
+          & .woo-perple-txt {
+            margin-left: auto;
+
+            & input[type="checkbox"] {
+              border: $border;
+              margin: 0 0.5rem 0.25rem;
+            }
+          }
+
+          & .woo-font {
+            color: $theme-color;
+            padding: 0 0.5rem;
+            font-size: 1rem;
+            cursor: pointer;
+          }
+        }
+
+        & select {
           height: 2.5rem;
           @include select-input();
         }
-    }
-    .mvx-option-part{
-      &::before{
-        position: absolute;
-        content: "\e95b";
-        font-family: 'mvx-admin-font';
-        color: $blue-icon;
-        top: 0;
-        left: 50%;
-        transform: translateX(-50%)
       }
-     
+
+      .woo-option-part {
+        &::before {
+          position: absolute;
+          content: "\e95b";
+          font-family: 'woo-admin-font';
+          color: $blue-icon;
+          top: 0;
+          left: 50%;
+          transform: translateX(-50%)
+        }
+      }
     }
   }
 }
-}
+
 // short despition code
-p.mvx-settings-metabox-description-code {
+p.woo-settings-metabox-description-code {
   padding: 0.5rem 1rem;
   margin: 0.5rem 0;
   background: $code-back;
   color: $code-font;
-  border-radius:$border-radius;
-  position:relative;
-  &:before{
-    position:absolute;
-    content:"";
+  border-radius: $border-radius;
+  position: relative;
+
+  &:before {
+    position: absolute;
+    content: "";
     left: 0;
     top: 0;
     width: 0.25rem;
-    border-radius:0.25rem;
+    border-radius: 0.25rem;
     background-color: $code-line;
     height: 100%;
   }
 }
+
 //loader---
-.mvx-tab-content > span{
+.woo-tab-content>span {
   display: block;
   margin: 0 auto;
 }
+
 // setting saved 
-.mvx-notic-display-title {
+.woo-notic-display-title {
   background-color: #bf6290;
   color: $font-white;
   padding: 0.5rem 1rem;
@@ -879,21 +1056,24 @@ p.mvx-settings-metabox-description-code {
   top: 15%;
   right: 1rem;
   z-index: 9999;
-  .mvx-font{
+
+  .woo-font {
     background-color: #c7769e;
     padding: 0.25rem;
-    font-size:0.0.625rem;
+    font-size: 0.0.625rem;
     margin-right: 0.5rem;
     border-radius: 50%;
   }
 }
-.mvx-notic-display-title span {
+
+.woo-notic-display-title span {
   background-color: $code-back;
   border-radius: 50%;
   padding: 0.1rem;
 }
+
 // header tab
-.mvx-container .mvx-tab-name {
+.woo-container .woo-tab-name {
   color: #181718;
   font-size: 1.25rem;
   font-weight: 500;
@@ -902,50 +1082,60 @@ p.mvx-settings-metabox-description-code {
 
 // responsive started here
 @media only screen and (max-width: 992px) {
-  .mvx-tab-banner-wrap{
+  .woo-tab-banner-wrap {
     justify-content: center;
     flex-wrap: wrap;
   }
-  .mvx-vertical-tabs {
+
+  .woo-vertical-tabs {
     width: 100%;
-    .mvx-middle-child-container {
-        .mvx-current-tab-lists{
-          width: 21%;
-        }
+
+    .woo-middle-child-container {
+      .woo-current-tab-lists {
+        width: 21%;
+      }
     }
   }
 }
 
 @media only screen and (max-width: 767px) {
-  .mvx-vertical-tabs {
-    .mvx-middle-child-container {
-        .mvx-current-tab-lists{
-          width: 100%;
+  .woo-vertical-tabs {
+    .woo-middle-child-container {
+      .woo-current-tab-lists {
+        width: 100%;
+      }
+
+      .woo-tab-content {
+        width: 100%;
+        margin-top: -0.06rem;
+        padding: 1.5rem;
+
+        .woo-settings-form-label,
+        .woo-settings-input-content {
+          width: 100% !important;
         }
-        .mvx-tab-content {
-          width: 100%;
-          margin-top: -0.06rem;
-          padding: 1.5rem;
-          .mvx-settings-form-label, .mvx-settings-input-content {
-            width: 100% !important;
-        }
-        }
+      }
     }
   }
-
 }
-@media only screen and (max-width: 575px) {
 
+@media only screen and (max-width: 668px) {
+  .editor-left.side {
+    padding: 1rem 0.5rem;
+  }
 }
+
 // subscriber list
 
-.mvx-container .mvx-search-and-multistatus-wrap .mvx-multistatus-ul {
+.woo-container .woo-search-and-multistatus-wrap .woo-multistatus-ul {
   cursor: pointer;
 }
-.mvx-button {
+
+.woo-button {
   text-align: right;
   margin-bottom: 1.5rem;
-  input.btn.default-btn{
+
+  input.btn.default-btn {
     padding: 0.5rem 1.5rem;
     background: #e03c32;
     color: #f9f8fb;
@@ -953,30 +1143,34 @@ p.mvx-settings-metabox-description-code {
   }
 }
 
-.mvx-search-and-multistatus-wrap {
+.woo-search-and-multistatus-wrap {
   @include flexprops(center);
-  gap:1rem;
+  gap: 1rem;
   justify-content: space-between;
   padding: 2rem 0;
-  flex-wrap:wrap;
+  flex-wrap: wrap;
 
-  .mvx-multistatus-ul {
+  .woo-multistatus-ul {
     margin: 0;
     cursor: pointer;
     @include flexprops(center);
     flex-wrap: wrap;
-    .mvx-multistatus-item.status-active {
+
+    .woo-multistatus-item.status-active {
       color: $theme-color;
-  }
-    .mvx-multistatus-item {
+    }
+
+    .woo-multistatus-item {
       margin: 0;
       font-size: 0.875rem;
       color: $paragraph-color;
-      button{
-        padding:0;
+
+      button {
+        padding: 0;
       }
     }
-    .mvx-divider {
+
+    .woo-divider {
       width: 0.051rem;
       background-color: $paragraph-color;
       margin: 0 0.4rem;
@@ -984,56 +1178,69 @@ p.mvx-settings-metabox-description-code {
     }
   }
 }
-.mvx-wrap-bulk-all-date {
+
+.woo-wrap-bulk-all-date {
   @include flexprops(center);
-  gap:0.5rem 0.5rem;
-  flex-wrap:wrap;
+  gap: 0.5rem 0.5rem;
+  flex-wrap: wrap;
   padding-bottom: 0.5rem;
 }
-.mvx-page-title {
+
+.woo-page-title {
   @include flexprops(center);
+
   p {
     font-size: 1.5rem;
     color: $title-color;
     margin-right: 0.7rem;
   }
-  .pull-right{
+
+  .pull-right {
     margin: 0.4rem 0 0 auto;
-    .mvx-btn.btn-purple{
+
+    .woo-btn.btn-purple {
       @include purple-btn();
       @include button();
       font-size: 0.875rem;
     }
   }
 }
+
 // subscriber list css date picker
 span.rs-picker-toggle-placeholder {
   display: none;
 }
+
 input.rs-picker-toggle-textbox {
   background-color: transparent;
   border: none;
   width: 13.375rem;
   line-height: 1.5rem;
 }
+
 .rs-picker-cleanable.rs-picker-daterange .rs-picker-toggle.rs-btn {
   padding-right: 1rem;
 }
+
 .rs-picker-toggle.rs-btn.rs-btn-default {
   background-color: #fdfdfe;
   padding: 0.563rem 1rem;
   border-radius: 0.25rem;
   border: 0.063rem solid #d4d1d9;
-  & svg{
+
+  & svg {
     margin-top: 0.25rem;
   }
-  & span svg{
+
+  & span svg {
     margin-top: 0rem;
   }
 }
+
 .sc-evZas.dFsTSm {
   overflow: visible;
 }
+
 // this is for date picker -----
 .rs-calendar-table-header-cell {
   display: table-cell;
@@ -1042,34 +1249,41 @@ input.rs-picker-toggle-textbox {
   text-align: center;
   vertical-align: middle;
 }
+
 //for loader purpose-----
-.mvx-middle-container-wrapper > span {
+.woo-middle-container-wrapper>span {
   display: block;
   margin: 0 auto;
 }
+
 // Start - Header
-.mvx-header-search-section {
+.woo-header-search-section {
   @include flexprops(center);
   @include input;
-  position:relative;
+  position: relative;
   background-color: $fill-color;
+
   & label {
     top: 0.75rem;
     left: 1.5rem;
     border: none;
+
     & i {
-        color: $grey-icon;
+      color: $grey-icon;
     }
   }
+
   & input {
     border: none;
     background-color: transparent;
-    &:focus{
+
+    &:focus {
       background-color: transparent;
       box-shadow: none;
     }
   }
-  .mvx-search-content {
+
+  .woo-search-content {
     background: $fill-color;
     border: $border;
     z-index: 99;
@@ -1079,180 +1293,220 @@ input.rs-picker-toggle-textbox {
     overflow-y: auto;
     width: 100%;
     height: 16rem;
-   @include scroll-width();
-    .mvx-header-search-content-wrapper{
-        padding: 0.75rem;
-        border-bottom: 0.06rem solid $boder-color;
-      a{
+    @include scroll-width();
+
+    .woo-header-search-content-wrapper {
+      padding: 0.75rem;
+      border-bottom: 0.06rem solid $boder-color;
+
+      a {
         color: $title-color;
         position: relative;
         cursor: pointer;
-        &:hover{
+
+        &:hover {
           text-decoration: none;
         }
-        .mvx-header-search-contetnt-label {
+
+        .woo-header-search-contetnt-label {
           margin: 1.75rem 0 0.25rem;
           color: $title-color;
           font-weight: 500;
-      }
-      p.mvx-header-search-contetnt-desc {
-        h5{
-        position: absolute;
-        padding:0 0.25rem;
-        left: 0;
-        top: 0;
-        background-color: #fdf8f8;
-        color:#df5d65;
-        border-radius: $border-radius;
-        font-size: 0.75rem;
-        font-weight: 400;
-        width: 100%;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+        }
+
+        p.woo-header-search-contetnt-desc {
+          h5 {
+            position: absolute;
+            padding: 0 0.25rem;
+            left: 0;
+            top: 0;
+            background-color: #fdf8f8;
+            color: #df5d65;
+            border-radius: $border-radius;
+            font-size: 0.75rem;
+            font-weight: 400;
+            width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
         }
       }
-      }
     }
+  }
 }
-}
-.mvx-wrap-bulk-action.css-b62m3t-container {
+
+.woo-wrap-bulk-action.css-b62m3t-container {
   min-width: 9.7rem;
 }
+
 //css for table purpose--
-.mvx-backend-datatable-wrapper {
-  .rdt_Pagination{
+.woo-backend-datatable-wrapper {
+  .rdt_Pagination {
     background: transparent;
     border: none;
     color: $paragraph-color;
     margin: 2rem 0 3rem;
     min-height: 0;
+
     .sc-llJcti {
       border: $border;
       border-radius: $border-radius;
       margin-left: 1rem;
       padding: 0 0.4rem 0 0;
+
       .sc-cxabCf {
         background: none;
-        color:$title-color;
+        color: $title-color;
         padding: 0 1.5rem;
         min-height: 2rem;
         max-width: 1.5rem;
-        &:focus{
+
+        &:focus {
           box-shadow: none;
         }
       }
+
       svg {
         top: 0.3rem;
         right: 0.8rem;
         color: $title-color;
       }
-      &:hover{
+
+      &:hover {
         border: 0.063rem solid $theme-color;
       }
-    }     
-      .sc-ezWOiH .sc-gicCDI {
-        border: $border;
-        border-radius: $border-radius;
-        margin-left: 0.25rem;
-        width: 2.5rem;
-        height: 2rem;
-        @include flexprops(center);
-        svg {
-            width: 2rem;
-        }
-        &:hover{
-          border: 0.063rem solid $theme-color;
-        }
+    }
+
+    .sc-ezWOiH .sc-gicCDI {
+      border: $border;
+      border-radius: $border-radius;
+      margin-left: 0.25rem;
+      width: 2.5rem;
+      height: 2rem;
+      @include flexprops(center);
+
+      svg {
+        width: 2rem;
       }
+
+      &:hover {
+        border: 0.063rem solid $theme-color;
+      }
+    }
   }
-  .sc-dmRaPn{
-  @include scroll-height();
-  .sc-ivTmOn {
-    background: $fill-color;
-    color: $paragraph-color;
-}
+
+  .sc-dmRaPn {
+    @include scroll-height();
+
+    .sc-ivTmOn {
+      background: $fill-color;
+      color: $paragraph-color;
+    }
   }
+
   .rdt_Table {
     background: transparent;
+
     .rdt_TableHead {
       .rdt_TableHeadRow {
-          border: $border;
-          margin-bottom: 0.4rem;
-          border-radius: $border-radius;
-          font-size: 0.875rem;
-          background-color:$fill-color;
-          color:$title-color;
-          .sc-crXcEl {
-            justify-content: start;
+        border: $border;
+        margin-bottom: 0.4rem;
+        border-radius: $border-radius;
+        font-size: 0.875rem;
+        background-color: $fill-color;
+        color: $title-color;
+
+        .sc-crXcEl {
+          justify-content: start;
         }
       }
     }
+
     .rdt_TableBody {
       .rdt_TableRow {
         border: $border;
-        color:$paragraph-color;
+        color: $paragraph-color;
         border-radius: $border-radius;
         margin-bottom: 0.2rem;
         min-height: 3rem;
-        background-color:$fill-color;
+        background-color: $fill-color;
         font-size: 0.813rem;
         position: relative;
+
         .rdt_TableCell {
-          img{
+          img {
             margin: 0 0.5rem 0 0;
           }
-          .mvx-vendor-action-icon {
+
+          .woo-vendor-action-icon {
             @include flexprops(center);
             min-width: 7rem;
-            column-gap:0.25rem;
-            .mvx-vendor-icon-name {
+            column-gap: 0.25rem;
+
+            .woo-vendor-icon-name {
               @include flexprops(start);
               padding: 0.25rem 0;
-             word-break: break-word;
-          }
-            div, a{
-              &:hover{
+              word-break: break-word;
+            }
+
+            div,
+            a {
+              &:hover {
                 text-decoration: none;
               }
-              i{
-                padding:0.5rem;
+
+              i {
+                padding: 0.5rem;
                 border-radius: $border-radius;
                 color: $theme-color;
-              &:hover {
-                background:$font-white;
-              }
+
+                &:hover {
+                  background: $font-white;
+                }
               }
             }
           }
         }
-        .mvx-vendor-icon-name {
+
+        .woo-vendor-icon-name {
           img {
             border-radius: $border-radius;
             margin-right: 0.4rem;
           }
-          a{
-          white-space: normal;
+
+          a {
+            white-space: normal;
           }
         }
+
         .sc-hKMtZM {
-         padding:0.75rem 1rem 0.5rem;
-         align-items:start;
-         div:first-child{
-          white-space: nowrap;
-         }
+          padding: 0.75rem 1rem 0.5rem;
+          align-items: start;
+
+          div:first-child {
+            white-space: nowrap;
+          }
         }
       }
     }
   }
 }
-#wpcontent{  
+
+#wpcontent {
   padding: 0
 }
-#adminmenu .wp-submenu li.current a{
-  font-weight: 500;
+
+#adminmenu .wp-submenu li.current a,
+#adminmenu .wp-submenu li.current a:hover {
+  font-weight: 500 !important;
 }
-.mvx-settings-basic-input-class input.mvx-setting-form-input{
+
+#adminmenu .wp-submenu a {
+  position: relative;
+}
+
+.woo-settings-basic-input-class input.woo-setting-form-input {
   border-radius: 0.25rem;
   width: 100%;
   padding: 0 0.75rem;
@@ -1261,16 +1515,437 @@ input.rs-picker-toggle-textbox {
   border: 0.063rem solid #d4d1d9;
   background-color: #fdfdfe;
   line-height: 2.375;
- 
 }
-input:focus, textarea:focus{
+
+input:focus,
+textarea:focus {
   outline: none;
   box-shadow: none !important;
 }
+
 .rs-picker-toolbar-ranges.rs-stack {
   display: flex;
 }
-#adminmenu .wp-submenu li a:hover {
+
+#adminmenu .wp-submenu li a:hover {
   font-weight: 500 !important;
   color: #1675e0 !important;
+}
+
+//popup css are started here
+.MuiDialogContent-root:has(.woo-image-overlay) {
+  &::-webkit-scrollbar {
+    width: 0;
+  }
+}
+
+.woo-image-overlay {
+  .woo-overlay-content {
+    background: #fff;
+    padding: 0rem 1rem;
+    text-align: center;
+    border-radius: 0.25rem;
+    max-width: 26rem;
+    position: relative;
+
+    .woo-modal.cross {
+      position: absolute;
+      right: 1.5rem;
+      top: 1.5rem;
+      color: #181819;
+    }
+  }
+
+  h1.banner-header {
+    font-size: 2rem;
+
+    span.banner-pro-tag {
+      line-height: 0;
+      background: #65438f;
+      color: #f9f8fb !important;
+      padding: 0 0.25rem;
+      border-radius: 0.25rem;
+      margin-left: 0.125rem;
+      box-shadow: 0.25rem 0.25rem 0.875rem rgb(63 20 115 / 25%);
+    }
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    margin: 1rem 0 1.5rem;
+  }
+
+  h3 {
+    color: #181819;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+
+  .discount-tag {
+    background: #fbedee;
+    color: #e26f76;
+    font-size: 0.875rem;
+    padding: 0.315rem 1.25rem;
+    width: fit-content;
+    margin: 0.5rem auto 1rem;
+    border-radius: 2rem;
+
+    b {
+      font-weight: 600;
+    }
+  }
+
+  p {
+    color: #5e5d60;
+    font-size: 1rem;
+  }
+
+  .woo-banner-offer {
+    margin: 1.5rem 0 1rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #181819;
+  }
+
+  .upgrade {
+    color: #181718;
+  }
+
+  .woo-banner-content {
+    font-size: 1rem;
+    line-height: 1.6;
+    letter-spacing: 0.02rem;
+    font-weight: 500;
+
+    p {
+      font-size: 0.9rem;
+      margin: 0 0 0.25rem;
+      text-align: left;
+      letter-spacing: 0;
+      font-weight: 400;
+      font-style: italic;
+    }
+  }
+
+  a.woo-go-pro-btn {
+    background: #e35047;
+    color: #f9f8fb;
+    text-decoration: none;
+    padding: 0.5rem 1.5rem;
+    line-height: 1.6;
+    border-radius: 0.25rem;
+    font-size: 1.25rem;
+    margin: 2rem auto 0rem;
+    display: block;
+    width: fit-content;
+    box-shadow: 0.25rem 0.25rem 1.5rem rgb(227 80 71 / 50%);
+  }
+}
+
+.MuiPaper-root {
+  padding: 2rem;
+}
+
+.woo-module-dialog-title {
+  text-align: center;
+}
+
+span.stock-alert-pro-tag {
+  position: absolute;
+  top: 0.25rem;
+  right: 0.5rem;
+  background: #9f8ab9;
+  color: #fdfdfe;
+  padding: 0.125rem 0.5rem;
+  border-radius: 0.625rem;
+  font-size: 0.625rem;
+  text-align: center;
+  line-height: 0.7rem;
+  text-transform: capitalize;
+}
+
+.woo-current-tab-lists a {
+  position: relative;
+}
+
+img.subscriber-img {
+  object-fit: cover;
+  object-position: center center;
+  height: 100%;
+  width: 100%;
+}
+
+.stock-alert-popup-cross {
+  text-align: right;
+}
+
+.woo-color-picker-wrap {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.4rem 0;
+}
+
+.woo-size-picker-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.25rem 0;
+}
+
+.editor-left.side {
+  display: flex;
+  gap: 1.5rem;
+  background-color: #f1f1f2;
+  border-radius: 0.25rem;
+  padding: 1rem;
+  justify-content: space-between;
+}
+
+.left_side_wrap {
+  width: 42%;
+}
+
+.right_side_wrap {
+  flex: auto;
+}
+
+.example_form_view {
+  border: 0.06rem solid #d4d1d9;
+  border-radius: 0.25rem;
+  padding: 2rem;
+}
+
+.example_form_email {
+  width: 70%;
+}
+
+.example_form_alert_text {
+  margin-bottom: 5px;
+}
+
+.example_form {
+  display: flex;
+  gap: 0.3rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.woo-size-picker-wrap {
+  padding: 0 0 3rem;
+
+  .woo-progress-picker-wrap {
+    position: relative;
+    width: 60%;
+  }
+
+}
+
+.example_form_email input {
+  min-height: 40px;
+  padding: 0.25rem 1rem;
+  background: transparent;
+  border: 0.06rem solid #D4D9CF;
+}
+
+.example_alert_button {
+  padding: 0.75rem;
+}
+
+.bubble {
+  background: #fdfdfe;
+  color: #181817;
+  padding: 0.25rem 0.5rem;
+  position: absolute;
+  border-radius: 4px;
+  left: 0%;
+  transform: translateX(-50%);
+  bottom: -2.25rem;
+  z-index: 1;
+
+  &::after {
+    content: "";
+    position: absolute;
+    width: 0.75rem;
+    height: 0.75rem;
+    background: #fdfdfe;
+    top: -3px;
+    left: 34%;
+    transform: rotate(45deg);
+    border: solid #fdfdfe;
+    border-width: 2px 0 0 2px;
+    z-index: -1;
+  }
+}
+
+input.woo-setting-color-picker {
+  width: 4rem;
+  height: 2rem;
+  border: 0;
+  padding: 0;
+  background: transparent;
+
+  &::-webkit-color-swatch {
+    border-radius: 0.25rem;
+    border: 0;
+  }
+
+
+}
+
+.woo-size-picker-wrap .woo-setting-range-picker {
+  -webkit-appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  height: 0.5rem;
+  border-radius: 1rem;
+  background: #fdfdfe;
+  outline: none;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+  width: 100%;
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 1rem;
+    height: 1rem;
+    background: #d4d1d9;
+    border: 0.125rem solid #000;
+    cursor: pointer;
+    border-radius: 50%;
+  }
+
+}
+
+// top banner css start
+.woo-carousel-container {
+  position: relative;
+  padding: 1rem 1.5rem;
+  background: #f2eff5;
+
+  .carousel-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .carousel-item {
+    display: none;
+    padding: 10px;
+  }
+
+  .carousel-item.active {
+    display: block;
+    transition: 0.5s all ease-in-out;
+  }
+
+  .carousel-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 3rem;
+    text-align: left;
+    background-image: url(../../assets/images/banner-back-color.jpg);
+    background-size: 100% 100%;
+    background-position: center center;
+    background-repeat: no-repeat, no-repeat;
+    color: #f9f8fb;
+    border-radius: 0.25rem;
+    border: 0.06rem solid #d4d1d9;
+    flex-wrap: wrap;
+    transition: 0.5s all ease-in-out;
+    overflow: hidden;
+    max-height: 12rem;
+
+    &:hover {
+      background-size: 110% 102%;
+    }
+  }
+
+  .woo-pro-txt-items {
+    text-align: center;
+
+    h3 {
+      font-size: 1.25rem;
+      font-weight: 500;
+    }
+
+    p {
+      margin: 0.5rem 0 1.5rem;
+      color: #f9f8fb;
+      font-size: 1rem;
+    }
+
+    a.woo-btn.btn-red {
+      background-color: #e35047;
+      color: #f9f8fb;
+      border: 0.06rem solid #e35047;
+      transition: all 0.3s ease;
+      border-radius: 0.25rem;
+      font-weight: 500;
+      padding: 0.37rem 2.5rem;
+      cursor: pointer;
+      vertical-align: middle;
+      white-space: nowrap;
+      display: inline-block;
+    }
+  }
+
+  .carousel-controls {
+    position: absolute;
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+
+    button {
+      color: #65438f;
+      background-color: #f9f8fb;
+      font-size: 0.65rem;
+      border-radius: 50%;
+      margin: 0;
+      line-height: 0.7;
+      height: 1.4rem;
+      width: 1.4rem;
+    }
+  }
+}
+
+.woo-settings-input-content {
+  span.stock-alert-pro-tag {
+    position: absolute;
+    left: 4.5rem;
+    width: fit-content;
+  }
+}
+
+// top banner css end
+
+//banner section
+
+@media only screen and (max-width: 1024px) {
+  .woo-carousel-container {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .woo-carousel-container .carousel-container {
+    max-height: fit-content;
+  }
+
+  .woo-carousel-container .carousel-controls {
+    width: 80%;
+  }
+
+  .editor-left.side {
+    flex-wrap: wrap;
+
+    .left_side_wrap {
+      width: 100%;
+    }
+  }
 }

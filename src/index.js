@@ -6,4 +6,4 @@ import StockAlert from "./admin/stockalert";
  */
 import './style/main.scss';
 // Render the App component into the DOM
-render(<StockAlert />, document.getElementById('mvx-admin-stockalert'));
+render(<StockAlert />, document.getElementById('woo-admin-stockalert'));

@@ -6,7 +6,7 @@ class WOO_Product_Stock_Alert_Shortcode {
 
 	public function __construct() {
 		// Product Stock Alert Form Shortcode
-		add_shortcode( 'display_stock_alert_form', array($this, 'display_stock_alert_form') );
+		add_shortcode('display_stock_alert_form', array($this, 'display_stock_alert_form'));
 	}
 	function display_stock_alert_form($attr) {
 		global $WOO_Product_Stock_Alert;

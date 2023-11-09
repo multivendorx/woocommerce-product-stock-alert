@@ -44,3 +44,21 @@
 	color: red;
 	font-size: 15px;
 }
+
+/*pro tag*/
+span.stock-alert-pro-tag {
+	position: absolute;
+    right: 0.5rem;
+    background: #9f8ab9;
+    color: #fdfdfe;
+    padding: 0.125rem 0.5rem;
+    top: 0.25rem;
+    border-radius: 0.625rem;
+    font-size: .625rem;
+    text-align: center;
+    line-height: .7rem;
+    text-transform: capitalize;
+}
+#adminmenu .wp-submenu li{
+	position: relative;
+  }

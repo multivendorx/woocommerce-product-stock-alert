@@ -30,7 +30,7 @@ export default class TabSection extends Component {
 		
 		if (this.props.subtab !== this.state.current_url) {
 			axios({
-				url: `${stockalertappLocalizer.apiUrl}/mvx_stockalert/v1/fetch_admin_tabs`,
+				url: `${stockalertappLocalizer.apiUrl}/woo_stockalert/v1/fetch_admin_tabs`,
 			}).then((response) => {
 				this.setState({
 					fetch_admin_tabs: response.data ? response.data[this.props.model] : [],
@@ -41,8 +41,8 @@ export default class TabSection extends Component {
 		const model = this.state.fetch_admin_tabs ? this.state.fetch_admin_tabs : [];
 		const TabUI = Object.entries(model).length > 0 ? Object.entries(model).map((m, index) => {
 			return this.props.subtab === m[0] ? (
-				<div className="mvx-tab-description-start">
-					<div className="mvx-tab-name">{m[1].tablabel}</div>
+				<div className="woo-tab-description-start">
+					<div className="woo-tab-name">{m[1].tablabel}</div>
 					<p>{m[1].description}</p>
 				</div>
 			) : (
@@ -50,24 +50,25 @@ export default class TabSection extends Component {
 			);
 		}) : '';
 		const TabUIContent = (
-			<div className={`mvx-general-wrapper mvx-${this.props.subtab}`}>
-				<div className="mvx-container mvx-tab-banner-wrap">
+			<div className={`woo-general-wrapper woo-${this.props.subtab}`}>
+				{ stockalertappLocalizer.pro_active == 'free' ? <BannerSection /> : '' }
+				<div className="woo-container woo-tab-banner-wrap">
 					<div
-						className={`mvx-middle-container-wrapper ${
+						className={`woo-middle-container-wrapper ${
 							horizontally
-								? 'mvx-horizontal-tabs'
-								: 'mvx-vertical-tabs'
+								? 'woo-horizontal-tabs'
+								: 'woo-vertical-tabs'
 						}`}
 					>
 						{this.props.tab_description &&
 						this.props.tab_description === 'no'
 							? ''
 							: TabUI}
-						<div className="mvx-middle-child-container">
+						<div className="woo-middle-child-container">
 							{this.props.no_tabs ? (
 								''
 							) : (
-								<div className="mvx-current-tab-lists">
+								<div className="woo-current-tab-lists">
 									{Object.entries(model).length > 0 ? Object.entries(model).map((m, index) => {
 										return m[1].link ? (
 											
@@ -105,13 +106,21 @@ export default class TabSection extends Component {
 														''
 													)}
 													{m[1].tablabel}
+													{ (stockalertappLocalizer.pro_active == 'free' ) ?
+														(m[0] == 'email' || m[0] == 'mailchimp') ? 
+															<span class="stock-alert-pro-tag">Pro</span> 
+															: ''
+														: ''
+													}
+													
+													
 												</Link>
 											
 										);
 									}) : ''}
 								</div>
 							)}
-							<div className="mvx-tab-content">
+							<div className="woo-tab-content">
 								{
 									model && Object.entries(model).length > 0 && this.props.subtab === this.state.current_url ? Object.entries(model).map((m, index) => (
 										
@@ -125,7 +134,7 @@ export default class TabSection extends Component {
 									}
 									method="post"
 									modulename={m[0]}
-									url={`mvx_stockalert/v1/${m[1].apiurl}`}
+									url={`woo_stockalert/v1/${m[1].apiurl}`}
 									submitbutton="false"
 								/>
 
@@ -145,7 +154,6 @@ export default class TabSection extends Component {
 							</div>
 						</div>
 					</div>
-					{ <BannerSection /> }
 				</div>
 			</div>
 		);

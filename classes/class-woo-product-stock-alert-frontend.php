@@ -8,27 +8,25 @@ class WOO_Product_Stock_Alert_Frontend {
         //enqueue styles
         add_action('wp_enqueue_scripts', array(&$this, 'frontend_styles'));
 
-        if (get_mvx_product_alert_plugin_settings('is_enable')) {
-            add_action( 'woocommerce_simple_add_to_cart', array( $this, 'display_in_simple_product' ), 31 );
-            add_action( 'woocommerce_bundle_add_to_cart', array( $this, 'display_in_simple_product' ), 31 );
-            add_action('woocommerce_subscription_add_to_cart', array($this, 'display_in_simple_product'), 31);
-            add_action( 'woocommerce_woosb_add_to_cart', array( $this, 'display_in_simple_product' ), 31 );
-            add_action( 'woocommerce_after_variations_form', array( $this, 'display_in_no_variation_product' ) );
-            add_filter( 'woocommerce_available_variation', array( $this, 'display_in_variation' ), 10, 3 );
-            // Some theme variation disabled by default if it is out of stock so for that workaround solution.
-            add_filter( 'woocommerce_variation_is_active', array( $this, 'enable_disabled_variation_dropdown' ), 100, 2 );
-            //support for grouped products
-            add_filter('woocommerce_grouped_product_list_column_price', array($this, 'display_in_grouped_product'), 10, 2);
-            // Hover style
-            add_action('wp_head', array($this, 'frontend_style'));
-        }
+        add_action('woocommerce_simple_add_to_cart', array($this, 'display_in_simple_product'), 31 );
+        add_action('woocommerce_bundle_add_to_cart', array($this, 'display_in_simple_product'), 31 );
+        add_action('woocommerce_subscription_add_to_cart', array($this, 'display_in_simple_product'), 31);
+        add_action('woocommerce_woosb_add_to_cart', array($this, 'display_in_simple_product'), 31);
+        add_action('woocommerce_after_variations_form', array($this, 'display_in_no_variation_product'));
+        add_filter('woocommerce_available_variation', array($this, 'display_in_variation'), 10, 3);
+        // Some theme variation disabled by default if it is out of stock so for that workaround solution.
+        add_filter('woocommerce_variation_is_active', array($this, 'enable_disabled_variation_dropdown'), 100, 2);
+        //support for grouped products
+        add_filter('woocommerce_grouped_product_list_column_price', array($this, 'display_in_grouped_product'), 10, 2);
+        // Hover style
+        add_action('wp_head', array($this, 'frontend_style'));    
     }
 
     function frontend_scripts() {
         global $WOO_Product_Stock_Alert;
         $frontend_script_path = $WOO_Product_Stock_Alert->plugin_url . 'assets/frontend/js/';
-        $suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '';
-        $stock_interest = $alert_text_html = $button_html = $button_css = '';
+        $suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+        $stock_interest = $alert_text_html = $button_html = $border_size = $button_css = '';
         $settings_array = get_woo_form_settings_array();
 
         if (!empty($settings_array['alert_text'])) {
@@ -37,14 +35,18 @@ class WOO_Product_Stock_Alert_Frontend {
             $alert_text_html = '<h5 class="subscribe_for_interest_text">' . $settings_array['alert_text'] . '</h5>';
         }
 
+        $border_size = (!empty($settings_array['button_border_size'])) ? $settings_array['button_border_size'].'px' : '1px';
+
         if (!empty($settings_array['button_background_color']))
             $button_css .= "background:" . $settings_array['button_background_color'] . "; ";
         if (!empty($settings_array['button_text_color']))
             $button_css .= "color:" . $settings_array['button_text_color'] . "; ";
         if (!empty($settings_array['button_border_color']))
-            $button_css .= "border: 1px solid " . $settings_array['button_border_color'] . "; ";
+            $button_css .= "border: " . $border_size . " solid " . $settings_array['button_border_color'] . "; ";
         if (!empty($settings_array['button_font_size']))
-            $button_css .= "font-size:" . $settings_array['button_font_size'] . "; ";
+            $button_css .= "font-size:" . $settings_array['button_font_size'] . "px; ";
+        if (!empty($settings_array['button_border_redious']))
+            $button_css .= "border-radius:" . $settings_array['button_border_redious'] . "px;";
 
 
         if (!empty($button_css)) {
@@ -76,8 +78,7 @@ class WOO_Product_Stock_Alert_Frontend {
                     'try_again' => __('Please try again.', 'woocommerce-product-stock-alert'),
                     'unsubscribe_button' => $unsubscribe_button_html,
                     'alert_unsubscribe_message' => $settings_array['alert_unsubscribe_message'],
-                    'recaptcha_enabled' => apply_filters('woo_stock_alert_recaptcha_enableed', false),
-                    'recaptcha_version' => apply_filters('woo_stock_alert_recaptcha_version', '')
+                    'recaptcha_enabled' => apply_filters('woo_stock_alert_recaptcha_enableed', false)
                 ));
             }
         }
@@ -86,24 +87,26 @@ class WOO_Product_Stock_Alert_Frontend {
     function frontend_styles() {
         global $WOO_Product_Stock_Alert;
         $frontend_style_path = $WOO_Product_Stock_Alert->plugin_url . 'assets/frontend/css/';
-
+        $suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
         if (function_exists('is_product')) {
             if (is_product()) {
                 // Enqueue your frontend stylesheet from here
-                wp_enqueue_style('stock_alert_frontend_css', $frontend_style_path . 'frontend.css', array(), $WOO_Product_Stock_Alert->version);
+                wp_enqueue_style('stock_alert_frontend_css', $frontend_style_path . 'frontend' . $suffix . '.css', array(), $WOO_Product_Stock_Alert->version);
             }
         }
     }
 
     function frontend_style() {
         $settings_array = get_woo_form_settings_array();
-        $button_onhover_style = '';
+        $button_onhover_style = $border_size = '';
+        $border_size = (!empty($settings_array['button_border_size'])) ? $settings_array['button_border_size'].'px' : '1px';
+
         if (isset($settings_array['button_background_color_onhover']))
             $button_onhover_style .= !empty($settings_array['button_background_color_onhover']) ? 'background: ' . $settings_array['button_background_color_onhover'] . ' !important;' : '';
         if (isset($settings_array['button_text_color_onhover']))
             $button_onhover_style .= !empty($settings_array['button_text_color_onhover']) ? ' color: ' . $settings_array['button_text_color_onhover'] . ' !important;' : '';
         if (isset($settings_array['button_border_color_onhover']))
-            $button_onhover_style .= !empty($settings_array['button_border_color_onhover']) ? 'border: 1px solid' . $settings_array['button_border_color_onhover'] . ' !important;' : '';
+            $button_onhover_style .= !empty($settings_array['button_border_color_onhover']) ? 'border: ' . $border_size . ' solid' . $settings_array['button_border_color_onhover'] . ' !important;' : '';
         if ($button_onhover_style) {
             echo '<style>
                 button.alert_button_hover:hover, button.unsubscribe_button:hover {
@@ -120,10 +123,10 @@ class WOO_Product_Stock_Alert_Frontend {
      */
     public function display_in_simple_product() {
         global $product;
-        echo _e( $this->display_subscribe_box( $product ) );
+        echo _e($this->display_subscribe_box($product));
     }
 
-    public function display_in_grouped_product( $value, $child) {
+    public function display_in_grouped_product($value, $child) {
         $value = $value . $this->display_subscribe_box($child, array());
         return $value;
     }
@@ -137,11 +140,11 @@ class WOO_Product_Stock_Alert_Frontend {
         global $product;
         $product_type = $product->get_type();
         // Get Available variations?
-        if ( 'variable' == $product_type ) {
-            $get_variations = count( $product->get_children() ) <= apply_filters( 'woocommerce_ajax_variation_threshold', 30, $product );
+        if ('variable' == $product_type) {
+            $get_variations = count($product->get_children()) <= apply_filters('woocommerce_ajax_variation_threshold', 30, $product);
             $get_variations = $get_variations ? $product->get_available_variations() : false;
-            if ( ! $get_variations ) {
-                echo _e( $this->display_subscribe_box( $product ) );
+            if (!$get_variations) {
+                echo _e($this->display_subscribe_box($product));
             }
         }
     }
@@ -155,13 +158,13 @@ class WOO_Product_Stock_Alert_Frontend {
      * @return html $html
      */
     public function display_subscribe_box( $product, $variation = [] ) {
-        $get_option_backorder = get_mvx_product_alert_plugin_settings('is_enable_backorders');
-        $visibility_backorder = isset( $get_option_backorder ) ? true : false;
+        $get_option_backorder = get_woo_product_alert_plugin_settings('is_enable_backorders');
+        $visibility_backorder = isset($get_option_backorder) ? true : false;
 
-        if ( ! $variation && $this->is_stock_product( $product ) ) {
-            return $this->html_subscribe_form( $product );
-        } elseif ( $variation && $this->is_stock_product( $variation ) ) {
-            return $this->html_subscribe_form( $product, $variation );
+        if (!$variation && $this->is_stock_product($product)) {
+            return $this->html_subscribe_form($product);
+        } elseif ($variation && $this->is_stock_product($variation)) {
+            return $this->html_subscribe_form($product, $variation);
         }
     }
 
@@ -172,8 +175,8 @@ class WOO_Product_Stock_Alert_Frontend {
      *
      * @return boolen $flag
      */
-    public function is_stock_product( $product ) {
-        $visibility_backorder = get_mvx_product_alert_plugin_settings('is_enable_backorders');
+    public function is_stock_product($product) {
+        $visibility_backorder = get_woo_product_alert_plugin_settings('is_enable_backorders');
         $flag = false;
         if ($product) {
             if (!$product->managing_stock()) {
@@ -187,7 +190,7 @@ class WOO_Product_Stock_Alert_Frontend {
                 if ($product->backorders_allowed() && $visibility_backorder) {
                     $flag = true;
                 } else {
-                    if ($product->get_stock_quantity() < 1) {
+                    if (!$product->backorders_allowed() && $product->get_stock_quantity() < 1) {
                         $flag = true;
                     }
                 }
@@ -207,10 +210,9 @@ class WOO_Product_Stock_Alert_Frontend {
      *
      * @version 1.0.0
      */
-    public function html_subscribe_form( $product, $variation = [] ) {
-        $stock_notifier_random_code = bin2hex( random_bytes( 12 ) );
+    public function html_subscribe_form($product, $variation = []) {
         $variation_class = '';
-        if ( $variation ) {
+        if ($variation) {
             $variation_id = $variation->get_id();
             $interested_person = get_no_subscribed_persons($variation->get_id(), 'woo_subscribed');
             $variation_class = 'stock_notifier-subscribe-form-' . $variation_id;
@@ -221,24 +223,28 @@ class WOO_Product_Stock_Alert_Frontend {
         $stock_interest = $alert_text_html = $button_html = $button_css = '';
         $dc_settings = array();
         $alert_text = $button_text = $button_background_color = $button_border_color = $button_text_color = $unsubscribe_button_text = '';
-        $alert_success = $alert_email_exist = $valid_email = $alert_unsubscribe_message = '';
+        $alert_success = $alert_email_exist = $valid_email = $alert_unsubscribe_message = $border_size = '';
         $settings_array = get_woo_form_settings_array();
-
+        $alert_fields = woo_stock_alert_fileds();
         if (!empty($settings_array['alert_text'])) {
             $alert_text_html = '<h5 style="color:' . $settings_array['alert_text_color'] . '" class="subscribe_for_interest_text">' . $settings_array['alert_text'] . '</h5>';
         } else {
             $alert_text_html = '<h5 class="subscribe_for_interest_text">' . $settings_array['alert_text'] . '</h5>';
         }
 
+        $border_size = (!empty($settings_array['button_border_size'])) ? $settings_array['button_border_size'].'px' : '1px';
+
         if (!empty($settings_array['button_background_color']))
             $button_css .= "background:" . $settings_array['button_background_color'] . ";";
         if (!empty($settings_array['button_text_color']))
             $button_css .= "color:" . $settings_array['button_text_color'] . ";";
         if (!empty($settings_array['button_border_color']))
-            $button_css .= "border: 1px solid " . $settings_array['button_border_color'] . ";";
+            $button_css .= "border: " . $border_size . " solid " . $settings_array['button_border_color'] . ";";
         if (!empty($settings_array['button_font_size']))
-            $button_css .= "font-size:" . $settings_array['button_font_size'] . ";";
-
+            $button_css .= "font-size:" . $settings_array['button_font_size'] . "px;";
+        if (!empty($settings_array['button_border_redious']))
+            $button_css .= "border-radius:" . $settings_array['button_border_redious'] . "px;";
+            
 
         if (!empty($button_css)) {
             $button_html = '<button style="' . $button_css .'" class="stock_alert_button alert_button_hover" name="alert_button">' . $settings_array['button_text'] . '</button>';
@@ -250,15 +256,14 @@ class WOO_Product_Stock_Alert_Frontend {
 
         $shown_interest_section = '';
         $shown_interest_text = $settings_array['shown_interest_text'];
-        if (get_mvx_product_alert_plugin_settings('is_enable_no_interest') && $interested_person != 0) {
+        if (get_woo_product_alert_plugin_settings('is_enable_no_interest') && $interested_person != 0) {
             if ($shown_interest_text) {
                 $shown_interest_text = str_replace("%no_of_subscribed%", $interested_person, $shown_interest_text);
                 $shown_interest_section = '<p>' . $shown_interest_text . '</p>';
             }
         }
 
-        wp_localize_script(
-            'stock_alert_frontend_js', 'form_submission_text', array(
+        $localization_data = array(
             'alert_text_html' => $alert_text_html,
             'button_html' => $button_html,
             'alert_success' => $settings_array['alert_success'],
@@ -269,25 +274,21 @@ class WOO_Product_Stock_Alert_Frontend {
             'double_opt_in_success' => $settings_array['double_opt_in_success'],
             'unsubscribe_button' => $unsubscribe_button_html,
             'alert_unsubscribe_message' => $settings_array['alert_unsubscribe_message'],
-            'alert_fields' => woo_stock_alert_fileds(),
+            'alert_fields' => $alert_fields,
             'recaptcha_enabled' => apply_filters('woo_stock_alert_recaptcha_enableed', false),
-            'recaptcha_version' => apply_filters('woo_stock_alert_recaptcha_version', '')
-        ));
+            'recaptcha_version' => apply_filters('woo_stock_alert_recaptcha_version', ''),
+        );
 
-        $user_email = '';
-        if (is_user_logged_in()) {
-            $current_user = wp_get_current_user();
-            $user_email = $current_user->data->user_email;
-        }
-        $alert_fields = woo_stock_alert_fileds();
+        wp_localize_script('stock_alert_frontend_js', 'form_submission_text', $localization_data);
+        
         $stock_interest .= '
-            <div id="stock_notifier_main_form" style="border-radius:10px;" class="stock_notifier-subscribe-form ' . esc_attr( $variation_class ) .'">
+            <div id="stock_notifier_main_form" style="border-radius:10px;" class="stock_notifier-subscribe-form ' . esc_attr($variation_class) .'">
                 ' . $alert_text_html . '
                 <div class="woo_fields_wrap"> ' . $alert_fields . '' . $button_html . '
                 </div>
-                <input type="hidden" class="current_product_id" value="' . $product->get_id() . '" />
-                <input type="hidden" class="current_variation_id" value="' . $variation_id . '" />
-                <input type="hidden" class="current_product_name" value="' . $product->get_title() . '" />
+                <input type="hidden" class="current_product_id" value="' . esc_attr($product->get_id()) . '" />
+                <input type="hidden" class="current_variation_id" value="' . esc_attr($variation_id) . '" />
+                <input type="hidden" class="current_product_name" value="' . esc_attr($product->get_title()) . '" />
                 ' . $shown_interest_section . '
             </div>';
         return $stock_interest;
@@ -305,7 +306,7 @@ class WOO_Product_Stock_Alert_Frontend {
      */
     public function display_in_variation( $atts, $product, $variation ) {
         $get_stock                 = $atts['availability_html'];
-        $atts['availability_html'] = $get_stock . $this->display_subscribe_box( $product, $variation );
+        $atts['availability_html'] = $get_stock . $this->display_subscribe_box($product, $variation);
         return $atts;
     }
 
@@ -318,8 +319,8 @@ class WOO_Product_Stock_Alert_Frontend {
      */
     public function enable_disabled_variation_dropdown( $active, $variation ) {
         $get_disabled_variation    = get_option( 'stock_notifier_ignore_disabled_variation' );
-        $ignore_disabled_variation = isset( $get_disabled_variation ) && '1' == $get_disabled_variation ? true : false;
-        if ( ! $ignore_disabled_variation ) {
+        $ignore_disabled_variation = isset($get_disabled_variation) && '1' == $get_disabled_variation ? true : false;
+        if (!$ignore_disabled_variation) {
             $active = true;
         }
         return $active;
