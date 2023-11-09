@@ -14,16 +14,6 @@ export default class DynamicForm extends React.Component {
 			datamclist: [],
 			from_loading: false,
 			errordisplay: '',
-			alert_text_color: '',
-			button_background_color: '',
-			button_border_color: '',
-			button_text_color: '',
-			button_background_color_onhover: '',
-			button_border_color_onhover: '',
-			button_text_color_onhover: '',
-			button_font_size: '',
-			button_border_radious: '',
-			button_border_size: '',
 		};
 
 		this.handleOMouseEnter = this.handleOMouseEnter.bind( this );
@@ -153,7 +143,10 @@ export default class DynamicForm extends React.Component {
 	};
 
 	componentDidMount() {
-		this.handle_get_button_color_state();
+		if (this.props.modulename == 'form_customization') {
+			this.handle_get_button_color_state();
+		}
+		
 		//Fetch all datas
 		this.props.model.map((m) => {
 			this.setState({
@@ -161,7 +154,7 @@ export default class DynamicForm extends React.Component {
 			});
 		});
 
-		if (stockalertappLocalizer.pro_active != 'free' ) {
+		if (stockalertappLocalizer.pro_active != 'free') {
 			this.handle_get_mailchimp_list();
 		}
 		
