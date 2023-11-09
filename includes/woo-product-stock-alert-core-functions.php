@@ -408,14 +408,15 @@ if (!function_exists('woo_stock_alert_fileds')) {
     }
 }
 if (!function_exists('get_product_subscribers_array')) {
-    function get_product_subscribers_array() {
+    function get_product_subscribers_array($args = array()) {
         $all_product_ids = $get_subscribed_user = array();
-
-        $products = get_posts(array(
+        $default_args = array(
             'post_type' => 'product',
             'post_status' => 'publish',
             'numberposts' => -1
-        ));
+        );
+        $args = wp_parse_args($args, $default_args);
+        $products = get_posts($args);
         if ($products) {
             foreach ($products as $product) {
                 $product_obj = wc_get_product($product->ID);

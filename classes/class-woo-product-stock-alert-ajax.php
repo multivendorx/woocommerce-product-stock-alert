@@ -60,19 +60,19 @@ class WOO_Product_Stock_Alert_Ajax {
 		$headers_str = implode(',', $headers_arr);
 		$get_subscribed_user = get_product_subscribers_array();
 
-        if (isset($get_subscribed_user) && !empty($get_subscribed_user)) {
-            foreach ($get_subscribed_user as $pro_id => $value) {
-                $subscribers_list = implode(',',$value);
-                $product = wc_get_product($pro_id);
-                $stock_alert_export_datas[] = array(
-                    '"'.$pro_id.'"',
-                    '"'.$product->get_name().'"',
-                    '"'.$product->get_sku().'"',
-                    '"'.$product->get_type().'"',
-                    '"'.$subscribers_list.'"'
-                );
-            }
-        }
+		if (isset($get_subscribed_user) && !empty($get_subscribed_user)) {
+			foreach ($get_subscribed_user as $pro_id => $value) {
+				$subscribers_list = implode(',',$value);
+				$product = wc_get_product($pro_id);
+				$stock_alert_export_datas[] = array(
+					'"'.$pro_id.'"',
+					'"'.$product->get_name().'"',
+					'"'.$product->get_sku().'"',
+					'"'.$product->get_type().'"',
+					'"'.$subscribers_list.'"'
+				);
+			}
+		}
 		
 		echo $headers_str;
 		if (isset($stock_alert_export_datas) && !empty($stock_alert_export_datas)) {
