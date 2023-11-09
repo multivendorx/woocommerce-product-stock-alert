@@ -375,7 +375,7 @@ export default class DynamicForm extends React.Component {
 					<div class="editor-left side">
 						<div class="left_side_wrap">
 							<div className="woo-color-picker-wrap">
-								Alert Text
+								Form Description
 								<input
 									{ ...props }
 									className="woo-setting-color-picker"
@@ -387,6 +387,21 @@ export default class DynamicForm extends React.Component {
 										);
 									} }
 									value={this.state.alert_text_color}
+								/>
+							</div>
+							<div className="woo-color-picker-wrap">
+								Submit Button Text
+								<input
+									{ ...props }
+									className="woo-setting-color-picker"
+									type="color"
+									onChange={ ( e ) => {
+										this.handleOnChangedada(
+											e,
+											'button_text_color'
+										);
+									} }
+									value={this.state.button_text_color}
 								/>
 							</div>
 							<div className="woo-color-picker-wrap">
@@ -417,21 +432,6 @@ export default class DynamicForm extends React.Component {
 										);
 									} }
 									value={this.state.button_border_color}
-								/>
-							</div>
-							<div className="woo-color-picker-wrap">
-								Text
-								<input
-									{ ...props }
-									className="woo-setting-color-picker"
-									type="color"
-									onChange={ ( e ) => {
-										this.handleOnChangedada(
-											e,
-											'button_text_color'
-										);
-									} }
-									value={this.state.button_text_color}
 								/>
 							</div>
 							<div className="woo-color-picker-wrap">

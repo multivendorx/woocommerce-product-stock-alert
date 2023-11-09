@@ -37,8 +37,8 @@ if (!function_exists('get_woo_product_alert_plugin_settings')) {
 if (!function_exists('get_woo_form_settings_array')) {
     function get_woo_form_settings_array() {
         $default_text = __('Enter your email', 'woocommerce-product-stock-alert');
-        $default_alert_text = __('Get an alert when the product is in stock.', 'woocommerce-product-stock-alert');
-        $default_button_text = __('Get an alert', 'woocommerce-product-stock-alert');
+        $default_alert_text = __('Receive in-stock notifications for this product.', 'woocommerce-product-stock-alert');
+        $default_button_text = __('Notify me', 'woocommerce-product-stock-alert');
         $default_unsubscribe_button_text = __('Unsubscribe', 'woocommerce-product-stock-alert');
         $default_alert_success = __('Thank you for your interest in <b>%product_title%</b>, you will receive an email alert when it becomes available.', 'woocommerce-product-stock-alert');
         $default_alert_email_exist = __('<b>%customer_email%</b> is already registered with <b>%product_title%</b>.', 'woocommerce-product-stock-alert');
@@ -506,6 +506,37 @@ if (!function_exists('woo_stockalert_admin_tabs')) {
                         'database_value' => array(),
                     ],
                     [
+                        'key'       => 'is_recaptcha_enable',
+                        'label'     => __("Enable  reCAPTCHA", 'woocommerce-product-stock-alert-pro'),
+                        'class'     => 'woo-toggle-checkbox',
+                        'type'      => 'checkbox',
+                        'props'     => array(
+                            'disabled'  => apply_filters('is_stock_alert_pro_inactive', true)
+                        ),
+                        'options'   => array(
+                            array(
+                                'key'   => "is_recaptcha_enable",
+                                'label' => apply_filters('allow_store_inventory_recaptcha', __('Upgrade to Pro for unlocking ReCAPTCHA for out-of-stock form subscriptions.', 'woocommerce-product-stock-alert-pro')),
+                                'value' => "is_recaptcha_enable"
+                            ),
+                        ),
+                        'database_value' => array(),
+                    ],
+                    [ 
+                        'key'       => 'v3_site_key',
+                        'type'      => 'text',
+                        'depend_checkbox'    => 'is_recaptcha_enable',
+                        'label'     => __('Site Key', 'woocommerce-product-stock-alert-pro'),
+                        'database_value' => '',
+                    ],
+                    [
+                        'key'       => 'v3_secret_key',
+                        'type'      => 'text',
+                        'depend_checkbox'    => 'is_recaptcha_enable',
+                        'label'     => __('Secret Key', 'woocommerce-product-stock-alert-pro'),
+                        'database_value' => '',
+                    ],
+                    [
                         'key'       => 'is_remove_admin_email',
                         'label'     => __("Remove Admin Email", 'woocommerce-product-stock-alert'),
                         'class'     => 'woo-toggle-checkbox',
@@ -537,11 +568,11 @@ if (!function_exists('woo_stockalert_admin_tabs')) {
                 'submenu'         => 'settings',
                 'modulename'      =>  [
                     [
-                    'key'       => 'email_placeholder_text',
-                    'type'      => 'text',
-                    'label'     => __('Edit Email Field Placeholder Text', 'woocommerce-product-stock-alert'),
-                    'desc'      => __('It will represent email field placeholder text.','woocommerce-product-stock-alert'),
-                    'database_value' => '',
+                        'key'       => 'email_placeholder_text',
+                        'type'      => 'text',
+                        'label'     => __('Edit Email Field Placeholder Text', 'woocommerce-product-stock-alert'),
+                        'desc'      => __('It will represent email field placeholder text.','woocommerce-product-stock-alert'),
+                        'database_value' => '',
                     ],
                     [
                         'key'       => 'alert_text',
@@ -576,7 +607,7 @@ if (!function_exists('woo_stockalert_admin_tabs')) {
                         'key'       => 'custom_example_form',
                         'type'      => 'example_form',
                         'class'     => 'woo-setting-own-class',
-                        'label'     => __('Demo Form', 'woocommerce-product-stock-alert')
+                        'label'     => __('Sample Form', 'woocommerce-product-stock-alert')
                     ],
                     [
                         'key'       => 'button_color_section',
