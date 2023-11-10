@@ -1815,7 +1815,32 @@ input.woo-setting-color-picker {
     cursor: pointer;
     border-radius: 50%;
   }
+}
 
+// Start - Settings Page
+.woo-setting-section-divider {
+  background-color: #9f8ab9;
+  height: 0.05rem;
+  margin: 2rem 0 1.5rem;
+}
+
+.woo-setting-section-header h5 {
+  font-size: 1.25rem;
+  color: #181817;
+  border-bottom: 0.06rem solid #ece8f1;
+  padding: 0 1rem 0.75rem 0;
+  margin: 1.5rem 0;
+  position: relative;
+
+  &::after {
+    position: absolute;
+    content: "";
+    height: 0.19rem;
+    width: 6%;
+    background-color: #522c81;
+    left: 0;
+    bottom: -0.125rem;
+  }
 }
 
 // top banner css start
@@ -1870,6 +1895,7 @@ input.woo-setting-color-picker {
     h3 {
       font-size: 1.25rem;
       font-weight: 500;
+      color: #f9f8fb;
     }
 
     p {
