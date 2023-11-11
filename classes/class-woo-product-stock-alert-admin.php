@@ -183,8 +183,7 @@ class WOO_Product_Stock_Alert_Admin {
                 'download_csv'              => __('Download CSV', 'woocommerce-product-stock-alert'),
                 'pro_settings_list'         => $pro_settings_list,
                 'pro_coupon_code'           => __('UPGRADE10', 'woocommerce-product-stock-alert'),
-                'pro_coupon_text'           => __('Why wait, grab the 10% discount and enjoy using Pro
-                with unlimited features.', 'woocommerce-product-stock-alert'),
+                'pro_coupon_text'           => __('Don\'t miss out! Enjoy 10% off on our pro features.', 'woocommerce-product-stock-alert'),
                 'pro_url'                   => esc_url(WOO_PRODUCT_STOCK_ALERT_PRO_SHOP_URL),
                 'setting_string'            => $setting_string,
               ] ) );

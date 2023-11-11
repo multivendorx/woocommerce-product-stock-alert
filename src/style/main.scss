@@ -576,7 +576,7 @@ $scroll-color: #ece8f1;
               &::after {
                 content: '';
                 position: absolute;
-                top: 0.55rem;
+                top: 0.35rem;
                 left: 2.3rem;
                 width: 0.25rem;
                 height: 0.25rem;
@@ -1523,6 +1523,11 @@ textarea:focus {
   box-shadow: none !important;
 }
 
+textarea {
+  border: 0.063rem solid #d4d1d9;
+  background-color: #fdfdfe;
+}
+
 .rs-picker-toolbar-ranges.rs-stack {
   display: flex;
 }
@@ -1624,6 +1629,8 @@ textarea:focus {
       letter-spacing: 0;
       font-weight: 400;
       font-style: italic;
+      max-width: 50%;
+      margin: auto;
     }
   }
 
@@ -1677,6 +1684,7 @@ img.subscriber-img {
 
 .stock-alert-popup-cross {
   text-align: right;
+  cursor: pointer;
 }
 
 .woo-color-picker-wrap {
@@ -1852,7 +1860,20 @@ input.woo-setting-color-picker {
   position: relative;
   padding: 1rem 1.5rem;
   background: #f2eff5;
-
+  .carousel-container {
+    position: relative;
+    overflow: hidden;
+    .why-go-pro-tag {
+      cursor: pointer;
+      position: absolute;
+      left: -28px;
+      top: 17px;
+      background: #e35047;
+      color: #f9f8fb;
+      padding: 0.25rem 1.5rem;
+      transform: rotate(-45deg);
+    }
+  }
   .carousel-list {
     list-style: none;
     padding: 0;
@@ -1934,7 +1955,7 @@ input.woo-setting-color-picker {
 
     button {
       color: #65438f;
-      background-color: #f9f8fb;
+      background-color: #d9d4d1;
       font-size: 0.65rem;
       border-radius: 50%;
       margin: 0;

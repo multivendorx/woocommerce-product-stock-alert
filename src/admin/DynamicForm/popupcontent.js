@@ -5,8 +5,8 @@ import DialogContentText from "@mui/material/DialogContentText";
 
 class Propopup extends Component {
 
-	render() {
-		return (
+    render() {
+        return (
             <>
                 <DialogContent>
                     <DialogContentText>
@@ -14,9 +14,8 @@ class Propopup extends Component {
                             <div className="woo-image-overlay">
                                 <div className="woo-overlay-content">
                                     <h1 className="banner-header">Unlock <span className="banner-pro-tag">Pro</span> </h1>
-                                    {/* <h3 className="woo-banner-thrd"></h3> */}
                                     <div className="woo-banner-content">
-                                        <strong>Boost to WooCommerce Product Stock Manager & Notifier PRO to access premium features and enhancements!</strong>
+                                        <strong>Boost to Product Stock Manager & Notifier PRO to access premium features!</strong>
                                         <p>&nbsp;</p>
                                         <p>1. Double Opt-in.</p>
                                         <p>2. Ban Spam Mail.</p>
@@ -26,7 +25,7 @@ class Propopup extends Component {
                                         <p>6. Recaptcha Support.</p>
                                         <p>7. Subscription Details.</p>
                                     </div>
-                                    <div className="woo-banner-offer">Today's Offer</div>
+                                    <div className="woo-banner-offer">Limited-Time Offer</div>
                                     <div className="discount-tag">Cupon Code: <b>{stockalertappLocalizer.pro_coupon_code}</b></div>
                                     <p className="">{stockalertappLocalizer.pro_coupon_text}</p>
                                     <a className="woo-go-pro-btn" target="_blank" href={stockalertappLocalizer.pro_url}>Upgrade to Pro</a>
@@ -35,8 +34,8 @@ class Propopup extends Component {
                         </div>
                     </DialogContentText>
                 </DialogContent>
-            </>  
-		);
-	}
+            </>
+        );
+    }
 }
 export default Propopup;

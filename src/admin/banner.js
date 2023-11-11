@@ -1,9 +1,29 @@
 /* global stockalertappLocalizer */
 import React, { Component } from 'react';
+import Dialog from "@mui/material/Dialog";
+import Popoup from './DynamicForm/popupcontent';
 class Banner extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			open_model: false,
+		};
+		this.handleClose = this.handleClose.bind(this);
+		this.handleOpen = this.handleOpen.bind(this);
+	}
+
+	handleClose() {
+		this.setState({
+			open_model: false,
+		});
+	}
+	handleOpen() {
+		this.setState({
+			open_model: true,
+		});
+	}
 	componentDidMount() {
 		var $ = jQuery;
-
 		$(document).ready(function () {
 			const $carouselList = $('.carousel-list');
 			const $carouselItems = $('.carousel-item');
@@ -31,7 +51,7 @@ class Banner extends Component {
 
 			// Start the auto-slide interval
 			function startAutoSlide() {
-				interval = setInterval(nextSlide, 3000); // Change slide every 3 seconds
+				interval = setInterval(nextSlide, 7000); // Change slide every 7 seconds
 			}
 
 			// Stop the auto-slide interval
@@ -63,9 +83,23 @@ class Banner extends Component {
 	render() {
 		return (
 			<>
-				{stockalertappLocalizer.pro_active ?
-					<div className="woo-carousel-container">
+				{stockalertappLocalizer.pro_active ? 
+					<div>
+						<Dialog
+							className="woo-module-popup"
+							open={this.state.open_model}
+							onClose={this.handleClose}
+							aria-labelledby="form-dialog-title"
+						>	
+							<span 
+								className="icon-cross stock-alert-popup-cross" 
+								onClick={this.handleClose}
+							></span>
+							<Popoup/>
+						</Dialog>
+						<div className="woo-carousel-container">
 						<div className="carousel-container">
+							<div class="why-go-pro-tag" onClick={this.handleOpen}>Why Go Pro</div>
 							<ul className="carousel-list">
 								<li className="carousel-item active">
 									<div className="woo-pro-txt-items">
@@ -133,6 +167,7 @@ class Banner extends Component {
 						<div class="carousel-controls">
 							<button id="prevBtn"><i className='icon-left-arrow'></i></button>
 							<button id="nextBtn"><i className='icon-right-arrow'></i></button>
+						</div>
 						</div>
 					</div>
 					: ''}
