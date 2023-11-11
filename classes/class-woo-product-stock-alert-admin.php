@@ -152,6 +152,19 @@ class WOO_Product_Stock_Alert_Admin {
             'show_product'  =>  __('Search by Product Name', 'woocommerce-product-stock-alert'),
             'daterenge'     =>  __('YYYY-MM-DD ~ YYYY-MM-DD', 'woocommerce-product-stock-alert'),
         );
+
+        $setting_string     =   array(
+            'form_dec'              =>  __('Form Description', 'woocommerce-product-stock-alert'),
+            'submit_button_text'    =>  __('Submit Button Text', 'woocommerce-product-stock-alert'),
+            'background'            =>  __('Background', 'woocommerce-product-stock-alert'),
+            'border'                =>  __('Border', 'woocommerce-product-stock-alert'),
+            'hover_background'      =>  __('Hover Background', 'woocommerce-product-stock-alert'),
+            'hover_border'          =>  __('Hover Border', 'woocommerce-product-stock-alert'),
+            'hover_text'            =>  __('Hover Text', 'woocommerce-product-stock-alert'),
+            'font_size'             =>  __('Font Size', 'woocommerce-product-stock-alert'),
+            'border_radius'         =>  __('Border Radius', 'woocommerce-product-stock-alert'),
+            'border_size'           =>  __('Border Size', 'woocommerce-product-stock-alert'),
+        );
         $pro_settings_list = apply_filters('woocommerce_stock_alert_pro_settings_lists',  array( 'ban_email_domains', 'ban_email_domain_text', 'ban_email_addresses', 'ban_email_address_text', 'is_mailchimp_enable', 'mailchimp_api', 'get_mailchimp_list_button', 'selected_mailchimp_list'));
         
         if (get_current_screen()->id == 'toplevel_page_woo-stock-alert-setting') {
@@ -169,10 +182,11 @@ class WOO_Product_Stock_Alert_Admin {
                 'subscription_page_string'  => $subscription_page_string,
                 'download_csv'              => __('Download CSV', 'woocommerce-product-stock-alert'),
                 'pro_settings_list'         => $pro_settings_list,
-                'pro_coupon_code'           => __('UPGRADE15', 'woocommerce-product-stock-alert'),
-                'pro_coupon_text'           => __('Why wait, grab the 15% discount and enjoy using Pro
+                'pro_coupon_code'           => __('UPGRADE10', 'woocommerce-product-stock-alert'),
+                'pro_coupon_text'           => __('Why wait, grab the 10% discount and enjoy using Pro
                 with unlimited features.', 'woocommerce-product-stock-alert'),
-                'pro_url'                   => esc_url(WOO_PRODUCT_STOCK_ALERT_PRO_SHOP_URL)
+                'pro_url'                   => esc_url(WOO_PRODUCT_STOCK_ALERT_PRO_SHOP_URL),
+                'setting_string'            => $setting_string,
               ] ) );
             wp_enqueue_style( 'woo-stockalert-style', $WOO_Product_Stock_Alert->plugin_url . 'build/index.css' );
             wp_enqueue_style('woo_admin_rsuite_css', $WOO_Product_Stock_Alert->plugin_url . 'assets/admin/css/rsuite-default' . '.min' . '.css', array(), $WOO_Product_Stock_Alert->version);

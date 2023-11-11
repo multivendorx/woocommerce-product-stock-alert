@@ -16,7 +16,7 @@ class Propopup extends Component {
                                     <h1 className="banner-header">Unlock <span className="banner-pro-tag">Pro</span> </h1>
                                     {/* <h3 className="woo-banner-thrd"></h3> */}
                                     <div className="woo-banner-content">
-                                        <strong>Boost to Stock Alert Pro to access premium features and enhancements!</strong>
+                                        <strong>Boost to WooCommerce Product Stock Manager & Notifier PRO to access premium features and enhancements!</strong>
                                         <p>&nbsp;</p>
                                         <p>1. Double Opt-in.</p>
                                         <p>2. Ban Spam Mail.</p>

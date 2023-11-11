@@ -375,7 +375,7 @@ export default class DynamicForm extends React.Component {
 					<div class="editor-left side">
 						<div class="left_side_wrap">
 							<div className="woo-color-picker-wrap">
-								Form Description
+								{stockalertappLocalizer.setting_string.form_dec}
 								<input
 									{ ...props }
 									className="woo-setting-color-picker"
@@ -390,7 +390,7 @@ export default class DynamicForm extends React.Component {
 								/>
 							</div>
 							<div className="woo-color-picker-wrap">
-								Submit Button Text
+								{stockalertappLocalizer.setting_string.submit_button_text}
 								<input
 									{ ...props }
 									className="woo-setting-color-picker"
@@ -405,7 +405,7 @@ export default class DynamicForm extends React.Component {
 								/>
 							</div>
 							<div className="woo-color-picker-wrap">
-								Background
+								{stockalertappLocalizer.setting_string.background}
 								<input
 									{ ...props }
 									className="woo-setting-color-picker"
@@ -420,7 +420,7 @@ export default class DynamicForm extends React.Component {
 								/>
 							</div>
 							<div className="woo-color-picker-wrap">
-								Border
+								{stockalertappLocalizer.setting_string.border}
 								<input
 									{ ...props }
 									className="woo-setting-color-picker"
@@ -435,7 +435,7 @@ export default class DynamicForm extends React.Component {
 								/>
 							</div>
 							<div className="woo-color-picker-wrap">
-								Hover Background
+								{stockalertappLocalizer.setting_string.hover_background}
 								<input
 									{ ...props }
 									className="woo-setting-color-picker"
@@ -450,7 +450,7 @@ export default class DynamicForm extends React.Component {
 								/>
 							</div>
 							<div className="woo-color-picker-wrap">
-								Hover Border
+								{stockalertappLocalizer.setting_string.hover_border}
 								<input
 									{ ...props }
 									className="woo-setting-color-picker"
@@ -465,7 +465,7 @@ export default class DynamicForm extends React.Component {
 								/>
 							</div>
 							<div className="woo-color-picker-wrap">
-								Hover Text
+								{stockalertappLocalizer.setting_string.hover_text}
 								<input
 									{ ...props }
 									className="woo-setting-color-picker"
@@ -482,7 +482,7 @@ export default class DynamicForm extends React.Component {
 						</div>
 						<div class="right_side_wrap">
 							<div className="woo-size-picker-wrap">
-								Font Size
+								{stockalertappLocalizer.setting_string.font_size}
 								<div className="woo-progress-picker-wrap">
 									<input 
 										{ ...props }
@@ -503,7 +503,7 @@ export default class DynamicForm extends React.Component {
 								</div>
 							</div>
 							<div className="woo-size-picker-wrap">
-								Border Radius
+								{stockalertappLocalizer.setting_string.border_radius}
 								<div className="woo-progress-picker-wrap">
 									<input 
 										{ ...props }
@@ -524,7 +524,7 @@ export default class DynamicForm extends React.Component {
 								</div>
 							</div>
 							<div className="woo-size-picker-wrap">
-								Border Size
+								{stockalertappLocalizer.setting_string.border_size}
 								<div className="woo-progress-picker-wrap">
 									<input 
 										{ ...props }

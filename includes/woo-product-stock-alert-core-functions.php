@@ -3,7 +3,7 @@ if (!function_exists('woocommerce_inactive_notice')) {
     function woocommerce_inactive_notice() {
         ?>
         <div id="message" class="error">
-            <p><?php printf(__('%sWoocommerce Product Stock Alert is inactive.%s The %sWooCommerce plugin%s must be active for the Woocommerce Product Stock Alert to work. Please %sinstall & activate WooCommerce%s', WOO_PRODUCT_STOCK_ALERT_TEXT_DOMAIN), '<strong>', '</strong>', '<a target="_blank" href="http://wordpress.org/extend/plugins/woocommerce/">', '</a>', '<a href="' . admin_url('plugins.php') . '">', '&nbsp;&raquo;</a>'); ?></p>
+            <p><?php printf(__('%sProduct Stock Manager & Notifier for WooCommerce is inactive.%s The %sWooCommerce plugin%s must be active for the Product Stock Manager & Notifier for WooCommerce to work. Please %sinstall & activate WooCommerce%s', 'woocommerce-product-stock-alert'), '<strong>', '</strong>', '<a target="_blank" href="http://wordpress.org/extend/plugins/woocommerce/">', '</a>', '<a href="' . admin_url('plugins.php') . '">', '&nbsp;&raquo;</a>'); ?></p>
         </div>
         <?php
     }
@@ -38,10 +38,10 @@ if (!function_exists('get_woo_form_settings_array')) {
         $default_alert_text = __('Receive in-stock notifications for this.', 'woocommerce-product-stock-alert');
         $default_button_text = __('Notify me', 'woocommerce-product-stock-alert');
         $default_unsubscribe_button_text = __('Unsubscribe', 'woocommerce-product-stock-alert');
-        $default_alert_success = __('Thank you for your interest in <b>%product_title%</b>, you will receive an email alert when it becomes available.', 'woocommerce-product-stock-alert');
-        $default_alert_email_exist = __('<b>%customer_email%</b> is already registered with <b>%product_title%</b>.', 'woocommerce-product-stock-alert');
-        $default_valid_email = __('Please enter a valid email id and try again.', 'woocommerce-product-stock-alert');
-        $default_alert_unsubscribe_message = __('<b>%customer_email%</b> is successfully unregistered.', 'woocommerce-product-stock-alert');
+        $default_alert_success = __('Thank you for expressing interest in %product_title%. We will notify you via email once it is back in stock.', 'woocommerce-product-stock-alert');
+        $default_alert_email_exist = __('%customer_email% is already registered for %product_title%. Please attempt a different email address.', 'woocommerce-product-stock-alert');
+        $default_valid_email = __('Please enter a valid email ID and try again.', 'woocommerce-product-stock-alert');
+        $default_alert_unsubscribe_message = __('%customer_email% is successfully unregistered.', 'woocommerce-product-stock-alert');
         $default_shown_interest_text = __('Product in demand: %no_of_subscribed% waiting.', 'woocommerce-product-stock-alert');
 
         $settings = array(
@@ -506,7 +506,7 @@ if (!function_exists('woo_stockalert_admin_tabs')) {
                         'options' => array(
                             array(
                                 'key'   => "is_double_optin",
-                                'label' => apply_filters('allow_store_inventory_double_optin', __('Upgrade to Pro to enable Double Opt-in flow for subscription confirmation.', 'woocommerce-product-stock-alert')),
+                                'label' => apply_filters('allow_store_inventory_double_optin', __('Upgrade to <a href="https://multivendorx.com/woocommerce-product-stock-manager-notifier-pro/"><span class="pro-strong">Pro</span></a> to enable Double Opt-in flow for subscription confirmation.', 'woocommerce-product-stock-alert')),
                                 'value' => "is_double_optin"
                             ),
                         ),
@@ -537,7 +537,7 @@ if (!function_exists('woo_stockalert_admin_tabs')) {
                         'options'   => array(
                             array(
                                 'key'   => "is_recaptcha_enable",
-                                'label' => apply_filters('allow_store_inventory_recaptcha', __('Upgrade to Pro for unlocking ReCAPTCHA for out-of-stock form subscriptions.', 'woocommerce-product-stock-alert-pro')),
+                                'label' => apply_filters('allow_store_inventory_recaptcha', __('Upgrade to <a href="https://multivendorx.com/woocommerce-product-stock-manager-notifier-pro/"><span class="pro-strong">Pro</span></a> for unlocking ReCAPTCHA for out-of-stock form subscriptions.', 'woocommerce-product-stock-alert-pro')),
                                 'value' => "is_recaptcha_enable"
                             ),
                         ),
@@ -589,7 +589,7 @@ if (!function_exists('woo_stockalert_admin_tabs')) {
             'form_customization' => array(
                 'tablabel'        => __('Form Customization', 'woocommerce-product-stock-alert'),
                 'apiurl'          => 'save_stockalert',
-                'description'     => __('Configure form settings. ', 'woocommerce-product-stock-alert'),
+                'description'     => __('Configure form settings.', 'woocommerce-product-stock-alert'),
                 'icon'            => 'icon-form-customization',
                 'submenu'         => 'settings',
                 'modulename'      =>  [
@@ -602,30 +602,30 @@ if (!function_exists('woo_stockalert_admin_tabs')) {
                     [
                         'key'       => 'email_placeholder_text',
                         'type'      => 'text',
-                        'label'     => __('Edit Email Field Placeholder Text', 'woocommerce-product-stock-alert'),
-                        'desc'      => __('It will represent email field placeholder text.','woocommerce-product-stock-alert'),
+                        'label'     => __('Email Field Placeholder', 'woocommerce-product-stock-alert'),
+                        'desc'      => __('It will represent email field placeholder text.', 'woocommerce-product-stock-alert'),
                         'database_value' => '',
                     ],
                     [
                         'key'       => 'alert_text',
                         'type'      => 'textarea',
                         'class'     => 'woo-setting-wpeditor-class',
-                        'desc'      => __('Enter the text which you want to display as alert text.','woocommerce-product-stock-alert'),
-                        'label'     => __('Edit Alert Text', 'woocommerce-product-stock-alert'),
+                        'desc'      => __('Descriptive text guiding users on the purpose of providing their email address above the email entry field.', 'woocommerce-product-stock-alert'),
+                        'label'     => __('Subscription Purpose Description', 'woocommerce-product-stock-alert'),
                         'database_value' => '',
                     ],
                     [
                         'key'       => 'button_text',
                         'type'      => 'text',
-                        'label'     => __('Edit Subscribe Button Text', 'woocommerce-product-stock-alert'),
-                        'desc'      => __('It will represent subscribe button text.','woocommerce-product-stock-alert'),
+                        'label'     => __('Subscribe Button', 'woocommerce-product-stock-alert'),
+                        'desc'      => __('Modify the subscribe button text. By default we display Notify Me.', 'woocommerce-product-stock-alert'),
                         'database_value' => '',
                     ],
                     [
                         'key'       => 'unsubscribe_button_text',
                         'type'      => 'text',
-                        'label'     => __('Edit Unsubscribe Button Text', 'woocommerce-product-stock-alert'),
-                        'desc'      => __('It will represent unsubscribe button text.','woocommerce-product-stock-alert'),
+                        'label'     => __('Unsubscribe Button', 'woocommerce-product-stock-alert'),
+                        'desc'      => __('Modify the un-subscribe button text. By default we display Unsbuscribe.', 'woocommerce-product-stock-alert'),
                         'database_value' => '',
                     ],
                     [
@@ -659,32 +659,32 @@ if (!function_exists('woo_stockalert_admin_tabs')) {
                         'key'       => 'alert_success',
                         'type'      => 'textarea',
                         'class'     => 'woo-setting-wpeditor-class',
-                        'desc'      => __('Tip: You can insert %product_title% for the product title and %customer_email% for the customers email. <br/> Example:Thank you for expressing interest in %product_title%. We will notify you via email once it is back in stock.', 'woocommerce-product-stock-alert'),
-                        'label'     => __('Alert Text on Successful Form Submission', 'woocommerce-product-stock-alert'),
+                        'desc'      => __('Tip: Utilize %product_title% for dynamic product titles and %customer_email% for personalized customer email addresses in your messages. <br/> Example:Thank you for expressing interest in %product_title%. We will notify you via email once it is back in stock.', 'woocommerce-product-stock-alert'),
+                        'label'     => __('Successful Form Submission', 'woocommerce-product-stock-alert'),
                         'database_value' => '',
                     ],
                     [
                         'key'       => 'alert_email_exist',
                         'type'      => 'textarea',
                         'class'     => 'woo-setting-wpeditor-class',
-                        'desc'      => __('Tip: You can utilize %product_title% as the product title and %customer_email% as the customers email.<br/> Example: %customer_email% is already registered for %product_title%. Please attempt a different email address.', 'woocommerce-product-stock-alert'),
-                        'label'     => __('Message for Existing Email Subscribers', 'woocommerce-product-stock-alert'),
+                        'desc'      => __('Tip: Enhance personalization by incorporating %product_title% for dynamic product titles and %customer_email% for individual customer emails.<br/> Example: %customer_email% is already registered for %product_title%. Please attempt a different email address.', 'woocommerce-product-stock-alert'),
+                        'label'     => __('Repeated Subscription Alert', 'woocommerce-product-stock-alert'),
                         'database_value' => '',
                     ],
                     [
                         'key'       => 'valid_email',
                         'type'      => 'textarea',
                         'class'     => 'woo-setting-wpeditor-class',
-                        'desc'      => __('Default: Please enter a valid email id and try again.', 'woocommerce-product-stock-alert'),
-                        'label'     => __('Invalid Email Address', 'woocommerce-product-stock-alert'),
+                        'desc'      => __('Personalize the message shown to users when they try to subscribe with an invalid email address. Default: Please enter a valid email ID and try again.', 'woocommerce-product-stock-alert'),
+                        'label'     => __('Email Validation Error', 'woocommerce-product-stock-alert'),
                         'database_value' => '',
                     ],
                     [
                         'key'       => 'alert_unsubscribe_message',
                         'type'      => 'textarea',
                         'class'     => 'woo-setting-wpeditor-class',
-                        'desc'      => __('Default: %customer_email% is successfully unregistered.', 'woocommerce-product-stock-alert'),
-                        'label'     => __('Unsubscription Confirm', 'woocommerce-product-stock-alert'),
+                        'desc'      => __('Modify the text that confirms user that they have successful unsubscribe. Default: %customer_email% is successfully unregistered.', 'woocommerce-product-stock-alert'),
+                        'label'     => __('Unsubscribe Confirmation', 'woocommerce-product-stock-alert'),
                         'database_value' => '',
                     ],
                 ]
