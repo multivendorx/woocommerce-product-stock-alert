@@ -894,7 +894,7 @@ export default class DynamicForm extends React.Component {
 												htmlFor={`woo-toggle-switch-${o.key}`}
 											></label>
 											{
-											props.disabled ?
+											props.pro_inactive ?
 												<span className="table-content-pro-tag stock-alert-pro-tag">Pro</span> 
 												: ''
 											}

@@ -453,15 +453,15 @@ if (!function_exists('woo_stockalert_admin_tabs')) {
                         'label'     => __("Subscriber Double Opt-in", 'woocommerce-product-stock-alert'),
                         'class'     => 'woo-toggle-checkbox',
                         'type'      => 'checkbox',
-                        'props'     => array(
-                            'disabled'  => apply_filters('is_stock_alert_pro_inactive', true)
-                        ),
                         'options' => array(
                             array(
                                 'key'   => "is_double_optin",
                                 'label' => apply_filters('allow_store_inventory_double_optin', __('Upgrade to <a href="https://multivendorx.com/woocommerce-product-stock-manager-notifier-pro/"><span class="pro-strong">Pro</span></a> to enable Double Opt-in flow for subscription confirmation.', 'woocommerce-product-stock-alert')),
                                 'value' => "is_double_optin"
                             ),
+                        ),
+                        'props'     => array(
+                            'pro_inactive'  => apply_filters('is_stock_alert_pro_inactive', true)
                         ),
                         'database_value' => array(),
                     ],
@@ -531,15 +531,15 @@ if (!function_exists('woo_stockalert_admin_tabs')) {
                         'label'     => __("Enable  reCAPTCHA", 'woocommerce-product-stock-alert-pro'),
                         'class'     => 'woo-toggle-checkbox',
                         'type'      => 'checkbox',
-                        'props'     => array(
-                            'disabled'  => apply_filters('is_stock_alert_pro_inactive', true)
-                        ),
                         'options'   => array(
                             array(
                                 'key'   => "is_recaptcha_enable",
                                 'label' => apply_filters('allow_store_inventory_recaptcha', __('Upgrade to <a href="https://multivendorx.com/woocommerce-product-stock-manager-notifier-pro/"><span class="pro-strong">Pro</span></a> for unlocking reCAPTCHA for out-of-stock form subscriptions.', 'woocommerce-product-stock-alert-pro')),
                                 'value' => "is_recaptcha_enable"
                             ),
+                        ),
+                        'props'     => array(
+                            'pro_inactive'  => apply_filters('is_stock_alert_pro_inactive', true)
                         ),
                         'database_value' => array(),
                     ],
