@@ -47,18 +47,20 @@
 
 /*pro tag*/
 span.stock-alert-pro-tag {
-	position: absolute;
+    position: absolute;
     right: 0.5rem;
     background: #9f8ab9;
     color: #fdfdfe;
     padding: 0.125rem 0.5rem;
-    top: 0.25rem;
+    top: 50%;
+    transform: translateY(-50%);
     border-radius: 0.625rem;
     font-size: .625rem;
     text-align: center;
-    line-height: .7rem;
+    line-height: 1;
     text-transform: capitalize;
 }
+
 #adminmenu .wp-submenu li{
 	position: relative;
   }
