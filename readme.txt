@@ -13,57 +13,102 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Alert your customer when a product of her choice is available again. 
 
 == Description ==
-Never miss a sale now! This plugin lets prospective buyers subscribe to a product even when it is out of stock. Once subscribed, customers will get an email notification when the product becomes available. On the admin side – you may view several interested customers for any out of stock product.
+**Supercharge your sales with instant stock alerts! Notify customers about restocked products and manage data effortlessly through export/import functionality.**
 
-= Features =
-
-*   WooCommerce Product Stock Alert Plugin creates a form with an out of stock product. Interested customers can register with their email addresses.
-*   When a customer subscribes to any out of stock product on your site, an email will be sent to the admin with the customer email id and interesting product.
-*   This plugin also creates a field to the inventory of the edit product page to show various interested customers. This will let you decide how much stock you want to add further.
-*   As soon as the product becomes available, an alert email will be sent to the interested persons.
-*   This is an extremely lightweight plugin; it doesn’t hamper the speed of your website and ensures a smooth transition.
-*   This killer plugin is easy to set up, use and install. You need not be a coding or developing expert to understand how the plugin works. Just install and let it do the rest.
-*   You can customize the form heading message, button text, colour, hover colour, alert message after form submission, etc. from the plugin settings page.
-*   You can customize the email heading, email subject which will be sent to customers from WooCommerce email settings.
-*   WooCommerce Product Stock Alert Plugin will work if the product Backorder option is enabled.
-*   You can change the default Stock Alert form position and display the stock alert form on the product page by using Shortcode [display_stock_alert_form].
-*   Export list of subscribers via Wordpress’s Tools settings
-*   Customers can unsubscribe from a product to which he/she already subscribed.
-*   Double Opt In setting sends customers a confirmation mail inquiring if they would like to confirm their subscription to an Out of Stock product. To enable this feature you need to Install **[MVX-Pro Vendor Stock Alert](https://multivendorx.com/pricing/)**
-
-= Compatibility =
-*   WordPress 5.5+
-*   WooCommerce 4.4+
-*   Multilingual Support is included with the plugin and is fully compatible with WPML.
+Introducing Product Stock Manager & Notifier – your solution for seamless product stock management. Subscribers receive instant email notifications for restocked items. Manage stock data seamlessly through easy export/import functionality.
 
 
-= Configurable =
+🌐 Explore our [Document](https://multivendorx.com/docs/knowledgebase/woocommerce-product-stock-alert/)
 
-WooCommerce Product Stock Alert has provided customizable email structure. Admin can customize email Header as well as email Subject from WooCommerce settings panel.
+👉 Learn More About [Pro](https://multivendorx.com/woocommerce-product-stock-manager-notifier-pro/)
 
-= Feedback =
+## ✌️Benefits:
+📧Automatically notify subscribers via email when products are back in stock.
+📩Admins receive email notifications when customers subscribe to out-of-stock products.
+🔔Prevent Duplicate Email Entries per Product for Efficient Notification Lists.
+📥Works efficiently for both Guests and Members.
+  👤Convert subscribers into loyal customers as they quickly purchase restocked items.
+ 🌐 WPML Compatible
+✍️ Easily tailor the form's heading, button text, colors, hover effects, submission alerts, and more through the plugin settings.
+✉️Personalize email headings and subjects sent to customers using WooCommerce's email settings.
+💡The WooCommerce Product Stock Alert Plugin functions seamlessly when product Backorder is enabled.
+🚀Modify the Stock Alert form's default placement and showcase it on product pages using shortcode : `[display_stock_alert_form]`
+👥Export your subscriber list effortlessly via WordPress's Tools settings.
+📤Export all stock data for your shop.
+🚫Customers have the option to unsubscribe from products from their My Account page. [PRO]
+🤖Safeguard your platform from unsolicited messages by blocking emails from specific addresses and domains.[PRO]
+🔐A two-step confirmation process to verify subscribers' genuine interest in receiving product availability notifications.[PRO]
+🔄Seamlessly sync out-of-stock user subscriptions with Mailchimp for efficient communication and marketing.[PRO]
+📊Enhance Marketing Strategies by Connecting WooCommerce Out-of-Stock Subscribers to Mailchimp.[PRO]
+📚View and manage lists of all products effortlessly from stock manager dashboard.[COMING SOON]
+✍️Quick edit products using in-line editing, allowing updates to stock, SKU, and more.
+📊Access a Stock Log page for each product.[COMING SOON]
+📈Track the stock movement history, gaining insights into product availability changes over time.[COMING SOON]
+💻Your central dashboard for efficient management and retrieval of out-of-stock subscriber lists. [COMING SOON]
+📤Easily export subscriber details, including customer names, subscription dates, product names, and email IDs, for efficient management. [COMING SOON]
+🔐Enhance Security and Data Integrity with ReCAPTCHA for Reliable Out-of-Stock Alerts.[PRO]
+🛒Mark products as 'Discontinued' in your WooCommerce catalog.[COMING SOON]
+💬Provide custom messages guiding buyers to newer or alternative products, aiding in sales recovery and maintaining SEO traffic.[COMING SOON]
+✍️Edit the data conveniently and import it back using a CSV file, streamlining inventory management. [COMING SOON]
 
-Thanks heaps for trying this plugin. I hope it could serve your purpose. If you find this plugin is helpful, appreciate us by giving a 5/5 star and feel free to comment as well as suggest additional features. If you find the plugin is buggy, please do mention the reason and we will add or change options and fix bugs. For more information and instructions on this plugin please visit www.multivendorx.com. 
 
-== Installation ==
-1.  Upload your plugin folder to the '/wp-content/plugins' directory.
-2.  Activate the plugin through the 'Plugins' menu in WordPress.
-3.  Goto plugin settings and "Enable Stock Alert".
-4.  Customize email heading, email subject from WooCommerce email settings.
-5.  All done. Just wait and watch how many customers are interested with an out of stock product of your Woostore.
+👉 Official Demo Link: Try out Free and Pro [Demo site](https://multivendordemo.com/stock-alert-notifier/wp-admin)
 
-== Frequently Asked Questions ==
-= Does this plugin work with newest WP version and also older versions? =
-Yes, this plugin works with WordPress 3.6 or later.
 
-= Does this plugin work with newest WooCommerce version and also older versions? =
-Yes, this plugin is compatible with WooCommerce 2.2 or later.
+➡️PRODUCT STOCK MANAGER & NOTIFIER BY WOOCOMMERCE PLUGIN - YOUR ULTIMATE SOLUTION TO MAXIMIZE SALES AND CUSTOMER SATISFACTION!
 
-= Does this plugin work with all types of theme =
-Yes, this plugin is compatible with all latest version of WooCommerce themes.
+## Comprehensive Features:
+Are you tired of losing potential sales because your customers can't buy the out-of-stock products they desire? Fret not! Our WooCommerce Out of Stock Notifier Plugin is here to save the day and boost your revenue.
 
-= Does this plugin work with WooCommerce Subscription Product =
-Yes, this plugin works with WooCommerce Subscription Product.
+💌 Email Notifications: Customers will receive notifications via email when the out-of-stock products are available again.
+🙋‍ User Management: Easily manage your subscriber list and their preferences.
+✉️ Customizable Messages: Tailor the notification messages to match your brand's tone and style.
+📦 Stock Alert for Backorders: Enable customers to subscribe for in-stock notifications, even for products that are currently out of stock but have backorders enabled. Keep your customers informed and engaged.
+🔄 Import/Export Functionality: Simplify data management by exporting and importing stock data with ease. Export all your stock information, make necessary edits, and seamlessly import the updated data using CSV files.[COMING SOON]
+🌏Multilingual Support: Reach a global audience by offering notifications in multiple languages.
+📱Responsive Design: The plugin's design is fully responsive, ensuring a seamless experience on all devices. To match with your theme’s structure.
+⬆️ Instant Updates: Get real-time updates on your subscribers and their preferences.
+➡️ UPGRADE TO WOOCOMMERCE PRODUCT STOCK MANAGER & NOTIFIER PRO FEATURES:
+✅ Double Opt In [PRO]:Double opt-in for stock alert subscription is a two-step confirmation process that ensures subscribers genuinely want to receive notifications about product availability.
+📨Mailchimp Connect [PRO]: Effortlessly connect your WooCommerce out-of-stock user subscriptions with Mailchimp for seamless communication and marketing strategies. Admins can easily manage and sync user data with Mailchimp lists.
+📈Subscription Hub [PRO] : The Subscription Dashboard is your central hub for efficiently overseeing and retrieving lists of out-of-stock subscribers, streamlining the entire management process. 
+🔒Ban Spam Emails [PRO]: Email and Domain Blacklist for Spam Prevention" is a robust feature that safeguards your platform from unsolicited and potentially harmful messages. This functionality empowers you to block incoming emails from specific addresses and domains that are identified as sources of spam.
+📭Unsubscribe Notifications [PRO]: Users have access to their subscribed product list, allowing them to easily manage their preferences. They can conveniently unsubscribe from specific products, ensuring they won't receive further in-stock notification emails related to those items.
+📤Subscriber Export Options [PRO]: Admins can effortlessly export subscriber details, including customer names, subscription dates, product names, and email IDs. Organize and sort this data by products and subscription dates for better management.
+📧Mail Sent Status [PRO]: Admins can easily track which users have received notification emails and identify users who have unsubscribed from receiving in-stock notifications, ensuring efficient communication management.
+🔐 ReCAPTCHA Central [PRO]: ReCAPTCHA ensures only genuine subscribers, improving data accuracy and targeted notifications. ReCAPTCHA settings are essential for out-of-stock notifications to maintain data quality, prevent spam, enhance security, and ensure compliance with relevant regulations. 
+ 📊 Stock Manager Dashboard [PRO]:Efficiently manage your inventory with a dedicated dashboard showcasing comprehensive product lists. Admins can perform quick in-line edits, updating stock, SKUs, and more for streamlined inventory control.[COMING SOON]
+ 📉 Product Stock History [PRO]: Dive into the Stock Manager for WooCommerce's Stock Log page, offering a detailed history of each product's stock movements. Track changes over time to make informed decisions about stock management.[COMING SOON]
+🚫 Discontinued Product Status [PRO]: Optimize inventory control with the ability to mark products as 'Discontinued' in your WooCommerce catalog. Craft custom messages to guide customers toward alternative or newer products, ensuring a smooth transition and minimizing potential lost sales.[COMING SOON]
+
+
+
+
+## Learn More About Pro
+[WooCommerce Product Catalog Mode Pro - Quote Request](https://multivendorx.com/woocommerce-product-stock-manager-notifier-pro/)
+
+
+## Shortcodes
+- [display_stock_alert_form]: You can display stock alert form anywhere using this shortcode.
+
+## FAQ
+**Q: Can I enable out-of-stock subscription with backorder enabled?**
+ *A: Yes, using the "Subscriptions with Active Backorders" option, you can enable out-of-stock subscriptions even when backorder is activated.*
+
+**Q: Can I customize the "Notify Me" button to match my theme colors?**
+  *A: Yes, we offer button customization options, allowing you to modify colors to match your theme.*
+
+**Q: Can I send out-of-stock subscriptions to additional email addresses besides the admin?**
+  *A: Yes, using the "Additional Receiver" option, you can specify additional email addresses to receive user subscription notifications.*
+
+**Q: Can I customize successful subscription messages?**
+  *A: Certainly, we provide a complete panel for each displayed text or alert, allowing you to customize the messages according to your preferences.*
+
+**Q: How can I export subscribers' data to my new site?**
+  *A: Navigate to WP-admin >> Tools >> WC Stock Alert and export the subscriber lists. The CSV will contain product names and their corresponding subscriber email IDs.*
+
+**Q: Is it possible to exclude the admin from receiving out-of-stock subscription notifications?**
+  *A: Certainly, go to Settings >> Recipient Email for New Subscriber and remove the admin's email ID from there.*
 
 == Screenshots ==
 1. Stock alert plugin settings panel
