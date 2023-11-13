@@ -141,29 +141,24 @@ if (!function_exists('insert_subscriber_email_trigger')) {
     function insert_subscriber_email_trigger($product_id, $customer_email) {
         $admin_mail = WC()->mailer()->emails['WC_Admin_Email_Stock_Alert'];
         $cust_mail = WC()->mailer()->emails['WC_Subscriber_Confirmation_Email_Stock_Alert'];
-        $admin_email = '';
-        if (get_woo_product_alert_plugin_settings('is_remove_admin_email')) {
-            $admin_email = '';
-        } else {
-            $admin_email = get_option('admin_email');
-        }
-
+        $addtional_email = '';
+        
         if (get_woo_product_alert_plugin_settings('additional_alert_email')) {
-            $admin_email .= ','.get_woo_product_alert_plugin_settings('additional_alert_email');
+            $addtional_email = get_woo_product_alert_plugin_settings('additional_alert_email');
         }
 
-        if (function_exists( 'get_mvx_product_vendors' )) {
-            $vendor = get_mvx_product_vendors( $product_id );
-            if ($vendor && apply_filters( 'woo_product_stock_alert_add_vendor', true )) {
-                $admin_email .= ','. sanitize_email( $vendor->user_data->user_email );  
+        if (function_exists('get_mvx_product_vendors')) {
+            $vendor = get_mvx_product_vendors($product_id);
+            if ($vendor && apply_filters( 'woo_product_stock_alert_add_vendor', true)) {
+                $addtional_email .= ','. sanitize_email($vendor->user_data->user_email);  
             }
         }
         //admin email or vendor email
-        if( !empty( $admin_email ) )
-        $admin_mail->trigger( $admin_email, $product_id, $customer_email );
+        if (!empty($addtional_email))
+        $admin_mail->trigger($addtional_email, $product_id, $customer_email);
 
         //customer email
-        $cust_mail->trigger( $customer_email, $product_id );
+        $cust_mail->trigger($customer_email, $product_id);
     }
 }
 
@@ -563,24 +558,10 @@ if (!function_exists('woo_stockalert_admin_tabs')) {
                         'label'     => "",
                     ],
                     [
-                        'key'       => 'is_remove_admin_email',
-                        'label'     => __("Remove Admin Email", 'woocommerce-product-stock-alert'),
-                        'class'     => 'woo-toggle-checkbox',
-                        'type'      => 'checkbox',
-                        'options'   => array(
-                            array(
-                                'key'   => "is_remove_admin_email",
-                                'label' => __('Remove admin email from stock alert receivers list.', 'woocommerce-product-stock-alert'),
-                                'value' => "is_remove_admin_email"
-                            ),
-                        ),
-                        'database_value' => array(),
-                    ],
-                    [
                         'key'       => 'additional_alert_email',
                         'type'      => 'textarea',
                         'class'     => 'woo-setting-wpeditor-class',
-                        'desc'      => __('Enter email address if you want to receive stock alert mail along with admin mail. You can add multiple commma seperated emails.<br/> Default: Admin emails.', 'woocommerce-product-stock-alert'),
+                        'desc'      => __('Set the email address to receive notifications when a user subscribes to an out-of-stock product. You can add multiple comma-separated emails.<br/> Default: The admin\'s email is set as the receiver. Exclude the admin\'s email from the list to exclude admin from receiving these notifications.', 'woocommerce-product-stock-alert'),
                         'label'     => __( 'Recipient Email for New Subscriber', 'woocommerce-product-stock-alert' ),
                         'database_value' => '',
                     ],
