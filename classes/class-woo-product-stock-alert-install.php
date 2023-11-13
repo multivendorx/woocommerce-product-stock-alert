@@ -125,7 +125,7 @@ class WOO_Product_Stock_Alert_Install {
                 $genaral_settings['additional_alert_email'] = get_woo_product_alert_old_plugin_settings('additional_alert_email');
             }
             if ($genaral_settings) {
-                save_mvx_product_alert_settings('woo_stock_alert_general_tab_settings', $genaral_settings);
+                save_woo_product_alert_settings('woo_stock_alert_general_tab_settings', $genaral_settings);
             }
 
             if (get_woo_product_alert_old_plugin_settings('alert_text')) {
@@ -173,7 +173,7 @@ class WOO_Product_Stock_Alert_Install {
                 $customization_settings['button_font_size'] = get_woo_product_alert_old_plugin_settings('button_font_size');
             }
             if ($customization_settings) {
-                save_mvx_product_alert_settings('woo_stock_alert_form_customization_tab_settings', $customization_settings);
+                save_woo_product_alert_settings('woo_stock_alert_form_customization_tab_settings', $customization_settings);
             }
 
             if (get_woo_product_alert_old_plugin_settings('alert_success')) {
@@ -189,7 +189,7 @@ class WOO_Product_Stock_Alert_Install {
                 $submit_settings['alert_unsubscribe_message'] = get_woo_product_alert_old_plugin_settings('alert_unsubscribe_message');    
             }
             if ($submit_settings) {
-                save_mvx_product_alert_settings('woo_stock_alert_form_submission_tab_settings', $submit_settings);
+                save_woo_product_alert_settings('woo_stock_alert_form_submission_tab_settings', $submit_settings);
             }
 
             update_option('_is_updated_woo_product_alert_settings', true);
