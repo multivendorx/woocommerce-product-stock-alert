@@ -562,7 +562,7 @@ if (!function_exists('woo_stockalert_admin_tabs')) {
                         'type'      => 'textarea',
                         'class'     => 'woo-setting-wpeditor-class',
                         'desc'      => __('Set the email address to receive notifications when a user subscribes to an out-of-stock product. You can add multiple comma-separated emails.<br/> Default: The admin\'s email is set as the receiver. Exclude the admin\'s email from the list to exclude admin from receiving these notifications.', 'woocommerce-product-stock-alert'),
-                        'label'     => __( 'Recipient Email for New Subscriber', 'woocommerce-product-stock-alert' ),
+                        'label'     => __('Recipient Email for New Subscriber', 'woocommerce-product-stock-alert'),
                         'database_value' => '',
                     ],
                 ]

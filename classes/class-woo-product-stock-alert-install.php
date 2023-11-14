@@ -27,6 +27,27 @@ class WOO_Product_Stock_Alert_Install {
         if (!get_option('_is_updated_woo_product_alert_database')) {
             $this->woo_stock_alert_older_data_migration();
         }
+
+        if (!get_option('_is_updated_admin_email_settings')) {
+            $this->woo_stock_alert_admin_email();
+        }
+    }
+
+    function woo_stock_alert_admin_email() {
+        $admin_email = get_option('admin_email');
+        if (get_option('woo_stock_alert_general_tab_settings')) {
+            $genaral_settings = get_option('woo_stock_alert_general_tab_settings');
+            if (!get_woo_product_alert_plugin_settings('is_remove_admin_email')) {
+                $additional_email_settings = get_woo_product_alert_plugin_settings('additional_alert_email');
+                if ($additional_email_settings) {
+                    $genaral_settings['additional_alert_email'] = $admin_email . ', ' . $additional_email_settings;
+                } else {
+                    $genaral_settings['additional_alert_email'] = $admin_email;
+                }
+            }
+        }
+        update_option('woo_stock_alert_general_tab_settings', $genaral_settings);
+        update_option('_is_updated_admin_email_settings', true);
     }
 
     function woo_stock_alert_option_migration() {
@@ -117,16 +138,14 @@ class WOO_Product_Stock_Alert_Install {
                 $genaral_settings['is_double_optin'] = array('is_double_optin');
             }
 
-            if (get_woo_product_alert_old_plugin_settings('is_remove_admin_email') &&  get_woo_product_alert_old_plugin_settings('is_remove_admin_email') != 'Enable') {
-                $admin_email = get_option('admin_email');
+            if (get_woo_product_alert_old_plugin_settings('is_remove_admin_email') &&  get_woo_product_alert_old_plugin_settings('is_remove_admin_email') == 'Enable') {
+                $genaral_settings['is_remove_admin_email'] = array('is_remove_admin_email');
             }
 
             if (get_woo_product_alert_old_plugin_settings('additional_alert_email')) {
                 $genaral_settings['additional_alert_email'] = get_woo_product_alert_old_plugin_settings('additional_alert_email');
-                if ($admin_email && !empty($admin_email)) {
-                    array_unshift($genaral_settings['additional_alert_email'], $admin_email);
-                }    
             }
+
             if ($genaral_settings) {
                 save_woo_product_alert_settings('woo_stock_alert_general_tab_settings', $genaral_settings);
             }
@@ -157,7 +176,6 @@ class WOO_Product_Stock_Alert_Install {
 
             if (get_woo_product_alert_old_plugin_settings('button_text_color')) {
                 $customization_settings['button_text_color'] = get_woo_product_alert_old_plugin_settings('button_text_color');
-
             }
 
             if (get_woo_product_alert_old_plugin_settings('button_background_color_onhover')) {
