@@ -270,12 +270,9 @@ if (!function_exists('customer_stock_alert_unsubscribe')) {
 
 if (!function_exists('woo_is_product_outofstock')) {
     function woo_is_product_outofstock($product_id, $type = '') {
-        $is_stock = true;
-
-        if (!$product_id) {
-            return $is_stock;
-        }
-
+        $is_outof_stock = false;
+        if (!$product_id) return $is_outof_stock;
+        
         if ($type == 'variation') {
             $child_obj = new WC_Product_Variation($product_id);
             $manage_stock = $child_obj->managing_stock();
@@ -289,22 +286,20 @@ if (!function_exists('woo_is_product_outofstock')) {
         }
 
         $is_enable_backorders = get_woo_product_alert_plugin_settings('is_enable_backorders');
-
         if ($manage_stock) {
             if ($stock_quantity <= (int) get_option('woocommerce_notify_no_stock_amount')) {
-                $is_stock = false;
+                $is_outof_stock = true;
             } elseif ($stock_quantity <= 0) {
-                $is_stock = false;
+                $is_outof_stock = true;
             }
         } else {
             if ($stock_status == 'onbackorder' && $is_enable_backorders) {
-                $is_stock = false;
-            } elseif ($stock_status == 'instock') {
-                $is_stock = false;
+                $is_outof_stock = true;
+            } elseif ($stock_status == 'outofstock') {
+                $is_outof_stock = true;
             }
         }
-
-        return $is_stock;
+        return $is_outof_stock;
     }
 }
 

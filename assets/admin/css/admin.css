@@ -63,4 +63,10 @@ span.stock-alert-pro-tag {
 
 #adminmenu .wp-submenu li{
 	position: relative;
-  }
+}
+
+.product-subscribtion-column{
+	color: #181817;
+    font-weight: 600;
+    font-size: 1rem;
+}

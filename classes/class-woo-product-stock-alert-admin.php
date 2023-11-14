@@ -208,14 +208,12 @@ class WOO_Product_Stock_Alert_Admin {
     }
 
     function manage_interest_column_orderby($vars) {
-
         if (isset($vars['orderby']) && 'product_subscriber' == $vars['orderby']) {
             $vars = array_merge($vars, array(
                 'meta_key' => 'no_of_subscribers',
                 'orderby' => 'meta_value'
             ));
         }
-
         return $vars;
     }
 
@@ -234,14 +232,16 @@ class WOO_Product_Stock_Alert_Admin {
                         if (isset($child_ids) && !empty($child_ids)) {
                             foreach ($child_ids as $child_id) {
                                 if (woo_is_product_outofstock($child_id, 'variation')) {
-                                    $no_of_subscriber += get_no_subscribed_persons($child_id);
+                                    $no_of_subscriber += get_no_subscribed_persons($child_id, 'woo_subscribed');
                                 }
                             }
                         }
-                        echo $no_of_subscriber;
+                        echo '<div class="product-subscribtion-column">' . $no_of_subscriber . '</div>';
                     } else {
-                        $no_of_subscriber += get_no_subscribed_persons($product_obj->get_id());
-                        echo $no_of_subscriber;
+                        if (woo_is_product_outofstock($product_obj->get_id())) {
+                            $no_of_subscriber = get_no_subscribed_persons($product_obj->get_id(), 'woo_subscribed');
+                        }
+                        echo '<div class="product-subscribtion-column">' . $no_of_subscriber . '</div>';
                     }
                 }
         }
@@ -256,7 +256,7 @@ class WOO_Product_Stock_Alert_Admin {
         $product_obj = wc_get_product($post->ID);
         if (!$product_obj->is_type('variable')) {
             if (woo_is_product_outofstock($post->ID)) {
-                $no_of_subscriber = get_no_subscribed_persons($post->ID);
+                $no_of_subscriber = get_no_subscribed_persons($post->ID, 'woo_subscribed');
                 if (!empty($no_of_subscriber) && $no_of_subscriber > 0) {
                     ?>
                     <p class="form-field _stock_field">
@@ -275,7 +275,7 @@ class WOO_Product_Stock_Alert_Admin {
     function manage_variation_custom_column($loop, $variation_data, $variation) {
         global $WOO_Product_Stock_Alert;
         if (woo_is_product_outofstock($variation->ID, 'variation')) {
-            $product_subscriber = get_no_subscribed_persons($variation->ID);
+            $product_subscriber = get_no_subscribed_persons($variation->ID, 'woo_subscribed');
             if (!empty($product_subscriber) && $product_subscriber >0) {
                 ?>
                 <p class="form-row form-row-full interested_person">
