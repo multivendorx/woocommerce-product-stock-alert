@@ -8,8 +8,8 @@ class WOO_Product_Stock_Alert_Frontend {
         //enqueue styles
         add_action('wp_enqueue_scripts', array(&$this, 'frontend_styles'));
 
-        add_action('woocommerce_simple_add_to_cart', array($this, 'display_in_simple_product'), 31 );
-        add_action('woocommerce_bundle_add_to_cart', array($this, 'display_in_simple_product'), 31 );
+        add_action('woocommerce_simple_add_to_cart', array($this, 'display_in_simple_product'), 31);
+        add_action('woocommerce_bundle_add_to_cart', array($this, 'display_in_simple_product'), 31);
         add_action('woocommerce_subscription_add_to_cart', array($this, 'display_in_simple_product'), 31);
         add_action('woocommerce_woosb_add_to_cart', array($this, 'display_in_simple_product'), 31);
         add_action('woocommerce_after_variations_form', array($this, 'display_in_no_variation_product'));
@@ -25,7 +25,7 @@ class WOO_Product_Stock_Alert_Frontend {
     function frontend_scripts() {
         global $WOO_Product_Stock_Alert;
         $frontend_script_path = $WOO_Product_Stock_Alert->plugin_url . 'assets/frontend/js/';
-        $suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+        $suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
         $stock_interest = $alert_text_html = $button_html = $border_size = $button_css = '';
         $settings_array = get_woo_form_settings_array();
 

@@ -30,8 +30,7 @@ class WOO_Product_Stock_Alert_Action {
                             $email->trigger($to, $p_id);
                             update_subscriber($post_id, 'woo_mailsent');
                             delete_post_meta($p_id, 'no_of_subscribers');
-                        }
-                        
+                        }        
                     } else {
                         if ($product_availability_stock > (int) get_option('woocommerce_notify_no_stock_amount')) {
                             $email = WC()->mailer()->emails['WC_Email_Stock_Alert'];
@@ -52,7 +51,7 @@ class WOO_Product_Stock_Alert_Action {
                                 delete_post_meta($p_id, 'no_of_subscribers');
                             }
                         }
-                    } elseif ($stock_status == 'instock' ) {
+                    } elseif ($stock_status == 'instock') {
                         $email = WC()->mailer()->emails['WC_Email_Stock_Alert'];
                         foreach ($subscriber as $post_id => $to) { 
                             $email->trigger($to, $p_id);
@@ -74,7 +73,7 @@ class WOO_Product_Stock_Alert_Action {
             $get_subscribed_user = get_product_subscribers_array();
             if (!empty($get_subscribed_user) && is_array($get_subscribed_user)) {
                 foreach ($get_subscribed_user as $id => $subscriber) {
-                    if  (!empty($subscriber)) {
+                    if (!empty($subscriber)) {
                         foreach ($subscriber as $email) {
                             if (!is_already_subscribed($email, $id)) {
                                 insert_subscriber($email, $id);

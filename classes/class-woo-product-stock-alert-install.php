@@ -10,6 +10,11 @@ class WOO_Product_Stock_Alert_Install {
         if (!get_option('woo_stock_alert_data_migrate')) {
             $this->woo_stock_alert_option_migration();
         }
+
+        if (!get_option('_is_updated_admin_email_settings')) {
+            $this->woo_stock_alert_admin_email();
+        }
+        
         if (!get_option('woo_product_stock_alert_activate')) {
             if ($this->stock_alert_activate() == true) {
                 update_option('woo_product_stock_alert_activate', 1);
@@ -26,10 +31,6 @@ class WOO_Product_Stock_Alert_Install {
 
         if (!get_option('_is_updated_woo_product_alert_database')) {
             $this->woo_stock_alert_older_data_migration();
-        }
-
-        if (!get_option('_is_updated_admin_email_settings')) {
-            $this->woo_stock_alert_admin_email();
         }
     }
 

@@ -71,7 +71,6 @@ jQuery(function ($) {
             } else {
                 instock_notifier.process_form(form.find('.stock_alert_email').val(), form.find('.current_product_id').val(), form.find('.current_variation_id').val(), form.find('.current_product_name').val());
             }
-            $(this).removeClass("stk_disabled");
         },
 
         process_form: function(cus_email, product_id, var_id, pro_title) {      
@@ -124,6 +123,7 @@ jQuery(function ($) {
             } else {
                 $('.stock_notifier-subscribe-form').html(alert_text_html+'<div class="woo_fields_wrap">'+alert_fields+''+button_html+'</div><p style="color:#e2401c;" class="stock_alert_error_message">'+valid_email+'</p><input type="hidden" class="current_product_id" value="'+product_id+'" /> <input type="hidden" class="current_variation_id" value="'+var_id+'" /><input type="hidden" class="current_product_name" value="'+pro_title+'" />');
             }
+            $(this).removeClass("stk_disabled");
         }
     };
     instock_notifier.init();

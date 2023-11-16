@@ -19,8 +19,10 @@ if (!function_exists('get_woo_product_alert_plugin_settings')) {
             )
         );
         
-        foreach ($all_options as $option_name) { 
-            $woo_plugin_settings = array_merge($woo_plugin_settings, get_option($option_name, array()));
+        foreach ($all_options as $option_name) {
+            if (is_array(get_option($option_name, array()))) {
+                $woo_plugin_settings = array_merge($woo_plugin_settings, get_option($option_name, array()));
+            }
         }
         if (empty($key)) {
             return $default;
@@ -94,7 +96,7 @@ if (!function_exists('save_woo_product_alert_settings')) {
 }
 
 if (!function_exists('update_subscriber')) {
-    function update_subscriber( $stockalert_id, $status) {
+    function update_subscriber($stockalert_id, $status) {
         $args = array(
             'ID' => $stockalert_id,
             'post_type' => 'woostockalert',
@@ -106,7 +108,7 @@ if (!function_exists('update_subscriber')) {
 }
 
 if (!function_exists('update_product_subscriber_count')) {
-    function update_product_subscriber_count( $product_id ) {
+    function update_product_subscriber_count($product_id ) {
         $get_count = get_no_subscribed_persons($product_id, 'woo_subscribed');
         update_post_meta($product_id, 'no_of_subscribers', $get_count);
     }
@@ -235,7 +237,7 @@ if (!function_exists('get_product_subscribers_email')) {
 
 if (!function_exists('customer_stock_alert_insert')) {
 
-    function customer_stock_alert_insert( $product_id, $customer_email) {
+    function customer_stock_alert_insert($product_id, $customer_email) {
         if (empty($product_id) && empty($customer_email)) return;
         $do_complete_additional_task = apply_filters( 'woo_product_stock_alert_do_complete_additional_task', false );
         $is_accept_email_address = apply_filters( 'woo_stock_alert_is_accept_email_address', false );
@@ -255,7 +257,7 @@ if (!function_exists('customer_stock_alert_insert')) {
 }
 
 if (!function_exists('customer_stock_alert_unsubscribe')) {
-    function customer_stock_alert_unsubscribe( $product_id, $customer_email) {
+    function customer_stock_alert_unsubscribe($product_id, $customer_email) {
         $unsubscribe_post = is_already_subscribed($customer_email, $product_id);
         if ($unsubscribe_post) {
             foreach($unsubscribe_post as $post){
@@ -580,6 +582,7 @@ if (!function_exists('woo_stockalert_admin_tabs')) {
                         'type'      => 'text',
                         'label'     => __('Email Field Placeholder', 'woocommerce-product-stock-alert'),
                         'desc'      => __('It will represent email field placeholder text.', 'woocommerce-product-stock-alert'),
+                        'placeholder'   => __('Enter your email', 'woocommerce-product-stock-alert'),
                         'database_value' => '',
                     ],
                     [
@@ -587,6 +590,7 @@ if (!function_exists('woo_stockalert_admin_tabs')) {
                         'type'      => 'textarea',
                         'class'     => 'woo-setting-wpeditor-class',
                         'desc'      => __('Descriptive text guiding users on the purpose of providing their email address above the email entry field.', 'woocommerce-product-stock-alert'),
+                        'placeholder'   => __('Receive in-stock notifications for this product.', 'woocommerce-product-stock-alert'),
                         'label'     => __('Subscription Purpose Description', 'woocommerce-product-stock-alert'),
                         'database_value' => '',
                     ],

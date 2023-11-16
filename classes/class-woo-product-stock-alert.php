@@ -66,7 +66,7 @@ class WOO_Product_Stock_Alert {
         $this->deprecated_hook_handlers['actions'] = new Stock_Alert_Deprecated_Action_Hooks();
 
         if (current_user_can('manage_options')) {
-            add_action( 'rest_api_init', array( $this, 'stock_alert_rest_routes_react_module' ) );
+            add_action('rest_api_init', array($this, 'stock_alert_rest_routes_react_module'));
         }
 
         register_post_status('woo_mailsent', array(
@@ -161,9 +161,9 @@ class WOO_Product_Stock_Alert {
      *
      */
     function woo_product_stock_alert_mail($emails) {
-        require_once( 'emails/class-woo-product-stock-alert-admin-email.php' );
-        require_once( 'emails/class-woo-product-stock-alert-subscriber-confirmation-email.php' );
-        require_once( 'emails/class-woo-product-stock-alert-email.php' );
+        require_once('emails/class-woo-product-stock-alert-admin-email.php');
+        require_once('emails/class-woo-product-stock-alert-subscriber-confirmation-email.php');
+        require_once('emails/class-woo-product-stock-alert-email.php');
 
         $emails['WC_Admin_Email_Stock_Alert'] = new WC_Admin_Email_Stock_Alert();
         $emails['WC_Subscriber_Confirmation_Email_Stock_Alert'] = new WC_Subscriber_Confirmation_Email_Stock_Alert();        
@@ -173,20 +173,20 @@ class WOO_Product_Stock_Alert {
     }
 
     public function stock_alert_rest_routes_react_module() {
-        register_rest_route( 'woo_stockalert/v1', '/fetch_admin_tabs', [
+        register_rest_route('woo_stockalert/v1', '/fetch_admin_tabs', [
             'methods' => WP_REST_Server::READABLE,
-            'callback' => array( $this, 'woo_stockalert_fetch_admin_tabs' ),
-            'permission_callback' => array( $this, 'stockalert_permission' ),
+            'callback' => array($this, 'woo_stockalert_fetch_admin_tabs'),
+            'permission_callback' => array($this, 'stockalert_permission'),
         ] );
-        register_rest_route( 'woo_stockalert/v1', '/save_stockalert', [
+        register_rest_route('woo_stockalert/v1', '/save_stockalert', [
             'methods' => WP_REST_Server::EDITABLE,
-            'callback' => array( $this, 'woo_stockalert_save_stockalert' ),
-            'permission_callback' => array( $this, 'stockalert_permission' ),
+            'callback' => array($this, 'woo_stockalert_save_stockalert'),
+            'permission_callback' => array($this, 'stockalert_permission'),
         ] );
-        register_rest_route( 'woo_stockalert/v1', '/get_button_data', [
+        register_rest_route('woo_stockalert/v1', '/get_button_data', [
             'methods' => WP_REST_Server::READABLE,
-            'callback' => array( $this, 'woo_stockalert_get_button_data' ),
-            'permission_callback' => array( $this, 'stockalert_permission' ),
+            'callback' => array($this, 'woo_stockalert_get_button_data'),
+            'permission_callback' => array($this, 'stockalert_permission'),
         ] );
     }
 
@@ -196,7 +196,7 @@ class WOO_Product_Stock_Alert {
     
     public function woo_stockalert_fetch_admin_tabs() {
 		$woo_stockalert_tabs_data = woo_stockalert_admin_tabs() ? woo_stockalert_admin_tabs() : [];
-        return rest_ensure_response( $woo_stockalert_tabs_data );
+        return rest_ensure_response($woo_stockalert_tabs_data);
 	}
 
     public function woo_stockalert_get_button_data() {
