@@ -53,7 +53,7 @@ class WC_Email_Stock_Alert extends WC_Email {
 		$this->recipient = $recipient;
 		$this->product_id = $product_id;
 
-		if (get_woo_product_alert_plugin_settings('is_remove_admin_email') == false) {
+		if (apply_filters('woo_product_backin_stock_send_admin', false)) {
 			$this->recipient .= ',' . get_option('admin_email');
 		}
 		if ( ! $this->is_enabled() || ! $this->get_recipient() ) {

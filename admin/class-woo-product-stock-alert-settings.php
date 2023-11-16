@@ -16,8 +16,8 @@ class WOO_Product_Stock_Alert_Settings {
     $pro_sticker = apply_filters('is_stock_alert_pro_inactive', true) ? '<span class="stock-alert-pro-tag">Pro</span>' : '';
 
     add_menu_page(
-      __( 'Stock Alert', 'woocommerce-product-stock-alert' ),
-      __( 'Stock Alert', 'woocommerce-product-stock-alert' ),
+      __( 'Stock Manager', 'woocommerce-product-stock-alert' ),
+      __( 'Stock Manager', 'woocommerce-product-stock-alert' ),
       'manage_options',
       'woo-stock-alert-setting',
       [ $this, 'create_woo_product_stock_alert_settings' ],

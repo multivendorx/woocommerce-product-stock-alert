@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name: WooCommerce Product Stock Alert
+ * Plugin Name: Product Stock Manager & Notifier for WooCommerce
  * Plugin URI: https://multivendorx.com/
- * Description: Woocommerce plugin using which a customer can subscribe for interest on an out of stock product. When the product becomes available, subscribed customer will get an alert email.
+ * Description: Boost sales with real-time stock alerts! Notify customers instantly when products are back in stock. Simplify data management by exporting and importing stock data with ease.
  * Author: MultiVendorX
  * Version: 2.1.0
  * Requires at least: 4.4

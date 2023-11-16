@@ -576,7 +576,7 @@ $scroll-color: #ece8f1;
               &::after {
                 content: '';
                 position: absolute;
-                top: 0.55rem;
+                top: 0.35rem;
                 left: 2.3rem;
                 width: 0.25rem;
                 height: 0.25rem;
@@ -1523,6 +1523,11 @@ textarea:focus {
   box-shadow: none !important;
 }
 
+textarea {
+  border: 0.063rem solid #d4d1d9;
+  background-color: #fdfdfe;
+}
+
 .rs-picker-toolbar-ranges.rs-stack {
   display: flex;
 }
@@ -1624,6 +1629,8 @@ textarea:focus {
       letter-spacing: 0;
       font-weight: 400;
       font-style: italic;
+      max-width: 50%;
+      margin: auto;
     }
   }
 
@@ -1652,15 +1659,16 @@ textarea:focus {
 
 span.stock-alert-pro-tag {
   position: absolute;
-  top: 0.25rem;
   right: 0.5rem;
   background: #9f8ab9;
   color: #fdfdfe;
   padding: 0.125rem 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
   border-radius: 0.625rem;
-  font-size: 0.625rem;
+  font-size: .625rem;
   text-align: center;
-  line-height: 0.7rem;
+  line-height: 1;
   text-transform: capitalize;
 }
 
@@ -1677,6 +1685,7 @@ img.subscriber-img {
 
 .stock-alert-popup-cross {
   text-align: right;
+  cursor: pointer;
 }
 
 .woo-color-picker-wrap {
@@ -1731,6 +1740,10 @@ img.subscriber-img {
   flex-wrap: wrap;
 }
 
+span.pro-strong {
+  font-weight: 700;
+}
+
 .woo-size-picker-wrap {
   padding: 0 0 3rem;
 
@@ -1749,7 +1762,7 @@ img.subscriber-img {
 }
 
 .example_alert_button {
-  padding: 0.75rem;
+  padding: 0.5rem 0.875rem;
 }
 
 .bubble {
@@ -1815,7 +1828,32 @@ input.woo-setting-color-picker {
     cursor: pointer;
     border-radius: 50%;
   }
+}
 
+// Start - Settings Page
+.woo-setting-section-divider {
+  background-color: #9f8ab9;
+  height: 0.05rem;
+  margin: 2rem 0 1.5rem;
+}
+
+.woo-setting-section-header h5 {
+  font-size: 1.25rem;
+  color: #181817;
+  border-bottom: 0.06rem solid #ece8f1;
+  padding: 0 1rem 0.75rem 0;
+  margin: 1.5rem 0;
+  position: relative;
+
+  &::after {
+    position: absolute;
+    content: "";
+    height: 0.19rem;
+    width: 6%;
+    background-color: #522c81;
+    left: 0;
+    bottom: -0.125rem;
+  }
 }
 
 // top banner css start
@@ -1823,7 +1861,20 @@ input.woo-setting-color-picker {
   position: relative;
   padding: 1rem 1.5rem;
   background: #f2eff5;
-
+  .carousel-container {
+    position: relative;
+    overflow: hidden;
+    .why-go-pro-tag {
+      cursor: pointer;
+      position: absolute;
+      left: -28px;
+      top: 17px;
+      background: #e35047;
+      color: #f9f8fb;
+      padding: 0.25rem 1.5rem;
+      transform: rotate(-45deg);
+    }
+  }
   .carousel-list {
     list-style: none;
     padding: 0;
@@ -1870,6 +1921,7 @@ input.woo-setting-color-picker {
     h3 {
       font-size: 1.25rem;
       font-weight: 500;
+      color: #f9f8fb;
     }
 
     p {
@@ -1904,7 +1956,7 @@ input.woo-setting-color-picker {
 
     button {
       color: #65438f;
-      background-color: #f9f8fb;
+      background-color: #d9d4d1;
       font-size: 0.65rem;
       border-radius: 50%;
       margin: 0;

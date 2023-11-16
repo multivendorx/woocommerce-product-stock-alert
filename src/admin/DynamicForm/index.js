@@ -22,6 +22,24 @@ export default class DynamicForm extends React.Component {
 		this.handleClose = this.handleClose.bind(this);
 		this.handleOnChangedada = this.handleOnChangedada.bind(this);
 		this.handle_get_button_color_state = this.handle_get_button_color_state.bind(this);
+		this.handleOnChangerange = this.handleOnChangerange.bind(this);
+		this.handleDragEnd = this.handleDragEnd.bind(this);
+	}
+
+	handleDragEnd (){
+		if ( this.props.submitbutton && this.props.submitbutton === 'false' ) {
+			setTimeout( () => {
+				this.onSubmit( '' );
+			}, 10 );
+		}
+	}
+
+	handleOnChangerange( e, target ) {
+		this.setState({
+			button_font_size: target === 'button_font_size' ? e.target.value : this.state.button_font_size,
+			button_border_radious: target === 'button_border_radious' ? e.target.value : this.state.button_border_radious,
+			button_border_size: target === 'button_border_size' ? e.target.value : this.state.button_border_size,
+		});
 	}
 
 	handleOMouseEnter( e ) {
@@ -67,10 +85,6 @@ export default class DynamicForm extends React.Component {
 			button_background_color_onhover: target === 'button_background_color_onhover' ? e.target.value : this.state.button_background_color_onhover,
 			button_border_color_onhover: target === 'button_border_color_onhover' ? e.target.value : this.state.button_border_color_onhover,
 			button_text_color_onhover: target === 'button_text_color_onhover' ? e.target.value : this.state.button_text_color_onhover,
-
-			button_font_size: target === 'button_font_size' ? e.target.value : this.state.button_font_size,
-			button_border_radious: target === 'button_border_radious' ? e.target.value : this.state.button_border_radious,
-			button_border_size: target === 'button_border_size' ? e.target.value : this.state.button_border_size,
 		});
 
 		if ( this.props.submitbutton && this.props.submitbutton === 'false' ) {
@@ -160,16 +174,17 @@ export default class DynamicForm extends React.Component {
 		
 		let $ = jQuery;
 		$(document).ready(function () {
-			const allRanges = document.querySelectorAll(".woo-progress-picker-wrap");
-			allRanges.forEach(wrap => {
-				const range = wrap.querySelector("input.woo-setting-range-picker");
-				const bubble = wrap.querySelector(".bubble");
+			setTimeout(function() {
+				const allRanges = document.querySelectorAll(".woo-progress-picker-wrap");
+				allRanges.forEach(wrap => {
+					const range = wrap.querySelector("input.woo-setting-range-picker");
+					const bubble = wrap.querySelector(".bubble");
 
-				range.addEventListener("input", () => {
+					range.addEventListener("input", () => {
+						setBubble(range, bubble);
+					});
 					setBubble(range, bubble);
-				});
-				setBubble(range, bubble);
-			});
+				});}, 2000);
 
 			function setBubble(range, bubble) {
 				const max = range.max ? range.max : 100;
@@ -375,7 +390,7 @@ export default class DynamicForm extends React.Component {
 					<div class="editor-left side">
 						<div class="left_side_wrap">
 							<div className="woo-color-picker-wrap">
-								Alert Text
+								{stockalertappLocalizer.setting_string.form_dec}
 								<input
 									{ ...props }
 									className="woo-setting-color-picker"
@@ -390,37 +405,7 @@ export default class DynamicForm extends React.Component {
 								/>
 							</div>
 							<div className="woo-color-picker-wrap">
-								Background
-								<input
-									{ ...props }
-									className="woo-setting-color-picker"
-									type="color"
-									onChange={ ( e ) => {
-										this.handleOnChangedada(
-											e,
-											'button_background_color'
-										);
-									} }
-									value={this.state.button_background_color}
-								/>
-							</div>
-							<div className="woo-color-picker-wrap">
-								Border
-								<input
-									{ ...props }
-									className="woo-setting-color-picker"
-									type="color"
-									onChange={ ( e ) => {
-										this.handleOnChangedada(
-											e,
-											'button_border_color'
-										);
-									} }
-									value={this.state.button_border_color}
-								/>
-							</div>
-							<div className="woo-color-picker-wrap">
-								Text
+								{stockalertappLocalizer.setting_string.submit_button_text}
 								<input
 									{ ...props }
 									className="woo-setting-color-picker"
@@ -435,7 +420,37 @@ export default class DynamicForm extends React.Component {
 								/>
 							</div>
 							<div className="woo-color-picker-wrap">
-								Hover Background
+								{stockalertappLocalizer.setting_string.background}
+								<input
+									{ ...props }
+									className="woo-setting-color-picker"
+									type="color"
+									onChange={ ( e ) => {
+										this.handleOnChangedada(
+											e,
+											'button_background_color'
+										);
+									} }
+									value={this.state.button_background_color}
+								/>
+							</div>
+							<div className="woo-color-picker-wrap">
+								{stockalertappLocalizer.setting_string.border}
+								<input
+									{ ...props }
+									className="woo-setting-color-picker"
+									type="color"
+									onChange={ ( e ) => {
+										this.handleOnChangedada(
+											e,
+											'button_border_color'
+										);
+									} }
+									value={this.state.button_border_color}
+								/>
+							</div>
+							<div className="woo-color-picker-wrap">
+								{stockalertappLocalizer.setting_string.hover_background}
 								<input
 									{ ...props }
 									className="woo-setting-color-picker"
@@ -450,7 +465,7 @@ export default class DynamicForm extends React.Component {
 								/>
 							</div>
 							<div className="woo-color-picker-wrap">
-								Hover Border
+								{stockalertappLocalizer.setting_string.hover_border}
 								<input
 									{ ...props }
 									className="woo-setting-color-picker"
@@ -465,7 +480,7 @@ export default class DynamicForm extends React.Component {
 								/>
 							</div>
 							<div className="woo-color-picker-wrap">
-								Hover Text
+								{stockalertappLocalizer.setting_string.hover_text}
 								<input
 									{ ...props }
 									className="woo-setting-color-picker"
@@ -482,7 +497,7 @@ export default class DynamicForm extends React.Component {
 						</div>
 						<div class="right_side_wrap">
 							<div className="woo-size-picker-wrap">
-								Font Size
+								{stockalertappLocalizer.setting_string.font_size}
 								<div className="woo-progress-picker-wrap">
 									<input 
 										{ ...props }
@@ -493,17 +508,19 @@ export default class DynamicForm extends React.Component {
 										max="30"
 										value={this.state.button_font_size}
 										onChange={ ( e ) => {
-											this.handleOnChangedada(
+											this.handleOnChangerange(
 												e,
 												'button_font_size'
 											);
 										} }
+										onMouseUp={this.handleDragEnd}
+        								onTouchEnd={this.handleDragEnd}
 									/>
-									<output class="bubble">{this.state.button_font_size}px</output>
+									<output class="bubble">{this.state.button_font_size ? this.state.button_font_size : 0 }px</output>
 								</div>
 							</div>
 							<div className="woo-size-picker-wrap">
-								Border Radius
+								{stockalertappLocalizer.setting_string.border_radius}
 								<div className="woo-progress-picker-wrap">
 									<input 
 										{ ...props }
@@ -514,17 +531,19 @@ export default class DynamicForm extends React.Component {
 										max="100"
 										value={this.state.button_border_radious}
 										onChange={ ( e ) => {
-											this.handleOnChangedada(
+											this.handleOnChangerange(
 												e,
 												'button_border_radious'
 											);
 										} }
+										onMouseUp={this.handleDragEnd}
+        								onTouchEnd={this.handleDragEnd}
 									/>
-									<output class="bubble">{this.state.button_border_radious}px</output>
+									<output class="bubble">{this.state.button_border_radious ? this.state.button_border_radious : 0}px</output>
 								</div>
 							</div>
 							<div className="woo-size-picker-wrap">
-								Border Size
+								{stockalertappLocalizer.setting_string.border_size}
 								<div className="woo-progress-picker-wrap">
 									<input 
 										{ ...props }
@@ -535,17 +554,41 @@ export default class DynamicForm extends React.Component {
 										max="10"
 										value={this.state.button_border_size}
 										onChange={ ( e ) => {
-											this.handleOnChangedada(
+											this.handleOnChangerange(
 												e,
 												'button_border_size'
 											);
 										} }
+										onMouseUp={this.handleDragEnd}
+        								onTouchEnd={this.handleDragEnd}
 									/>
-									<output class="bubble">{this.state.button_border_size}px</output>
+									<output class="bubble">{this.state.button_border_size ? this.state.button_border_size : 0 }px</output>
 								</div>
 							</div>
 						</div>
 					</div>			
+				);
+			}
+
+			if (type === 'section') {
+				input = (
+					<div className="woo-setting-section-divider">&nbsp;</div>
+				);
+			}
+
+			if (type === 'heading') {
+				input = (
+					<div className="woo-setting-section-header">
+						{m.blocktext ? (
+							<h5
+								dangerouslySetInnerHTML={{
+									__html: m.blocktext,
+								}}
+							></h5>
+						) : (
+							''
+						)}
+					</div>
 				);
 			}
 
@@ -851,7 +894,7 @@ export default class DynamicForm extends React.Component {
 												htmlFor={`woo-toggle-switch-${o.key}`}
 											></label>
 											{
-											props.disabled ?
+											props.pro_inactive ?
 												<span className="table-content-pro-tag stock-alert-pro-tag">Pro</span> 
 												: ''
 											}
