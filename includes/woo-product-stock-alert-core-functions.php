@@ -473,7 +473,7 @@ if (!function_exists('woo_stockalert_admin_tabs')) {
                     ],
                     [
                         'key'       => 'is_enable_backorders',
-                        'label'     => __("Subscriptions with Active Backorders", 'woocommerce-product-stock-alert'),
+                        'label'     => __("Allow Subscriptions with Active Backorders", 'woocommerce-product-stock-alert'),
                         'class'     => 'woo-toggle-checkbox',
                         'type'      => 'checkbox',
                         'options'   => array(

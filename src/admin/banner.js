@@ -99,7 +99,7 @@ class Banner extends Component {
 						</Dialog>
 						<div className="woo-carousel-container">
 						<div className="carousel-container">
-							<div class="why-go-pro-tag" onClick={this.handleOpen}>Why Go Pro</div>
+							<div class="why-go-pro-tag" onClick={this.handleOpen}>Why Premium</div>
 							<ul className="carousel-list">
 								<li className="carousel-item active">
 									<div className="woo-pro-txt-items">
@@ -109,7 +109,7 @@ class Banner extends Component {
 											href={stockalertappLocalizer.pro_url}
 											className="woo-btn btn-red"
 										>
-											Go to pro
+											View Pricing
 										</a>
 									</div>
 								</li>
@@ -121,7 +121,7 @@ class Banner extends Component {
 											href={stockalertappLocalizer.pro_url}
 											className="woo-btn btn-red"
 										>
-											Go to pro
+											View Pricing
 										</a>
 									</div>
 								</li>
@@ -133,7 +133,7 @@ class Banner extends Component {
 											href={stockalertappLocalizer.pro_url}
 											className="woo-btn btn-red"
 										>
-											Go to pro
+											View Pricing
 										</a>
 									</div>
 								</li>
@@ -145,7 +145,7 @@ class Banner extends Component {
 											href={stockalertappLocalizer.pro_url}
 											className="woo-btn btn-red"
 										>
-											Go to pro
+											View Pricing
 										</a>
 									</div>
 								</li>
@@ -157,7 +157,7 @@ class Banner extends Component {
 											href={stockalertappLocalizer.pro_url}
 											className="woo-btn btn-red"
 										>
-											Go to pro
+											View Pricing
 										</a>
 									</div>
 								</li>

@@ -3,9 +3,9 @@
 Contributors: wcmp, abhirup23
 Tags: wordpress, woocommerce, e-commerce, shop, stock, out of stock, in stock, stock alert, alert email, stock alert email
 Requires at least: 4.4
-Tested up to: 6.3.1
+Tested up to: 6.4.1
 Requires PHP: 5.6
-Stable tag: 2.1.0
+Stable tag: 2.2.0
 Donate link: https://multivendorx.com/donate/
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -128,6 +128,19 @@ Are you tired of losing potential sales because your customers can't buy the out
 15. Export subscribers' list
 
 == Changelog ==
+
+= 2.2.0 - 2023-16-11 =
+* Added - WordPress 6.4.1 compatibility.
+* Added - WooCommerce 8.2.2 compatibility.
+* Added - Sample form design section.
+* Fixed - Migration issue.
+* Fixed - Subscriber count in product table.
+* Fixed - Some minor issue.
+* Fixed - Admin dashboard loading issue.
+* Fixed - Undefined array warning.
+* Enhancement - migration in a cron.
+* Dev - Added `woo_product_backin_stock_send_admin` filter.
+* Updated - Language files.
 
 = 2.1.0 - 2023-09-18 =
 * Added - WordPress 6.3.1 compatibility.
