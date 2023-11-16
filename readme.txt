@@ -10,7 +10,7 @@ Donate link: https://multivendorx.com/donate/
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Alert your customer when a product of her choice is available again. 
+Elevate sales with instant stock alerts, engage customers with real-time updates, and efficiently manage inventory through a dedicated dashboard. Simplify data handling with seamless export/import functionality.
 
 == Description ==
 **Supercharge your sales with instant stock alerts! Notify customers about restocked products and manage data effortlessly through export/import functionality.**
