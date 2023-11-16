@@ -15,7 +15,7 @@ class Propopup extends Component {
                                 <div className="woo-overlay-content">
                                     <h1 className="banner-header">Unlock <span className="banner-pro-tag">Pro</span> </h1>
                                     <div className="woo-banner-content">
-                                        <strong>Boost to Product Stock Manager & Notifier PRO to access premium features!</strong>
+                                        <strong>Boost to Product Stock Manager & Notifier Pro to access premium features!</strong>
                                         <p>&nbsp;</p>
                                         <p>1. Double Opt-in.</p>
                                         <p>2. Ban Spam Mail.</p>

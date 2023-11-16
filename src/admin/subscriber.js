@@ -370,7 +370,7 @@ class Subscriber extends Component {
 								<div className="woo-middle-container-wrapper">
 									<div className="woo-page-title">
 										<p>
-										Subscriber list
+										Subscriber List
 										</p>
 										<div className="pull-right">
 											<CSVLink

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-16 12:03+0000\n"
+"POT-Creation-Date: 2023-11-16 13:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -14,19 +14,21 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/"
 
-#: includes/woo-product-stock-alert-core-functions.php:693
+#: includes/woo-product-stock-alert-core-functions.php:697
 msgid ""
 " Create an alert message for users attempting to subscribe from blocked "
 "domains."
 msgstr ""
 
-#: includes/woo-product-stock-alert-core-functions.php:44
+#: includes/woo-product-stock-alert-core-functions.php:44 
+#: includes/woo-product-stock-alert-core-functions.php:653
 msgid ""
 "%customer_email% is already registered for %product_title%. Please attempt a "
 "different email address."
 msgstr ""
 
-#: includes/woo-product-stock-alert-core-functions.php:46
+#: includes/woo-product-stock-alert-core-functions.php:46 
+#: includes/woo-product-stock-alert-core-functions.php:671
 msgid "%customer_email% is successfully unregistered."
 msgstr ""
 
@@ -67,27 +69,31 @@ msgstr ""
 msgid "All"
 msgstr ""
 
+#: includes/woo-product-stock-alert-core-functions.php:476
+msgid "Allow Subscriptions with Active Backorders"
+msgstr ""
+
 #: classes/class-woo-product-stock-alert-admin.php:157
 msgid "Background"
 msgstr ""
 
-#: includes/woo-product-stock-alert-core-functions.php:677
+#: includes/woo-product-stock-alert-core-functions.php:681
 msgid "Ban Email Control Center."
 msgstr ""
 
-#: includes/woo-product-stock-alert-core-functions.php:692
+#: includes/woo-product-stock-alert-core-functions.php:696
 msgid "Blocked Domain Alert Message"
 msgstr ""
 
-#: includes/woo-product-stock-alert-core-functions.php:701
+#: includes/woo-product-stock-alert-core-functions.php:705
 msgid "Blocked Email Addresses"
 msgstr ""
 
-#: includes/woo-product-stock-alert-core-functions.php:707
+#: includes/woo-product-stock-alert-core-functions.php:711
 msgid "Blocked Email Alert Message"
 msgstr ""
 
-#: includes/woo-product-stock-alert-core-functions.php:686
+#: includes/woo-product-stock-alert-core-functions.php:690
 msgid "Blocked Email Domains"
 msgstr ""
 
@@ -118,7 +124,7 @@ msgstr ""
 msgid "Configure form settings."
 msgstr ""
 
-#: includes/woo-product-stock-alert-core-functions.php:716
+#: includes/woo-product-stock-alert-core-functions.php:720
 msgid "Configure mailChimp settings. "
 msgstr ""
 
@@ -130,7 +136,7 @@ msgstr ""
 msgid "Confirm subscriber"
 msgstr ""
 
-#: includes/woo-product-stock-alert-core-functions.php:708
+#: includes/woo-product-stock-alert-core-functions.php:712
 msgid ""
 "Create an alert message for users attempting to subscribe from blocked Email "
 "ID."
@@ -183,7 +189,7 @@ msgstr ""
 msgid "Email"
 msgstr ""
 
-#: includes/woo-product-stock-alert-core-functions.php:675
+#: includes/woo-product-stock-alert-core-functions.php:679
 msgid "Email Blocker"
 msgstr ""
 
@@ -191,15 +197,15 @@ msgstr ""
 msgid "Email Field Placeholder"
 msgstr ""
 
-#: includes/woo-product-stock-alert-core-functions.php:661
+#: includes/woo-product-stock-alert-core-functions.php:664
 msgid "Email Validation Error"
 msgstr ""
 
-#: includes/woo-product-stock-alert-core-functions.php:722
+#: includes/woo-product-stock-alert-core-functions.php:726
 msgid "Enable Mailchimp"
 msgstr ""
 
-#: includes/woo-product-stock-alert-core-functions.php:728
+#: includes/woo-product-stock-alert-core-functions.php:732
 msgid "Enable this to activate Mailchimp."
 msgstr ""
 
@@ -309,15 +315,15 @@ msgid_plural "Mail Sent <span class=\"count\">(%s)</span>"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/woo-product-stock-alert-core-functions.php:738
+#: includes/woo-product-stock-alert-core-functions.php:742
 msgid "Mailchimp API"
 msgstr ""
 
-#: includes/woo-product-stock-alert-core-functions.php:714
+#: includes/woo-product-stock-alert-core-functions.php:718
 msgid "Mailchimp Integration"
 msgstr ""
 
-#: includes/woo-product-stock-alert-core-functions.php:754
+#: includes/woo-product-stock-alert-core-functions.php:758
 msgid "Mailchimp List"
 msgstr ""
 
@@ -325,10 +331,9 @@ msgstr ""
 msgid "Modify the subscribe button text. By default we display Notify Me."
 msgstr ""
 
-#: includes/woo-product-stock-alert-core-functions.php:668
+#: includes/woo-product-stock-alert-core-functions.php:672
 msgid ""
 "Modify the text that confirms user that they have successful unsubscribe."
-"<br/> Default: %customer_email% is successfully unregistered."
 msgstr ""
 
 #: includes/woo-product-stock-alert-core-functions.php:609
@@ -361,11 +366,10 @@ msgstr ""
 msgid "Number of Interested Person(s) : "
 msgstr ""
 
-#: includes/woo-product-stock-alert-core-functions.php:660
+#: includes/woo-product-stock-alert-core-functions.php:663
 msgid ""
 "Personalize the message shown to users when they try to subscribe with an "
-"invalid email address.<br/> Default: Please enter a valid email ID and try "
-"again."
+"invalid email address."
 msgstr ""
 
 #: includes/woo-product-stock-alert-core-functions.php:513
@@ -375,7 +379,8 @@ msgid ""
 "interest/subscribed persons."
 msgstr ""
 
-#: includes/woo-product-stock-alert-core-functions.php:45
+#: includes/woo-product-stock-alert-core-functions.php:45 
+#: includes/woo-product-stock-alert-core-functions.php:662
 msgid "Please enter a valid email ID and try again."
 msgstr ""
 
@@ -442,7 +447,7 @@ msgid_plural "Removed subscribers from %s products."
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/woo-product-stock-alert-core-functions.php:653
+#: includes/woo-product-stock-alert-core-functions.php:655
 msgid "Repeated Subscription Alert"
 msgstr ""
 
@@ -458,7 +463,7 @@ msgstr ""
 msgid "Search by Product Name"
 msgstr ""
 
-#: includes/woo-product-stock-alert-core-functions.php:755
+#: includes/woo-product-stock-alert-core-functions.php:759
 msgid "Select a mailchimp list."
 msgstr ""
 
@@ -486,13 +491,13 @@ msgstr ""
 msgid "Some error occurs"
 msgstr ""
 
-#: includes/woo-product-stock-alert-core-functions.php:700
+#: includes/woo-product-stock-alert-core-functions.php:704
 msgid ""
 "Specify email addresses that are restricted from subscribing. You can add "
 "multiple commma seperated emails."
 msgstr ""
 
-#: includes/woo-product-stock-alert-core-functions.php:685
+#: includes/woo-product-stock-alert-core-functions.php:689
 msgid ""
 "Specify email domains that are restricted from subscribing. You can add "
 "multiple commma seperated emails."
@@ -539,11 +544,7 @@ msgstr ""
 msgid "Subscription Purpose Description"
 msgstr ""
 
-#: includes/woo-product-stock-alert-core-functions.php:476
-msgid "Subscriptions with Active Backorders"
-msgstr ""
-
-#: includes/woo-product-stock-alert-core-functions.php:645
+#: includes/woo-product-stock-alert-core-functions.php:646
 msgid "Successful Form Submission"
 msgstr ""
 
@@ -555,26 +556,23 @@ msgstr ""
 msgid "Text Customization"
 msgstr ""
 
-#: includes/woo-product-stock-alert-core-functions.php:43
-msgid ""
-"Thank you for expressing interest in %product_title%. We will notify you via "
-"email once it is back in stock."
-msgstr ""
-
-#: includes/woo-product-stock-alert-core-functions.php:652
-msgid ""
-"Tip: Enhance personalization by incorporating %product_title% for dynamic "
-"product titles and %customer_email% for individual customer emails.<br/> "
-"Default: %customer_email% is already registered for %product_title%. Please "
-"attempt a different email address."
-msgstr ""
-
+#: includes/woo-product-stock-alert-core-functions.php:43 
 #: includes/woo-product-stock-alert-core-functions.php:644
 msgid ""
-"Tip: Utilize %product_title% for dynamic product titles and %customer_email% "
-"for personalized customer email addresses in your messages. <br/> Default:"
 "Thank you for expressing interest in %product_title%. We will notify you via "
 "email once it is back in stock."
+msgstr ""
+
+#: includes/woo-product-stock-alert-core-functions.php:654
+msgid ""
+"Tip: Enhance personalization by incorporating %product_title% for dynamic "
+"product titles and %customer_email% for individual customer emails."
+msgstr ""
+
+#: includes/woo-product-stock-alert-core-functions.php:645
+msgid ""
+"Tip: Utilize %product_title% for dynamic product titles and %customer_email% "
+"for personalized customer email addresses in your messages."
 msgstr ""
 
 #: classes/class-woo-product-stock-alert-admin.php:147 
@@ -587,7 +585,7 @@ msgstr ""
 msgid "Unsubscribe Button"
 msgstr ""
 
-#: includes/woo-product-stock-alert-core-functions.php:669
+#: includes/woo-product-stock-alert-core-functions.php:673
 msgid "Unsubscribe Confirmation"
 msgstr ""
 

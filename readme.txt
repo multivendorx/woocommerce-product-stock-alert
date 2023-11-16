@@ -27,8 +27,8 @@ Introducing Product Stock Manager & Notifier – your solution for seamless prod
 📩Admins receive email notifications when customers subscribe to out-of-stock products.
 🔔Prevent Duplicate Email Entries per Product for Efficient Notification Lists.
 📥Works efficiently for both Guests and Members.
-  👤Convert subscribers into loyal customers as they quickly purchase restocked items.
- 🌐 WPML Compatible
+👤Convert subscribers into loyal customers as they quickly purchase restocked items.
+🌐 WPML Compatible
 ✍️ Easily tailor the form's heading, button text, colors, hover effects, submission alerts, and more through the plugin settings.
 ✉️Personalize email headings and subjects sent to customers using WooCommerce's email settings.
 💡The WooCommerce Product Stock Alert Plugin functions seamlessly when product Backorder is enabled.
@@ -77,8 +77,8 @@ Are you tired of losing potential sales because your customers can't buy the out
 📤Subscriber Export Options [PRO]: Admins can effortlessly export subscriber details, including customer names, subscription dates, product names, and email IDs. Organize and sort this data by products and subscription dates for better management.
 📧Mail Sent Status [PRO]: Admins can easily track which users have received notification emails and identify users who have unsubscribed from receiving in-stock notifications, ensuring efficient communication management.
 🔐 ReCAPTCHA Central [PRO]: ReCAPTCHA ensures only genuine subscribers, improving data accuracy and targeted notifications. ReCAPTCHA settings are essential for out-of-stock notifications to maintain data quality, prevent spam, enhance security, and ensure compliance with relevant regulations. 
- 📊 Stock Manager Dashboard [PRO]:Efficiently manage your inventory with a dedicated dashboard showcasing comprehensive product lists. Admins can perform quick in-line edits, updating stock, SKUs, and more for streamlined inventory control.[COMING SOON]
- 📉 Product Stock History [PRO]: Dive into the Stock Manager for WooCommerce's Stock Log page, offering a detailed history of each product's stock movements. Track changes over time to make informed decisions about stock management.[COMING SOON]
+📊 Stock Manager Dashboard [PRO]:Efficiently manage your inventory with a dedicated dashboard showcasing comprehensive product lists. Admins can perform quick in-line edits, updating stock, SKUs, and more for streamlined inventory control.[COMING SOON]
+📉 Product Stock History [PRO]: Dive into the Stock Manager for WooCommerce's Stock Log page, offering a detailed history of each product's stock movements. Track changes over time to make informed decisions about stock management.[COMING SOON]
 🚫 Discontinued Product Status [PRO]: Optimize inventory control with the ability to mark products as 'Discontinued' in your WooCommerce catalog. Craft custom messages to guide customers toward alternative or newer products, ensuring a smooth transition and minimizing potential lost sales.[COMING SOON]
 
 

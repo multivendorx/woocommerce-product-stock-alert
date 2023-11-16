@@ -128,7 +128,7 @@ class WOO_Product_Stock_Alert_Admin {
                 'selector_choice'  => "email",
             ),
             array(
-                'name'      =>  __('Registred User', 'woocommerce-product-stock-alert'),
+                'name'      =>  __('Registered', 'woocommerce-product-stock-alert'),
                 'selector'  =>  '',
                 'sortable'  =>  false,
                 'selector_choice'  => "reg_user",
