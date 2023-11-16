@@ -10,7 +10,7 @@ Donate link: https://multivendorx.com/donate/
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Elevate sales with instant stock alerts, engage customers with real-time updates, and efficiently manage inventory through a dedicated dashboard. Simplify data handling with seamless export/import functionality.
+Elevate sales with instant stock alerts, engage customers with real-time updates, and efficiently manage inventory through a dedicated dashboard. Features stock export/import via csv format.
 
 == Description ==
 **Instant Stock Alerts and Effortless Inventory Management. Seamless stock export/import functionality.**
@@ -42,13 +42,12 @@ Revolutionize your stock management with our Product Stock Manager & Notifier pl
 📊Enhance Marketing Strategies by Connecting WooCommerce Out-of-Stock Subscribers to Mailchimp.[PRO]
 📚View and manage lists of all products effortlessly from stock manager dashboard.[COMING SOON]
 ✍️Quick edit products using in-line editing, allowing updates to stock, SKU, and more.
-📊Access a Stock Log page for each product.[COMING SOON]
-📈Track the stock movement history, gaining insights into product availability changes over time.[COMING SOON]
+📊Access a Stock Log page for each product.[PRO/COMING SOON]
+📈Track the stock movement history, gaining insights into product availability changes over time.[PRO/COMING SOON]
 💻Your central dashboard for efficient management and retrieval of out-of-stock subscriber lists. [COMING SOON]
-📤Easily export subscriber details, including customer names, subscription dates, product names, and email IDs, for efficient management. [COMING SOON]
+📤Easily export subscriber details, including customer names, subscription dates, product names, and email IDs, for efficient management. [PRO]
 🔐Enhance Security and Data Integrity with ReCAPTCHA for Reliable Out-of-Stock Alerts.[PRO]
-🛒Mark products as 'Discontinued' in your WooCommerce catalog.[COMING SOON]
-💬Provide custom messages guiding buyers to newer or alternative products, aiding in sales recovery and maintaining SEO traffic.[COMING SOON]
+🛒Mark products as 'Discontinued' in your WooCommerce catalog.[PRO/COMING SOON]
 ✍️Edit the data conveniently and import it back using a CSV file, streamlining inventory management. [COMING SOON]
 
 
