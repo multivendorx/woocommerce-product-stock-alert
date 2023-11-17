@@ -148,7 +148,7 @@ class WOO_Product_Stock_Alert_Admin {
             'mail_sent'     =>  __('Mail Sent', 'woocommerce-product-stock-alert'),
             'search'        =>  __('Search by Email', 'woocommerce-product-stock-alert'),
             'show_product'  =>  __('Search by Product Name', 'woocommerce-product-stock-alert'),
-            'daterenge'     =>  __('YYYY-MM-DD ~ YYYY-MM-DD', 'woocommerce-product-stock-alert'),
+            'daterenge'     =>  __('DD-MM-YYYY ~ DD-MM-YYYY', 'woocommerce-product-stock-alert'),
         );
 
         $setting_string     =   array(
@@ -163,7 +163,28 @@ class WOO_Product_Stock_Alert_Admin {
             'border_radius'         =>  __('Border Radius', 'woocommerce-product-stock-alert'),
             'border_size'           =>  __('Border Size', 'woocommerce-product-stock-alert'),
         );
-        $pro_settings_list = apply_filters('woocommerce_stock_alert_pro_settings_lists',  array( 'ban_email_domains', 'ban_email_domain_text', 'ban_email_addresses', 'ban_email_address_text', 'is_mailchimp_enable', 'mailchimp_api', 'get_mailchimp_list_button', 'selected_mailchimp_list', 'is_double_optin', 'is_recaptcha_enable'));
+        $pro_settings_list = apply_filters('woocommerce_stock_alert_pro_settings_lists', array(
+            'ban_email_domains',
+            'ban_email_domain_text',
+            'ban_email_addresses',
+            'ban_email_address_text',
+            'is_mailchimp_enable',
+            'mailchimp_api',
+            'get_mailchimp_list_button',
+            'selected_mailchimp_list',
+            'is_double_optin',
+            'is_recaptcha_enable'
+        ));
+        $woo_admin_massages_fields = array(
+            'double_opt_in_success',
+            'shown_interest_text',
+            'alert_success',
+            'alert_email_exist',
+            'valid_email',
+            'alert_unsubscribe_message',
+            'ban_email_domain_text',
+            'ban_email_address_text'
+        );
         
         if (get_current_screen()->id == 'toplevel_page_woo-stock-alert-setting') {
             wp_enqueue_script( 'woo-stockalert-script', $WOO_Product_Stock_Alert->plugin_url . 'build/index.js', array( 'wp-element' ), $WOO_Product_Stock_Alert->version, true );
@@ -185,6 +206,8 @@ class WOO_Product_Stock_Alert_Admin {
                 'pro_url'                   => esc_url(WOO_PRODUCT_STOCK_ALERT_PRO_SHOP_URL),
                 'setting_string'            => $setting_string,
                 'banner_show'               => $this->woo_stockalert_is_banner_close(),
+                'default_massages_fields'   => $woo_admin_massages_fields,
+                'default_massages'          => get_woo_default_massages(),
               ]));
             wp_enqueue_style('woo-stockalert-style', $WOO_Product_Stock_Alert->plugin_url . 'build/index.css');
             wp_enqueue_style('woo_admin_rsuite_css', $WOO_Product_Stock_Alert->plugin_url . 'assets/admin/css/rsuite-default' . '.min' . '.css', array(), $WOO_Product_Stock_Alert->version);

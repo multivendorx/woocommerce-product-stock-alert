@@ -79,8 +79,8 @@ jQuery(function ($) {
             var alert_success = woo_stock_alert_script_data.alert_success;
             var alert_email_exist = woo_stock_alert_script_data.alert_email_exist;
             var valid_email = woo_stock_alert_script_data.valid_email;
-            var ban_email_domin = woo_stock_alert_script_data.ban_email_domin;
-            var ban_email_address = woo_stock_alert_script_data.ban_email_address;
+            var ban_email_domin = woo_stock_alert_script_data.ban_email_domain_text;
+            var ban_email_address = woo_stock_alert_script_data.ban_email_address_text;
             var double_opt_in_text = woo_stock_alert_script_data.double_opt_in_success;
             var unsubscribe_button_html = woo_stock_alert_script_data.unsubscribe_button;
             var alert_fields = woo_stock_alert_script_data.alert_fields;

@@ -34,6 +34,7 @@ class WOO_Product_Stock_Alert_Install {
 
     function woo_stock_alert_admin_settings_default() {
         $admin_email = get_option('admin_email');
+        $default_massages = get_woo_default_massages();
         if (get_option('woo_stock_alert_general_tab_settings')) {
             $genaral_settings = get_option('woo_stock_alert_general_tab_settings');
             if (!get_woo_product_alert_plugin_settings('is_remove_admin_email')) {
@@ -45,10 +46,10 @@ class WOO_Product_Stock_Alert_Install {
                 }
             }
             if (empty(get_woo_product_alert_plugin_settings('double_opt_in_success'))) {
-                $genaral_settings['double_opt_in_success'] = __('Kindly check your inbox to confirm the subscription.', 'woocommerce-product-stock-alert-pro');
+                $genaral_settings['double_opt_in_success'] = $default_massages['double_opt_in_success'];
             }
             if (empty(get_woo_product_alert_plugin_settings('shown_interest_text'))) {
-                $genaral_settings['shown_interest_text'] = __('Product in demand: %no_of_subscribed% waiting.', 'woocommerce-product-stock-alert');
+                $genaral_settings['shown_interest_text'] = $default_massages['shown_interest_text'];
             }
             update_option('woo_stock_alert_general_tab_settings', $genaral_settings);
         }
@@ -56,16 +57,16 @@ class WOO_Product_Stock_Alert_Install {
         if (get_option('woo_stock_alert_form_submission_tab_settings')) {
             $form_submission_settings = get_option('woo_stock_alert_form_submission_tab_settings');
             if (empty(get_woo_product_alert_plugin_settings('alert_success'))) {
-                $form_submission_settings['alert_success'] = __('Thank you for expressing interest in %product_title%. We will notify you via email once it is back in stock.', 'woocommerce-product-stock-alert');
+                $form_submission_settings['alert_success'] = $default_massages['alert_success'];
             }
             if (empty(get_woo_product_alert_plugin_settings('alert_email_exist'))) {
-                $form_submission_settings['alert_email_exist'] = __('%customer_email% is already registered for %product_title%. Please attempt a different email address.', 'woocommerce-product-stock-alert');
+                $form_submission_settings['alert_email_exist'] = $default_massages['alert_email_exist'];
             }
             if (empty(get_woo_product_alert_plugin_settings('valid_email'))) {
-                $form_submission_settings['valid_email'] = __('Please enter a valid email ID and try again.', 'woocommerce-product-stock-alert');
+                $form_submission_settings['valid_email'] = $default_massages['valid_email'];
             }
             if (empty(get_woo_product_alert_plugin_settings('alert_unsubscribe_message'))) {
-                $form_submission_settings['alert_unsubscribe_message'] = __('%customer_email% is successfully unregistered.', 'woocommerce-product-stock-alert');
+                $form_submission_settings['alert_unsubscribe_message'] = $default_massages['alert_unsubscribe_message'];
             }
             update_option('woo_stock_alert_form_submission_tab_settings', $form_submission_settings);
         }
@@ -73,10 +74,10 @@ class WOO_Product_Stock_Alert_Install {
         if (get_option('woo_stock_alert_email_tab_settings')) {
             $form_submission_settings = get_option('woo_stock_alert_email_tab_settings');
             if (empty(get_woo_product_alert_plugin_settings('ban_email_domain_text'))) {
-                $form_submission_settings['ban_email_domain_text'] = __('This email domain is ban in our site, kindly use another email domain.', 'woocommerce-product-stock-alert');
+                $form_submission_settings['ban_email_domain_text'] = $default_massages['ban_email_domain_text'];
             }
             if (empty(get_woo_product_alert_plugin_settings('ban_email_address_text'))) {
-                $form_submission_settings['ban_email_address_text'] = __('This email address is ban in our site, kindly use another email address.', 'woocommerce-product-stock-alert');
+                $form_submission_settings['ban_email_address_text'] = $default_massages['ban_email_address_text'];
             }
             update_option('woo_stock_alert_email_tab_settings', $form_submission_settings);
         }
@@ -143,10 +144,11 @@ class WOO_Product_Stock_Alert_Install {
 
     function stock_alert_activate() {
         $admin_email = get_option('admin_email');
+        $default_massages = get_woo_default_massages();
         $stock_alert_general_settings = array(
             'additional_alert_email'    => $admin_email,
-            'double_opt_in_success'     => __('Kindly check your inbox to confirm the subscription.', 'woocommerce-product-stock-alert-pro'),
-            'shown_interest_text'       => __('Product in demand: %no_of_subscribed% waiting.', 'woocommerce-product-stock-alert'),
+            'double_opt_in_success'     => $default_massages['double_opt_in_success'],
+            'shown_interest_text'       => $default_massages['shown_interest_text'],
         );
 
         if (!get_option('woo_stock_alert_general_tab_settings')) {
@@ -154,10 +156,10 @@ class WOO_Product_Stock_Alert_Install {
         }
 
         $stock_alert_form_submission_settings = array(
-            'alert_success'              =>  __('Thank you for expressing interest in %product_title%. We will notify you via email once it is back in stock.', 'woocommerce-product-stock-alert'),
-            'alert_email_exist'          => __('%customer_email% is already registered for %product_title%. Please attempt a different email address.', 'woocommerce-product-stock-alert'),
-            'valid_email'                => __('Please enter a valid email ID and try again.', 'woocommerce-product-stock-alert'),
-            'alert_unsubscribe_message'  => __('%customer_email% is successfully unregistered.', 'woocommerce-product-stock-alert'),
+            'alert_success'             => $default_massages['alert_success'],
+            'alert_email_exist'         => $default_massages['alert_email_exist'],
+            'valid_email'               => $default_massages['valid_email'],
+            'alert_unsubscribe_message' => $default_massages['alert_unsubscribe_message'],
         );
 
         if (!get_option('woo_stock_alert_form_submission_tab_settings')) {
@@ -165,8 +167,8 @@ class WOO_Product_Stock_Alert_Install {
         }
 
         $stock_alert_email_settings = array(
-            'ban_email_domain_text'      => __('This email domain is ban in our site, kindly use another email domain.', 'woocommerce-product-stock-alert'),
-            'ban_email_address_text'     => __('This email address is ban in our site, kindly use another email address.', 'woocommerce-product-stock-alert'),
+            'ban_email_domain_text'     => $default_massages['ban_email_domain_text'],
+            'ban_email_address_text'    => $default_massages['ban_email_address_text'],
         );
 
         if (!get_option('woo_stock_alert_email_tab_settings')) {
