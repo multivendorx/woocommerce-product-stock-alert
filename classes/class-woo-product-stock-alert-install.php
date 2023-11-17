@@ -11,8 +11,8 @@ class WOO_Product_Stock_Alert_Install {
             $this->woo_stock_alert_option_migration();
         }
 
-        if (!get_option('_is_updated_admin_email_settings')) {
-            $this->woo_stock_alert_admin_email();
+        if (!get_option('woo_stock_alert_admin_settings_default')) {
+            $this->woo_stock_alert_admin_settings_default();
         }
         
         if (!get_option('woo_product_stock_alert_activate')) {
@@ -32,7 +32,7 @@ class WOO_Product_Stock_Alert_Install {
         }
     }
 
-    function woo_stock_alert_admin_email() {
+    function woo_stock_alert_admin_settings_default() {
         $admin_email = get_option('admin_email');
         if (get_option('woo_stock_alert_general_tab_settings')) {
             $genaral_settings = get_option('woo_stock_alert_general_tab_settings');
@@ -44,9 +44,44 @@ class WOO_Product_Stock_Alert_Install {
                     $genaral_settings['additional_alert_email'] = $admin_email;
                 }
             }
+            if (empty(get_woo_product_alert_plugin_settings('double_opt_in_success'))) {
+                $genaral_settings['double_opt_in_success'] = __('Kindly check your inbox to confirm the subscription.', 'woocommerce-product-stock-alert-pro');
+            }
+            if (empty(get_woo_product_alert_plugin_settings('shown_interest_text'))) {
+                $genaral_settings['shown_interest_text'] = __('Product in demand: %no_of_subscribed% waiting.', 'woocommerce-product-stock-alert');
+            }
             update_option('woo_stock_alert_general_tab_settings', $genaral_settings);
         }
-        update_option('_is_updated_admin_email_settings', true);
+
+        if (get_option('woo_stock_alert_form_submission_tab_settings')) {
+            $form_submission_settings = get_option('woo_stock_alert_form_submission_tab_settings');
+            if (empty(get_woo_product_alert_plugin_settings('alert_success'))) {
+                $form_submission_settings['alert_success'] = __('Thank you for expressing interest in %product_title%. We will notify you via email once it is back in stock.', 'woocommerce-product-stock-alert');
+            }
+            if (empty(get_woo_product_alert_plugin_settings('alert_email_exist'))) {
+                $form_submission_settings['alert_email_exist'] = __('%customer_email% is already registered for %product_title%. Please attempt a different email address.', 'woocommerce-product-stock-alert');
+            }
+            if (empty(get_woo_product_alert_plugin_settings('valid_email'))) {
+                $form_submission_settings['valid_email'] = __('Please enter a valid email ID and try again.', 'woocommerce-product-stock-alert');
+            }
+            if (empty(get_woo_product_alert_plugin_settings('alert_unsubscribe_message'))) {
+                $form_submission_settings['alert_unsubscribe_message'] = __('%customer_email% is successfully unregistered.', 'woocommerce-product-stock-alert');
+            }
+            update_option('woo_stock_alert_form_submission_tab_settings', $form_submission_settings);
+        }
+
+        if (get_option('woo_stock_alert_email_tab_settings')) {
+            $form_submission_settings = get_option('woo_stock_alert_email_tab_settings');
+            if (empty(get_woo_product_alert_plugin_settings('ban_email_domain_text'))) {
+                $form_submission_settings['ban_email_domain_text'] = __('This email domain is ban in our site, kindly use another email domain.', 'woocommerce-product-stock-alert');
+            }
+            if (empty(get_woo_product_alert_plugin_settings('ban_email_address_text'))) {
+                $form_submission_settings['ban_email_address_text'] = __('This email address is ban in our site, kindly use another email address.', 'woocommerce-product-stock-alert');
+            }
+            update_option('woo_stock_alert_email_tab_settings', $form_submission_settings);
+        }
+
+        update_option('woo_stock_alert_admin_settings_default', true);
     }
 
     function woo_stock_alert_option_migration() {

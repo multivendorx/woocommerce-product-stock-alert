@@ -184,6 +184,7 @@ class WOO_Product_Stock_Alert_Admin {
                 'pro_coupon_text'           => __('Don\'t miss out! Enjoy 10% off on our pro features.', 'woocommerce-product-stock-alert'),
                 'pro_url'                   => esc_url(WOO_PRODUCT_STOCK_ALERT_PRO_SHOP_URL),
                 'setting_string'            => $setting_string,
+                'banner_show'               => $this->woo_stockalert_is_banner_close(),
               ]));
             wp_enqueue_style('woo-stockalert-style', $WOO_Product_Stock_Alert->plugin_url . 'build/index.css');
             wp_enqueue_style('woo_admin_rsuite_css', $WOO_Product_Stock_Alert->plugin_url . 'assets/admin/css/rsuite-default' . '.min' . '.css', array(), $WOO_Product_Stock_Alert->version);
@@ -336,6 +337,14 @@ class WOO_Product_Stock_Alert_Admin {
                     }
                 }
             }
+        }
+    }
+
+    public function woo_stockalert_is_banner_close() {
+        if (get_option('woocommerce_stock_alert_pro_banner_hide')) {
+            return false;
+        } else {
+            return true;
         }
     }
 }

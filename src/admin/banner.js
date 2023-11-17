@@ -26,17 +26,6 @@ class Banner extends Component {
 				});
 			});
 	}
-	common_funtions = (e) => {
-		axios
-			.get(
-				`${stockalertappLocalizer.apiUrl}/woo_stockalert/v1/is_banner_close`,
-			)
-			.then((response) => {
-				this.setState({
-					open_banner: response.data,
-				});
-			});
-	}
 
 	handleClose() {
 		this.setState({
@@ -49,7 +38,11 @@ class Banner extends Component {
 		});
 	}
 	componentDidMount() {
-		this.common_funtions('');
+
+		this.setState({
+			open_banner: stockalertappLocalizer.banner_show,
+		});
+
 		var $ = jQuery;
 		$(document).ready(function () {
 			const $carouselList = $('.carousel-list');
@@ -104,11 +97,9 @@ class Banner extends Component {
 				startAutoSlide();
 			});
 		});
-
 	}
 
 	render() {
-		{console.log(this.state.open_banner)}
 		return (
 			<>
 				{stockalertappLocalizer.pro_active ? 
