@@ -1864,6 +1864,16 @@ input.woo-setting-color-picker {
   .carousel-container {
     position: relative;
     overflow: hidden;
+    .pro-slider-cross {
+      cursor: pointer;
+      position: absolute;
+      right: 0.75rem;
+      top: 0.75rem;
+      font-size: 0.5rem;
+      border: 0.06rem solid;
+      padding: 0.25rem;
+      border-radius: 50%;
+    }
     .why-go-pro-tag {
       cursor: pointer;
       position: absolute;
@@ -1956,7 +1966,7 @@ input.woo-setting-color-picker {
 
     button {
       color: #65438f;
-      background-color: #d9d4d1;
+      background-color: #c9c5c3;
       font-size: 0.65rem;
       border-radius: 50%;
       margin: 0;

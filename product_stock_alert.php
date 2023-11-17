@@ -8,7 +8,7 @@
  * Requires at least: 4.4
  * Tested up to: 6.4.1
  * WC requires at least: 3.0
- * WC tested up to: 8.2.2
+ * WC tested up to: 8.3.0
  * Author URI: https://multivendorx.com/
  * Text Domain: woocommerce-product-stock-alert
  * Domain Path: /languages/

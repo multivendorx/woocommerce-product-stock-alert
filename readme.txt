@@ -123,9 +123,9 @@ Are you tired of losing potential sales because your customers can't buy the out
 
 == Changelog ==
 
-= 2.2.0 - 2023-16-11 =
+= 2.2.0 - 2023-11-17 =
 * Added - WordPress 6.4.1 compatibility.
-* Added - WooCommerce 8.2.2 compatibility.
+* Added - WooCommerce 8.3.0 compatibility.
 * Added - Sample form design section.
 * Fixed - Migration issue.
 * Fixed - Subscriber count in product table.

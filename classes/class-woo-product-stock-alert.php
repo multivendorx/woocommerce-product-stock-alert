@@ -188,10 +188,33 @@ class WOO_Product_Stock_Alert {
             'callback' => array($this, 'woo_stockalert_get_button_data'),
             'permission_callback' => array($this, 'stockalert_permission'),
         ] );
+        register_rest_route('woo_stockalert/v1', '/is_banner_close', [
+            'methods' => WP_REST_Server::READABLE,
+            'callback' => array($this, 'woo_stockalert_is_banner_close'),
+            'permission_callback' => array($this, 'stockalert_permission'),
+        ] );
+        register_rest_route('woo_stockalert/v1', '/close_banner', [
+            'methods' => WP_REST_Server::READABLE,
+            'callback' => array($this, 'woo_stockalert_close_banner'),
+            'permission_callback' => array($this, 'stockalert_permission'),
+        ] );
     }
 
     public function stockalert_permission() {
         return true;
+    }
+
+    public function woo_stockalert_is_banner_close() {
+        if (get_option('woocommerce_stock_alert_pro_banner_hide')) {
+            return rest_ensure_response(false);
+        } else {
+            return rest_ensure_response(true);
+        }
+    }
+
+    public function woo_stockalert_close_banner() {
+        update_option('woocommerce_stock_alert_pro_banner_hide', true);
+        return rest_ensure_response(false);
     }
     
     public function woo_stockalert_fetch_admin_tabs() {

@@ -16,14 +16,12 @@ class WOO_Product_Stock_Alert_Install {
         }
         
         if (!get_option('woo_product_stock_alert_activate')) {
-            if ($this->stock_alert_activate() == true) {
-                update_option('woo_product_stock_alert_activate', 1);
-            }
+            $this->stock_alert_activate();
         }
         
-        if (get_option('woo_product_stock_alert_installed')) :
+        if (get_option('woo_product_stock_alert_installed')) {
             $this->start_cron_job();
-        endif;
+        }
 
         if (!get_option('_is_updated_woo_product_alert_settings')) {
             $this->woo_stock_alert_older_settings_migration();
@@ -40,14 +38,14 @@ class WOO_Product_Stock_Alert_Install {
             $genaral_settings = get_option('woo_stock_alert_general_tab_settings');
             if (!get_woo_product_alert_plugin_settings('is_remove_admin_email')) {
                 $additional_email_settings = get_woo_product_alert_plugin_settings('additional_alert_email');
-                if ($additional_email_settings) {
+                if ($additional_email_settings && !empty($additional_email_settings)) {
                     $genaral_settings['additional_alert_email'] = $admin_email . ', ' . $additional_email_settings;
                 } else {
                     $genaral_settings['additional_alert_email'] = $admin_email;
                 }
             }
+            update_option('woo_stock_alert_general_tab_settings', $genaral_settings);
         }
-        update_option('woo_stock_alert_general_tab_settings', $genaral_settings);
         update_option('_is_updated_admin_email_settings', true);
     }
 
@@ -110,13 +108,36 @@ class WOO_Product_Stock_Alert_Install {
 
     function stock_alert_activate() {
         $admin_email = get_option('admin_email');
-        $stock_alert_settings = array('additional_alert_email' => $admin_email);
+        $stock_alert_general_settings = array(
+            'additional_alert_email'    => $admin_email,
+            'double_opt_in_success'     => __('Kindly check your inbox to confirm the subscription.', 'woocommerce-product-stock-alert-pro'),
+            'shown_interest_text'       => __('Product in demand: %no_of_subscribed% waiting.', 'woocommerce-product-stock-alert'),
+        );
 
         if (!get_option('woo_stock_alert_general_tab_settings')) {
-            if (update_option('woo_stock_alert_general_tab_settings', $stock_alert_settings)) {
-                return true;
-            }
+            update_option('woo_stock_alert_general_tab_settings', $stock_alert_general_settings);
         }
+
+        $stock_alert_form_submission_settings = array(
+            'alert_success'              =>  __('Thank you for expressing interest in %product_title%. We will notify you via email once it is back in stock.', 'woocommerce-product-stock-alert'),
+            'alert_email_exist'          => __('%customer_email% is already registered for %product_title%. Please attempt a different email address.', 'woocommerce-product-stock-alert'),
+            'valid_email'                => __('Please enter a valid email ID and try again.', 'woocommerce-product-stock-alert'),
+            'alert_unsubscribe_message'  => __('%customer_email% is successfully unregistered.', 'woocommerce-product-stock-alert'),
+        );
+
+        if (!get_option('woo_stock_alert_form_submission_tab_settings')) {
+            update_option('woo_stock_alert_form_submission_tab_settings', $stock_alert_form_submission_settings);
+        }
+
+        $stock_alert_email_settings = array(
+            'ban_email_domain_text'      => __('This email domain is ban in our site, kindly use another email domain.', 'woocommerce-product-stock-alert'),
+            'ban_email_address_text'     => __('This email address is ban in our site, kindly use another email address.', 'woocommerce-product-stock-alert'),
+        );
+
+        if (!get_option('woo_stock_alert_email_tab_settings')) {
+            update_option('woo_stock_alert_email_tab_settings', $stock_alert_email_settings);
+        }
+        update_option('woo_product_stock_alert_activate', 1);
     }
 
     /*
