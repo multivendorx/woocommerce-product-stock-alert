@@ -461,7 +461,7 @@ if (!function_exists('woo_stockalert_admin_tabs')) {
                         'options' => array(
                             array(
                                 'key'   => "is_double_optin",
-                                'label' => apply_filters('allow_store_inventory_double_optin', __('Upgrade to <a href="https://multivendorx.com/woocommerce-product-stock-manager-notifier-pro/"><span class="pro-strong">Pro</span></a> to enable Double Opt-in flow for subscription confirmation.', 'woocommerce-product-stock-alert')),
+                                'label' => apply_filters('allow_store_inventory_double_optin', __('Upgrade to <a href="' . WOO_PRODUCT_STOCK_ALERT_PRO_SHOP_URL . '"><span class="pro-strong">Pro</span></a> to enable Double Opt-in flow for subscription confirmation.', 'woocommerce-product-stock-alert')),
                                 'value' => "is_double_optin"
                             ),
                         ),
@@ -539,7 +539,7 @@ if (!function_exists('woo_stockalert_admin_tabs')) {
                         'options'   => array(
                             array(
                                 'key'   => "is_recaptcha_enable",
-                                'label' => apply_filters('allow_store_inventory_recaptcha', __('Upgrade to <a href="https://multivendorx.com/woocommerce-product-stock-manager-notifier-pro/"><span class="pro-strong">Pro</span></a> for unlocking reCAPTCHA for out-of-stock form subscriptions.', 'woocommerce-product-stock-alert-pro')),
+                                'label' => apply_filters('allow_store_inventory_recaptcha', __('Upgrade to <a href="' . WOO_PRODUCT_STOCK_ALERT_PRO_SHOP_URL . '"><span class="pro-strong">Pro</span></a> for unlocking reCAPTCHA for out-of-stock form subscriptions.', 'woocommerce-product-stock-alert-pro')),
                                 'value' => "is_recaptcha_enable"
                             ),
                         ),
