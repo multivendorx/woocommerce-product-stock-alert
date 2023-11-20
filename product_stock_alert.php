@@ -45,7 +45,7 @@ function woo_product_stock_alert_settings($links) {
     $plugin_links = array(
         '<a href="' . admin_url('admin.php?page=woo-stock-alert-setting#&tab=settings&subtab=general') . '">' . __('Settings', 'woocommerce-product-stock-alert') . '</a>',
         '<a href="https://multivendorx.com/support-forum/woocommerce-product-stock-alert">' . __('Support', 'woocommerce-product-stock-alert') . '</a>',
-        '<a href="https://multivendorx.com/docs/knowledgebase/woocommerce-product-stock-alert">' . __('Docs', 'woocommerce-product-stock-alert') . '</a>'
+        '<a href="https://multivendorx.com/docs/knowledgebase/products-stock-manager-notifier-for-woocommerce/">' . __('Docs', 'woocommerce-product-stock-alert') . '</a>'
     );
     if (apply_filters('is_stock_alert_pro_inactive', true)) {
     	$links['go_pro'] = '<a href="' . WOO_PRODUCT_STOCK_ALERT_PRO_SHOP_URL . '" class="stock-alert-pro-plugin">' . __('Get Pro', 'woocommerce-product-stock-alert') . '</a>';
