@@ -121,8 +121,8 @@ class WOO_Product_Stock_Alert_Ajax {
 
 	function get_variation_box_ajax(){
 		global $WOO_Product_Stock_Alert;
-		$product_id = (int)$_POST['product_id'];
-		$child_id = (int)$_POST['variation_id'];
+		$product_id = isset($_POST['product_id']) ? (int)$_POST['product_id'] : '';
+		$child_id = isset($_POST['variation_id']) ? (int)$_POST['variation_id'] : '';
 		$product = wc_get_product( $product_id );
 		$display_stock_alert_form = false;
 		

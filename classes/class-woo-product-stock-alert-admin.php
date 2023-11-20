@@ -13,9 +13,6 @@ class WOO_Product_Stock_Alert_Admin {
         add_action('manage_edit-product_columns', array($this, 'custom_column'));
         // manage stock alert column
         add_action('manage_product_posts_custom_column', array($this, 'manage_custom_column'), 10, 2);
-        // manage interest column 
-        add_filter('manage_edit-product_sortable_columns', array($this, 'manage_interest_column_sorting'));
-        add_filter('request', array($this, 'manage_interest_column_orderby'));
 
         // show number of subscribers for individual product
         add_action('woocommerce_product_options_inventory_product_data', array($this, 'product_subscriber_details'));
@@ -28,7 +25,7 @@ class WOO_Product_Stock_Alert_Admin {
         add_filter('bulk_actions-edit-product', array($this, 'register_subscribers_bulk_actions'));
         add_filter('handle_bulk_actions-edit-product', array($this, 'subscribers_bulk_action_handler'), 10, 3);
         add_action('admin_notices', array($this, 'subscribers_bulk_action_admin_notice'));
-        add_action( 'admin_print_styles-plugins.php', array( $this, 'admin_plugin_page_style' ));
+        add_action('admin_print_styles-plugins.php', array( $this, 'admin_plugin_page_style'));
     }
 
     function load_class($class_name = '') {
@@ -59,6 +56,7 @@ class WOO_Product_Stock_Alert_Admin {
                                 foreach ($subscribers_email as $alert_id => $to) {
                                     update_subscriber($alert_id, 'woo_unsubscribed');
                                 }
+                                delete_post_meta($child_id, 'no_of_subscribers');
                             }
                         }
                     }
@@ -69,6 +67,7 @@ class WOO_Product_Stock_Alert_Admin {
                     foreach ($subscribers_email as $alert_id => $to) {
                         update_subscriber($alert_id, 'woo_unsubscribed');
                     }
+                    delete_post_meta($post_id, 'no_of_subscribers');
                 }
             }
         }
@@ -88,7 +87,7 @@ class WOO_Product_Stock_Alert_Admin {
     public function admin_plugin_page_style() {
         ?>
         <style>
-            a.stock-alert-pro-plugin{
+            a.stock-alert-pro-plugin {
                 font-weight: 700;
                 background: linear-gradient(110deg, rgb(63, 20, 115) 0%, 25%, rgb(175 59 116) 50%, 75%, rgb(219 75 84) 100%);
                 -webkit-background-clip: text;
@@ -108,8 +107,7 @@ class WOO_Product_Stock_Alert_Admin {
      */
     public function enqueue_admin_script() {
         global $WOO_Product_Stock_Alert;
-        $suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
-
+        $suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
         $columns_subscriber = apply_filters('woo_stock_alert_subscribers_list_headers', array(
             array(
                 'name'      =>  __('Date', 'woocommerce-product-stock-alert'),
@@ -130,7 +128,7 @@ class WOO_Product_Stock_Alert_Admin {
                 'selector_choice'  => "email",
             ),
             array(
-                'name'      =>  __('Registred User', 'woocommerce-product-stock-alert'),
+                'name'      =>  __('Registered', 'woocommerce-product-stock-alert'),
                 'selector'  =>  '',
                 'sortable'  =>  false,
                 'selector_choice'  => "reg_user",
@@ -150,7 +148,7 @@ class WOO_Product_Stock_Alert_Admin {
             'mail_sent'     =>  __('Mail Sent', 'woocommerce-product-stock-alert'),
             'search'        =>  __('Search by Email', 'woocommerce-product-stock-alert'),
             'show_product'  =>  __('Search by Product Name', 'woocommerce-product-stock-alert'),
-            'daterenge'     =>  __('YYYY-MM-DD ~ YYYY-MM-DD', 'woocommerce-product-stock-alert'),
+            'daterenge'     =>  __('DD-MM-YYYY ~ DD-MM-YYYY', 'woocommerce-product-stock-alert'),
         );
 
         $setting_string     =   array(
@@ -165,13 +163,34 @@ class WOO_Product_Stock_Alert_Admin {
             'border_radius'         =>  __('Border Radius', 'woocommerce-product-stock-alert'),
             'border_size'           =>  __('Border Size', 'woocommerce-product-stock-alert'),
         );
-        $pro_settings_list = apply_filters('woocommerce_stock_alert_pro_settings_lists',  array( 'ban_email_domains', 'ban_email_domain_text', 'ban_email_addresses', 'ban_email_address_text', 'is_mailchimp_enable', 'mailchimp_api', 'get_mailchimp_list_button', 'selected_mailchimp_list', 'is_double_optin', 'is_recaptcha_enable'));
+        $pro_settings_list = apply_filters('woocommerce_stock_alert_pro_settings_lists', array(
+            'ban_email_domains',
+            'ban_email_domain_text',
+            'ban_email_addresses',
+            'ban_email_address_text',
+            'is_mailchimp_enable',
+            'mailchimp_api',
+            'get_mailchimp_list_button',
+            'selected_mailchimp_list',
+            'is_double_optin',
+            'is_recaptcha_enable'
+        ));
+        $woo_admin_massages_fields = array(
+            'double_opt_in_success',
+            'shown_interest_text',
+            'alert_success',
+            'alert_email_exist',
+            'valid_email',
+            'alert_unsubscribe_message',
+            'ban_email_domain_text',
+            'ban_email_address_text'
+        );
         
         if (get_current_screen()->id == 'toplevel_page_woo-stock-alert-setting') {
             wp_enqueue_script( 'woo-stockalert-script', $WOO_Product_Stock_Alert->plugin_url . 'build/index.js', array( 'wp-element' ), $WOO_Product_Stock_Alert->version, true );
             wp_localize_script( 'woo-stockalert-script', 'stockalertappLocalizer', apply_filters('stockalert_settings', [
-                'apiUrl'                    => home_url( '/wp-json' ),
-                'nonce'                     => wp_create_nonce( 'wp_rest' ),
+                'apiUrl'                    => home_url('/wp-json'),
+                'nonce'                     => wp_create_nonce('wp_rest'),
                 'default_alert_text'        => __('Receive in-stock notifications for this product.', 'woocommerce-product-stock-alert'),
                 'default_email_place'       => __('Enter your email', 'woocommerce-product-stock-alert'),
                 'default_alert_button'      => __('Notify me', 'woocommerce-product-stock-alert'),
@@ -186,12 +205,15 @@ class WOO_Product_Stock_Alert_Admin {
                 'pro_coupon_text'           => __('Don\'t miss out! Enjoy 10% off on our pro features.', 'woocommerce-product-stock-alert'),
                 'pro_url'                   => esc_url(WOO_PRODUCT_STOCK_ALERT_PRO_SHOP_URL),
                 'setting_string'            => $setting_string,
-              ] ) );
-            wp_enqueue_style( 'woo-stockalert-style', $WOO_Product_Stock_Alert->plugin_url . 'build/index.css' );
+                'banner_show'               => $this->woo_stockalert_is_banner_close(),
+                'default_massages_fields'   => $woo_admin_massages_fields,
+                'default_massages'          => get_woo_default_massages(),
+              ]));
+            wp_enqueue_style('woo-stockalert-style', $WOO_Product_Stock_Alert->plugin_url . 'build/index.css');
             wp_enqueue_style('woo_admin_rsuite_css', $WOO_Product_Stock_Alert->plugin_url . 'assets/admin/css/rsuite-default' . '.min' . '.css', array(), $WOO_Product_Stock_Alert->version);
         }
         
-        wp_enqueue_style('stock_alert_product_admin_css', $WOO_Product_Stock_Alert->plugin_url . 'assets/admin/css/admin'. $suffix .'.css' );
+        wp_enqueue_style('stock_alert_product_admin_css', $WOO_Product_Stock_Alert->plugin_url . 'assets/admin/css/admin'. $suffix .'.css');
     }
 
     /**
@@ -200,21 +222,6 @@ class WOO_Product_Stock_Alert_Admin {
     function custom_column($columns) {
         global $WOO_Product_Stock_Alert;
         return array_merge($columns, array('product_subscriber' => __('Interested Person(s)', 'woocommerce-product-stock-alert')));
-    }
-
-    function manage_interest_column_sorting($columns) {
-        $columns['product_subscriber'] = 'product_subscriber';
-        return $columns;
-    }
-
-    function manage_interest_column_orderby($vars) {
-        if (isset($vars['orderby']) && 'product_subscriber' == $vars['orderby']) {
-            $vars = array_merge($vars, array(
-                'meta_key' => 'no_of_subscribers',
-                'orderby' => 'meta_value'
-            ));
-        }
-        return $vars;
     }
 
     /**
@@ -353,6 +360,14 @@ class WOO_Product_Stock_Alert_Admin {
                     }
                 }
             }
+        }
+    }
+
+    public function woo_stockalert_is_banner_close() {
+        if (get_option('woocommerce_stock_alert_pro_banner_hide')) {
+            return false;
+        } else {
+            return true;
         }
     }
 }

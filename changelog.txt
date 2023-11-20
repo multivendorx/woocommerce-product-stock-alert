@@ -1,6 +1,19 @@
 == Changelog ==
 ----------------------------------------------------------------------------------------------
 
+= 2.2.0 - 2023-11-20 =
+* Added - WordPress 6.4.1 compatibility.
+* Added - WooCommerce 8.3.0 compatibility.
+* Added - Sample form design section.
+* Fixed - Migration issue.
+* Fixed - Subscriber count in product table.
+* Fixed - Some minor issue.
+* Fixed - Admin dashboard loading issue.
+* Fixed - Undefined array warning.
+* Enhancement - migration in a cron.
+* Dev - Added `woo_product_backin_stock_send_admin` filter.
+* Updated - Language files.
+
 = 2.1.0 - 2023-09-18 =
 * Added - WordPress 6.3.1 compatibility.
 * Added - WooCommerce 8.1.1 compatibility.

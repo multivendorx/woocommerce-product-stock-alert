@@ -243,12 +243,30 @@ export default class DynamicForm extends React.Component {
 					});
 					
 				} else {
-					this.setState(
-						{
-							[key]: e.target.value,
-						},
-						() => {}
-					);
+					if (stockalertappLocalizer.default_massages_fields.includes(key)) {
+						if (e.target.value.length < 1) {
+							this.setState(
+								{
+									[key]: stockalertappLocalizer.default_massages[key] ? stockalertappLocalizer.default_massages[key] : '',
+								},
+								() => {}
+							);
+						} else {
+							this.setState(
+								{
+									[key]: e.target.value,
+								},
+								() => {}
+							);
+						}
+					} else {
+						this.setState(
+							{
+								[key]: e.target.value,
+							},
+							() => {}
+						);
+					}
 				}
 			} else {
 				// Array of values (e.g. checkbox): TODO: Optimization needed.

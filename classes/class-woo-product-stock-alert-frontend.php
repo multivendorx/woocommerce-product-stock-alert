@@ -8,8 +8,8 @@ class WOO_Product_Stock_Alert_Frontend {
         //enqueue styles
         add_action('wp_enqueue_scripts', array(&$this, 'frontend_styles'));
 
-        add_action('woocommerce_simple_add_to_cart', array($this, 'display_in_simple_product'), 31 );
-        add_action('woocommerce_bundle_add_to_cart', array($this, 'display_in_simple_product'), 31 );
+        add_action('woocommerce_simple_add_to_cart', array($this, 'display_in_simple_product'), 31);
+        add_action('woocommerce_bundle_add_to_cart', array($this, 'display_in_simple_product'), 31);
         add_action('woocommerce_subscription_add_to_cart', array($this, 'display_in_simple_product'), 31);
         add_action('woocommerce_woosb_add_to_cart', array($this, 'display_in_simple_product'), 31);
         add_action('woocommerce_after_variations_form', array($this, 'display_in_no_variation_product'));
@@ -25,7 +25,7 @@ class WOO_Product_Stock_Alert_Frontend {
     function frontend_scripts() {
         global $WOO_Product_Stock_Alert;
         $frontend_script_path = $WOO_Product_Stock_Alert->plugin_url . 'assets/frontend/js/';
-        $suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+        $suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
         $stock_interest = $alert_text_html = $button_html = $border_size = $button_css = '';
         $settings_array = get_woo_form_settings_array();
 
@@ -70,8 +70,8 @@ class WOO_Product_Stock_Alert_Frontend {
                     'alert_success' => $settings_array['alert_success'],
                     'alert_email_exist' => $settings_array['alert_email_exist'],
                     'valid_email' => $settings_array['valid_email'],
-                    'ban_email_domin' => $settings_array['ban_email_domin'],
-                    'ban_email_address' => $settings_array['ban_email_address'],
+                    'ban_email_domain_text' => $settings_array['ban_email_domain_text'],
+                    'ban_email_address_text' => $settings_array['ban_email_address_text'],
                     'double_opt_in_success' => $settings_array['double_opt_in_success'],
                     'processing' => __('Processing...', 'woocommerce-product-stock-alert'),
                     'error_occurs' => __('Some error occurs', 'woocommerce-product-stock-alert'),
@@ -269,8 +269,8 @@ class WOO_Product_Stock_Alert_Frontend {
             'alert_success' => $settings_array['alert_success'],
             'alert_email_exist' => $settings_array['alert_email_exist'],
             'valid_email' => $settings_array['valid_email'],
-            'ban_email_domin' => $settings_array['ban_email_domin'],
-            'ban_email_address' => $settings_array['ban_email_address'],
+            'ban_email_domain_text' => $settings_array['ban_email_domain_text'],
+            'ban_email_address_text' => $settings_array['ban_email_address_text'],
             'double_opt_in_success' => $settings_array['double_opt_in_success'],
             'unsubscribe_button' => $unsubscribe_button_html,
             'alert_unsubscribe_message' => $settings_array['alert_unsubscribe_message'],
