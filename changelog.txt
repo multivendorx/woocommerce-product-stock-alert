@@ -1,7 +1,7 @@
 == Changelog ==
 ----------------------------------------------------------------------------------------------
 
-= 2.2.0 - 2023-11-17 =
+= 2.2.0 - 2023-11-20 =
 * Added - WordPress 6.4.1 compatibility.
 * Added - WooCommerce 8.3.0 compatibility.
 * Added - Sample form design section.

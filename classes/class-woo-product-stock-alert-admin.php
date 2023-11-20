@@ -175,16 +175,6 @@ class WOO_Product_Stock_Alert_Admin {
             'is_double_optin',
             'is_recaptcha_enable'
         ));
-        $woo_admin_massages_fields = array(
-            'double_opt_in_success',
-            'shown_interest_text',
-            'alert_success',
-            'alert_email_exist',
-            'valid_email',
-            'alert_unsubscribe_message',
-            'ban_email_domain_text',
-            'ban_email_address_text'
-        );
         
         if (get_current_screen()->id == 'toplevel_page_woo-stock-alert-setting') {
             wp_enqueue_script( 'woo-stockalert-script', $WOO_Product_Stock_Alert->plugin_url . 'build/index.js', array( 'wp-element' ), $WOO_Product_Stock_Alert->version, true );
@@ -206,8 +196,6 @@ class WOO_Product_Stock_Alert_Admin {
                 'pro_url'                   => esc_url(WOO_PRODUCT_STOCK_ALERT_PRO_SHOP_URL),
                 'setting_string'            => $setting_string,
                 'banner_show'               => $this->woo_stockalert_is_banner_close(),
-                'default_massages_fields'   => $woo_admin_massages_fields,
-                'default_massages'          => get_woo_default_massages(),
               ]));
             wp_enqueue_style('woo-stockalert-style', $WOO_Product_Stock_Alert->plugin_url . 'build/index.css');
             wp_enqueue_style('woo_admin_rsuite_css', $WOO_Product_Stock_Alert->plugin_url . 'assets/admin/css/rsuite-default' . '.min' . '.css', array(), $WOO_Product_Stock_Alert->version);
