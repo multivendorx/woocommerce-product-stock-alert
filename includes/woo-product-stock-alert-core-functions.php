@@ -461,7 +461,7 @@ if (!function_exists('woo_stockalert_admin_tabs')) {
                         'options' => array(
                             array(
                                 'key'   => "is_double_optin",
-                                'label' => apply_filters('allow_store_inventory_double_optin', __('Upgrade to <a href="' . WOO_PRODUCT_STOCK_ALERT_PRO_SHOP_URL . '"><span class="pro-strong">Pro</span></a> to enable Double Opt-in flow for subscription confirmation.', 'woocommerce-product-stock-alert')),
+                                'label' => apply_filters('allow_store_inventory_double_optin', __('Upgrade to <a href="' . WOO_PRODUCT_STOCK_ALERT_PRO_SHOP_URL . '" target="_blank"><span class="pro-strong">Pro</span></a> to enable Double Opt-in flow for subscription confirmation.', 'woocommerce-product-stock-alert')),
                                 'value' => "is_double_optin"
                             ),
                         ),
