@@ -1,4 +1,4 @@
-=== WooCommerce Product Stock Alert ===
+=== Product Stock Manager & Notifier for WooCommerce ===
 
 Contributors: wcmp, abhirup23
 Tags: wordpress, woocommerce, e-commerce, shop, stock, out of stock, in stock, stock alert, alert email, stock alert email
