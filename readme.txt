@@ -106,20 +106,13 @@ Are you tired of losing potential sales because your customers can't buy the out
 
 == Screenshots ==
 1. Stock alert plugin settings panel
-2. Stock alert admin email settings panel
-3. Stock alert customer email settings panel
-4. Stock alert customer confirmation email settings panel
-5. An out of stock simple product with textarea to subscribe
-6. An out of stock variable product with textarea to subscribe
-7. An email sent to admin when a customer subscribed the product
-8. Number of customers interested with out of stock products
-9. Individual product edit page for simple product with number of interested persons
-10. Individual product edit page for variable product when no customer is interested
-11. Individual product edit page for variable product with number of interested persons
-12. An email sent to the customer when the product becomes available
-13. Plugin settings to customize stock alert form
-14. A customized stock alert form
-15. Export subscribers' list
+2. Stock alert form customization settings
+3. Stock alert submission message
+4. Stock alert email blocker
+5. Stock alert plugin mailchimp settings
+6. Stock alert plugin subscriber settings
+7. Shubscription Message
+8. User Unsubscription [Pro]
 
 == Changelog ==
 
