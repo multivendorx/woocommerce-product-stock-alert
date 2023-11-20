@@ -18,9 +18,9 @@ Elevate sales with instant stock alerts, engage customers with real-time updates
 Revolutionize your stock management with our Product Stock Manager & Notifier plugin. Users can subscribe for instant restock notifications. Admin have the capability to update and monitor product stock details, including status, quantities, prices, SKUs, and taxes. Simplify stock management by easily importing and exporting stock data in CSV format.
 
 
-🌐 Explore our [Document](https://multivendorx.com/docs/knowledgebase/products-stock-manager-notifier-for-woocommerce/?utm_source=wordpress.org&utm_medium=freelandingpage&utm_campaign=products-stock-manager-&-notifier-for-woocommerce)
+🌐 Explore our [Document](https://multivendorx.com/docs/knowledgebase/products-stock-manager-notifier-for-woocommerce/?utm_source=wordpress.org&utm_medium=freelandingpage&utm_campaign=products-stock-manager)
 
-🌟 Learn More About [Pro](https://multivendorx.com/woocommerce-product-stock-manager-notifier-pro/?utm_source=wordpress.org&utm_medium=freelandingpage&utm_campaign=products-stock-manager-&-notifier-for-woocommerce)
+🌟 Learn More About [Pro](https://multivendorx.com/woocommerce-product-stock-manager-notifier-pro/?utm_source=wordpress.org&utm_medium=freelandingpage&utm_campaign=products-stock-manager)
 
 ## 🚀 Benefits:
 📧 Send automatic email notifications to customers who subscribe to out-of-stock products.
@@ -80,7 +80,7 @@ Are you tired of losing potential sales because your customers can't buy the out
 
 
 ## 👩‍🏫 Learn More About Pro
-[WooCommerce Product Stock Manager & Notifier Pro](https://multivendorx.com/woocommerce-product-stock-manager-notifier-pro/?utm_source=wordpress.org&utm_medium=freelandingpage&utm_campaign=products-stock-manager-&-notifier-for-woocommerce)
+[WooCommerce Product Stock Manager & Notifier Pro](https://multivendorx.com/woocommerce-product-stock-manager-notifier-pro/?utm_source=wordpress.org&utm_medium=freelandingpage&utm_campaign=products-stock-manager)
 
 ## Shortcodes
 - [display_stock_alert_form]: You can display stock alert form anywhere using this shortcode.
