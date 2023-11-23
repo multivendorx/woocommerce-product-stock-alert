@@ -336,12 +336,12 @@ if(!function_exists('woo_stock_product_data')) {
         if( $parent_product_id ) {
             $product_obj = wc_get_product( $parent_product_id );
             $parent_id = $parent_product_id ? $parent_product_id : 0;
-            $product_data['link'] = admin_url('post.php?post=' . $parent_id . '&action=edit');
+            $product_data['link'] = $product_obj->get_permalink();
             $product_data['name'] = $product_obj && $product_obj->get_formatted_name() ? $product_obj->get_formatted_name() : '';
             $product_data['price'] = $product_obj && $product_obj->get_price_html() ? $product_obj->get_price_html() : '';
         } else {
             $product_obj = wc_get_product( $product_id );
-            $product_data['link'] = admin_url('post.php?post=' . $product_id . '&action=edit');
+            $product_data['link'] = $product_obj->get_permalink();
             $product_data['name'] = $product_obj && $product_obj->get_formatted_name() ? $product_obj->get_formatted_name() : '';
             $product_data['price'] = $product_obj && $product_obj->get_price_html() ? $product_obj->get_price_html() : '';
         }
