@@ -8,9 +8,6 @@ class WOO_Product_Stock_Alert_Action {
     public function __construct() {
         // Call to cron action
         add_action('woo_start_stock_alert', array($this, 'stock_alert_action'));
-        // Older data crone
-        add_action('woo_stock_alert_older_data_migration', array($this, 'woo_stock_alert_older_data_migration_function'));
-
     }
 
     function stock_alert_action() {
@@ -61,28 +58,6 @@ class WOO_Product_Stock_Alert_Action {
                     }
                 }
             }
-        }
-    }
-
-
-    /*
-     * This function migrate older subscription data
-     */
-    function woo_stock_alert_older_data_migration_function() {
-        if (!get_option('_is_updated_woo_product_alert_database')) {
-            $get_subscribed_user = get_product_subscribers_array();
-            if (!empty($get_subscribed_user) && is_array($get_subscribed_user)) {
-                foreach ($get_subscribed_user as $id => $subscriber) {
-                    if (!empty($subscriber)) {
-                        foreach ($subscriber as $email) {
-                            if (!is_already_subscribed($email, $id)) {
-                                insert_subscriber($email, $id);
-                            }
-                        }
-                    }   
-                }
-            }
-            update_option( '_is_updated_woo_product_alert_database', true );
         }
     }
 }

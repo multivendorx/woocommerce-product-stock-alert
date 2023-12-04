@@ -26,10 +26,6 @@ class WOO_Product_Stock_Alert_Install {
         if (!get_option('_is_updated_woo_product_alert_settings')) {
             $this->woo_stock_alert_older_settings_migration();
         }
-
-        if (!get_option('_is_updated_woo_product_alert_database')) {
-            $this->woo_stock_alert_older_data_migration();
-        }
     }
 
     function woo_stock_alert_admin_settings_default() {
@@ -124,13 +120,6 @@ class WOO_Product_Stock_Alert_Install {
             update_option('woo_stock_alert_form_submission_tab_settings', $form_submit_option);
         }
         update_option('woo_stock_alert_data_migrate', true);
-    }
-
-    /*
-     * This function migrate older subscription data
-     */
-    function woo_stock_alert_older_data_migration() {
-        wp_schedule_single_event(time(), 'woo_stock_alert_older_data_migration');
     }
     
     /*

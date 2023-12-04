@@ -50,7 +50,7 @@ if (!function_exists('get_woo_default_massages')) {
             'ban_email_address_text'    => __('This email address is ban in our site, kindly use another email address.', 'woocommerce-product-stock-alert'),
             'double_opt_in_success'     => __('Kindly check your inbox to confirm the subscription.', 'woocommerce-product-stock-alert'),
         );
-
+        
         return $default_massages;
     }
 }
@@ -336,12 +336,12 @@ if(!function_exists('woo_stock_product_data')) {
         if( $parent_product_id ) {
             $product_obj = wc_get_product( $parent_product_id );
             $parent_id = $parent_product_id ? $parent_product_id : 0;
-            $product_data['link'] = $product_obj->get_permalink();
+            $product_data['link'] = admin_url('post.php?post=' . $parent_id . '&action=edit');
             $product_data['name'] = $product_obj && $product_obj->get_formatted_name() ? $product_obj->get_formatted_name() : '';
             $product_data['price'] = $product_obj && $product_obj->get_price_html() ? $product_obj->get_price_html() : '';
         } else {
             $product_obj = wc_get_product( $product_id );
-            $product_data['link'] = $product_obj->get_permalink();
+            $product_data['link'] = admin_url('post.php?post=' . $product_id . '&action=edit');
             $product_data['name'] = $product_obj && $product_obj->get_formatted_name() ? $product_obj->get_formatted_name() : '';
             $product_data['price'] = $product_obj && $product_obj->get_price_html() ? $product_obj->get_price_html() : '';
         }
@@ -797,5 +797,42 @@ if (!function_exists('woo_stockalert_admin_tabs')) {
         ));
         
         return $woo_stock_alert_backend_tab_list;
+    }
+}
+
+
+if(!function_exists("woo_stock_alert_data_migrate")){
+    function woo_stock_alert_data_migrate($previous_vertion = "", $current_vertion = ""){
+        if($previous_vertion <= "2.2.0"){
+            $all_products = wc_get_products([
+                'status'    => 'publish',
+                'limit' => -1, 
+            ]);
+    
+            foreach($all_products as $key => $product){
+                $current_product_ids = [];
+                if($product->get_type() == "variable" && $product->has_child()){
+                    $child_ids = $product->get_children();
+                    if(isset($child_ids) && !empty($child_ids)) {
+                        $current_product_ids = $child_ids;
+                    }
+				}
+                else{
+                    $current_product_ids[] = $product->get_id();
+                }
+                foreach($current_product_ids as $product_id){
+                    $product_subscribers = get_post_meta($product_id, '_product_subscriber', true);
+                    if($product_subscribers && !empty($product_subscribers)){
+                        foreach($product_subscribers as $subscriber_email){
+                            if(! is_already_subscribed($subscriber_email, $product_id)){
+                                insert_subscriber($subscriber_email, $product_id);
+                            }
+                        }
+                    }
+                    delete_post_meta($product_id, '_product_subscriber');
+                }
+            }
+        }
+        update_option('woo_product_stock_alert_version', $current_vertion);
     }
 }

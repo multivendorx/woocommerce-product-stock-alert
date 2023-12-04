@@ -24,6 +24,7 @@ class WOO_Product_Stock_Alert {
         $this->version = WOO_PRODUCT_STOCK_ALERT_PLUGIN_VERSION;
 
         add_action('init', array(&$this, 'init'), 0);
+        add_action('admin_init', array(&$this, 'woo_admin_init'));
         // Woocommerce Email structure
         add_filter('woocommerce_email_classes', array(&$this, 'woo_product_stock_alert_mail'));
     }
@@ -95,6 +96,12 @@ class WOO_Product_Stock_Alert {
             'show_in_admin_status_list' => true, /* translators: %s: count */
             'label_count' => _n_noop('Unsubscribed <span class="count">(%s)</span>', 'Unsubscribed <span class="count">(%s)</span>'),
         ));
+    }
+
+    function woo_admin_init(){
+        $previous_plugin_version = get_option("woo_product_stock_alert_version", "");
+        $current_plugin_version = $this->version;
+        woo_stock_alert_data_migrate($previous_plugin_version, $current_plugin_version);
     }
 
 
