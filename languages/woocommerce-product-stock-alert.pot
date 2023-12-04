@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-17 11:03+0000\n"
+"POT-Creation-Date: 2023-12-04 12:14+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -18,6 +18,12 @@ msgstr ""
 msgid ""
 " Create an alert message for users attempting to subscribe from blocked "
 "domains."
+msgstr ""
+
+#: includes/woo-product-stock-alert-core-functions.php:464
+msgid ""
+"\" target=\"_blank\"><span class=\"pro-strong\">Pro</span></a> to enable "
+"Double Opt-in flow for subscription confirmation."
 msgstr ""
 
 #: includes/woo-product-stock-alert-core-functions.php:45
@@ -140,8 +146,8 @@ msgid ""
 "ID."
 msgstr ""
 
-#: templates/emails/stock_alert_admin_email.php:45 
-#: templates/emails/stock_alert_email.php:45 
+#: templates/emails/stock_alert_admin_email.php:45
+#: templates/emails/stock_alert_email.php:45
 #: templates/emails/stock_alert_email_subscriber_confirmation.php:45
 msgid "Customer Details"
 msgstr ""
@@ -184,9 +190,9 @@ msgstr ""
 msgid "Download CSV"
 msgstr ""
 
-#: classes/class-woo-product-stock-alert-admin.php:125 
-#: templates/emails/stock_alert_admin_email.php:47 
-#: templates/emails/stock_alert_email.php:47 
+#: classes/class-woo-product-stock-alert-admin.php:125
+#: templates/emails/stock_alert_admin_email.php:47
+#: templates/emails/stock_alert_email.php:47
 #: templates/emails/stock_alert_email_subscriber_confirmation.php:47
 msgid "Email"
 msgstr ""
@@ -222,8 +228,8 @@ msgid ""
 "Enabling this setting shows the subscriber count on the single product page."
 msgstr ""
 
-#: classes/class-woo-product-stock-alert-admin.php:195 
-#: includes/woo-product-stock-alert-core-functions.php:40 
+#: classes/class-woo-product-stock-alert-admin.php:195
+#: includes/woo-product-stock-alert-core-functions.php:40
 #: includes/woo-product-stock-alert-core-functions.php:598
 msgid "Enter your email"
 msgstr ""
@@ -232,8 +238,8 @@ msgstr ""
 msgid "Export CSV"
 msgstr ""
 
-#: templates/emails/stock_alert_admin_email.php:43 
-#: templates/emails/stock_alert_email.php:43 
+#: templates/emails/stock_alert_admin_email.php:43
+#: templates/emails/stock_alert_email.php:43
 #: templates/emails/stock_alert_email_subscriber_confirmation.php:43
 msgid "Following is the product link : "
 msgstr ""
@@ -258,21 +264,21 @@ msgstr ""
 msgid "Get Pro"
 msgstr ""
 
-#: templates/emails/stock_alert_admin_email.php:15 
+#: templates/emails/stock_alert_admin_email.php:15
 #: templates/emails/plain/stock_alert_admin_email.php:14
 msgid ""
 "Hi there. A customer has subscribed a product on your shop. Product details "
 "are shown below for your reference:"
 msgstr ""
 
-#: templates/emails/stock_alert_email.php:15 
+#: templates/emails/stock_alert_email.php:15
 #: templates/emails/plain/stock_alert_email.php:14
 msgid ""
 "Hi there. You have subscribed a product. Your subscribed product is "
 "available now. Product details are shown below for your reference:"
 msgstr ""
 
-#: templates/emails/stock_alert_email_subscriber_confirmation.php:15 
+#: templates/emails/stock_alert_email_subscriber_confirmation.php:15
 #: templates/emails/plain/stock_alert_email_subscriber_confirmation.php:14
 msgid ""
 "Hi there. You have successfully subscribed a product. We will inform you "
@@ -314,7 +320,7 @@ msgid "Mail Sent"
 msgstr ""
 
 #. %s: count
-#: classes/class-woo-product-stock-alert.php:78
+#: classes/class-woo-product-stock-alert.php:76
 #, php-format
 msgid "Mail Sent <span class=\"count\">(%s)</span>"
 msgid_plural "Mail Sent <span class=\"count\">(%s)</span>"
@@ -350,7 +356,7 @@ msgstr ""
 msgid "MultiVendorX"
 msgstr ""
 
-#: includes/woo-product-stock-alert-core-functions.php:590 
+#: includes/woo-product-stock-alert-core-functions.php:590
 #: includes/woo-product-stock-alert-core-functions.php:629
 msgid "no_label"
 msgstr ""
@@ -359,7 +365,7 @@ msgstr ""
 msgid "Notify Me"
 msgstr ""
 
-#: classes/class-woo-product-stock-alert-admin.php:196 
+#: classes/class-woo-product-stock-alert-admin.php:196
 #: includes/woo-product-stock-alert-core-functions.php:42
 msgid "Notify me"
 msgstr ""
@@ -393,8 +399,8 @@ msgstr ""
 msgid "Please try again."
 msgstr ""
 
-#: templates/emails/stock_alert_admin_email.php:25 
-#: templates/emails/stock_alert_email.php:25 
+#: templates/emails/stock_alert_admin_email.php:25
+#: templates/emails/stock_alert_email.php:25
 #: templates/emails/stock_alert_email_subscriber_confirmation.php:25
 msgid "Price"
 msgstr ""
@@ -403,15 +409,15 @@ msgstr ""
 msgid "Processing..."
 msgstr ""
 
-#: classes/class-woo-product-stock-alert-admin.php:119 
-#: templates/emails/stock_alert_admin_email.php:24 
-#: templates/emails/stock_alert_email.php:24 
+#: classes/class-woo-product-stock-alert-admin.php:119
+#: templates/emails/stock_alert_admin_email.php:24
+#: templates/emails/stock_alert_email.php:24
 #: templates/emails/stock_alert_email_subscriber_confirmation.php:24
 msgid "Product"
 msgstr ""
 
-#: templates/emails/stock_alert_admin_email.php:20 
-#: templates/emails/stock_alert_email.php:20 
+#: templates/emails/stock_alert_admin_email.php:20
+#: templates/emails/stock_alert_email.php:20
 #: templates/emails/stock_alert_email_subscriber_confirmation.php:20
 msgid "Product Details"
 msgstr ""
@@ -424,7 +430,7 @@ msgstr ""
 msgid "Product Stock Manager & Notifier for WooCommerce"
 msgstr ""
 
-#: classes/class-woo-product-stock-alert-admin.php:194 
+#: classes/class-woo-product-stock-alert-admin.php:194
 #: includes/woo-product-stock-alert-core-functions.php:606
 msgid "Receive in-stock notifications for this product."
 msgstr ""
@@ -482,13 +488,13 @@ msgstr ""
 
 #. parent slug
 #. page title
-#: product_stock_alert.php:46 
-#: admin/class-woo-product-stock-alert-settings.php:37 
+#: product_stock_alert.php:46
+#: admin/class-woo-product-stock-alert-settings.php:37
 #: admin/class-woo-product-stock-alert-settings.php:38
 msgid "Settings"
 msgstr ""
 
-#: classes/class-woo-product-stock-alert.php:236
+#: classes/class-woo-product-stock-alert.php:240
 msgid "Settings Saved"
 msgstr ""
 
@@ -512,7 +518,7 @@ msgstr ""
 msgid "Status"
 msgstr ""
 
-#: admin/class-woo-product-stock-alert-settings.php:19 
+#: admin/class-woo-product-stock-alert-settings.php:19
 #: admin/class-woo-product-stock-alert-settings.php:20
 msgid "Stock Manager"
 msgstr ""
@@ -588,8 +594,8 @@ msgid ""
 "for personalized customer email addresses in your messages."
 msgstr ""
 
-#: classes/class-woo-product-stock-alert-admin.php:147 
-#: includes/woo-product-stock-alert-core-functions.php:43 
+#: classes/class-woo-product-stock-alert-admin.php:147
+#: includes/woo-product-stock-alert-core-functions.php:43
 #: includes/woo-product-stock-alert-core-functions.php:623
 msgid "Unsubscribe"
 msgstr ""
@@ -602,25 +608,18 @@ msgstr ""
 msgid "Unsubscribe Confirmation"
 msgstr ""
 
-#: includes/woo-product-stock-alert-core-functions.php:464
-msgid ""
-"Upgrade to <a href=\"https://multivendorx.com/woocommerce-product-stock-"
-"manager-notifier-pro/\"><span class=\"pro-strong\">Pro</span></a> to enable "
-"Double Opt-in flow for subscription confirmation."
-msgstr ""
-
 #: classes/class-woo-product-stock-alert-admin.php:204
 msgid "UPGRADE10"
 msgstr ""
 
-#: admin/class-woo-product-stock-alert-settings.php:57 
-#: admin/class-woo-product-stock-alert-settings.php:58 
+#: admin/class-woo-product-stock-alert-settings.php:57
+#: admin/class-woo-product-stock-alert-settings.php:58
 #: admin/class-woo-product-stock-alert-settings.php:74
 msgid "WC Stock Alert Export"
 msgstr ""
 
-#: classes/emails/class-woo-product-stock-alert-admin-email.php:81 
-#: classes/emails/class-woo-product-stock-alert-email.php:83 
+#: classes/emails/class-woo-product-stock-alert-admin-email.php:81
+#: classes/emails/class-woo-product-stock-alert-email.php:83
 #: classes/emails/class-woo-product-stock-alert-subscriber-confirmation-email.php:79
 msgid "Welcome to {site_title}"
 msgstr ""
@@ -631,17 +630,17 @@ msgid ""
 "with subscribers email."
 msgstr ""
 
-#: classes/class-woo-product-stock-alert.php:73
+#: classes/class-woo-product-stock-alert.php:71
 msgctxt "woostockalert"
 msgid "Mail Sent"
 msgstr ""
 
-#: classes/class-woo-product-stock-alert.php:82
+#: classes/class-woo-product-stock-alert.php:80
 msgctxt "woostockalert"
 msgid "Subscribed"
 msgstr ""
 
-#: classes/class-woo-product-stock-alert.php:91
+#: classes/class-woo-product-stock-alert.php:89
 msgctxt "woostockalert"
 msgid "Unsubscribed"
 msgstr ""

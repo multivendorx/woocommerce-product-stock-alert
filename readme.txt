@@ -5,7 +5,7 @@ Tags: wordpress, woocommerce, e-commerce, shop, stock, out of stock, in stock, s
 Requires at least: 4.4
 Tested up to: 6.4.1
 Requires PHP: 5.6
-Stable tag: 2.2.0
+Stable tag: 2.2.1
 Donate link: https://multivendorx.com/donate/
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html

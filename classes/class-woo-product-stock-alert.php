@@ -24,7 +24,7 @@ class WOO_Product_Stock_Alert {
         $this->version = WOO_PRODUCT_STOCK_ALERT_PLUGIN_VERSION;
 
         add_action('init', array(&$this, 'init'), 0);
-        add_action('admin_init', array(&$this, 'woo_admin_init'));
+        add_action('admin_init', array(&$this, 'woo_product_stock_alert_admin_init'));
         // Woocommerce Email structure
         add_filter('woocommerce_email_classes', array(&$this, 'woo_product_stock_alert_mail'));
         add_action('woo_stock_alert_start_notification_cron_job', 'woo_stock_alert_notify_subscribed_user');
@@ -95,7 +95,7 @@ class WOO_Product_Stock_Alert {
         ));
     }
 
-    function woo_admin_init(){
+    function woo_product_stock_alert_admin_init(){
         $previous_plugin_version = get_option("woo_product_stock_alert_version", "");
         $current_plugin_version = $this->version;
         woo_stock_alert_data_migrate($previous_plugin_version, $current_plugin_version);
@@ -145,7 +145,7 @@ class WOO_Product_Stock_Alert {
         update_option('woo_product_stock_alert_installed', 1);
         // Init install
         $WOO_Product_Stock_Alert->load_class('install');
-        $WOO_Product_Stock_Alert->install = new WOO_Product_Stock_Alert_Install();
+        new WOO_Product_Stock_Alert_Install();
     }
 
     /**

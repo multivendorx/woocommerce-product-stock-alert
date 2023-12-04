@@ -8,7 +8,7 @@
  * Requires at least: 4.4
  * Tested up to: 6.4.1
  * WC requires at least: 3.0
- * WC tested up to: 8.3.0
+ * WC tested up to: 8.3.1
  * Author URI: https://multivendorx.com/
  * Text Domain: woocommerce-product-stock-alert
  * Domain Path: /languages/
@@ -58,7 +58,6 @@ if (!class_exists('WOO_Product_Stock_Alert') && WC_Dependencies_Stock_Alert::woo
 	global $WOO_Product_Stock_Alert;
 	$WOO_Product_Stock_Alert = new WOO_Product_Stock_Alert( __FILE__ );
 	$GLOBALS['WOO_Product_Stock_Alert'] = $WOO_Product_Stock_Alert;
-	require_once('classes/class-woo-product-stock-alert-action.php');
 	// Activation Hooks
 	register_activation_hook( __FILE__, array('WOO_Product_Stock_Alert', 'activate_product_stock_alert'));
 	// Deactivation Hooks
