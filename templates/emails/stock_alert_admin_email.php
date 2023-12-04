@@ -48,4 +48,4 @@ $is_prices_including_tax = get_option( 'woocommerce_prices_include_tax' );
 	<a target="_blank" href="mailto:<?php echo $customer_email; ?>"><?php echo esc_html($customer_email); ?></a>
 </p>
 
-<?php do_action( 'woocommerce_email_footer' ); ?>
+<?php do_action( 'woocommerce_email_footer' );

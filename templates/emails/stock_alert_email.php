@@ -49,4 +49,4 @@ $is_prices_including_tax = get_option( 'woocommerce_prices_include_tax' );
 </p>
 
 </p>
-<?php do_action( 'woocommerce_email_footer' ); ?>
+<?php do_action( 'woocommerce_email_footer' );
