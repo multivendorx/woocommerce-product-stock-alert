@@ -837,8 +837,8 @@ if(!function_exists("woo_stock_alert_data_migrate")){
     }
 }
 
-if(!function_exists('stock_alert_action')){
-    function stock_alert_action() {
+if(!function_exists('woo_stock_alert_notify_subscribed_user')){
+    function woo_stock_alert_notify_subscribed_user() {
         global $WC;
         $get_subscribed_user = get_product_subscribers_array();
         if (!empty($get_subscribed_user) && is_array($get_subscribed_user)) {

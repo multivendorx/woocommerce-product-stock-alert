@@ -126,8 +126,8 @@ class WOO_Product_Stock_Alert_Install {
      * This function will start the cron job
      */
     function start_cron_job() {
-        wp_clear_scheduled_hook('woo_start_stock_alert');    
-        wp_schedule_event(time(), 'hourly', 'woo_start_stock_alert');
+        wp_clear_scheduled_hook('woo_stock_alert_start_notification_cron_job');    
+        wp_schedule_event(time(), 'hourly', 'woo_stock_alert_start_notification_cron_job');
         update_option('woo_product_stock_alert_cron_start', 1);
     }
 

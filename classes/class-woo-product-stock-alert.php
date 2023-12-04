@@ -27,7 +27,7 @@ class WOO_Product_Stock_Alert {
         add_action('admin_init', array(&$this, 'woo_admin_init'));
         // Woocommerce Email structure
         add_filter('woocommerce_email_classes', array(&$this, 'woo_product_stock_alert_mail'));
-        add_action('woo_start_stock_alert', 'stock_alert_action');
+        add_action('woo_stock_alert_start_notification_cron_job', 'woo_stock_alert_notify_subscribed_user');
     }
 
     /**
