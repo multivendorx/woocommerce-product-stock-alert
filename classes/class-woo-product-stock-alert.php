@@ -24,8 +24,10 @@ class WOO_Product_Stock_Alert {
         $this->version = WOO_PRODUCT_STOCK_ALERT_PLUGIN_VERSION;
 
         add_action('init', array(&$this, 'init'), 0);
+        add_action('admin_init', array(&$this, 'woo_admin_init'));
         // Woocommerce Email structure
         add_filter('woocommerce_email_classes', array(&$this, 'woo_product_stock_alert_mail'));
+        add_action('woo_stock_alert_start_notification_cron_job', 'woo_stock_alert_notify_subscribed_user');
     }
 
     /**
@@ -54,10 +56,6 @@ class WOO_Product_Stock_Alert {
         }
         $this->load_class('template');
         $this->template = new WOO_Product_Stock_Alert_Template();
-        
-        // Init action
-        $this->load_class('action');
-        $this->action = new WOO_Product_Stock_Alert_Action();
 
         include_once $this->plugin_path . '/includes/class-woo-product-stock-alert-deprecated-filter-hooks.php';
         include_once $this->plugin_path . '/includes/class-woo-product-stock-alert-deprecated-action-hooks.php';
@@ -95,6 +93,12 @@ class WOO_Product_Stock_Alert {
             'show_in_admin_status_list' => true, /* translators: %s: count */
             'label_count' => _n_noop('Unsubscribed <span class="count">(%s)</span>', 'Unsubscribed <span class="count">(%s)</span>'),
         ));
+    }
+
+    function woo_admin_init(){
+        $previous_plugin_version = get_option("woo_product_stock_alert_version", "");
+        $current_plugin_version = $this->version;
+        woo_stock_alert_data_migrate($previous_plugin_version, $current_plugin_version);
     }
 
 
