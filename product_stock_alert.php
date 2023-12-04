@@ -5,9 +5,9 @@
  * Description: Boost sales with real-time stock alerts! Notify customers instantly when products are back in stock. Simplify data management by exporting and importing stock data with ease.
  * Author: MultiVendorX
  * Version: 2.2.1
- * Requires at least: 4.4
+ * Requires at least: 5.0
  * Tested up to: 6.4.1
- * WC requires at least: 3.0
+ * WC requires at least: 7.2
  * WC tested up to: 8.3.1
  * Author URI: https://multivendorx.com/
  * Text Domain: woocommerce-product-stock-alert

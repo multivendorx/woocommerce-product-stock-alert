@@ -2,9 +2,9 @@
 
 Contributors: wcmp, abhirup23
 Tags: wordpress, woocommerce, e-commerce, shop, stock, out of stock, in stock, stock alert, alert email, stock alert email
-Requires at least: 4.4
+Requires at least: 5.0
 Tested up to: 6.4.1
-Requires PHP: 5.6
+Requires PHP: 7.2
 Stable tag: 2.2.1
 Donate link: https://multivendorx.com/donate/
 License: GPLv2 or later
