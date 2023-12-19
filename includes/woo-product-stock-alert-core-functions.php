@@ -397,7 +397,7 @@ if (!function_exists('woo_stock_alert_fileds')) {
                         $stock_alert_fields_array[] = $recaptchaScript . $recaptchaResponseInput . $recaptchaSiteKeyInput . $recaptchaSecretKeyInput;
                         break;
                     default:
-                        $stock_alert_fields_array[] = '<input type="' . $type . '" name="' . $key . '" class="' . $class . '" value="' . $value . '" placeholder="' . $placeholder . '" >';
+                        $stock_alert_fields_array[] = '<input id="woo_stock_alert_' . $key . '" type="' . $type . '" name="' . $key . '" class="' . $class . '" value="' . $value . '" placeholder="' . $placeholder . '" >';
                         break;
                 }
             }
