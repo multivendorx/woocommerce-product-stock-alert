@@ -54,8 +54,6 @@ class WOO_Product_Stock_Alert {
             $this->load_class('shortcode');
             $this->shortcode = new WOO_Product_Stock_Alert_Shortcode();
         }
-        $this->load_class('template');
-        $this->template = new WOO_Product_Stock_Alert_Template();
 
         include_once $this->plugin_path . '/includes/class-woo-product-stock-alert-deprecated-filter-hooks.php';
         include_once $this->plugin_path . '/includes/class-woo-product-stock-alert-deprecated-action-hooks.php';
@@ -239,6 +237,5 @@ class WOO_Product_Stock_Alert {
         do_action('woo_stock_alert_settings_after_save', $modulename, $get_managements_data);
         $all_details['error'] = __('Settings Saved', 'woocommerce-product-stock-alert');
         return $all_details;
-        die;
     }
 }

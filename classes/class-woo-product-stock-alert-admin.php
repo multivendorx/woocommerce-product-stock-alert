@@ -18,8 +18,8 @@ class WOO_Product_Stock_Alert_Admin {
         add_action('woocommerce_product_options_inventory_product_data', array($this, 'product_subscriber_details'));
         add_action('woocommerce_product_after_variable_attributes', array($this, 'manage_variation_custom_column'), 10, 3);
 
-        // check product stock status
-        add_action('save_post', array($this, 'check_product_stock_status'), 5, 2);
+        // when a post/product modify notify all users if the product is instock 
+        add_action('save_post', array($this, 'notify_users_if_product_instock'), 5, 2);
 
         // bulk action to remove subscribers
         add_filter('bulk_actions-edit-product', array($this, 'register_subscribers_bulk_actions'));
@@ -365,7 +365,7 @@ class WOO_Product_Stock_Alert_Admin {
      * Alert on Product Stock Update
      *
      */
-    function check_product_stock_status($post_id, $post) {
+    function notify_users_if_product_instock($post_id, $post) {
         if ($post->post_type == 'product') {
             $product_obj = wc_get_product($post_id);
             if ($product_obj && $product_obj->is_type('variable')) {
