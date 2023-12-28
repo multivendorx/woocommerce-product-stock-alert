@@ -18,9 +18,6 @@ class WOO_Product_Stock_Alert_Admin {
         add_action('woocommerce_product_options_inventory_product_data', array($this, 'product_subscriber_details'));
         add_action('woocommerce_product_after_variable_attributes', array($this, 'manage_variation_custom_column'), 10, 3);
 
-        // when a post/product modify notify all users if the product is instock 
-        add_action('save_post', array($this, 'notify_users_if_product_instock'), 5, 2);
-
         // bulk action to remove subscribers
         add_filter('bulk_actions-edit-product', array($this, 'register_subscribers_bulk_actions'));
         add_filter('handle_bulk_actions-edit-product', array($this, 'subscribers_bulk_action_handler'), 10, 3);
@@ -353,33 +350,10 @@ class WOO_Product_Stock_Alert_Admin {
             if (!empty($product_subscriber) && $product_subscriber >0) {
                 ?>
                 <p class="form-row form-row-full interested_person">
-                    <label class="stock_label"><?php echo _e('Number of Interested Person(s) : ', 'woocommerce-product-stock-alert'); ?></label>
+                    <label class="stock_label"><?php _e('Number of Interested Person(s) : ', 'woocommerce-product-stock-alert'); ?></label>
                 <div class="variation_no_subscriber"><?php echo $product_subscriber; ?></div>
                 </p>
                 <?php
-            }
-        }
-    }
-
-    /**
-     * Alert on Product Stock Update
-     *
-     */
-    function notify_users_if_product_instock($post_id, $post) {
-        if ($post->post_type == 'product') {
-            $product_obj = wc_get_product($post_id);
-            if ($product_obj && $product_obj->is_type('variable')) {
-                if ($product_obj->has_child()) {
-                    $child_ids = $product_obj->get_children();
-                    if (isset($child_ids) && !empty($child_ids)) {
-                        foreach ($child_ids as $child_id){
-                            woo_stockalert_notify_particular_product_subs($child_id);
-                        }
-                    }
-                }
-            }
-            else{
-                woo_stockalert_notify_particular_product_subs($post_id);
             }
         }
     }

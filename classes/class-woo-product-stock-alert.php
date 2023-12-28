@@ -28,6 +28,7 @@ class WOO_Product_Stock_Alert {
         // Woocommerce Email structure
         add_filter('woocommerce_email_classes', array(&$this, 'woo_product_stock_alert_mail'));
         add_action('woo_stock_alert_start_notification_cron_job', 'woo_stock_alert_notify_subscribed_user');
+        add_action('woocommerce_update_product', array($this, 'notify_users_if_product_instock'), 10, 2);
     }
 
     /**
@@ -41,7 +42,7 @@ class WOO_Product_Stock_Alert {
             $this->load_class('ajax');
             $this->ajax = new WOO_Product_Stock_Alert_Ajax();
         }
-
+        
         if (is_admin()) {
             $this->load_class('admin');
             $this->admin = new WOO_Product_Stock_Alert_Admin();
@@ -237,5 +238,26 @@ class WOO_Product_Stock_Alert {
         do_action('woo_stock_alert_settings_after_save', $modulename, $get_managements_data);
         $all_details['error'] = __('Settings Saved', 'woocommerce-product-stock-alert');
         return $all_details;
+    }
+
+    /**
+     * Alert on Product Stock Update
+     *
+     */
+    function notify_users_if_product_instock($post_id, $post) {
+        $product_obj = wc_get_product($post_id);
+        if ($product_obj && $product_obj->is_type('variable')) {
+            if ($product_obj->has_child()) {
+                $child_ids = $product_obj->get_children();
+                if (isset($child_ids) && !empty($child_ids)) {
+                    foreach ($child_ids as $child_id) {
+                        woo_stockalert_notify_particular_product_subs($child_id);
+                    }
+                }
+            }
+        }
+        else{
+            woo_stockalert_notify_particular_product_subs($post_id);
+        }
     }
 }

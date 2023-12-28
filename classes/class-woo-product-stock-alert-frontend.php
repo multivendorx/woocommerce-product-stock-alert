@@ -8,24 +8,24 @@ class WOO_Product_Stock_Alert_Frontend {
         //enqueue styles
         add_action('wp_enqueue_scripts', array(&$this, 'frontend_styles'));
 
-        add_action('woocommerce_simple_add_to_cart', array($this, 'display_in_simple_product'), 31);
-        add_action('woocommerce_bundle_add_to_cart', array($this, 'display_in_simple_product'), 31);
-        add_action('woocommerce_subscription_add_to_cart', array($this, 'display_in_simple_product'), 31);
-        add_action('woocommerce_woosb_add_to_cart', array($this, 'display_in_simple_product'), 31);
-        add_action('woocommerce_after_variations_form', array($this, 'display_in_no_variation_product'));
-        add_filter('woocommerce_available_variation', array($this, 'display_in_variation'), 10, 3);
+        add_action('woocommerce_simple_add_to_cart', array($this, 'display_product_subscription_form'), 31);
+        add_action('woocommerce_bundle_add_to_cart', array($this, 'display_product_subscription_form'), 31);
+        add_action('woocommerce_subscription_add_to_cart', array($this, 'display_product_subscription_form'), 31);
+        add_action('woocommerce_woosb_add_to_cart', array($this, 'display_product_subscription_form'), 31);
+        add_action('woocommerce_after_variations_form', array($this, 'display_product_subscription_form'), 31);
         // Some theme variation disabled by default if it is out of stock so for that workaround solution.
         add_filter('woocommerce_variation_is_active', array($this, 'enable_disabled_variation_dropdown'), 100, 2);
         //support for grouped products
         add_filter('woocommerce_grouped_product_list_column_price', array($this, 'display_in_grouped_product'), 10, 2);
         // Hover style
-        add_action('wp_head', array($this, 'frontend_hover_styles'));   
+        add_action('wp_head', array($this, 'frontend_hover_styles')); 
     }
 
     function frontend_scripts() {
         global $WOO_Product_Stock_Alert;
         $frontend_script_path = $WOO_Product_Stock_Alert->plugin_url . 'assets/frontend/js/';
         $suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
+        $suffix = ''; /////////Should be removed for deploy
         $settings_array = get_woo_form_settings_array();
 
         $border_size = (!empty($settings_array['button_border_size'])) ? $settings_array['button_border_size'].'px' : '1px';
@@ -103,13 +103,27 @@ class WOO_Product_Stock_Alert_Frontend {
     }
 
     /**
-     * Display Reuest Stock Form in simple product
+     * Display product subscription form if product is outof stock
      *
      * @version 1.0.0
      */
-    public function display_in_simple_product() {
+    public function display_product_subscription_form() {
         global $product;
-        echo _e(woo_stock_alert_subscribe_form($product));
+
+        if (empty($product))
+            return;
+
+        if ($product->is_type('variable')) {
+            $get_variations = count($product->get_children()) <= apply_filters('woocommerce_ajax_variation_threshold', 30, $product);
+            $get_variations = $get_variations ? $product->get_available_variations() : false;
+            if ($get_variations) {
+                echo '<div class="stock_notifier-shortcode-subscribe-form" data-product-id="' . esc_attr($product->get_id()) . '"></div>';
+            } else {
+                echo $this->get_subscribe_form($product);
+            }
+        } else {
+            echo $this->get_subscribe_form($product);
+        }
     }
 
     /**
@@ -121,41 +135,8 @@ class WOO_Product_Stock_Alert_Frontend {
      * @version 1.0.0
      */
     public function display_in_grouped_product($value, $child) {
-        $value = $value . woo_stock_alert_subscribe_form($child);
+        $value = $value . $this->get_subscribe_form($child);
         return $value;
-    }
-
-    /**
-     * Display Reuest Stock Form in no variation product
-     *
-     * @version 1.0.0
-     */
-    public function display_in_no_variation_product() {
-        global $product;
-        $product_type = $product->get_type();
-        // Get Available variations?
-        if ('variable' == $product_type) {
-            $get_variations = count($product->get_children()) <= apply_filters('woocommerce_ajax_variation_threshold', 30, $product);
-            $get_variations = $get_variations ? $product->get_available_variations() : false;
-            if (!$get_variations) {
-                echo _e(woo_stock_alert_subscribe_form($product));
-            }
-        }
-    }
-
-    /**
-     * Display in variation product request stock button
-     *
-     * @param string $atts default attributes.
-     * @param object $product all product.
-     * @param object $variation variation product.
-     *
-     * @version 1.0.0
-     */
-    public function display_in_variation( $atts, $product, $variation ) {
-        $get_stock                 = $atts['availability_html'];
-        $atts['availability_html'] = $get_stock . woo_stock_alert_subscribe_form($product, $variation);
-        return $atts;
     }
 
     /**
@@ -172,5 +153,110 @@ class WOO_Product_Stock_Alert_Frontend {
             $active = true;
         }
         return $active;
+    }
+    
+    /**
+     * Get subscribe from's HTML content for a particular product.
+     * If the product is not outofstock it return empty string.
+     *
+     * @param mixed $product product variable
+     * @param mixed $variation variation variable default null
+     * @return string HTML of subscribe form
+     */
+    public function get_subscribe_form($product, $variation = null) {
+        if(! woo_is_product_outofstock($variation ? $variation->get_id() : $product->get_id(), $variation ? 'variation' : '', true)){
+            return "";
+        }
+        $stock_alert_fields_array = array();
+        $stock_alert_fields_html = $user_email = '';
+        $separator = apply_filters('woo_fileds_separator', '<br>');
+        $settings_array = get_woo_form_settings_array();
+        if (is_user_logged_in()) {
+            $current_user = wp_get_current_user();
+            $user_email = $current_user->data->user_email;
+        }
+        $placeholder = $settings_array['email_placeholder_text'];
+        $alert_fields = apply_filters('woo_stock_alert_fileds_array', array(
+            'alert_email' => array(
+                'type' => 'text',
+                'class'=> 'stock_alert_email woo-fields',
+                'value'=> $user_email,
+                'placeholder' => $placeholder
+            )
+        ), $settings_array);
+        if ($alert_fields) {
+            foreach ($alert_fields as $key => $fvalue) {
+                $type = in_array($fvalue['type'], ['recaptcha-v3', 'text', 'number', 'email']) ? esc_attr($fvalue['type']) : 'text';
+                $class = isset($fvalue['class']) ? esc_attr($fvalue['class']) : 'stock_alert_' . $key;
+                $value = isset($fvalue['value']) ? esc_attr($fvalue['value']) : '';
+                $placeholder = isset($fvalue['placeholder']) ? esc_attr($fvalue['placeholder']) : '';
+                switch ($fvalue['type']) {
+                    case 'recaptcha-v3':
+                        $recaptcha_type = isset($fvalue['version']) ? esc_attr($fvalue['version']) : 'v3';
+                        $sitekey = isset($fvalue['sitekey']) ? esc_attr($fvalue['sitekey']) : '';
+                        $secretkey = isset($fvalue['secretkey']) ? esc_attr($fvalue['secretkey']) : '';
+
+                        $recaptchaScript = '
+                        <script>
+                            grecaptcha.ready(function () {
+                                grecaptcha.execute("' . $sitekey . '").then(function (token) {
+                                    var recaptchaResponse = document.getElementById("recaptchav3_response");
+                                    recaptchaResponse.value = token;
+                                });
+                            });
+                        </script>';
+                        
+                        $recaptchaResponseInput = '<input type="hidden" id="recaptchav3_response" name="recaptchav3_response" value="" />';
+                        $recaptchaSiteKeyInput = '<input type="hidden" id="recaptchav3_sitekey" name="recaptchav3_sitekey" value="' . esc_html($sitekey) . '" />';
+                        $recaptchaSecretKeyInput = '<input type="hidden" id="recaptchav3_secretkey" name="recaptchav3_secretkey" value="' . esc_html($secretkey) . '" />';
+
+                        $stock_alert_fields_array[] = $recaptchaScript . $recaptchaResponseInput . $recaptchaSiteKeyInput . $recaptchaSecretKeyInput;
+                        break;
+                    default:
+                        $stock_alert_fields_array[] = '<input id="woo_stock_alert_' . $key . '" type="' . $type . '" name="' . $key . '" class="' . $class . '" value="' . $value . '" placeholder="' . $placeholder . '" >';
+                        break;
+                }
+            }
+        }
+        if ($stock_alert_fields_array) {
+            $stock_alert_fields_html = implode($separator, $stock_alert_fields_array);
+        }
+
+        $alert_text_html = '<h5 style="color:' . $settings_array['alert_text_color'] . '" class="subscribe_for_interest_text">' . $settings_array['alert_text'] . '</h5>';
+
+        $button_css = "";
+        $border_size = (!empty($settings_array['button_border_size'])) ? $settings_array['button_border_size'].'px' : '1px';
+        if (!empty($settings_array['button_background_color']))
+            $button_css .= "background:" . $settings_array['button_background_color'] . ";";
+        if (!empty($settings_array['button_text_color']))
+            $button_css .= "color:" . $settings_array['button_text_color'] . ";";
+        if (!empty($settings_array['button_border_color']))
+            $button_css .= "border: " . $border_size . " solid " . $settings_array['button_border_color'] . ";";
+        if (!empty($settings_array['button_font_size']))
+            $button_css .= "font-size:" . $settings_array['button_font_size'] . "px;";
+        if (!empty($settings_array['button_border_redious']))
+            $button_css .= "border-radius:" . $settings_array['button_border_redious'] . "px;";
+
+        $button_html = '<button style="' . $button_css .'" class="stock_alert_button alert_button_hover" name="alert_button">' . $settings_array['button_text'] . '</button>';
+
+        $interested_person = get_no_subscribed_persons($variation ? $variation->get_id() : $product->get_id(), 'woo_subscribed');
+
+        $shown_interest_html = '';
+        $shown_interest_text = $settings_array['shown_interest_text'];
+        if (get_woo_product_alert_plugin_settings('is_enable_no_interest') && $interested_person != 0 && $shown_interest_text) {
+            $shown_interest_text = str_replace("%no_of_subscribed%", $interested_person, $shown_interest_text);
+            $shown_interest_html = '<p>' . $shown_interest_text . '</p>';
+        }
+
+        return
+        '<div id="stock_notifier_main_form" class="stock_notifier-subscribe-form" style="border-radius:10px;">
+            ' . $alert_text_html . '
+            <div class="woo_fields_wrap"> ' . $stock_alert_fields_html . '' . $button_html . '
+            </div>
+            <input type="hidden" class="current_product_id" value="' . esc_attr($product->get_id()) . '" />
+            <input type="hidden" class="current_variation_id" value="' . esc_attr($variation ? $variation->get_id() : 0) . '" />
+            <input type="hidden" class="current_product_name" value="' . esc_attr($product->get_title()) . '" />
+            ' . $shown_interest_html . '
+        </div>';
     }
 }

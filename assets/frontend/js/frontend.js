@@ -8,10 +8,10 @@ jQuery(function ($) {
         },
 
         getVariationSubscribeForm: function () {
-            var variationId = Number($(this).val());
-            var productId = Number($('.stock_notifier-shortcode-subscribe-form').data('product-id'));
+            const variationId = Number($(this).val());
+            const productId = Number($('.stock_notifier-shortcode-subscribe-form').data('product-id'));
             if ($('.stock_notifier-shortcode-subscribe-form').length && variationId) {
-                var stock_alert_box = {
+                const stock_alert_box = {
                     action: 'get_variation_box_ajax',
                     product_id: productId,
                     variation_id: variationId
@@ -26,7 +26,7 @@ jQuery(function ($) {
         },
 
         is_email: function (email) {
-            var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+            const regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
             if (!regex.test(email)) {
                 return false;
             } else {
@@ -38,15 +38,15 @@ jQuery(function ($) {
             e.preventDefault();
             $(this).text(woo_stock_alert_script_data.processing);   
             $(this).addClass("stk_disabled");   
-            var form = $(this).closest('.stock_notifier-subscribe-form');
-            var customer_data = {
+            const form = $(this).closest('.stock_notifier-subscribe-form');
+            const customer_data = {
                 action: 'unsubscribe_button',
                 customer_email: form.find('.subscribed_email').val(),
                 product_id: form.find('.product_id').val(),
                 var_id : form.find('.variation_id').val(),
             };
             
-            var unsubscribe_successful_messsage = woo_stock_alert_script_data.alert_unsubscribe_message;
+            let unsubscribe_successful_messsage = woo_stock_alert_script_data.alert_unsubscribe_message;
             unsubscribe_successful_messsage = unsubscribe_successful_messsage.replace( '%customer_email%', customer_data.customer_email );
             
             $.post(woo_stock_alert_script_data.ajax_url, customer_data, function(response) {
@@ -62,13 +62,13 @@ jQuery(function ($) {
             e.preventDefault();
             $(this).text(woo_stock_alert_script_data.processing);
             $(this).addClass("stk_disabled");
-            var recaptcha_enabled = woo_stock_alert_script_data.recaptcha_enabled;
-            var form = $(this).closest('.stock_notifier-subscribe-form');
+            const recaptcha_enabled = woo_stock_alert_script_data.recaptcha_enabled;
+            const form = $(this).closest('.stock_notifier-subscribe-form');
             
             if (recaptcha_enabled) {
-                var recaptcha_secret = form.find('#recaptchav3_secretkey').val();
-                var recaptcha_response = form.find('#recaptchav3_response').val();
-                var recaptcha = {
+                const recaptcha_secret = form.find('#recaptchav3_secretkey').val();
+                const recaptcha_response = form.find('#recaptchav3_response').val();
+                const recaptcha = {
                     action: 'recaptcha_validate_ajax',
                     captcha_secret : recaptcha_secret,
                     captcha_response : recaptcha_response

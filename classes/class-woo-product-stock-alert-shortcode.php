@@ -44,7 +44,7 @@ class WOO_Product_Stock_Alert_Shortcode {
         if ($product->is_type('variable')) {
             echo '<div class="stock_notifier-shortcode-subscribe-form" data-product-id="' . esc_attr($product->get_id()) . '"></div>';
         } else {
-            echo _e( woo_stock_alert_subscribe_form($product) );
+            echo $WOO_Product_Stock_Alert->frontend->get_subscribe_form($product);
         }
 
         do_action('woocommerce_product_stock_alert_form_after');

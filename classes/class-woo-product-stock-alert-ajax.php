@@ -20,9 +20,9 @@ class WOO_Product_Stock_Alert_Ajax {
 	}
 
 	function recaptcha_validate_ajax() {
-        $recaptcha_secret = isset($_POST['captcha_secret']) ? $_POST['captcha_secret'] : '';
+        $recaptcha_secret = isset($_POST['captcha_secret']) ? sanitize_text_field($_POST['captcha_secret']) : '';
+        $recaptcha_response = isset($_POST['captcha_response']) ? sanitize_text_field($_POST['captcha_response']) : '';
         $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
-        $recaptcha_response = isset($_POST['captcha_response']) ? $_POST['captcha_response'] : '';
 
         $recaptcha = file_get_contents($recaptcha_url . '?secret=' . $recaptcha_secret . '&response=' . $recaptcha_response);
         $recaptcha = json_decode($recaptcha);
@@ -52,7 +52,6 @@ class WOO_Product_Stock_Alert_Ajax {
 			'product_type',
 			'subscribers'
 		);
-
 		
 		foreach ($headers as $header) { 
 			$headers_arr[] = '"' . $header . '"';
@@ -87,8 +86,8 @@ class WOO_Product_Stock_Alert_Ajax {
 
 	function unsubscribe_users() {
 		$customer_email = isset($_POST['customer_email']) ? sanitize_email($_POST['customer_email']) : '';
-		$product_id = isset($_POST['product_id']) ? (int)$_POST['product_id'] : '';
-		$variation_id = isset($_POST['var_id']) ? (int)$_POST['var_id'] : 0;
+		$product_id = isset($_POST['product_id']) ? absint($_POST['product_id']) : '';
+		$variation_id = isset($_POST['var_id']) ? absint($_POST['var_id']) : 0;
 		$success = false;
 		if ($product_id && !empty($product_id) && !empty($customer_email)) {
 			$product = wc_get_product($product_id);
@@ -104,8 +103,8 @@ class WOO_Product_Stock_Alert_Ajax {
 	
 	function subscribe_users() {
 		$customer_email = isset($_POST['email']) ? sanitize_email($_POST['email']) : '';
-		$product_id = isset($_POST['product_id']) ? (int)$_POST['product_id'] : '';
-		$variation_id = isset($_POST['variation_id']) ? (int)$_POST['variation_id'] : 0;
+		$product_id = isset($_POST['product_id']) ? absint($_POST['product_id']) : '';
+		$variation_id = isset($_POST['variation_id']) ? absint($_POST['variation_id']) : 0;
 		$status = '';
 		if ($product_id && !empty($product_id) && !empty($customer_email)) {
 			$product = wc_get_product($product_id);
@@ -121,15 +120,14 @@ class WOO_Product_Stock_Alert_Ajax {
 
 	function get_variation_box_ajax(){
 		global $WOO_Product_Stock_Alert;
-		$product_id = isset($_POST['product_id']) ? (int)$_POST['product_id'] : '';
-		$child_id = isset($_POST['variation_id']) ? (int)$_POST['variation_id'] : '';
+		$product_id = isset($_POST['product_id']) ? absint($_POST['product_id']) : '';
+		$child_id = isset($_POST['variation_id']) ? absint($_POST['variation_id']) : '';
 		$product = wc_get_product( $product_id );
 		$child_obj = null;
 		if ($child_id && !empty($child_id)) {
 			$child_obj = new WC_Product_Variation($child_id);
 		}
-
-		echo woo_stock_alert_subscribe_form($product, $child_obj);
+		echo $WOO_Product_Stock_Alert->frontend->get_subscribe_form($product, $child_obj);
 		die();
 	}
 }
