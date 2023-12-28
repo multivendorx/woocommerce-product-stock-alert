@@ -4,10 +4,10 @@ class WOO_Product_Stock_Alert_Admin {
     public $settings;
 
     public function __construct() {
-        // admin pages manu and submenu
-        add_action('admin_menu', array($this, 'add_settings_page'), 100);
         //admin script and style
         add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_script'));
+        $this->load_class('settings');
+        $this->settings = new WOO_Product_Stock_Alert_Settings();
 
         // create custom column
         add_action('manage_edit-product_columns', array($this, 'custom_column'));
@@ -25,83 +25,11 @@ class WOO_Product_Stock_Alert_Admin {
         add_action('admin_print_styles-plugins.php', array( $this, 'admin_plugin_page_style'));
     }
 
-    /**
-    * Add options page
-    */
-    public function add_settings_page() {
-        $pro_sticker = apply_filters('is_stock_alert_pro_inactive', true) ? '<span class="stock-alert-pro-tag">Pro</span>' : '';
-
-        add_menu_page(
-            __('Stock Manager', 'woocommerce-product-stock-alert'),
-            __('Stock Manager', 'woocommerce-product-stock-alert'),
-            'manage_options',
-            'woo-stock-alert-setting',
-            [$this, 'create_woo_product_stock_alert_settings'],
-            'data:image/svg+xml;base64,' . base64_encode('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><g fill="#9EA3A8" fill-rule="nonzero">
-            <path d="M19.9,5.7c0.2,0.9-0.3,1.8-1.1,2c-0.2,0.1-0.5,0.1-0.7,0c-0.6-0.1-1.1-0.5-1.3-1.2    c-0.2-0.6,0-1.2,0.4-1.6c0.2-0.2,0.4-0.3,0.7-0.4C18.8,4.3,19.7,4.8,19.9,5.7z M17.8,8.9l-3.2,9.9c-0.2,0.5-0.7,0.7-1.2,0.6
-            L0.6,15.2C0.1,15-0.1,14.5,0,14L4.3,1.2c0.2-0.5,0.7-0.7,1.2-0.6L16,4.1c-0.5,0.7-0.7,1.7-0.5,2.6C15.8,7.9,16.7,8.7,17.8,8.9z
-            M10.8,4.9c0.5,0.2,1,0.5,1.5,0.7c0.2-0.4,0-0.9-0.4-1.1C11.4,4.4,11,4.5,10.8,4.9z M9.5,15.2c-0.9-0.1-1.7-0.2-2.6-0.2
-            c0.1,0.7,0.6,1.2,1.2,1.2C8.7,16.2,9.3,15.8,9.5,15.2z M12.7,9c0-1.7-1.4-3.1-3.1-3.2c-1.2,0-2.2,0.5-2.8,1.5
-            c-0.6,0.9-1.1,1.8-1.7,2.7c-0.1,0.1-0.2,0.2-0.3,0.1c-0.5-0.2-0.8,0-1.1,0.6c-0.2,0.4,0,0.8,0.4,1c0.7,0.4,1.4,0.7,2.2,1.1
-            c1.4,0.7,2.8,1.4,4.2,2.1c0.4,0.2,0.8,0.1,1.1-0.4c0-0.1,0.1-0.1,0.1-0.2c0.1-0.3,0-0.7-0.3-0.9c-0.2-0.1-0.2-0.2-0.1-0.4
-            c0.4-1,0.8-2,1.1-3C12.7,9.7,12.7,9,12.7,9z"/></g></svg>'), 
-            50
-        );
-
-        add_submenu_page(
-            'woo-stock-alert-setting',
-            __('Stock Manager', 'woocommerce-product-stock-alert'),
-            __('Stock Manager', 'woocommerce-product-stock-alert'),
-            'manage_options',
-            'woo-stock-alert-setting#&tab=stock-manager',
-            '__return_null'
-        );
-
-        add_submenu_page(
-            'woo-stock-alert-setting',                              
-            __('Settings', 'woocommerce-product-stock-alert'),      
-            __('Settings', 'woocommerce-product-stock-alert'),      
-            'manage_options',                                       
-            'woo-stock-alert-setting#&tab=settings&subtab=general', 
-            '__return_null'                                         
-        );
-        
-        add_submenu_page( 
-            'woo-stock-alert-setting', 
-            __('Subscriber List', 'woocommerce-product-stock-alert'), 
-            __('Subscriber List ' . $pro_sticker, 'woocommerce-product-stock-alert'), 
-            'manage_woocommerce', 
-            'woo-stock-alert-setting#&tab=subscriber-list', 
-            '__return_null' 
-        );
-        
-        add_submenu_page(
-            'tools.php', 
-            __('WC Stock Alert Export', 'woocommerce-product-stock-alert'), 
-            __('WC Stock Alert Export', 'woocommerce-product-stock-alert'), 
-            'manage_options',
-            'woo-product-stock-alert-export-admin',
-            array($this, 'create_woo_product_stock_alert_export')
-        );
-
-        remove_submenu_page('woo-stock-alert-setting', 'woo-stock-alert-setting');
-    }
-
-    public function create_woo_product_stock_alert_settings() {
-        echo '<div id="woo-admin-stockalert"></div>';
-    }
-
-    public function create_woo_product_stock_alert_export() { 
-        ?>
-            <div class="wrap">
-            <h1><?php _e('WC Stock Alert Export', 'woocommerce-product-stock-alert') ?></h1>
-            <p><?php _e('When you click the button below, this will export all out of stock products with subscribers email.', 'woocommerce-product-stock-alert') ?></p>
-            <form class="alert_export_data" id="alert_export_data" method="post" action="<?php echo admin_url('admin-ajax.php?action=export_subscribers') ?>">
-                <input type="hidden" name="export_csv" value="1">
-                <input type="submit" class="button-primary" value="<?php _e('Export CSV', 'woocommerce-product-stock-alert')  ?>">
-            </form>
-            </div>
-        <?php
+    function load_class($class_name = '') {
+        global $WOO_Product_Stock_Alert;
+        if ('' != $class_name) {
+            require_once ($WOO_Product_Stock_Alert->plugin_path . '/admin/class-' . esc_attr($WOO_Product_Stock_Alert->token) . '-' . esc_attr($class_name) . '.php');
+        } // End If Statement
     }
 
     function register_subscribers_bulk_actions($bulk_actions) {
@@ -274,13 +202,14 @@ class WOO_Product_Stock_Alert_Admin {
                 'pro_coupon_text'           => __('Don\'t miss out! Enjoy 10% off on our pro features.', 'woocommerce-product-stock-alert'),
                 'pro_url'                   => esc_url(WOO_PRODUCT_STOCK_ALERT_PRO_SHOP_URL),
                 'setting_string'            => $setting_string,
-                'banner_show'               => get_option('woocommerce_stock_alert_pro_banner_hide') ? false : true,
+                'banner_show'               => $this->woo_stockalert_is_banner_close(),
                 'default_massages_fields'   => $woo_admin_massages_fields,
                 'default_massages'          => get_woo_default_massages(),
               ]));
             wp_enqueue_style('woo-stockalert-style', $WOO_Product_Stock_Alert->plugin_url . 'build/index.css');
             wp_enqueue_style('woo_admin_rsuite_css', $WOO_Product_Stock_Alert->plugin_url . 'assets/admin/css/rsuite-default' . '.min' . '.css', array(), $WOO_Product_Stock_Alert->version);
         }
+        
         wp_enqueue_style('stock_alert_product_admin_css', $WOO_Product_Stock_Alert->plugin_url . 'assets/admin/css/admin'. $suffix .'.css');
     }
 
@@ -297,6 +226,7 @@ class WOO_Product_Stock_Alert_Admin {
      */
     function manage_custom_column($column_name, $post_id) {
         $no_of_subscriber = 0;
+        $product_subscriber = $child_ids = $product_obj = array();
         switch ($column_name) {
             case 'product_subscriber' :
                 $product_obj = wc_get_product($post_id);
@@ -310,10 +240,13 @@ class WOO_Product_Stock_Alert_Admin {
                                 }
                             }
                         }
-                    } else if (woo_is_product_outofstock($product_obj->get_id())) {
-                        $no_of_subscriber = get_no_subscribed_persons($product_obj->get_id(), 'woo_subscribed');
+                        echo '<div class="product-subscribtion-column">' . $no_of_subscriber . '</div>';
+                    } else {
+                        if (woo_is_product_outofstock($product_obj->get_id())) {
+                            $no_of_subscriber = get_no_subscribed_persons($product_obj->get_id(), 'woo_subscribed');
+                        }
+                        echo '<div class="product-subscribtion-column">' . $no_of_subscriber . '</div>';
                     }
-                    echo '<div class="product-subscribtion-column">' . $no_of_subscriber . '</div>';
                 }
         }
     }
@@ -350,11 +283,19 @@ class WOO_Product_Stock_Alert_Admin {
             if (!empty($product_subscriber) && $product_subscriber >0) {
                 ?>
                 <p class="form-row form-row-full interested_person">
-                    <label class="stock_label"><?php _e('Number of Interested Person(s) : ', 'woocommerce-product-stock-alert'); ?></label>
+                    <label class="stock_label"><?php echo _e('Number of Interested Person(s) : ', 'woocommerce-product-stock-alert'); ?></label>
                 <div class="variation_no_subscriber"><?php echo $product_subscriber; ?></div>
                 </p>
                 <?php
             }
+        }
+    }
+
+    public function woo_stockalert_is_banner_close() {
+        if (get_option('woocommerce_stock_alert_pro_banner_hide')) {
+            return false;
+        } else {
+            return true;
         }
     }
 }
