@@ -14,15 +14,12 @@
  * Domain Path: /languages/
  */
 
+if (!defined('ABSPATH')) exit; // Exit if accessed directly
+
 if (!class_exists('WC_Dependencies_Stock_Alert'))
 	require_once 'includes/class-woo-product-stock-alert-dependencies.php';
 require_once 'includes/woo-product-stock-alert-core-functions.php';
 require_once 'config.php';
-if (!defined('ABSPATH')) exit; // Exit if accessed directly
-
-if (!WC_Dependencies_Stock_Alert::woocommerce_plugin_active_check()) {
-  add_action( 'admin_notices', 'woocommerce_inactive_notice' );
-}
 
 /**
  * Declare support for 'High-Performance order storage (COT)' in WooCommerce
@@ -57,9 +54,11 @@ if (!class_exists('WOO_Product_Stock_Alert') && WC_Dependencies_Stock_Alert::woo
 	require_once('classes/class-woo-product-stock-alert.php');
 	global $WOO_Product_Stock_Alert;
 	$WOO_Product_Stock_Alert = new WOO_Product_Stock_Alert( __FILE__ );
-	$GLOBALS['WOO_Product_Stock_Alert'] = $WOO_Product_Stock_Alert;
 	// Activation Hooks
 	register_activation_hook( __FILE__, array('WOO_Product_Stock_Alert', 'activate_product_stock_alert'));
 	// Deactivation Hooks
 	register_deactivation_hook( __FILE__, array('WOO_Product_Stock_Alert', 'deactivate_product_stock_alert'));
+}
+else{
+	add_action( 'admin_notices', 'woocommerce_inactive_notice' );
 }
