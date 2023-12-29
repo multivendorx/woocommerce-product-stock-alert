@@ -101,7 +101,7 @@ jQuery(function ($) {
                 }
 
                 for (var i=0; i<woo_stock_alert_script_data.additional_fields.length; i++){
-                    stock_alert[woo_stock_alert_script_data.additional_fields[i]] = $(this).parent().find('.'+woo_stock_alert_script_data.additional_fields[i]).val();
+                    stock_alert[woo_stock_alert_script_data.additional_fields[i]] = $('#woo_stock_alert_' + woo_stock_alert_script_data.additional_fields[i]).val();
                 }
 
                 $.post(woo_stock_alert_script_data.ajax_url, stock_alert, function(response) {   

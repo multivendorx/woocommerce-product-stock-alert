@@ -10,7 +10,7 @@ jQuery( 'input.variation_id' ).change( function(){
             variation_id : var_id
         };
         for (var i=0; i<stock_alert_sc_data.additional_fields.length; i++){
-            stock_alert_box[stock_alert_sc_data.additional_fields[i]] = jQuery(this).parent().find('.'+stock_alert_sc_data.additional_fields[i]).val();
+            stock_alert_box[stock_alert_sc_data.additional_fields[i]] = $('#woo_stock_alert_' + woo_stock_alert_script_data.additional_fields[i]).val();
         }
 
         jQuery.post( stock_alert_sc_data.ajax_url, stock_alert_box, function(response) {

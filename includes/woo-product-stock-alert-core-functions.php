@@ -332,19 +332,10 @@ if(!function_exists('is_activate_double_opt_in')) {
 if(!function_exists('woo_stock_product_data')) {
     function woo_stock_product_data($product_id) {
         $product_data = array();
-        $parent_product_id = wp_get_post_parent_id($product_id);
-        if( $parent_product_id ) {
-            $product_obj = wc_get_product( $parent_product_id );
-            $parent_id = $parent_product_id ? $parent_product_id : 0;
-            $product_data['link'] = $product_obj->get_permalink();
-            $product_data['name'] = $product_obj && $product_obj->get_formatted_name() ? $product_obj->get_formatted_name() : '';
-            $product_data['price'] = $product_obj && $product_obj->get_price_html() ? $product_obj->get_price_html() : '';
-        } else {
-            $product_obj = wc_get_product( $product_id );
-            $product_data['link'] = $product_obj->get_permalink();
-            $product_data['name'] = $product_obj && $product_obj->get_formatted_name() ? $product_obj->get_formatted_name() : '';
-            $product_data['price'] = $product_obj && $product_obj->get_price_html() ? $product_obj->get_price_html() : '';
-        }
+        $product_obj = wc_get_product( $product_id );
+        $product_data['link'] = $product_obj->get_permalink();
+        $product_data['name'] = $product_obj ? $product_obj->get_name() : '';
+        $product_data['price'] = $product_obj ? wc_price( wc_get_price_to_display( $product_obj ) ): '';
         return apply_filters('woo_stock_alert_product_data', $product_data, $product_id);
     }
 }
@@ -397,7 +388,7 @@ if (!function_exists('woo_stock_alert_fileds')) {
                         $stock_alert_fields_array[] = $recaptchaScript . $recaptchaResponseInput . $recaptchaSiteKeyInput . $recaptchaSecretKeyInput;
                         break;
                     default:
-                        $stock_alert_fields_array[] = '<input type="' . $type . '" name="' . $key . '" class="' . $class . '" value="' . $value . '" placeholder="' . $placeholder . '" >';
+                    $stock_alert_fields_array[] = '<input id="woo_stock_alert_' . $key . '" type="' . $type . '" name="' . $key . '" class="' . $class . '" value="' . $value . '" placeholder="' . $placeholder . '" >';
                         break;
                 }
             }

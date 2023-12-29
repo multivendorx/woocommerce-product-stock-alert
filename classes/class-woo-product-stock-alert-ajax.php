@@ -109,12 +109,7 @@ class WOO_Product_Stock_Alert_Ajax {
 		$variation_id = isset($_POST['variation_id']) ? (int)$_POST['variation_id'] : 0;
 		$status = '';
 		if ($product_id && !empty($product_id) && !empty($customer_email)) {
-			$product = wc_get_product($product_id);
-			if ($product && $product->is_type( 'variable' ) && $variation_id > 0) {
-				$status = customer_stock_alert_insert($variation_id, $customer_email);
-			} else {
-				$status = customer_stock_alert_insert($product_id, $customer_email);
-			}
+			$status = customer_stock_alert_insert( ($variation_id && $variation_id > 0) ? $variation_id : $product_id, $customer_email);
 		}
 		echo $status;
 		die();
