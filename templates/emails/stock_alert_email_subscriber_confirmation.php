@@ -8,7 +8,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-global $WOO_Product_Stock_Alert;
+global $Woo_Product_Stock_Alert;
 
 do_action( 'woocommerce_email_header', $email_heading, $email ); ?>
 

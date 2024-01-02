@@ -7,7 +7,7 @@
  */
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-global $WOO_Product_Stock_Alert;
+global $Woo_Product_Stock_Alert;
 
 echo $email_heading . "\n\n";
 

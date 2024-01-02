@@ -26,7 +26,7 @@ class WC_Subscriber_Confirmation_Email_Stock_Alert extends WC_Email {
 	 */
 	function __construct() {
 		
-		global $WOO_Product_Stock_Alert;
+		global $Woo_Product_Stock_Alert;
 		
 		$this->id 				= 'stock_alert_subscriber_confirmation';
 		$this->title 			= __('Confirm subscriber', 'woocommerce-product-stock-alert');
@@ -35,7 +35,7 @@ class WC_Subscriber_Confirmation_Email_Stock_Alert extends WC_Email {
 		$this->template_html 	= 'emails/stock_alert_email_subscriber_confirmation.php';
 		$this->template_plain 	= 'emails/plain/stock_alert_email_subscriber_confirmation.php';
 
-		$this->template_base = $WOO_Product_Stock_Alert->plugin_path . 'templates/';
+		$this->template_base = $Woo_Product_Stock_Alert->plugin_path . 'templates/';
 		
 		// Call parent constuctor
 		parent::__construct();

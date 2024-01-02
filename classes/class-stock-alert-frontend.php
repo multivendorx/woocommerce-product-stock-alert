@@ -1,6 +1,6 @@
 <?php
 
-class WOO_Product_Stock_Alert_Frontend {
+class Woo_Product_Stock_Alert_Frontend {
 
     public function __construct() {
         //enqueue scripts
@@ -22,10 +22,10 @@ class WOO_Product_Stock_Alert_Frontend {
     }
 
     function frontend_scripts() {
-        global $WOO_Product_Stock_Alert;
-        $frontend_script_path = $WOO_Product_Stock_Alert->plugin_url . 'assets/frontend/js/';
+        global $Woo_Product_Stock_Alert;
+        $frontend_script_path = $Woo_Product_Stock_Alert->plugin_url . 'assets/frontend/js/';
         $suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
-        $settings_array = get_woo_form_settings_array();
+        $settings_array = get_form_settings_array();
 
         $border_size = (!empty($settings_array['button_border_size'])) ? $settings_array['button_border_size'].'px' : '1px';
 
@@ -47,7 +47,7 @@ class WOO_Product_Stock_Alert_Frontend {
         if (function_exists('is_product')) {
             if (is_product()) {
                 // Enqueue your frontend javascript from here
-                wp_enqueue_script('stock_alert_frontend_js', $frontend_script_path . 'frontend' . $suffix . '.js', array('jquery'), $WOO_Product_Stock_Alert->version, true);
+                wp_enqueue_script('stock_alert_frontend_js', $frontend_script_path . 'frontend' . $suffix . '.js', array('jquery'), $Woo_Product_Stock_Alert->version, true);
             
                 wp_localize_script('stock_alert_frontend_js', 'woo_stock_alert_script_data', array('ajax_url' => admin_url('admin-ajax.php', 'relative'),
                     'additional_fields' => apply_filters('woocommerce_product_stock_alert_form_additional_fields', []),
@@ -70,19 +70,19 @@ class WOO_Product_Stock_Alert_Frontend {
     }
 
     function frontend_styles() {
-        global $WOO_Product_Stock_Alert;
-        $frontend_style_path = $WOO_Product_Stock_Alert->plugin_url . 'assets/frontend/css/';
+        global $Woo_Product_Stock_Alert;
+        $frontend_style_path = $Woo_Product_Stock_Alert->plugin_url . 'assets/frontend/css/';
         $suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
         if (function_exists('is_product')) {
             if (is_product()) {
                 // Enqueue your frontend stylesheet from here
-                wp_enqueue_style('stock_alert_frontend_css', $frontend_style_path . 'frontend' . $suffix . '.css', array(), $WOO_Product_Stock_Alert->version);
+                wp_enqueue_style('stock_alert_frontend_css', $frontend_style_path . 'frontend' . $suffix . '.css', array(), $Woo_Product_Stock_Alert->version);
             }
         }
     }
 
     function frontend_hover_styles() {
-        $settings_array = get_woo_form_settings_array();
+        $settings_array = get_form_settings_array();
         $button_onhover_style = $border_size = '';
         $border_size = (!empty($settings_array['button_border_size'])) ? $settings_array['button_border_size'].'px' : '1px';
 
@@ -163,13 +163,14 @@ class WOO_Product_Stock_Alert_Frontend {
      * @return string HTML of subscribe form
      */
     public function get_subscribe_form($product, $variation = null) {
-        if(! woo_is_product_outofstock($variation ? $variation->get_id() : $product->get_id(), $variation ? 'variation' : '', true)){
+        global $Woo_Product_Stock_Alert;
+        if(! is_product_outofstock($variation ? $variation->get_id() : $product->get_id(), $variation ? 'variation' : '', true)){
             return "";
         }
         $stock_alert_fields_array = array();
         $stock_alert_fields_html = $user_email = '';
         $separator = apply_filters('woo_fileds_separator', '<br>');
-        $settings_array = get_woo_form_settings_array();
+        $settings_array = get_form_settings_array();
         if (is_user_logged_in()) {
             $current_user = wp_get_current_user();
             $user_email = $current_user->data->user_email;
@@ -238,11 +239,14 @@ class WOO_Product_Stock_Alert_Frontend {
 
         $button_html = '<button style="' . $button_css .'" class="stock_alert_button alert_button_hover" name="alert_button">' . $settings_array['button_text'] . '</button>';
 
-        $interested_person = get_no_subscribed_persons($variation ? $variation->get_id() : $product->get_id(), 'woo_subscribed');
+        $interested_person = get_post_meta($variation ? $variation->get_id() : $product->get_id(), 'no_of_subscribers', true);
+        $interested_person = (isset($interested_person) && $interested_person > 0) ? $interested_person : 0;
 
         $shown_interest_html = '';
         $shown_interest_text = $settings_array['shown_interest_text'];
-        if (get_woo_product_alert_plugin_settings('is_enable_no_interest') && $interested_person != 0 && $shown_interest_text) {
+        $general_tab_settings = get_option('woo_stock_alert_general_tab_settings');
+        $is_enable_no_interest = (isset($general_tab_settings['is_enable_no_interest'])) ? $general_tab_settings['is_enable_no_interest'] : false;
+        if ($is_enable_no_interest && $interested_person != 0 && $shown_interest_text) {
             $shown_interest_text = str_replace("%no_of_subscribed%", $interested_person, $shown_interest_text);
             $shown_interest_html = '<p>' . $shown_interest_text . '</p>';
         }
