@@ -10,22 +10,17 @@
  * WC requires at least: 7.2
  * WC tested up to: 8.3.1
  * Author URI: https://multivendorx.com/
- * Text Domain: woocommerce-product-stock-alert
+ * Text Domain: woocommerce-stock-manager
  * Domain Path: /languages/
  */
 
 if (!defined('ABSPATH')) exit; // Exit if accessed directly
 
-if (!class_exists('WC_Dependencies_Stock_Alert'))
-	require_once 'includes/class-stock-alert-dependencies.php';
-require_once 'includes/stock-alert-core-functions.php';
 require_once 'config.php';
+require_once 'classes/StockManager.php';
 
-/**
- * Declare support for 'High-Performance order storage (COT)' in WooCommerce
- */
 if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option( 'active_plugins')))) {
-    add_action(
+	add_action(
 	'before_woocommerce_init',
 		function () {
 			if (class_exists('\Automattic\WooCommerce\Utilities\FeaturesUtil')) {
@@ -35,16 +30,5 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 	);
 }
 
-add_filter('plugin_action_links_' . plugin_basename( __FILE__ ), 'woo_product_stock_alert_settings');
-
-if (!class_exists('Woo_Product_Stock_Alert') && WC_Dependencies_Stock_Alert::woocommerce_plugin_active_check()) {
-	require_once('classes/class-stock-alert.php');
-	global $Woo_Product_Stock_Alert;
-	$Woo_Product_Stock_Alert = new Woo_Product_Stock_Alert( __FILE__ );
-	// Activation Hooks
-	register_activation_hook( __FILE__, array('Woo_Product_Stock_Alert', 'activate_product_stock_alert'));
-	// Deactivation Hooks
-	register_deactivation_hook( __FILE__, array('Woo_Product_Stock_Alert', 'deactivate_product_stock_alert'));
-} else {
-	add_action( 'admin_notices', 'woocommerce_inactive_notice' );
-}
+global $Woo_Stock_Manager;
+$Woo_Stock_Manager = new Woo_Stock_Manager( __FILE__ );

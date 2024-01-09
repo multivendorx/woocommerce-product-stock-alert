@@ -1418,7 +1418,7 @@ input.rs-picker-toggle-textbox {
         color: $title-color;
 
         .sc-crXcEl {
-          justify-content: start;
+          justify-content: flex-start;
         }
       }
     }
@@ -1657,7 +1657,7 @@ textarea {
   text-align: center;
 }
 
-span.stock-alert-pro-tag {
+span.stock-manager-pro-tag {
   position: absolute;
   right: 0.5rem;
   background: #9f8ab9;
@@ -1683,7 +1683,7 @@ img.subscriber-img {
   width: 100%;
 }
 
-.stock-alert-popup-cross {
+.stock-manager-popup-cross {
   text-align: right;
   cursor: pointer;
 }
@@ -1978,7 +1978,7 @@ input.woo-setting-color-picker {
 }
 
 .woo-settings-input-content {
-  span.stock-alert-pro-tag {
+  span.stock-manager-pro-tag {
     position: absolute;
     left: 4.5rem;
     width: fit-content;
