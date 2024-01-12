@@ -16,8 +16,7 @@
 
 if (!defined('ABSPATH')) exit; // Exit if accessed directly
 
-require_once 'config.php';
-require_once 'classes/StockManager.php';
+require_once 'classes/Autoload.php';
 
 if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option( 'active_plugins')))) {
 	add_action(
@@ -31,4 +30,4 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 }
 
 global $Woo_Stock_Manager;
-$Woo_Stock_Manager = new Woo_Stock_Manager( __FILE__ );
+$Woo_Stock_Manager = new \StockManager\StockManager( __FILE__ );

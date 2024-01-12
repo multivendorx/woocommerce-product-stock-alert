@@ -10,7 +10,7 @@ function file_autoloader($class) {
     // replace namespace separators with directory separators in the relative 
     // class name, append with .php
     $class_path = str_replace('\\', '/', $class);
-    $class_path = str_replace('StockManager', '', $class_path);
+    $class_path = preg_replace('/StockManager/', '', $class_path, 1);
     
     $file =  __DIR__ . '/' . $class_path . '.php';
 

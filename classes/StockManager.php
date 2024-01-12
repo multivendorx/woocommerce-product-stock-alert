@@ -1,6 +1,8 @@
 <?php
 
-class Woo_Stock_Manager {
+namespace StockManager;
+
+class StockManager {
 
     public $plugin_url;
     public $plugin_path;
@@ -17,7 +19,7 @@ class Woo_Stock_Manager {
     public $deprecated_hook_handlers = [];
 
     public function __construct($file) {
-        require_once 'Autoload.php';
+        require_once trailingslashit(dirname($file)) . '/config.php';
 
         $this->file = $file;
         $this->plugin_url = trailingslashit(plugins_url('', $plugin = $file));
@@ -25,8 +27,8 @@ class Woo_Stock_Manager {
         $this->token = WOO_STOCK_MANAGER_PLUGIN_TOKEN;
         $this->version = WOO_STOCK_MANAGER_PLUGIN_VERSION;
 
-        add_filter('plugin_action_links_' . plugin_basename( $file ), [ StockManager\Utill::class, 'stock_manager_settings']);
-        if ( StockManager\Dependencies::woocommerce_plugin_active_check() ) {
+        add_filter('plugin_action_links_' . plugin_basename( $file ), [ \StockManager\Utill::class, 'stock_manager_settings']);
+        if ( \StockManager\Dependencies::woocommerce_plugin_active_check() ) {
             add_action('init', [&$this, 'init'], 0);
             add_filter('woocommerce_email_classes', [&$this, 'setup_email_class']);
             // Activation Hooks
@@ -34,7 +36,7 @@ class Woo_Stock_Manager {
             // Deactivation Hooks
             register_deactivation_hook( $file, [$this, 'deactivate_stock_manager']);
         } else {
-            add_action( 'admin_notices', [ StockManager\Utill::class, 'woocommerce_inactive_notice' ] );
+            add_action( 'admin_notices', [ \StockManager\Utill::class, 'woocommerce_inactive_notice' ] );
         }
     }
     
