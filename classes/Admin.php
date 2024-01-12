@@ -17,7 +17,7 @@ class Admin {
         add_action('manage_product_posts_custom_column', array($this, 'display_subscriber_count_in_custom_column'), 10, 2);
 
         // show number of subscribers for individual product
-        add_action('woocommerce_product_options_inventory_product_data', array($this, 'display_product_subscriber_count_in_metabox'));
+        add_action('woocommerce_product_options_inventory_product_data', array($this, 'display_product_subscriber_count_in_metabox'), 10);
         add_action('woocommerce_product_after_variable_attributes', array($this, 'display_product_subscriber_count_in_variation_metabox'), 10, 3);
 
         // bulk action to remove subscribers
@@ -304,7 +304,7 @@ class Admin {
     /**
      * Stock Manager news on Product edit page (simple)
      */
-    function display_product_subscriber_count_in_metabox() {
+    function display_product_subscriber_count_in_metabox($product) {
         global $post;
 
         if(\StockManager\Subscriber::is_product_outofstock($post->ID)){

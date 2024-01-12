@@ -178,11 +178,11 @@ class Ajax {
 	 * @return never
 	 */
 	function get_variation_box_ajax() {
+		global $Woo_Stock_Manager;
 		if (! check_ajax_referer('stock-manager-security-nonce', 'nonce', false)) {
 			wp_send_json_error( 'Invalid security token sent.' );
 			wp_die();
 		}
-		global $Woo_Stock_Manager;
 		$product_id = isset($_POST['product_id']) ? absint($_POST['product_id']) : '';
 		$child_id = isset($_POST['variation_id']) ? absint($_POST['variation_id']) : '';
 		$product = wc_get_product( $product_id );
