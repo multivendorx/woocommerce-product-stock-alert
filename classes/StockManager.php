@@ -6,7 +6,6 @@ class Woo_Stock_Manager {
     public $plugin_path;
     public $version;
     public $token;
-    public $subscriber;
     public $frontend;
     public $ajax;
     public $restapi;
@@ -126,7 +125,6 @@ class Woo_Stock_Manager {
      * Activation function on register activation hook
      */
     public static function activate_stock_manager() {
-        global $Woo_Stock_Manager;
         update_option('woo_stock_manager_installed', 1);
         new \StockManager\Install();
     }

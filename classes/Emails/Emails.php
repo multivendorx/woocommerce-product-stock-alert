@@ -18,7 +18,7 @@ if ( ! class_exists( 'Emails' ) ) :
  */
 class Emails extends \WC_Email {
 	
-	public $product_id;
+	public $product;
 
 	/**
 	 * Constructor
@@ -49,11 +49,11 @@ class Emails extends \WC_Email {
 	 * @access public
 	 * @return void
 	 */
-	function trigger($recipient, $product_id) {
+	function trigger($recipient, $product) {
 
 		$this->customer_email = $recipient;
 		$this->recipient = $recipient;
-		$this->product_id = $product_id;
+		$this->product = $product;
 
 		if (apply_filters('woo_product_backin_stock_send_admin', false)) {
 			$this->recipient .= ',' . get_option('admin_email');
@@ -95,7 +95,7 @@ class Emails extends \WC_Email {
 		ob_start();
 		wc_get_template($this->template_html, array(
 			'email_heading' => $this->get_heading(),
-			'product_id' => $this->product_id,
+			'product' => $this->product,
 			'customer_email' => $this->customer_email,
 			'sent_to_admin' => false,
 			'plain_text' => false,
@@ -114,7 +114,7 @@ class Emails extends \WC_Email {
 		ob_start();
 		wc_get_template($this->template_plain, array(
 			'email_heading' => $this->get_heading(),
-			'product_id' => $this->product_id,
+			'product' => $this->product,
 			'customer_email' => $this->customer_email,
 			'sent_to_admin' => false,
 			'plain_text' => true

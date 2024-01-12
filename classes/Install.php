@@ -34,20 +34,25 @@ class Install {
         $current_version = $Woo_Stock_Manager->version;
 
         if($previous_version <= "2.2.0") {
-            $all_products = wc_get_products([
-                'status'    => 'publish',
-                'limit'     => -1, 
+            $all_product_ids = get_posts([
+                'post_type'     => 'product',
+                'post_status'   => 'publish',
+                'fields'        => 'ids',
+	            'meta_query'    => [
+                    [
+                        'key'     => '_product_subscriber',
+                        'compare' => 'EXISTS',
+                    ],
+                ],
             ]);
     
-            foreach($all_products as $key => $product) {
-                $current_product_ids = \StockManager\Subscriber::get_related_product($product);
+            foreach($all_product_ids as $product_id) {
+                $current_product_ids = \StockManager\Subscriber::get_related_product(wc_get_product($product_id));
                 foreach($current_product_ids as $product_id) {
                     $product_subscribers = get_post_meta($product_id, '_product_subscriber', true);
                     if($product_subscribers && !empty($product_subscribers)) {
                         foreach($product_subscribers as $subscriber_email) {
-                            if(! \StockManager\Subscriber::is_already_subscribed($subscriber_email, $product_id)) {
-                                \StockManager\Subscriber::subscribe_user($subscriber_email, $product_id);
-                            }
+                            \StockManager\Subscriber::subscribe_user($subscriber_email, $product_id);
                         }
                     }
                     delete_post_meta($product_id, '_product_subscriber');

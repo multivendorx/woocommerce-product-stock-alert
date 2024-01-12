@@ -56,7 +56,7 @@ class RestAPI
         foreach ($response as $tab_name => $tab_content) {
             $response[$tab_name]['databases_value'] = get_option('woo_stock_manager_' . $tab_name . '_tab_settings');
         }
-        $response = json_encode($response, JSON_PRETTY_PRINT);
+        $response = wp_json_encode($response, JSON_PRETTY_PRINT);
         return rest_ensure_response($response);
     }
 

@@ -18,7 +18,7 @@ if ( ! class_exists( 'AdminEmail' ) ) :
  */
 class AdminEmail extends \WC_Email {
 	
-	public $product_id;
+	public $product;
 	public $customer_email;
 
 	/**
@@ -50,10 +50,10 @@ class AdminEmail extends \WC_Email {
 	 * @access public
 	 * @return void
 	 */
-	function trigger($recipient, $product_id, $customer_email) {
+	function trigger($recipient, $product, $customer_email) {
 		
 		$this->recipient = $recipient;
-		$this->product_id = $product_id;
+		$this->product = $product;
 		$this->customer_email = $customer_email;
 		
 		if (!$this->is_enabled() || ! $this->get_recipient()) {
@@ -93,7 +93,7 @@ class AdminEmail extends \WC_Email {
 		ob_start();
 		wc_get_template($this->template_html, array(
 			'email_heading' => $this->get_heading(),
-			'product_id' => $this->product_id,
+			'product' => $this->product,
 			'customer_email' => $this->customer_email,
 			'sent_to_admin' => true,
 			'plain_text' => false,
@@ -112,7 +112,7 @@ class AdminEmail extends \WC_Email {
 		ob_start();
 		wc_get_template($this->template_plain, array(
 			'email_heading' => $this->get_heading(),
-			'product_id' => $this->product_id,
+			'product' => $this->product,
 			'customer_email' => $this->customer_email,
 			'sent_to_admin' => true,
 			'plain_text' => true

@@ -35,7 +35,7 @@ class Ajax {
         $recaptcha_response = isset($_POST['captcha_response']) ? sanitize_text_field($_POST['captcha_response']) : '';
         $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
 
-        $recaptcha = file_get_contents($recaptcha_url . '?secret=' . $recaptcha_secret . '&response=' . $recaptcha_response);
+        $recaptcha =  wp_remote_get($recaptcha_url . '?secret=' . $recaptcha_secret . '&response=' . $recaptcha_response);
         $recaptcha = json_decode($recaptcha);
         if (!$recaptcha->success || $recaptcha->score < 0.5) {
             echo 0;
@@ -123,7 +123,6 @@ class Ajax {
 			wp_send_json_error( 'Invalid security token sent.' );
 			wp_die();
 		}
-		global $Woo_Stock_Manager;
 		$customer_email = isset($_POST['customer_email']) ? sanitize_email($_POST['customer_email']) : '';
 		$product_id = isset($_POST['product_id']) ? absint($_POST['product_id']) : '';
 		$variation_id = isset($_POST['var_id']) ? absint($_POST['var_id']) : 0;

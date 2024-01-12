@@ -8,13 +8,10 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-global $Woo_Stock_Manager;
-
 do_action( 'woocommerce_email_header', $email_heading, $email ); ?>
 
 <p><?php printf( __( "Hi there. A customer has subscribed a product on your shop. Product details are shown below for your reference:", 'woocommerce-stock-manager' ) ); ?></p>
 <?php
-$product_data = \StockManager\Utill::get_product_data($product_id);
 $is_prices_including_tax = get_option( 'woocommerce_prices_include_tax' );
 ?>
 <h3><?php esc_html_e( 'Product Details', 'woocommerce-stock-manager' ); ?></h3>
@@ -27,12 +24,12 @@ $is_prices_including_tax = get_option( 'woocommerce_prices_include_tax' );
 	</thead>
 	<tbody>
 		<tr>
-			<th scope="col" style="text-align:left; border: 1px solid #eee;"><?php echo esc_html( $product_data['name'] ); ?>
+			<th scope="col" style="text-align:left; border: 1px solid #eee;"><?php echo esc_html( $product->get_name() ); ?>
 			
 			</th>
 			<th scope="col" style="text-align:left; border: 1px solid #eee;">
 				<?php 
-					echo wp_kses_post( $product_data['price']); 
+					echo wp_kses_post( wc_price( wc_get_price_to_display( $product_obj ) ) ); 
 					echo ( isset( $is_prices_including_tax ) && ($is_prices_including_tax != "yes" )) ? WC()->countries->ex_tax_or_vat() : WC()->countries->inc_tax_or_vat(); 
 				?>
 			</th>
@@ -40,7 +37,7 @@ $is_prices_including_tax = get_option( 'woocommerce_prices_include_tax' );
 	</tbody>
 </table>
 
-<p style="margin-top: 15px !important;"><?php printf( __( "Following is the product link : ", 'woocommerce-stock-manager' ) ); ?><a href="<?php echo esc_url($product_data['link']); ?>"><?php echo esc_html(wp_strip_all_tags($product_data['name'])); ?></a></p>
+<p style="margin-top: 15px !important;"><?php printf( __( "Following is the product link : ", 'woocommerce-stock-manager' ) ); ?><a href="<?php echo esc_url( $product->get_permalink() ); ?>"><?php echo esc_html(wp_strip_all_tags($product_data['name'])); ?></a></p>
 
 <h3><?php esc_html_e( 'Customer Details', 'woocommerce-stock-manager' ); ?></h3>
 <p>

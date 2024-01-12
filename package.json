@@ -1,7 +1,7 @@
 {
-  "name": "woocommerce-product-stock-alert",
-  "version": "1.0.0",
-  "description": "=== WooCommerce Product Stock Alert ===",
+  "name": "woocommerce-product-stock-manager",
+  "version": "2.0.0",
+  "description": "=== WooCommerce Product Stock Manager ===",
   "main": "index.js",
   "directories": {
     "lib": "lib"

@@ -250,8 +250,8 @@ class FrontEnd {
             $button_css .= "border: " . $border_size . " solid " . $settings_array['button_border_color'] . ";";
         if (!empty($settings_array['button_font_size']))
             $button_css .= "font-size:" . $settings_array['button_font_size'] . "px;";
-        if (!empty($settings_array['button_border_redious']))
-            $button_css .= "border-radius:" . $settings_array['button_border_redious'] . "px;";
+        if (!empty($settings_array['button_border_radious']))
+            $button_css .= "border-radius:" . $settings_array['button_border_radious'] . "px;";
 
         $button_html = '<button style="' . $button_css .'" class="stock_manager_button alert_button_hover" name="alert_button">' . $settings_array['button_text'] . '</button>';
 

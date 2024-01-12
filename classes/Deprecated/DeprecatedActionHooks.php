@@ -5,9 +5,7 @@ namespace StockManager\Deprecated;
 /**
  * Deprecated action hooks
  *
- * @package MultiVendorX\Abstracts
- * @since   4.0.0
- * @version 4.0.0
+ * @package Stock Manager
  */
 
 defined( 'ABSPATH' ) || exit;

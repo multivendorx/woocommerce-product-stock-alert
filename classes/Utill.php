@@ -67,18 +67,4 @@ class Utill {
             'ban_email_address_text'            => $email_tab_settings['ban_email_address_text'],
         ];
     }
-
-    /**
-     * Get product related basic data (link, name, price) in a array.
-     * @param int $product_id
-     * @return array
-     */
-    public static function get_product_data($product_id) {
-        $product_data = array();
-        $product_obj = wc_get_product( $product_id );
-        $product_data['link'] = $product_obj->get_permalink();
-        $product_data['name'] = $product_obj ? $product_obj->get_name() : '';
-        $product_data['price'] = $product_obj ? wc_price( wc_get_price_to_display( $product_obj ) ) . '  ' : '';
-        return apply_filters('woo_stock_manager_product_data', $product_data, $product_id);
-    }
 }

@@ -7,21 +7,17 @@
  */
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-global $Woo_Stock_Manager;
-
 echo $email_heading . "\n\n";
 
 echo sprintf( __( "Hi there. You have subscribed a product. Your subscribed product is available now. Product details are shown below for your reference:", 'woocommerce-stock-manager' ) ) . "\n\n";
 
 echo "\n****************************************************\n\n";
 
-$product_data = \StockManager\Utill::get_product_data($product_id);
+echo "\n Product Name : " . $product->get_name() ;
 
-echo "\n Product Name : " . $product_data['name'];
+echo "\n\n Product Price : " .  wc_price( wc_get_price_to_display( $product_obj ) ) ;
 
-echo "\n\n Product Price : " . $product_data['price'];
-
-echo "\n\n Product link : " . $product_data['link'];
+echo "\n\n Product link : " . $product->get_permalink() ;
 
 echo "\n\n\n****************************************************\n\n";
 

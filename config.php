@@ -1,5 +1,5 @@
 <?php
-define('WOO_STOCK_MANAGER_PLUGIN_TOKEN', 'woo-stock-manager');
+define('WOO_STOCK_MANAGER_PLUGIN_TOKEN', 'woocommerce-stock-manager');
 
 define('WOO_STOCK_MANAGER_TEXT_DOMAIN', 'woocommerce-stock-manager');
 

@@ -18,7 +18,7 @@ if ( ! class_exists( 'SubscriberConfirmationEmail' ) ) :
  */
 class SubscriberConfirmationEmail extends \WC_Email {
 	
-	public $product_id;
+	public $product;
 
 	/**
 	 * Constructor
@@ -49,10 +49,10 @@ class SubscriberConfirmationEmail extends \WC_Email {
 	 * @access public
 	 * @return void
 	 */
-	function trigger($recipient, $product_id) {
+	function trigger($recipient, $product) {
 		
 		$this->recipient = $recipient;
-		$this->product_id = $product_id;
+		$this->product = $product;
 		
 		if (!$this->is_enabled() || ! $this->get_recipient()) {
 			return;
@@ -91,7 +91,7 @@ class SubscriberConfirmationEmail extends \WC_Email {
 		ob_start();
 		wc_get_template($this->template_html, array(
 			'email_heading' => $this->get_heading(),
-			'product_id' => $this->product_id,
+			'product' => $this->product,
 			'customer_email' => $this->recipient,
 			'sent_to_admin' => false,
 			'plain_text' => false,
@@ -110,7 +110,7 @@ class SubscriberConfirmationEmail extends \WC_Email {
 		ob_start();
 		wc_get_template($this->template_plain, array(
 			'email_heading' => $this->get_heading(),
-			'product_id' => $this->product_id,
+			'product' => $this->product,
 			'customer_email' => $this->recipient,
 			'sent_to_admin' => false,
 			'plain_text' => true

@@ -6,16 +6,16 @@ if (!defined('ABSPATH')) exit;
 
 class Subscriber {
     public function __construct() {
-        add_action('woo_stock_manager_start_notification_cron_job', array('Woo_Stock_Manager_Subscriber', 'send_instock_notification_corn'));
-        add_action('woocommerce_update_product', array('Woo_Stock_Manager_Subscriber', 'send_instock_notification'), 10, 2);
+        add_action('woo_stock_manager_start_notification_cron_job', [$this, 'send_instock_notification_corn']);
+        add_action('woocommerce_update_product', [$this, 'send_instock_notification'], 10, 2);
     }
-
+    
     /**
      * Send instock notification on every product's subscriber if product is instock.
      * It will run every hour through corn job.
      * @return void
      */
-    static function send_instock_notification_corn() {
+    function send_instock_notification_corn() {
         $posts = get_posts([
             'post_type' => 'product',
             'post_status' => 'publish',
@@ -27,17 +27,17 @@ class Subscriber {
             }
         }
     }
-
+    
     /**
      * Send instock notification of a product's all subscribers on 'woocommerce_update_product' hook
      * @param int $product_id
      * @param object $product
      * @return void
      */
-    static function send_instock_notification($product_id, $product) {
+    function send_instock_notification($product_id, $product) {
         $related_products = self::get_related_product($product);
         foreach($related_products as $product_id){
-            self::notify_all_product_subscribers($product_id);
+            $this->notify_all_product_subscribers($product_id);
         }
     }
 
@@ -46,7 +46,7 @@ class Subscriber {
      * @param int $product_id
      * @return void
      */
-    static function notify_all_product_subscribers($product_id) {
+    function notify_all_product_subscribers($product_id) {
         if(! $product_id) {
             return;
         }
@@ -60,7 +60,7 @@ class Subscriber {
                 if (isset($product_subscribers) && !empty($product_subscribers)) {
                     $email = WC()->mailer()->emails['WC_Email_Stock_Manager'];
                     foreach ($product_subscribers as $subscribe_id => $to) {
-                        $email->trigger($to, $product_id);
+                        $email->trigger($to, wc_get_product($product_id));
                         self::update_subscriber($subscribe_id, 'woo_mailsent');
                     }
                     delete_post_meta($product_id, 'no_of_subscribers');
@@ -191,21 +191,21 @@ class Subscriber {
      * @param string $customer_email
      * @return void
      */
-    static function insert_subscriber_email_trigger($product_id, $customer_email) {
+    static function insert_subscriber_email_trigger($product, $customer_email) {
         $admin_mail = WC()->mailer()->emails['WC_Admin_Email_Stock_Manager'];
         $cust_mail = WC()->mailer()->emails['WC_Subscriber_Confirmation_Email_Stock_Manager'];
         $general_tab_settings = get_option('woo_stock_manager_general_tab_settings');
         $additional_email = (isset($general_tab_settings['additional_alert_email'])) ? $general_tab_settings['additional_alert_email'] : '';
 
         if (function_exists('get_mvx_product_vendors')) {
-            $vendor = get_mvx_product_vendors($product_id);
+            $vendor = get_mvx_product_vendors(wc_get_product($product)->get_id());
             if ($vendor && apply_filters( 'woo_stock_manager_add_vendor', true)) {
                 $additional_email .= ','. sanitize_email($vendor->user_data->user_email);  
             }
         }
         if (!empty($additional_email))
-            $admin_mail->trigger($additional_email, $product_id, $customer_email);
-        $cust_mail->trigger($customer_email, $product_id);
+            $admin_mail->trigger($additional_email, $product, $customer_email);
+        $cust_mail->trigger($customer_email, $product);
     }
 
     /**
@@ -248,9 +248,9 @@ class Subscriber {
      */
     static function get_related_product($product) {
         $product_ids = [];
-        switch($product->get_type()){
+        switch($product->get_type()) {
             case 'variable' :
-                if($product->has_child()){
+                if($product->has_child()) {
                     $product_ids = $product->get_children();
                 } else {
                     $product_ids[] = $product->get_id();
