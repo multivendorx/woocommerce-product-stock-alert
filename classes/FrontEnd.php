@@ -32,7 +32,7 @@ class FrontEnd {
         $frontend_script_path = $Woo_Stock_Manager->plugin_url . 'assets/frontend/js/';
         $suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
         $suffix = ''; /// Should be removed.
-        $settings_array = \StockManager\Utill::get_form_settings_array();
+        $settings_array = Utill::get_form_settings_array();
 
         $border_size = (!empty($settings_array['button_border_size'])) ? $settings_array['button_border_size'].'px' : '1px';
 
@@ -99,7 +99,7 @@ class FrontEnd {
      * @return void
      */
     function frontend_hover_styles() {
-        $settings_array = \StockManager\Utill::get_form_settings_array();
+        $settings_array = Utill::get_form_settings_array();
         $button_onhover_style = $border_size = '';
         $border_size = (!empty($settings_array['button_border_size'])) ? $settings_array['button_border_size'].'px' : '1px';
 
@@ -180,13 +180,13 @@ class FrontEnd {
      * @return string HTML of subscribe form
      */
     public function get_subscribe_form($product, $variation = null) {
-        if(! \StockManager\Subscriber::is_product_outofstock($variation ? $variation->get_id() : $product->get_id(), $variation ? 'variation' : '', true)){
+        if(! Subscriber::is_product_outofstock($variation ? $variation->get_id() : $product->get_id(), $variation ? 'variation' : '', true)){
             return "";
         }
         $stock_manager_fields_array = array();
         $stock_manager_fields_html = $user_email = '';
         $separator = apply_filters('woo_fileds_separator', '<br>');
-        $settings_array = \StockManager\Utill::get_form_settings_array();
+        $settings_array = Utill::get_form_settings_array();
         if (is_user_logged_in()) {
             $current_user = wp_get_current_user();
             $user_email = $current_user->data->user_email;

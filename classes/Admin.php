@@ -120,11 +120,11 @@ class Admin {
             return $redirect_to;
         }
         foreach ($post_ids as $post_id) {
-            $product_ids = \StockManager\Subscriber::get_related_product(wc_get_product($post_id));
+            $product_ids = Subscriber::get_related_product(wc_get_product($post_id));
             foreach ($product_ids as $product_id) {
-                $emails = \StockManager\Subscriber::get_product_subscribers_email($product_id);
+                $emails = Subscriber::get_product_subscribers_email($product_id);
                 foreach ($emails as $alert_id => $to) {
-                    \StockManager\Subscriber::update_subscriber($alert_id, 'woo_unsubscribed');
+                    Subscriber::update_subscriber($alert_id, 'woo_unsubscribed');
                 }
                 delete_post_meta($product_id, 'no_of_subscribers');
             }
@@ -276,7 +276,7 @@ class Admin {
                 'setting_string'            => $setting_string,
                 'banner_show'               => get_option('woocommerce_stock_manager_pro_banner_hide') ? false : true,
                 'default_massages_fields'   => $woo_admin_massages_fields,
-                'default_massages'          => \StockManager\Utill::get_form_settings_array()
+                'default_massages'          => Utill::get_form_settings_array()
               ]));
             wp_enqueue_style('woo_stockmanager_style', $Woo_Stock_Manager->plugin_url . 'build/index.css');
             wp_enqueue_style('woo_admin_rsuite_css', $Woo_Stock_Manager->plugin_url . 'assets/admin/css/rsuite-default' . '.min' . '.css', array(), $Woo_Stock_Manager->version);
@@ -307,7 +307,7 @@ class Admin {
     function display_product_subscriber_count_in_metabox($product) {
         global $post;
 
-        if(\StockManager\Subscriber::is_product_outofstock($post->ID)){
+        if(Subscriber::is_product_outofstock($post->ID)){
             $no_of_subscriber = get_post_meta($post->ID, 'no_of_subscribers', true);
             ?>
             <p class="form-field _stock_field">
@@ -322,7 +322,7 @@ class Admin {
      * Stock Manager news on Product edit page (variable)
      */
     function display_product_subscriber_count_in_variation_metabox($loop, $variation_data, $variation) {
-        if (\StockManager\Subscriber::is_product_outofstock($variation->ID, 'variation')) {
+        if (Subscriber::is_product_outofstock($variation->ID, 'variation')) {
             $product_subscriber = get_post_meta($variation->ID, 'no_of_subscribers', true);
             ?>
             <p class="form-row form-row-full interested_person">

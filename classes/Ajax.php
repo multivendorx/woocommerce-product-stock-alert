@@ -57,9 +57,9 @@ class Ajax {
             'numberposts' => -1
         ]);
 		foreach($products as $product) {
-			$product_ids = \StockManager\Subscriber::get_related_product(wc_get_product($product->ID));
+			$product_ids = Subscriber::get_related_product(wc_get_product($product->ID));
             foreach ($product_ids as $product_id) {
-				$subscribers = \StockManager\Subscriber::get_product_subscribers_email($product_id);
+				$subscribers = Subscriber::get_product_subscribers_email($product_id);
                 if ($subscribers && !empty($subscribers)) {
 					$get_subscribed_user[$product_id] = $subscribers;
                 }
@@ -130,9 +130,9 @@ class Ajax {
 		if ($product_id && !empty($product_id) && !empty($customer_email)) {
 			$product = wc_get_product($product_id);
 			if ($product && $product->is_type( 'variable' ) && $variation_id > 0) {
-				$success = \StockManager\Subscriber::unsubscribe_user($variation_id, $customer_email);
+				$success = Subscriber::unsubscribe_user($variation_id, $customer_email);
 			} else {
-				$success = \StockManager\Subscriber::unsubscribe_user($product_id, $customer_email);
+				$success = Subscriber::unsubscribe_user($product_id, $customer_email);
 			}
 		}
 		echo $success;
@@ -157,15 +157,15 @@ class Ajax {
 			$do_complete_additional_task = apply_filters( 'woo_stock_manager_do_complete_additional_task', false );
         	$is_accept_email_address = apply_filters( 'woo_stock_manager_is_accept_email_address', false );
         
-			if (\StockManager\Subscriber::is_already_subscribed($customer_email, $product_id)) {
+			if (Subscriber::is_already_subscribed($customer_email, $product_id)) {
 				$status = '/*?%already_registered%?*/';
 			} else if ($do_complete_additional_task) {
 				$status = apply_filters( 'woo_stock_manager_new_subscriber_added', true, $customer_email, $product_id );
 			} else if ($is_accept_email_address) {
 				$status = apply_filters( 'woo_stock_manager_accept_email', true, $customer_email, $product_id );
 			} else {
-				\StockManager\Subscriber::subscribe_user($customer_email, $product_id);
-				\StockManager\Subscriber::insert_subscriber_email_trigger($product_id, $customer_email);
+				Subscriber::subscribe_user($customer_email, $product_id);
+				Subscriber::insert_subscriber_email_trigger($product_id, $customer_email);
 				$status = true;
 			}
 		}

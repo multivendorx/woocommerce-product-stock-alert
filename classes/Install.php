@@ -92,12 +92,12 @@ class Install {
             
             // Database migration for subscriber data before version 2.3.0
             foreach($all_product_ids as $product_id) {
-                $current_product_ids = \StockManager\Subscriber::get_related_product(wc_get_product($product_id));
+                $current_product_ids = Subscriber::get_related_product(wc_get_product($product_id));
                 foreach($current_product_ids as $product_id) {
                     $product_subscribers = get_post_meta($product_id, '_product_subscriber', true);
                     if($product_subscribers && !empty($product_subscribers)) {
                         foreach($product_subscribers as $subscriber_email) {
-                            \StockManager\Subscriber::subscribe_user($subscriber_email, $product_id);
+                            Subscriber::subscribe_user($subscriber_email, $product_id);
                         }
                     }
                     delete_post_meta($product_id, '_product_subscriber');

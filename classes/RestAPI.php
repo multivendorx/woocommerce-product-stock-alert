@@ -52,7 +52,7 @@ class RestAPI
     }
 
     public function fetch_admin_tabs() {
-        $response = \StockManager\AdminSettingTab::get();
+        $response = AdminSettingTab::get();
         foreach ($response as $tab_name => $tab_content) {
             $response[$tab_name]['databases_value'] = get_option('woo_stock_manager_' . $tab_name . '_tab_settings');
         }

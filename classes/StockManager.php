@@ -27,8 +27,8 @@ class StockManager {
         $this->token = WOO_STOCK_MANAGER_PLUGIN_TOKEN;
         $this->version = WOO_STOCK_MANAGER_PLUGIN_VERSION;
 
-        add_filter('plugin_action_links_' . plugin_basename( $file ), [ \StockManager\Utill::class, 'stock_manager_settings']);
-        if ( \StockManager\Dependencies::woocommerce_plugin_active_check() ) {
+        add_filter('plugin_action_links_' . plugin_basename( $file ), [ Utill::class, 'stock_manager_settings']);
+        if ( Dependencies::woocommerce_plugin_active_check() ) {
             add_action('init', [&$this, 'init'], 0);
             add_filter('woocommerce_email_classes', [&$this, 'setup_email_class']);
             // Activation Hooks
@@ -36,7 +36,7 @@ class StockManager {
             // Deactivation Hooks
             register_deactivation_hook( $file, [$this, 'deactivate_stock_manager']);
         } else {
-            add_action( 'admin_notices', [ \StockManager\Utill::class, 'woocommerce_inactive_notice' ] );
+            add_action( 'admin_notices', [ Utill::class, 'woocommerce_inactive_notice' ] );
         }
     }
     
@@ -47,26 +47,26 @@ class StockManager {
         // Init Text Domain
         $this->load_plugin_textdomain();
 
-        new \StockManager\Subscriber();
+        new Subscriber();
 
-        $this->restapi = new \StockManager\RestAPI();
+        $this->restapi = new RestAPI();
 
         // Init ajax
         if (defined('DOING_AJAX')) {
-            $this->ajax = new \StockManager\Ajax();
+            $this->ajax = new Ajax();
         }
         
         if (is_admin()) {
-            $this->admin = new \StockManager\Admin();
+            $this->admin = new Admin();
         }
 
         if (!is_admin() || defined('DOING_AJAX')) {
-            $this->frontend = new \StockManager\Frontend();
-            $this->shortcode = new \StockManager\Shortcode();
+            $this->frontend = new FrontEnd();
+            $this->shortcode = new Shortcode();
         }
 
-        $this->deprecated_hook_handlers['filters'] = new \StockManager\Deprecated\DeprecatedFilterHooks();
-        $this->deprecated_hook_handlers['actions'] = new \StockManager\Deprecated\DeprecatedActionHooks();
+        $this->deprecated_hook_handlers['filters'] = new Deprecated\DeprecatedFilterHooks();
+        $this->deprecated_hook_handlers['actions'] = new Deprecated\DeprecatedActionHooks();
 
         register_post_status('woo_mailsent', array(
             'label' => _x('Mail Sent', 'woostockalert', 'woocommerce-stock-manager'),
@@ -128,7 +128,7 @@ class StockManager {
      */
     public static function activate_stock_manager() {
         update_option('woo_stock_manager_installed', 1);
-        new \StockManager\Install();
+        new Install();
     }
 
     /**
@@ -147,9 +147,9 @@ class StockManager {
      * @return void
      */
     function setup_email_class($emails) {
-        $emails['WC_Admin_Email_Stock_Manager'] = new \StockManager\Emails\AdminEmail();
-        $emails['WC_Subscriber_Confirmation_Email_Stock_Manager'] = new \StockManager\Emails\SubscriberConfirmationEmail();
-        $emails['WC_Email_Stock_Manager'] = new \StockManager\Emails\Emails();
+        $emails['WC_Admin_Email_Stock_Manager'] = new Emails\AdminEmail();
+        $emails['WC_Subscriber_Confirmation_Email_Stock_Manager'] = new Emails\SubscriberConfirmationEmail();
+        $emails['WC_Email_Stock_Manager'] = new Emails\Emails();
 
         return $emails;
     }

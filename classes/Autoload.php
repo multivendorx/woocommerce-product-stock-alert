@@ -11,7 +11,7 @@ function file_autoloader($class) {
     // class name, append with .php
     $class_path = preg_replace('/StockManager/', '', $class, 1);
     $file = plugin_dir_path(__FILE__) . DIRECTORY_SEPARATOR . $class_path . '.php';
-    $file = str_replace('\\', DIRECTORY_SEPARATOR, $file);
+    $file = str_replace('\\', '/', $file);
     
     // if the file exists, require it
     if (file_exists($file)) {

@@ -16,7 +16,7 @@
 
 if (!defined('ABSPATH')) exit; // Exit if accessed directly
 
-require_once 'classes/Autoload.php';
+require_once __DIR__ . '/vendor/autoload.php';
 
 if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option( 'active_plugins')))) {
 	add_action(
