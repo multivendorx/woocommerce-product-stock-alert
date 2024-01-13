@@ -10,6 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 do_action( 'woocommerce_email_header', $email_heading, $email ); ?>
 
+
 <p><?php printf( __( "Hi there. A customer has subscribed a product on your shop. Product details are shown below for your reference:", 'woocommerce-stock-manager' ) ); ?></p>
 <?php
 $is_prices_including_tax = get_option( 'woocommerce_prices_include_tax' );
@@ -29,7 +30,7 @@ $is_prices_including_tax = get_option( 'woocommerce_prices_include_tax' );
 			</th>
 			<th scope="col" style="text-align:left; border: 1px solid #eee;">
 				<?php 
-					echo wp_kses_post( wc_price( wc_get_price_to_display( $product_obj ) ) ); 
+					echo wp_kses_post( wc_price( wc_get_price_to_display( $product ) ) ); 
 					echo ( isset( $is_prices_including_tax ) && ($is_prices_including_tax != "yes" )) ? WC()->countries->ex_tax_or_vat() : WC()->countries->inc_tax_or_vat(); 
 				?>
 			</th>

@@ -60,7 +60,7 @@ class Subscriber {
                 if (isset($product_subscribers) && !empty($product_subscribers)) {
                     $email = WC()->mailer()->emails['WC_Email_Stock_Manager'];
                     foreach ($product_subscribers as $subscribe_id => $to) {
-                        $email->trigger($to, wc_get_product($product_id));
+                        $email->trigger($to, $product_object);
                         self::update_subscriber($subscribe_id, 'woo_mailsent');
                     }
                     delete_post_meta($product_id, 'no_of_subscribers');

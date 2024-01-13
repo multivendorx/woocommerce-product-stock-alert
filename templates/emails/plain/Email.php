@@ -15,7 +15,7 @@ echo "\n****************************************************\n\n";
 
 echo "\n Product Name : " . $product->get_name() ;
 
-echo "\n\n Product Price : " .  wc_price( wc_get_price_to_display( $product_obj ) ) ;
+echo "\n\n Product Price : " .  wc_price( wc_get_price_to_display( $product ) ) ;
 
 echo "\n\n Product link : " . $product->get_permalink() ;
 

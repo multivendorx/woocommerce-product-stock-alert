@@ -165,7 +165,7 @@ class Ajax {
 				$status = apply_filters( 'woo_stock_manager_accept_email', true, $customer_email, $product_id );
 			} else {
 				Subscriber::subscribe_user($customer_email, $product_id);
-				Subscriber::insert_subscriber_email_trigger($product_id, $customer_email);
+				Subscriber::insert_subscriber_email_trigger(wc_get_product($product_id), $customer_email);
 				$status = true;
 			}
 		}
