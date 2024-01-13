@@ -1,6 +1,6 @@
 === Product Stock Manager & Notifier for WooCommerce ===
 
-Contributors: wcmp, abhirup23
+Contributors: wcmp
 Tags: wordpress, woocommerce, e-commerce, shop, stock, out of stock, in stock, stock alert, alert email, stock alert email
 Requires at least: 5.4
 Tested up to: 6.4.2
