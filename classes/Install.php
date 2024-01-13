@@ -34,9 +34,9 @@ class Install {
         $previous_version = get_option("woo_stock_manager_version");
 
         // Used to check the plugin version before 2.1.0
-        $dc_was_installed = get_option('dc_product_stock_alert_installed');
+        $dc_was_installed = get_option('dc_product_stock_alert_activate');
         // Used to check the plugin version before 2.3.0
-        $woo_was_installed = get_option('woo_product_stock_alert_installed');
+        $woo_was_installed = get_option('woo_product_stock_alert_activate');
 
         // Default messages for settings array.
         // Those will modify if previous settings was set.
@@ -173,8 +173,8 @@ class Install {
 
             delete_option('dc_product_stock_alert_installed');
             delete_option('woo_product_stock_alert_installed');
-            delete_option('dc_product_stock_alert_installed');
-            delete_option('dc_product_stock_alert_installed');
+            delete_option('dc_product_stock_alert_activate');
+            delete_option('woo_product_stock_alert_activate');
         }
 
         update_option('woo_stock_manager_general_tab_settings', $general_settings);
