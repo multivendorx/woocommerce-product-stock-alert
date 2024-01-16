@@ -304,7 +304,7 @@ class Admin {
     /**
      * Stock Manager news on Product edit page (simple)
      */
-    function display_product_subscriber_count_in_metabox($product) {
+    function display_product_subscriber_count_in_metabox() {
         global $post;
 
         if(Subscriber::is_product_outofstock($post->ID)){

@@ -203,6 +203,7 @@ class Subscriber {
                 $additional_email .= ','. sanitize_email($vendor->user_data->user_email);  
             }
         }
+        
         if (!empty($additional_email))
             $admin_mail->trigger($additional_email, $product, $customer_email);
         $cust_mail->trigger($customer_email, $product);
