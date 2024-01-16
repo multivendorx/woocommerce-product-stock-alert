@@ -137,7 +137,14 @@ Manual installation method requires downloading the [Product Stock Manager & Not
 
 == Changelog ==
 
-= 2.3.0 - 2023-12-04- =
+= 2.4.0 - 2024-01-16 =
+* Added - Coding structure updated. 
+* Dev - Class concept implemented.
+* Added - WordPress 6.4.2 compatibility.
+* Added - WooCommerce 8.4.0 compatibility.
+* Updated - Language files.
+
+= 2.3.0 - 2023-12-04 =
 * Added - WooCommerce 8.3.1 compatibility.
 * Fixed - Subscriber Number Mismatch Issue during Database Migration.
 * Updated - Language files.
