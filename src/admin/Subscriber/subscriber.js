@@ -69,7 +69,7 @@ class Subscriber extends Component {
 
 		axios
 		.get(
-			`${stockManagerAppLocalizer.apiUrl}/woo_stockalert_pro/v1/show_subscribe_from_status_list`,
+			`${stockManagerAppLocalizer.apiUrl}/woo_stockmanager_pro/v1/show_subscribe_from_status_list`,
 			{
 				params: { date_range: e },
 			}
@@ -89,7 +89,7 @@ class Subscriber extends Component {
 			if (e && e.target.value.length > 2) {
 				axios
 					.get(
-						`${stockManagerAppLocalizer.apiUrl}/woo_stockalert_pro/v1/search_subscribe_by_product`,
+						`${stockManagerAppLocalizer.apiUrl}/woo_stockmanager_pro/v1/search_subscribe_by_product`,
 						{
 							params: { product: e.target.value, subscription_status: this.state.subscribe_active, date_range: this.state.date_range },
 						}
@@ -102,7 +102,7 @@ class Subscriber extends Component {
 			} else {
 				axios
 				.get(
-					`${stockManagerAppLocalizer.apiUrl}/woo_stockalert_pro/v1/show_subscribe_from_status_list`,
+					`${stockManagerAppLocalizer.apiUrl}/woo_stockmanager_pro/v1/show_subscribe_from_status_list`,
 					{
 						params: { date_range: this.state.date_range, subscription_status: this.state.subscribe_active },
 					}
@@ -119,7 +119,7 @@ class Subscriber extends Component {
 		if (e.target.value) {
 			axios
 				.get(
-					`${stockManagerAppLocalizer.apiUrl}/woo_stockalert_pro/v1/search_specific_subscribe`,
+					`${stockManagerAppLocalizer.apiUrl}/woo_stockmanager_pro/v1/search_specific_subscribe`,
 					{
 						params: { email_id: e.target.value },
 					}
@@ -132,7 +132,7 @@ class Subscriber extends Component {
 		} else {
 			axios
 			.get(
-				`${stockManagerAppLocalizer.apiUrl}/woo_stockalert_pro/v1/show_subscribe_from_status_list`,
+				`${stockManagerAppLocalizer.apiUrl}/woo_stockmanager_pro/v1/show_subscribe_from_status_list`,
 				{
 					params: { date_range: this.state.date_range },
 				}
@@ -158,7 +158,7 @@ class Subscriber extends Component {
 			// subscribe status
 			axios
 				.get(
-					`${stockManagerAppLocalizer.apiUrl}/woo_stockalert_pro/v1/show_subscribe_from_status_list`,
+					`${stockManagerAppLocalizer.apiUrl}/woo_stockmanager_pro/v1/show_subscribe_from_status_list`,
 					{
 						params: { subscription_status: 'woo_subscribed' },
 					}
@@ -181,7 +181,7 @@ class Subscriber extends Component {
 			});
 			axios
 				.get(
-					`${stockManagerAppLocalizer.apiUrl}/woo_stockalert_pro/v1/show_subscribe_from_status_list`,
+					`${stockManagerAppLocalizer.apiUrl}/woo_stockmanager_pro/v1/show_subscribe_from_status_list`,
 					{
 						params: { subscription_status: 'woo_unsubscribed' },
 					}
@@ -204,7 +204,7 @@ class Subscriber extends Component {
 			});
 			axios
 				.get(
-					`${stockManagerAppLocalizer.apiUrl}/woo_stockalert_pro/v1/show_subscribe_from_status_list`,
+					`${stockManagerAppLocalizer.apiUrl}/woo_stockmanager_pro/v1/show_subscribe_from_status_list`,
 					{
 						params: { subscription_status: 'woo_mailsent' },
 					}
@@ -228,7 +228,7 @@ class Subscriber extends Component {
 
 			axios
 			.get(
-				`${stockManagerAppLocalizer.apiUrl}/woo_stockalert_pro/v1/show_subscribe_from_status_list`,
+				`${stockManagerAppLocalizer.apiUrl}/woo_stockmanager_pro/v1/show_subscribe_from_status_list`,
 				{
 					params: { date_range: this.state.date_range },
 				}
@@ -244,7 +244,7 @@ class Subscriber extends Component {
 		// subscribe status
 		axios
 			.get(
-				`${stockManagerAppLocalizer.apiUrl}/woo_stockalert_pro/v1/no_of_subscribe_list`,
+				`${stockManagerAppLocalizer.apiUrl}/woo_stockmanager_pro/v1/no_of_subscribe_list`,
 				{
 					params: { subscribtion_status: 'woo_subscribed', date_range: this.state.date_range },
 				}
@@ -258,7 +258,7 @@ class Subscriber extends Component {
 		// unsubscribe status
 		axios
 			.get(
-				`${stockManagerAppLocalizer.apiUrl}/woo_stockalert_pro/v1/no_of_subscribe_list`,
+				`${stockManagerAppLocalizer.apiUrl}/woo_stockmanager_pro/v1/no_of_subscribe_list`,
 				{
 					params: { subscribtion_status: 'woo_unsubscribed', date_range: this.state.date_range },
 				}
@@ -272,7 +272,7 @@ class Subscriber extends Component {
 		// mail sent status
 		axios
 			.get(
-				`${stockManagerAppLocalizer.apiUrl}/woo_stockalert_pro/v1/no_of_subscribe_list`,
+				`${stockManagerAppLocalizer.apiUrl}/woo_stockmanager_pro/v1/no_of_subscribe_list`,
 				{
 					params: { subscribtion_status: 'woo_mailsent', date_range: this.state.date_range },
 				}
@@ -286,7 +286,7 @@ class Subscriber extends Component {
 		// trash status
 		axios
 			.get(
-				`${stockManagerAppLocalizer.apiUrl}/woo_stockalert_pro/v1/no_of_subscribe_list`,
+				`${stockManagerAppLocalizer.apiUrl}/woo_stockmanager_pro/v1/no_of_subscribe_list`,
 				{
 					params: { subscribtion_status: 'trash', date_range: this.state.date_range },
 				}
@@ -303,7 +303,7 @@ class Subscriber extends Component {
 			this.common_funtions('');
 			axios
 			.get(
-				`${stockManagerAppLocalizer.apiUrl}/woo_stockalert_pro/v1/show_subscribe_from_status_list`,
+				`${stockManagerAppLocalizer.apiUrl}/woo_stockmanager_pro/v1/show_subscribe_from_status_list`,
 				{
 					params: { date_range: this.state.date_range },
 				}
