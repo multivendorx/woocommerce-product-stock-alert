@@ -16844,7 +16844,7 @@ const DynamicForm = ({
   const [errorDisplay, setErrorDisplay] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
   const [hoverOn, setHoverOn] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
   const [settings, setSettings] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
-  const [dataMcList, setDataMcList] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
+  const [dataMcList, setDataMcList] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
   const tabfilds = tabs[currentTab].module;
   const submitUrl = tabs[currentTab].apiurl;
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
@@ -16896,7 +16896,7 @@ const DynamicForm = ({
   const handleOnChange = (e, key, type = 'single', from_type = '', array_values = []) => {
     if (!stockManagerAppLocalizer.pro_settings_list.includes(key)) {
       if (type === 'single') {
-        if (from_type === 'select') {
+        if (from_type === 'select' || from_type === 'mailchimp_select') {
           setSettings(preData => {
             return {
               ...preData,
@@ -17241,8 +17241,9 @@ const DynamicForm = ({
           break;
         case 'select':
         case 'mailchimp_select':
+          const selectArray = type === 'select' ? inputFild.option : dataMcList;
           const optionsData = [];
-          inputFild.options.forEach((option, index) => {
+          selectArray.forEach((option, index) => {
             optionsData[index] = {
               value: option.value,
               label: option.label,
