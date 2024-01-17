@@ -1,6 +1,12 @@
 == Changelog ==
 ----------------------------------------------------------------------------------------------
 
+= 2.4.1 - 2024-01-17 =
+* Added - React Code changes for pro.
+* Added - WordPress 6.4.2 compatibility.
+* Added - WooCommerce 8.5.1 compatibility.
+* Updated - Language files.
+
 = 2.4.0 - 2024-01-16 =
 * Added - Coding structure updated. 
 * Dev - Class concept implemented.
