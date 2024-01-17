@@ -38,7 +38,7 @@ $is_prices_including_tax = get_option( 'woocommerce_prices_include_tax' );
 	</tbody>
 </table>
 
-<p style="margin-top: 15px !important;"><?php printf( __( "Following is the product link : ", 'woocommerce-stock-manager' ) ); ?><a href="<?php echo esc_url( $product->get_permalink() ); ?>"><?php echo esc_html(wp_strip_all_tags($product_data['name'])); ?></a></p>
+<p style="margin-top: 15px !important;"><?php printf( __( "Following is the product link : ", 'woocommerce-stock-manager' ) ); ?><a href="<?php echo esc_url( $product->get_permalink() ); ?>"><?php echo esc_html(wp_strip_all_tags( $product->get_name() )); ?></a></p>
 
 <h3><?php esc_html_e( 'Customer Details', 'woocommerce-stock-manager' ); ?></h3>
 <p>
