@@ -30,7 +30,7 @@ class DeprecatedFilterHooks extends \WC_Deprecated_Hooks {
 		'woo_stock_manager_product_data' => 'woo_stock_alert_product_data',
 		'woo_stock_manager_add_vendor' => 'woo_product_stock_alert_add_vendor',
 		'woocommerce_stock_manager_form_additional_fields' => 'woocommerce_product_stock_alert_form_additional_fields',
-		'woo_stock_manager_recaptcha_enableed' => 'woo_stock_alert_recaptcha_enableed',
+		'woo_stock_manager_recaptcha_enabled' => 'woo_stock_alert_recaptcha_enableed',
 		'woo_stock_manager_fileds_array' => 'woo_stock_alert_fileds_array',
 		'woo_stock_manager_do_complete_additional_task' => 'woo_product_stock_alert_do_complete_additional_task',
 		'woo_stock_manager_is_accept_email_address' => 'woo_stock_alert_is_accept_email_address',

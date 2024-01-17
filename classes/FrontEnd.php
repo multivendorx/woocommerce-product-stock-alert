@@ -72,7 +72,7 @@ class FrontEnd {
                     'try_again' => __('Please try again.', 'woocommerce-stock-manager'),
                     'unsubscribe_button' => $unsubscribe_button_html,
                     'alert_unsubscribe_message' => $settings_array['alert_unsubscribe_message'],
-                    'recaptcha_enabled' => apply_filters('woo_stock_manager_recaptcha_enableed', false)
+                    'recaptcha_enabled' => apply_filters('woo_stock_manager_recaptcha_enabled', false)
                 ));
             }
         }
