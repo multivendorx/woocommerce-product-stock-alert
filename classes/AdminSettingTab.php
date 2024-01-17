@@ -280,7 +280,7 @@ class AdminSettingTab {
                         'key'       => 'get_mailchimp_list_button',
                         'type'      => 'button',
                         'label'     => 'no_label',
-                        'api_link'  => 'woo_stockmanager_pro/v1/get_mailchimp_list',
+                        'api_link'  => 'woo-stockmanager-pro/v1/get-mailchimp-list',
                         'depend_checkbox' => 'is_mailchimp_enable',
                     ],
                     [
