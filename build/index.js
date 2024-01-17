@@ -16844,7 +16844,7 @@ const DynamicForm = ({
   const [errorDisplay, setErrorDisplay] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
   const [hoverOn, setHoverOn] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
   const [settings, setSettings] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
-  const [dataMcList, setDataMcList] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
+  const [dataMcList, setDataMcList] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
   const tabfilds = tabs[currentTab].module;
   const submitUrl = tabs[currentTab].apiurl;
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
@@ -16896,7 +16896,7 @@ const DynamicForm = ({
   const handleOnChange = (e, key, type = 'single', from_type = '', array_values = []) => {
     if (!stockManagerAppLocalizer.pro_settings_list.includes(key)) {
       if (type === 'single') {
-        if (from_type === 'select') {
+        if (from_type === 'select' || from_type === 'mailchimp_select') {
           setSettings(preData => {
             return {
               ...preData,
@@ -16958,7 +16958,7 @@ const DynamicForm = ({
   };
   const handleGetMailchimpList = () => {
     if (stockManagerAppLocalizer.pro_active != 'free') {
-      axios__WEBPACK_IMPORTED_MODULE_2__["default"].get(`${stockManagerAppLocalizer.apiUrl}/woo_stockalert_pro/v1/get_mailchimp_list`).then(response => {
+      axios__WEBPACK_IMPORTED_MODULE_2__["default"].get(`${stockManagerAppLocalizer.apiUrl}/woo-stockmanager-pro/v1/get-mailchimp-list`).then(response => {
         setDataMcList(response.data);
       });
     } else {
@@ -17241,8 +17241,9 @@ const DynamicForm = ({
           break;
         case 'select':
         case 'mailchimp_select':
+          const selectArray = type === 'select' ? inputFild.option : dataMcList;
           const optionsData = [];
-          inputFild.options.forEach((option, index) => {
+          selectArray.forEach((option, index) => {
             optionsData[index] = {
               value: option.value,
               label: option.label,
@@ -17521,7 +17522,7 @@ class Subscriber extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     this.setState({
       date_range: e
     });
-    axios__WEBPACK_IMPORTED_MODULE_5__["default"].get(`${stockManagerAppLocalizer.apiUrl}/woo_stockalert_pro/v1/show_subscribe_from_status_list`, {
+    axios__WEBPACK_IMPORTED_MODULE_5__["default"].get(`${stockManagerAppLocalizer.apiUrl}/woo-stockmanager-pro/v1/show-subscribe-from-status-list`, {
       params: {
         date_range: e
       }
@@ -17535,7 +17536,7 @@ class Subscriber extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   handlesubscriptionsearch(e, status) {
     if (status === 'searchproduct') {
       if (e && e.target.value.length > 2) {
-        axios__WEBPACK_IMPORTED_MODULE_5__["default"].get(`${stockManagerAppLocalizer.apiUrl}/woo_stockalert_pro/v1/search_subscribe_by_product`, {
+        axios__WEBPACK_IMPORTED_MODULE_5__["default"].get(`${stockManagerAppLocalizer.apiUrl}/woo-stockmanager-pro/v1/search-subscribe-by-product`, {
           params: {
             product: e.target.value,
             subscription_status: this.state.subscribe_active,
@@ -17547,7 +17548,7 @@ class Subscriber extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
           });
         });
       } else {
-        axios__WEBPACK_IMPORTED_MODULE_5__["default"].get(`${stockManagerAppLocalizer.apiUrl}/woo_stockalert_pro/v1/show_subscribe_from_status_list`, {
+        axios__WEBPACK_IMPORTED_MODULE_5__["default"].get(`${stockManagerAppLocalizer.apiUrl}/woo-stockmanager-pro/v1/show-subscribe-from-status-list`, {
           params: {
             date_range: this.state.date_range,
             subscription_status: this.state.subscribe_active
@@ -17562,7 +17563,7 @@ class Subscriber extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   }
   handle_subscription_live_search(e) {
     if (e.target.value) {
-      axios__WEBPACK_IMPORTED_MODULE_5__["default"].get(`${stockManagerAppLocalizer.apiUrl}/woo_stockalert_pro/v1/search_specific_subscribe`, {
+      axios__WEBPACK_IMPORTED_MODULE_5__["default"].get(`${stockManagerAppLocalizer.apiUrl}/woo-stockmanager-pro/v1/search-specific-subscribe`, {
         params: {
           email_id: e.target.value
         }
@@ -17572,7 +17573,7 @@ class Subscriber extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
         });
       });
     } else {
-      axios__WEBPACK_IMPORTED_MODULE_5__["default"].get(`${stockManagerAppLocalizer.apiUrl}/woo_stockalert_pro/v1/show_subscribe_from_status_list`, {
+      axios__WEBPACK_IMPORTED_MODULE_5__["default"].get(`${stockManagerAppLocalizer.apiUrl}/woo-stockmanager-pro/v1/show-subscribe-from-status-list`, {
         params: {
           date_range: this.state.date_range
         }
@@ -17593,7 +17594,7 @@ class Subscriber extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
         subscription_list_status_mail_sent: false
       });
       // subscribe status
-      axios__WEBPACK_IMPORTED_MODULE_5__["default"].get(`${stockManagerAppLocalizer.apiUrl}/woo_stockalert_pro/v1/show_subscribe_from_status_list`, {
+      axios__WEBPACK_IMPORTED_MODULE_5__["default"].get(`${stockManagerAppLocalizer.apiUrl}/woo-stockmanager-pro/v1/show-subscribe-from-status-list`, {
         params: {
           subscription_status: 'woo_subscribed'
         }
@@ -17612,7 +17613,7 @@ class Subscriber extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
         subscription_list_status_unsubscription: true,
         subscription_list_status_mail_sent: false
       });
-      axios__WEBPACK_IMPORTED_MODULE_5__["default"].get(`${stockManagerAppLocalizer.apiUrl}/woo_stockalert_pro/v1/show_subscribe_from_status_list`, {
+      axios__WEBPACK_IMPORTED_MODULE_5__["default"].get(`${stockManagerAppLocalizer.apiUrl}/woo-stockmanager-pro/v1/show-subscribe-from-status-list`, {
         params: {
           subscription_status: 'woo_unsubscribed'
         }
@@ -17631,7 +17632,7 @@ class Subscriber extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
         subscription_list_status_unsubscription: false,
         subscription_list_status_mail_sent: true
       });
-      axios__WEBPACK_IMPORTED_MODULE_5__["default"].get(`${stockManagerAppLocalizer.apiUrl}/woo_stockalert_pro/v1/show_subscribe_from_status_list`, {
+      axios__WEBPACK_IMPORTED_MODULE_5__["default"].get(`${stockManagerAppLocalizer.apiUrl}/woo-stockmanager-pro/v1/show-subscribe-from-status-list`, {
         params: {
           subscription_status: 'woo_mailsent'
         }
@@ -17650,7 +17651,7 @@ class Subscriber extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
         subscription_list_status_unsubscription: false,
         subscription_list_status_mail_sent: false
       });
-      axios__WEBPACK_IMPORTED_MODULE_5__["default"].get(`${stockManagerAppLocalizer.apiUrl}/woo_stockalert_pro/v1/show_subscribe_from_status_list`, {
+      axios__WEBPACK_IMPORTED_MODULE_5__["default"].get(`${stockManagerAppLocalizer.apiUrl}/woo-stockmanager-pro/v1/show-subscribe-from-status-list`, {
         params: {
           date_range: this.state.date_range
         }
@@ -17663,7 +17664,7 @@ class Subscriber extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   }
   common_funtions = e => {
     // subscribe status
-    axios__WEBPACK_IMPORTED_MODULE_5__["default"].get(`${stockManagerAppLocalizer.apiUrl}/woo_stockalert_pro/v1/no_of_subscribe_list`, {
+    axios__WEBPACK_IMPORTED_MODULE_5__["default"].get(`${stockManagerAppLocalizer.apiUrl}/woo-stockmanager-pro/v1/no-of-subscribe-list`, {
       params: {
         subscribtion_status: 'woo_subscribed',
         date_range: this.state.date_range
@@ -17675,7 +17676,7 @@ class Subscriber extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     });
 
     // unsubscribe status
-    axios__WEBPACK_IMPORTED_MODULE_5__["default"].get(`${stockManagerAppLocalizer.apiUrl}/woo_stockalert_pro/v1/no_of_subscribe_list`, {
+    axios__WEBPACK_IMPORTED_MODULE_5__["default"].get(`${stockManagerAppLocalizer.apiUrl}/woo-stockmanager-pro/v1/no-of-subscribe-list`, {
       params: {
         subscribtion_status: 'woo_unsubscribed',
         date_range: this.state.date_range
@@ -17687,7 +17688,7 @@ class Subscriber extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     });
 
     // mail sent status
-    axios__WEBPACK_IMPORTED_MODULE_5__["default"].get(`${stockManagerAppLocalizer.apiUrl}/woo_stockalert_pro/v1/no_of_subscribe_list`, {
+    axios__WEBPACK_IMPORTED_MODULE_5__["default"].get(`${stockManagerAppLocalizer.apiUrl}/woo-stockmanager-pro/v1/no-of-subscribe-list`, {
       params: {
         subscribtion_status: 'woo_mailsent',
         date_range: this.state.date_range
@@ -17699,7 +17700,7 @@ class Subscriber extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     });
 
     // trash status
-    axios__WEBPACK_IMPORTED_MODULE_5__["default"].get(`${stockManagerAppLocalizer.apiUrl}/woo_stockalert_pro/v1/no_of_subscribe_list`, {
+    axios__WEBPACK_IMPORTED_MODULE_5__["default"].get(`${stockManagerAppLocalizer.apiUrl}/woo-stockmanager-pro/v1/no-of-subscribe-list`, {
       params: {
         subscribtion_status: 'trash',
         date_range: this.state.date_range
@@ -17713,7 +17714,7 @@ class Subscriber extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   componentDidMount() {
     if (stockManagerAppLocalizer.pro_active != 'free') {
       this.common_funtions('');
-      axios__WEBPACK_IMPORTED_MODULE_5__["default"].get(`${stockManagerAppLocalizer.apiUrl}/woo_stockalert_pro/v1/show_subscribe_from_status_list`, {
+      axios__WEBPACK_IMPORTED_MODULE_5__["default"].get(`${stockManagerAppLocalizer.apiUrl}/woo-stockmanager-pro/v1/show-subscribe-from-status-list`, {
         params: {
           date_range: this.state.date_range
         }

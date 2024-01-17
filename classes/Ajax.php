@@ -49,13 +49,21 @@ class Ajax {
 	 * Preaper data for CSV. CSV contain all stockmanager subscribtion details.
 	 * @return never
 	 */
-	function export_CSV_data() {
+	function export_CSV_data($argument = []) {
 		$get_subscribed_user = [];
-        $products = get_posts([
+
+		$default_argument = [
             'post_type' => 'product',
             'post_status' => 'publish',
             'numberposts' => -1
-        ]);
+        ];
+
+		if( is_array($argument) && count($argument) > 0 ) {
+			$default_argument = array_merge($default_argument, $argument);
+		}
+
+        $products = get_posts($default_argument);
+
 		foreach($products as $product) {
 			$product_ids = Subscriber::get_related_product(wc_get_product($product->ID));
             foreach ($product_ids as $product_id) {

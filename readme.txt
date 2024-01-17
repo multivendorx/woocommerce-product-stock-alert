@@ -5,7 +5,7 @@ Tags: wordpress, woocommerce, e-commerce, shop, stock, out of stock, in stock, s
 Requires at least: 5.4
 Tested up to: 6.4.2
 Requires PHP: 8.0
-Stable tag: 2.4.0
+Stable tag: 2.4.1
 Donate link: https://multivendorx.com/donate/
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -136,6 +136,12 @@ Manual installation method requires downloading the [Product Stock Manager & Not
 8. User Unsubscription [Pro]
 
 == Changelog ==
+
+= 2.4.1 - 2024-01-17 =
+* Added - React Code changes for pro.
+* Added - WordPress 6.4.2 compatibility.
+* Added - WooCommerce 8.5.1 compatibility.
+* Updated - Language files.
 
 = 2.4.0 - 2024-01-16 =
 * Added - Coding structure updated. 

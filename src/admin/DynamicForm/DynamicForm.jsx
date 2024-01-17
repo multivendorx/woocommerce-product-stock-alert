@@ -11,7 +11,7 @@ const DynamicForm = ({ currentTab, tabs, setTabs }) => {
 	const [errorDisplay, setErrorDisplay] = useState('');
 	const [hoverOn, setHoverOn] = useState(false);
 	const [settings, setSettings] = useState(null);
-	const [dataMcList, setDataMcList] = useState(null);
+	const [dataMcList, setDataMcList] = useState([]);
 	
 	const tabfilds = tabs[currentTab].module;
 	const submitUrl = tabs[currentTab].apiurl;
@@ -63,7 +63,7 @@ const DynamicForm = ({ currentTab, tabs, setTabs }) => {
 	const handleOnChange = (e, key, type = 'single', from_type = '', array_values = []) => {
 		if (!stockManagerAppLocalizer.pro_settings_list.includes(key)) {
 			if (type === 'single') {
-				if ( from_type === 'select' ) {
+				if ( from_type === 'select' || from_type === 'mailchimp_select') {
 					setSettings((preData) => {
 						return { ...preData, [key]: array_values[e.index] };
 					});
@@ -107,7 +107,7 @@ const DynamicForm = ({ currentTab, tabs, setTabs }) => {
 		if (stockManagerAppLocalizer.pro_active != 'free' ) {
 			axios
 				.get(
-					`${stockManagerAppLocalizer.apiUrl}/woo_stockalert_pro/v1/get_mailchimp_list`,
+					`${stockManagerAppLocalizer.apiUrl}/woo-stockmanager-pro/v1/get-mailchimp-list`,
 				)
 				.then((response) => {
 					setDataMcList(response.data);
@@ -409,8 +409,9 @@ const DynamicForm = ({ currentTab, tabs, setTabs }) => {
 					break;
 				case 'select':
 				case 'mailchimp_select':
+					const selectArray = type === 'select' ? inputFild.option : dataMcList;
 					const optionsData = [];
-					inputFild.options.forEach((option, index) => {
+					selectArray.forEach((option, index) => {
 						optionsData[index] = {
 							value: option.value,
 							label: option.label,
@@ -425,11 +426,11 @@ const DynamicForm = ({ currentTab, tabs, setTabs }) => {
 								options={optionsData}
 								onChange={(e) => { handleOnChange(e, key, 'single', type, optionsData) }}
 								onClick={(e) => { checkProActive(e, key) }}
-							></Select>
+								></Select>
 							{
 								inputFild.desc && <p
-									className="woo-settings-metabox-description"
-									dangerouslySetInnerHTML={{ __html: inputFild.desc }}
+								className="woo-settings-metabox-description"
+								dangerouslySetInnerHTML={{ __html: inputFild.desc }}
 								></p>
 							}
 						</div>

@@ -239,7 +239,7 @@ class Admin {
             'ban_email_address_text',
             'is_mailchimp_enable',
             'mailchimp_api',
-            'get_mailchimp_list_button',
+            'get-mailchimp-list_button',
             'selected_mailchimp_list',
             'is_double_optin',
             'is_recaptcha_enable'
