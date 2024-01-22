@@ -259,7 +259,7 @@ class Admin {
         if (get_current_screen()->id == 'toplevel_page_woo-stock-manager-setting') {
             wp_enqueue_script( 'woo-stockmanager-script', $Woo_Stock_Manager->plugin_url . 'build/index.js', array( 'wp-element' ), $Woo_Stock_Manager->version, true );
             wp_localize_script( 'woo-stockmanager-script', 'stockManagerAppLocalizer', apply_filters('woo_stock_manager_settings', [
-                'apiUrl'                    => home_url('/wp-json'),
+                'apiUrl'                    => untrailingslashit(get_rest_url()),
                 'nonce'                     => wp_create_nonce('wp_rest'),
                 'default_alert_text'        => __('Receive in-stock notifications for this product.', 'woocommerce-stock-manager'),
                 'default_email_place'       => __('Enter your email', 'woocommerce-stock-manager'),
