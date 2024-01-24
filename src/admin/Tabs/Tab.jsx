@@ -13,6 +13,7 @@ const Tabs = (props) => {
     useEffect(() => {
         axios({
             url: `${stockManagerAppLocalizer.apiUrl}/woo-stockmanager/v1/fetch-admin-tabs`,
+            headers: { 'X-WP-Nonce' : stockManagerAppLocalizer.nonce },
         }).then((response) => {
             setTabs(response.data ? JSON.parse(response.data) : null);
         });

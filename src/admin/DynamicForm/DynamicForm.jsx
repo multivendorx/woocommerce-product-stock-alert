@@ -34,6 +34,7 @@ const DynamicForm = ({ currentTab, tabs, setTabs }) => {
 			axios({
 				method: 'post',
 				url: stockManagerAppLocalizer.apiUrl + '/woo-stockmanager/v1/' + submitUrl,
+				headers: { 'X-WP-Nonce' : stockManagerAppLocalizer.nonce },
 				data: {
 					model: settings,
 					modulename: currentTab,
@@ -259,7 +260,7 @@ const DynamicForm = ({ currentTab, tabs, setTabs }) => {
 										className="woo-setting-color-picker"
 										type="color"
 										onChange={(e) => { handleOnChange(e, 'alert_text_color') }}
-										value={settings.alert_text_color}
+										value={settings.alert_text_color || '#000000'}
 									/>
 								</div>
 								<div className="woo-color-picker-wrap">
@@ -268,7 +269,7 @@ const DynamicForm = ({ currentTab, tabs, setTabs }) => {
 										className="woo-setting-color-picker"
 										type="color"
 										onChange={(e) => { handleOnChange(e, 'button_text_color') }}
-										value={settings.button_text_color}
+										value={settings.button_text_color || '#000000'}
 									/>
 								</div>
 								<div className="woo-color-picker-wrap">
@@ -277,7 +278,7 @@ const DynamicForm = ({ currentTab, tabs, setTabs }) => {
 										className="woo-setting-color-picker"
 										type="color"
 										onChange={(e) => { handleOnChange(e, 'button_background_color') }}
-										value={settings.button_background_color}
+										value={settings.button_background_color || '#000000'}
 									/>
 								</div>
 								<div className="woo-color-picker-wrap">
@@ -286,7 +287,7 @@ const DynamicForm = ({ currentTab, tabs, setTabs }) => {
 										className="woo-setting-color-picker"
 										type="color"
 										onChange={(e) => { handleOnChange(e, 'button_border_color') }}
-										value={settings.button_border_color}
+										value={settings.button_border_color || '#000000'}
 									/>
 								</div>
 								<div className="woo-color-picker-wrap">
@@ -295,7 +296,7 @@ const DynamicForm = ({ currentTab, tabs, setTabs }) => {
 										className="woo-setting-color-picker"
 										type="color"
 										onChange={(e) => { handleOnChange(e, 'button_background_color_onhover') }}
-										value={settings.button_background_color_onhover}
+										value={settings.button_background_color_onhover || '#000000'}
 									/>
 								</div>
 								<div className="woo-color-picker-wrap">
@@ -304,7 +305,7 @@ const DynamicForm = ({ currentTab, tabs, setTabs }) => {
 										className="woo-setting-color-picker"
 										type="color"
 										onChange={(e) => { handleOnChange(e, 'button_border_color_onhover') }}
-										value={settings.button_border_color_onhover}
+										value={settings.button_border_color_onhover || '#000000'}
 									/>
 								</div>
 								<div className="woo-color-picker-wrap">
@@ -313,7 +314,7 @@ const DynamicForm = ({ currentTab, tabs, setTabs }) => {
 										className="woo-setting-color-picker"
 										type="color"
 										onChange={(e) => { handleOnChange(e, 'button_text_color_onhover') }}
-										value={settings.button_text_color_onhover}
+										value={settings.button_text_color_onhover || '#000000'}
 									/>
 								</div>
 							</div>
