@@ -1,6 +1,10 @@
 == Changelog ==
 ----------------------------------------------------------------------------------------------
 
+= 2.4.2 - 2024-01-25 =
+* Fixed - Rest API related Vulnerability issue.
+* Fixed - Plugin settings page 404 error tied to WordPress permalink structure.
+
 = 2.4.1 - 2024-01-17 =
 * Added - React Code changes for pro.
 * Added - WordPress 6.4.2 compatibility.

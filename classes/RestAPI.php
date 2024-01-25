@@ -39,7 +39,7 @@ class RestAPI
      * @return bool
      */
     public function stockmanager_permission() {
-        return true;
+        return current_user_can('manage_options');
     }
 
     /**
