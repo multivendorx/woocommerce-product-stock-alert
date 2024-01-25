@@ -1,7 +1,7 @@
 == Changelog ==
 ----------------------------------------------------------------------------------------------
 
-= 2.4.2 - 2024-01-24 =
+= 2.4.2 - 2024-01-25 =
 * Fixed - Rest API related Vulnerability issue.
 * Fixed - Plugin settings page 404 error tied to WordPress permalink structure.
 
