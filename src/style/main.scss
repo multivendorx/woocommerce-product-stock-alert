@@ -2013,9 +2013,42 @@ input.woo-setting-color-picker {
 }
 
 .wp-core-ui select {
-  background: #fff;
+  // background: #fff;
 }
 
 .rdt_Pagination svg {
   margin-top: 3px;
 }
+
+//Manage stock section
+.wp-core-ui select:focus{
+  color: $paragraph-color;
+  border-color: $boder-color;
+  box-shadow: none;
+}
+.wp-core-ui select:hover {
+  color: $paragraph-color;
+}
+.custom-select{
+  display: flex;
+  align-items: center;
+  font-weight:normal; 
+  border: $border;
+  border-radius: $border-radius;
+  height: 2.5rem;
+  position: relative;
+  background-color:$fill-color;
+
+}
+
+select {
+  appearance: none;
+  /*  safari  */
+  -webkit-appearance: none;
+  /*  other styles for aesthetics */
+  width: 100%;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+

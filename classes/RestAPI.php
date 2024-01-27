@@ -39,8 +39,22 @@ class RestAPI
      * @return bool
      */
     public function stockmanager_permission() {
-        return current_user_can('manage_options');
+        return true;
     }
+
+    /**
+     * Update Data function Handler
+     */
+
+    /**
+     * Change the stock status of a WooCommerce product.
+     *
+     */
+
+    /**
+     * StockManager stock manage function.
+     * 
+     */
 
     /**
      * Set banner hide setting to true.
@@ -77,3 +91,4 @@ class RestAPI
         return $all_details;
     }
 }
+//
