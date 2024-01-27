@@ -12,7 +12,7 @@ const Dropdown = ({ backorder,id,value,option1,option2,option3 }) => {
         }
         axios({
             method: 'post',
-            url: `${stockManagerAppLocalizer.apiUrl}/woo-stockmanager/v1/update`,
+            url: `${stockManagerAppLocalizer.apiUrl}/woo-stockmanager-pro/v1/update`,
             data: data
         }).then((response) => {
           // console.log("loaded");
@@ -25,7 +25,7 @@ const Dropdown = ({ backorder,id,value,option1,option2,option3 }) => {
       }
       axios({
           method: 'post',
-          url: `${stockManagerAppLocalizer.apiUrl}/woo-stockmanager/v1/update-stock-status`,
+          url: `${stockManagerAppLocalizer.apiUrl}/woo-stockmanager-pro/v1/update-stock-status`,
           data: data
       }).then((response)=>{
         // console.log(response);
@@ -43,7 +43,7 @@ const Dropdown = ({ backorder,id,value,option1,option2,option3 }) => {
 
 
   return (
-    <div>
+    <div className='custom-select'>
       <select
         value={orderStatus?orderStatus:value}
         onChange={handleDropdownChange}

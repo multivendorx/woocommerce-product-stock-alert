@@ -11,7 +11,6 @@ const Stockalert = () => {
             element.parentNode.classList.add('current');
         }
     });
-
     const location = new URLSearchParams(useLocation().hash);
 
     return (

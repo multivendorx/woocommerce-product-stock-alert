@@ -21,7 +21,7 @@ class Shortcode {
 	 */
 	function display_stock_manager_form($attr) {
         ob_start();
-        call_user_func([$this, 'output']);
+        call_user_func(['Woo_Stock_Manager_Shortcode', 'output']);
         return ob_get_clean();
     }
 
@@ -32,7 +32,7 @@ class Shortcode {
      * @param array $atts
      * @return void
      */
-	public function output() {
+	public static function output() {
         global $Woo_Stock_Manager;
         $Woo_Stock_Manager->nocache();
 

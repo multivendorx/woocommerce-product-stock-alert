@@ -15,7 +15,7 @@ const Checkbox = ({changeData,id,name,state})=>{
         }
         axios({
             method: 'post',
-            url: `${stockManagerAppLocalizer.apiUrl}/woo-stockmanager/v1/update`,
+            url: `${stockManagerAppLocalizer.apiUrl}/woo-stockmanager-pro/v1/update`,
             data: data
         })
         let row =e.target.parentElement.parentElement; // row containing all element
@@ -31,7 +31,7 @@ const Checkbox = ({changeData,id,name,state})=>{
             ReactDOM.render(<Dropdown backorder={true} id={id} value={stock_select_element_text} option1={"no"} option2={"notify"} option3={"yes"} />, backorder_div);
         }else{
             let backorder_div =row.children[9].children[0];
-            let backorder_select_element = backorder_div.children[0];
+            // let backorder_select_element = backorder_div.children[0];
             let stock_quantity = row.children[10];
             let stock_div =row.children[8]
             stock_quantity.innerHTML=" ";

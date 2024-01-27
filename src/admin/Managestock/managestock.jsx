@@ -5,31 +5,53 @@ import Checkbox from '../components/Checkbox.jsx';
 import Cell from '../components/Cell.jsx';
 import Image from '../components/Image.jsx';
 import Dropdown from '../components/Dropdown.jsx'
+import Dialog from "@mui/material/Dialog";
+import Popoup from '../PopupContent/PopupContent';
 
 const Managestock = () => {
     const [skuFilter, setSkuFilter] = useState('');
     const [nameFilter, setNameFilter] = useState('');
-    const [selectedProductType, setSelectedProductType] = useState('all');
-    const [selectedStockStatus, setSelectedStockStatus] = useState('all');
+    const [selectedProductType, setSelectedProductType] = useState('');
+    const [selectedStockStatus, setSelectedStockStatus] = useState('');
     const [data,setData]= useState([]);
-
-    // const updateData= () =>{
-    //     setmanageStockClick(true);
+    const [model,setModel]=useState(false);
+    // this.state = {
+    //     open_model: false,
     // }
+    const handleClose = ()=>{
+        setModel(false);
+		// this.setState({
+		// 	open_model: false,
+		// });
+	}
+
+	const handleCloseDialog = ()=>{
+        setModel(false);
+		// this.setState({
+		// 	open_model: false,
+		// });
+	}
+
+	const CheckProActive = () => {
+		if (stockManagerAppLocalizer.pro_active == 'free' ) {
+            setModel(true);
+			// this.setState({
+			// 	open_model: true,
+			// });
+		}
+	}
     useEffect(() => {
-        axios({
-            url: `${stockManagerAppLocalizer.apiUrl}/woo-stockmanager/v1/manage-stock`,
-        }).then((response) => {
-            let products =JSON.parse(response.data);
-            setData(products);
-        });
+        if(stockManagerAppLocalizer.pro_active != 'free'){
+            axios({
+                url: `${stockManagerAppLocalizer.apiUrl}/woo-stockmanager-pro/v1/manage-stock`,
+            }).then((response) => {
+                let products =JSON.parse(response.data);
+                setData(products);
+            });
+        }
         // console.log("loaded");
     }, []);
     const getFilteredData= ()=>{
-        // console.log("loaded");
-        // if(newData){
-        //     setData(newData);
-        // }
         var modifyData = [...data];
         if(skuFilter){
             modifyData = modifyData.filter(item =>item.product_sku.toLowerCase().includes(skuFilter.toLowerCase()))
@@ -38,10 +60,10 @@ const Managestock = () => {
             modifyData = modifyData.filter(item =>item.product_name.toLowerCase().includes(nameFilter.toLowerCase()))
         }
         if(selectedStockStatus){
-            modifyData = modifyData.filter(item =>(selectedStockStatus === 'all' || item.product_stock_status === selectedStockStatus))
+            modifyData = modifyData.filter(item =>(item.product_stock_status === selectedStockStatus))
         }
         if(selectedProductType){
-            modifyData = modifyData.filter(item =>(selectedProductType === 'all' || item.product_type === selectedProductType))
+            modifyData = modifyData.filter(item =>(item.product_type === selectedProductType))
         }
         return modifyData
     }
@@ -128,69 +150,92 @@ const Managestock = () => {
     ];
     return( 
     <>
-        <div className="woo-subscriber-list">
-            <div className="woo-container">
-                <div className="woo-middle-container-wrapper">
-                    <div className="woo-page-title">
-                        <p>
-                        WooCommerce Stock Manager
-                        </p>
-                    </div>
-                    <div class="woo-wrap-bulk-all-date">
-                        <div class="woo-header-search-section">
-                            <input
-                                type="text"
-                                placeholder="Search by SKU..."
-                                value={skuFilter}
-                                onChange={(e) =>setSkuFilter(e.target.value)}
-                            />
+        {stockManagerAppLocalizer.pro_active == 'free'  ?
+            <div>
+                <Dialog
+                    className="woo-module-popup"
+                    open={model}
+                    onClose={handleClose}
+                    aria-labelledby="form-dialog-title"
+                >	
+                    <span 
+                        className="icon-cross stock-manager-popup-cross"
+                        onClick={handleClose}
+                    ></span>
+                    <Popoup/>
+                </Dialog>
+                <img
+                    src={ stockManagerAppLocalizer.manage_stock }
+                    alt="Inventory-manager"
+                    className='subscriber-img'
+                    onClick={(e) => { 
+                        CheckProActive();
+                    }}
+                />
+                
+            </div>
+        
+        :
+            <div className="woo-subscriber-list">
+                <div className="woo-container">
+                    <div className="woo-middle-container-wrapper">
+                        <div className="woo-search-and-multistatus-wrap">
+                            <div className="woo-page-title">
+                                <p>
+                                Inventory Manager
+                                </p>
+                            </div>
                         </div>
-                        <div class="woo-header-search-section">
-                            <input
-                                type="text"
-                                placeholder="Search by Name..."
-                                value={nameFilter}
-                                onChange={(e) => setNameFilter(e.target.value)}
-                            />
-                        </div>
-                        <div class="woo-header-search-section">
-                            <label>
-                                Product Type:
+                        <div class="woo-wrap-bulk-all-date">
+                            <div class="woo-header-search-section">
+                                <input
+                                    type="text"
+                                    placeholder="Search by Name..."
+                                    value={nameFilter}
+                                    onChange={(e) => setNameFilter(e.target.value)}
+                                />
+                            </div>
+                            <div class="woo-header-search-section">
+                                <input
+                                    type="text"
+                                    placeholder="Search by SKU..."
+                                    value={skuFilter}
+                                    onChange={(e) =>setSkuFilter(e.target.value)}
+                                />
+                            </div>
+                            <div class="custom-select">
                                 <select
-                                    value={selectedProductType}
+                                    value={selectedProductType?selectedProductType:""}
                                     onChange={(e) => setSelectedProductType(e.target.value)}
                                 >
-                                    <option value="all">All</option>
+                                    <option value="">Product Type</option>
                                     <option value="simple">Simple</option>
                                     <option value="variable">Variable</option>
                                 </select>
-                            </label>
+                            </div>
+                            <div class="custom-select">
+                                    <select
+                                        value={selectedStockStatus?selectedStockStatus:""}
+                                        onChange={(e) => setSelectedStockStatus(e.target.value)}
+                                    >
+                                        <option value="" >Stock Status</option>
+                                        <option value="instock">Instock</option>
+                                        <option value="onbackorder">Onbackorder</option>
+                                        <option value="outofstock">Outofstock</option>
+                                    </select>
+                            </div>
                         </div>
-                        <div class="woo-header-search-section">
-                            <label>
-                                Stock Status:
-                                <select
-                                    value={selectedStockStatus}
-                                    onChange={(e) => setSelectedStockStatus(e.target.value)}
-                                >
-                                    <option value="all">All</option>
-                                    <option value="instock">Instock</option>
-                                    <option value="onbackorder">Onbackorder</option>
-                                    <option value="outofstock">Outofstock</option>
-                                </select>
-                            </label>
+                        <div className="woo-backend-datatable-wrapper">
+                            <DataTable
+                            columns={columns}
+                            data={getFilteredData()}
+                            pagination
+                            />
                         </div>
-                    </div>
-                    <div className="woo-backend-datatable-wrapper">
-                        <DataTable
-                        columns={columns}
-                        data={getFilteredData()}
-                        pagination
-                        />
                     </div>
                 </div>
             </div>
-        </div>
+        }
     </>
     );
 }
