@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { CSVLink } from "react-csv";
 import axios from 'axios';
 
-const ImportExport = (props) => {
+const ImportExport = ({data}) => {
     const [file, setFile] = useState(null);
+    const [header,setHeader] = useState([]);
 
     const processCSV = (str, delim=',') => {
         const headers = str.slice(0,str.indexOf('\n')).split(delim);
@@ -17,8 +19,18 @@ const ImportExport = (props) => {
         })
         return newArray
     };
+    // let headers = [{label: "Id", key: "product_id"},{label: "Product Type", key: "product_type"}];
     const handleFileChange = (event) => {
         setFile(event.target.files[0]);
+    };
+    const handleCheck = (e,label,key) =>{
+        let str = `{"label":"${label}","key":"${key}"}`;
+        str = JSON.parse(str);
+        if(e.target.checked){
+            setHeader(prevHeader => [...prevHeader, str]);
+        }else{
+            setHeader(prevHeader => prevHeader.filter(header => header.label !== str.label || header.key !== str.key));
+        }
     };
     const handleUpload = ()=> {
         if (file) {
@@ -64,29 +76,31 @@ const ImportExport = (props) => {
                     </tr>
                 </table>
                     <input onChange={handleFileChange} type="file" name="csv_file" accept=".csv"/>
-                    <button onClick={handleUpload} class="import-export-btn">Upload CSV</button>
+                    <button onClick={handleUpload} class="import-export-btn">Import CSV</button>
             </div>
             <div className="export">
                 <h2>Export</h2>
                 <p>You can download csv file,with stock data.<br />Please Select the field of which you want to download the csv.</p>
-                <input type="checkbox" id="Id" />
+                <input type="checkbox" id="Id" onChange={(e)=>{handleCheck(e,"Id","product_id")}} />
                 <label htmlFor="Id">Id</label>
-                <input type="checkbox" id="Type" />
+                <input type="checkbox" id="Type" onChange={(e)=>{handleCheck(e,"Type","product_type")}} />
                 <label htmlFor="Type">Type</label>
-                <input type="checkbox" id="SKU" />
+                <input type="checkbox" id="SKU" onChange={(e)=>{handleCheck(e,"SKU","product_sku")}} />
                 <label htmlFor="SKU">SKU</label>
-                <input type="checkbox" id="Name" />
+                <input type="checkbox" id="Name" onChange={(e)=>{handleCheck(e,"Name","product_name")}} />
                 <label htmlFor="Name">Name</label>
-                <input type="checkbox" id="Manage Stock" />
+                <input type="checkbox" id="Manage Stock" onChange={(e)=>{handleCheck(e,"Manage Stock","product_manage_stock")}} />
                 <label htmlFor="Manage Stock">Manage Stock</label>
-                <input type="checkbox" id="Stock status" />
+                <input type="checkbox" id="Stock status" onChange={(e)=>{handleCheck(e,"Stock status","product_stock_status")}} />
                 <label htmlFor="Stock status">Stock status</label>
-                <input type="checkbox" id="Backorders" />
+                <input type="checkbox" id="Backorders" onChange={(e)=>{handleCheck(e,"Backorders","product_backorders")}} />
                 <label htmlFor="Backorders">Backorders</label>
-                <input type="checkbox" id="Stock Quantity" />
+                <input type="checkbox" id="Stock Quantity" onChange={(e)=>{handleCheck(e,"Stock Quantity","product_stock_quantity")}} />
                 <label htmlFor="Stock Quantity">Stock Quantity</label>                
             </div>
-            <button class="import-export-btn" >Export CSV</button>
+            <button class="import-export-btn">
+                <CSVLink data={data} headers={header} filename={'Products.csv'}>Export CSV</CSVLink>
+            </button>
         </div>
     );
 };

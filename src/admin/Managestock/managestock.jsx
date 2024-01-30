@@ -15,6 +15,7 @@ const Managestock = () => {
     const [selectedStockStatus, setSelectedStockStatus] = useState('');
     const [data,setData]= useState([]);
     const [model,setModel]=useState(false);
+    const [inputValue, setInputValue] = useState('');
     
     useEffect(() => {
         if(stockManagerAppLocalizer.pro_active != 'free'){
@@ -28,14 +29,29 @@ const Managestock = () => {
     }, []);
     const style={
         width: '50px',
-        height: '50px'
-    }   
-    const handleImportExport=()=>{
+        height: '50px',
+    } 
+    const handleInputChange = (e,id,str) => {
+        // data.forEach((product)=>{
+        //     if(product['product_id']===id){
+                setData((prevData)=> {
+                   return prevData.map((obj)=>{
+                        if(obj.product_id===id){
+                            return {...obj, [str]:e.target.value};
+                        }
+                        return obj;
+                    })
+                });
+        //     }
+        // })
+        // setInputValue(e.target.value);
+    }
+    const handleImportExport = () => {
         let page=document.querySelector('.woo-subscriber-list');
         page.removeChild(page.children[0]);
         ReactDOM.render(<ImportExport data={data} />, page);        
     }
-    const getFilteredData= ()=>{
+    const getFilteredData = () => {
         let modifyData = [...data];
         if(skuFilter){
             modifyData = modifyData.filter(item =>item.product_sku.toLowerCase().includes(skuFilter.toLowerCase()))
@@ -51,29 +67,30 @@ const Managestock = () => {
         }
         return modifyData;
     }
-    const columns= [
+    const columns = [
         {
-            name:"Product Name",
-            selector:(row)=>row.product_name,
+            name: "Product Name",
+            selector: (row) => row.product_name,
         },
         {
             name:"Product Photo",
-            cell: (row) =>(
+            cell: (row) => (
                 <img src={row.product_image} style={style} className={"table-image"}/>
             )
         },
         {
             name: "Product Type",
-            selector:(row)=>row.product_type,
+            selector: (row) => row.product_type,
         },
         {
-            name:"SKU",
+            name: "SKU",
             cell: (row) => (
-                <Cell value={row.product_sku} name={"set_sku"} id={row.product_id}/>
+                <input type="text" value={row.product_sku} name={"set_sku"} onChange={(e) => {handleInputChange(e,row.product_id,"product_sku")}} />
+                // <Cell value={row.product_sku} name={"set_sku"} id={row.product_id}/>
             )
         },
         {
-            name:"Regular Price",
+            name: "Regular Price",
             cell: (row) => {
                 if (row.product_type=="simple") {
                     return <Cell str={false} value={row.product_regular_price} name={"set_regular_price"} id={row.product_id}/>;
@@ -82,7 +99,7 @@ const Managestock = () => {
             }
         },
         {            
-            name:"Sale Price",
+            name: "Sale Price",
             cell: (row) => {
                 if (row.product_type=="simple") {
                     return <Cell str={false} value={row.product_sale_price} name={"set_sale_price"} id={row.product_id} />;
@@ -90,19 +107,19 @@ const Managestock = () => {
             }
         },
         {
-            name:"Weight",
+            name: "Weight",
             cell: (row) => (
                 <Cell value={row.product_weight} name={"set_weight"} id={row.product_id} />
             )
         },
         {
-            name:"Manage Stock",
+            name: "Manage Stock",
             cell: (row) => (
                 <Checkbox name={"set_manage_stock"} id={row.product_id} state={row.product_manage_stock?true:false} />
             )
         },
         {
-            name:"Stock Status",
+            name: "Stock Status",
             cell: (row) => {
                 if (row.product_manage_stock) {
                     return`${row.product_stock_status}`;
@@ -112,7 +129,7 @@ const Managestock = () => {
               },
         },
         {
-            name:"Backorders",
+            name: "Backorders",
             cell: (row) => {
                 if (row.product_manage_stock) {
                   return <Dropdown backorder={true} id={row.product_id} value={row.product_backorders} option1={"no"} option2={"notify"} option3={"yes"} />;
@@ -122,7 +139,7 @@ const Managestock = () => {
             }
         },
         {
-            name:"Stock",
+            name: "Stock",
             cell: (row) => {
                 if (row.product_manage_stock) {
                   return <Cell str={false} value={row.product_stock_quantity} name={"set_stock_quantity"} id={row.product_id} />;
@@ -134,25 +151,25 @@ const Managestock = () => {
     <>
         {stockManagerAppLocalizer.pro_active === 'free'  ?
             <div>
-                {/* <Dialog
+                <Dialog
                     className="woo-module-popup"
                     open={model}
-                    onClose={setModel(false)}
+                    onClose={() => {setModel(false)}}
                     aria-labelledby="form-dialog-title"
                 >	
                     <span 
                         className="icon-cross stock-manager-popup-cross"
-                        onClick={setModel(false)}
+                        onClick={() => {setModel(false)}}
                     ></span>
                     <Popoup/>
-                </Dialog> */}
+                </Dialog>
                 <img
                     src={ stockManagerAppLocalizer.manage_stock }
-                    alt="Inventory-manager"
+                    alt="subscriber-list"
                     className='subscriber-img'
-                    onClick={() => setModel(true)}
-                />                
-            </div>        
+                    onClick={() => {setModel(true)}}
+                />
+            </div>
         :
             <div className="woo-subscriber-list">
                 <div className="woo-container">
@@ -205,12 +222,12 @@ const Managestock = () => {
                             <div className="pull-right export">
                                 <button class="import-export-btn" onClick={handleImportExport}>Import/Export</button>
                             </div>
-                        </div>                        
+                        </div>
                         <div className="woo-backend-datatable-wrapper">
                             <DataTable
                             columns={columns}
                             data={getFilteredData()}
-                            selectableRows
+                            // selectableRows
                             pagination
                             />
                         </div>

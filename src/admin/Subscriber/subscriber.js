@@ -537,7 +537,7 @@ class Subscriber extends Component {
 												}
 												data={this.state.datasubscriber}
 												selectableRows
-												pagination
+												// pagination
 											/>
 										</div>
 									) : (

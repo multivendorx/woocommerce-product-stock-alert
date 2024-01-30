@@ -17370,12 +17370,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
+/* harmony import */ var react_csv__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-csv */ "./node_modules/react-csv/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
 
 
 
-const ImportExport = props => {
+
+const ImportExport = ({
+  data
+}) => {
   const [file, setFile] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
+  const [header, setHeader] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
   const processCSV = (str, delim = ',') => {
     const headers = str.slice(0, str.indexOf('\n')).split(delim);
     const rows = str.slice(str.indexOf('\n') + 1).split('\n');
@@ -17389,8 +17394,18 @@ const ImportExport = props => {
     });
     return newArray;
   };
+  // let headers = [{label: "Id", key: "product_id"},{label: "Product Type", key: "product_type"}];
   const handleFileChange = event => {
     setFile(event.target.files[0]);
+  };
+  const handleCheck = (e, label, key) => {
+    let str = `{"label":"${label}","key":"${key}"}`;
+    str = JSON.parse(str);
+    if (e.target.checked) {
+      setHeader(prevHeader => [...prevHeader, str]);
+    } else {
+      setHeader(prevHeader => prevHeader.filter(header => header.label !== str.label || header.key !== str.key));
+    }
   };
   const handleUpload = () => {
     if (file) {
@@ -17399,7 +17414,7 @@ const ImportExport = props => {
       reader.onload = function (e) {
         let text = e.target.result;
         let data = processCSV(text);
-        (0,axios__WEBPACK_IMPORTED_MODULE_1__["default"])({
+        (0,axios__WEBPACK_IMPORTED_MODULE_2__["default"])({
           method: 'post',
           url: `${stockManagerAppLocalizer.apiUrl}/woo-stockmanager-pro/v1/import`,
           data: data
@@ -17421,51 +17436,79 @@ const ImportExport = props => {
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
     onClick: handleUpload,
     class: "import-export-btn"
-  }, "Upload CSV")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, "Import CSV")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "export"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", null, "Export"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "You can download csv file,with stock data.", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), "Please Select the field of which you want to download the csv."), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "checkbox",
-    id: "Id"
+    id: "Id",
+    onChange: e => {
+      handleCheck(e, "Id", "product_id");
+    }
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     htmlFor: "Id"
   }, "Id"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "checkbox",
-    id: "Type"
+    id: "Type",
+    onChange: e => {
+      handleCheck(e, "Type", "product_type");
+    }
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     htmlFor: "Type"
   }, "Type"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "checkbox",
-    id: "SKU"
+    id: "SKU",
+    onChange: e => {
+      handleCheck(e, "SKU", "product_sku");
+    }
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     htmlFor: "SKU"
   }, "SKU"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "checkbox",
-    id: "Name"
+    id: "Name",
+    onChange: e => {
+      handleCheck(e, "Name", "product_name");
+    }
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     htmlFor: "Name"
   }, "Name"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "checkbox",
-    id: "Manage Stock"
+    id: "Manage Stock",
+    onChange: e => {
+      handleCheck(e, "Manage Stock", "product_manage_stock");
+    }
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     htmlFor: "Manage Stock"
   }, "Manage Stock"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "checkbox",
-    id: "Stock status"
+    id: "Stock status",
+    onChange: e => {
+      handleCheck(e, "Stock status", "product_stock_status");
+    }
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     htmlFor: "Stock status"
   }, "Stock status"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "checkbox",
-    id: "Backorders"
+    id: "Backorders",
+    onChange: e => {
+      handleCheck(e, "Backorders", "product_backorders");
+    }
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     htmlFor: "Backorders"
   }, "Backorders"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "checkbox",
-    id: "Stock Quantity"
+    id: "Stock Quantity",
+    onChange: e => {
+      handleCheck(e, "Stock Quantity", "product_stock_quantity");
+    }
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     htmlFor: "Stock Quantity"
   }, "Stock Quantity")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
     class: "import-export-btn"
-  }, "Export CSV"));
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_csv__WEBPACK_IMPORTED_MODULE_1__.CSVLink, {
+    data: data,
+    headers: header,
+    filename: 'Products.csv'
+  }, "Export CSV")));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ImportExport);
 
@@ -17489,6 +17532,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Checkbox_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Checkbox.jsx */ "./src/admin/components/Checkbox.jsx");
 /* harmony import */ var _components_Cell_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/Cell.jsx */ "./src/admin/components/Cell.jsx");
 /* harmony import */ var _components_Dropdown_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/Dropdown.jsx */ "./src/admin/components/Dropdown.jsx");
+/* harmony import */ var _mui_material_Dialog__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @mui/material/Dialog */ "./node_modules/@mui/material/Dialog/Dialog.js");
 /* harmony import */ var _PopupContent_PopupContent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../PopupContent/PopupContent */ "./src/admin/PopupContent/PopupContent.jsx");
 /* harmony import */ var _ImportExport_ImportExport_jsx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../ImportExport/ImportExport.jsx */ "./src/admin/ImportExport/ImportExport.jsx");
 
@@ -17508,6 +17552,7 @@ const Managestock = () => {
   const [selectedStockStatus, setSelectedStockStatus] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
   const [data, setData] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
   const [model, setModel] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
+  const [inputValue, setInputValue] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     if (stockManagerAppLocalizer.pro_active != 'free') {
       (0,axios__WEBPACK_IMPORTED_MODULE_7__["default"])({
@@ -17522,6 +17567,25 @@ const Managestock = () => {
     width: '50px',
     height: '50px'
   };
+  const handleInputChange = (e, id, str) => {
+    // data.forEach((product)=>{
+    //     if(product['product_id']===id){
+    setData(prevData => {
+      return prevData.map(obj => {
+        if (obj.product_id === id) {
+          return {
+            ...obj,
+            [str]: e.target.value
+          };
+        }
+        return obj;
+      });
+    });
+    //     }
+    // })
+    // setInputValue(e.target.value);
+  };
+
   const handleImportExport = () => {
     let page = document.querySelector('.woo-subscriber-list');
     page.removeChild(page.children[0]);
@@ -17560,11 +17624,15 @@ const Managestock = () => {
     selector: row => row.product_type
   }, {
     name: "SKU",
-    cell: row => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_Cell_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    cell: row => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+      type: "text",
       value: row.product_sku,
       name: "set_sku",
-      id: row.product_id
+      onChange: e => {
+        handleInputChange(e, row.product_id, "product_sku");
+      }
     })
+    // <Cell value={row.product_sku} name={"set_sku"} id={row.product_id}/>
   }, {
     name: "Regular Price",
     cell: row => {
@@ -17648,11 +17716,25 @@ const Managestock = () => {
       }
     }
   }];
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, stockManagerAppLocalizer.pro_active === 'free' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, stockManagerAppLocalizer.pro_active === 'free' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Dialog__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    className: "woo-module-popup",
+    open: model,
+    onClose: () => {
+      setModel(false);
+    },
+    "aria-labelledby": "form-dialog-title"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "icon-cross stock-manager-popup-cross",
+    onClick: () => {
+      setModel(false);
+    }
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_PopupContent_PopupContent__WEBPACK_IMPORTED_MODULE_5__["default"], null)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: stockManagerAppLocalizer.manage_stock,
-    alt: "Inventory-manager",
+    alt: "subscriber-list",
     className: "subscriber-img",
-    onClick: () => setModel(true)
+    onClick: () => {
+      setModel(true);
+    }
   })) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "woo-subscriber-list"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -17714,8 +17796,9 @@ const Managestock = () => {
     className: "woo-backend-datatable-wrapper"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_data_table_component__WEBPACK_IMPORTED_MODULE_1__["default"], {
     columns: columns,
-    data: getFilteredData(),
-    selectableRows: true,
+    data: getFilteredData()
+    // selectableRows
+    ,
     pagination: true
   }))))));
 };
@@ -18202,8 +18285,8 @@ class Subscriber extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_data_table_component__WEBPACK_IMPORTED_MODULE_2__["default"], {
       columns: this.state.columns_subscriber_list,
       data: this.state.datasubscriber,
-      selectableRows: true,
-      pagination: true
+      selectableRows: true
+      // pagination
     })) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)((react_spinners_PuffLoader__WEBPACK_IMPORTED_MODULE_8___default()), {
       css: override,
       color: '#cd0000',
@@ -18335,17 +18418,17 @@ const Cell = ({
   const [isReadOnly, setIsReadOnly] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true);
   const [btnclick, buttonClick] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
   const [editted, inputEditted] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
-  const handleInputChange = e => {
-    inputEditted(true);
-    setInputValue(e.target.value);
-  };
+
+  // const handleInputChange = (e) => {
+  //     inputEditted(true);
+  //     setInputValue(e.target.value);
+  // };
   const handleMouseOut = e => {
     if (btnclick | editted) {
       document.addEventListener('click', handleDocumentClick);
     }
   };
   const buttonOnClick = e => {
-    // console.log(e.target.parentElement);
     buttonClick(true);
     setIsReadOnly(false);
   };
@@ -18377,8 +18460,9 @@ const Cell = ({
     type: "text",
     style: style,
     value: inputValue ? inputValue : value,
-    readOnly: isReadOnly,
-    onChange: handleInputChange,
+    readOnly: isReadOnly
+    // onChange={handleInputChange}
+    ,
     onMouseOut: handleMouseOut
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
     onClick: buttonOnClick,
@@ -18441,33 +18525,27 @@ const Checkbox = ({
       data: data
     });
     let row = e.target.parentElement.parentElement; // row containing all element
+    let stock_status = row.children[8];
+    let back_orders = row.children[9];
+    let stock_quantity = row.children[10];
     if (e.target.checked) {
-      let stock_div = row.children[8].children[0]; //div containing select
-      let stock_quantity = row.children[10];
-      let stock_select_element = stock_div.children[0]; //select element
-      let backorder_div = row.children[9];
-      backorder_div.innerText = "";
-      let stock_select_element_text = stock_select_element.value;
-      stock_div.innerHTML = stock_select_element.value;
+      back_orders.innerHTML = "";
+      stock_status.innerHTML = "outofstock";
       ReactDOM.render((0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Cell__WEBPACK_IMPORTED_MODULE_2__["default"], {
-        str: false,
         name: "set_stock_quantity",
         id: id
       }), stock_quantity);
       ReactDOM.render((0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Dropdown__WEBPACK_IMPORTED_MODULE_1__["default"], {
         backorder: true,
         id: id,
-        value: stock_select_element_text,
+        value: "no",
         option1: "no",
         option2: "notify",
         option3: "yes"
-      }), backorder_div);
+      }), back_orders);
     } else {
-      let backorder_div = row.children[9].children[0];
-      let stock_quantity = row.children[10];
-      let stock_div = row.children[8];
-      stock_quantity.innerHTML = " ";
-      backorder_div.innerHTML = "no";
+      back_orders.innerHTML = "no";
+      stock_quantity.innerHTML = "";
       ReactDOM.render((0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Dropdown__WEBPACK_IMPORTED_MODULE_1__["default"], {
         backorder: false,
         id: id,
@@ -18475,7 +18553,7 @@ const Checkbox = ({
         option1: "instock",
         option2: "onbackorder",
         option3: "outofstock"
-      }), stock_div);
+      }), stock_status);
     }
   };
   const style = {};

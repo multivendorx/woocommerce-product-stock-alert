@@ -19,23 +19,18 @@ const Checkbox = ({id,name,state})=>{
             data: data
         })
         let row =e.target.parentElement.parentElement; // row containing all element
+        let stock_status = row.children[8];
+        let back_orders = row.children[9];
+        let stock_quantity = row.children[10];
         if(e.target.checked){
-            let stock_div = row.children[8].children[0]; //div containing select
-            let stock_quantity = row.children[10]; 
-            let stock_select_element = stock_div.children[0]; //select element
-            let backorder_div =row.children[9]
-            backorder_div.innerText="";
-            let stock_select_element_text=stock_select_element.value;
-            stock_div.innerHTML=stock_select_element.value;
-            ReactDOM.render(<Cell str={false} name={"set_stock_quantity"} id={id}/>,stock_quantity)
-            ReactDOM.render(<Dropdown backorder={true} id={id} value={stock_select_element_text} option1={"no"} option2={"notify"} option3={"yes"} />, backorder_div);
+            back_orders.innerHTML = "";
+            stock_status.innerHTML = "outofstock";
+            ReactDOM.render(<Cell name={"set_stock_quantity"} id={id}/>,stock_quantity)
+            ReactDOM.render(<Dropdown backorder={true} id={id} value={"no"} option1={"no"} option2={"notify"} option3={"yes"} />, back_orders);
         }else{
-            let backorder_div =row.children[9].children[0];
-            let stock_quantity = row.children[10];
-            let stock_div =row.children[8]
-            stock_quantity.innerHTML=" ";
-            backorder_div.innerHTML="no";
-            ReactDOM.render(<Dropdown backorder={false} id={id} value={"outofstock"} option1={"instock"} option2={"onbackorder"} option3={"outofstock"} />, stock_div);
+            back_orders.innerHTML = "no";
+            stock_quantity.innerHTML = "";
+            ReactDOM.render(<Dropdown backorder={false} id={id} value={"outofstock"} option1={"instock"} option2={"onbackorder"} option3={"outofstock"} />, stock_status);
         }
     };
     const style={
