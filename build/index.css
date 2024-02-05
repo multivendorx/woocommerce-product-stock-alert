@@ -1665,8 +1665,32 @@ select {
 }
 
 .table-image {
-  width: "50px";
-  height: "50px";
+  width: 50px;
+  height: 50px;
+}
+
+.input-field {
+  width: 70%;
+  padding: 0px 4px !important;
+  background: none !important;
+}
+
+.input-field-edit {
+  border: none !important;
+  outline: none !important;
+}
+
+.dashicons-edit {
+  width: 29px;
+  height: 29px;
+  display: none;
+}
+
+.cell {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
 }
 
 /*# sourceMappingURL=index.css.map*/

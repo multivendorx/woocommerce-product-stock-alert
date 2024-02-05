@@ -19,7 +19,6 @@ const ImportExport = ({data}) => {
         })
         return newArray
     };
-    // let headers = [{label: "Id", key: "product_id"},{label: "Product Type", key: "product_type"}];
     const handleFileChange = (event) => {
         setFile(event.target.files[0]);
     };
