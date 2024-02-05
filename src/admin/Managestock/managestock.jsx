@@ -1,8 +1,6 @@
 import axios from 'axios';
 import Dialog from "@mui/material/Dialog";
 import React,{useEffect,useState} from 'react';
-import Dropdown from '../components/Dropdown.jsx'
-import Checkbox from '../components/Checkbox.jsx';
 import Popoup from '../PopupContent/PopupContent';
 import DataTable from 'react-data-table-component';
 import ImportExport from '../ImportExport/ImportExport.jsx';
@@ -30,35 +28,59 @@ const Managestock = () => {
             });
         }
     }, []);
+    function changeData(newData){
+        axios({
+            method: 'post',
+            url: `${stockManagerAppLocalizer.apiUrl}/woo-stockmanager-pro/v1/update`,
+            data: newData,
+        })
+    }
     const handleDocumentClick = () =>{
         const data ={
             id: inputId,
             name: inputName,
             value: inputValue
         }
-        axios({
-            method: 'post',
-            url: `${stockManagerAppLocalizer.apiUrl}/woo-stockmanager-pro/v1/update`,
-            data: data,
-        })
+        changeData(data);
         setInputChange(false);
         event.classList.add('input-field-edit');
         event.setAttribute('readonly', 'readonly');
         document.removeEventListener('click', handleDocumentClick);
     }
-    const handleInputChange = (e,id,str) => {
+    const handleChange = (e,id,str) => {
+        let Value;
+        if(str === "product_manage_stock"){
+            Value = e.target.checked;
+        }else{
+            Value = e.target.value;
+        }
+        const updateData = {
+            id: id,
+            name: e.target.name,
+            value:Value,
+        }
+        switch(str){
+            case "product_manage_stock":
+                changeData(updateData);
+                break;
+            case "product_backorders":
+            case "product_stock_status":
+                changeData(updateData);
+                break;
+            default:
+                setInputChange(true);
+                setInputValue(e.target.value);
+                setInputName(e.target.name);
+                setInputId(e.target.id);
+        }
         setData((prevData) => {
             return prevData.map((obj) => {
                 if(obj.product_id === id){
-                    return {...obj, [str] : e.target.value};
+                    return {...obj, [str] : Value};
                 }
                 return obj;
             })
         });
-        setInputChange(true);
-        setInputValue(e.target.value);
-        setInputName(e.target.name);
-        setInputId(e.target.id);
     }
     const handleInputMouseOut = (e) => {
         e.currentTarget.children[1].style.display = 'none';
@@ -119,7 +141,7 @@ const Managestock = () => {
             width: '130px',
             cell: (row) => (
                 <div class="cell" onMouseOver={handleInputMouseOver} onMouseOut={handleInputMouseOut}>
-                    <input  type="text" class="input-field input-field-edit" id={row.product_id} value={row.product_sku} name={"set_sku"} onChange={(e) => {handleInputChange(e,row.product_id,"product_sku")}} readOnly />
+                    <input  type="text" class="input-field input-field-edit" id={row.product_id} value={row.product_sku} name={"set_sku"} onChange={(e) => {handleChange(e,row.product_id,"product_sku")}} readOnly />
                     <span onClick={editButtonOnClick} class="dashicons dashicons-edit edit"></span>
                 </div>
             )
@@ -129,11 +151,10 @@ const Managestock = () => {
             cell: (row) => {
                 if (row.product_type=="simple") {
                     return  <div class="cell" onMouseOver={handleInputMouseOver} onMouseOut={handleInputMouseOut}>
-                                <input type="text" class="input-field input-field-edit" id={row.product_id} value={row.product_regular_price} name={"set_regular_price"} onChange={(e) => {handleInputChange(e,row.product_id,"product_regular_price")}} readOnly />                        
+                                <input type="text" class="input-field input-field-edit" id={row.product_id} value={row.product_regular_price} name={"set_regular_price"} onChange={(e) => {handleChange(e,row.product_id,"product_regular_price")}} readOnly />                        
                                 <span onClick={editButtonOnClick} class="dashicons dashicons-edit edit"></span>
                             </div>
-                }
-                
+                }                
             }
         },
         {            
@@ -141,18 +162,17 @@ const Managestock = () => {
             cell: (row) => {
                 if (row.product_type=="simple") {
                     return <div class="cell" onMouseOver={handleInputMouseOver} onMouseOut={handleInputMouseOut}>
-                                <input type="text" class="input-field input-field-edit" id={row.product_id} value={row.product_sale_price} name={"set_sale_price"} onChange={(e) => {handleInputChange(e,row.product_id,"product_sale_price")}} readOnly />                        
+                                <input type="text" class="input-field input-field-edit" id={row.product_id} value={row.product_sale_price} name={"set_sale_price"} onChange={(e) => {handleChange(e,row.product_id,"product_sale_price")}} readOnly />                        
                                 <span onClick={editButtonOnClick} class="dashicons dashicons-edit edit"></span>
                             </div>
-                }
-                
+                }                
             }
         },
         {
             name: "Weight",
             cell: (row) => (
                 <div class="cell" onMouseOver={handleInputMouseOver} onMouseOut={handleInputMouseOut}>
-                    <input type="text" class="input-field input-field-edit" id={row.product_id} value={row.product_weight} name={"set_weight"} onChange={(e) => {handleInputChange(e,row.product_id,"product_weight")}} readOnly/>                        
+                    <input type="text" class="input-field input-field-edit" id={row.product_id} value={row.product_weight} name={"set_weight"} onChange={(e) => {handleChange(e,row.product_id,"product_weight")}} readOnly/>                        
                     <span onClick={editButtonOnClick} class="dashicons dashicons-edit"></span>
                 </div>
             )
@@ -160,7 +180,7 @@ const Managestock = () => {
         {
             name: "Manage Stock",
             cell: (row) => (
-                <Checkbox name={"set_manage_stock"} handleInputMouseOver={handleInputMouseOver} handleInputMouseOut={handleInputMouseOut} editButtonOnClick={editButtonOnClick} handleInputChange={handleInputChange} id={row.product_id} state={row.product_manage_stock?true:false} />
+                <input id={row.product_id} type="checkbox" name={"set_manage_stock"} checked={row.product_manage_stock} onChange={(e) => {handleChange(e,row.product_id,"product_manage_stock")}} />
             )
         },
         {
@@ -170,15 +190,27 @@ const Managestock = () => {
                 if (row.product_manage_stock) {
                     return`${row.product_stock_status}`;
                 }else {
-                    return <Dropdown backorder={false} id={row.product_id} value={row.product_stock_status} option1={"instock"} option2={"onbackorder"} option3={"outofstock"} />;
+                    return <div className='custom-select'>
+                        <select name='stock_status' value={row.product_stock_status} onChange={(e) => {handleChange(e,row.product_id,"product_stock_status")}} >
+                            <option value={"instock"}>Instock</option>
+                            <option value={"onbackorder"}>Onbackorder</option>
+                            <option value={"outofstock"}>Outofstock</option>
+                        </select>
+                    </div>
                 }
-              },
+            },
         },
         {
             name: "Backorders",
             cell: (row) => {
                 if (row.product_manage_stock) {
-                  return <Dropdown backorder={true} id={row.product_id} value={row.product_backorders} option1={"no"} option2={"notify"} option3={"yes"} />;
+                    return <div className='custom-select'>
+                        <select name='set_backorders' value={row.product_backorders} onChange={(e) => {handleChange(e,row.product_id,"product_backorders")}}>
+                            <option value={"no"}>No</option>
+                            <option value={"notify"}>Notify</option>
+                            <option value={"yes"}>Yes</option>
+                        </select>
+                    </div>
                 }else {
                   return`${row.product_backorders}`;
                 }
@@ -189,7 +221,7 @@ const Managestock = () => {
             cell: (row) => {
                 if (row.product_manage_stock) {
                     return <div class="cell" onMouseOver={handleInputMouseOver} onMouseOut={handleInputMouseOut}>
-                                <input type="text" class="input-field input-field-edit" id={row.product_id} value={row.product_stock_quantity} name={"set_stock_quantity"} onChange={(e) => {handleInputChange(e,row.product_id,"product_stock_quantity")}} />                        
+                                <input type="text" class="input-field input-field-edit" id={row.product_id} value={row.product_stock_quantity} name={"set_stock_quantity"} onChange={(e) => {handleChange(e,row.product_id,"product_stock_quantity")}} />                        
                                 <span onClick={editButtonOnClick} class="dashicons dashicons-edit edit"></span>
                             </div>
                 }
