@@ -6,17 +6,21 @@ import DataTable from 'react-data-table-component';
 import ImportExport from '../ImportExport/ImportExport.jsx';
 
 const Managestock = () => {
-    const [skuFilter, setSkuFilter] = useState('');
-    const [nameFilter, setNameFilter] = useState('');
-    const [selectedProductType, setSelectedProductType] = useState('');
-    const [selectedStockStatus, setSelectedStockStatus] = useState('');
-    const [data,setData] = useState([]);
-    const [model,setModel] = useState(false);
-    const [inputChange,setInputChange] = useState(false);
-    const [inputValue,setInputValue] = useState();
-    const [inputName,setInputName] = useState();
-    const [inputId,setInputId] = useState();
-    const [event,setEvent] = useState();
+    const [ filter, setFilter ] = useState({
+        sku: '',
+        name: '',
+        productType: '',
+        stockStatus: '',
+    });
+    const [ uploadData, setUploadData ] = useState({
+        id: '',
+        name: '',
+        value: '',
+    });
+    const [ event,setEvent ] = useState();
+    const [ data, setData ] = useState([]);
+    const [ openDialog, setOpenDialog ] = useState(false);
+    const [ inputChange,setInputChange ] = useState(false);
     
     useEffect(() => {
         if(stockManagerAppLocalizer.pro_active != 'free'){
@@ -28,50 +32,49 @@ const Managestock = () => {
             });
         }
     }, []);
-    function changeData(newData){
+    useEffect(() => {
+        const updateData = async () => {
+        let name = uploadData.name
+        if( name !== "" || name === "set_manage_stock" || name === "set_backorders" || name === "stock_status"){
+            changeData()
+        }
+        };    
+        updateData();
+    }, [uploadData]);
+    function changeData(){
         axios({
             method: 'post',
             url: `${stockManagerAppLocalizer.apiUrl}/woo-stockmanager-pro/v1/update`,
-            data: newData,
+            data: uploadData,
         })
     }
-    const handleDocumentClick = () =>{
-        const data ={
-            id: inputId,
-            name: inputName,
-            value: inputValue
-        }
-        changeData(data);
+    function setfilter(name,value){
+        setFilter({
+            ...filter,
+            [name]: value,
+        });
+    }
+    function updateData(id,name,value){
+        setUploadData({
+            ['id']:id,
+            ['name']:name,
+            ['value']:value,
+        })
+    }
+    const handleDocumentClick = () => {
+        changeData();
         setInputChange(false);
         event.classList.add('input-field-edit');
         event.setAttribute('readonly', 'readonly');
         document.removeEventListener('click', handleDocumentClick);
     }
     const handleChange = (e,id,str) => {
-        let Value;
-        if(str === "product_manage_stock"){
-            Value = e.target.checked;
-        }else{
-            Value = e.target.value;
-        }
-        const updateData = {
-            id: id,
-            name: e.target.name,
-            value:Value,
-        }
-        switch(str){
-            case "product_manage_stock":
-                changeData(updateData);
-                break;
-            case "product_backorders":
-            case "product_stock_status":
-                changeData(updateData);
-                break;
-            default:
-                setInputChange(true);
-                setInputValue(e.target.value);
-                setInputName(e.target.name);
-                setInputId(e.target.id);
+        let element =e.target;
+        let name = element.name;
+        let Value = ( name === "set_manage_stock" )? element.checked:element.value;
+        updateData(element.id,name,Value);
+        if(name !== "set_manage_stock" || name !== "set_backorders" || name !== "stock_status"){
+            setInputChange(true);
         }
         setData((prevData) => {
             return prevData.map((obj) => {
@@ -107,17 +110,17 @@ const Managestock = () => {
     }
     const getFilteredData = () => {
         let modifyData = [...data];
-        if(skuFilter){
-            modifyData = modifyData.filter(item =>item.product_sku.toLowerCase().includes(skuFilter.toLowerCase()));
+        if(filter.sku){
+            modifyData = modifyData.filter(item =>item.product_sku.toLowerCase().includes(filter.sku.toLowerCase()));
         }
-        if(nameFilter){
-            modifyData = modifyData.filter(item =>item.product_name.toLowerCase().includes(nameFilter.toLowerCase()));
+        if(filter.name){
+            modifyData = modifyData.filter(item =>item.product_name.toLowerCase().includes(filter.name.toLowerCase()));
         }
-        if(selectedStockStatus){
-            modifyData = modifyData.filter(item =>(item.product_stock_status === selectedStockStatus));
+        if(filter.stockStatus){
+            modifyData = modifyData.filter(item =>(item.product_stock_status === filter.stockStatus));
         }
-        if(selectedProductType){
-            modifyData = modifyData.filter(item =>(item.product_type === selectedProductType));
+        if(filter.productType){
+            modifyData = modifyData.filter(item =>(item.product_type === filter.productType));
         }
         return modifyData;
     }
@@ -190,13 +193,13 @@ const Managestock = () => {
                 if (row.product_manage_stock) {
                     return`${row.product_stock_status}`;
                 }else {
-                    return <div className='custom-select'>
-                        <select name='stock_status' value={row.product_stock_status} onChange={(e) => {handleChange(e,row.product_id,"product_stock_status")}} >
-                            <option value={"instock"}>Instock</option>
-                            <option value={"onbackorder"}>Onbackorder</option>
-                            <option value={"outofstock"}>Outofstock</option>
-                        </select>
-                    </div>
+                    return  <div className='custom-select'>
+                                <select id={row.product_id} name='stock_status' value={row.product_stock_status} onChange={(e) => {handleChange(e,row.product_id,"product_stock_status")}} >
+                                    <option value={"instock"}>Instock</option>
+                                    <option value={"onbackorder"}>Onbackorder</option>
+                                    <option value={"outofstock"}>Outofstock</option>
+                                </select>
+                            </div>
                 }
             },
         },
@@ -204,13 +207,13 @@ const Managestock = () => {
             name: "Backorders",
             cell: (row) => {
                 if (row.product_manage_stock) {
-                    return <div className='custom-select'>
-                        <select name='set_backorders' value={row.product_backorders} onChange={(e) => {handleChange(e,row.product_id,"product_backorders")}}>
-                            <option value={"no"}>No</option>
-                            <option value={"notify"}>Notify</option>
-                            <option value={"yes"}>Yes</option>
-                        </select>
-                    </div>
+                    return  <div className='custom-select'>
+                                <select id={row.product_id} name='set_backorders' value={row.product_backorders} onChange={(e) => {handleChange(e,row.product_id,"product_backorders")}}>
+                                    <option value={"no"}>No</option>
+                                    <option value={"notify"}>Notify</option>
+                                    <option value={"yes"}>Yes</option>
+                                </select>
+                            </div>
                 }else {
                   return`${row.product_backorders}`;
                 }
@@ -234,13 +237,13 @@ const Managestock = () => {
             <div>
                 <Dialog
                     className="woo-module-popup"
-                    open={model}
-                    onClose={() => {setModel(false)}}
+                    open={openDialog}
+                    onClose={() => {setOpenDialog(false)}}
                     aria-labelledby="form-dialog-title"
                 >	
                     <span 
                         className="icon-cross stock-manager-popup-cross"
-                        onClick={() => {setModel(false)}}
+                        onClick={() => {setOpenDialog(false)}}
                     ></span>
                     <Popoup/>
                 </Dialog>
@@ -248,7 +251,7 @@ const Managestock = () => {
                     src={ stockManagerAppLocalizer.manage_stock }
                     alt="subscriber-list"
                     className='subscriber-img'
-                    onClick={() => {setModel(true)}}
+                    onClick={() => {setOpenDialog(true)}}
                 />
             </div>
         :
@@ -266,22 +269,22 @@ const Managestock = () => {
                                     <input
                                         type="text"
                                         placeholder="Search by Name..."
-                                        value={nameFilter}
-                                        onChange={(e) => setNameFilter(e.target.value)}
+                                        value={filter.name}
+                                        onChange={(e) => setfilter('name',e.target.value)}
                                     />
                                 </div>
                                 <div class="woo-header-search-section">
                                     <input
                                         type="text"
                                         placeholder="Search by SKU..."
-                                        value={skuFilter}
-                                        onChange={(e) =>setSkuFilter(e.target.value)}
+                                        value={filter.sku}
+                                        onChange={(e) =>setfilter('sku',e.target.value)}
                                     />
                                 </div>
                                 <div class="custom-select">
                                     <select
-                                        value={selectedProductType?selectedProductType:""}
-                                        onChange={(e) => setSelectedProductType(e.target.value)}
+                                        value={filter.productType}
+                                        onChange={(e) => setfilter('productType',e.target.value)}
                                     >
                                         <option value="">Product Type</option>
                                         <option value="simple">Simple</option>
@@ -290,8 +293,8 @@ const Managestock = () => {
                                 </div>
                                 <div class="custom-select">
                                     <select
-                                        value={selectedStockStatus?selectedStockStatus:""}
-                                        onChange={(e) => setSelectedStockStatus(e.target.value)}
+                                        value={filter.stockStatus}
+                                        onChange={(e) => setfilter('stockStatus',e.target.value)}
                                     >
                                         <option value="" >Stock Status</option>
                                         <option value="instock">Instock</option>

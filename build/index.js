@@ -17539,17 +17539,21 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const Managestock = () => {
-  const [skuFilter, setSkuFilter] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
-  const [nameFilter, setNameFilter] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
-  const [selectedProductType, setSelectedProductType] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
-  const [selectedStockStatus, setSelectedStockStatus] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
-  const [data, setData] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
-  const [model, setModel] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
-  const [inputChange, setInputChange] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
-  const [inputValue, setInputValue] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)();
-  const [inputName, setInputName] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)();
-  const [inputId, setInputId] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)();
+  const [filter, setFilter] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+    sku: '',
+    name: '',
+    productType: '',
+    stockStatus: ''
+  });
+  const [uploadData, setUploadData] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+    id: '',
+    name: '',
+    value: ''
+  });
   const [event, setEvent] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)();
+  const [data, setData] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
+  const [openDialog, setOpenDialog] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
+  const [inputChange, setInputChange] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     if (stockManagerAppLocalizer.pro_active != 'free') {
       (0,axios__WEBPACK_IMPORTED_MODULE_4__["default"])({
@@ -17560,50 +17564,49 @@ const Managestock = () => {
       });
     }
   }, []);
-  function changeData(newData) {
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    const updateData = async () => {
+      let name = uploadData.name;
+      if (name !== "" || name === "set_manage_stock" || name === "set_backorders" || name === "stock_status") {
+        changeData();
+      }
+    };
+    updateData();
+  }, [uploadData]);
+  function changeData() {
     (0,axios__WEBPACK_IMPORTED_MODULE_4__["default"])({
       method: 'post',
       url: `${stockManagerAppLocalizer.apiUrl}/woo-stockmanager-pro/v1/update`,
-      data: newData
+      data: uploadData
+    });
+  }
+  function setfilter(name, value) {
+    setFilter({
+      ...filter,
+      [name]: value
+    });
+  }
+  function updateData(id, name, value) {
+    setUploadData({
+      ['id']: id,
+      ['name']: name,
+      ['value']: value
     });
   }
   const handleDocumentClick = () => {
-    const data = {
-      id: inputId,
-      name: inputName,
-      value: inputValue
-    };
-    changeData(data);
+    changeData();
     setInputChange(false);
     event.classList.add('input-field-edit');
     event.setAttribute('readonly', 'readonly');
     document.removeEventListener('click', handleDocumentClick);
   };
   const handleChange = (e, id, str) => {
-    let Value;
-    if (str === "product_manage_stock") {
-      Value = e.target.checked;
-    } else {
-      Value = e.target.value;
-    }
-    const updateData = {
-      id: id,
-      name: e.target.name,
-      value: Value
-    };
-    switch (str) {
-      case "product_manage_stock":
-        changeData(updateData);
-        break;
-      case "product_backorders":
-      case "product_stock_status":
-        changeData(updateData);
-        break;
-      default:
-        setInputChange(true);
-        setInputValue(e.target.value);
-        setInputName(e.target.name);
-        setInputId(e.target.id);
+    let element = e.target;
+    let name = element.name;
+    let Value = name === "set_manage_stock" ? element.checked : element.value;
+    updateData(element.id, name, Value);
+    if (name !== "set_manage_stock" || name !== "set_backorders" || name !== "stock_status") {
+      setInputChange(true);
     }
     setData(prevData => {
       return prevData.map(obj => {
@@ -17644,17 +17647,17 @@ const Managestock = () => {
   };
   const getFilteredData = () => {
     let modifyData = [...data];
-    if (skuFilter) {
-      modifyData = modifyData.filter(item => item.product_sku.toLowerCase().includes(skuFilter.toLowerCase()));
+    if (filter.sku) {
+      modifyData = modifyData.filter(item => item.product_sku.toLowerCase().includes(filter.sku.toLowerCase()));
     }
-    if (nameFilter) {
-      modifyData = modifyData.filter(item => item.product_name.toLowerCase().includes(nameFilter.toLowerCase()));
+    if (filter.name) {
+      modifyData = modifyData.filter(item => item.product_name.toLowerCase().includes(filter.name.toLowerCase()));
     }
-    if (selectedStockStatus) {
-      modifyData = modifyData.filter(item => item.product_stock_status === selectedStockStatus);
+    if (filter.stockStatus) {
+      modifyData = modifyData.filter(item => item.product_stock_status === filter.stockStatus);
     }
-    if (selectedProductType) {
-      modifyData = modifyData.filter(item => item.product_type === selectedProductType);
+    if (filter.productType) {
+      modifyData = modifyData.filter(item => item.product_type === filter.productType);
     }
     return modifyData;
   };
@@ -17780,6 +17783,7 @@ const Managestock = () => {
         return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
           className: "custom-select"
         }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
+          id: row.product_id,
           name: "stock_status",
           value: row.product_stock_status,
           onChange: e => {
@@ -17801,6 +17805,7 @@ const Managestock = () => {
         return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
           className: "custom-select"
         }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
+          id: row.product_id,
           name: "set_backorders",
           value: row.product_backorders,
           onChange: e => {
@@ -17843,22 +17848,22 @@ const Managestock = () => {
   }];
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, stockManagerAppLocalizer.pro_active === 'free' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Dialog__WEBPACK_IMPORTED_MODULE_5__["default"], {
     className: "woo-module-popup",
-    open: model,
+    open: openDialog,
     onClose: () => {
-      setModel(false);
+      setOpenDialog(false);
     },
     "aria-labelledby": "form-dialog-title"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "icon-cross stock-manager-popup-cross",
     onClick: () => {
-      setModel(false);
+      setOpenDialog(false);
     }
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_PopupContent_PopupContent__WEBPACK_IMPORTED_MODULE_1__["default"], null)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: stockManagerAppLocalizer.manage_stock,
     alt: "subscriber-list",
     className: "subscriber-img",
     onClick: () => {
-      setModel(true);
+      setOpenDialog(true);
     }
   })) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "woo-subscriber-list"
@@ -17879,20 +17884,20 @@ const Managestock = () => {
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "text",
     placeholder: "Search by Name...",
-    value: nameFilter,
-    onChange: e => setNameFilter(e.target.value)
+    value: filter.name,
+    onChange: e => setfilter('name', e.target.value)
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     class: "woo-header-search-section"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "text",
     placeholder: "Search by SKU...",
-    value: skuFilter,
-    onChange: e => setSkuFilter(e.target.value)
+    value: filter.sku,
+    onChange: e => setfilter('sku', e.target.value)
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     class: "custom-select"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
-    value: selectedProductType ? selectedProductType : "",
-    onChange: e => setSelectedProductType(e.target.value)
+    value: filter.productType,
+    onChange: e => setfilter('productType', e.target.value)
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
     value: ""
   }, "Product Type"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
@@ -17902,8 +17907,8 @@ const Managestock = () => {
   }, "Variable"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     class: "custom-select"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
-    value: selectedStockStatus ? selectedStockStatus : "",
-    onChange: e => setSelectedStockStatus(e.target.value)
+    value: filter.stockStatus,
+    onChange: e => setfilter('stockStatus', e.target.value)
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
     value: ""
   }, "Stock Status"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
