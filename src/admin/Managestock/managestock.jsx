@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { __ } from '@wordpress/i18n';
 import Dialog from "@mui/material/Dialog";
 import React,{useEffect,useState} from 'react';
 import Popoup from '../PopupContent/PopupContent';
@@ -12,11 +13,13 @@ const Managestock = () => {
         productType: '',
         stockStatus: '',
     });
+
     const [ uploadData, setUploadData ] = useState({
         id: '',
         name: '',
         value: '',
     });
+
     const [ event,setEvent ] = useState();
     const [ data, setData ] = useState([]);
     const [ openDialog, setOpenDialog ] = useState(false);
@@ -25,42 +28,47 @@ const Managestock = () => {
     useEffect(() => {
         if(stockManagerAppLocalizer.pro_active != 'free'){
             axios({
-                url: `${stockManagerAppLocalizer.apiUrl}/woo-stockmanager-pro/v1/manage-stock`,
+                url: `${ stockManagerAppLocalizer.apiUrl }/woo-stockmanager-pro/v1/manage-stock`,
             }).then((response) => {
-                let products =JSON.parse(response.data);
+                let products = JSON.parse(response.data);
                 setData(products);
             });
         }
     }, []);
+
     useEffect(() => {
-        const updateData = async () => {
+        const submitData = async () => {
         let name = uploadData.name
-        if( name !== "" || name === "set_manage_stock" || name === "set_backorders" || name === "stock_status"){
-            changeData()
+        if( name !== "" || name === "set_manage_stock" || name === "set_backorders" || name === "stock_status" ){
+            changeData();
         }
         };    
-        updateData();
+        submitData();
     }, [uploadData]);
+
     function changeData(){
         axios({
             method: 'post',
-            url: `${stockManagerAppLocalizer.apiUrl}/woo-stockmanager-pro/v1/update`,
+            url: `${ stockManagerAppLocalizer.apiUrl }/woo-stockmanager-pro/v1/update`,
             data: uploadData,
         })
     }
-    function setfilter(name,value){
+
+    function setfilter( name, value ){
         setFilter({
             ...filter,
             [name]: value,
         });
     }
+
     function updateData(id,name,value){
         setUploadData({
-            ['id']:id,
-            ['name']:name,
-            ['value']:value,
+            ['id']: id,
+            ['name']: name,
+            ['value']: value,
         })
     }
+
     const handleDocumentClick = () => {
         changeData();
         setInputChange(false);
@@ -68,79 +76,86 @@ const Managestock = () => {
         event.setAttribute('readonly', 'readonly');
         document.removeEventListener('click', handleDocumentClick);
     }
+
     const handleChange = (e,id,str) => {
-        let element =e.target;
+        let element = e.target;
         let name = element.name;
-        let Value = ( name === "set_manage_stock" )? element.checked:element.value;
+        let Value = ( name === "set_manage_stock" ) ? element.checked : element.value;
         updateData(element.id,name,Value);
-        if(name !== "set_manage_stock" || name !== "set_backorders" || name !== "stock_status"){
+        if( name !== "set_manage_stock" || name !== "set_backorders" || name !== "stock_status" ){
             setInputChange(true);
         }
         setData((prevData) => {
             return prevData.map((obj) => {
-                if(obj.product_id === id){
-                    return {...obj, [str] : Value};
+                if( obj.product_id === id ){
+                    return {...obj, [str] : Value };
                 }
                 return obj;
             })
         });
     }
+
     const handleInputMouseOut = (e) => {
         e.currentTarget.children[1].style.display = 'none';
         if(inputChange){
-            document.addEventListener('click', handleDocumentClick);
+            document.addEventListener( 'click', handleDocumentClick );
         }
     }
+
     const editButtonOnClick = (e) =>{
         if(event){
             event.classList.add('input-field-edit');
-            event.setAttribute('readonly','readonly');
+            event.setAttribute('readonly', 'readonly');
         }
         setEvent(e.currentTarget.previousSibling);
         e.currentTarget.previousSibling.removeAttribute('readonly');
         e.currentTarget.previousSibling.classList.remove('input-field-edit');
     }
+
     const handleInputMouseOver = (e) => {
         e.currentTarget.children[1].style.display = 'block';
     }
+
     const handleImportExport = () => {
         let page=document.querySelector('.woo-subscriber-list');
         page.removeChild(page.children[0]);
         ReactDOM.render(<ImportExport data={data} />, page);        
     }
+
     const getFilteredData = () => {
         let modifyData = [...data];
         if(filter.sku){
-            modifyData = modifyData.filter(item =>item.product_sku.toLowerCase().includes(filter.sku.toLowerCase()));
+            modifyData = modifyData.filter(item => item.product_sku.toLowerCase().includes(filter.sku.toLowerCase()));
         }
         if(filter.name){
-            modifyData = modifyData.filter(item =>item.product_name.toLowerCase().includes(filter.name.toLowerCase()));
+            modifyData = modifyData.filter(item => item.product_name.toLowerCase().includes(filter.name.toLowerCase()));
         }
         if(filter.stockStatus){
-            modifyData = modifyData.filter(item =>(item.product_stock_status === filter.stockStatus));
+            modifyData = modifyData.filter(item => (item.product_stock_status === filter.stockStatus));
         }
         if(filter.productType){
-            modifyData = modifyData.filter(item =>(item.product_type === filter.productType));
+            modifyData = modifyData.filter(item => (item.product_type === filter.productType));
         }
         return modifyData;
     }
+
     const columns = [
         {
-            name: "Product Name",
+            name: __('Product Name','woocommerce-stock-manager-pro'),
             selector: (row) => row.product_name,
         },
         {
-            name:"Product Photo",
+            name: __('Product Photo','woocommerce-stock-manager-pro'),
             cell: (row) => (
                 <img src={row.product_image} class="table-image"/>
             )
         },
         {
-            name: "Product Type",
+            name: __('Product Type','woocommerce-stock-manager-pro'),
             selector: (row) => row.product_type,
         },
         {
-            name: "SKU",
+            name: __('SKU','woocommerce-stock-manager-pro'),
             width: '130px',
             cell: (row) => (
                 <div class="cell" onMouseOver={handleInputMouseOver} onMouseOut={handleInputMouseOut}>
@@ -150,7 +165,7 @@ const Managestock = () => {
             )
         },
         {
-            name: "Regular Price",
+            name: __('Regular Price','woocommerce-stock-manager-pro'),
             cell: (row) => {
                 if (row.product_type=="simple") {
                     return  <div class="cell" onMouseOver={handleInputMouseOver} onMouseOut={handleInputMouseOut}>
@@ -161,7 +176,7 @@ const Managestock = () => {
             }
         },
         {            
-            name: "Sale Price",
+            name: __('Sale Price','woocommerce-stock-manager-pro'),
             cell: (row) => {
                 if (row.product_type=="simple") {
                     return <div class="cell" onMouseOver={handleInputMouseOver} onMouseOut={handleInputMouseOut}>
@@ -172,7 +187,7 @@ const Managestock = () => {
             }
         },
         {
-            name: "Weight",
+            name: __('Weight','woocommerce-stock-manager-pro'),
             cell: (row) => (
                 <div class="cell" onMouseOver={handleInputMouseOver} onMouseOut={handleInputMouseOut}>
                     <input type="text" class="input-field input-field-edit" id={row.product_id} value={row.product_weight} name={"set_weight"} onChange={(e) => {handleChange(e,row.product_id,"product_weight")}} readOnly/>                        
@@ -181,13 +196,13 @@ const Managestock = () => {
             )
         },
         {
-            name: "Manage Stock",
+            name: __('Manage Stock','woocommerce-stock-manager-pro'),
             cell: (row) => (
                 <input id={row.product_id} type="checkbox" name={"set_manage_stock"} checked={row.product_manage_stock} onChange={(e) => {handleChange(e,row.product_id,"product_manage_stock")}} />
             )
         },
         {
-            name: "Stock Status",
+            name: __('Stock Status','woocommerce-stock-manager-pro'),
             width: '150px',
             cell: (row) => {
                 if (row.product_manage_stock) {
@@ -195,23 +210,23 @@ const Managestock = () => {
                 }else {
                     return  <div className='custom-select'>
                                 <select id={row.product_id} name='stock_status' value={row.product_stock_status} onChange={(e) => {handleChange(e,row.product_id,"product_stock_status")}} >
-                                    <option value={"instock"}>Instock</option>
-                                    <option value={"onbackorder"}>Onbackorder</option>
-                                    <option value={"outofstock"}>Outofstock</option>
+                                    <option value={"instock"}>{__("Instock","woocommerce-stock-manager-pro")}</option>
+                                    <option value={"onbackorder"}>{__("Onbackorder","woocommerce-stock-manager-pro")}</option>
+                                    <option value={"outofstock"}>{__("Outofstock","woocommerce-stock-manager-pro")}</option>
                                 </select>
                             </div>
                 }
             },
         },
         {
-            name: "Backorders",
+            name: __('Backorders','woocommerce-stock-manager-pro'),
             cell: (row) => {
                 if (row.product_manage_stock) {
                     return  <div className='custom-select'>
                                 <select id={row.product_id} name='set_backorders' value={row.product_backorders} onChange={(e) => {handleChange(e,row.product_id,"product_backorders")}}>
-                                    <option value={"no"}>No</option>
-                                    <option value={"notify"}>Notify</option>
-                                    <option value={"yes"}>Yes</option>
+                                    <option value={"no"}>{__("No","woocommerce-stock-manager-pro")}</option>
+                                    <option value={"notify"}>{__("Notify","woocommerce-stock-manager-pro")}</option>
+                                    <option value={"yes"}>{__("Yes","woocommerce-stock-manager-pro")}</option>
                                 </select>
                             </div>
                 }else {
@@ -231,9 +246,10 @@ const Managestock = () => {
             }
         },        
     ];
+    
     return( 
     <>
-        {stockManagerAppLocalizer.pro_active === 'free'  ?
+        { stockManagerAppLocalizer.pro_active === 'free'  ?
             <div>
                 <Dialog
                     className="woo-module-popup"
@@ -260,7 +276,7 @@ const Managestock = () => {
                     <div className="woo-middle-container-wrapper">
                         <div className="woo-search-and-multistatus-wrap">
                             <div className="woo-page-title">
-                                <p>Inventory Manager</p>
+                                <p>{__('Inventory Manager','woocommerce-stock-manager-pro')}</p>
                             </div>
                         </div>
                         <div className="woo-search-and-multistatus-wrap">
@@ -286,9 +302,9 @@ const Managestock = () => {
                                         value={filter.productType}
                                         onChange={(e) => setfilter('productType',e.target.value)}
                                     >
-                                        <option value="">Product Type</option>
-                                        <option value="simple">Simple</option>
-                                        <option value="variable">Variable</option>
+                                        <option value="">{__("Product Type","woocommerce-stock-manager-pro")}</option>
+                                        <option value="simple">{__("Simple","woocommerce-stock-manager-pro")}</option>
+                                        <option value="variable">{__("Variable","woocommerce-stock-manager-pro")}</option>
                                     </select>
                                 </div>
                                 <div class="custom-select">
@@ -296,22 +312,21 @@ const Managestock = () => {
                                         value={filter.stockStatus}
                                         onChange={(e) => setfilter('stockStatus',e.target.value)}
                                     >
-                                        <option value="" >Stock Status</option>
-                                        <option value="instock">Instock</option>
-                                        <option value="onbackorder">Onbackorder</option>
-                                        <option value="outofstock">Outofstock</option>
+                                        <option value="" >{__("Stock Status","woocommerce-stock-manager-pro")}</option>
+                                        <option value="instock">{__("Instock","woocommerce-stock-manager-pro")}</option>
+                                        <option value="onbackorder">{__("Onbackorder","woocommerce-stock-manager-pro")}</option>
+                                        <option value="outofstock">{__("Outofstock","woocommerce-stock-manager-pro")}</option>
                                     </select>
                                 </div>
                             </div>
                             <div className="pull-right export">
-                                <button class="import-export-btn" onClick={handleImportExport}>Import/Export</button>
+                                <button class="import-export-btn" onClick={handleImportExport}>{__("Import/Export","woocommerce-stock-manager-pro")}</button>
                             </div>
                         </div>
                         <div className="woo-backend-datatable-wrapper">
                             <DataTable
                             columns={columns}
                             data={getFilteredData()}
-                            // selectableRows
                             pagination
                             />
                         </div>

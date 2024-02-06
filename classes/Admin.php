@@ -266,7 +266,8 @@ class Admin {
         );
         
         if (get_current_screen()->id == 'toplevel_page_woo-stock-manager-setting') {
-            wp_enqueue_script( 'woo-stockmanager-script', $Woo_Stock_Manager->plugin_url . 'build/index.js', array( 'wp-element' ), $Woo_Stock_Manager->version, true );
+            wp_enqueue_script( 'woo-stockmanager-script', $Woo_Stock_Manager->plugin_url . 'build/index.js', array( 'wp-element', 'wp-i18n' ), $Woo_Stock_Manager->version, true );
+            wp_set_script_translations('woo-stockmanager-script', 'woocommerce-stock-manager-pro');
             wp_localize_script( 'woo-stockmanager-script', 'stockManagerAppLocalizer', apply_filters('woo_stock_manager_settings', [
                 'apiUrl'                    => untrailingslashit(get_rest_url()),
                 'nonce'                     => wp_create_nonce('wp_rest'),
