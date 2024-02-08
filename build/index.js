@@ -17357,10 +17357,10 @@ const DynamicForm = ({
 
 /***/ }),
 
-/***/ "./src/admin/ImportExport/ImportExport.jsx":
-/*!*************************************************!*\
-  !*** ./src/admin/ImportExport/ImportExport.jsx ***!
-  \*************************************************/
+/***/ "./src/admin/Managestock/Export.jsx":
+/*!******************************************!*\
+  !*** ./src/admin/Managestock/Export.jsx ***!
+  \******************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -17373,33 +17373,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_csv__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-csv */ "./node_modules/react-csv/index.js");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
 
 
 
 
-
-const ImportExport = ({
+const Export = ({
   data
 }) => {
-  const [file, setFile] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
   const [header, setHeader] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
-  const processCSV = (str, delim = ',') => {
-    const headers = str.slice(0, str.indexOf('\n')).split(delim);
-    const rows = str.slice(str.indexOf('\n') + 1).split('\n');
-    const newArray = rows.map(row => {
-      const values = row.split(delim);
-      const eachObject = headers.reduce((obj, header, i) => {
-        obj[header] = values[i];
-        return obj;
-      }, {});
-      return eachObject;
-    });
-    return newArray;
-  };
-  const handleFileChange = event => {
-    setFile(event.target.files[0]);
-  };
   const handleCheck = (e, label, key) => {
     let str = `{"label":"${label}","key":"${key}"}`;
     str = JSON.parse(str);
@@ -17409,42 +17390,11 @@ const ImportExport = ({
       setHeader(prevHeader => prevHeader.filter(header => header.label !== str.label || header.key !== str.key));
     }
   };
-  const handleUpload = () => {
-    if (file) {
-      const reader = new FileReader();
-      reader.readAsText(file);
-      reader.onload = function (e) {
-        let csvData = processCSV(e.target.result);
-        (0,axios__WEBPACK_IMPORTED_MODULE_3__["default"])({
-          method: 'post',
-          url: `${stockManagerAppLocalizer.apiUrl}/woo-stockmanager-pro/v1/import`,
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          data: {
-            data: csvData
-          }
-        });
-      };
-    }
-  };
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "woo-container"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "woo-page-title"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Import/Export', 'woocommerce-stock-manager-pro'))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "export-import"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "import-section"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Import', 'woocommerce-stock-manager-pro')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Upload your csv file with the stock data', 'woocommerce-stock-manager-pro')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('CSV file must be in this format or you can export file and edit them in this format', 'woocommerce-stock-manager-pro')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('File Format', 'woocommerce-stock-manager-pro')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("table", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("thead", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("th", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('SKU', 'woocommerce-stock-manager-pro'), " "), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("th", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Manage Stock', 'woocommerce-stock-manager-pro')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("th", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Stock Status', 'woocommerce-stock-manager-pro')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("th", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Backorders', 'woocommerce-stock-manager-pro'), " "), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("th", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Stock Quantity', 'woocommerce-stock-manager-pro'))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("tbody", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("tr", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('PKG1', 'woocommerce-stock-manager-pro')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('yes', 'woocommerce-stock-manager-pro')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('instock', 'woocommerce-stock-manager-pro')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('yes', 'woocommerce-stock-manager-pro')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('10', 'woocommerce-stock-manager-pro'))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
-    onChange: handleFileChange,
-    type: "file",
-    name: "csv_file",
-    accept: ".csv"
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
-    onClick: handleUpload,
-    class: "import-export-btn"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Import CSV', 'woocommerce-stock-manager-pro'))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "export-section"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Export', 'woocommerce-stock-manager-pro')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('You can download csv file,with stock data.', 'woocommerce-stock-manager-pro'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Please Select the field of which you want to download the csv.', 'woocommerce-stock-manager-pro')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "checkbox",
@@ -17517,9 +17467,86 @@ const ImportExport = ({
     data: data,
     headers: header,
     filename: 'Products.csv'
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Export CSV', 'woocommerce-stock-manager-pro'))))));
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Export CSV', 'woocommerce-stock-manager-pro')))));
 };
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ImportExport);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Export);
+
+/***/ }),
+
+/***/ "./src/admin/Managestock/Import.jsx":
+/*!******************************************!*\
+  !*** ./src/admin/Managestock/Import.jsx ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
+
+
+
+
+const Import = () => {
+  const [file, setFile] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
+  const handleFileChange = event => {
+    setFile(event.target.files[0]);
+  };
+  const processCSV = (str, delim = ',') => {
+    const headers = str.slice(0, str.indexOf('\n')).split(delim);
+    const rows = str.slice(str.indexOf('\n') + 1).split('\n');
+    const processedCsvData = rows.map(row => {
+      const values = row.split(delim);
+      const eachObject = headers.reduce((obj, header, i) => {
+        obj[header] = values[i];
+        return obj;
+      }, {});
+      return eachObject;
+    });
+    return processedCsvData;
+  };
+  const handleUpload = () => {
+    if (file) {
+      const reader = new FileReader();
+      reader.readAsText(file);
+      reader.onload = function (e) {
+        let csvData = processCSV(e.target.result);
+        (0,axios__WEBPACK_IMPORTED_MODULE_2__["default"])({
+          method: 'post',
+          url: `${stockManagerAppLocalizer.apiUrl}/woo-stockmanager-pro/v1/import`,
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          data: {
+            data: csvData
+          }
+        });
+      };
+    }
+  };
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "woo-container"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "woo-page-title"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Import', 'woocommerce-stock-manager-pro'))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "import-section"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Import', 'woocommerce-stock-manager-pro')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Upload your csv file with the stock data of existing product', 'woocommerce-stock-manager-pro')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('CSV file must be in this format or you can export file and edit them in this format', 'woocommerce-stock-manager-pro')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('File Format', 'woocommerce-stock-manager-pro')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("table", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("thead", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("th", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('SKU', 'woocommerce-stock-manager-pro'), " "), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("th", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Manage Stock', 'woocommerce-stock-manager-pro')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("th", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Stock Status', 'woocommerce-stock-manager-pro')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("th", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Backorders', 'woocommerce-stock-manager-pro'), " "), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("th", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Stock Quantity', 'woocommerce-stock-manager-pro'))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("tbody", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("tr", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('PKG1', 'woocommerce-stock-manager-pro')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('yes', 'woocommerce-stock-manager-pro')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('instock', 'woocommerce-stock-manager-pro')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('yes', 'woocommerce-stock-manager-pro')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('10', 'woocommerce-stock-manager-pro'))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+    onChange: handleFileChange,
+    type: "file",
+    name: "csv_file",
+    accept: ".csv"
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+    onClick: handleUpload,
+    class: "import-export-btn"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Import CSV', 'woocommerce-stock-manager-pro'))));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Import);
 
 /***/ }),
 
@@ -17536,13 +17563,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _mui_material_Dialog__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @mui/material/Dialog */ "./node_modules/@mui/material/Dialog/Dialog.js");
+/* harmony import */ var _mui_material_Dialog__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @mui/material/Dialog */ "./node_modules/@mui/material/Dialog/Dialog.js");
 /* harmony import */ var _PopupContent_PopupContent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../PopupContent/PopupContent */ "./src/admin/PopupContent/PopupContent.jsx");
-/* harmony import */ var react_data_table_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-data-table-component */ "./node_modules/react-data-table-component/dist/index.cjs.js");
-/* harmony import */ var _ImportExport_ImportExport_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../ImportExport/ImportExport.jsx */ "./src/admin/ImportExport/ImportExport.jsx");
+/* harmony import */ var _Export__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Export */ "./src/admin/Managestock/Export.jsx");
+/* harmony import */ var _Import__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Import */ "./src/admin/Managestock/Import.jsx");
+/* harmony import */ var react_data_table_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-data-table-component */ "./node_modules/react-data-table-component/dist/index.cjs.js");
+
 
 
 
@@ -17569,7 +17598,7 @@ const Managestock = () => {
   const [inputChange, setInputChange] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     if (stockManagerAppLocalizer.pro_active != 'free') {
-      (0,axios__WEBPACK_IMPORTED_MODULE_5__["default"])({
+      (0,axios__WEBPACK_IMPORTED_MODULE_6__["default"])({
         url: `${stockManagerAppLocalizer.apiUrl}/woo-stockmanager-pro/v1/manage-stock`
       }).then(response => {
         let products = JSON.parse(response.data);
@@ -17587,7 +17616,7 @@ const Managestock = () => {
     submitData();
   }, [uploadData]);
   function changeData() {
-    (0,axios__WEBPACK_IMPORTED_MODULE_5__["default"])({
+    (0,axios__WEBPACK_IMPORTED_MODULE_6__["default"])({
       method: 'post',
       url: `${stockManagerAppLocalizer.apiUrl}/woo-stockmanager-pro/v1/update`,
       data: uploadData
@@ -17651,12 +17680,17 @@ const Managestock = () => {
   const handleInputMouseOver = e => {
     e.currentTarget.children[1].style.display = 'block';
   };
-  const handleImportExport = () => {
+  const handleExport = () => {
     let page = document.querySelector('.woo-subscriber-list');
     page.removeChild(page.children[0]);
-    ReactDOM.render((0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_ImportExport_ImportExport_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    ReactDOM.render((0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Export__WEBPACK_IMPORTED_MODULE_3__["default"], {
       data: data
     }), page);
+  };
+  const handleImport = () => {
+    let page = document.querySelector('.woo-subscriber-list');
+    page.removeChild(page.children[0]);
+    ReactDOM.render((0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Import__WEBPACK_IMPORTED_MODULE_4__["default"], null), page);
   };
   const getFilteredData = () => {
     let modifyData = [...data];
@@ -17859,7 +17893,7 @@ const Managestock = () => {
       }
     }
   }];
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, stockManagerAppLocalizer.pro_active === 'free' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Dialog__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, stockManagerAppLocalizer.pro_active === 'free' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Dialog__WEBPACK_IMPORTED_MODULE_7__["default"], {
     className: "woo-module-popup",
     open: openDialog,
     onClose: () => {
@@ -17931,13 +17965,18 @@ const Managestock = () => {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Onbackorder", "woocommerce-stock-manager-pro")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
     value: "outofstock"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Outofstock", "woocommerce-stock-manager-pro"))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "pull-right import"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+    class: "import-export-btn",
+    onClick: handleImport
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Import", "woocommerce-stock-manager-pro"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "pull-right export"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
     class: "import-export-btn",
-    onClick: handleImportExport
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Import/Export", "woocommerce-stock-manager-pro")))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    onClick: handleExport
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Export", "woocommerce-stock-manager-pro")))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "woo-backend-datatable-wrapper"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_data_table_component__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_data_table_component__WEBPACK_IMPORTED_MODULE_5__["default"], {
     columns: columns,
     data: getFilteredData(),
     pagination: true

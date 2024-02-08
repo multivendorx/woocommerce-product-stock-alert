@@ -1660,7 +1660,7 @@ select {
   position: relative;
 }
 
-.export {
+.export, .import {
   padding-bottom: 8px;
 }
 

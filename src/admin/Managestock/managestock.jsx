@@ -2,9 +2,10 @@ import axios from 'axios';
 import { __ } from '@wordpress/i18n';
 import Dialog from "@mui/material/Dialog";
 import React,{useEffect,useState} from 'react';
+import Export from './Export';
+import Import from './Import';
 import Popoup from '../PopupContent/PopupContent';
 import DataTable from 'react-data-table-component';
-import ImportExport from '../ImportExport/ImportExport.jsx';
 
 const Managestock = () => {
     const [ filter, setFilter ] = useState({
@@ -116,10 +117,15 @@ const Managestock = () => {
         e.currentTarget.children[1].style.display = 'block';
     }
 
-    const handleImportExport = () => {
+    const handleExport = () => {
         let page=document.querySelector('.woo-subscriber-list');
         page.removeChild(page.children[0]);
-        ReactDOM.render(<ImportExport data={data} />, page);        
+        ReactDOM.render(<Export data={data} />, page);        
+    }
+    const handleImport = () => {
+        let page=document.querySelector('.woo-subscriber-list');
+        page.removeChild(page.children[0]);
+        ReactDOM.render(<Import/>, page);        
     }
 
     const getFilteredData = () => {
@@ -319,8 +325,11 @@ const Managestock = () => {
                                     </select>
                                 </div>
                             </div>
+                            <div className="pull-right import">
+                                <button class="import-export-btn" onClick={handleImport}>{__("Import","woocommerce-stock-manager-pro")}</button>
+                            </div>
                             <div className="pull-right export">
-                                <button class="import-export-btn" onClick={handleImportExport}>{__("Import/Export","woocommerce-stock-manager-pro")}</button>
+                                <button class="import-export-btn" onClick={handleExport}>{__("Export","woocommerce-stock-manager-pro")}</button>
                             </div>
                         </div>
                         <div className="woo-backend-datatable-wrapper">
