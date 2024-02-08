@@ -2088,3 +2088,31 @@ select {
   display: flex;
   align-items: center;
 }
+//import export section
+.export-import{
+  display: flex;
+  columns: $paragraph-color;
+
+}
+.import-section{
+  padding:2% 5% 2% 0%;
+  width: 70%;
+}
+.import-section th, td {
+  border: 1px solid $boder-color;
+  text-align: center;
+}
+.export-section{
+  padding: 5px;
+  width: 30%;
+}
+.import-export-btn a{
+  color: $font-white;
+}
+.import-export-btn a:hover{
+  text-decoration: none;
+}
+.import-export-btn a:focus{
+  box-shadow: none;
+  text-decoration: none;
+}

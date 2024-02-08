@@ -17371,7 +17371,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_csv__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-csv */ "./node_modules/react-csv/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
+
 
 
 
@@ -17411,23 +17414,29 @@ const ImportExport = ({
       const reader = new FileReader();
       reader.readAsText(file);
       reader.onload = function (e) {
-        let text = e.target.result;
-        let data = processCSV(text);
-        (0,axios__WEBPACK_IMPORTED_MODULE_2__["default"])({
+        let csvData = processCSV(e.target.result);
+        (0,axios__WEBPACK_IMPORTED_MODULE_3__["default"])({
           method: 'post',
           url: `${stockManagerAppLocalizer.apiUrl}/woo-stockmanager-pro/v1/import`,
-          data: data
-        }).then(response => {
-          console.log(response);
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          data: {
+            data: csvData
+          }
         });
       };
     }
   };
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "woo-container"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", null, "Import/Export"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "import"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", null, "Import"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("b", null, "Upload your csv file with the stock data")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "CSV file must be in this format or you can export file and edit them in this format"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", null, "File Format"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("table", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("th", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", null, "SKU"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", null, "manage Stock"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", null, "Stock Status"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", null, "Backorders"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", null, "stock"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", null, "Product Type")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("tr", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", null, "PKG1"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", null, "yes"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", null, "instock"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", null, "yes"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", null, "10"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", null, "simple"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "woo-page-title"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Import/Export', 'woocommerce-stock-manager-pro'))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "export-import"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "import-section"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Import', 'woocommerce-stock-manager-pro')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Upload your csv file with the stock data', 'woocommerce-stock-manager-pro')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('CSV file must be in this format or you can export file and edit them in this format', 'woocommerce-stock-manager-pro')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('File Format', 'woocommerce-stock-manager-pro')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("table", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("thead", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("th", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('SKU', 'woocommerce-stock-manager-pro'), " "), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("th", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Manage Stock', 'woocommerce-stock-manager-pro')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("th", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Stock Status', 'woocommerce-stock-manager-pro')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("th", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Backorders', 'woocommerce-stock-manager-pro'), " "), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("th", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Stock Quantity', 'woocommerce-stock-manager-pro'))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("tbody", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("tr", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('PKG1', 'woocommerce-stock-manager-pro')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('yes', 'woocommerce-stock-manager-pro')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('instock', 'woocommerce-stock-manager-pro')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('yes', 'woocommerce-stock-manager-pro')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('10', 'woocommerce-stock-manager-pro'))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     onChange: handleFileChange,
     type: "file",
     name: "csv_file",
@@ -17435,9 +17444,9 @@ const ImportExport = ({
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
     onClick: handleUpload,
     class: "import-export-btn"
-  }, "Import CSV")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "export"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", null, "Export"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "You can download csv file,with stock data.", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), "Please Select the field of which you want to download the csv."), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Import CSV', 'woocommerce-stock-manager-pro'))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "export-section"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Export', 'woocommerce-stock-manager-pro')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('You can download csv file,with stock data.', 'woocommerce-stock-manager-pro'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Please Select the field of which you want to download the csv.', 'woocommerce-stock-manager-pro')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "checkbox",
     id: "Id",
     onChange: e => {
@@ -17445,7 +17454,7 @@ const ImportExport = ({
     }
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     htmlFor: "Id"
-  }, "Id"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Id', 'woocommerce-stock-manager-pro'))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "checkbox",
     id: "Type",
     onChange: e => {
@@ -17453,7 +17462,7 @@ const ImportExport = ({
     }
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     htmlFor: "Type"
-  }, "Type"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Type', 'woocommerce-stock-manager-pro'))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "checkbox",
     id: "SKU",
     onChange: e => {
@@ -17461,7 +17470,7 @@ const ImportExport = ({
     }
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     htmlFor: "SKU"
-  }, "SKU"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('SKU', 'woocommerce-stock-manager-pro'))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "checkbox",
     id: "Name",
     onChange: e => {
@@ -17469,7 +17478,7 @@ const ImportExport = ({
     }
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     htmlFor: "Name"
-  }, "Name"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Name', 'woocommerce-stock-manager-pro'))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "checkbox",
     id: "Manage Stock",
     onChange: e => {
@@ -17477,7 +17486,7 @@ const ImportExport = ({
     }
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     htmlFor: "Manage Stock"
-  }, "Manage Stock"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Manage Stock', 'woocommerce-stock-manager-pro'))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "checkbox",
     id: "Stock status",
     onChange: e => {
@@ -17485,7 +17494,7 @@ const ImportExport = ({
     }
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     htmlFor: "Stock status"
-  }, "Stock status"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Stock status', 'woocommerce-stock-manager-pro'))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "checkbox",
     id: "Backorders",
     onChange: e => {
@@ -17493,7 +17502,7 @@ const ImportExport = ({
     }
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     htmlFor: "Backorders"
-  }, "Backorders"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Backorders', 'woocommerce-stock-manager-pro'))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "checkbox",
     id: "Stock Quantity",
     onChange: e => {
@@ -17501,13 +17510,14 @@ const ImportExport = ({
     }
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     htmlFor: "Stock Quantity"
-  }, "Stock Quantity")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Stock Quantity', 'woocommerce-stock-manager-pro'))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
     class: "import-export-btn"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_csv__WEBPACK_IMPORTED_MODULE_1__.CSVLink, {
+    enclosingCharacter: ``,
     data: data,
     headers: header,
     filename: 'Products.csv'
-  }, "Export CSV")));
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Export CSV', 'woocommerce-stock-manager-pro'))))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ImportExport);
 

@@ -1693,4 +1693,38 @@ select {
   align-items: center;
 }
 
+.export-import {
+  display: flex;
+  -moz-columns: #5e5d60;
+       columns: #5e5d60;
+}
+
+.import-section {
+  padding: 2% 5% 2% 0%;
+  width: 70%;
+}
+
+.import-section th, td {
+  border: 1px solid #d4d1d9;
+  text-align: center;
+}
+
+.export-section {
+  padding: 5px;
+  width: 30%;
+}
+
+.import-export-btn a {
+  color: #f9f8fb;
+}
+
+.import-export-btn a:hover {
+  text-decoration: none;
+}
+
+.import-export-btn a:focus {
+  box-shadow: none;
+  text-decoration: none;
+}
+
 /*# sourceMappingURL=index.css.map*/
