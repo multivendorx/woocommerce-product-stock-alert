@@ -2013,9 +2013,106 @@ input.woo-setting-color-picker {
 }
 
 .wp-core-ui select {
-  background: #fff;
+  // background: #fff;
 }
 
 .rdt_Pagination svg {
   margin-top: 3px;
+}
+
+//Manage stock section
+.wp-core-ui select:focus{
+  color: $paragraph-color;
+  border-color: $boder-color;
+  box-shadow: none;
+}
+.wp-core-ui select:hover {
+  color: $paragraph-color;
+}
+.custom-select{
+  display: flex;
+  align-items: center;
+  font-weight:normal; 
+  border: $border;
+  border-radius: $border-radius;
+  height: 2.5rem;
+  position: relative;
+  background-color:$fill-color;
+  cursor: pointer;
+}
+
+select {
+  appearance: none;
+  /*  safari  */
+  -webkit-appearance: none;
+  /*  other styles for aesthetics */
+  width: 100%;
+  border: none;
+}
+.import-export-btn{
+  display: flex;
+  align-items: center; 
+  border: $border;
+  background-color: #65438f;
+  color: $font-white;
+  border-radius: $border-radius;
+  height: 2.5rem;
+  position: relative;
+}
+.export,.import{
+  padding-bottom: 8px;
+}
+//table image
+.table-image{
+  width: 50px;
+  height: 50px
+}
+.input-field{
+  width:70%;
+  padding: 0px 4px !important;
+  background:none !important;
+}
+.input-field-edit{
+  border: none !important;
+  outline: none !important;
+}
+//individual cell
+.dashicons-edit{
+  width: 29px;
+  height: 29px;
+  display: none;
+}
+.cell{
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+//import export section
+.export-import{
+  display: flex;
+  columns: $paragraph-color;
+
+}
+.import-section{
+  padding:2% 5% 2% 0%;
+  width: 70%;
+}
+.import-section th, td {
+  border: 1px solid $boder-color;
+  text-align: center;
+}
+.export-section{
+  padding: 5px;
+  width: 30%;
+}
+.import-export-btn a{
+  color: $font-white;
+}
+.import-export-btn a:hover{
+  text-decoration: none;
+}
+.import-export-btn a:focus{
+  box-shadow: none;
+  text-decoration: none;
 }
