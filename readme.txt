@@ -5,7 +5,7 @@ Tags: wordpress, woocommerce, e-commerce, shop, stock, out of stock, in stock, s
 Requires at least: 5.4
 Tested up to: 6.4.2
 Requires PHP: 8.0
-Stable tag: 2.4.1
+Stable tag: 2.4.2
 Donate link: https://multivendorx.com/donate/
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -32,7 +32,7 @@ Revolutionize your stock management with our Product Stock Manager & Notifier pl
 * 🎨 Customize the form’s heading, button text, colors, hover effects, submission alerts, and more.
 * 📝 Personalize email headings and subjects sent to customers. 
 * ⚙️ Work seamlessly with product backorder option enabled. 
-* 🔧 Reposition and display the stock alert form on product pages with a shortcode: **[display_stock_alert_form]** 
+* 🔧 Reposition and display the stock alert form on product pages with a shortcode: **[display_stock_manager_form]** 
 * 📂 Export your subscriber list easily via WordPress’s Tools settings. 
 * 📊 Export all stock data for your shop. 
 * ❌ Customers can unsubscribe from products from their My Account page. **[PRO]** 
@@ -85,7 +85,7 @@ Are you tired of losing potential sales because your customers can't buy the out
 [WooCommerce Product Stock Manager & Notifier Pro](https://multivendorx.com/woocommerce-product-stock-manager-notifier-pro/?utm_source=wordpress.org&utm_medium=freelandingpage&utm_campaign=productsstockmanager)
 
 ## Shortcodes
-- **[display_stock_alert_form]**: You can display stock alert form anywhere using this shortcode.
+- **[display_stock_manager_form]**: You can display stock alert form anywhere using this shortcode.
 
 ## 🌟 Upcoming Features: 
 * 🔒 Enhance security and data integrity with ReCAPTCHA for reliable out-of-stock alerts. 
@@ -136,6 +136,10 @@ Manual installation method requires downloading the [Product Stock Manager & Not
 8. User Unsubscription [Pro]
 
 == Changelog ==
+
+= 2.4.2 - 2024-01-24 =
+* Fixed - Rest API related Vulnerability issue.
+* Fixed - Plugin settings page 404 error tied to WordPress permalink structure.
 
 = 2.4.1 - 2024-01-17 =
 * Added - React Code changes for pro.

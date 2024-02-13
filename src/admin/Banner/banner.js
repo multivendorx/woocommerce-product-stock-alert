@@ -19,7 +19,9 @@ class Banner extends Component {
 		axios
 			.get(
 				`${stockManagerAppLocalizer.apiUrl}/woo-stockmanager/v1/close-banner`,
+				{headers: { 'X-WP-Nonce' : stockManagerAppLocalizer.nonce }}
 			)
+			
 			.then((response) => {
 				this.setState({
 					open_banner: response.data,
