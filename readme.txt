@@ -32,7 +32,7 @@ Revolutionize your stock management with our Product Stock Manager & Notifier pl
 * 🎨 Customize the form’s heading, button text, colors, hover effects, submission alerts, and more.
 * 📝 Personalize email headings and subjects sent to customers. 
 * ⚙️ Work seamlessly with product backorder option enabled. 
-* 🔧 Reposition and display the stock alert form on product pages with a shortcode: **[display_stock_alert_form]** 
+* 🔧 Reposition and display the stock alert form on product pages with a shortcode: **[display_stock_manager_form]** 
 * 📂 Export your subscriber list easily via WordPress’s Tools settings. 
 * 📊 Export all stock data for your shop. 
 * ❌ Customers can unsubscribe from products from their My Account page. **[PRO]** 
