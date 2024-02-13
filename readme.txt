@@ -85,7 +85,7 @@ Are you tired of losing potential sales because your customers can't buy the out
 [WooCommerce Product Stock Manager & Notifier Pro](https://multivendorx.com/woocommerce-product-stock-manager-notifier-pro/?utm_source=wordpress.org&utm_medium=freelandingpage&utm_campaign=productsstockmanager)
 
 ## Shortcodes
-- **[display_stock_alert_form]**: You can display stock alert form anywhere using this shortcode.
+- **[display_stock_manager_form]**: You can display stock alert form anywhere using this shortcode.
 
 ## 🌟 Upcoming Features: 
 * 🔒 Enhance security and data integrity with ReCAPTCHA for reliable out-of-stock alerts. 
