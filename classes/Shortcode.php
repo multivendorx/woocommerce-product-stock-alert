@@ -9,6 +9,8 @@ class Shortcode {
 	public function __construct() {
 		// Product Stock Manager Form Shortcode
 		add_shortcode('display_stock_manager_form', array($this, 'display_stock_manager_form'));
+        // Product Stock Manager Form Shortcode previous version support
+        add_shortcode('display_stock_alert_form', array($this, 'display_stock_manager_form'));
 	}
 
     /**
