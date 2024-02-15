@@ -61,15 +61,6 @@ class Admin {
             '__return_null' 
         );
         
-            add_submenu_page( 
-                'woo-stock-manager-setting', 
-                __('Inventory Manager', 'woocommerce-stock-manager'), 
-                __('Inventory Manager ' . $pro_sticker, 'woocommerce-stock-manager'), 
-                'manage_woocommerce', 
-                'woo-stock-manager-setting#&tab=manage-stock', 
-                '__return_null' 
-            );
-
         add_submenu_page(
             'tools.php', 
             __('WC Stock Manager Export', 'woocommerce-stock-manager'), 
@@ -266,8 +257,7 @@ class Admin {
         );
         
         if (get_current_screen()->id == 'toplevel_page_woo-stock-manager-setting') {
-            wp_enqueue_script( 'woo-stockmanager-script', $Woo_Stock_Manager->plugin_url . 'build/index.js', array( 'wp-element', 'wp-i18n' ), $Woo_Stock_Manager->version, true );
-            wp_set_script_translations('woo-stockmanager-script', 'woocommerce-stock-manager-pro');
+            wp_enqueue_script( 'woo-stockmanager-script', $Woo_Stock_Manager->plugin_url . 'build/index.js', array( 'wp-element' ), $Woo_Stock_Manager->version, true );
             wp_localize_script( 'woo-stockmanager-script', 'stockManagerAppLocalizer', apply_filters('woo_stock_manager_settings', [
                 'apiUrl'                    => untrailingslashit(get_rest_url()),
                 'nonce'                     => wp_create_nonce('wp_rest'),
@@ -275,7 +265,6 @@ class Admin {
                 'default_email_place'       => __('Enter your email', 'woocommerce-stock-manager'),
                 'default_alert_button'      => __('Notify me', 'woocommerce-stock-manager'),
                 'subscriber_list'           => $Woo_Stock_Manager->plugin_url . 'assets/images/subscriber-list.jpg',
-                'manage_stock'              => $Woo_Stock_Manager->plugin_url . 'assets/images/inventory-manager.png',
                 'pro_active'                => apply_filters('woo_stock_manager_pro_active', 'free'),
                 'columns_subscriber'        => $columns_subscriber,
                 'subscription_page_string'  => $subscription_page_string,
