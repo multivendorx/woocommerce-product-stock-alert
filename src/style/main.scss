@@ -2577,5 +2577,13 @@ input[type=number]::-webkit-inner-spin-button{
 }
 
 .rdt_ExpanderRow .rdt_TableRow{
-  background-color: #f2f2f2 !important;
+  background-color: #e9f7ff !important;
+}
+
+.rdt_ExpanderRow .rdt_TableRow:first-child{
+  border-top: none !important;
+}
+
+.expanded-data-table{
+  border: none !important;
 }

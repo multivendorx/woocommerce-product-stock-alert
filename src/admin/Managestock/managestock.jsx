@@ -145,6 +145,19 @@ const Managestock = () => {
                 });
             }
         }
+        if(name === 'set_manage_stock' && Value === true){
+            if(type === 'variation'){
+                setVariationData(element.id,id,"product_stock_quantity",0)
+            }
+            setData((prevData) => {
+                return prevData.map((obj) => {
+                    if( obj.product_id === id ){
+                        return {...obj, ["product_stock_quantity"] : 0 };
+                    }
+                    return obj;
+                })
+            });
+        }
         if( name !== "set_manage_stock" && name !== "set_backorders" && name !== "stock_status" ){
             setInputChange(true);
             setEvent(e.target)
@@ -295,7 +308,7 @@ const Managestock = () => {
             name: __('Manage stock','woocommerce-stock-manager-pro'),
             cell: (row) => (
                 <div className='custome-toggle-default'>
-                    <input id={( row.product_type === "variation" ) ? row.parent_product_id : null }  type="checkbox" name={"set_manage_stock"} checked={row.product_manage_stock} onChange={(e) => {handleChange( e, row.product_id, "product_manage_stock", row.product_type )}} />
+                    <input id={( row.product_type === "variation" ) ? row.parent_product_id : row.product_id }  type="checkbox" name={"set_manage_stock"} checked={row.product_manage_stock} onChange={(e) => {handleChange( e, row.product_id, "product_manage_stock", row.product_type )}} />
                     <label htmlFor={row.product_id}></label>
                 </div>
             )

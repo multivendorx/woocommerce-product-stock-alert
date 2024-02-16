@@ -17960,6 +17960,22 @@ const Managestock = () => {
         });
       }
     }
+    if (name === 'set_manage_stock' && Value === true) {
+      if (type === 'variation') {
+        setVariationData(element.id, id, "product_stock_quantity", 0);
+      }
+      setData(prevData => {
+        return prevData.map(obj => {
+          if (obj.product_id === id) {
+            return {
+              ...obj,
+              ["product_stock_quantity"]: 0
+            };
+          }
+          return obj;
+        });
+      });
+    }
     if (name !== "set_manage_stock" && name !== "set_backorders" && name !== "stock_status") {
       setInputChange(true);
       setEvent(e.target);
@@ -18266,7 +18282,7 @@ const Managestock = () => {
     cell: row => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "custome-toggle-default"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
-      id: row.product_type === "variation" ? row.parent_product_id : null,
+      id: row.product_type === "variation" ? row.parent_product_id : row.product_id,
       type: "checkbox",
       name: "set_manage_stock",
       checked: row.product_manage_stock,
