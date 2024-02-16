@@ -2180,6 +2180,10 @@ select {
   display: none;
   cursor: pointer;
 }
+button[disabled]{
+  height: 0;
+  width: 0;
+}
 
 .value-danger{
   color: red !important;
