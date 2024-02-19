@@ -41,6 +41,10 @@ Revolutionize your stock management with our Product Stock Manager & Notifier pl
 * 🔄 Sync out-of-stock subscriptions with Mailchimp for effective communication and marketing.**[PRO]** 
 * 📈 Enhance marketing strategies by connecting WooCommerce out-of-stock subscribers to Mailchimp. **[PRO]** 
 * 📥Efficiently manage subscribers by exporting details like names, subscription dates, product names, and email IDs.**[PRO]** 
+* 🔄 Edit the data conveniently and import it back using a CSV file, streamlining inventory management. **[PRO]** 
+* 🗂️ View and manage lists of all products easily from stock manager dashboard. **[PRO]** 
+* ✏️ Quick edit products using in-line editing, allowing updates to stock, SKU, and more. **[PRO]** 
+* 🔒 Enhance security and data integrity with ReCAPTCHA for reliable out-of-stock alerts.  **[PRO]** 
 
 
 👉 Official Demo Link: Try out Free and Pro **Stock Alert & Notifier** [Demo site](https://multivendordemo.com/stock-alert-notifier/wp-admin)
@@ -76,7 +80,7 @@ Are you tired of losing potential sales because your customers can't buy the out
 
 🔒 **ReCAPTCHA Central [PRO]**: ReCAPTCHA ensures only genuine subscribers, improving data accuracy and targeted notifications. ReCAPTCHA settings are essential for out-of-stock notifications to maintain data quality, prevent spam, enhance security, and ensure compliance with relevant regulations. 
 
-📊 **Stock Manager Dashboard [PRO]**: Efficiently manage your inventory with a dedicated dashboard showcasing comprehensive product lists. Admins can perform quick in-line edits, updating stock, SKUs, and more for streamlined inventory control.**[COMING SOON]** 
+📊 **Stock Manager Dashboard [PRO]**: Efficiently manage your inventory with a dedicated dashboard showcasing comprehensive product lists. Admins can perform quick in-line edits, updating stock, SKUs, and more for streamlined inventory control.
 
 📉 **Product Stock History [PRO]**: Dive into the Stock Manager for WooCommerce’s Stock Log page, offering a detailed history of each product’s stock movements. Track changes over time to gain insights into product availability trends. **[COMING SOON]**
 
@@ -88,18 +92,14 @@ Are you tired of losing potential sales because your customers can't buy the out
 - **[display_stock_manager_form]**: You can display stock alert form anywhere using this shortcode.
 
 ## 🌟 Upcoming Features: 
-* 🔒 Enhance security and data integrity with ReCAPTCHA for reliable out-of-stock alerts. 
 * 🚫 Mark products as ‘Discontinued’ in your WooCommerce catalog. 
-* 🔄 Edit the data conveniently and import it back using a CSV file, streamlining inventory management. 
-* 🗂️ View and manage lists of all products easily from stock manager dashboard. 
-* ✏️ Quick edit products using in-line editing, allowing updates to stock, SKU, and more. 
 * 📜 Access a stock log page for each product. 
 * 📉 Track the stock movement history, gaining insights into product availability changes over time.  
 * 💻 Your central dashboard for efficient management and retrieval of out-of-stock subscriber lists. 
 
 == Installation ==
 **AUTOMATIC INSTALLATION**
-Automatic installation is the easiest option — WordPress will handle the file transfer, and you won’t need to leave your web browser. To do an automatic install of Product Stock Manager & Notifier for WooCommerce, log in to your WordPress dashboard, navigate to the Plugins menu, and click “Add New.”
+Automatic installation is the easiest option — WordPress will handle the file transfer, and you won’t need to leave your web browser. To do an automatic install of Product Stock Manager & Notifier for WooCommerce, log in to your WordPress dashboard, navigate to the Plugins menu, and click “Add New”.
 
 In the search field type “Product Stock Manager & Notifier for WooCommerce,” then click “Search Plugins.” Once you’ve found us, you can view details about it such as the point release, rating, and description. Most importantly of course, you can install it by! Click “Install Now,” and WordPress will take it from there.
 
