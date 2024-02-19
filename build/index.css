@@ -2193,4 +2193,16 @@ input[type=number]::-webkit-inner-spin-button {
   border: none !important;
 }
 
+@media (max-width: 1600px) {
+  .rdt_TableCol {
+    flex-grow: 0 !important;
+  }
+  .rdt_TableCell {
+    flex-grow: 0 !important;
+  }
+  .rdt_Table {
+    width: 1200px;
+  }
+}
+
 /*# sourceMappingURL=index.css.map*/

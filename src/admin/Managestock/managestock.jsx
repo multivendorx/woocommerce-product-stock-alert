@@ -5,7 +5,8 @@ import React,{useEffect,useState} from 'react';
 import Popoup from '../PopupContent/PopupContent';
 import DataTable from 'react-data-table-component';
 import InputElement from './InputElement';
-import { BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import { BrowserRouter as Router,  Link} from 'react-router-dom';
+import CustomDataTable from './CustomDatatable';
 
 const Managestock = () => {
     const getDataUrl = `${ stockManagerAppLocalizer.apiUrl }/woo-stockmanager-pro/v1/manage-stock`;
@@ -212,9 +213,14 @@ const Managestock = () => {
         return modifyData;
     }
 
-    const ExpandableRow = ({ data }) => {
-        return (
-            <DataTable expandableRows={true} expandableRowDisabled={ () => true } className="expanded-data-table" noHeader noTableHead columns={columns} data={data.variation}/>
+    // const ExpandableRow = ({ data }) => {
+    //     return (
+    //         <DataTable expandableRows={true} expandableRowDisabled={ () => true } className="expanded-data-table" noHeader noTableHead columns={columns} data={data.variation}/>
+    //     );
+    // };
+    const expandableRowsComponent = ({ row }) => {
+        return(
+            <CustomDataTable pagination={false} renderHeader={false} expandableRowDisabled={ () => false } expandableRowsComponent={expandableRowsComponent} data={row.variation} columns={columns} />
         );
     };
 
@@ -225,7 +231,7 @@ const Managestock = () => {
                 return  <a href={row.product_link} target="_blank">
                             <img src={row.product_image} class="table-image"/>
                         </a>
-            }
+            },
         },
         {
             name: __('Name','woocommerce-stock-manager-pro'),
@@ -240,7 +246,7 @@ const Managestock = () => {
                                 </span>
                             </div> 
                 }
-            }
+            },
         },
         {
             name: __('SKU','woocommerce-stock-manager-pro'),
@@ -255,11 +261,13 @@ const Managestock = () => {
                                 </span>
                             </div>
                 }
-            }
+            },
         },
         {
-            name: __('Product type','woocommerce-stock-manager-pro'),
-            selector: (row) => capitalizeFirstLetter(row.product_type),
+            name: __('Type','woocommerce-stock-manager-pro'),
+            cell: (row) => {
+                return capitalizeFirstLetter(row.product_type);
+            }
         },
         {
             name: __('Regular price','woocommerce-stock-manager-pro'),
@@ -279,7 +287,7 @@ const Managestock = () => {
                                 <input  type="number" class={`input-field input-field-edit`} style={{ width: dynamicWidth(row.variation_regular_price_max) }}  value={row.variation_regular_price_max} readOnly/>
                             </div>
                 }
-            }
+            },
         },
         {
             name: __('Sale price','woocommerce-stock-manager-pro'),
@@ -302,7 +310,7 @@ const Managestock = () => {
                                 <input  type="number" class={`input-field input-field-edit`} style={{ width: dynamicWidth(row.variation_sale_price_max) }}  value={row.variation_sale_price_max} readOnly/>
                             </div>
                 }          
-            }
+            },
         },
         {
             name: __('Manage stock','woocommerce-stock-manager-pro'),
@@ -311,11 +319,11 @@ const Managestock = () => {
                     <input id={( row.product_type === "variation" ) ? row.parent_product_id : row.product_id }  type="checkbox" name={"set_manage_stock"} checked={row.product_manage_stock} onChange={(e) => {handleChange( e, row.product_id, "product_manage_stock", row.product_type )}} />
                     <label htmlFor={row.product_id}></label>
                 </div>
-            )
+            ),
         },
         {
             name: __('Stock status','woocommerce-stock-manager-pro'),
-                        cell: (row) => {
+            cell: (row) => {
                 if (row.product_manage_stock) {
                     if( row.product_stock_quantity > 0 || row.variation_stock_quantity > 0 ){
                         return <p class="value-sucess">{__("In stock","woocommerce-stock-manager-pro")}</p>;
@@ -346,7 +354,7 @@ const Managestock = () => {
                 }else{
                   return <p>{__("No","woocommerce-stock-manager-pro")}</p>;
                 }
-            }
+            },
         },
         {
             name: "Stock",
@@ -363,8 +371,16 @@ const Managestock = () => {
                 }else if( row.product_type === "variable" ){
                     return <input  type="number" min={0} class={`input-field input-field-edit ${ (row.variation_stock_quantity>0) ? "value-sucess" : "value-danger"}`}  value={ (row.variation_stock_quantity === null) ? '0' : row.variation_stock_quantity } readOnly/> 
                 }
-            }
+            },
         },
+        {
+            name: __('Subscriber No.','woocommerce-stock-manager-pro'),
+            cell: (row) => {
+                return  <div class="cell">
+                            {row.product_interested_person}
+                        </div> 
+            },
+        }
     ];
     return( 
     <>
@@ -432,9 +448,9 @@ const Managestock = () => {
                                         onChange={(e) => setfilter('stockStatus',e.target.value)}
                                     >
                                         <option value="" >{__("Stock Status","woocommerce-stock-manager-pro")}</option>
-                                        <option value="instock">{__("Instock","woocommerce-stock-manager-pro")}</option>
-                                        <option value="onbackorder">{__("Onbackorder","woocommerce-stock-manager-pro")}</option>
-                                        <option value="outofstock">{__("Outofstock","woocommerce-stock-manager-pro")}</option>
+                                        <option value="instock">{__("In stock","woocommerce-stock-manager-pro")}</option>
+                                        <option value="onbackorder">{__("On backorder","woocommerce-stock-manager-pro")}</option>
+                                        <option value="outofstock">{__("Out of stock","woocommerce-stock-manager-pro")}</option>
                                     </select>
                                 </div>
                             </div>
@@ -457,14 +473,14 @@ const Managestock = () => {
                             </div>
                         </div>
                         <div className="woo-backend-datatable-wrapper">
-                            <DataTable
+                            {/* <DataTable
                             columns={columns}
                             expandableRows
                             expandableRowsComponent={ExpandableRow}
                             expandableRowDisabled={(row) => !(row.variation.length>0)}
                             data={getFilteredData()}
-                            pagination
-                            />
+                            /> */}
+                            <CustomDataTable pagination={true} renderHeader={true} expandableRowDisabled={(row) => (row.variation.length>0)} expandableRowsComponent={expandableRowsComponent} data={getFilteredData()} columns={columns} />
                         </div>
                     </div>
                 </div>

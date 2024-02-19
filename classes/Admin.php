@@ -281,8 +281,6 @@ class Admin {
                 'subscription_page_string'  => $subscription_page_string,
                 'download_csv'              => __('Download CSV', 'woocommerce-stock-manager'),
                 'pro_settings_list'         => $pro_settings_list,
-                'pro_coupon_code'           => __('UPGRADE10', 'woocommerce-stock-manager'),
-                'pro_coupon_text'           => __('Don\'t miss out! Enjoy 10% off on our pro features.', 'woocommerce-stock-manager'),
                 'pro_url'                   => esc_url(WOO_STOCK_MANAGER_PRO_SHOP_URL),
                 'setting_string'            => $setting_string,
                 'banner_show'               => get_option('woocommerce_stock_manager_pro_banner_hide') ? false : true,

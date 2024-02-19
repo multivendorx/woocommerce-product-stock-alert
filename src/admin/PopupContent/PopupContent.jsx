@@ -23,9 +23,6 @@ const Propopup = () => {
                                     <p>6. Recaptcha Support.</p>
                                     <p>7. Subscription Details.</p>
                                 </div>
-                                <div className="woo-banner-offer">Limited-Time Offer</div>
-                                <div className="discount-tag">Cupon Code: <b>{stockManagerAppLocalizer.pro_coupon_code}</b></div>
-                                <p className="">{stockManagerAppLocalizer.pro_coupon_text}</p>
                                 <a className="woo-go-pro-btn" target="_blank" href={stockManagerAppLocalizer.pro_url}>Upgrade to Pro</a>
                             </div>
                         </div>
