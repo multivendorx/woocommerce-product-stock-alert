@@ -1,3 +1,139 @@
+/*!**************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./src/admin/Managestock/custom.css ***!
+  \**************************************************************************************************************************************************************************************/
+.custom-table-main{
+    /* border: 1px solid red; */
+    font-size: 1.03rem;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-content: space-between;
+}
+.custom-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+.custom-container .custom-container-inner-div{
+    display: flex ;
+    width: 100%;
+}
+.custom-container .custom-container-inner-div div{
+    max-width: 200px;
+    width: 100%;
+}
+.custom-container .custom-container-inner-div .cell{
+    width: 100%;
+    border: 1px solid red;
+    display: flex;
+    overflow: hidden;
+}
+.custom-container .custom-container-inner-div.left{
+   width: 330px;
+}
+.custom-container .custom-container-inner-div.right{
+   max-width: 100%;
+}
+.cell.div-expand-icon{
+    max-width: 50px !important;
+}
+.cell.div-img, .cell.div-product-type, .cell.div-manage-stock{
+    max-width: 80px !important;
+}
+.cell.div-manage-stock{
+    max-width: 110px !important;
+}
+.variable-product-expand{
+    height: 25px;
+    width: 25px;
+    background-color: rgb(201, 201, 201);
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.25rem;
+}
+.variable-product-expand svg{
+    height: 20px;
+    width: 20px;
+}
+.div-img-img{
+    width: 55px;
+    height: 55px;
+    border-radius: 0.25rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.089);
+}
+.cell input{
+    max-width: 85% !important;
+    width: 110px;
+}
+.cell span{
+    width: 20px;
+    display: block;
+}
+.cell span svg{
+    width: 100%;
+}
+.div-manage-stock{
+    overflow: visible !important;
+}
+.div-manage-stock-container{
+    width: 100%;
+    min-height: 100%;
+}
+.custom-container .custom-container-inner-div.right div p{
+    display: none;
+}
+.master-edit-btn{
+    display: none;
+}
+.master-edit-btn svg{
+    width: 20px;
+    height: 20px;
+}
+@media only screen and (max-width: 1200px) {
+    .master-edit-btn{
+        display: block;
+    }
+    .div-backorder, .div-product-type, .div-subcriberno{
+        display: flex !important;
+    }
+    .custom-container.custom-container-col{
+        flex-direction: column;
+    }
+    .custom-container.custom-container-col div{
+        width: 100% !important;
+        justify-content: flex-start;
+    }
+    .custom-container-row{
+        width: 100%;
+        justify-content: space-between;
+    }
+    .custom-container-row .right .cell{
+        display: none !important;
+    }
+    .custom-container-row .left{
+        width: 100%;
+    }
+    .custom-container-inner-div.right{
+        flex-direction: column;
+        width: -moz-fit-content;
+        width: fit-content;
+    }
+    .custom-container .custom-container-inner-div.right div, .cell.div-product-type, .cell.div-manage-stock{
+        max-width: 400px !important;
+    }
+    .custom-container .custom-container-inner-div.right div input{
+        width: 150px;
+    }
+    .custom-container .custom-container-inner-div.right div p{
+        display: block;
+        font-size: 1.25rem;
+        width: 150px;
+    }
+}
 /*!********************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/style/main.scss ***!
   \********************************************************************************************************************************************************************************************************************************************/
@@ -2191,18 +2327,6 @@ input[type=number]::-webkit-inner-spin-button {
 
 .expanded-data-table {
   border: none !important;
-}
-
-@media (max-width: 1600px) {
-  .rdt_TableCol {
-    flex-grow: 0 !important;
-  }
-  .rdt_TableCell {
-    flex-grow: 0 !important;
-  }
-  .rdt_Table {
-    width: 1200px;
-  }
 }
 
 /*# sourceMappingURL=index.css.map*/

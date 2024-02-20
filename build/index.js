@@ -17357,99 +17357,6 @@ const DynamicForm = ({
 
 /***/ }),
 
-/***/ "./src/admin/Managestock/CustomDatatable.jsx":
-/*!***************************************************!*\
-  !*** ./src/admin/Managestock/CustomDatatable.jsx ***!
-  \***************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-
-
-const CustomDataTable = ({
-  columns,
-  data,
-  expandableRowsComponent,
-  pagination,
-  renderHeader,
-  expandableRowDisabled,
-  itemsPerPageOptions = [10, 20, 30],
-  defaultItemsPerPage = 5
-}) => {
-  const [currentPage, setCurrentPage] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(1);
-  const [itemsPerPage, setItemsPerPage] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(defaultItemsPerPage);
-  const [expandedRows, setExpandedRows] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
-  const totalItems = data.length;
-  const totalPages = Math.ceil(totalItems / itemsPerPage);
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const currentData = data.slice(startIndex, endIndex);
-  const renderHeaderCells = () => {
-    const dropDownHeader = (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("th", null, "ab");
-    const headers = columns.map(column => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("th", {
-      key: column.name
-    }, column.name));
-    return [dropDownHeader, ...headers];
-  };
-  const handleExpandToggle = index => {
-    setExpandedRows(prevExpandedRows => {
-      const isExpanded = prevExpandedRows.includes(index);
-      return isExpanded ? prevExpandedRows.filter(rowIndex => rowIndex !== index) : [...prevExpandedRows, index];
-    });
-  };
-  const isExpandableRowDisabled = row => {
-    return expandableRowDisabled && expandableRowDisabled(row);
-  };
-  const renderRows = () => {
-    return currentData.map((row, index) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), {
-      key: startIndex + index
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("tr", {
-      className: "table table-row"
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", null, isExpandableRowDisabled(row) ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
-      onClick: () => handleExpandToggle(startIndex + index)
-    }, expandedRows.includes(startIndex + index) ? 'Collapse' : 'Expand') : ""), columns.map(column => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", {
-      key: column.name
-    }, column.cell ? column.cell(row) : row[column.key]))), expandedRows.includes(startIndex + index) && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("tr", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", {
-      colSpan: columns.length + 1
-    }, expandableRowsComponent({
-      row
-    })))));
-  };
-  const handlePageChange = pageNumber => {
-    setCurrentPage(pageNumber);
-  };
-  const handleItemsPerPageChange = value => {
-    setItemsPerPage(value);
-    setCurrentPage(1); // Reset to the first page when changing items per page
-  };
-
-  const renderPagination = () => {
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, `Page ${currentPage} of ${totalPages}`), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
-      onClick: () => handlePageChange(currentPage - 1),
-      disabled: currentPage === 1
-    }, "Previous"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
-      onClick: () => handlePageChange(currentPage + 1),
-      disabled: currentPage === totalPages
-    }, "Next"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "Show", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
-      value: itemsPerPage,
-      onChange: e => handleItemsPerPageChange(Number(e.target.value))
-    }, itemsPerPageOptions.map(option => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
-      key: option,
-      value: option
-    }, option))), "rows per page"));
-  };
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, renderHeader && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("thead", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("tr", null, renderHeaderCells())), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("tbody", null, renderRows()), pagination && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, renderPagination()));
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CustomDataTable);
-
-/***/ }),
-
 /***/ "./src/admin/Managestock/Export.jsx":
 /*!******************************************!*\
   !*** ./src/admin/Managestock/Export.jsx ***!
@@ -17890,6 +17797,607 @@ const InputElement = ({
 
 /***/ }),
 
+/***/ "./src/admin/Managestock/ProductTable.jsx":
+/*!************************************************!*\
+  !*** ./src/admin/Managestock/ProductTable.jsx ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _TableRow__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TableRow */ "./src/admin/Managestock/TableRow.jsx");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
+
+const ProductTable = ({
+  products,
+  setData
+}) => {
+  const [event, setEvent] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)();
+  const [currentPage, setCurrentPage] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(1);
+  const [itemsPerPage, setItemsPerPage] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(10);
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = products.slice(indexOfFirstItem, indexOfLastItem);
+  const renderRows = () => {
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, currentItems.map(product => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), {
+      key: product.product_id
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_TableRow__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      event: event,
+      setEvent: setEvent,
+      key: product.product_id,
+      setData: setData,
+      row: product
+    }))));
+  };
+  const paginate = pageNumber => setCurrentPage(pageNumber);
+  const handleItemsPerPageChange = e => {
+    setItemsPerPage(parseInt(e.target.value, 10));
+    setCurrentPage(1); // Reset to the first page when changing items per page
+  };
+
+  const pageNumbers = [];
+  for (let i = 1; i <= Math.ceil(products.length / itemsPerPage); i++) {
+    pageNumbers.push(i);
+  }
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "pagination-controls"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Rows per page:', 'woocommerce-stock-manager-pro'), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
+    onChange: handleItemsPerPageChange,
+    value: itemsPerPage
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
+    value: 5
+  }, "5"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
+    value: 10
+  }, "10"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
+    value: 15
+  }, "15"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
+    value: 20
+  }, "20")))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("table", {
+    className: "main-table"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("thead", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("tr", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("th", null, "hello"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("th", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    class: "dashicons img-icon dashicons-format-image"
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("th", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Name', 'woocommerce-stock-manager-pro')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("th", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('SKU', 'woocommerce-stock-manager-pro')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("th", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Type', 'woocommerce-stock-manager-pro')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("th", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Regular price', 'woocommerce-stock-manager-pro')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("th", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Sale price', 'woocommerce-stock-manager-pro')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("th", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Manage stock', 'woocommerce-stock-manager-pro')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("th", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Stock status', 'woocommerce-stock-manager-pro')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("th", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Back orders', 'woocommerce-stock-manager-pro')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("th", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Stock', 'woocommerce-stock-manager-pro')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("th", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Subscriber No.', 'woocommerce-stock-manager-pro')))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("tbody", null, renderRows())), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "pagination"
+  }, pageNumbers.map(number => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    key: number,
+    onClick: () => paginate(number)
+  }, number))));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ProductTable);
+
+/***/ }),
+
+/***/ "./src/admin/Managestock/TableRow.jsx":
+/*!********************************************!*\
+  !*** ./src/admin/Managestock/TableRow.jsx ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
+
+
+
+
+const TableRow = ({
+  row,
+  setData,
+  event,
+  setEvent
+}) => {
+  const updateDataUrl = `${stockManagerAppLocalizer.apiUrl}/woo-stockmanager-pro/v1/update`;
+  const [inputChange, setInputChange] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
+  const [uploadData, setUploadData] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+    id: '',
+    name: '',
+    value: ''
+  });
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    let name = uploadData.name;
+    if (name !== "" || name === "set_manage_stock" || name === "set_backorders" || name === "stock_status") {
+      changeData();
+    }
+  }, [uploadData]);
+  function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+  function changeData() {
+    (0,axios__WEBPACK_IMPORTED_MODULE_2__["default"])({
+      method: 'post',
+      url: updateDataUrl,
+      headers: {
+        'X-WP-Nonce': stockManagerAppLocalizer.nonce
+      },
+      data: uploadData
+    });
+  }
+  function updateData(id, name, value) {
+    setUploadData({
+      ['id']: id,
+      ['name']: name,
+      ['value']: value
+    });
+  }
+  const handleDocumentClick = e => {
+    if (inputChange) {
+      changeData();
+      setInputChange(false);
+      event.classList.add('input-field-edit');
+      event.setAttribute('readonly', 'readonly');
+      document.removeEventListener('click', handleDocumentClick);
+    }
+  };
+  const editButtonOnClick = e => {
+    let element = e.currentTarget;
+    element.previousSibling.focus();
+    element.previousSibling.removeAttribute('readonly');
+    element.previousSibling.classList.remove('input-field-edit');
+  };
+  const handleInputMouseOut = e => {
+    e.currentTarget.children[1].style.display = 'none';
+    if (inputChange) {
+      document.addEventListener('click', handleDocumentClick);
+    }
+  };
+  const handleInputMouseOver = e => {
+    e.currentTarget.children[1].style.display = 'flex';
+  };
+  const handleChange = (e, id, str, type) => {
+    let element = e.target;
+    let name = element.name;
+    let Value = name === "set_manage_stock" ? element.checked : element.value;
+    updateData(id, name, Value);
+    if (name === "set_sale_price") {
+      const regular_price = Number(element.parentElement.parentElement.parentElement.children[5].children[0].children[0].value);
+      if (Value >= regular_price) {
+        element.parentElement.children[2].style.display = "block";
+      } else {
+        element.parentElement.children[2].style.display = "none";
+      }
+    }
+    if (name === 'set_regular_price') {
+      const sale_price = element.parentElement.parentElement.nextSibling.children[0].children[0].value;
+      if (Number(sale_price) > Number(Value)) {
+        setData(prevData => {
+          const newData = {
+            ...prevData
+          };
+          newData[id]['product_sale_price'] = "0";
+          return newData;
+        });
+      }
+    }
+    // if(name === 'set_manage_stock' && Value === true){
+    //     if(type === 'variation'){
+    //         setVariationData(element.id,id,"product_stock_quantity",0)
+    //     }
+    //     setData((prevData) => {
+    //         return prevData.map((obj) => {
+    //             if( obj.product_id === id ){
+    //                 return {...obj, ["product_stock_quantity"] : 0 };
+    //             }
+    //             return obj;
+    //         })
+    //     });
+    // }
+    if (name !== "set_manage_stock" && name !== "set_backorders" && name !== "stock_status") {
+      setInputChange(true);
+      setEvent(e.target);
+      Value = Value.replace(/^0+/, "");
+    }
+    // if(type === "variation"){
+    //     setVariationData(element.id,id,str,Value)
+    // }else{
+    setData(prevData => {
+      const newData = {
+        ...prevData
+      };
+      newData[id][str] = Value;
+      return newData;
+    });
+    // }
+  };
+
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "custom-container custom-container-col"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "custom-container-inner-div left"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "cell div-expand-icon"
+  }, row.variation ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+    className: "variable-product-expand"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    fill: "currentColor",
+    class: "bi bi-arrow-right-short",
+    viewBox: "0 0 16 16"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    "fill-rule": "evenodd",
+    d: "M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8"
+  }))) : ""), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "cell div-img"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+    href: row.product_link,
+    target: "_blank"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+    src: row.product_image,
+    class: "table-image"
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "cell div-name",
+    onMouseOver: handleInputMouseOver,
+    onMouseOut: handleInputMouseOut
+  }, row.product_type === "variation" ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+    type: "text",
+    class: `input-field input-field-edit`,
+    value: row.product_name,
+    readOnly: true
+  }) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+    id: row.product_type === "variation" ? row.parent_product_id : row.product_id,
+    type: "text",
+    class: "input-field input-field-edit",
+    value: row.product_name,
+    name: "set_name",
+    onChange: e => {
+      handleChange(e, row.product_id, "product_name", row.product_type);
+    },
+    readOnly: true
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    onClick: editButtonOnClick,
+    class: "edit-btn"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 16 16",
+    id: "edit"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    fill: "#212121",
+    d: "M12.2417871,6.58543288 L6.27024769,12.5583865 C5.94985063,12.8787836 5.54840094,13.1060806 5.1088198,13.2159758 L2.81782051,13.7887257 C2.45163027,13.8802732 2.11993389,13.5485768 2.21148144,13.1823866 L2.78423127,10.8913873 C2.89412655,10.4518062 3.12142351,10.0503565 3.44182056,9.72995942 L9.41336001,3.75700576 L12.2417871,6.58543288 Z M13.6567078,2.3434993 C14.4377564,3.12454789 14.4377564,4.39087785 13.6567078,5.17192643 L12.9488939,5.8783261 L10.1204668,3.04989898 L10.8282807,2.3434993 C11.6093293,1.56245072 12.8756592,1.56245072 13.6567078,2.3434993 Z"
+  })))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "custom-container-inner-div right"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "cell div-sku",
+    onMouseOver: handleInputMouseOver,
+    onMouseOut: handleInputMouseOut
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+    id: row.product_type === "variation" ? row.parent_product_id : null,
+    type: "text",
+    class: "input-field input-field-edit",
+    value: row.product_sku,
+    name: "set_sku",
+    onChange: e => {
+      handleChange(e, row.product_id, "product_sku", row.product_type);
+    },
+    readOnly: true
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    onClick: editButtonOnClick,
+    class: "edit-btn"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 16 16",
+    id: "edit"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    fill: "#212121",
+    d: "M12.2417871,6.58543288 L6.27024769,12.5583865 C5.94985063,12.8787836 5.54840094,13.1060806 5.1088198,13.2159758 L2.81782051,13.7887257 C2.45163027,13.8802732 2.11993389,13.5485768 2.21148144,13.1823866 L2.78423127,10.8913873 C2.89412655,10.4518062 3.12142351,10.0503565 3.44182056,9.72995942 L9.41336001,3.75700576 L12.2417871,6.58543288 Z M13.6567078,2.3434993 C14.4377564,3.12454789 14.4377564,4.39087785 13.6567078,5.17192643 L12.9488939,5.8783261 L10.1204668,3.04989898 L10.8282807,2.3434993 C11.6093293,1.56245072 12.8756592,1.56245072 13.6567078,2.3434993 Z"
+  })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "cell div-product-type",
+    onMouseOver: handleInputMouseOver,
+    onMouseOut: handleInputMouseOut
+  }, capitalizeFirstLetter(row.product_type)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    class: "cell div-regular-price",
+    onMouseOver: handleInputMouseOver,
+    onMouseOut: handleInputMouseOut
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+    id: row.product_type === "variation" ? row.parent_product_id : row.product_id,
+    type: "number",
+    min: 0,
+    class: "input-field input-field-edit",
+    value: row.product_regular_price === "" || row.product_regular_price === null ? 0 : row.product_regular_price,
+    name: "set_regular_price",
+    onChange: e => {
+      handleChange(e, row.product_id, "product_regular_price", row.product_type);
+    },
+    readOnly: true
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    onClick: editButtonOnClick,
+    className: "edit-btn"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 16 16",
+    id: "edit"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    fill: "#212121",
+    d: "M12.2417871,6.58543288 L6.27024769,12.5583865 C5.94985063,12.8787836 5.54840094,13.1060806 5.1088198,13.2159758 L2.81782051,13.7887257 C2.45163027,13.8802732 2.11993389,13.5485768 2.21148144,13.1823866 L2.78423127,10.8913873 C2.89412655,10.4518062 3.12142351,10.0503565 3.44182056,9.72995942 L9.41336001,3.75700576 L12.2417871,6.58543288 Z M13.6567078,2.3434993 C14.4377564,3.12454789 14.4377564,4.39087785 13.6567078,5.17192643 L12.9488939,5.8783261 L10.1204668,3.04989898 L10.8282807,2.3434993 C11.6093293,1.56245072 12.8756592,1.56245072 13.6567078,2.3434993 Z"
+  })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    class: "cell div-sale-price",
+    onMouseOver: handleInputMouseOver,
+    onMouseOut: handleInputMouseOut
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+    id: row.product_type === "variation" ? row.parent_product_id : row.product_id,
+    type: "number",
+    min: 0,
+    class: "input-field input-field-edit",
+    value: row.product_sale_price === "" ? 0 : row.product_sale_price,
+    name: "set_sale_price",
+    onChange: e => {
+      handleChange(e, row.product_id, "product_sale_price", row.product_type);
+    },
+    readOnly: true
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    onClick: editButtonOnClick,
+    class: "edit-btn"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 16 16",
+    id: "edit"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    fill: "#212121",
+    d: "M12.2417871,6.58543288 L6.27024769,12.5583865 C5.94985063,12.8787836 5.54840094,13.1060806 5.1088198,13.2159758 L2.81782051,13.7887257 C2.45163027,13.8802732 2.11993389,13.5485768 2.21148144,13.1823866 L2.78423127,10.8913873 C2.89412655,10.4518062 3.12142351,10.0503565 3.44182056,9.72995942 L9.41336001,3.75700576 L12.2417871,6.58543288 Z M13.6567078,2.3434993 C14.4377564,3.12454789 14.4377564,4.39087785 13.6567078,5.17192643 L12.9488939,5.8783261 L10.1204668,3.04989898 L10.8282807,2.3434993 C11.6093293,1.56245072 12.8756592,1.56245072 13.6567078,2.3434993 Z"
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "sale-price-error-message"
+  }, "Please enter in a value less than the regular price")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "cell div-manage-stock"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+    id: row.product_type === "variation" ? row.parent_product_id : row.product_id,
+    type: "checkbox",
+    name: "set_manage_stock",
+    checked: row.product_manage_stock,
+    onChange: e => {
+      handleChange(e, row.product_id, "product_manage_stock", row.product_type);
+    }
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    htmlFor: row.product_id
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "cell div-stock-status"
+  }, row.product_manage_stock ? row.product_stock_quantity > 0 || row.variation_stock_quantity > 0 ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+    class: "value-sucess"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("In stock", "woocommerce-stock-manager-pro")) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+    class: "value-danger"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Out of stock", "woocommerce-stock-manager-pro")) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "custom-select"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
+    id: row.product_type === "variation" ? row.parent_product_id : null,
+    name: "stock_status",
+    value: row.product_stock_status,
+    onChange: e => {
+      handleChange(e, row.product_id, "product_stock_status", row.product_type);
+    }
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
+    value: "instock"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("In stock", "woocommerce-stock-manager-pro")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
+    value: "onbackorder"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("On backorder", "woocommerce-stock-manager-pro")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
+    value: "outofstock"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Out of stock", "woocommerce-stock-manager-pro"))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "cell div-backorder"
+  }, row.product_manage_stock ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    class: "custom-select"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
+    id: row.product_type === "variation" ? row.parent_product_id : row.product_id,
+    name: "set_backorders",
+    value: row.product_backorders,
+    onChange: e => {
+      handleChange(e, row.product_id, "product_backorders", row.product_type);
+    }
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
+    value: "no"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("No", "woocommerce-stock-manager-pro")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
+    value: "notify"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Notify", "woocommerce-stock-manager-pro")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
+    value: "yes"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Yes", "woocommerce-stock-manager-pro")))) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("No", "woocommerce-stock-manager-pro"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "cell div-stock"
+  }, row.product_type === "simple" && row.product_manage_stock ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    class: "cell",
+    onMouseOver: handleInputMouseOver,
+    onMouseOut: handleInputMouseOut
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+    id: row.product_type === "variation" ? row.parent_product_id : row.product_id,
+    type: "number",
+    min: 0,
+    class: `input-field input-field-edit ${row.product_stock_quantity > 0 ? "value-sucess" : "value-danger"}`,
+    value: row.product_stock_quantity === null || row.product_stock_quantity === "" ? '0' : row.product_stock_quantity,
+    name: "set_stock_quantity",
+    onChange: e => {
+      handleChange(e, row.product_id, "product_stock_quantity", row.product_type);
+    },
+    readOnly: true
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    onClick: editButtonOnClick,
+    class: "edit-btn"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 16 16",
+    id: "edit"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    fill: "#212121",
+    d: "M12.2417871,6.58543288 L6.27024769,12.5583865 C5.94985063,12.8787836 5.54840094,13.1060806 5.1088198,13.2159758 L2.81782051,13.7887257 C2.45163027,13.8802732 2.11993389,13.5485768 2.21148144,13.1823866 L2.78423127,10.8913873 C2.89412655,10.4518062 3.12142351,10.0503565 3.44182056,9.72995942 L9.41336001,3.75700576 L12.2417871,6.58543288 Z M13.6567078,2.3434993 C14.4377564,3.12454789 14.4377564,4.39087785 13.6567078,5.17192643 L12.9488939,5.8783261 L10.1204668,3.04989898 L10.8282807,2.3434993 C11.6093293,1.56245072 12.8756592,1.56245072 13.6567078,2.3434993 Z"
+  })))) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+    type: "number",
+    min: 0,
+    class: `input-field input-field-edit ${row.variation_stock_quantity > 0 ? "value-sucess" : "value-danger"}`,
+    value: row.variation_stock_quantity === null ? '0' : row.variation_stock_quantity,
+    readOnly: true
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "cell div-subcriberno"
+  }, row.product_interested_person)));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TableRow);
+
+/***/ }),
+
+/***/ "./src/admin/Managestock/custo.jsx":
+/*!*****************************************!*\
+  !*** ./src/admin/Managestock/custo.jsx ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _custom_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./custom.css */ "./src/admin/Managestock/custom.css");
+
+
+
+const Custo = () => {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "custom-table-main"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "custom-container custom-container-row"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "custom-container-inner-div left"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "cell div-expand-icon"
+  }, "icons"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "cell div-img"
+  }, "Image"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "cell div-name"
+  }, "Name")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "custom-container-inner-div right"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "cell div-sku"
+  }, "SKU"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "cell div-product-type"
+  }, "Type"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "cell div-regular-price"
+  }, "Regular price"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "cell div-sale-price"
+  }, "Sale price"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "cell div-manage-stock"
+  }, "Manage stock"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "cell div-stock-status"
+  }, "Stock status"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "cell div-backorder"
+  }, "Back orders"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "cell div-stock"
+  }, "Stock"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "cell div-subcriberno"
+  }, "Subscriber No."), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "master-edit-btn"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
+    xmlns: "http://www.w3.org/2000/svg"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    d: "M12 15a1 1 0 0 1-.707-.293l-4-4a1 1 0 1 1 1.414-1.414L12 12.586l3.293-3.293a1 1 0 0 1 1.414 1.414l-4 4A1 1 0 0 1 12 15z"
+  }))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "custom-container custom-container-col"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "custom-container-inner-div left"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "cell div-expand-icon"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+    className: "variable-product-expand"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    fill: "currentColor",
+    class: "bi bi-arrow-right-short",
+    viewBox: "0 0 16 16"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    "fill-rule": "evenodd",
+    d: "M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8"
+  })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "cell div-img"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+    className: "div-img-img",
+    src: "https://images.unsplash.com/photo-1682687218982-6c508299e107?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8",
+    alt: ""
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "cell div-name"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+    type: "text"
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 16 16",
+    id: "edit"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    fill: "#212121",
+    d: "M12.2417871,6.58543288 L6.27024769,12.5583865 C5.94985063,12.8787836 5.54840094,13.1060806 5.1088198,13.2159758 L2.81782051,13.7887257 C2.45163027,13.8802732 2.11993389,13.5485768 2.21148144,13.1823866 L2.78423127,10.8913873 C2.89412655,10.4518062 3.12142351,10.0503565 3.44182056,9.72995942 L9.41336001,3.75700576 L12.2417871,6.58543288 Z M13.6567078,2.3434993 C14.4377564,3.12454789 14.4377564,4.39087785 13.6567078,5.17192643 L12.9488939,5.8783261 L10.1204668,3.04989898 L10.8282807,2.3434993 C11.6093293,1.56245072 12.8756592,1.56245072 13.6567078,2.3434993 Z"
+  }))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "custom-container-inner-div right"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "cell div-sku"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Bishal"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+    type: "text"
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 16 16",
+    id: "edit"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    fill: "#212121",
+    d: "M12.2417871,6.58543288 L6.27024769,12.5583865 C5.94985063,12.8787836 5.54840094,13.1060806 5.1088198,13.2159758 L2.81782051,13.7887257 C2.45163027,13.8802732 2.11993389,13.5485768 2.21148144,13.1823866 L2.78423127,10.8913873 C2.89412655,10.4518062 3.12142351,10.0503565 3.44182056,9.72995942 L9.41336001,3.75700576 L12.2417871,6.58543288 Z M13.6567078,2.3434993 C14.4377564,3.12454789 14.4377564,4.39087785 13.6567078,5.17192643 L12.9488939,5.8783261 L10.1204668,3.04989898 L10.8282807,2.3434993 C11.6093293,1.56245072 12.8756592,1.56245072 13.6567078,2.3434993 Z"
+  })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "cell div-product-type"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Bishal"), "Simple"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "cell div-regular-price"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Bishal"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+    type: "text"
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 16 16",
+    id: "edit"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    fill: "#212121",
+    d: "M12.2417871,6.58543288 L6.27024769,12.5583865 C5.94985063,12.8787836 5.54840094,13.1060806 5.1088198,13.2159758 L2.81782051,13.7887257 C2.45163027,13.8802732 2.11993389,13.5485768 2.21148144,13.1823866 L2.78423127,10.8913873 C2.89412655,10.4518062 3.12142351,10.0503565 3.44182056,9.72995942 L9.41336001,3.75700576 L12.2417871,6.58543288 Z M13.6567078,2.3434993 C14.4377564,3.12454789 14.4377564,4.39087785 13.6567078,5.17192643 L12.9488939,5.8783261 L10.1204668,3.04989898 L10.8282807,2.3434993 C11.6093293,1.56245072 12.8756592,1.56245072 13.6567078,2.3434993 Z"
+  })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "cell div-sale-price"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Bishal"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+    type: "text"
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 16 16",
+    id: "edit"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    fill: "#212121",
+    d: "M12.2417871,6.58543288 L6.27024769,12.5583865 C5.94985063,12.8787836 5.54840094,13.1060806 5.1088198,13.2159758 L2.81782051,13.7887257 C2.45163027,13.8802732 2.11993389,13.5485768 2.21148144,13.1823866 L2.78423127,10.8913873 C2.89412655,10.4518062 3.12142351,10.0503565 3.44182056,9.72995942 L9.41336001,3.75700576 L12.2417871,6.58543288 Z M13.6567078,2.3434993 C14.4377564,3.12454789 14.4377564,4.39087785 13.6567078,5.17192643 L12.9488939,5.8783261 L10.1204668,3.04989898 L10.8282807,2.3434993 C11.6093293,1.56245072 12.8756592,1.56245072 13.6567078,2.3434993 Z"
+  })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "cell div-manage-stock"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Bishal"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "div-manage-stock-container"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "custome-toggle-default"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+    type: "checkbox"
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null)))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "cell div-stock-status"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Bishal"), "Out of stock"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "cell div-backorder"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Bishal"), "No"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "cell div-stock"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Bishal"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+    type: "text"
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 16 16",
+    id: "edit"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    fill: "#212121",
+    d: "M12.2417871,6.58543288 L6.27024769,12.5583865 C5.94985063,12.8787836 5.54840094,13.1060806 5.1088198,13.2159758 L2.81782051,13.7887257 C2.45163027,13.8802732 2.11993389,13.5485768 2.21148144,13.1823866 L2.78423127,10.8913873 C2.89412655,10.4518062 3.12142351,10.0503565 3.44182056,9.72995942 L9.41336001,3.75700576 L12.2417871,6.58543288 Z M13.6567078,2.3434993 C14.4377564,3.12454789 14.4377564,4.39087785 13.6567078,5.17192643 L12.9488939,5.8783261 L10.1204668,3.04989898 L10.8282807,2.3434993 C11.6093293,1.56245072 12.8756592,1.56245072 13.6567078,2.3434993 Z"
+  })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "cell div-subcriberno"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Bishal"), "1000")))));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Custo);
+
+/***/ }),
+
 /***/ "./src/admin/Managestock/managestock.jsx":
 /*!***********************************************!*\
   !*** ./src/admin/Managestock/managestock.jsx ***!
@@ -17903,15 +18411,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _mui_material_Dialog__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @mui/material/Dialog */ "./node_modules/@mui/material/Dialog/Dialog.js");
+/* harmony import */ var _mui_material_Dialog__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @mui/material/Dialog */ "./node_modules/@mui/material/Dialog/Dialog.js");
 /* harmony import */ var _PopupContent_PopupContent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../PopupContent/PopupContent */ "./src/admin/PopupContent/PopupContent.jsx");
-/* harmony import */ var react_data_table_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-data-table-component */ "./node_modules/react-data-table-component/dist/index.cjs.js");
-/* harmony import */ var _InputElement__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./InputElement */ "./src/admin/Managestock/InputElement.jsx");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
-/* harmony import */ var _CustomDatatable__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./CustomDatatable */ "./src/admin/Managestock/CustomDatatable.jsx");
+/* harmony import */ var _InputElement__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./InputElement */ "./src/admin/Managestock/InputElement.jsx");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
+/* harmony import */ var _custo_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./custo.jsx */ "./src/admin/Managestock/custo.jsx");
+/* harmony import */ var _custom_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./custom.css */ "./src/admin/Managestock/custom.css");
+/* harmony import */ var _ProductTable__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./ProductTable */ "./src/admin/Managestock/ProductTable.jsx");
+
 
 
 
@@ -17923,7 +18433,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const Managestock = () => {
-  const getDataUrl = `${stockManagerAppLocalizer.apiUrl}/woo-stockmanager-pro/v1/manage-stock`;
+  const getDataUrl = `${stockManagerAppLocalizer.apiUrl}/woo-stockmanager-pro/v1/inventory-manager`;
   const updateDataUrl = `${stockManagerAppLocalizer.apiUrl}/woo-stockmanager-pro/v1/update`;
   const [filter, setFilter] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
     sku: '',
@@ -17942,7 +18452,7 @@ const Managestock = () => {
   const [inputChange, setInputChange] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     if (stockManagerAppLocalizer.pro_active != 'free') {
-      (0,axios__WEBPACK_IMPORTED_MODULE_6__["default"])({
+      (0,axios__WEBPACK_IMPORTED_MODULE_7__["default"])({
         url: getDataUrl
       }).then(response => {
         let products = JSON.parse(response.data);
@@ -17963,7 +18473,7 @@ const Managestock = () => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
   function changeData() {
-    (0,axios__WEBPACK_IMPORTED_MODULE_6__["default"])({
+    (0,axios__WEBPACK_IMPORTED_MODULE_7__["default"])({
       method: 'post',
       url: updateDataUrl,
       headers: {
@@ -17971,17 +18481,6 @@ const Managestock = () => {
       },
       data: uploadData
     });
-  }
-  function dynamicWidth(value) {
-    if (value.length > 11) {
-      return `${value.length * 14}px`;
-    } else if (value.length >= 5) {
-      return `${value.length * 9}px`;
-    } else if (value.length > 2) {
-      return `${value.length * 12}px`;
-    } else {
-      return `35px`;
-    }
   }
   function setfilter(name, value) {
     setFilter({
@@ -18108,7 +18607,7 @@ const Managestock = () => {
     e.currentTarget.children[1].style.display = 'flex';
   };
   const getFilteredData = () => {
-    let modifyData = [...data];
+    let modifyData = Object.values(data);
     if (filter.sku) {
       modifyData = modifyData.filter(item => item.product_sku.toLowerCase().includes(filter.sku.toLowerCase()));
     }
@@ -18132,7 +18631,7 @@ const Managestock = () => {
   const expandableRowsComponent = ({
     row
   }) => {
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_CustomDatatable__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(CustomDataTable, {
       pagination: false,
       renderHeader: false,
       expandableRowDisabled: () => false,
@@ -18199,7 +18698,7 @@ const Managestock = () => {
     name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('SKU', 'woocommerce-stock-manager-pro'),
     cell: row => {
       if (row.product_type === "variation") {
-        return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_InputElement__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_InputElement__WEBPACK_IMPORTED_MODULE_3__["default"], {
           setVariationData: setVariationData,
           editButtonOnClick: editButtonOnClick,
           dynamicWidth: dynamicWidth,
@@ -18279,7 +18778,7 @@ const Managestock = () => {
           d: "M12.2417871,6.58543288 L6.27024769,12.5583865 C5.94985063,12.8787836 5.54840094,13.1060806 5.1088198,13.2159758 L2.81782051,13.7887257 C2.45163027,13.8802732 2.11993389,13.5485768 2.21148144,13.1823866 L2.78423127,10.8913873 C2.89412655,10.4518062 3.12142351,10.0503565 3.44182056,9.72995942 L9.41336001,3.75700576 L12.2417871,6.58543288 Z M13.6567078,2.3434993 C14.4377564,3.12454789 14.4377564,4.39087785 13.6567078,5.17192643 L12.9488939,5.8783261 L10.1204668,3.04989898 L10.8282807,2.3434993 C11.6093293,1.56245072 12.8756592,1.56245072 13.6567078,2.3434993 Z"
         }))));
       } else if (row.product_type === "variation") {
-        return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_InputElement__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_InputElement__WEBPACK_IMPORTED_MODULE_3__["default"], {
           setVariationData: setVariationData,
           editButtonOnClick: editButtonOnClick,
           dynamicWidth: dynamicWidth,
@@ -18347,7 +18846,7 @@ const Managestock = () => {
           className: "sale-price-error-message"
         }, "Please enter in a value less than the regular price"));
       } else if (row.product_type === "variation") {
-        return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_InputElement__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_InputElement__WEBPACK_IMPORTED_MODULE_3__["default"], {
           setVariationData: setVariationData,
           editButtonOnClick: editButtonOnClick,
           dynamicWidth: dynamicWidth,
@@ -18483,7 +18982,7 @@ const Managestock = () => {
           d: "M12.2417871,6.58543288 L6.27024769,12.5583865 C5.94985063,12.8787836 5.54840094,13.1060806 5.1088198,13.2159758 L2.81782051,13.7887257 C2.45163027,13.8802732 2.11993389,13.5485768 2.21148144,13.1823866 L2.78423127,10.8913873 C2.89412655,10.4518062 3.12142351,10.0503565 3.44182056,9.72995942 L9.41336001,3.75700576 L12.2417871,6.58543288 Z M13.6567078,2.3434993 C14.4377564,3.12454789 14.4377564,4.39087785 13.6567078,5.17192643 L12.9488939,5.8783261 L10.1204668,3.04989898 L10.8282807,2.3434993 C11.6093293,1.56245072 12.8756592,1.56245072 13.6567078,2.3434993 Z"
         }))));
       } else if (row.product_type === "variation" && row.product_manage_stock) {
-        return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_InputElement__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_InputElement__WEBPACK_IMPORTED_MODULE_3__["default"], {
           setVariationData: setVariationData,
           editButtonOnClick: editButtonOnClick,
           dynamicWidth: dynamicWidth,
@@ -18511,7 +19010,7 @@ const Managestock = () => {
       }, row.product_interested_person);
     }
   }];
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, stockManagerAppLocalizer.pro_active === 'free' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Dialog__WEBPACK_IMPORTED_MODULE_7__["default"], {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, stockManagerAppLocalizer.pro_active === 'free' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Dialog__WEBPACK_IMPORTED_MODULE_8__["default"], {
     className: "woo-module-popup",
     open: openDialog,
     onClose: () => {
@@ -18588,7 +19087,7 @@ const Managestock = () => {
     className: "pull-right import"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
     class: "import-export-btn"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Link, {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Link, {
     to: '?page=woo-stock-manager-setting#&tab=import'
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "wp-menu-image dashicons-before dashicons-download"
@@ -18596,19 +19095,16 @@ const Managestock = () => {
     className: "pull-right export"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
     class: "import-export-btn"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Link, {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Link, {
     to: '?page=woo-stock-manager-setting#&tab=export'
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "wp-menu-image dashicons-before dashicons-upload"
   }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Export", "woocommerce-stock-manager-pro")))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "woo-backend-datatable-wrapper"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_CustomDatatable__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_ProductTable__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    setData: setData,
     pagination: true,
-    renderHeader: true,
-    expandableRowDisabled: row => row.variation.length > 0,
-    expandableRowsComponent: expandableRowsComponent,
-    data: getFilteredData(),
-    columns: columns
+    products: getFilteredData()
   }))))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Managestock);
@@ -41570,6 +42066,19 @@ function memoizeOne(resultFn, isEqual) {
 }
 
 
+
+
+/***/ }),
+
+/***/ "./src/admin/Managestock/custom.css":
+/*!******************************************!*\
+  !*** ./src/admin/Managestock/custom.css ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
 
 
 /***/ }),

@@ -3,13 +3,14 @@ import { __ } from '@wordpress/i18n';
 import Dialog from "@mui/material/Dialog";
 import React,{useEffect,useState} from 'react';
 import Popoup from '../PopupContent/PopupContent';
-import DataTable from 'react-data-table-component';
 import InputElement from './InputElement';
-import { BrowserRouter as Router,  Link} from 'react-router-dom';
-import CustomDataTable from './CustomDatatable';
+import { Link} from 'react-router-dom';
+import Custo from './custo.jsx';
+import "./custom.css";
+import ProductTable from './ProductTable';
 
 const Managestock = () => {
-    const getDataUrl = `${ stockManagerAppLocalizer.apiUrl }/woo-stockmanager-pro/v1/manage-stock`;
+    const getDataUrl = `${ stockManagerAppLocalizer.apiUrl }/woo-stockmanager-pro/v1/inventory-manager`;
     const updateDataUrl = `${ stockManagerAppLocalizer.apiUrl }/woo-stockmanager-pro/v1/update`;
 
     const [ filter, setFilter ] = useState({
@@ -61,19 +62,6 @@ const Managestock = () => {
             headers: { 'X-WP-Nonce' : stockManagerAppLocalizer.nonce },
             data: uploadData,
         })
-    }
-    function dynamicWidth(value) {
-        if(value.length > 11){
-            return `${value.length * 14 }px`;
-        }
-        else if(value.length >= 5){
-            return `${value.length * 9 }px`;
-        }
-        else if(value.length > 2){
-            return `${value.length * 12}px`;
-        }else{
-            return `35px`;
-        }
     }
 
     function setfilter( name, value ){
@@ -193,11 +181,11 @@ const Managestock = () => {
     }
 
     const handleInputMouseOver = (e) => {
-            e.currentTarget.children[1].style.display = 'flex';
-        }
+        e.currentTarget.children[1].style.display = 'flex';
+    }
 
     const getFilteredData = () => {
-        let modifyData = [...data];
+        let modifyData = Object.values(data);
         if(filter.sku){
             modifyData = modifyData.filter(item => item.product_sku.toLowerCase().includes(filter.sku.toLowerCase()));
         }
@@ -309,7 +297,7 @@ const Managestock = () => {
                                 <input  type="number" class={`input-field input-field-edit`} style={{ width: dynamicWidth(row.variation_sale_price_min) }}  value={row.variation_sale_price_min} readOnly/>-
                                 <input  type="number" class={`input-field input-field-edit`} style={{ width: dynamicWidth(row.variation_sale_price_max) }}  value={row.variation_sale_price_max} readOnly/>
                             </div>
-                }          
+                }    
             },
         },
         {
@@ -480,7 +468,9 @@ const Managestock = () => {
                             expandableRowDisabled={(row) => !(row.variation.length>0)}
                             data={getFilteredData()}
                             /> */}
-                            <CustomDataTable pagination={true} renderHeader={true} expandableRowDisabled={(row) => (row.variation.length>0)} expandableRowsComponent={expandableRowsComponent} data={getFilteredData()} columns={columns} />
+                            {/* <CustomDataTable pagination={true} renderHeader={true} expandableRowDisabled={(row) => (row.variation.length>0)} expandableRowsComponent={expandableRowsComponent} data={getFilteredData()} columns={columns} /> */}
+                            <ProductTable setData={setData} pagination={true} products={getFilteredData()} />
+                            {/* <Custo /> */}
                         </div>
                     </div>
                 </div>

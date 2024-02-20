@@ -19,7 +19,7 @@ const CustomDataTable = ({ columns, data, expandableRowsComponent, pagination, r
         {column.name}
       </th>
     ));
-return [dropDownHeader,...headers]
+    return [dropDownHeader,...headers]
   };
 
   const handleExpandToggle = (index) => {
@@ -68,7 +68,7 @@ return [dropDownHeader,...headers]
 
   const handleItemsPerPageChange = (value) => {
     setItemsPerPage(value);
-    setCurrentPage(1); // Reset to the first page when changing items per page
+    setCurrentPage(1);
   };
 
   const renderPagination = () => {
