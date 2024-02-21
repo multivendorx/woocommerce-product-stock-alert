@@ -13,7 +13,7 @@ const ProductTable = ({ products, headers, setData }) => {
 
   const handleRowsPerPageChange = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
-    setCurrentPage(1); // Reset to the first page when changing rows per page
+    setCurrentPage(1);
   };
 
   const PaginationRounded = () => {
