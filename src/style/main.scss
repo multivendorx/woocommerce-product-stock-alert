@@ -1861,9 +1861,11 @@ input.woo-setting-color-picker {
   position: relative;
   padding: 1rem 1.5rem;
   background: #f2eff5;
+
   .carousel-container {
     position: relative;
     overflow: hidden;
+
     .pro-slider-cross {
       cursor: pointer;
       position: absolute;
@@ -1874,6 +1876,7 @@ input.woo-setting-color-picker {
       padding: 0.25rem;
       border-radius: 50%;
     }
+
     .why-go-pro-tag {
       cursor: pointer;
       position: absolute;
@@ -1885,6 +1888,7 @@ input.woo-setting-color-picker {
       transform: rotate(-45deg);
     }
   }
+
   .carousel-list {
     list-style: none;
     padding: 0;
@@ -2012,10 +2016,581 @@ input.woo-setting-color-picker {
   }
 }
 
-.wp-core-ui select {
-  background: #fff;
+
+// Custome Inventory Manager Css
+
+.woo-middle-container-wrapper {
+  background-color: #fff;
+  padding: 1rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.12);
+  overflow-x: scroll;
+}
+
+.stock-reports-download {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.woo-search-and-multistatus-wrap {
+  padding: 0;
+}
+
+.woo-search-and-multistatus-wrap .woo-page-title,
+.import-page .woo-page-title {
+  margin-bottom: 15px;
+}
+
+
+.woo-middle-container-wrapper .woo-backend-datatable-wrapper .rdt_TableHeadRow {
+  border: none !important;
+  border-bottom: 0;
+  margin: 0 !important;
+  border-radius: 0 !important;
+}
+
+.woo-middle-container-wrapper .woo-backend-datatable-wrapper .sc-dmlpXa.koyZDM {
+  border-radius: 0.25rem;
+  border: 1px solid rgba($color: #000000, $alpha: 0.3);
+  overflow: visible;
+}
+
+.woo-middle-container-wrapper .woo-backend-datatable-wrapper .rdt_Table .rdt_TableBody .rdt_TableRow {
+  // border: none !important;
+  // border-bottom: 1px solid rgba($color: #000000, $alpha: 0.3) !important;
+  padding: 10px 0;
+  font-size: 1rem !important;
+  border-radius: 0;
+  margin: 0 !important;
+  border-left: 0;
+  border-right: 0;
+}
+
+.woo-middle-container-wrapper .woo-backend-datatable-wrapper .rdt_Pagination {
+  margin: 1rem 0;
+  gap: 10px;
+}
+
+.woo-middle-container-wrapper .rdt_TableCell {
+  width: 100%;
+}
+.woo-middle-container-wrapper .rdt_TableCell .custome-toggle-default {
+  width: fit-content !important;
+  min-width: 100px !important;
+  top: -12px;
+}
+
+.woo-middle-container-wrapper .woo-backend-datatable-wrapper .rdt_Table .rdt_TableBody .rdt_TableRow {
+  &:nth-child(-2n+4) {
+    border: none !important;
+  }
+}
+
+.table-image {
+  border-radius: 5px;
+  overflow: hidden;
+  border: 2px solid rgba($color: #000000, $alpha: 0.3);
+  width: 70px;
+  height: 70px;
+  margin: 0 !important;
 }
 
 .rdt_Pagination svg {
   margin-top: 3px;
+}
+
+//Manage stock section
+.wp-core-ui select:focus {
+  color: $paragraph-color;
+  border-color: $boder-color;
+  box-shadow: none;
+}
+
+.wp-core-ui select:hover {
+  color: $paragraph-color;
+}
+
+.custom-select {
+  display: flex;
+  align-items: center;
+  font-weight: normal;
+  border: $border;
+  border-radius: $border-radius;
+  height: 2.5rem;
+  position: relative;
+  background-color: $fill-color;
+  cursor: pointer;
+}
+
+.img-icon {
+  margin-left: 25px;
+}
+
+select {
+  -webkit-appearance: none;
+  width: 100%;
+  border: none;
+}
+
+.import-export-btn {
+  display: flex;
+  align-items: center;
+  border: 0.063rem solid #d4d1d9;
+  background-color: #65438f;
+  color: #f9f8fb;
+  border-radius: 0.25rem;
+  padding: 0.75rem 1.5rem;
+  position: relative;
+  font-size: 0.9rem;
+  width: fit-content;
+  margin-left: auto;
+}
+
+.import-export-btn .wp-menu-image::before {
+  padding: 0;
+  padding-right: 5px;
+}
+
+.export,
+.import {
+  padding-bottom: 8px;
+}
+
+.input-field {
+  max-width: 100%;
+  padding: 0px 4px !important;
+  background: none !important;
+}
+
+.input-field-edit {
+  border: none !important;
+  outline: none !important;
+  min-width: 20px;
+}
+
+//individual cell
+.edit-btn {
+  width: 16px;
+  height: 16px;
+  opacity: 0;
+  cursor: pointer;
+}
+button[disabled]{
+  height: 0;
+  width: 0;
+}
+
+.value-danger{
+  color: red !important;
+}
+.value-sucess{
+  color: green !important;
+}
+
+.cell {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.cell .dashicons {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.4;
+  cursor: pointer;
+}
+
+.export-import {
+  display: flex;
+  columns: $paragraph-color;
+
+}
+
+.import-section th,
+.import-section td {
+  text-align: center;
+  border-bottom: 1px solid rgba($color: #000000, $alpha: 0.2);
+  padding: 10px;
+}
+
+.import-section td {
+  border-bottom: none;
+}
+
+.export-section {
+  margin-top: 15px;
+}
+
+.import-export-btn a {
+  color: $font-white;
+  display: flex;
+}
+
+.import-export-btn a:hover {
+  text-decoration: none;
+}
+
+.import-export-btn a:focus {
+  box-shadow: none;
+  text-decoration: none;
+}
+
+.custome-toggle {
+  position: relative !important;
+}
+
+.custome-toggle input[type=checkbox] {
+  height: 20px;
+  width: 50px;
+  z-index: 999;
+  position: relative;
+  opacity: 0;
+}
+
+.export-list-btn {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+.export-list-section {
+  padding: 10px 0 15px;
+  display: flex;
+  gap: 2rem;
+}
+.export-list-section p{
+ font-weight: 600;
+ font-size: 1.15rem;
+ color: #000;
+}
+.export-list-section .checkbox-container{
+  display: flex;
+  gap: 2rem;
+}
+.export-list-section .chunk-container{
+  max-width: 200px;
+  width: 100%;
+}
+
+.mvx-select-deselect-trigger{
+  border: 0.063rem solid #d4d1d9;
+    color: #181718;
+    border-radius: 0.25rem;
+    width: fit-content;
+    padding: 0.5rem 1rem;
+    margin-bottom: 1rem;
+    transition: .3s;
+    cursor: pointer;
+}
+.export-page-content{
+  max-width: 650px;
+  width: 100%;
+}
+.mvx-select-deselect-trigger:hover{
+  border: 0.063rem solid #000000;
+}
+
+@media only screen and (max-width: 500px) {
+  .export-list-section {
+    flex-direction: column;
+    gap: 0rem;
+    align-items: start;
+  }
+  .export-list-section .checkbox-container .chunk-container{
+    width: 100%;
+    max-width: 500px;
+  }
+  .export-feature-card{
+    justify-content: space-between;
+  }
+  .export-list-section .checkbox-container{
+    flex-direction: column;
+    gap: 0;
+    width: 100%;
+  }
+}
+
+.custome-toggle label {
+  position: absolute !important;
+  cursor: pointer;
+  text-indent: -9999px;
+  width: 40px;
+  height: 19px;
+  background: grey;
+  display: block;
+  border-radius: 100px;
+  position: relative;
+  background: #c0c0c0;
+  top: 0;
+  left: 0;
+}
+
+.sale-price-error-message{
+  position: absolute;
+  top: 60px;
+  left: -50%;
+  transform: translateX(5%);
+  border: 1px solid #65438f;
+  width: 200px;
+  text-align: center;
+  z-index: 1;
+  background-color: #65438f;
+  color: white;
+  display: none;
+  padding: 10px 5px;
+}
+
+.custome-toggle label:after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 3px;
+  width: 15px;
+  height: 15px;
+  background: #fff;
+  border-radius: 90px;
+  transition: 0.3s;
+}
+
+.custome-toggle input:checked+label {
+  background: #bada55;
+}
+
+.custome-toggle input:checked+label:after {
+  left: calc(100% - 3px);
+  transform: translateX(-100%);
+}
+
+.custome-toggle label:active:after {
+  width: 20px;
+}
+
+.import-page,
+.export-page {
+  background-color: #ffffff;
+  padding: 1.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.25rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.12);
+}
+
+
+.import-section p,
+.export-section p {
+  font-size: 1rem;
+  padding-bottom: 10px;
+}
+
+.import-section h2,
+.export-section h2 {
+  margin: 10px 0;
+}
+
+.import-table  {
+  padding: 1.5rem;
+  box-shadow: 0 0 0.2rem rgba($color: #000000, $alpha: 0.2);
+  margin-bottom: 10px;
+  border-radius: 0.25rem;
+}
+.import-table .import-export-btn {
+  margin: auto;
+  margin-bottom: 10px;
+}
+input[type=number]::-webkit-inner-spin-button{
+  display: none;
+}
+
+.import-csv-section{
+  border-radius: 0.5rem;
+  border: 1px solid rgba(0, 0, 0, 0.284);
+  border-style: dashed;
+  padding: 2rem 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  height: 150px;
+  flex-direction: column;
+  margin-bottom: 15px;
+  cursor: pointer;
+  position: relative;
+}
+.import-csv-section .import-input{
+  height: 130px;
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+.import-csv-section p{
+  text-align: center;
+}
+
+.export-feature-card{
+  display: flex;
+    gap: 2rem;
+    padding: 0.5rem 0;
+}
+
+.export-feature-card h1{
+  font-size: 1rem;
+    width: 110px;
+    font-weight: 400;
+}
+
+.export-container, .import-container{
+  max-width: 700px;
+  width: 100%;
+  padding: 1.25rem;
+  border: 1px solid rgba($color: #000000, $alpha: 0.2);
+  background: #fff;
+}
+
+.custome-toggle-default {
+  position: relative;
+  z-index: 1;
+  top: -12px;
+    left: 50%;
+    transform: translateX(-30%);
+}
+
+.custome-toggle-default::after {
+  content: "";
+  position: absolute;
+  top: 0.35rem;
+  left: 2.3rem;
+  width: 0.25rem;
+  height: 0.25rem;
+  transform: translateY(50%);
+  border: 0.0625rem solid #65438f;
+  border-radius: 8rem;
+  transition: 0.3s;
+  z-index: 0;
+}
+
+.custome-toggle-default input {
+  position: absolute;
+  width: 3.3rem;
+  height: 1.5rem;
+  top: 5px;
+  z-index: 2;
+  opacity: 0;
+  left: 0;
+}
+
+.custome-toggle-default label {
+  position: absolute;
+  cursor: pointer;
+  width: 3.3rem;
+  height: 1.5rem;
+  background: transparent;
+  display: block;
+  border-radius: 8rem;
+  border: 0.125rem solid #d4d1d9;
+}
+
+.custome-toggle-default label::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0.5rem;
+  width: 0.17rem;
+  height: 0.57rem;
+  background: #fdfdfe;
+  transition: 0.3s;
+}
+
+.custome-toggle-default label::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0.313rem;
+  width: 0.875rem;
+  height: 0.875rem;
+  background: #65438f;
+  border-radius: 90rem;
+  transition: 0.3s;
+  z-index: 1;
+}
+
+.custome-toggle-default:has(input[type="checkbox"]:checked) label {
+  background: #65438f;
+  border: 0.125rem solid #65438f;
+}
+
+.custome-toggle-default:has(input[type="checkbox"]:checked) label::after {
+  left: calc(100% - 1.313rem);
+  transform: translatey(-50%);
+  background-color: #fdfdfe;
+}
+
+.woo-subscriber-list .woo-backend-datatable-wrapper .rdt_Pagination select{
+  background-image: none !important;
+  padding-right: 20px;
+}
+
+.import-export-btn-section{
+  margin: 0.5rem 0;
+  margin-right: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+.import-btn-section{
+  display: flex;
+  align-items: center;
+  justify-content: end !important;
+  gap: 0.5rem;
+  margin-bottom: 10px;
+}
+.import-btn-section *{
+  margin: 0 !important;
+}
+.import-export-btn-section > div{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+.import-btn{
+  padding: 0.75rem 1.5rem;
+  background: #795b9d;
+  border-radius: 2rem;
+  color: white;
+  max-width: 400px;
+  width: 100%;
+}
+.import-upload-btn-section{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rdt_ExpanderRow .rdt_TableRow{
+  background-color: #e9f7ff !important;
+}
+
+.rdt_ExpanderRow .rdt_TableRow:first-child{
+  border-top: none !important;
+}
+
+.expanded-data-table{
+  border: none !important;
+}
+.expander{
+  display: none;
+  width: 100%;
 }
