@@ -2,17 +2,16 @@
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./src/admin/Managestock/custom.css ***!
   \**************************************************************************************************************************************************************************************/
 .custom-table-main{
-    /* border: 1px solid red; */
+    border: 1px solid rgba(0, 0, 0, 0.24);
     font-size: 1.03rem;
-    align-items: center;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     justify-content: space-between;
+    align-items: center;
+    border-radius: 0.25rem;
 }
 .custom-container{
     display: flex;
-    align-items: center;
     justify-content: center;
     width: 100%;
 }
@@ -20,15 +19,25 @@
     display: flex ;
     width: 100%;
 }
-.custom-container .custom-container-inner-div div{
+.custom-container .custom-container-inner-div .custom-container-inner-left-main {
+    display: flex ;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+.custom-container .custom-container-inner-div div div{
     max-width: 200px;
     width: 100%;
 }
 .custom-container .custom-container-inner-div .cell{
+    padding: 8px 5px;
     width: 100%;
-    border: 1px solid red;
+    /* border: 1px solid red; */
     display: flex;
     overflow: hidden;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 .custom-container .custom-container-inner-div.left{
    width: 330px;
@@ -60,20 +69,21 @@
     width: 20px;
 }
 .div-img-img{
-    width: 55px;
-    height: 55px;
+    width: 45px;
+    height: 45px;
     border-radius: 0.25rem;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.089);
 }
 .cell input{
-    max-width: 85% !important;
+    max-width: calc(100% - 20px) !important;
     width: 110px;
+    background-color: transparent;
 }
-.cell span{
+.cell span.edit-btn{
     width: 20px;
     display: block;
 }
-.cell span svg{
+.cell span.edit-btn svg{
     width: 100%;
 }
 .div-manage-stock{
@@ -82,20 +92,43 @@
 .div-manage-stock-container{
     width: 100%;
     min-height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-.custom-container .custom-container-inner-div.right div p{
+.custom-container .custom-container-inner-div.right .cell div.title{
     display: none;
 }
 .master-edit-btn{
     display: none;
+    width: 30px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
 }
 .master-edit-btn svg{
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
 }
-@media only screen and (max-width: 1200px) {
+.custom-container-row{
+        background: rgb(236, 236, 236);
+        color: black;
+        padding: 0 8px;
+    }
+.custom-container-col{
+        padding: 0 8px;
+    }
+    .custom-container-col:nth-child(odd){
+        background: rgb(247, 247, 247);
+    }
+    .input-edit{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+@media only screen and (max-width: 1270px) {
     .master-edit-btn{
-        display: block;
+        display: flex;
     }
     .div-backorder, .div-product-type, .div-subcriberno{
         display: flex !important;
@@ -103,13 +136,23 @@
     .custom-container.custom-container-col{
         flex-direction: column;
     }
-    .custom-container.custom-container-col div{
+    .custom-container.custom-container-col .left{
         width: 100% !important;
-        justify-content: flex-start;
+        /* justify-content: center !important; */
+        text-align: center !important;
+    }
+    .custom-container.custom-container-col .right{
+        width: 100% !important;
+        justify-content: flex-start !important;
+        text-align: left !important;
+        background-color: rgb(235, 235, 235);
+        padding: 10px 20px;
+        margin-bottom: 10px;
     }
     .custom-container-row{
         width: 100%;
         justify-content: space-between;
+        background: rgb(231, 231, 231);
     }
     .custom-container-row .right .cell{
         display: none !important;
@@ -118,20 +161,36 @@
         width: 100%;
     }
     .custom-container-inner-div.right{
+        display: none;
         flex-direction: column;
         width: -moz-fit-content;
         width: fit-content;
+        justify-content: center;
     }
-    .custom-container .custom-container-inner-div.right div, .cell.div-product-type, .cell.div-manage-stock{
+    .custom-container .custom-container-inner-div.right .cell{
         max-width: 400px !important;
     }
     .custom-container .custom-container-inner-div.right div input{
         width: 150px;
     }
-    .custom-container .custom-container-inner-div.right div p{
+    .custom-container .custom-container-inner-div.right .cell div.title{
         display: block;
+        max-width: 180px;
+        width: 100%;
+    }
+    .custom-container .custom-container-inner-div.right .cell > *{
+        width: 50%;
+    }
+    .custom-container .custom-container-inner-div.right .cell div.title p{
         font-size: 1.25rem;
-        width: 150px;
+    }
+    .custom-container .custom-container-inner-div.right .cell{
+        justify-content: flex-start;
+        align-items: center;
+        text-align: left;
+    }
+    .custom-container .custom-container-inner-div .custom-container-inner-left-main{
+        justify-content: flex-start;
     }
 }
 /*!********************************************************************************************************************************************************************************************************************************************!*\
@@ -1902,8 +1961,7 @@ select {
 .edit-btn {
   width: 16px;
   height: 16px;
-  opacity: 1;
-  display: none;
+  opacity: 0;
   cursor: pointer;
 }
 
@@ -2195,6 +2253,9 @@ input[type=number]::-webkit-inner-spin-button {
 .custome-toggle-default {
   position: relative;
   z-index: 1;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-30%);
 }
 
 .custome-toggle-default::after {
@@ -2218,6 +2279,7 @@ input[type=number]::-webkit-inner-spin-button {
   top: 5px;
   z-index: 2;
   opacity: 0;
+  left: 0;
 }
 
 .custome-toggle-default label {
@@ -2327,6 +2389,11 @@ input[type=number]::-webkit-inner-spin-button {
 
 .expanded-data-table {
   border: none !important;
+}
+
+.expander {
+  display: none;
+  width: 100%;
 }
 
 /*# sourceMappingURL=index.css.map*/

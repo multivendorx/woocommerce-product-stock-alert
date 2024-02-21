@@ -3,9 +3,7 @@ import { __ } from '@wordpress/i18n';
 import Dialog from "@mui/material/Dialog";
 import React,{useEffect,useState} from 'react';
 import Popoup from '../PopupContent/PopupContent';
-import InputElement from './InputElement';
 import { Link} from 'react-router-dom';
-import Custo from './custo.jsx';
 import "./custom.css";
 import ProductTable from './ProductTable';
 
@@ -28,6 +26,7 @@ const Managestock = () => {
 
     const [ event, setEvent ] = useState();
     const [ data, setData ] = useState([]);
+    const [ headers, setHeaders] = useState([]);
     const [ openDialog, setOpenDialog ] = useState(false);
     const [ inputChange, setInputChange ] = useState(false);
     
@@ -36,8 +35,9 @@ const Managestock = () => {
             axios({
                 url: getDataUrl,
             }).then((response) => {
-                let products = JSON.parse(response.data);
-                setData(products);
+                let parsedData = JSON.parse(response.data);
+                setData(parsedData.products);
+                setHeaders(parsedData.headers);
             });
         }
     }, []);
@@ -200,18 +200,6 @@ const Managestock = () => {
         }
         return modifyData;
     }
-
-    // const ExpandableRow = ({ data }) => {
-    //     return (
-    //         <DataTable expandableRows={true} expandableRowDisabled={ () => true } className="expanded-data-table" noHeader noTableHead columns={columns} data={data.variation}/>
-    //     );
-    // };
-    const expandableRowsComponent = ({ row }) => {
-        return(
-            <CustomDataTable pagination={false} renderHeader={false} expandableRowDisabled={ () => false } expandableRowsComponent={expandableRowsComponent} data={row.variation} columns={columns} />
-        );
-    };
-
     const columns = [
         {
             name: __(<span class="dashicons img-icon dashicons-format-image"></span>,'woocommerce-stock-manager-pro'),
@@ -461,16 +449,7 @@ const Managestock = () => {
                             </div>
                         </div>
                         <div className="woo-backend-datatable-wrapper">
-                            {/* <DataTable
-                            columns={columns}
-                            expandableRows
-                            expandableRowsComponent={ExpandableRow}
-                            expandableRowDisabled={(row) => !(row.variation.length>0)}
-                            data={getFilteredData()}
-                            /> */}
-                            {/* <CustomDataTable pagination={true} renderHeader={true} expandableRowDisabled={(row) => (row.variation.length>0)} expandableRowsComponent={expandableRowsComponent} data={getFilteredData()} columns={columns} /> */}
-                            <ProductTable setData={setData} pagination={true} products={getFilteredData()} />
-                            {/* <Custo /> */}
+                            <ProductTable setData={setData} pagination={true} headers={headers} products={getFilteredData()} />
                         </div>
                     </div>
                 </div>

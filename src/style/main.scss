@@ -2176,8 +2176,7 @@ select {
 .edit-btn {
   width: 16px;
   height: 16px;
-  opacity: 1;
-  display: none;
+  opacity: 0;
   cursor: pointer;
 }
 button[disabled]{
@@ -2459,6 +2458,9 @@ input[type=number]::-webkit-inner-spin-button{
 .custome-toggle-default {
   position: relative;
   z-index: 1;
+  top: -12px;
+    left: 50%;
+    transform: translateX(-30%);
 }
 
 .custome-toggle-default::after {
@@ -2482,6 +2484,7 @@ input[type=number]::-webkit-inner-spin-button{
   top: 5px;
   z-index: 2;
   opacity: 0;
+  left: 0;
 }
 
 .custome-toggle-default label {
@@ -2586,4 +2589,8 @@ input[type=number]::-webkit-inner-spin-button{
 
 .expanded-data-table{
   border: none !important;
+}
+.expander{
+  display: none;
+  width: 100%;
 }
