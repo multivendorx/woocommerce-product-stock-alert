@@ -31,10 +31,14 @@ class StockManager {
         if ( Dependencies::woocommerce_plugin_active_check() ) {
             add_action('init', [&$this, 'init'], 0);
             add_filter('woocommerce_email_classes', [&$this, 'setup_email_class']);
+
             // Activation Hooks
             register_activation_hook( $file, [$this, 'activate_stock_manager']);
             // Deactivation Hooks
             register_deactivation_hook( $file, [$this, 'deactivate_stock_manager']);
+
+            // Add notice for database migration
+            add_action( 'admin_notices', [ Utill::class, 'database_migration_notice' ] );
         } else {
             add_action( 'admin_notices', [ Utill::class, 'woocommerce_inactive_notice' ] );
         }

@@ -7,8 +7,9 @@ if (!defined('ABSPATH')) exit;
 class Shortcode {
 
 	public function __construct() {
-		// Product Stock Manager Form Shortcode
+		// Product Stock Manager Form Shortcode.
 		add_shortcode('display_stock_manager_form', array($this, 'display_stock_manager_form'));
+        add_shortcode('display_stock_alert_form', array($this, 'display_stock_manager_form'));
 	}
 
     /**

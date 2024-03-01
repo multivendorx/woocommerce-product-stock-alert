@@ -3,7 +3,6 @@
 namespace StockManager;
 
 class FrontEnd {
-
     public function __construct() {
         //enqueue scripts
         add_action('wp_enqueue_scripts', array(&$this, 'frontend_scripts'));
@@ -20,7 +19,7 @@ class FrontEnd {
         //support for grouped products
         add_filter('woocommerce_grouped_product_list_column_price', array($this, 'display_in_grouped_product'), 10, 2);
         // Hover style
-        add_action('wp_head', array($this, 'frontend_hover_styles')); 
+        add_action('wp_head', array($this, 'frontend_hover_styles'));
     }
 
     /**
