@@ -275,7 +275,7 @@ class Admin {
                 'default_email_place'       => __('Enter your email', 'woocommerce-stock-manager'),
                 'default_alert_button'      => __('Notify me', 'woocommerce-stock-manager'),
                 'subscriber_list'           => $Woo_Stock_Manager->plugin_url . 'assets/images/subscriber-list.jpg',
-                'manage_stock'              => $Woo_Stock_Manager->plugin_url . 'assets/images/inventory-manager.png',
+                'manage_stock'              => $Woo_Stock_Manager->plugin_url . 'assets/images/inventory-manager.jpg',
                 'pro_active'                => apply_filters('woo_stock_manager_pro_active', 'free'),
                 'columns_subscriber'        => $columns_subscriber,
                 'subscription_page_string'  => $subscription_page_string,

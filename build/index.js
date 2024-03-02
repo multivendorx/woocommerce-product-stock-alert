@@ -17851,6 +17851,7 @@ const ProductTable = ({
     name: "",
     value: ""
   });
+
   //Function to Toggle the Expandable rows for the variable products
   const toggleRow = productId => {
     setExpandedRows(prevExpandedRows => ({
@@ -17882,9 +17883,7 @@ const ProductTable = ({
     };
     submitData();
   }, [uploadData]);
-  function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  }
+
   // Function 
   function updateData(id, name, value) {
     setUploadData({
@@ -17955,11 +17954,16 @@ const ProductTable = ({
     } else {
       updateData(id, updateKey, Value);
     }
-    if (updateKey === 'set_stock_quantity') {
+    if (updateKey === 'set_stock_quantity' && Value > 0) {
       const stock_status = element.parentElement.parentElement.parentElement.parentElement.querySelector('.product_stock_status').children[0].children[0].children[1];
       stock_status.classList.remove('outofstock');
       stock_status.classList.add('instock');
       stock_status.innerHTML = 'In stock';
+    } else {
+      const stock_status = element.parentElement.parentElement.parentElement.parentElement.querySelector('.product_stock_status').children[0].children[0].children[1];
+      stock_status.classList.add('outofstock');
+      stock_status.classList.remove('instock');
+      stock_status.innerHTML = 'Out of stock';
     }
     if (updateKey === "set_sale_price") {
       const regular_price = Number(element.parentElement.parentElement.parentElement.parentElement.querySelector('.product_regular_price').children[0].children[0].children[1].value);
