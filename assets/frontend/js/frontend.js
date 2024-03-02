@@ -2,6 +2,7 @@
 jQuery(function ($) {
     var instock_notifier = {
         init: function () {
+            console.log(woo_stock_manager_script_data.nonce);
             $(document).on('click', '.stock_manager_button', this.subscribe_form);
             $(document).on('click', '.unsubscribe_button', this.unsubscribe_form);
             $(document).on('change', 'input.variation_id', this.getVariationSubscribeForm);

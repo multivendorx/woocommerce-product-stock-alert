@@ -1,5 +1,5 @@
 .required {
-	color: red; 
+	color: red;
 }
 
 .no_subscriber {
@@ -47,26 +47,26 @@
 
 /*pro tag*/
 span.stock-manager-pro-tag {
-    position: absolute;
-    right: 0.5rem;
-    background: #9f8ab9;
-    color: #fdfdfe;
-    padding: 0.125rem 0.5rem;
-    top: 50%;
-    transform: translateY(-50%);
-    border-radius: 0.625rem;
-    font-size: .625rem;
-    text-align: center;
-    line-height: 1;
-    text-transform: capitalize;
+	position: absolute;
+	right: .25rem;
+	background: #9f8ab9;
+	color: #fdfdfe;
+	padding: .125rem .4rem;
+	top: 50%;
+	transform: translateY(-50%);
+	border-radius: .625rem;
+	font-size: .625rem;
+	text-align: center;
+	line-height: 1;
+	text-transform: capitalize
 }
 
-#adminmenu .wp-submenu li{
+#adminmenu .wp-submenu li {
 	position: relative;
 }
 
-.product-subscribtion-column{
+.product-subscribtion-column {
 	color: #181817;
-    font-weight: 600;
-    font-size: 1rem;
+	font-weight: 600;
+	font-size: 1rem;
 }

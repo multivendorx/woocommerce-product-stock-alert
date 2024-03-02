@@ -108,7 +108,7 @@ const DynamicForm = ({ currentTab, tabs, setTabs }) => {
 		if (stockManagerAppLocalizer.pro_active != 'free' ) {
 			axios
 				.get(
-					`${stockManagerAppLocalizer.apiUrl}/woo-stockmanager-pro/v1/get-mailchimp-list`,
+					`${stockManagerAppLocalizer.apiUrl}/stockmanager/v1/get-mailchimp-list`,
 				)
 				.then((response) => {
 					setDataMcList(response.data);
