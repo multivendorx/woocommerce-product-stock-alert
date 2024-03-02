@@ -76,7 +76,7 @@ const Managestock = () => {
     <>
         { stockManagerAppLocalizer.pro_active === 'free'  ?
         //If the user is free user he will be shown a Inventory Manager image
-            <div>
+            <div onClick={() => {setOpenDialog(true)}} className='subscriber-img inventory-manager'>
                 <Dialog
                     className="woo-module-popup"
                     open={openDialog}
@@ -89,12 +89,6 @@ const Managestock = () => {
                     ></span>
                     <Popoup/>
                 </Dialog>
-                <img
-                    src={ stockManagerAppLocalizer.manage_stock }
-                    alt="subscriber-list"
-                    className='subscriber-img'
-                    onClick={() => {setOpenDialog(true)}}
-                />
             </div>
         :
         //If user is pro user he will shown the Inventory Manager Table

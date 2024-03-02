@@ -18309,7 +18309,12 @@ const Managestock = () => {
   };
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, stockManagerAppLocalizer.pro_active === 'free' ?
   //If the user is free user he will be shown a Inventory Manager image
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Dialog__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    onClick: () => {
+      setOpenDialog(true);
+    },
+    className: "subscriber-img inventory-manager"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Dialog__WEBPACK_IMPORTED_MODULE_6__["default"], {
     className: "woo-module-popup",
     open: openDialog,
     onClose: () => {
@@ -18321,14 +18326,7 @@ const Managestock = () => {
     onClick: () => {
       setOpenDialog(false);
     }
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_PopupContent_PopupContent__WEBPACK_IMPORTED_MODULE_2__["default"], null)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
-    src: stockManagerAppLocalizer.manage_stock,
-    alt: "subscriber-list",
-    className: "subscriber-img",
-    onClick: () => {
-      setOpenDialog(true);
-    }
-  })) :
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_PopupContent_PopupContent__WEBPACK_IMPORTED_MODULE_2__["default"], null))) :
   //If user is pro user he will shown the Inventory Manager Table
   (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "woo-subscriber-list"

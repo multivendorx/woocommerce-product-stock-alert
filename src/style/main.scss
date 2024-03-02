@@ -2906,3 +2906,44 @@ tr.expand:last-child{
   text-align: left;
   font-size: 14px;
 }
+.inventory-manager {
+  background-image: url("../../assets/images/inventory-manager-monitor.jpg") !important;
+    background-repeat: no-repeat;
+    background-position: top left;
+    background-size: contain;
+}
+@media only screen and (max-width: 1100px) {
+  .inventory-manager {
+    background-image: url("../../assets/images/inventory-manager-laptop.png") !important;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: contain;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .MuiPaper-root {
+    padding: 1rem;
+  }
+  .css-ypiqx9-MuiDialogContent-root {
+    padding: 0 !important;
+  }
+}
+@media only screen and (max-width: 650px) {
+  .inventory-manager {
+    background-image: url("../../assets/images/inventory-manager-phone.jpg") !important;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: contain;
+  }
+}
+@media only screen and (max-width: 567px) {
+  .woo-image-overlay .woo-banner-content p {
+    max-width: 80%;
+  }
+}
+#woo-admin-stockmanager{
+  height: 100vh;
+}
+.inventory-manager{
+  height: 100%;
+}

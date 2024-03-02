@@ -2551,4 +2551,48 @@ tr.expand:last-child {
   font-size: 14px;
 }
 
+.inventory-manager {
+  background-image: url(images/inventory-manager-monitor.b078c004.jpg) !important;
+  background-repeat: no-repeat;
+  background-position: top left;
+  background-size: contain;
+}
+
+@media only screen and (max-width: 1100px) {
+  .inventory-manager {
+    background-image: url(images/inventory-manager-laptop.4e31b68a.png) !important;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: contain;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .MuiPaper-root {
+    padding: 1rem;
+  }
+  .css-ypiqx9-MuiDialogContent-root {
+    padding: 0 !important;
+  }
+}
+@media only screen and (max-width: 650px) {
+  .inventory-manager {
+    background-image: url(images/inventory-manager-phone.945b330f.jpg) !important;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: contain;
+  }
+}
+@media only screen and (max-width: 567px) {
+  .woo-image-overlay .woo-banner-content p {
+    max-width: 80%;
+  }
+}
+#woo-admin-stockmanager {
+  height: 100vh;
+}
+
+.inventory-manager {
+  height: 100%;
+}
+
 /*# sourceMappingURL=index.css.map*/

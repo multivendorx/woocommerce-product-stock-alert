@@ -16,7 +16,7 @@ const ProductTable = ({ products, headers, setData, setDisplayMessage , rowsPerP
     name: "",
     value: "",
   });
-  
+
   //Function to Toggle the Expandable rows for the variable products
   const toggleRow = (productId) => {
     setExpandedRows((prevExpandedRows) => ({
@@ -64,6 +64,7 @@ const ProductTable = ({ products, headers, setData, setDisplayMessage , rowsPerP
       headers: { "X-WP-Nonce": stockManagerAppLocalizer.nonce },
       data: uploadData,
     }).then((response)=>{
+      
     })
     setDisplayMessage('Settings Saved');
     setTimeout(() => {
