@@ -72,23 +72,23 @@ export default function SubscribersList() {
     };
     const columns =[
         {
-            name: 'Date',
+            name: __("Date","woocommerce-stock-manager-pro"),
             selector: row => row.date,
         },
         {
-            name: 'Email',
+            name: __("Email","woocommerce-stock-manager-pro"),
             selector: row => row.email,
         },
         {
-            name: 'Product',
+            name: __("Product","woocommerce-stock-manager-pro"),
             selector: row => row.product,
         },
         {
-            name: 'Registered',
+            name: __("Registered","woocommerce-stock-manager-pro"),
             selector: row => row.reg_user,
         },
         {
-            name: 'Status',
+            name: __("Status","woocommerce-stock-manager-pro"),
             selector: row => row.status,
         }
     ];
@@ -164,7 +164,7 @@ export default function SubscribersList() {
                             <div className="woo-middle-container-wrapper">
                                 <div className="woo-page-title">
                                     <p>{__("Subscriber List","woocommerce-stock-manager-pro")}</p>
-                                    <div className="pull-right">
+                                    <div className="download-btn-subscriber-list">
                                         <CSVLink
                                             data={data}
                                             headers={stockManagerAppLocalizer.columns_subscriber_list}
@@ -237,6 +237,7 @@ export default function SubscribersList() {
                                     (data.length > 0 )?
                                         <div className="woo-backend-datatable-wrapper">
                                             <DataTable
+                                                className='subscribe-list-table'
                                                 columns={columns}
                                                 data={data}
                                                 selectableRows

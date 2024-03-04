@@ -16,7 +16,7 @@ export default function Input({ headerKey , header , product , handleChange , ha
                     <h1>{header.name}</h1>
                     {
                         button ?
-                            <input id={ product.type === 'Variation' ? product.parent_product_id : null } onMouseOut={handleInputMouseOut} onChange={handleChange} type={type} value={( value === "" || value === null ? 0 : value )} readOnly />
+                            <input id={ product.type === 'Variation' ? product.parent_product_id : null } onMouseOut={handleInputMouseOut} onChange={handleChange} type={type} value={( value === "" || value === null ? 0 : value )} autofocus="false" readOnly />
                         :
                             <p>{( value === "" || value === null ? 0 : value )}</p>
                     }

@@ -274,10 +274,10 @@ class Admin {
                 'default_alert_text'        => __('Receive in-stock notifications for this product.', 'woocommerce-stock-manager'),
                 'default_email_place'       => __('Enter your email', 'woocommerce-stock-manager'),
                 'default_alert_button'      => __('Notify me', 'woocommerce-stock-manager'),
-                'subscriber_list'           => $Woo_Stock_Manager->plugin_url . 'assets/images/subscriber-list.jpg',
-                'inventory_manager_mobile'  => $Woo_Stock_Manager->plugin_url . 'assets/images/inventory-manager-mobile.jpg',
-                'inventory_manager_laptop'  => $Woo_Stock_Manager->plugin_url . 'assets/images/inventory-manager-laptop.png',
-                'inventory_manager_monitor' => $Woo_Stock_Manager->plugin_url . 'assets/images/inventory-manager-monitor.jpg',
+                'subscriber_list'           => $Woo_Stock_Manager->plugin_url . 'src/assets/images/subscriber-list.jpg',
+                'inventory_manager_mobile'  => $Woo_Stock_Manager->plugin_url . 'src/assets/images/inventory-manager-mobile.jpg',
+                'inventory_manager_laptop'  => $Woo_Stock_Manager->plugin_url . 'src/assets/images/inventory-manager-laptop.png',
+                'inventory_manager_monitor' => $Woo_Stock_Manager->plugin_url . 'src/assets/images/inventory-manager-monitor.jpg',
                 'pro_active'                => apply_filters('woo_stock_manager_pro_active', 'free'),
                 'columns_subscriber'        => $columns_subscriber,
                 'subscription_page_string'  => $subscription_page_string,
@@ -290,9 +290,9 @@ class Admin {
                 'default_massages'          => Utill::get_form_settings_array()
               ]));
             wp_enqueue_style('woo_stockmanager_style', $Woo_Stock_Manager->plugin_url . 'build/index.css');
-            wp_enqueue_style('woo_admin_rsuite_css', $Woo_Stock_Manager->plugin_url . 'assets/admin/css/rsuite-default' . '.min' . '.css', array(), $Woo_Stock_Manager->version);
+            wp_enqueue_style('woo_admin_rsuite_css', $Woo_Stock_Manager->plugin_url . 'src/assets/admin/css/rsuite-default' . '.min' . '.css', array(), $Woo_Stock_Manager->version);
         }
-        wp_enqueue_style('stock_manager_product_admin_css', $Woo_Stock_Manager->plugin_url . 'assets/admin/css/admin'. $suffix .'.css');
+        wp_enqueue_style('stock_manager_product_admin_css', $Woo_Stock_Manager->plugin_url . 'src/assets/admin/css/admin'. $suffix .'.css');
     }
 
     /**

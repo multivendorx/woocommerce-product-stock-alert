@@ -31,6 +31,10 @@ const Managestock = () => {
     const [ currentPage , setCurrentPage ] = useState(0);
     const [ displayMessage, setDisplayMessage] = useState('');
     const [ openDialog, setOpenDialog ] = useState(false);
+    const [ productName, setProductName ] = useState('');
+    const [ productSku, setProductSku ] = useState('');
+    const [ productType, setProductType ] = useState('');
+    const [ stockStatus, setStockStatus ] = useState('');
     
     useEffect(() => {
         if( stockManagerAppLocalizer.pro_active != 'free' ){
@@ -38,7 +42,7 @@ const Managestock = () => {
             axios({
                 method: "post",
                 url: fetchDataUrl,
-                data:{page:currentPage+1 , row:rowsPerPage,allData:'false'},
+                data:{page:currentPage+1 , row:rowsPerPage, product_name:productName, product_sku:productSku, product_type:'simple', stock_status:stockStatus, allData:'false'},
             }).then((response) => {
                 let parsedData = JSON.parse(response.data);
                 setData(parsedData.products);
@@ -46,37 +50,33 @@ const Managestock = () => {
                 setTotalProducts(parsedData.total_products);
             });
         }
-    }, [rowsPerPage,currentPage]);
-    
-    function setfilter( name, value ){
+    }, [rowsPerPage,currentPage,productName,productSku,productType,stockStatus]);
+    function handleInputName (e) {
+        if ( e.target.value.length > 3 ) {
+            setProductName( e.target.value )
+        }else if(e.target.value.length <= 1){
+            setProductName('');
+        }
+    }
+    function handleInputSku (e) {
+        if ( e.target.value.length > 3 ) {
+            setProductSku( e.target.value )
+        }else if(e.target.value.length <= 1){
+            setProductSku('');
+        }
+    }
+    function setfilter( name, value ) {
         setFilter({
             ...filter,
             [name]: value,
         });
-    }
-    //Filters the received data according to the different conditions like the product name, sku, type, stock status
-    const getFilteredData = () => {
-        let modifyData = Object.values(data);
-        if(filter.sku){
-            modifyData = modifyData.filter(item => item.sku.toLowerCase().includes(filter.sku.toLowerCase()));
-        }
-        if(filter.name){
-            modifyData = modifyData.filter(item => item.name.toLowerCase().includes(filter.name.toLowerCase()));
-        }
-        if(filter.stockStatus){
-            modifyData = modifyData.filter(item => (item.stock_status === filter.stockStatus));
-        }
-        if(filter.productType){
-            modifyData = modifyData.filter(item => (item.type === filter.productType));
-        }
-        return modifyData;
     }
     
     return( 
     <>
         { stockManagerAppLocalizer.pro_active === 'free'  ?
         //If the user is free user he will be shown a Inventory Manager image
-            <div onClick={() => {setOpenDialog(true)}} className='subscriber-img inventory-manager'>
+            <div className='subscriber-img' >
                 <Dialog
                     className="woo-module-popup"
                     open={openDialog}
@@ -89,103 +89,118 @@ const Managestock = () => {
                     ></span>
                     <Popoup/>
                 </Dialog>
+                <div onClick={() => {setOpenDialog(true)}} className='inventory-manager'></div>
             </div>
         :
         //If user is pro user he will shown the Inventory Manager Table
-        <div className="woo-subscriber-list">
-                <div className="woo-container">
-                    <div className="woo-middle-container-wrapper">
-                        <div className="woo-search-and-multistatus-wrap">
-                            <div className="woo-page-title">
-                                <p>{__('Inventory Manager','woocommerce-stock-manager-pro')}</p>
+            <div className="woo-subscriber-list">
+                    <div className="woo-container">
+                        <div className="woo-middle-container-wrapper">
+                            <div className="woo-search-and-multistatus-wrap">
+                                <div className="woo-page-title">
+                            <p>
+                                {__("Inventory Manager", "woocommerce-stock-manager-pro")}
+                            </p>
                             </div>
-                            {
-                                displayMessage &&
-                                <div className="woo-notic-display-title">
-                                    <i className="icon-success-notification"></i>
-                                    {displayMessage}
+                            <div>
+                            <div className="stock-reports-download">
+                                <div className="pull-right import">
+                                <button class="import-export-btn">
+                                    <Link
+                                    to={"?page=woo-stock-manager-setting#&tab=import"}
+                                    >
+                                    <div className="wp-menu-image dashicons-before dashicons-download"></div>
+                                    {__("Import", "woocommerce-stock-manager-pro")}
+                                    </Link>
+                                </button>
                                 </div>
-                            }
+                                <div className="pull-right export">
+                                <button class="import-export-btn">
+                                    <Link
+                                    to={"?page=woo-stock-manager-setting#&tab=export"}
+                                    >
+                                    <div className="wp-menu-image dashicons-before dashicons-upload"></div>
+                                    {__("Export", "woocommerce-stock-manager-pro")}
+                                    </Link>
+                                </button>
+                                </div>
+                            </div>
+                            </div>
+                            {displayMessage && (
+                            <div className="woo-notic-display-title">
+                                <i className="icon-success-notification"></i>
+                                {displayMessage}
+                            </div>
+                            )}
                         </div>
                         <div className="woo-search-and-multistatus-wrap">
                             <div class="woo-wrap-bulk-all-date">
                                 <div class="woo-header-search-section">
                                     <input
-                                        type="text"
-                                        placeholder="Search by Name..."
-                                        value={filter.name}
-                                        onChange={(e) => setfilter('name',e.target.value)}
+                                    type="text"
+                                    placeholder="Search by Name..."
+                                    onChange={handleInputName}
                                     />
                                 </div>
                                 <div class="woo-header-search-section">
                                     <input
-                                        type="text"
-                                        placeholder="Search by SKU..."
-                                        value={filter.sku}
-                                        onChange={(e) =>setfilter('sku',e.target.value)}
+                                    type="text"
+                                    placeholder="Search by SKU..."
+                                    onChange={handleInputSku}
                                     />
                                 </div>
                                 <div class="custom-select">
                                     <select
-                                        value={filter.productType}
-                                        onChange={(e) => setfilter('productType',e.target.value)}
+                                    onChange={ ( e ) => { setProductType ( e.target.value ) } }
                                     >
-                                        <option value="">{__("Product Type","woocommerce-stock-manager-pro")}</option>
-                                        <option value="simple">{__("Simple","woocommerce-stock-manager-pro")}</option>
-                                        <option value="variable">{__("Variable","woocommerce-stock-manager-pro")}</option>
+                                    <option value="">
+                                        {__("Product Type", "woocommerce-stock-manager-pro")}
+                                    </option>
+                                    <option value="Simple">
+                                        {__("Simple", "woocommerce-stock-manager-pro")}
+                                    </option>
+                                    <option value="Variable">
+                                        {__("Variable", "woocommerce-stock-manager-pro")}
+                                    </option>
                                     </select>
                                 </div>
                                 <div class="custom-select">
                                     <select
-                                        value={filter.stockStatus}
-                                        onChange={(e) => setfilter('stockStatus',e.target.value)}
+                                    onChange={ ( e ) => { setStockStatus ( e.target.value ) } }
                                     >
-                                        <option value="" >{__("Stock Status","woocommerce-stock-manager-pro")}</option>
-                                        <option value="instock">{__("In stock","woocommerce-stock-manager-pro")}</option>
-                                        <option value="onbackorder">{__("On backorder","woocommerce-stock-manager-pro")}</option>
-                                        <option value="outofstock">{__("Out of stock","woocommerce-stock-manager-pro")}</option>
+                                    <option value="">
+                                        {__("Stock Status", "woocommerce-stock-manager-pro")}
+                                    </option>
+                                    <option value="instock">
+                                        {__("In stock", "woocommerce-stock-manager-pro")}
+                                    </option>
+                                    <option value="onbackorder">
+                                        {__("On backorder", "woocommerce-stock-manager-pro")}
+                                    </option>
+                                    <option value="outofstock">
+                                        {__("Out of stock", "woocommerce-stock-manager-pro")}
+                                    </option>
                                     </select>
                                 </div>
-                                {
-                                    <div>Result Found: {totalProducts}</div>
-                                }
                             </div>
-                            <div className='stock-reports-download'>
-                                <div className="pull-right import">                                    
-                                    <button class="import-export-btn" >
-                                        <Link to={'?page=woo-stock-manager-setting#&tab=import'}>
-                                            <div className='wp-menu-image dashicons-before dashicons-download'></div>
-                                            {__("Import","woocommerce-stock-manager-pro")}</Link>
-                                    </button>
-                                </div>
-                                <div className="pull-right export">
-                                    <button class="import-export-btn" >
-                                        <Link to={'?page=woo-stock-manager-setting#&tab=export'}>
-                                            <div className='wp-menu-image dashicons-before dashicons-upload'></div>
-                                            {__("Export","woocommerce-stock-manager-pro")}
-                                        </Link>
-                                    </button>
-                                </div>
-                            </div>
+                            <div>{__("Results Found: ", "woocommerce-stock-manager-pro")}{totalProducts}</div>
                         </div>
-                        {
-                            //If both the data nad the headers are set then only the Table will be shown else the <PuffLoader/> will be shown
-                            ((data && Object.keys(data).length > 0 ) && (headers && Object.keys(headers).length > 0))?
-                                <div className="woo-backend-datatable-wrapper">
-                                    <ProductTable setData={setData} setDisplayMessage={setDisplayMessage} totalProducts={totalProducts} rowsPerPage={rowsPerPage} setRowsPerPage={setRowsPerPage} setCurrentPage={setCurrentPage} headers={headers} products={getFilteredData()} />
-                                    {/* {console.log(data)}
-                                    {console.log(headers)} */}
-                                </div>
-                            :
-                                <PuffLoader
-                                    css={override}
-                                    color={'#cd0000'}
-                                    size={200}
-                                    loading={true}
-                                />
-                        }
+                            {
+                                //If both the data nad the headers are set then only the Table will be shown else the <PuffLoader/> will be shown
+                                ((data && Object.keys(data).length > 0 ) && (headers && Object.keys(headers).length > 0))?
+                                    <div className="woo-backend-datatable-wrapper">
+                                        <ProductTable setData={setData} setDisplayMessage={setDisplayMessage} totalProducts={totalProducts} rowsPerPage={rowsPerPage} setRowsPerPage={setRowsPerPage} currentPage={currentPage} setCurrentPage={setCurrentPage} headers={headers} products={data} />
+                                    </div>
+                                :
+                                    <PuffLoader
+                                        css={override}
+                                        color={'#cd0000'}
+                                        size={200}
+                                        loading={true}
+                                    />
+                            }
+                        </div>
                     </div>
-                </div>
             </div>
         }
     </>

@@ -3,17 +3,17 @@
 }
 
 .no_subscriber {
-	font-size: 35px;
+	font-size: 1.5rem;
 	color: green;
 }
 
 .no_subscriber_zero {
-	font-size: 35px;
+	font-size:1.5rem;
 	color: red;
 }
 
 .interested_person {
-	margin-top: 25px;
+	margin-top: 2rem;
 }
 
 .stock_label {
@@ -23,26 +23,26 @@
 
 .variation_no_subscriber {
 	text-align: center;
-	font-size: 3.5em;
+	font-size: 1.75rem;
 	margin: 20px;
 	color: green;
 }
 
 .variation_no_subscriber_zero {
 	text-align: center;
-	font-size: 3.5em;
-	margin: 20px;
+	font-size: 1.75rem;
+	margin: 1.25rem;
 	color: red;
 }
 
 .stock_column {
 	color: green;
-	font-size: 15px;
+	font-size: 1rem;
 }
 
 .stock_column_zero {
 	color: red;
-	font-size: 15px;
+	font-size: 1rem;
 }
 
 /*pro tag*/

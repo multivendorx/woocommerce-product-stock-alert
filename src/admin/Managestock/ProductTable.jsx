@@ -5,8 +5,8 @@ import ReactPaginate from "react-paginate";
 import Dropdown from "./Dropdown";
 import Input from "./Input";
 
-const ProductTable = ({ products, headers, setData, setDisplayMessage , rowsPerPage , setRowsPerPage, setCurrentPage , totalProducts}) => {
-  const updateDataUrl = `${stockManagerAppLocalizer.apiUrl}/stockmanager/v1/update-product`;
+const ProductTable = ( { products, headers, setData, setDisplayMessage , rowsPerPage , setRowsPerPage, currentPage, setCurrentPage , totalProducts } ) => {
+  const updateDataUrl = `${ stockManagerAppLocalizer.apiUrl }/stockmanager/v1/update-product`;
   const [ event, setEvent] = useState();
   const [ inputChange, setInputChange ] = useState(false);
   const [ expandElement , setExpandElement ] = useState({});
@@ -64,13 +64,14 @@ const ProductTable = ({ products, headers, setData, setDisplayMessage , rowsPerP
       headers: { "X-WP-Nonce": stockManagerAppLocalizer.nonce },
       data: uploadData,
     }).then((response)=>{
-      
+     
     })
     setDisplayMessage('Settings Saved');
     setTimeout(() => {
       setDisplayMessage('');  
     }, 2000);
   }
+
   // Function to handle page changes in pagination
   const handlePageChange = ({ selected }) => {
     setCurrentPage(selected);
@@ -82,29 +83,39 @@ const ProductTable = ({ products, headers, setData, setDisplayMessage , rowsPerP
   
   // Function to handle changes in the rows per page select input
   const handleRowsPerPageChange = (e) => {
+    setCurrentPage(0);
     setRowsPerPage(parseInt(e.target.value));
     window.scrollTo({
       top: 0,
       behavior: 'smooth',
     });
-    setCurrentPage(0);
   };
+
   //Function to handle edit button click
-  const editButtonOnClick = (e) => {
+  const editButtonOnClick = ( e ) => {
     let editButton = e.currentTarget;
     let inputElement = editButton.previousSibling.children[1];
-    // inputElement.focus();
+    setEvent(inputElement);
+    document.addEventListener("click", handleDocumentClick);
     inputElement.removeAttribute("readonly");
     inputElement.classList.add("active");
   };
-  const handleDocumentClick = (e) => {
-    if (inputChange) {
-      changeData();
-      setInputChange(false);
+
+  const handleDocumentClick = ( e ) => {
+    if( event ) {
       event.classList.remove("active");
       event.setAttribute("readonly", "readonly");
       document.removeEventListener("click", handleDocumentClick);
     }
+    if (inputChange) {
+      changeData();
+      setInputChange(false);
+    }
+  };
+
+  //Function to handle input element MouseOut
+  const handleInputMouseOut = (e) => {
+    document.addEventListener("click", handleDocumentClick);
   };
   const handleChange = (e, id, key, type) => {
     let element = e.target;
@@ -115,12 +126,12 @@ const ProductTable = ({ products, headers, setData, setDisplayMessage , rowsPerP
     } else {
       updateData(id, updateKey, Value);
     }
-    if (updateKey === 'set_stock_quantity' && Value > 0){
+    if ( updateKey === 'set_stock_quantity' && Value > 0 ) {
       const stock_status = element.parentElement.parentElement.parentElement.parentElement.querySelector('.product_stock_status').children[0].children[0].children[1];
       stock_status.classList.remove('outofstock');
       stock_status.classList.add('instock');
       stock_status.innerHTML = 'In stock';
-    }else{
+    }else if ( updateKey === 'set_stock_quantity' && Value <= 0 ) {
       const stock_status = element.parentElement.parentElement.parentElement.parentElement.querySelector('.product_stock_status').children[0].children[0].children[1];
       stock_status.classList.add('outofstock');
       stock_status.classList.remove('instock');
@@ -184,27 +195,6 @@ const ProductTable = ({ products, headers, setData, setDisplayMessage , rowsPerP
     }
   };
 
-  //Function to handle input element MouseOut
-  const handleInputMouseOut = (e) => {
-    if (inputChange) {
-      document.addEventListener("click", handleDocumentClick);
-    }
-  };
-  const GetIcon = (type) => {
-    if(type === 'edit'){
-      return (
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" id="edit">
-          <path fill="#212121"d="M12.2417871,6.58543288 L6.27024769,12.5583865 C5.94985063,12.8787836 5.54840094,13.1060806 5.1088198,13.2159758 L2.81782051,13.7887257 C2.45163027,13.8802732 2.11993389,13.5485768 2.21148144,13.1823866 L2.78423127,10.8913873 C2.89412655,10.4518062 3.12142351,10.0503565 3.44182056,9.72995942 L9.41336001,3.75700576 L12.2417871,6.58543288 Z M13.6567078,2.3434993 C14.4377564,3.12454789 14.4377564,4.39087785 13.6567078,5.17192643 L12.9488939,5.8783261 L10.1204668,3.04989898 L10.8282807,2.3434993 C11.6093293,1.56245072 12.8756592,1.56245072 13.6567078,2.3434993 Z"/>
-        </svg>
-      );
-    }else if(type === 'dropdown'){
-      return (
-        <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-arrow-right-short" viewBox="0 0 16 16">
-          <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8"/>
-        </svg>
-      )
-    }
-  };
   const renderHeader = () => {
     return(
       <tr className="table-head">
@@ -359,6 +349,7 @@ const ProductTable = ({ products, headers, setData, setDisplayMessage , rowsPerP
           pageCount={totalProducts?Math.ceil(totalProducts/rowsPerPage):0}
           marginPagesDisplayed={2}
           pageRangeDisplayed={2}
+          forcePage={currentPage}
           onPageChange={handlePageChange}
         />
       </div>

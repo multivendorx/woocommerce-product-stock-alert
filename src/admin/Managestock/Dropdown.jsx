@@ -8,7 +8,7 @@ export default function Dropdown({ product , header , headerKey , options , hand
         {
           Object.entries(options).map(([key,value]) => {
             return(
-              <option value={key}>{value}</option>
+              <option className={key} value={key}>{value}</option>
             )
           })
         }

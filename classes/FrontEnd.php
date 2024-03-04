@@ -28,7 +28,7 @@ class FrontEnd {
      */
     function frontend_scripts() {
         global $Woo_Stock_Manager;
-        $frontend_script_path = $Woo_Stock_Manager->plugin_url . 'assets/frontend/js/';
+        $frontend_script_path = $Woo_Stock_Manager->plugin_url . 'src/assets/frontend/js/';
         $suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
         $suffix = ''; /// Should be removed.
         $settings_array = Utill::get_form_settings_array();
@@ -83,7 +83,7 @@ class FrontEnd {
      */
     function frontend_styles() {
         global $Woo_Stock_Manager;
-        $frontend_style_path = $Woo_Stock_Manager->plugin_url . 'assets/frontend/css/';
+        $frontend_style_path = $Woo_Stock_Manager->plugin_url . 'src/assets/frontend/css/';
         $suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
         if (function_exists('is_product')) {
             if (is_product()) {
