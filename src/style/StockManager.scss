@@ -79,7 +79,6 @@ $manageStock-scroll-color: #ece8f1;
 .woo-middle-container-wrapper .woo-backend-datatable-wrapper .sc-dmlpXa.koyZDM {
   border-radius: 0.25rem;
   border: 0.063rem solid rgba($color: #000000, $alpha: 0.3);
-  overflow: visible;
 }
 
 .woo-middle-container-wrapper .woo-backend-datatable-wrapper .rdt_Table .rdt_TableBody .rdt_TableRow {
@@ -118,12 +117,12 @@ $manageStock-scroll-color: #ece8f1;
 }
 
 #woo-admin-stockmanager select:focus {
-  color: black !important; // Adjust color as none to overwrite default color
+  color: inherit;
   border: none !important; // Adjust border as none to overwrite default border
   box-shadow: none;
 }
 #woo-admin-stockmanager select:hover {
-  color: black !important; // Adjust hover color as black to overwrite default hover color
+  color: inherit; 
 }
 
 .custom-select {

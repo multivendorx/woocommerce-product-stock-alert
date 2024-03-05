@@ -1,9 +1,17 @@
 /* global stockManagerAppLocalizer */
 import React, {useState, useEffect, useRef} from 'react';
-import Select from 'react-select';
 import axios from 'axios';
 import Dialog from "@mui/material/Dialog";
 import Popoup from '../PopupContent/PopupContent';
+import TextArea from '../CustomInputs/TextArea';
+import CheckBox from '../CustomInputs/CheckBox';
+import BasicInput from '../CustomInputs/BasicInput';
+import SelectInput from '../CustomInputs/SelectInput';
+import Section from '../CustomInputs/Util/Section';
+import BlockText from '../CustomInputs/Util/BlockText';
+import Button from '../CustomInputs/Button';
+import ColorInput from '../CustomInputs/ColorInput';
+import RangeInput from '../CustomInputs/RangeInput';
 
 const DynamicForm = ({ currentTab, tabs, setTabs }) => {
 	const isFirstRender = useRef(true);
@@ -13,7 +21,7 @@ const DynamicForm = ({ currentTab, tabs, setTabs }) => {
 	const [settings, setSettings] = useState(null);
 	const [dataMcList, setDataMcList] = useState([]);
 	
-	const tabfilds = tabs[currentTab].module;
+	const tabfields = tabs[currentTab].module;
 	const submitUrl = tabs[currentTab].apiurl;
 
 	useEffect(() => {
@@ -41,43 +49,43 @@ const DynamicForm = ({ currentTab, tabs, setTabs }) => {
 				},
 			}).then((res) => {
 				setErrorDisplay(res.data.error);
-				setTimeout(() => {
+				setTimeout(( ) => {
 					setErrorDisplay('');
 				}, 2000);
 			});
 		}
 		submitData();
-	}, [settings]);
+	}, [ settings ] );
 
-	const handleModelClose = () => {
-		setModelOpen(false);
+	const handleModelClose = ( ) => {
+		setModelOpen( false );
 	}
 	
-	const checkProActive = (e, key) => {
-		if (stockManagerAppLocalizer.pro_settings_list.includes(key)) {
+	const checkProActive = ( e, key ) => {
+		if (stockManagerAppLocalizer.pro_settings_list.includes( key )) {
 			if (stockManagerAppLocalizer.pro_active == 'free' ) {
 				setModelOpen(true);
 			}
 		}
 	}
 
-	const handleOnChange = (e, key, type = 'single', from_type = '', array_values = []) => {
-		if (!stockManagerAppLocalizer.pro_settings_list.includes(key)) {
-			if (type === 'single') {
-				if ( from_type === 'select' || from_type === 'mailchimp_select') {
+	const handleOnChange = ( e, key, type = 'single', form_type = '', array_values = [] ) => {
+		if ( !stockManagerAppLocalizer.pro_settings_list.includes( key ) ) {
+			if ( type === 'single' ) {
+				if ( form_type === 'select' || form_type === 'mailchimp_select') {
 					setSettings((preData) => {
-						return { ...preData, [key]: array_values[e.index] };
+						return { ...preData, [key]: array_values[ e.index] };
 					});
-				} else if ( from_type === 'multi-select' ) {
+				} else if ( form_type === 'multi-select' ) {
 					setSettings((preData) => {
 						return { ...preData, [key]: e };
 					});
-				} else if (from_type === 'text_api') {
+				} else if (form_type === 'text_api') {
 					setSettings((preData) => {
 						return { ...preData, [key]: e.target.value };
 					});
 					setDataMcList([]);
-				} else if (from_type === 'checkbox') {
+				} else if (form_type === 'checkbox') {
 					setSettings((preData) => {
 						return { ...preData, [key]: e.target.checked };
 					});
@@ -119,16 +127,16 @@ const DynamicForm = ({ currentTab, tabs, setTabs }) => {
 	}
 
 	const renderForm = () => {
-		return tabfilds.map((inputFild) => {
-			const key = inputFild.key;
-			const type = inputFild.type || 'text';
-			const name = inputFild.name;
+		return tabfields.map((inputField) => {
+			const key = inputField.key;
+			const type = inputField.type || 'text';
+			const name = inputField.name;
 			const value = settings[key] || '';
-			const placeholder = inputFild.placeholder;
+			const placeholder = inputField.placeholder;
 			let input = '';
 			
-			if (inputFild.depend_checkbox) {
-				if (! settings[inputFild.depend_checkbox]) {
+			if (inputField.depend_checkbox) {
+				if (! settings[inputField.depend_checkbox]) {
 					return;
 				}
 			}
@@ -140,10 +148,9 @@ const DynamicForm = ({ currentTab, tabs, setTabs }) => {
 				case 'number':
 				case 'url':
 				case 'text_api':
-					input = (
-						<div className="woo-settings-basic-input-class">
-							<input
-								className="woo-setting-form-input"
+					input = <BasicInput
+								wrapperClass={"woo-settings-basic-input-class"}
+								inputClass={"woo-setting-form-input"}
 								key={key}
 								name={name}
 								type={type}
@@ -151,83 +158,62 @@ const DynamicForm = ({ currentTab, tabs, setTabs }) => {
 								value={value}
 								onChange={(e) => { handleOnChange(e, key, 'single', type) }}
 								onClick={(e) => { checkProActive(e, key) }}
+								descClass={"woo-settings-metabox-description"}
+								description={ inputField.desc }
 							/>
-							{
-								inputFild.desc &&
-								<p
-									className="woo-settings-metabox-description"
-									dangerouslySetInnerHTML={{ __html: inputFild.desc }}
-								></p>
-							}
-						</div>
-					);
 					break;
 				case 'textarea':
-					input = (
-						<div className="woo-setting-from-textarea">
-							<textarea
-								className={inputFild.class ? inputFild.class : 'woo-form-input'}
+
+					input = <TextArea 
+								wrapperClass={"woo-setting-from-textarea"} 
+								inputClass={inputField.class ? inputField.class : 'woo-form-input'}
 								key={key}
-								maxLength={inputFild.limit}
+								maxLength={inputField.limit}
 								placeholder={placeholder}
 								name={name}
 								value={value}
-								rows="4"
-								cols="50"
-								onChange={(e) => { handleOnChange(e, key) }}
-								onClick={(e) => { checkProActive(e, key) }}
+								rowNumber={"4"}
+								colNumber={"50"}
+								onChange={ (e) => { handleOnChange(e, key) } }
+								onClick={ (e) => { checkProActive(e, key) } }
+								description={ inputField.desc }
+								descClass={ "woo-settings-metabox-description" }
 							/>
-							{
-								inputFild.desc && <p
-									className="woo-settings-metabox-description"
-									dangerouslySetInnerHTML={{ __html: inputFild.desc }}
-								></p>
-							}
-						</div>
-					);
 					break;
 				case 'checkbox':
 					input = (
-						<div className={inputFild.right_content || inputFild.parent_class ? 'woo-checkbox-list-side-by-side' : ''} >
+						<div className={inputField.right_content || inputField.parent_class ? 'woo-checkbox-list-side-by-side' : ''} >
 							{
-								inputFild.options.map((option) => {
+								inputField.options.map(( option ) => {
 									let checked = settings[option.key] ? true : false;
 									return (
 										<div
-											className={inputFild.right_content ? 'woo-toggle-checkbox-header' : inputFild.parent_class || ''}
+											className={inputField.right_content ? 'woo-toggle-checkbox-header' : inputField.parent_class || ''}
 										>
 											<>
 												{
-													inputFild.right_content && <p
+													inputField.right_content && <p
 														className="woo-settings-metabox-description"
 														dangerouslySetInnerHTML={{ __html: option.label }}
 													></p>
 												}
-												<div className="woo-toggle-checkbox-content">
-													<input
-														className={inputFild.class}
-														type={type}
-														id={`woo-toggle-switch-${option.key}`}
-														key={option.key}
-														name={option.name}
-														checked={checked}
-														value={option.value}
-														onChange={(e) => { handleOnChange(e, option.key, 'single', type) }}
-														onClick={(e) => { checkProActive(e, key) }}
-													/>
-													<label htmlFor={`woo-toggle-switch-${option.key}`} ></label>
-													{
-														stockManagerAppLocalizer.pro_active === 'free' &&
-														stockManagerAppLocalizer.pro_settings_list.includes(key) &&
-														<span className="table-content-pro-tag stock-manager-pro-tag">Pro</span>
-													}
-												</div>
-												{
-													(!inputFild.right_content) && <p
-														className="woo-settings-metabox-description"
-														dangerouslySetInnerHTML={{ __html: option.label }}
-													></p>
-												}
+												<CheckBox
+													wrapperClass={"woo-toggle-checkbox-content"}
+													inputClass={inputField.class}
+													type={type}
+													id={`woo-toggle-switch-${option.key}`}
+													key={option.key}
+													name={option.name}
+													checked={checked}
+													value={option.value}
+													onChange={(e) => { handleOnChange(e, option.key, 'single', type) }}
+													onClick={(e) => { checkProActive(e, key) }}
+													description={option.label}
+													label={option.key}
+													pro={stockManagerAppLocalizer.pro_active === 'free' &&
+													stockManagerAppLocalizer.pro_settings_list.includes(key)}
+													descClass={"woo-settings-metabox-description"}
+												/>
 												{
 													option.hints &&
 													<span className="dashicons dashicons-info">
@@ -242,9 +228,9 @@ const DynamicForm = ({ currentTab, tabs, setTabs }) => {
 								})
 							}
 							{
-								inputFild.desc && <p
+								inputField.desc && <p
 									className="woo-settings-metabox-description"
-									dangerouslySetInnerHTML={{ __html: inputFild.desc }}
+									dangerouslySetInnerHTML={{ __html: inputField.desc }}
 								></p>
 							}
 						</div>
@@ -254,116 +240,93 @@ const DynamicForm = ({ currentTab, tabs, setTabs }) => {
 					input = (
 						<div class="editor-left side">
 							<div class="left_side_wrap">
-								<div className="woo-color-picker-wrap">
-									{stockManagerAppLocalizer.setting_string.form_dec}
-									<input
-										className="woo-setting-color-picker"
-										type="color"
-										onChange={(e) => { handleOnChange(e, 'alert_text_color') }}
-										value={settings.alert_text_color || '#000000'}
-									/>
-								</div>
-								<div className="woo-color-picker-wrap">
-									{stockManagerAppLocalizer.setting_string.submit_button_text}
-									<input
-										className="woo-setting-color-picker"
-										type="color"
-										onChange={(e) => { handleOnChange(e, 'button_text_color') }}
-										value={settings.button_text_color || '#000000'}
-									/>
-								</div>
-								<div className="woo-color-picker-wrap">
-									{stockManagerAppLocalizer.setting_string.background}
-									<input
-										className="woo-setting-color-picker"
-										type="color"
-										onChange={(e) => { handleOnChange(e, 'button_background_color') }}
-										value={settings.button_background_color || '#000000'}
-									/>
-								</div>
-								<div className="woo-color-picker-wrap">
-									{stockManagerAppLocalizer.setting_string.border}
-									<input
-										className="woo-setting-color-picker"
-										type="color"
-										onChange={(e) => { handleOnChange(e, 'button_border_color') }}
-										value={settings.button_border_color || '#000000'}
-									/>
-								</div>
-								<div className="woo-color-picker-wrap">
-									{stockManagerAppLocalizer.setting_string.hover_background}
-									<input
-										className="woo-setting-color-picker"
-										type="color"
-										onChange={(e) => { handleOnChange(e, 'button_background_color_onhover') }}
-										value={settings.button_background_color_onhover || '#000000'}
-									/>
-								</div>
-								<div className="woo-color-picker-wrap">
-									{stockManagerAppLocalizer.setting_string.hover_border}
-									<input
-										className="woo-setting-color-picker"
-										type="color"
-										onChange={(e) => { handleOnChange(e, 'button_border_color_onhover') }}
-										value={settings.button_border_color_onhover || '#000000'}
-									/>
-								</div>
-								<div className="woo-color-picker-wrap">
-									{stockManagerAppLocalizer.setting_string.hover_text}
-									<input
-										className="woo-setting-color-picker"
-										type="color"
-										onChange={(e) => { handleOnChange(e, 'button_text_color_onhover') }}
-										value={settings.button_text_color_onhover || '#000000'}
-									/>
-								</div>
+								<ColorInput
+									wrapperClass={"woo-color-picker-wrap"}
+									description={stockManagerAppLocalizer.setting_string.form_dec}
+									inputClass={"woo-setting-color-picker"}
+									onChange={(e) => { handleOnChange(e, 'alert_text_color') }}
+									value={settings.alert_text_color}
+								/>
+								<ColorInput
+									wrapperClass={"woo-color-picker-wrap"}
+									description={stockManagerAppLocalizer.setting_string.submit_button_text}
+									inputClass={"woo-setting-color-picker"}
+									onChange={(e) => { handleOnChange(e, 'button_text_color') }}
+									value={settings.button_text_color}
+								/>
+								<ColorInput
+									wrapperClass={"woo-color-picker-wrap"}
+									description={stockManagerAppLocalizer.setting_string.background}
+									inputClass={"woo-setting-color-picker"}
+									onChange={(e) => { handleOnChange(e, 'button_background_color') }}
+									value={settings.button_background_color}
+								/>
+								<ColorInput
+									wrapperClass={"woo-color-picker-wrap"}
+									description={stockManagerAppLocalizer.setting_string.border}
+									inputClass={"woo-setting-color-picker"}
+									onChange={(e) => { handleOnChange(e, 'button_border_color') }}
+									value={settings.button_border_color}
+								/>
+								<ColorInput
+									wrapperClass={"woo-color-picker-wrap"}
+									description={stockManagerAppLocalizer.setting_string.hover_background}
+									inputClass={"woo-setting-color-picker"}
+									onChange={(e) => { handleOnChange(e, 'button_background_color_onhover') }}
+									value={settings.button_background_color_onhover}
+								/>
+								<ColorInput
+									wrapperClass={"woo-color-picker-wrap"}
+									description={stockManagerAppLocalizer.setting_string.hover_border}
+									inputClass={"woo-setting-color-picker"}
+									onChange={(e) => { handleOnChange(e, 'button_border_color_onhover') }}
+									value={settings.button_border_color_onhover}
+								/>
+								<ColorInput
+									wrapperClass={"woo-color-picker-wrap"}
+									description={stockManagerAppLocalizer.setting_string.hover_text}
+									inputClass={"woo-setting-color-picker"}
+									onChange={(e) => { handleOnChange(e, 'button_text_color_onhover') }}
+									value={settings.button_text_color_onhover}
+								/>
 							</div>
 							<div class="right_side_wrap">
-								<div className="woo-size-picker-wrap">
-									{stockManagerAppLocalizer.setting_string.font_size}
-									<div className="woo-progress-picker-wrap">
-										<input
-											className="woo-setting-range-picker"
-											id="button_font_size"
-											type="range"
-											min="0"
-											max="30"
-											value={settings.button_font_size}
-											onChange={(e) => { handleOnChange(e, 'button_font_size') }}
-										/>
-										<output class="bubble">{settings.button_font_size ? settings.button_font_size : 0}px</output>
-									</div>
-								</div>
-								<div className="woo-size-picker-wrap">
-									{stockManagerAppLocalizer.setting_string.border_radius}
-									<div className="woo-progress-picker-wrap">
-										<input
-											className="woo-setting-range-picker"
-											id="button_border_radious"
-											type="range"
-											min="0"
-											max="100"
-											value={settings.button_border_radious}
-											onChange={(e) => { handleOnChange(e, 'button_border_radious') }}
-										/>
-										<output class="bubble">{settings.button_border_radious ? settings.button_border_radious : 0}px</output>
-									</div>
-								</div>
-								<div className="woo-size-picker-wrap">
-									{stockManagerAppLocalizer.setting_string.border_size}
-									<div className="woo-progress-picker-wrap">
-										<input
-											className="woo-setting-range-picker"
-											id="button_border_size"
-											type="range"
-											min="0"
-											max="10"
-											value={settings.button_border_size}
-											onChange={(e) => { handleOnChange(e, 'button_border_size') }}
-										/>
-										<output class="bubble">{settings.button_border_size ? settings.button_border_size : 0}px</output>
-									</div>
-								</div>
+								<RangeInput
+									wrapperClass={"woo-size-picker-wrap"}
+									subWrapperClass={"woo-progress-picker-wrap"}
+									inputClass={"woo-setting-range-picker"}
+									description={stockManagerAppLocalizer.setting_string.font_size}
+									id={"button_font_size"}
+									min={"0"}
+									max={"30"}
+									value={settings.button_font_size}
+									onChange={(e) => { handleOnChange(e, 'button_font_size') }}
+									outputClass={"bubble"}
+								/>
+								<RangeInput
+									wrapperClass={"woo-size-picker-wrap"}
+									subWrapperClass={"woo-progress-picker-wrap"}
+									inputClass={"woo-setting-range-picker"}
+									description={stockManagerAppLocalizer.setting_string.border_radius}
+									id={"button_border_radious"}
+									min={"0"}
+									max={"30"}
+									value={settings.button_border_radious}
+									onChange={(e) => { handleOnChange(e, 'button_border_radious') }}
+									outputClass={"bubble"}
+								/>
+								<RangeInput
+									wrapperClass={"woo-size-picker-wrap"}
+									subWrapperClass={"woo-progress-picker-wrap"}
+									inputClass={"woo-setting-range-picker"}
+									description={stockManagerAppLocalizer.setting_string.border_size}
+									id={"button_border_size"}
+									min={"0"}
+									max={"30"}
+									value={settings.button_border_size}
+									onChange={(e) => { handleOnChange(e, 'button_border_size') }}
+									outputClass={"bubble"}
+								/>
 							</div>
 						</div>
 					);
@@ -410,7 +373,7 @@ const DynamicForm = ({ currentTab, tabs, setTabs }) => {
 					break;
 				case 'select':
 				case 'mailchimp_select':
-					const selectArray = type === 'select' ? inputFild.option : dataMcList;
+					const selectArray = type === 'select' ? inputField.option : dataMcList;
 					const optionsData = [];
 					selectArray.forEach((option, index) => {
 						optionsData[index] = {
@@ -419,79 +382,58 @@ const DynamicForm = ({ currentTab, tabs, setTabs }) => {
 							index,
 						};
 					});
-					input = (
-						<div className="woo-form-select-field-wrapper">
-							<Select
+					input = <SelectInput
+								wrapperClass={"woo-form-select-field-wrapper"}
 								className={key}
 								value={value ? value : ''}
 								options={optionsData}
 								onChange={(e) => { handleOnChange(e, key, 'single', type, optionsData) }}
 								onClick={(e) => { checkProActive(e, key) }}
-								></Select>
-							{
-								inputFild.desc && <p
-								className="woo-settings-metabox-description"
-								dangerouslySetInnerHTML={{ __html: inputFild.desc }}
-								></p>
-							}
-						</div>
-					);
+								description={ inputField.desc }
+								descClass={ "woo-settings-metabox-description" }
+							/>
 					break;
 				case 'button':
-					input = (
-						<div className="woo-button">
-							<input
-								className="btn default-btn"
-								type="button"
-								value="Connect to Mailchimp"
+					input = <Button
+								wrapperClass={"woo-button"}
+								inputClass={"btn default-btn"}
+								type={"button"}
+								value={"Connect to Mailchimp"}
 								onClick={(e) => handleGetMailchimpList()}
+								descClass={"woo-settings-metabox-description"}
+								description={inputField.desc}
 							/>
-							{
-								inputFild.desc && <p
-									className="woo-settings-metabox-description"
-									dangerouslySetInnerHTML={{ __html: inputFild.desc }}
-								></p>
-							}
-						</div>
-					);
 					break;
 				case 'section':
-					input = (
-						<div className="woo-setting-section-divider">&nbsp;</div>
-					);
+					input = <Section wrapperClass={"woo-setting-section-divider"} />
 					break;
 				case 'heading':
 					input = (
 						<div className="woo-setting-section-header">
 							{
-								inputFild.blocktext &&
-								<h5 dangerouslySetInnerHTML={{ __html: inputFild.blocktext }} ></h5>
+								inputField.blocktext &&
+								<h5 dangerouslySetInnerHTML={{ __html: inputField.blocktext }}></h5>
 							}
 						</div>
 					);
 					break;
 				case 'blocktext':
-					input = (
-						<div className="woo-blocktext-class">
-							{
-								inputFild.blocktext && <p
-									className="woo-settings-metabox-description-code"
-									dangerouslySetInnerHTML={{ __html: inputFild.blocktext }}
-								></p>
-							}
-						</div>
-					);
+					input = < BlockText
+								wrapperClass={"woo-blocktext-class"}
+								blockTextClass={"woo-settings-metabox-description-code"}
+								value={inputField.blocktext}
+							/>
 					break;
 			}
 
-			return inputFild.type === 'section' || inputFild.label === 'no_label' ? ( input ) : (
+			return inputField.type === 'section' || inputField.label === 'no_label' ? ( input ) : (
 				<div key={'g' + key} className="woo-form-group">
 					<label
 						className="woo-settings-form-label"
 						key={'l' + key}
 						htmlFor={key}
 					>
-						<p dangerouslySetInnerHTML={{ __html: inputFild.label }}></p>
+						<p dangerouslySetInnerHTML={{ __html: inputField.label }}></p>
 					</label>
 					<div className="woo-settings-input-content">{input}</div>
 				</div>
