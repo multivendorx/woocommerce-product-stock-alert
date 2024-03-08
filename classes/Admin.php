@@ -44,9 +44,9 @@ class Admin {
         );
 
         add_submenu_page(
-            'woo-stock-manager-setting',                              
-            __('Settings', 'woocommerce-stock-manager'),      
-            __('Settings', 'woocommerce-stock-manager'),      
+            'woo-stock-manager-setting',
+            __('Settings', 'woocommerce-stock-manager'),
+            __('Settings', 'woocommerce-stock-manager'),
             'manage_options',                                       
             'woo-stock-manager-setting#&tab=settings&subtab=general', 
             '__return_null'                                         
@@ -55,7 +55,8 @@ class Admin {
         add_submenu_page( 
             'woo-stock-manager-setting', 
             __('Subscribers List', 'woocommerce-stock-manager'), 
-            __('Subscribers List ' . $pro_sticker, 'woocommerce-stock-manager'), 
+			// Translators: Subscribers list with a pro sticker.Variable $pro_sticker contains the sticker text.
+            sprintf(__('Subscribers List ' . $pro_sticker, 'woocommerce-stock-manager')), // phpcs:ignore
             'manage_woocommerce', 
             'woo-stock-manager-setting#&tab=subscribers-list', 
             '__return_null' 
@@ -64,7 +65,8 @@ class Admin {
         add_submenu_page( 
             'woo-stock-manager-setting', 
             __('Inventory Manager', 'woocommerce-stock-manager'), 
-            __('Inventory Manager ' . $pro_sticker, 'woocommerce-stock-manager'), 
+			// Translators: Subscribers list with a pro sticker.Variable $pro_sticker contains the sticker text.
+            sprintf(__('Inventory Manager ' . $pro_sticker, 'woocommerce-stock-manager')), // phpcs:ignore
             'manage_woocommerce', 
             'woo-stock-manager-setting#&tab=manage-stock', 
             '__return_null' 
@@ -91,17 +93,17 @@ class Admin {
     }
 
     /**
-     * Create Stock Manager Export (CSV) option to 'Tool' manue.
+     * Create Stock Manager Export (CSV) option to 'Tool' menu.
      * @return void
      */
     public function create_csv_export_page() {
         ?>
             <div class="wrap">
-            <h1><?php _e('Stock Manager Export', 'woocommerce-stock-manager') ?></h1>
-            <p><?php _e('When you click the button below, this will export all out of stock products with subscribers email.', 'woocommerce-stock-manager') ?></p>
+            <h1><?php __('Stock Manager Export', 'woocommerce-stock-manager') ?></h1>
+            <p><?php __('When you click the button below, this will export all out of stock products with subscribers email.', 'woocommerce-stock-manager') ?></p>
             <form class="alert-export-data" id="alert-export-data" method="post" action="<?php echo admin_url('admin-ajax.php?action=export_subscribers') ?>">
                 <input type="hidden" name="export_csv" value="1">
-                <input type="submit" class="button-primary" value="<?php _e('Export CSV', 'woocommerce-stock-manager')  ?>">
+                <input type="submit" class="button-primary" value="<?php __('Export CSV', 'woocommerce-stock-manager')  ?>">
             </form>
             </div>
         <?php
@@ -149,9 +151,8 @@ class Admin {
     function subscribers_bulk_action_admin_notice() {
         if (!empty($_REQUEST['bulk_remove_subscribers'])) {
             $bulk_remove_count = intval($_REQUEST['bulk_remove_subscribers']);
-            printf('<div id="message" class="updated fade"><p>' .
-                    _n('Removed subscribers from %s product.', 'Removed subscribers from %s products.', $bulk_remove_count, 'woocommerce-stock-manager'
-                    ) . '</p></div>', $bulk_remove_count);
+			// Translators: This message is to display removed subscribers from the product
+            printf('<div id="message" class="updated fade"><p>' . _n('Removed subscribers from %s product.', 'Removed subscribers from %s products.', $bulk_remove_count, 'woocommerce-stock-manager') . '</p></div>', $bulk_remove_count);
         }
     }
 

@@ -3,6 +3,7 @@
 namespace StockManager;
 
 class AdminSettingTab {
+	$Stock_manager_shop_url = 'Upgrade to <a href="' . WOO_STOCK_MANAGER_PRO_SHOP_URL . '" target="_blank"><span class="pro-strong">Pro</span></a> to enable Double Opt-in flow for subscription confirmation.';
     static function get() {
         return [
             'general' => [
@@ -19,7 +20,7 @@ class AdminSettingTab {
                         'options'   => [
                             [
                                 'key'   => "is_double_optin",
-                                'label' => apply_filters('allow_store_inventory_double_optin', __('Upgrade to <a href="' . WOO_STOCK_MANAGER_PRO_SHOP_URL . '" target="_blank"><span class="pro-strong">Pro</span></a> to enable Double Opt-in flow for subscription confirmation.', 'woocommerce-stock-manager')),
+                                'label' => apply_filters('allow_store_inventory_double_optin', esc_html__($Stock_manager_shop_url, 'woocommerce-stock-manager')),
                                 'value' => "is_double_optin"
                             ]
                         ]
@@ -190,6 +191,7 @@ class AdminSettingTab {
                         'key'       => 'alert_success',
                         'type'      => 'textarea',
                         'class'     => 'woo-setting-wpeditor-class',
+						// Translators: This message display dynamic product title and emails.
                         'desc'      => __('Tip: Utilize %product_title% for dynamic product titles and %customer_email% for personalized customer email addresses in your messages.', 'woocommerce-stock-manager'),
                         'label'     => __('Successful Form Submission', 'woocommerce-stock-manager'),
                     ],
@@ -197,6 +199,7 @@ class AdminSettingTab {
                         'key'       => 'alert_email_exist',
                         'type'      => 'textarea',
                         'class'     => 'woo-setting-wpeditor-class',
+						// Translators: This message display dynamic product title and emails.
                         'desc'      => __('Tip: Enhance personalization by incorporating %product_title% for dynamic product titles and %customer_email% for individual customer emails.', 'woocommerce-stock-manager'),
                         'label'     => __('Repeated Subscription Alert', 'woocommerce-stock-manager'),
                     ],

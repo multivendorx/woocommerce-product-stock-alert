@@ -67,8 +67,10 @@ class Install {
         ];
         $submit_settings = [
             'alert_success'  => __('Thank you for expressing interest in %product_title%. We will notify you via email once it is back in stock.', 'woocommerce-stock-manager'),
+			// Translators: This message display already registered user to display already registered message
             'alert_email_exist' => __('%customer_email% is already registered for %product_title%. Please attempt a different email address.', 'woocommerce-stock-manager'),
             'valid_email' => __('Please enter a valid email ID and try again.', 'woocommerce-stock-manager'),
+			// Translators: This message display user sucessfully unregistered
             'alert_unsubscribe_message' => __('%customer_email% is successfully unregistered.', 'woocommerce-stock-manager'),
         ];
         $email_settings = [

@@ -32,6 +32,26 @@ export default function SubscribersList( ) {
         start_date: sevenDaysAgo,
         end_date: currentDate
     } )
+
+    const debounce = (func, delay) => {
+        let timer;
+        return (...args) => {
+          clearTimeout(timer);
+          timer = setTimeout(() => {
+            func(...args);
+          }, delay);
+        };
+    };
+
+    useEffect(() => {
+        const delayedSearch = debounce(performSearch, 500);
+        delayedSearch(productNameField);
+    }, [productNameField]);
+    
+    //   const handleInputChange = (event) => {
+    //     setSearchQuery(event.target.value);
+    //   };
+
     const override = css`
         display: block;
         margin: 0 auto;
