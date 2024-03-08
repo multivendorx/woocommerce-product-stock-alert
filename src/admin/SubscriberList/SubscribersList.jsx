@@ -10,10 +10,10 @@ import DataTable from 'react-data-table-component';
 import PuffLoader from 'react-spinners/PuffLoader';
 import Popoup from '../PopupContent/PopupContent';
 
-export default function SubscribersList() {
+export default function SubscribersList( ) {
     const fetchSubscribersDataUrl = `${ stockManagerAppLocalizer.apiUrl }/stockmanager/v1/get-subscriber-list`;
-    const [ rowsPerPage , setRowsPerPage ] = useState(10);
-    const [ currentPage , setCurrentPage ] = useState(0);
+    const [ rowsPerPage , setRowsPerPage ] = useState( 10 );
+    const [ currentPage , setCurrentPage ] = useState( 0 );
     const [ post_status , setPost_status] = useState( 'any' );
     const [ productNameField , setProductNameField ] = useState( '' );
     const [ emailField , setEmailField ] = useState( '' );
@@ -25,9 +25,9 @@ export default function SubscribersList() {
         unsubscribed: 0,
         mailSent: 0
     } )
-    const currentDate = new Date();
-    const sevenDaysAgo = new Date();
-    sevenDaysAgo.setDate( currentDate.getDate() - 7 );
+    const currentDate = new Date( );
+    const sevenDaysAgo = new Date( );
+    sevenDaysAgo.setDate( currentDate.getDate( ) - 7 );
     const [ date , setDate ] = useState( {
         start_date: sevenDaysAgo,
         end_date: currentDate
@@ -59,6 +59,7 @@ export default function SubscribersList() {
                 })
             });
         }
+        //Data to be loaded for the changes of the following states
     }, [ rowsPerPage, currentPage, post_status, productNameField, emailField, date ] );
     const [ openDialog, setOpenDialog ] = useState ( false );
     
@@ -70,6 +71,7 @@ export default function SubscribersList() {
             })
         }
     };
+    //columns for the data table
     const columns = [
         {
             name: __( "Date","woocommerce-stock-manager-pro" ),
@@ -92,6 +94,7 @@ export default function SubscribersList() {
             selector: row => row.status,
         }
     ];
+    //Pagination component
     const Pagination = ( ) => {
         const handlePageChange = ( { selected } ) => {
             setCurrentPage ( selected );
@@ -118,7 +121,7 @@ export default function SubscribersList() {
                             return <option value={value}> {value} </option>
                             })
                         }
-                        <option value={ totalRows }>{__( "All","woocommerce-stock-manager-pro" ) }</option>
+                        <option value={ totalRows }>{__( "All", "woocommerce-stock-manager-pro" ) }</option>
                     </select>          
                 </div>
                 <ReactPaginate
@@ -128,8 +131,8 @@ export default function SubscribersList() {
                 breakLabel={"..."}
                 breakClassName={"break-me"}
                 pageCount={ totalRows ? Math.ceil ( totalRows / rowsPerPage ) : 0 }
-                marginPagesDisplayed={2}
-                pageRangeDisplayed={2}
+                marginPagesDisplayed={ 2 }
+                pageRangeDisplayed={ 2 }
                 onPageChange={ handlePageChange }
                 />
             </div>

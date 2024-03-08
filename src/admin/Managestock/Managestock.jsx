@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 import ProductTable from './ProductTable';
 
 const Managestock = () => {
+    
     const fetchDataUrl = `${ stockManagerAppLocalizer.apiUrl }/stockmanager/v1/get-products`;
     
     const override = css`
@@ -32,19 +33,21 @@ const Managestock = () => {
     useEffect(() => {
         if( stockManagerAppLocalizer.pro_active != 'free' ) {
             //Fetch the data to show in the table
-            axios({
+            axios( {
                 method: "post",
                 url: fetchDataUrl,
-                data:{ page:currentPage+1 , row:rowsPerPage, product_name:productName, product_sku:productSku, product_type:productType, stock_status: stockStatus, allData: 'false'},
-            }).then( ( response ) => {
+                data:{ page:currentPage+1 , row:rowsPerPage, product_name:productName, product_sku:productSku,
+                     product_type:productType, stock_status: stockStatus, allData: 'false' },
+            } ).then( ( response ) => {
                 let parsedData = JSON.parse( response.data );
                 setData( parsedData.products );
                 setHeaders( parsedData.headers );
                 setTotalProducts( parsedData.total_products );
-            });
+            } );
         }
-    }, [ rowsPerPage, currentPage, productName, productSku, productType, stockStatus ]);
+    }, [ rowsPerPage, currentPage, productName, productSku, productType, stockStatus ] );
 
+    //Function to handle the the Name Search
     function handleInputName ( e ) {
         if ( e.target.value.length > 3 ) {
             setProductName( e.target.value )
@@ -53,11 +56,12 @@ const Managestock = () => {
         }
     }
 
+    //Function to handle the SKU Search
     function handleInputSku ( e ) {
         if ( e.target.value.length > 3 ) {
             setProductSku( e.target.value )
         }else if ( e.target.value.length <= 1 ) {
-            setProductSku('');
+            setProductSku( '' );
         }
     }
     
@@ -88,7 +92,7 @@ const Managestock = () => {
                             <div className="woo-search-and-multistatus-wrap">
                                 <div className="woo-page-title">
                                     <p>
-                                        {__( "Inventory Manager", "woocommerce-stock-manager-pro" )}
+                                        { __( "Inventory Manager", "woocommerce-stock-manager-pro" ) }
                                     </p>
                                 </div>
                             <div>
@@ -96,10 +100,10 @@ const Managestock = () => {
                                     <div className="pull-right import">
                                         <button class="import-export-btn">
                                             <Link
-                                            to={"?page=woo-stock-manager-setting#&tab=import"}
+                                            to={ "?page=woo-stock-manager-setting#&tab=import" }
                                             >
                                             <div className="wp-menu-image dashicons-before dashicons-download"></div>
-                                            {__( "Import", "woocommerce-stock-manager-pro" )}
+                                            { __( "Import", "woocommerce-stock-manager-pro" ) }
                                             </Link>
                                         </button>
                                     </div>
@@ -109,7 +113,7 @@ const Managestock = () => {
                                             to={ "?page=woo-stock-manager-setting#&tab=export" }
                                             >
                                             <div className="wp-menu-image dashicons-before dashicons-upload"></div>
-                                            {__( "Export", "woocommerce-stock-manager-pro" )}
+                                            { __( "Export", "woocommerce-stock-manager-pro" ) }
                                             </Link>
                                         </button>
                                     </div>
@@ -143,13 +147,13 @@ const Managestock = () => {
                                     onChange={ ( e ) => { setProductType ( e.target.value ) } }
                                     >
                                         <option value="">
-                                            {__( "Product Type", "woocommerce-stock-manager-pro" )}
+                                            { __( "Product Type", "woocommerce-stock-manager-pro" ) }
                                         </option>
                                         <option value="Simple">
-                                            {__( "Simple", "woocommerce-stock-manager-pro" )}
+                                            { __( "Simple", "woocommerce-stock-manager-pro" ) }
                                         </option>
                                         <option value="Variable">
-                                            {__( "Variable", "woocommerce-stock-manager-pro" )}
+                                            { __( "Variable", "woocommerce-stock-manager-pro" ) }
                                         </option>
                                     </select>
                                 </div>
@@ -158,16 +162,16 @@ const Managestock = () => {
                                     onChange={ ( e ) => { setStockStatus ( e.target.value ) } }
                                     >
                                         <option value="">
-                                            {__( "Stock Status", "woocommerce-stock-manager-pro" )}
+                                            { __( "Stock Status", "woocommerce-stock-manager-pro" ) }
                                         </option>
                                         <option value="instock">
-                                            {__( "In stock", "woocommerce-stock-manager-pro" )}
+                                            { __( "In stock", "woocommerce-stock-manager-pro" ) }
                                         </option>
                                         <option value="onbackorder">
-                                            {__( "On backorder", "woocommerce-stock-manager-pro" )}
+                                            { __( "On backorder", "woocommerce-stock-manager-pro" ) }
                                         </option>
                                         <option value="outofstock">
-                                            {__( "Out of stock", "woocommerce-stock-manager-pro" )}
+                                            { __( "Out of stock", "woocommerce-stock-manager-pro" ) }
                                         </option>
                                     </select>
                                 </div>
@@ -181,7 +185,7 @@ const Managestock = () => {
                                         <ProductTable 
                                             setData={ setData } 
                                             setDisplayMessage={ setDisplayMessage }
-                                            totalProducts={ totalProducts }
+                                            totalProducts={ totalProducts } 
                                             rowsPerPage={ rowsPerPage } 
                                             setRowsPerPage={ setRowsPerPage }
                                             currentPage={ currentPage } 

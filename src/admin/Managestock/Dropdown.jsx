@@ -1,6 +1,7 @@
 import React from 'react';
 import { __ } from "@wordpress/i18n";
 
+//component to show all the dropdown elements
 export default function Dropdown({ product , header , headerKey , options , handleChange }) {
   const dropdown = () => {
     return(

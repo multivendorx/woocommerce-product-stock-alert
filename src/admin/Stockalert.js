@@ -2,7 +2,7 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import WOOTab from './Tabs/Tab.jsx';
 import SubscribersList from './SubscriberList/SubscribersList.jsx';
-import ManageStock from './Managestock/managestock.jsx'
+import ManageStock from './Managestock/Managestock.jsx'
 import Import from './Managestock/Import.jsx';
 import Export from './Managestock/Export.jsx';
 const Stockalert = () => {

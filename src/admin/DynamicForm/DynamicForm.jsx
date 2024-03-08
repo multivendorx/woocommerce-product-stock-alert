@@ -15,11 +15,11 @@ import RangeInput from '../CustomInputs/RangeInput';
 
 const DynamicForm = ({ currentTab, tabs, setTabs }) => {
 	const isFirstRender = useRef(true);
-	const [modelOpen, setModelOpen] = useState(false);
-	const [errorDisplay, setErrorDisplay] = useState('');
-	const [hoverOn, setHoverOn] = useState(false);
-	const [settings, setSettings] = useState(null);
-	const [dataMcList, setDataMcList] = useState([]);
+	const [ modelOpen, setModelOpen ] = useState(false);
+	const [ errorDisplay, setErrorDisplay ] = useState('');
+	const [ hoverOn, setHoverOn ] = useState(false);
+	const [ settings, setSettings ] = useState(null);
+	const [ dataMcList, setDataMcList ] = useState([]);
 	
 	const tabfields = tabs[currentTab].module;
 	const submitUrl = tabs[currentTab].apiurl;
