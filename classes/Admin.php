@@ -44,9 +44,9 @@ class Admin {
         );
 
         add_submenu_page(
-            'woo-stock-manager-setting',                              
-            __('Settings', 'woocommerce-stock-manager'),      
-            __('Settings', 'woocommerce-stock-manager'),      
+            'woo-stock-manager-setting',
+            __('Settings', 'woocommerce-stock-manager'),
+            __('Settings', 'woocommerce-stock-manager'),
             'manage_options',                                       
             'woo-stock-manager-setting#&tab=settings&subtab=general', 
             '__return_null'                                         
@@ -54,13 +54,24 @@ class Admin {
         
         add_submenu_page( 
             'woo-stock-manager-setting', 
-            __('Subscriber List', 'woocommerce-stock-manager'), 
-            __('Subscriber List ' . $pro_sticker, 'woocommerce-stock-manager'), 
+            __('Subscribers List', 'woocommerce-stock-manager'), 
+			// Translators: Subscribers list with a pro sticker.Variable $pro_sticker contains the sticker text.
+            __('Subscribers List ', 'woocommerce-stock-manager') . $pro_sticker,
             'manage_woocommerce', 
-            'woo-stock-manager-setting#&tab=subscriber-list', 
+            'woo-stock-manager-setting#&tab=subscribers-list', 
             '__return_null' 
         );
         
+        add_submenu_page( 
+            'woo-stock-manager-setting',
+            __('Inventory Manager', 'woocommerce-stock-manager'),
+			// Translators: Subscribers list with a pro sticker.Variable $pro_sticker contains the sticker text.
+            __('Inventory Manager', 'woocommerce-stock-manager') . $pro_sticker,
+            'manage_woocommerce', 
+            'woo-stock-manager-setting#&tab=manage-stock', 
+            '__return_null' 
+        );
+
         add_submenu_page(
             'tools.php', 
             __('WC Stock Manager Export', 'woocommerce-stock-manager'), 
@@ -82,17 +93,17 @@ class Admin {
     }
 
     /**
-     * Create Stock Manager Export (CSV) option to 'Tool' manue.
+     * Create Stock Manager Export (CSV) option to 'Tool' menu.
      * @return void
      */
     public function create_csv_export_page() {
         ?>
             <div class="wrap">
-            <h1><?php _e('Stock Manager Export', 'woocommerce-stock-manager') ?></h1>
-            <p><?php _e('When you click the button below, this will export all out of stock products with subscribers email.', 'woocommerce-stock-manager') ?></p>
-            <form class="alert-export-data" id="alert-export-data" method="post" action="<?php echo admin_url('admin-ajax.php?action=export_subscribers') ?>">
+            <h1><?php __('Stock Manager Export', 'woocommerce-stock-manager') ?></h1>
+            <p><?php __('When you click the button below, this will export all out of stock products with subscribers email.', 'woocommerce-stock-manager') ?></p>
+            <form class="alert-export-data" id="alert-export-data" method="post" action="<?php echo esc_html( admin_url('admin-ajax.php?action=export_subscribers') ) ?>">
                 <input type="hidden" name="export_csv" value="1">
-                <input type="submit" class="button-primary" value="<?php _e('Export CSV', 'woocommerce-stock-manager')  ?>">
+                <input type="submit" class="button-primary" value="<?php __('Export CSV', 'woocommerce-stock-manager')  ?>">
             </form>
             </div>
         <?php
@@ -140,9 +151,8 @@ class Admin {
     function subscribers_bulk_action_admin_notice() {
         if (!empty($_REQUEST['bulk_remove_subscribers'])) {
             $bulk_remove_count = intval($_REQUEST['bulk_remove_subscribers']);
-            printf('<div id="message" class="updated fade"><p>' .
-                    _n('Removed subscribers from %s product.', 'Removed subscribers from %s products.', $bulk_remove_count, 'woocommerce-stock-manager'
-                    ) . '</p></div>', $bulk_remove_count);
+			// Translators: This message is to display removed subscribers count for the product
+            printf('<div id="message" class="updated fade"><p>' . esc_html( _n('Removed subscribers from %s product.', 'Removed subscribers from %s products.', $bulk_remove_count, 'woocommerce-stock-manager') ). '</p></div>', esc_html( $bulk_remove_count ) );
         }
     }
 
@@ -257,31 +267,33 @@ class Admin {
         );
         
         if (get_current_screen()->id == 'toplevel_page_woo-stock-manager-setting') {
-            wp_enqueue_script( 'woo-stockmanager-script', $Woo_Stock_Manager->plugin_url . 'build/index.js', array( 'wp-element' ), $Woo_Stock_Manager->version, true );
+            wp_enqueue_script( 'woo-stockmanager-script', $Woo_Stock_Manager->plugin_url . 'build/index.js', array( 'wp-element', 'wp-i18n' ), $Woo_Stock_Manager->version, true );
+            wp_set_script_translations('woo-stockmanager-script', 'woocommerce-stock-manager-pro');
             wp_localize_script( 'woo-stockmanager-script', 'stockManagerAppLocalizer', apply_filters('woo_stock_manager_settings', [
                 'apiUrl'                    => untrailingslashit(get_rest_url()),
                 'nonce'                     => wp_create_nonce('wp_rest'),
                 'default_alert_text'        => __('Receive in-stock notifications for this product.', 'woocommerce-stock-manager'),
                 'default_email_place'       => __('Enter your email', 'woocommerce-stock-manager'),
                 'default_alert_button'      => __('Notify me', 'woocommerce-stock-manager'),
-                'subscriber_list'           => $Woo_Stock_Manager->plugin_url . 'assets/images/subscriber-list.jpg',
+                'subscriber_list'           => $Woo_Stock_Manager->plugin_url . 'src/assets/images/subscriber-list.jpg',
+                'inventory_manager_mobile'  => $Woo_Stock_Manager->plugin_url . 'src/assets/images/inventory-manager-mobile.jpg',
+                'inventory_manager_laptop'  => $Woo_Stock_Manager->plugin_url . 'src/assets/images/inventory-manager-laptop.png',
+                'inventory_manager_monitor' => $Woo_Stock_Manager->plugin_url . 'src/assets/images/inventory-manager-monitor.jpg',
                 'pro_active'                => apply_filters('woo_stock_manager_pro_active', 'free'),
                 'columns_subscriber'        => $columns_subscriber,
                 'subscription_page_string'  => $subscription_page_string,
                 'download_csv'              => __('Download CSV', 'woocommerce-stock-manager'),
                 'pro_settings_list'         => $pro_settings_list,
-                'pro_coupon_code'           => __('UPGRADE10', 'woocommerce-stock-manager'),
-                'pro_coupon_text'           => __('Don\'t miss out! Enjoy 10% off on our pro features.', 'woocommerce-stock-manager'),
                 'pro_url'                   => esc_url(WOO_STOCK_MANAGER_PRO_SHOP_URL),
                 'setting_string'            => $setting_string,
                 'banner_show'               => get_option('woocommerce_stock_manager_pro_banner_hide') ? false : true,
                 'default_massages_fields'   => $woo_admin_massages_fields,
                 'default_massages'          => Utill::get_form_settings_array()
               ]));
-            wp_enqueue_style('woo_stockmanager_style', $Woo_Stock_Manager->plugin_url . 'build/index.css');
-            wp_enqueue_style('woo_admin_rsuite_css', $Woo_Stock_Manager->plugin_url . 'assets/admin/css/rsuite-default' . '.min' . '.css', array(), $Woo_Stock_Manager->version);
+            wp_enqueue_style('woo_stockmanager_style', $Woo_Stock_Manager->plugin_url . 'build/index.css', array(), $Woo_Stock_Manager->version );
+            wp_enqueue_style('woo_admin_rsuite_css', $Woo_Stock_Manager->plugin_url . 'src/assets/admin/css/rsuite-default' . '.min' . '.css', array(), $Woo_Stock_Manager->version );
         }
-        wp_enqueue_style('stock_manager_product_admin_css', $Woo_Stock_Manager->plugin_url . 'assets/admin/css/admin'. $suffix .'.css');
+        wp_enqueue_style('stock_manager_product_admin_css', $Woo_Stock_Manager->plugin_url . 'src/assets/admin/css/admin'. $suffix .'.css', array(), $Woo_Stock_Manager->version );
     }
 
     /**
@@ -297,7 +309,7 @@ class Admin {
     function display_subscriber_count_in_custom_column($column_name, $post_id) {
         if($column_name == 'product_subscriber') {
             $no_of_subscriber = get_post_meta($post_id, 'no_of_subscribers', true);
-            echo '<div class="product-subscribtion-column">' . ((isset($no_of_subscriber) && $no_of_subscriber > 0) ? $no_of_subscriber : 0) . '</div>';
+            echo '<div class="product-subscribtion-column">' . esc_html((isset($no_of_subscriber) && $no_of_subscriber > 0) ? $no_of_subscriber : 0) . '</div>';
         }
     }
 
@@ -311,8 +323,8 @@ class Admin {
             $no_of_subscriber = get_post_meta($post->ID, 'no_of_subscribers', true);
             ?>
             <p class="form-field _stock_field">
-                <label class=""><?php _e('Number of Interested Person(s)', 'woocommerce-stock-manager'); ?></label>
-                <span class="no_subscriber"><?php echo ((isset($no_of_subscriber) && $no_of_subscriber > 0) ? $no_of_subscriber : 0); ?></span>
+                <label class=""><?php esc_attr_e('Number of Interested Person(s)', 'woocommerce-stock-manager'); ?></label>
+                <span class="no_subscriber"><?php echo esc_html((isset($no_of_subscriber) && $no_of_subscriber > 0) ? $no_of_subscriber : 0); ?></span>
             </p>
             <?php
         }
@@ -326,8 +338,8 @@ class Admin {
             $product_subscriber = get_post_meta($variation->ID, 'no_of_subscribers', true);
             ?>
             <p class="form-row form-row-full interested_person">
-                <label class="stock_label"><?php _e('Number of Interested Person(s) : ', 'woocommerce-stock-manager'); ?></label>
-            <div class="variation_no_subscriber"><?php echo ((isset($product_subscriber) && $product_subscriber > 0) ? $product_subscriber : 0); ?></div>
+                <label class="stock_label"><?php esc_attr_e( 'Number of Interested Person(s) : ', 'woocommerce-stock-manager' ); ?></label>
+            <div class="variation_no_subscriber"><?php echo esc_html((isset($product_subscriber) && $product_subscriber > 0) ? $product_subscriber : 0); ?></div>
             </p>
             <?php
         }

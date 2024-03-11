@@ -19,7 +19,7 @@ class AdminSettingTab {
                         'options'   => [
                             [
                                 'key'   => "is_double_optin",
-                                'label' => apply_filters('allow_store_inventory_double_optin', __('Upgrade to <a href="' . WOO_STOCK_MANAGER_PRO_SHOP_URL . '" target="_blank"><span class="pro-strong">Pro</span></a> to enable Double Opt-in flow for subscription confirmation.', 'woocommerce-stock-manager')),
+                                'label' => apply_filters('allow_store_inventory_double_optin', 'Upgrade to <a href="' . WOO_STOCK_MANAGER_PRO_SHOP_URL . '" target="_blank"><span class="pro-strong">Pro</span></a> to enable Double Opt-in flow for subscription confirmation.', 'woocommerce-stock-manager'),
                                 'value' => "is_double_optin"
                             ]
                         ]
@@ -89,7 +89,7 @@ class AdminSettingTab {
                         'options'   => [
                             [
                                 'key'   => "is_recaptcha_enable",
-                                'label' => apply_filters('allow_store_inventory_recaptcha', __('Upgrade to <a href="' . WOO_STOCK_MANAGER_PRO_SHOP_URL . '" target="_blank"><span class="pro-strong">Pro</span></a> for unlocking reCAPTCHA for out-of-stock form subscriptions.', 'woocommerce-stock-manager-pro')),
+                                'label' => apply_filters('allow_store_inventory_recaptcha','Upgrade to <a href="' . WOO_STOCK_MANAGER_PRO_SHOP_URL . '" target="_blank"><span class="pro-strong">Pro</span></a> for unlocking reCAPTCHA for out-of-stock form subscriptions.'),
                                 'value' => "is_recaptcha_enable"
                             ]
                         ]
@@ -190,6 +190,7 @@ class AdminSettingTab {
                         'key'       => 'alert_success',
                         'type'      => 'textarea',
                         'class'     => 'woo-setting-wpeditor-class',
+						// Translators: This message display dynamic product title and emails.
                         'desc'      => __('Tip: Utilize %product_title% for dynamic product titles and %customer_email% for personalized customer email addresses in your messages.', 'woocommerce-stock-manager'),
                         'label'     => __('Successful Form Submission', 'woocommerce-stock-manager'),
                     ],
@@ -197,6 +198,7 @@ class AdminSettingTab {
                         'key'       => 'alert_email_exist',
                         'type'      => 'textarea',
                         'class'     => 'woo-setting-wpeditor-class',
+						// Translators: This message display dynamic product title and emails.
                         'desc'      => __('Tip: Enhance personalization by incorporating %product_title% for dynamic product titles and %customer_email% for individual customer emails.', 'woocommerce-stock-manager'),
                         'label'     => __('Repeated Subscription Alert', 'woocommerce-stock-manager'),
                     ],
@@ -273,14 +275,14 @@ class AdminSettingTab {
                         'key'       => 'mailchimp_api',
                         'type'      => 'text_api',
                         'label'     => __('Mailchimp API', 'woocommerce-stock-manager'),
-                        'desc'      => __('', 'woocommerce-stock-manager'),
+                        'desc'      => '',
                         'depend_checkbox' => 'is_mailchimp_enable',
                     ],
                     [
                         'key'       => 'get_mailchimp_list_button',
                         'type'      => 'button',
                         'label'     => 'no_label',
-                        'api_link'  => 'woo-stockmanager-pro/v1/get-mailchimp-list',
+                        'api_link'  => 'stockmanager/v1/get-mailchimp-list',
                         'depend_checkbox' => 'is_mailchimp_enable',
                     ],
                     [
