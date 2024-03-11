@@ -3,7 +3,6 @@
 namespace StockManager;
 
 class AdminSettingTab {
-	$Stock_manager_shop_url = 'Upgrade to <a href="' . WOO_STOCK_MANAGER_PRO_SHOP_URL . '" target="_blank"><span class="pro-strong">Pro</span></a> to enable Double Opt-in flow for subscription confirmation.';
     static function get() {
         return [
             'general' => [
@@ -20,7 +19,7 @@ class AdminSettingTab {
                         'options'   => [
                             [
                                 'key'   => "is_double_optin",
-                                'label' => apply_filters('allow_store_inventory_double_optin', esc_html__($Stock_manager_shop_url, 'woocommerce-stock-manager')),
+                                'label' => apply_filters('allow_store_inventory_double_optin', 'Upgrade to <a href="' . WOO_STOCK_MANAGER_PRO_SHOP_URL . '" target="_blank"><span class="pro-strong">Pro</span></a> to enable Double Opt-in flow for subscription confirmation.', 'woocommerce-stock-manager'),
                                 'value' => "is_double_optin"
                             ]
                         ]
@@ -90,7 +89,7 @@ class AdminSettingTab {
                         'options'   => [
                             [
                                 'key'   => "is_recaptcha_enable",
-                                'label' => apply_filters('allow_store_inventory_recaptcha', __('Upgrade to <a href="' . WOO_STOCK_MANAGER_PRO_SHOP_URL . '" target="_blank"><span class="pro-strong">Pro</span></a> for unlocking reCAPTCHA for out-of-stock form subscriptions.', 'woocommerce-stock-manager-pro')),
+                                'label' => apply_filters('allow_store_inventory_recaptcha','Upgrade to <a href="' . WOO_STOCK_MANAGER_PRO_SHOP_URL . '" target="_blank"><span class="pro-strong">Pro</span></a> for unlocking reCAPTCHA for out-of-stock form subscriptions.'),
                                 'value' => "is_recaptcha_enable"
                             ]
                         ]
@@ -276,7 +275,7 @@ class AdminSettingTab {
                         'key'       => 'mailchimp_api',
                         'type'      => 'text_api',
                         'label'     => __('Mailchimp API', 'woocommerce-stock-manager'),
-                        'desc'      => __('', 'woocommerce-stock-manager'),
+                        'desc'      => '',
                         'depend_checkbox' => 'is_mailchimp_enable',
                     ],
                     [

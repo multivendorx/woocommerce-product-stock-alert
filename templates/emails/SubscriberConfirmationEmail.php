@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 do_action( 'woocommerce_email_header', $email_heading, $email ); ?>
 
-<p><?php printf( __( "Hi there. You have successfully subscribed a product. We will inform you when the product becomes available. Product details are shown below for your reference:", 'woocommerce-stock-manager' ) );
+<p><?php printf( esc_html__( "Hi there. You have successfully subscribed a product. We will inform you when the product becomes available. Product details are shown below for your reference:", 'woocommerce-stock-manager' ) );
 
 $is_prices_including_tax = get_option( 'woocommerce_prices_include_tax' );
 ?>
@@ -30,19 +30,19 @@ $is_prices_including_tax = get_option( 'woocommerce_prices_include_tax' );
 			<th scope="col" style="text-align:left; border: 1px solid #eee;">
 				<?php 
 					echo wp_kses_post( wc_price( wc_get_price_to_display( $product ) ) ); 
-					echo ( isset( $is_prices_including_tax ) && ($is_prices_including_tax != "yes" )) ? WC()->countries->ex_tax_or_vat() : WC()->countries->inc_tax_or_vat(); 
+					echo esc_html( ( isset( $is_prices_including_tax ) && ($is_prices_including_tax != "yes" )) ? WC()->countries->ex_tax_or_vat() : WC()->countries->inc_tax_or_vat() ); 
 				?>
 			</th>
 		</tr>
 	</tbody>
 </table>
 
-<p style="margin-top: 15px !important;"><?php printf( __( "Following is the product link : ", 'woocommerce-stock-manager' ) ); ?><a href="<?php echo esc_url( $product->get_permalink() ); ?>"><?php echo esc_html(wp_strip_all_tags( $product->get_name() )); ?></a></p>
+<p style="margin-top: 15px !important;"><?php printf( esc_html__( "Following is the product link : ", 'woocommerce-stock-manager' ) ); ?><a href="<?php echo esc_url( $product->get_permalink() ); ?>"><?php echo esc_html( wp_strip_all_tags( $product->get_name() ) ); ?></a></p>
 
 <h3><?php esc_html_e( 'Customer Details', 'woocommerce-stock-manager' ); ?></h3>
 <p>
 	<strong><?php esc_html_e( 'Email', 'woocommerce-stock-manager' ); ?> : </strong>
-	<a target="_blank" href="mailto:<?php echo $customer_email; ?>"><?php echo esc_html($customer_email); ?></a>
+	<a target="_blank" href="mailto:<?php echo esc_html( $customer_email ); ?>"><?php echo esc_html( $customer_email ); ?></a>
 </p>
 
 </p>

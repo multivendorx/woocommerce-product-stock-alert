@@ -29,7 +29,7 @@ class Utill {
         <div id="message" class="error">
             <p><?php
 		// Translators: This message is to display the Product Stock Manager & Notifier for WooCommerce is inactive.
-		printf(__('%sProduct Stock Manager & Notifier for WooCommerce is inactive.%s The %sWooCommerce plugin%s must be active for the Product Stock Manager & Notifier for WooCommerce to work. Please %sinstall & activate WooCommerce%s', 'woocommerce-stock-manager'), '<strong>', '</strong>', '<a target="_blank" href="http://wordpress.org/extend/plugins/woocommerce/">', '</a>', '<a href="' . admin_url('plugins.php') . '">', '&nbsp;&raquo;</a>'); ?></p>
+		printf(esc_html__('%1$sProduct Stock Manager & Notifier for WooCommerce is inactive.%2$s The %3$sWooCommerce plugin%4$s must be active for the Product Stock Manager & Notifier for WooCommerce to work. Please %5$sinstall & activate WooCommerce%6$s'), '<strong>', '</strong>', '<a target="_blank" href="http://wordpress.org/extend/plugins/woocommerce/">', '</a>', '<a href="' . esc_html( admin_url('plugins.php') ) . '">', '&nbsp;&raquo;</a>'); ?></p>
         </div>
         <?php
     }
@@ -44,7 +44,7 @@ class Utill {
         if ( $plugin_version != WOO_STOCK_MANAGER_PLUGIN_VERSION ) {
             ?>
             <div id="message" class="error">
-                <p><?php _e( "The Product Stock Manager & Notifier for WooCommerce is experiencing configuration issues. To ensure proper functioning, kindly deactivate and then activate the plugin." ) ?></p>
+                <p><?php esc_html( "The Product Stock Manager & Notifier for WooCommerce is experiencing configuration issues. To ensure proper functioning, kindly deactivate and then activate the plugin." ) ?></p>
             </div>
             <?php
         }

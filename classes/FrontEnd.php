@@ -111,7 +111,7 @@ class FrontEnd {
         if ($button_onhover_style) {
             echo '<style>
                 button.alert_button_hover:hover, button.unsubscribe_button:hover {
-                '. $button_onhover_style .'
+                '. esc_html( $button_onhover_style ) .'
                 }
             </style>';
         }
@@ -134,10 +134,10 @@ class FrontEnd {
             if ($get_variations) {
                 echo '<div class="stock_notifier-shortcode-subscribe-form" data-product-id="' . esc_attr($product->get_id()) . '"></div>';
             } else {
-                echo $this->get_subscribe_form($product);
+                echo ( $this->get_subscribe_form($product) );
             }
         } else {
-            echo $this->get_subscribe_form($product);
+            echo ( $this->get_subscribe_form($product) );
         }
     }
 
@@ -237,28 +237,28 @@ class FrontEnd {
             $stock_manager_fields_html = implode($separator, $stock_manager_fields_array);
         }
 
-        $alert_text_html = '<h5 style="color:' . $settings_array['alert_text_color'] . '" class="subscribe_for_interest_text">' . $settings_array['alert_text'] . '</h5>';
+        $alert_text_html = '<h5 style="color:' . esc_html($settings_array['alert_text_color']) . '" class="subscribe_for_interest_text">' . esc_html($settings_array['alert_text']) . '</h5>';
 
         $button_css = "";
-        $border_size = (!empty($settings_array['button_border_size'])) ? $settings_array['button_border_size'].'px' : '1px';
+        $border_size = (!empty($settings_array['button_border_size'])) ? esc_html($settings_array['button_border_size']).'px' : '1px';
         if (!empty($settings_array['button_background_color']))
-            $button_css .= "background:" . $settings_array['button_background_color'] . ";";
+            $button_css .= "background:" . esc_html($settings_array['button_background_color']) . ";";
         if (!empty($settings_array['button_text_color']))
-            $button_css .= "color:" . $settings_array['button_text_color'] . ";";
+            $button_css .= "color:" . esc_html($settings_array['button_text_color']) . ";";
         if (!empty($settings_array['button_border_color']))
-            $button_css .= "border: " . $border_size . " solid " . $settings_array['button_border_color'] . ";";
+            $button_css .= "border: " . $border_size . " solid " . esc_html($settings_array['button_border_color']) . ";";
         if (!empty($settings_array['button_font_size']))
-            $button_css .= "font-size:" . $settings_array['button_font_size'] . "px;";
+            $button_css .= "font-size:" . esc_html($settings_array['button_font_size']) . "px;";
         if (!empty($settings_array['button_border_radious']))
-            $button_css .= "border-radius:" . $settings_array['button_border_radious'] . "px;";
+            $button_css .= "border-radius:" . esc_html($settings_array['button_border_radious']) . "px;";
 
-        $button_html = '<button style="' . $button_css .'" class="stock_manager_button alert_button_hover" name="alert_button">' . $settings_array['button_text'] . '</button>';
+        $button_html = '<button style="' . $button_css .'" class="stock_manager_button alert_button_hover" name="alert_button">' . esc_html($settings_array['button_text']) . '</button>';
 
         $interested_person = get_post_meta($variation ? $variation->get_id() : $product->get_id(), 'no_of_subscribers', true);
         $interested_person = (isset($interested_person) && $interested_person > 0) ? $interested_person : 0;
 
         $shown_interest_html = '';
-        $shown_interest_text = $settings_array['shown_interest_text'];
+        $shown_interest_text = esc_html($settings_array['shown_interest_text']);
         $general_tab_settings = get_option('woo_stock_manager_general_tab_settings');
         $is_enable_no_interest = (isset($general_tab_settings['is_enable_no_interest'])) ? $general_tab_settings['is_enable_no_interest'] : false;
         if ($is_enable_no_interest && $interested_person != 0 && $shown_interest_text) {

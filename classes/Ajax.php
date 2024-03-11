@@ -112,11 +112,11 @@ class Ajax {
 			}
 		}
 		
-		echo $csv_header_string;
+		echo esc_html( $csv_header_string );
 		if (isset($csv_body_arrays) && !empty($csv_body_arrays)) {
 			foreach ($csv_body_arrays as $csv_body_array) {
 				echo "\r\n";
-				echo implode(",", $csv_body_array);
+				echo esc_html( implode(",", $csv_body_array) );
 			}
 		}
 		exit();
@@ -143,7 +143,7 @@ class Ajax {
 				$success = Subscriber::unsubscribe_user($product_id, $customer_email);
 			}
 		}
-		echo $success;
+		echo esc_html( $success );
 		die();
 	}
 	
@@ -177,7 +177,7 @@ class Ajax {
 				$status = true;
 			}
 		}
-		echo $status;
+		echo esc_html( $status );
 		die();
 	}
 
@@ -198,7 +198,7 @@ class Ajax {
 		if ($child_id && !empty($child_id)) {
 			$child_obj = new \WC_Product_Variation($child_id);
 		}
-		echo $Woo_Stock_Manager->frontend->get_subscribe_form($product, $child_obj);
+		echo esc_html( $Woo_Stock_Manager->frontend->get_subscribe_form($product, $child_obj) );
 		die();
 	}
 }

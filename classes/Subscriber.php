@@ -130,19 +130,18 @@ class Subscriber {
             'fields' => 'ids',
             'posts_per_page' => 1,
             'post_status' => 'woo_subscribed',
+			'meta_query' => [
+				'relation' => 'AND',
+				[
+					'key' => 'wooinstock_product_id',
+					'value' => $product_id,
+                ],
+				[
+					'key' => 'wooinstock_subscriber_email',
+					'value' => $subscriber_email,
+                ],
+            ]
         );
-        $meta_query = array(
-            'relation' => 'AND',
-            array(
-                'key' => 'wooinstock_product_id',
-                'value' => $product_id,
-            ),
-            array(
-                'key' => 'wooinstock_subscriber_email',
-                'value' => $subscriber_email,
-            ),
-        );
-        $args['meta_query'] = $meta_query;
         $get_posts = get_posts($args);
         return $get_posts;
     }

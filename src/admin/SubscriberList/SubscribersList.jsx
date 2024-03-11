@@ -43,15 +43,6 @@ export default function SubscribersList( ) {
         };
     };
 
-    useEffect(() => {
-        const delayedSearch = debounce(performSearch, 500);
-        delayedSearch(productNameField);
-    }, [productNameField]);
-    
-    //   const handleInputChange = (event) => {
-    //     setSearchQuery(event.target.value);
-    //   };
-
     const override = css`
         display: block;
         margin: 0 auto;

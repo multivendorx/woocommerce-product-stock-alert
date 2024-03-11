@@ -18909,15 +18909,6 @@ function SubscribersList() {
       }, delay);
     };
   };
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-    const delayedSearch = debounce(performSearch, 500);
-    delayedSearch(productNameField);
-  }, [productNameField]);
-
-  //   const handleInputChange = (event) => {
-  //     setSearchQuery(event.target.value);
-  //   };
-
   const override = (0,_emotion_react__WEBPACK_IMPORTED_MODULE_6__.css)`
         display: block;
         margin: 0 auto;
