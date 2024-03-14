@@ -16,7 +16,7 @@
 
 if (!defined('ABSPATH')) exit; // Exit if accessed directly
 
-require_once __DIR__ . '/vendor/autoload.php';
+
 
 if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option( 'active_plugins')))) {
 	add_action(
@@ -28,6 +28,10 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 		}
 	);
 }
-
+require_once __DIR__ . '/vendor/autoload.php';
+function SA() {
+    return \StockManagerPro\StockManagerPro::init( __FILE__ );
+}
+// SA();
 global $Woo_Stock_Manager;
 $Woo_Stock_Manager = new \StockManager\StockManager( __FILE__ );

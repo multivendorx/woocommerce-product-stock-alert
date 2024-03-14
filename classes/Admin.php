@@ -187,36 +187,36 @@ class Admin {
         $suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
 
         $columns_subscriber = apply_filters('woo_stock_manager_subscribers_list_headers', array(
-            array(
+            [
                 'name'      =>  __('Date', 'woocommerce-stock-manager'),
                 'selector'  =>  '',
                 'sortable'  =>  false,
                 'selector_choice'  => "date",
-            ),
-            array(
+            ],
+            [
                 'name'      =>  __('Product', 'woocommerce-stock-manager'),
                 'selector'  =>  '',
                 'sortable'  =>  false,
                 'selector_choice'  => "product",
-            ),
-            array(
+            ],
+            [
                 'name'      =>  __('Email', 'woocommerce-stock-manager'),
                 'selector'  =>  '',
                 'sortable'  =>  false,
                 'selector_choice'  => "email",
-            ),
-            array(
+            ],
+            [
                 'name'      =>  __('Registered', 'woocommerce-stock-manager'),
                 'selector'  =>  '',
                 'sortable'  =>  false,
                 'selector_choice'  => "reg_user",
-            ),
-            array(
+            ],
+            [
                 'name'      =>  __('Status', 'woocommerce-stock-manager'),
                 'selector'  =>  '',
                 'sortable'  =>  false,
                 'selector_choice'  => "status",
-            )
+            ]
         ));
 
         $subscription_page_string     =   array(
@@ -267,8 +267,8 @@ class Admin {
         );
         
         if (get_current_screen()->id == 'toplevel_page_woo-stock-manager-setting') {
-            wp_enqueue_script( 'woo-stockmanager-script', $Woo_Stock_Manager->plugin_url . 'build/index.js', array( 'wp-element', 'wp-i18n' ), $Woo_Stock_Manager->version, true );
-            wp_set_script_translations('woo-stockmanager-script', 'woocommerce-stock-manager-pro');
+            wp_enqueue_script( 'woo-stockmanager-script', $Woo_Stock_Manager->plugin_url . 'build/index.js', [ 'wp-element', 'wp-i18n' ], $Woo_Stock_Manager->version, true );
+            // wp_set_script_translations('woo-stockmanager-script', 'woocommerce-stock-manager');
             wp_localize_script( 'woo-stockmanager-script', 'stockManagerAppLocalizer', apply_filters('woo_stock_manager_settings', [
                 'apiUrl'                    => untrailingslashit(get_rest_url()),
                 'nonce'                     => wp_create_nonce('wp_rest'),

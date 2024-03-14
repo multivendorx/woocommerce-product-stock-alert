@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { CSVLink } from 'react-csv';
 import { css } from '@emotion/react';
-import { __ } from '@wordpress/i18n';
+// import { __ } from '@wordpress/i18n';
 import { DateRangePicker } from 'rsuite';
 import Dialog from "@mui/material/Dialog";
 import ReactPaginate from "react-paginate";
@@ -9,7 +9,7 @@ import React, { useState, useEffect } from 'react';
 import DataTable from 'react-data-table-component';
 import PuffLoader from 'react-spinners/PuffLoader';
 import Popoup from '../PopupContent/PopupContent';
-
+const { __ } = wp.i18n;
 export default function SubscribersList( ) {
     const fetchSubscribersDataUrl = `${ stockManagerAppLocalizer.apiUrl }/stockmanager/v1/get-subscriber-list`;
     const [ rowsPerPage , setRowsPerPage ] = useState( 10 );
@@ -85,23 +85,23 @@ export default function SubscribersList( ) {
     //columns for the data table
     const columns = [
         {
-            name: __( "Date","woocommerce-stock-manager-pro" ),
+            name: __( "Date","woocommerce-stock-manager" ),
             selector: row => row.date,
         },
         {
-            name: __( "Email","woocommerce-stock-manager-pro" ),
+            name: __( "Email","woocommerce-stock-manager" ),
             selector: row => row.email,
         },
         {
-            name: __( "Product","woocommerce-stock-manager-pro" ),
+            name: __( "Product","woocommerce-stock-manager" ),
             selector: row => row.product,
         },
         {
-            name: __( "Registered","woocommerce-stock-manager-pro" ),
+            name: __( "Registered","woocommerce-stock-manager" ),
             selector: row => row.reg_user,
         },
         {
-            name: __( "Status","woocommerce-stock-manager-pro" ),
+            name: __( "Status","woocommerce-stock-manager" ),
             selector: row => row.status,
         }
     ];
@@ -125,14 +125,14 @@ export default function SubscribersList( ) {
         return(
             <div className="pagination">
                 <div>
-                    <label htmlFor="rowsPerPage" > { __( "Rows per page:","woocommerce-stock-manager-pro" ) } </label>
+                    <label htmlFor="rowsPerPage" > { __( "Rows per page:","woocommerce-stock-manager" ) } </label>
                     <select id="rowsPerPage" value={ rowsPerPage } onChange={ handleRowsPerPageChange } >
                         {
                             [10,25,30,50].map( ( value ) => {
                             return <option value={value}> {value} </option>
                             })
                         }
-                        <option value={ totalRows }>{__( "All", "woocommerce-stock-manager-pro" ) }</option>
+                        <option value={ totalRows }>{__( "All", "woocommerce-stock-manager" ) }</option>
                     </select>          
                 </div>
                 <ReactPaginate
@@ -177,7 +177,7 @@ export default function SubscribersList( ) {
                     <div className="woo-container">
                             <div className="woo-middle-container-wrapper">
                                 <div className="woo-page-title">
-                                    <p>{__("Subscriber List","woocommerce-stock-manager-pro")}</p>
+                                    <p>{__("Subscriber List","woocommerce-stock-manager")}</p>
                                     <div className="download-btn-subscriber-list">
                                         <CSVLink
                                             data={ data }

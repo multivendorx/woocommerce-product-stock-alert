@@ -18853,19 +18853,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
 /* harmony import */ var react_csv__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-csv */ "./node_modules/react-csv/index.js");
-/* harmony import */ var _emotion_react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @emotion/react */ "./node_modules/@emotion/react/dist/emotion-react.browser.esm.js");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var rsuite__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! rsuite */ "./node_modules/rsuite/esm/DateRangePicker/index.js");
-/* harmony import */ var _mui_material_Dialog__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @mui/material/Dialog */ "./node_modules/@mui/material/Dialog/Dialog.js");
-/* harmony import */ var react_paginate__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-paginate */ "./node_modules/react-paginate/dist/react-paginate.js");
-/* harmony import */ var react_paginate__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_paginate__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var react_data_table_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-data-table-component */ "./node_modules/react-data-table-component/dist/index.cjs.js");
-/* harmony import */ var react_spinners_PuffLoader__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-spinners/PuffLoader */ "./node_modules/react-spinners/PuffLoader.js");
-/* harmony import */ var react_spinners_PuffLoader__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(react_spinners_PuffLoader__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var _PopupContent_PopupContent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../PopupContent/PopupContent */ "./src/admin/PopupContent/PopupContent.jsx");
+/* harmony import */ var _emotion_react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @emotion/react */ "./node_modules/@emotion/react/dist/emotion-react.browser.esm.js");
+/* harmony import */ var rsuite__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! rsuite */ "./node_modules/rsuite/esm/DateRangePicker/index.js");
+/* harmony import */ var _mui_material_Dialog__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @mui/material/Dialog */ "./node_modules/@mui/material/Dialog/Dialog.js");
+/* harmony import */ var react_paginate__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-paginate */ "./node_modules/react-paginate/dist/react-paginate.js");
+/* harmony import */ var react_paginate__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_paginate__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react_data_table_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-data-table-component */ "./node_modules/react-data-table-component/dist/index.cjs.js");
+/* harmony import */ var react_spinners_PuffLoader__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-spinners/PuffLoader */ "./node_modules/react-spinners/PuffLoader.js");
+/* harmony import */ var react_spinners_PuffLoader__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(react_spinners_PuffLoader__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _PopupContent_PopupContent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../PopupContent/PopupContent */ "./src/admin/PopupContent/PopupContent.jsx");
+
+
+
+
+// import { __ } from '@wordpress/i18n';
 
 
 
@@ -18873,11 +18876,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
-
-
-
+const {
+  __
+} = wp.i18n;
 function SubscribersList() {
   const fetchSubscribersDataUrl = `${stockManagerAppLocalizer.apiUrl}/stockmanager/v1/get-subscriber-list`;
   const [rowsPerPage, setRowsPerPage] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(10);
@@ -18909,7 +18910,7 @@ function SubscribersList() {
       }, delay);
     };
   };
-  const override = (0,_emotion_react__WEBPACK_IMPORTED_MODULE_6__.css)`
+  const override = (0,_emotion_react__WEBPACK_IMPORTED_MODULE_5__.css)`
         display: block;
         margin: 0 auto;
         border-color: red;
@@ -18917,7 +18918,7 @@ function SubscribersList() {
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     if (stockManagerAppLocalizer.pro_active != 'free') {
       //Fetch the data to show in the table   
-      (0,axios__WEBPACK_IMPORTED_MODULE_7__["default"])({
+      (0,axios__WEBPACK_IMPORTED_MODULE_6__["default"])({
         method: "post",
         url: fetchSubscribersDataUrl,
         data: {
@@ -18955,19 +18956,19 @@ function SubscribersList() {
   };
   //columns for the data table
   const columns = [{
-    name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Date", "woocommerce-stock-manager-pro"),
+    name: __("Date", "woocommerce-stock-manager"),
     selector: row => row.date
   }, {
-    name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Email", "woocommerce-stock-manager-pro"),
+    name: __("Email", "woocommerce-stock-manager"),
     selector: row => row.email
   }, {
-    name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Product", "woocommerce-stock-manager-pro"),
+    name: __("Product", "woocommerce-stock-manager"),
     selector: row => row.product
   }, {
-    name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Registered", "woocommerce-stock-manager-pro"),
+    name: __("Registered", "woocommerce-stock-manager"),
     selector: row => row.reg_user
   }, {
-    name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Status", "woocommerce-stock-manager-pro"),
+    name: __("Status", "woocommerce-stock-manager"),
     selector: row => row.status
   }];
   //Pagination component
@@ -18993,7 +18994,7 @@ function SubscribersList() {
       className: "pagination"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
       htmlFor: "rowsPerPage"
-    }, " ", (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Rows per page:", "woocommerce-stock-manager-pro"), " "), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
+    }, " ", __("Rows per page:", "woocommerce-stock-manager"), " "), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
       id: "rowsPerPage",
       value: rowsPerPage,
       onChange: handleRowsPerPageChange
@@ -19003,7 +19004,7 @@ function SubscribersList() {
       }, " ", value, " ");
     }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
       value: totalRows
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("All", "woocommerce-stock-manager-pro")))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)((react_paginate__WEBPACK_IMPORTED_MODULE_3___default()), {
+    }, __("All", "woocommerce-stock-manager")))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)((react_paginate__WEBPACK_IMPORTED_MODULE_2___default()), {
       className: "pagination",
       previousLabel: "previous",
       nextLabel: "next",
@@ -19015,7 +19016,7 @@ function SubscribersList() {
       onPageChange: handlePageChange
     }));
   };
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, stockManagerAppLocalizer.pro_active == 'free' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Dialog__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, stockManagerAppLocalizer.pro_active == 'free' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Dialog__WEBPACK_IMPORTED_MODULE_7__["default"], {
     className: "woo-module-popup",
     open: openDialog,
     onClose: () => {
@@ -19027,7 +19028,7 @@ function SubscribersList() {
     onClick: () => {
       setOpenDialog(false);
     }
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_PopupContent_PopupContent__WEBPACK_IMPORTED_MODULE_5__["default"], null)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_PopupContent_PopupContent__WEBPACK_IMPORTED_MODULE_4__["default"], null)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: stockManagerAppLocalizer.subscriber_list,
     alt: "subscriber-list",
     className: "subscriber-img",
@@ -19042,7 +19043,7 @@ function SubscribersList() {
     className: "woo-middle-container-wrapper"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "woo-page-title"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Subscriber List", "woocommerce-stock-manager-pro")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, __("Subscriber List", "woocommerce-stock-manager")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "download-btn-subscriber-list"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_csv__WEBPACK_IMPORTED_MODULE_1__.CSVLink, {
     data: data,
@@ -19121,17 +19122,17 @@ function SubscribersList() {
         setEmailField('');
       }
     }
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(rsuite__WEBPACK_IMPORTED_MODULE_9__["default"], {
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(rsuite__WEBPACK_IMPORTED_MODULE_8__["default"], {
     placeholder: stockManagerAppLocalizer.subscription_page_string.daterenge,
     onChange: handleDateRangeChange
   })), data.length > 0 ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "woo-backend-datatable-wrapper"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_data_table_component__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_data_table_component__WEBPACK_IMPORTED_MODULE_3__["default"], {
     className: "subscribe-list-table",
     columns: columns,
     data: data,
     selectableRows: true
-  }), Pagination()) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)((react_spinners_PuffLoader__WEBPACK_IMPORTED_MODULE_10___default()), {
+  }), Pagination()) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)((react_spinners_PuffLoader__WEBPACK_IMPORTED_MODULE_9___default()), {
     css: override,
     color: '#cd0000',
     size: 200,

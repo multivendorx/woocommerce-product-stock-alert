@@ -4,18 +4,19 @@ namespace StockManager;
 
 class StockManager {
 
-    public $plugin_url;
-    public $plugin_path;
-    public $version;
-    public $token;
-    public $frontend;
-    public $ajax;
-    public $restapi;
-    public $template;
-    public $admin;
-    public $action;
-    public $shortcode;
+    private $plugin_url  = '';
+    private $plugin_path = '';
+    private $container   = [];
     private $file;
+    // public $version;
+    // public $token;
+    // public $frontend;
+    // public $ajax;
+    // public $restapi;
+    // public $template;
+    // public $admin;
+    // public $action;
+    // public $shortcode;
     public $deprecated_hook_handlers = [];
 
     public function __construct($file) {
@@ -24,8 +25,8 @@ class StockManager {
         $this->file = $file;
         $this->plugin_url = trailingslashit(plugins_url('', $plugin = $file));
         $this->plugin_path = trailingslashit(dirname($file));
-        $this->token = WOO_STOCK_MANAGER_PLUGIN_TOKEN;
-        $this->version = WOO_STOCK_MANAGER_PLUGIN_VERSION;
+        // $this->token = WOO_STOCK_MANAGER_PLUGIN_TOKEN;
+        // $this->version = WOO_STOCK_MANAGER_PLUGIN_VERSION;
 
         add_filter('plugin_action_links_' . plugin_basename( $file ), [ Utill::class, 'stock_manager_settings']);
         if ( Dependencies::woocommerce_plugin_active_check() ) {
