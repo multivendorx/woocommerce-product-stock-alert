@@ -25,20 +25,20 @@ $is_prices_including_tax = get_option( 'woocommerce_prices_include_tax' );
 	</thead>
 	<tbody>
 		<tr>
-			<th scope="col" style="text-align:left; border: 1px solid #eee;"><?php echo esc_html( $product->get_name() ); ?>
+			<th scope="col" style="text-align:left; border: 1px solid #eee;"><?php echo esc_html( $product -> get_name( ) ); ?>
 			
 			</th>
 			<th scope="col" style="text-align:left; border: 1px solid #eee;">
 				<?php 
 					echo esc_html( wp_kses_post( wc_price( wc_get_price_to_display( $product ) ) ) ); 
-					echo esc_html( ( isset( $is_prices_including_tax ) && ($is_prices_including_tax != "yes" )) ? WC()->countries->ex_tax_or_vat() : WC()->countries->inc_tax_or_vat() ); 
+					echo esc_html( ( isset( $is_prices_including_tax ) && ( $is_prices_including_tax != "yes" ) ) ? WC( ) -> countries -> ex_tax_or_vat( ) : WC( ) -> countries -> inc_tax_or_vat( ) ); 
 				?>
 			</th>
 		</tr>
 	</tbody>
 </table>
 
-<p style="margin-top: 15px !important;"><?php printf( esc_html__( "Following is the product link : ", 'woocommerce-stock-manager' ) ); ?><a href="<?php echo esc_url( $product->get_permalink() ); ?>"><?php echo esc_html( wp_strip_all_tags( $product->get_name() ) ); ?></a></p>
+<p style="margin-top: 15px !important;"><?php printf( esc_html__( "Following is the product link : ", 'woocommerce-stock-manager' ) ); ?><a href="<?php echo esc_url( $product -> get_permalink( ) ); ?>"><?php echo esc_html( wp_strip_all_tags( $product -> get_name( ) ) ); ?></a></p>
 
 <h3><?php esc_html_e( 'Customer Details', 'woocommerce-stock-manager' ); ?></h3>
 <p>
