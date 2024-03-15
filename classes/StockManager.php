@@ -28,6 +28,7 @@ class StockManager {
         add_action( 'plugins_loaded', [ $this, 'is_stock_alert_loaded'] );
         add_filter('plugin_action_links_' . plugin_basename( $file ), [ Utill::class, 'stock_manager_settings']);
         add_action( 'admin_notices', [ Utill::class, 'database_migration_notice' ] );
+        add_filter('woocommerce_email_classes', [&$this, 'setup_email_class']);
     }
 
     public function init_classes() {
@@ -39,9 +40,18 @@ class StockManager {
         $this->container['subscriber']  = new Subscriber();
         $this->container['filters']     = new Deprecated\DeprecatedFilterHooks();
         $this->container['actions']     = new Deprecated\DeprecatedActionHooks();
-        $this->container['WC_Admin_Email_Stock_Manager'] = new Emails\AdminEmail();
-        $this->container['WC_Email_Stock_Manager'] = new Emails\Emails();
-        $this->container['WC_Subscriber_Confirmation_Email_Stock_Manager'] = new Emails\SubscriberConfirmationEmail();
+    }
+
+    /**
+     * Add Stock Alert Email Class
+     * @return void
+     */
+    function setup_email_class($emails) {
+        $emails['WC_Admin_Email_Stock_Manager'] = new Emails\AdminEmail();
+        $emails['WC_Subscriber_Confirmation_Email_Stock_Manager'] = new Emails\SubscriberConfirmationEmail();
+        $emails['WC_Email_Stock_Manager'] = new Emails\Emails();
+
+        return $emails;
     }
 
     /**
