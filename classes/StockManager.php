@@ -28,15 +28,6 @@ class StockManager {
         add_action( 'plugins_loaded', [ $this, 'is_stock_alert_loaded'] );
         add_filter('plugin_action_links_' . plugin_basename( $file ), [ Utill::class, 'stock_manager_settings']);
         add_action( 'admin_notices', [ Utill::class, 'database_migration_notice' ] );
-        
-        if ( Dependencies::woocommerce_plugin_active_check() ) {
-            add_action('init', [&$this, 'init'], 0);
-            add_filter('woocommerce_email_classes', [&$this, 'setup_email_class']);
-
-            // Add notice for database migration
-        } else {
-            add_action( 'admin_notices', [ Utill::class, 'woocommerce_inactive_notice' ] );
-        }
     }
 
     public function init_classes() {
@@ -48,12 +39,15 @@ class StockManager {
         $this->container['subscriber']  = new Subscriber();
         $this->container['filters']     = new Deprecated\DeprecatedFilterHooks();
         $this->container['actions']     = new Deprecated\DeprecatedActionHooks();
+        $this->container['WC_Admin_Email_Stock_Manager'] = new Emails\AdminEmail();
+        $this->container['WC_Email_Stock_Manager'] = new Emails\Emails();
+        $this->container['WC_Subscriber_Confirmation_Email_Stock_Manager'] = new Emails\SubscriberConfirmationEmail();
     }
 
     /**
      * initilize plugin on WP init
      */
-    public static function init_plugin($file) {
+    public function init_plugin($file) {
         $this->load_plugin_textdomain();
         $this->init_classes();
     }
@@ -69,7 +63,6 @@ class StockManager {
             add_action( 'admin_notices', [ Utill::class, 'woocommerce_inactive_notice' ] );
         }
     }
-
 
     /**
      * Load Localisation files.
@@ -96,26 +89,14 @@ class StockManager {
         if (!defined('DONOTCACHEPAGE'))
             define("DONOTCACHEPAGE", "true");
         // WP Super Cache constant
-    }        
-
-    /**
-     * Add Stock Alert Email Class
-     * @return void
-     */
-    function setup_email_class($emails) {
-        $emails['WC_Admin_Email_Stock_Manager'] = new Emails\AdminEmail();
-        $emails['WC_Subscriber_Confirmation_Email_Stock_Manager'] = new Emails\SubscriberConfirmationEmail();
-        $emails['WC_Email_Stock_Manager'] = new Emails\Emails();
-        
-        return $emails;
     }
 
     /**
      * Add High Performance Order Storage Support
      * @return void
      */
-    public function declare_compatibility() {
-        FeaturesUtil::declare_compatibility( 'custom_order_tables', plugin_basename($this->$file), true );
+    public function declare_compatibility($file) {
+        FeaturesUtil::declare_compatibility( 'custom_order_tables', plugin_basename($file), true );
     }
 
     /**
@@ -128,7 +109,7 @@ class StockManager {
     /**
      * Deactivation function on register deactivation hook
      */
-    public static function deactivate() {
+    public  function deactivate() {
         if (get_option('woo_stock_manager_cron_start')) :
             wp_clear_scheduled_hook('woo_stock_manager_start_notification_cron_job');
             delete_option('woo_stock_manager_cron_start');
