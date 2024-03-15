@@ -12,7 +12,40 @@ class Install {
     public function __construct() {
         $this->stock_manager_data_migrate();
         $this->start_cron_job();
+        $this->registers_post_status();
     }
+    /**
+     * Function to register the post status
+     */
+    function registers_post_status(){
+        register_post_status('woo_mailsent', [
+            'label' => _x('Mail Sent', 'woostockalert', 'woocommerce-stock-manager'),
+            'public' => true,
+            'exclude_from_search' => false,
+            'show_in_admin_all_list' => true,
+            'show_in_admin_status_list' => true, /* translators: %s: count */
+            'label_count' => _n_noop('Mail Sent <span class="count">(%s)</span>', 'Mail Sent <span class="count">(%s)</span>', 'woocommerce-stock-manager'),
+        ]);
+
+        register_post_status('woo_subscribed', [
+            'label' => _x('Subscribed', 'woostockalert', 'woocommerce-stock-manager'),
+            'public' => true,
+            'exclude_from_search' => false,
+            'show_in_admin_all_list' => true,
+            'show_in_admin_status_list' => true, /* translators: %s: count */
+            'label_count' => _n_noop('Subscribed <span class="count">(%s)</span>', 'Subscribed <span class="count">(%s)</span>'),
+        ]);
+
+        register_post_status('woo_unsubscribed', [
+            'label' => _x('Unsubscribed', 'woostockalert', 'woocommerce-stock-manager'),
+            'public' => true,
+            'exclude_from_search' => false,
+            'show_in_admin_all_list' => true,
+            'show_in_admin_status_list' => true, /* translators: %s: count */
+            'label_count' => _n_noop('Unsubscribed <span class="count">(%s)</span>', 'Unsubscribed <span class="count">(%s)</span>'),
+        ]);
+    }
+
 
     /**
      * Function that schedule hook for notification corn job.
