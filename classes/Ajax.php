@@ -186,7 +186,6 @@ class Ajax {
 	 * @return never
 	 */
 	function get_variation_box_ajax() {
-		global $Woo_Stock_Manager;
 		if (! check_ajax_referer('stock-manager-security-nonce', 'nonce', false)) {
 			wp_send_json_error( 'Invalid security token sent.' );
 			wp_die();
@@ -198,7 +197,7 @@ class Ajax {
 		if ($child_id && !empty($child_id)) {
 			$child_obj = new \WC_Product_Variation($child_id);
 		}
-		echo esc_html( $Woo_Stock_Manager->frontend->get_subscribe_form($product, $child_obj) );
+		echo esc_html( SM()->frontend->get_subscribe_form($product, $child_obj) );
 		die();
 	}
 }

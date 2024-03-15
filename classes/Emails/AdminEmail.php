@@ -27,10 +27,7 @@ class AdminEmail extends \WC_Email {
 	 * @access public
 	 * @return void
 	 */
-	function __construct() {
-		
-		global $Woo_Stock_Manager;
-		
+	function __construct() {		
 		$this->id 				= 'stock_manager_admin';
 		$this->title 			= __('Alert admin', 'woocommerce-stock-manager');
 		$this->description		= __('Admin will get an alert when customer subscribe any out of stock product', 'woocommerce-stock-manager');
@@ -38,7 +35,7 @@ class AdminEmail extends \WC_Email {
 		$this->template_html 	= 'emails/AdminEmail.php';
 		$this->template_plain 	= 'emails/plain/AdminEmail.php';
 
-		$this->template_base = $Woo_Stock_Manager->plugin_path . 'templates/';
+		$this->template_base = SM()->plugin_path . 'templates/';
 		
 		// Call parent constuctor
 		parent::__construct();

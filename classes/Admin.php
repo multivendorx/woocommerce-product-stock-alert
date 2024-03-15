@@ -183,7 +183,6 @@ class Admin {
      * @return void
      */
     public function enqueue_admin_script() {
-        global $Woo_Stock_Manager;
         $suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
 
         $columns_subscriber = apply_filters('woo_stock_manager_subscribers_list_headers', array(
@@ -267,7 +266,7 @@ class Admin {
         );
         
         if (get_current_screen()->id == 'toplevel_page_woo-stock-manager-setting') {
-            wp_enqueue_script( 'woo-stockmanager-script', $Woo_Stock_Manager->plugin_url . 'build/index.js', [ 'wp-element', 'wp-i18n' ], $Woo_Stock_Manager->version, true );
+            wp_enqueue_script( 'woo-stockmanager-script', SM()->plugin_url . 'build/index.js', [ 'wp-element', 'wp-i18n' ], SM()->version, true );
             // wp_set_script_translations('woo-stockmanager-script', 'woocommerce-stock-manager');
             wp_localize_script( 'woo-stockmanager-script', 'stockManagerAppLocalizer', apply_filters('woo_stock_manager_settings', [
                 'apiUrl'                    => untrailingslashit(get_rest_url()),
@@ -275,10 +274,10 @@ class Admin {
                 'default_alert_text'        => __('Receive in-stock notifications for this product.', 'woocommerce-stock-manager'),
                 'default_email_place'       => __('Enter your email', 'woocommerce-stock-manager'),
                 'default_alert_button'      => __('Notify me', 'woocommerce-stock-manager'),
-                'subscriber_list'           => $Woo_Stock_Manager->plugin_url . 'src/assets/images/subscriber-list.jpg',
-                'inventory_manager_mobile'  => $Woo_Stock_Manager->plugin_url . 'src/assets/images/inventory-manager-mobile.jpg',
-                'inventory_manager_laptop'  => $Woo_Stock_Manager->plugin_url . 'src/assets/images/inventory-manager-laptop.png',
-                'inventory_manager_monitor' => $Woo_Stock_Manager->plugin_url . 'src/assets/images/inventory-manager-monitor.jpg',
+                'subscriber_list'           => SM()->plugin_url . 'src/assets/images/subscriber-list.jpg',
+                'inventory_manager_mobile'  => SM()->plugin_url . 'src/assets/images/inventory-manager-mobile.jpg',
+                'inventory_manager_laptop'  => SM()->plugin_url . 'src/assets/images/inventory-manager-laptop.png',
+                'inventory_manager_monitor' => SM()->plugin_url . 'src/assets/images/inventory-manager-monitor.jpg',
                 'pro_active'                => apply_filters('woo_stock_manager_pro_active', 'free'),
                 'columns_subscriber'        => $columns_subscriber,
                 'subscription_page_string'  => $subscription_page_string,
@@ -290,10 +289,10 @@ class Admin {
                 'default_massages_fields'   => $woo_admin_massages_fields,
                 'default_massages'          => Utill::get_form_settings_array()
               ]));
-            wp_enqueue_style('woo_stockmanager_style', $Woo_Stock_Manager->plugin_url . 'build/index.css', array(), $Woo_Stock_Manager->version );
-            wp_enqueue_style('woo_admin_rsuite_css', $Woo_Stock_Manager->plugin_url . 'src/assets/admin/css/rsuite-default' . '.min' . '.css', array(), $Woo_Stock_Manager->version );
+            wp_enqueue_style('woo_stockmanager_style', SM()->plugin_url . 'build/index.css', array(), SM()->version );
+            wp_enqueue_style('woo_admin_rsuite_css', SM()->plugin_url . 'src/assets/admin/css/rsuite-default' . '.min' . '.css', array(), SM()->version );
         }
-        wp_enqueue_style('stock_manager_product_admin_css', $Woo_Stock_Manager->plugin_url . 'src/assets/admin/css/admin'. $suffix .'.css', array(), $Woo_Stock_Manager->version );
+        wp_enqueue_style('stock_manager_product_admin_css', SM()->plugin_url . 'src/assets/admin/css/admin'. $suffix .'.css', array(), SM()->version );
     }
 
     /**

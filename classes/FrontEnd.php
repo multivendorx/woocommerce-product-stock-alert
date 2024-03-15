@@ -27,8 +27,7 @@ class FrontEnd {
      * @return void
      */
     function frontend_scripts() {
-        global $Woo_Stock_Manager;
-        $frontend_script_path = $Woo_Stock_Manager->plugin_url . 'src/assets/frontend/js/';
+        $frontend_script_path = SM()->plugin_url . 'src/assets/frontend/js/';
         $suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
         $suffix = ''; /// Should be removed.
         $settings_array = Utill::get_form_settings_array();
@@ -53,7 +52,7 @@ class FrontEnd {
         if (function_exists('is_product')) {
             if (is_product()) {
                 // Enqueue your frontend javascript from here
-                wp_enqueue_script('stock_manager_frontend_js', $frontend_script_path . 'frontend' . $suffix . '.js', array('jquery'), $Woo_Stock_Manager->version, true);
+                wp_enqueue_script('stock_manager_frontend_js', $frontend_script_path . 'frontend' . $suffix . '.js', array('jquery'), SM()->version, true);
             
                 wp_localize_script('stock_manager_frontend_js', 'woo_stock_manager_script_data', array(
                     'ajax_url' => admin_url('admin-ajax.php', 'relative'),
@@ -82,13 +81,12 @@ class FrontEnd {
      * @return void
      */
     function frontend_styles() {
-        global $Woo_Stock_Manager;
-        $frontend_style_path = $Woo_Stock_Manager->plugin_url . 'src/assets/frontend/css/';
+        $frontend_style_path = SM()->plugin_url . 'src/assets/frontend/css/';
         $suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
         if (function_exists('is_product')) {
             if (is_product()) {
                 // Enqueue your frontend stylesheet from here
-                wp_enqueue_style('stock_manager_frontend_css', $frontend_style_path . 'frontend' . $suffix . '.css', array(), $Woo_Stock_Manager->version);
+                wp_enqueue_style('stock_manager_frontend_css', $frontend_style_path . 'frontend' . $suffix . '.css', array(), SM()->version);
             }
         }
     }

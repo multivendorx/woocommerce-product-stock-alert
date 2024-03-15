@@ -62,8 +62,7 @@ class Install {
      * @return void
      */
     function stock_manager_data_migrate() {
-        global $Woo_Stock_Manager;
-        $current_version = $Woo_Stock_Manager->version;
+        $current_version = SM()->version;
         $previous_version = get_option("woo_stock_manager_version");
 
         // Used to check the plugin version before 2.1.0

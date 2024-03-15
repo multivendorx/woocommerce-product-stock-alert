@@ -28,8 +28,6 @@ class Emails extends \WC_Email {
 	 */
 	function __construct() {
 		
-		global $Woo_Stock_Manager;
-		
 		$this->id 				= 'stock_manager';
 		$this->title 			= __('Alert Subscriber', 'woocommerce-stock-manager');
 		$this->description		= __('Alert customer when their subscribed product becomes in stock', 'woocommerce-stock-manager');
@@ -37,7 +35,7 @@ class Emails extends \WC_Email {
 		$this->template_html 	= 'emails/Email.php';
 		$this->template_plain 	= 'emails/plain/Email.php';
 
-		$this->template_base = $Woo_Stock_Manager->plugin_path . 'templates/';
+		$this->template_base = SM()->plugin_path . 'templates/';
 		
 		// Call parent constuctor
 		parent::__construct();

@@ -6,35 +6,81 @@ use \Automattic\WooCommerce\Utilities\FeaturesUtil;
 class StockManager {
 
     private static $instance = null;
-    private $plugin_url  = '';
-    private $plugin_path = '';
-    private $container   = [];
+    private $container       = [];
     private $file;
 
+    /**
+     * Class construct
+     * @param object $file
+     */
     public function __construct($file) {
         require_once trailingslashit(dirname($file)) . '/config.php';
 
         $this->file = $file;
-        $this->plugin_url = trailingslashit(plugins_url('', $plugin = $file));
-        $this->plugin_path = trailingslashit(dirname($file));
-
+        $this->container['plugin_url'] = trailingslashit(plugins_url('', $plugin = $file));
+        $this->container['plugin_path'] = trailingslashit(dirname($file));
+        $this->container['version'] = WOO_STOCK_MANAGER_PLUGIN_VERSION;
         // Activation Hooks
         register_activation_hook( $file, [ $this, 'activate' ] );
         // Deactivation Hooks
         register_deactivation_hook( $file, [ $this, 'deactivate' ] );
 
-        add_action( 'before_woocommerce_init', [ $this, 'declare_compatibility' ] );
-        add_action( 'woocommerce_loaded', [ $this, 'init_plugin' ] );
-        add_action( 'plugins_loaded', [ $this, 'is_stock_alert_loaded'] );
         add_filter('plugin_action_links_' . plugin_basename( $file ), [ Utill::class, 'stock_manager_settings']);
         add_action( 'admin_notices', [ Utill::class, 'database_migration_notice' ] );
         add_filter('woocommerce_email_classes', [&$this, 'setup_email_class']);
+
+        add_action( 'before_woocommerce_init', [ $this, 'declare_compatibility' ] );
+        add_action( 'woocommerce_loaded', [ $this, 'init_plugin' ] );
+        add_action( 'plugins_loaded', [ $this, 'is_stock_alert_loaded'] );
     }
 
+    /**
+     * Placeholder for activation function.
+     * @return void
+     */
+    public function activate() {
+        update_option('woo_stock_manager_installed', 1);
+        $this->container['install'] = new Install();
+    }
+
+    /**
+     * Placeholder for deactivation function.
+     * @return void
+     */
+    public  function deactivate() {
+        if (get_option('woo_stock_manager_cron_start')) :
+            wp_clear_scheduled_hook('woo_stock_manager_start_notification_cron_job');
+            delete_option('woo_stock_manager_cron_start');
+        endif;
+        delete_option('woo_stock_manager_installed');
+    }
+
+    /**
+     * Add High Performance Order Storage Support
+     * @return void
+     */
+    public function declare_compatibility($file) {
+        FeaturesUtil::declare_compatibility( 'custom_order_tables', plugin_basename($file), true );
+    }
+
+    /**
+     * initilize plugin on WP init
+     */
+    public function init_plugin($file) {
+        $this->load_plugin_textdomain();
+        $this->init_classes();
+    }
+    
+    /**
+     * Init all multivendorx classess.
+     * Access this classes using magic method.
+     * @return void
+     */
     public function init_classes() {
-        $this->container['restapi']     = new RestAPI();
+        $this->container['util']        = new Utill();
         $this->container['ajax']        = new Ajax();
         $this->container['admin']       = new Admin();
+        $this->container['restapi']     = new RestAPI();
         $this->container['frontend']    = new FrontEnd();
         $this->container['shortcode']   = new Shortcode();
         $this->container['subscriber']  = new Subscriber();
@@ -50,16 +96,7 @@ class StockManager {
         $emails['WC_Admin_Email_Stock_Manager'] = new Emails\AdminEmail();
         $emails['WC_Subscriber_Confirmation_Email_Stock_Manager'] = new Emails\SubscriberConfirmationEmail();
         $emails['WC_Email_Stock_Manager'] = new Emails\Emails();
-
         return $emails;
-    }
-
-    /**
-     * initilize plugin on WP init
-     */
-    public function init_plugin($file) {
-        $this->load_plugin_textdomain();
-        $this->init_classes();
     }
     
     /**
@@ -86,45 +123,6 @@ class StockManager {
         $locale = apply_filters('plugin_locale', $locale, 'woocommerce-stock-manager');
         load_textdomain('woocommerce-stock-manager', WP_LANG_DIR . '/woocommerce-product-stock-alert/woocommerce-product-stock-alert-' . $locale . '.mo');
         load_plugin_textdomain('woocommerce-stock-manager', false, plugin_basename(dirname(dirname(__FILE__))) . '/languages');
-    }
-
-    /****************************Cache Helpers ******************************/
-    /**
-     * Sets a constant preventing some caching plugins from caching a page. Used on dynamic pages
-     *
-     * @access public
-     * @return void
-     */
-    function nocache() {
-        if (!defined('DONOTCACHEPAGE'))
-            define("DONOTCACHEPAGE", "true");
-        // WP Super Cache constant
-    }
-
-    /**
-     * Add High Performance Order Storage Support
-     * @return void
-     */
-    public function declare_compatibility($file) {
-        FeaturesUtil::declare_compatibility( 'custom_order_tables', plugin_basename($file), true );
-    }
-
-    /**
-     * Activation function on register activation hook
-     */
-    public function activate() {
-        update_option('woo_stock_manager_installed', 1);
-        $this->container['install'] = new Install();
-    }
-    /**
-     * Deactivation function on register deactivation hook
-     */
-    public  function deactivate() {
-        if (get_option('woo_stock_manager_cron_start')) :
-            wp_clear_scheduled_hook('woo_stock_manager_start_notification_cron_job');
-            delete_option('woo_stock_manager_cron_start');
-        endif;
-        delete_option('woo_stock_manager_installed');
     }
 
     /**
