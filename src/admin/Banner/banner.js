@@ -18,7 +18,7 @@ class Banner extends Component {
 	handleCloseBanner() {
 		axios
 			.get(
-				`${stockManagerAppLocalizer.apiUrl}/woo-stockmanager/v1/close-banner`,
+				`${stockManagerAppLocalizer.apiUrl}/stockmanager/v1/close-banner`,
 				{headers: { 'X-WP-Nonce' : stockManagerAppLocalizer.nonce }}
 			)
 			

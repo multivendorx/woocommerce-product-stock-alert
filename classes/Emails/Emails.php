@@ -27,15 +27,13 @@ class Emails extends \WC_Email {
 	 * @return void
 	 */
 	function __construct( ) {
-		
-		$this -> id 				= 'stock_manager';
+
+		$this -> id 			= 'stock_manager';
 		$this -> title 			= __( 'Alert Subscriber', 'woocommerce-stock-manager' );
-		$this -> description		= __( 'Alert customer when their subscribed product becomes in stock', 'woocommerce-stock-manager' );
-
+		$this -> description	= __( 'Alert customer when their subscribed product becomes in stock', 'woocommerce-stock-manager' );
 		$this -> template_html 	= 'emails/Email.php';
-		$this -> template_plain 	= 'emails/plain/Email.php';
-
-		$this -> template_base = SM( ) -> plugin_path . 'templates/';
+		$this -> template_plain = 'emails/plain/Email.php';
+		$this -> template_base  = SM( ) -> plugin_path . 'templates/';
 		
 		// Call parent constuctor
 		parent::__construct( );
@@ -93,11 +91,11 @@ class Emails extends \WC_Email {
 		ob_start( );
 		wc_get_template( $this -> template_html, array( 
 			'email_heading' => $this -> get_heading( ), 
-			'product' => $this -> product, 
-			'customer_email' => $this -> customer_email, 
+			'product' 		=> $this -> product, 
+			'customer_email'=> $this -> customer_email, 
 			'sent_to_admin' => false, 
-			'plain_text' => false, 
-			'email' => $this, 
+			'plain_text' 	=> false, 
+			'email' 		=> $this, 
 		 ), '', $this -> template_base );
 		return ob_get_clean( );
 	} 
@@ -112,10 +110,10 @@ class Emails extends \WC_Email {
 		ob_start( );
 		wc_get_template( $this -> template_plain, array( 
 			'email_heading' => $this -> get_heading( ), 
-			'product' => $this -> product, 
-			'customer_email' => $this -> customer_email, 
+			'product' 		=> $this -> product, 
+			'customer_email'=> $this -> customer_email, 
 			'sent_to_admin' => false, 
-			'plain_text' => true
+			'plain_text' 	=> true
 		 ) , '', $this -> template_base );
 		return ob_get_clean( );
 	} 	

@@ -19,7 +19,8 @@ class StockManager {
         $this -> file = $file;
         $this -> container[ 'plugin_url' ] = trailingslashit( plugins_url( '', $plugin = $file ) );
         $this -> container[ 'plugin_path' ] = trailingslashit( dirname( $file ) );
-        $this -> container[ 'version' ] = WOO_STOCK_MANAGER_PLUGIN_VERSION;
+        $this -> container[ 'version' ] = STOCK_MANAGER_PLUGIN_VERSION;
+        $this -> container[ 'rest_namespace' ] = STOCK_MANAGER_REST_NAMESPACE;
         // Activation Hooks
         register_activation_hook( $file, [ $this, 'activate' ] );
         // Deactivation Hooks

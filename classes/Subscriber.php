@@ -126,18 +126,18 @@ class Subscriber {
      */
     static function is_already_subscribed( $subscriber_email, $product_id ) {
         $args = [ 
-            'post_type' => 'woostockalert', 
-            'fields' => 'ids', 
+            'post_type'    => 'woostockalert', 
+            'fields'       => 'ids', 
             'posts_per_page' => 1, 
-            'post_status' => 'woo_subscribed', 
-			'meta_query' => [ 
+            'post_status'  => 'woo_subscribed', 
+			'meta_query'   => [ 
 				'relation' => 'AND', 
 				[ 
-					'key' => 'wooinstock_product_id', 
+					'key'   => 'wooinstock_product_id', 
 					'value' => $product_id, 
                 ], 
 				[ 
-					'key' => 'wooinstock_subscriber_email', 
+					'key'   => 'wooinstock_subscriber_email', 
 					'value' => $subscriber_email, 
                 ], 
             ]
@@ -153,12 +153,12 @@ class Subscriber {
      */
     static function update_product_subscriber_count( $product_id ) {
         $args = [ 
-            'post_type' => 'woostockalert', 
+            'post_type'   => 'woostockalert', 
             'post_status' => 'woo_subscribed', 
-            'meta_query' => [ 
+            'meta_query'  => [ 
                 [ 
-                    'key' => 'wooinstock_product_id', 
-                    'value' => [ $product_id ], 
+                    'key'     => 'wooinstock_product_id', 
+                    'value'   => [ $product_id ], 
                     'compare' => 'IN', 
                 ] ], 
             'numberposts' => -1, 
@@ -277,15 +277,15 @@ class Subscriber {
         if ( !$product_id ) return $bias;
 
         if ( $type == 'variation' ) {
-            $child_obj = new \WC_Product_Variation( $product_id );
-            $manage_stock = $child_obj -> managing_stock( );
+            $child_obj      = new \WC_Product_Variation( $product_id );
+            $manage_stock   = $child_obj -> managing_stock( );
             $stock_quantity = intval( $child_obj -> get_stock_quantity( ) );
-            $stock_status = $child_obj -> get_stock_status( );
+            $stock_status   = $child_obj -> get_stock_status( );
         } else {
-            $product = wc_get_product( $product_id );
-            $manage_stock = $product -> get_manage_stock( );
+            $product        = wc_get_product( $product_id );
+            $manage_stock   = $product -> get_manage_stock( );
             $stock_quantity = $product -> get_stock_quantity( );
-            $stock_status = $product -> get_stock_status( );
+            $stock_status   = $product -> get_stock_status( );
         } 
 
         $general_tab_settings = get_option( 'woo_stock_manager_general_tab_settings' );

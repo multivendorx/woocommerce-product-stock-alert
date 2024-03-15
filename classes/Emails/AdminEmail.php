@@ -28,14 +28,12 @@ class AdminEmail extends \WC_Email {
 	 * @return void
 	 */
 	function __construct( ) {		
-		$this -> id 				= 'stock_manager_admin';
+		$this -> id 			= 'stock_manager_admin';
 		$this -> title 			= __( 'Alert admin', 'woocommerce-stock-manager' );
-		$this -> description		= __( 'Admin will get an alert when customer subscribe any out of stock product', 'woocommerce-stock-manager' );
-
+		$this -> description	= __( 'Admin will get an alert when customer subscribe any out of stock product', 'woocommerce-stock-manager' );
 		$this -> template_html 	= 'emails/AdminEmail.php';
-		$this -> template_plain 	= 'emails/plain/AdminEmail.php';
-
-		$this -> template_base = SM( ) -> plugin_path . 'templates/';
+		$this -> template_plain = 'emails/plain/AdminEmail.php';
+		$this -> template_base  = SM( ) -> plugin_path . 'templates/';
 		
 		// Call parent constuctor
 		parent::__construct( );
@@ -90,11 +88,11 @@ class AdminEmail extends \WC_Email {
 		ob_start( );
 		wc_get_template( $this -> template_html, array( 
 			'email_heading' => $this -> get_heading( ), 
-			'product' => $this -> product, 
-			'customer_email' => $this -> customer_email, 
+			'product' 		=> $this -> product, 
+			'customer_email'=> $this -> customer_email, 
 			'sent_to_admin' => true, 
-			'plain_text' => false, 
-			'email' => $this, 
+			'plain_text' 	=> false, 
+			'email'			=> $this, 
 		 ), '', $this -> template_base );
 		return ob_get_clean( );
 	} 
@@ -108,11 +106,11 @@ class AdminEmail extends \WC_Email {
 	function get_content_plain( ) {
 		ob_start( );
 		wc_get_template( $this -> template_plain, array( 
-			'email_heading' => $this -> get_heading( ), 
-			'product' => $this -> product, 
+			'email_heading'  => $this -> get_heading( ), 
+			'product' 		 => $this -> product, 
 			'customer_email' => $this -> customer_email, 
-			'sent_to_admin' => true, 
-			'plain_text' => true
+			'sent_to_admin'  => true, 
+			'plain_text'     => true
 		 ) , '', $this -> template_base );
 		return ob_get_clean( );
 	} 

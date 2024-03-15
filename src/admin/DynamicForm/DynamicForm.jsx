@@ -41,7 +41,7 @@ const DynamicForm = ({ currentTab, tabs, setTabs }) => {
 			});
 			axios({
 				method: 'post',
-				url: stockManagerAppLocalizer.apiUrl + '/woo-stockmanager/v1/' + submitUrl,
+				url: stockManagerAppLocalizer.apiUrl + '/stockmanager/v1/' + submitUrl,
 				headers: { 'X-WP-Nonce' : stockManagerAppLocalizer.nonce },
 				data: {
 					model: settings,

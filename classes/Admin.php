@@ -44,40 +44,40 @@ class Admin {
         );
 
         add_submenu_page( 
-            'woo-stock-manager-setting', 
-            __( 'Settings', 'woocommerce-stock-manager' ), 
-            __( 'Settings', 'woocommerce-stock-manager' ), 
-            'manage_options',                                       
+            'woo-stock-manager-setting',
+            __( 'Settings', 'woocommerce-stock-manager' ),
+            __( 'Settings', 'woocommerce-stock-manager' ),
+            'manage_options',
             'woo-stock-manager-setting#&tab=settings&subtab=general', 
             '__return_null'                                         
         );
         
         add_submenu_page( 
             'woo-stock-manager-setting', 
-            __( 'Subscribers List', 'woocommerce-stock-manager' ), 
+            __( 'Subscribers List', 'woocommerce-stock-manager' ),
 			// Translators: Subscribers list with a pro sticker.Variable $pro_sticker contains the sticker text.
-            __( 'Subscribers List ', 'woocommerce-stock-manager' ) . $pro_sticker, 
-            'manage_woocommerce', 
-            'woo-stock-manager-setting#&tab=subscribers-list', 
+            __( 'Subscribers List ', 'woocommerce-stock-manager' ) . $pro_sticker,
+            'manage_woocommerce',
+            'woo-stock-manager-setting#&tab=subscribers-list',
             '__return_null' 
         );
         
         add_submenu_page( 
             'woo-stock-manager-setting', 
-            __( 'Inventory Manager', 'woocommerce-stock-manager' ), 
+            __( 'Inventory Manager', 'woocommerce-stock-manager' ),
 			// Translators: Subscribers list with a pro sticker.Variable $pro_sticker contains the sticker text.
-            __( 'Inventory Manager', 'woocommerce-stock-manager' ) . $pro_sticker, 
-            'manage_woocommerce', 
-            'woo-stock-manager-setting#&tab=manage-stock', 
+            __( 'Inventory Manager', 'woocommerce-stock-manager' ) . $pro_sticker,
+            'manage_woocommerce',
+            'woo-stock-manager-setting#&tab=manage-stock',
             '__return_null' 
         );
 
         add_submenu_page( 
             'tools.php', 
-            __( 'WC Stock Manager Export', 'woocommerce-stock-manager' ), 
-            __( 'WC Stock Manager Export', 'woocommerce-stock-manager' ), 
+            __( 'WC Stock Manager Export', 'woocommerce-stock-manager' ),
+            __( 'WC Stock Manager Export', 'woocommerce-stock-manager' ),
             'manage_options', 
-            'woo-product-stock-manager-export-admin', 
+            'woo-product-stock-manager-export-admin',
             [ $this, 'create_csv_export_page' ]
         );
 
@@ -249,7 +249,7 @@ class Admin {
                 'subscription_page_string'  => $subscription_page_string, 
                 'download_csv'              => __( 'Download CSV', 'woocommerce-stock-manager' ), 
                 'pro_settings_list'         => $pro_settings_list, 
-                'pro_url'                   => esc_url( WOO_STOCK_MANAGER_PRO_SHOP_URL ), 
+                'pro_url'                   => esc_url( STOCK_MANAGER_PRO_SHOP_URL ), 
                 'setting_string'            => $setting_string, 
                 'banner_show'               => get_option( 'woocommerce_stock_manager_pro_banner_hide' ) ? false : true, 
                 'default_massages_fields'   => $woo_admin_massages_fields, 

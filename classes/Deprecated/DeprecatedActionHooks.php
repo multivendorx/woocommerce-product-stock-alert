@@ -22,9 +22,9 @@ class DeprecatedActionHooks extends \WC_Deprecated_Hooks {
 	 */
 	protected $deprecated_hooks = array( 
         'wc_product_stock_alert_new_subscriber_added' => 'dc_wc_product_stock_alert_new_subscriber_added', 
-		'woocommerce_stock_manager_form_before' => 'woocommerce_product_stock_alert_form_before', 
-		'woocommerce_stock_manager_form_after' => 'woocommerce_product_stock_alert_form_after', 
-		'woo_stock_manager_settings_after_save' => 'woo_stock_alert_settings_after_save', 
+		'woocommerce_stock_manager_form_before' 	  => 'woocommerce_product_stock_alert_form_before', 
+		'woocommerce_stock_manager_form_after' 		  => 'woocommerce_product_stock_alert_form_after', 
+		'woo_stock_manager_settings_after_save'       => 'woo_stock_alert_settings_after_save', 
 	 );
 
 	/**
@@ -33,10 +33,10 @@ class DeprecatedActionHooks extends \WC_Deprecated_Hooks {
 	 * @var array
 	 */
 	protected $deprecated_version = array( 
-        'dc_wc_product_stock_alert_new_subscriber_added' => '2.0.0', 
-		'woocommerce_product_stock_alert_form_before' => '2.4.0', 
-		'woocommerce_product_stock_alert_form_after' => '2.4.0', 
-		'woo_stock_alert_settings_after_save' => '2.4.0', 
+        'dc_wc_product_stock_alert_new_subscriber_added'=> '2.0.0', 
+		'woocommerce_product_stock_alert_form_before' 	=> '2.4.0', 
+		'woocommerce_product_stock_alert_form_after' 	=> '2.4.0', 
+		'woo_stock_alert_settings_after_save' 			=> '2.4.0', 
 	 );
 
 	/**

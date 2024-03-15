@@ -19,7 +19,7 @@ class AdminSettingTab {
                         'options'   => [ 
                             [ 
                                 'key'   => "is_double_optin", 
-                                'label' => apply_filters( 'allow_store_inventory_double_optin', 'Upgrade to <a href="' . WOO_STOCK_MANAGER_PRO_SHOP_URL . '" target="_blank"><span class="pro-strong">Pro</span></a> to enable Double Opt-in flow for subscription confirmation.', 'woocommerce-stock-manager' ), 
+                                'label' => apply_filters( 'allow_store_inventory_double_optin', 'Upgrade to <a href="' . STOCK_MANAGER_PRO_SHOP_URL . '" target="_blank"><span class="pro-strong">Pro</span></a> to enable Double Opt-in flow for subscription confirmation.', 'woocommerce-stock-manager' ), 
                                 'value' => "is_double_optin"
                             ]
                         ]
@@ -89,7 +89,7 @@ class AdminSettingTab {
                         'options'   => [ 
                             [ 
                                 'key'   => "is_recaptcha_enable", 
-                                'label' => apply_filters( 'allow_store_inventory_recaptcha', 'Upgrade to <a href="' . WOO_STOCK_MANAGER_PRO_SHOP_URL . '" target="_blank"><span class="pro-strong">Pro</span></a> for unlocking reCAPTCHA for out-of-stock form subscriptions.' ), 
+                                'label' => apply_filters( 'allow_store_inventory_recaptcha', 'Upgrade to <a href="' . STOCK_MANAGER_PRO_SHOP_URL . '" target="_blank"><span class="pro-strong">Pro</span></a> for unlocking reCAPTCHA for out-of-stock form subscriptions.' ), 
                                 'value' => "is_recaptcha_enable"
                             ]
                         ]
@@ -255,7 +255,7 @@ class AdminSettingTab {
             'mailchimp' => [ 
                 'tablabel'      => __( 'Mailchimp Integration', 'woocommerce-stock-manager' ), 
                 'description'   => __( 'Configure mailChimp settings. ', 'woocommerce-stock-manager' ), 
-                'apiurl'        => 'save-stockmanager', 
+                'apiurl'        => 'save-stockmanager',
                 'icon'          => 'icon-mailchimp-setting', 
                 'module'        => [ 
                     [ 

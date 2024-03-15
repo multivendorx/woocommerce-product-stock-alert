@@ -9,30 +9,30 @@ class RestAPI
     function __construct( ) {
         if ( current_user_can( 'manage_options' ) ) {
             add_action( 'rest_api_init', [ $this, 'register_restAPI' ] );
-        } 
-    } 
+        }
+    }
 
     /**
      * Rest api register function call on rest_api_init action hook.
      * @return void
      */
     public function register_restAPI( ) {
-        register_rest_route( 'woo-stockmanager/v1', '/fetch-admin-tabs', [ 
-            'methods' => \WP_REST_Server::READABLE, 
-            'callback' => [ $this, 'fetch_admin_tabs' ], 
-            'permission_callback' => [ $this, 'stockmanager_permission' ], 
+        register_rest_route( SM( ) -> rest_namespace, '/fetch-admin-tabs', [ 
+            'methods' => \WP_REST_Server::READABLE,
+            'callback' => [ $this, 'fetch_admin_tabs' ],
+            'permission_callback' => [ $this, 'stockmanager_permission' ],
         ] );
-        register_rest_route( 'woo-stockmanager/v1', '/save-stockmanager', [ 
-            'methods' => \WP_REST_Server::EDITABLE, 
-            'callback' => [ $this, 'save_stockmanager_setting' ], 
-            'permission_callback' => [ $this, 'stockmanager_permission' ], 
+        register_rest_route( SM( ) -> rest_namespace, '/save-stockmanager', [ 
+            'methods' => \WP_REST_Server::EDITABLE,
+            'callback' => [ $this, 'save_stockmanager_setting' ],
+            'permission_callback' => [ $this, 'stockmanager_permission' ],
         ] );
-        register_rest_route( 'woo-stockmanager/v1', '/close-banner', [ 
-            'methods' => \WP_REST_Server::READABLE, 
-            'callback' => [ $this, 'close_banner' ], 
-            'permission_callback' => [ $this, 'stockmanager_permission' ], 
+        register_rest_route( SM( ) -> rest_namespace, '/close-banner', [ 
+            'methods' => \WP_REST_Server::READABLE,
+            'callback' => [ $this, 'close_banner' ],
+            'permission_callback' => [ $this, 'stockmanager_permission' ],
         ] );
-    } 
+    }
 
     /**
      * StockManager api permission function.
@@ -40,7 +40,7 @@ class RestAPI
      */
     public function stockmanager_permission( ) {
         return current_user_can( 'manage_options' );
-    } 
+    }
 
     /**
      * Set banner hide setting to true.
@@ -49,7 +49,7 @@ class RestAPI
     public function close_banner( ) {
         update_option( 'woocommerce_stock_manager_pro_banner_hide', true );
         return rest_ensure_response( false );
-    } 
+    }
 
     public function fetch_admin_tabs( ) {
         $response = AdminSettingTab::get( );
@@ -58,7 +58,7 @@ class RestAPI
         } 
         $response = wp_json_encode( $response, JSON_PRETTY_PRINT );
         return rest_ensure_response( $response );
-    } 
+    }
 
     /**
      * Seve the setting set in react's admin setting page.
@@ -75,5 +75,5 @@ class RestAPI
         do_action( 'woo_stock_manager_settings_after_save', $modulename, $get_managements_data );
         $all_details[ 'error' ] = __( 'Settings Saved', 'woocommerce-stock-manager' );
         return $all_details;
-    } 
+    }
 } 

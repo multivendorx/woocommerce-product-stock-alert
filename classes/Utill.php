@@ -15,7 +15,7 @@ class Utill {
             '<a href="https://multivendorx.com/docs/knowledgebase/products-stock-manager-notifier-for-woocommerce/?utm_source=WordPressAdmin&utm_medium=PluginSettings&utm_campaign=products-stock-manager" target="_blank">' . __( 'Docs', 'woocommerce-stock-manager' ) . '</a>'
         ];
         if ( apply_filters( 'is_stock_manager_pro_inactive', true ) ) {
-            $links[ 'go_pro' ] = '<a href="' . WOO_STOCK_MANAGER_PRO_SHOP_URL . '" class="stock-manager-pro-plugin" target="_blank">' . __( 'Get Pro', 'woocommerce-stock-manager' ) . '</a>';
+            $links[ 'go_pro' ] = '<a href="' . STOCK_MANAGER_PRO_SHOP_URL . '" class="stock-manager-pro-plugin" target="_blank">' . __( 'Get Pro', 'woocommerce-stock-manager' ) . '</a>';
         } 
         return array_merge( $plugin_links, $links );
     } 
@@ -41,7 +41,7 @@ class Utill {
     public static function database_migration_notice( ) {
         // check if plugin vertion in databse is not same to current stock manager version
         $plugin_version = get_option( 'woo_stock_manager_version', '' );
-        if ( $plugin_version != WOO_STOCK_MANAGER_PLUGIN_VERSION ) {
+        if ( $plugin_version != STOCK_MANAGER_PLUGIN_VERSION ) {
             ?>
             <div id="message" class="error">
                 <p><?php esc_html( "The Product Stock Manager & Notifier for WooCommerce is experiencing configuration issues. To ensure proper functioning, kindly deactivate and then activate the plugin." ) ?></p>

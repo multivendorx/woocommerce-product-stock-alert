@@ -27,14 +27,12 @@ class SubscriberConfirmationEmail extends \WC_Email {
 	 * @return void
 	 */
 	function __construct( ) {		
-		$this -> id 				= 'stock_manager_subscriber_confirmation';
+		$this -> id 			= 'stock_manager_subscriber_confirmation';
 		$this -> title 			= __( 'Confirm subscriber', 'woocommerce-stock-manager' );
-		$this -> description		= __( 'Confirm customer when they subscribe a product', 'woocommerce-stock-manager' );
-
+		$this -> description	= __( 'Confirm customer when they subscribe a product', 'woocommerce-stock-manager' );
 		$this -> template_html 	= 'emails/SubscriberConfirmationEmail.php';
-		$this -> template_plain 	= 'emails/plain/SubscriberConfirmationEmail.php';
-
-		$this -> template_base = SM( ) -> plugin_path . 'templates/';
+		$this -> template_plain = 'emails/plain/SubscriberConfirmationEmail.php';
+		$this -> template_base  = SM( ) -> plugin_path . 'templates/';
 		
 		// Call parent constuctor
 		parent::__construct( );
@@ -88,11 +86,11 @@ class SubscriberConfirmationEmail extends \WC_Email {
 		ob_start( );
 		wc_get_template( $this -> template_html, array( 
 			'email_heading' => $this -> get_heading( ), 
-			'product' => $this -> product, 
-			'customer_email' => $this -> recipient, 
+			'product' 		=> $this -> product, 
+			'customer_email'=> $this -> recipient, 
 			'sent_to_admin' => false, 
-			'plain_text' => false, 
-			'email' => $this, 
+			'plain_text' 	=> false, 
+			'email' 		=> $this, 
 		 ), '', $this -> template_base );
 		return ob_get_clean( );
 	} 
@@ -107,10 +105,10 @@ class SubscriberConfirmationEmail extends \WC_Email {
 		ob_start( );
 		wc_get_template( $this -> template_plain, array( 
 			'email_heading' => $this -> get_heading( ), 
-			'product' => $this -> product, 
-			'customer_email' => $this -> recipient, 
+			'product' 		=> $this -> product, 
+			'customer_email'=> $this -> recipient, 
 			'sent_to_admin' => false, 
-			'plain_text' => true
+			'plain_text' 	=> true
 		 ) , '', $this -> template_base );
 		return ob_get_clean( );
 	} 
