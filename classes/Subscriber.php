@@ -76,18 +76,18 @@ class Subscriber {
      * @return \WP_Error|bool|int
      */
     static function subscribe_user($subscriber_email, $product_id) {
-        $args = array(
+        $args = [
             'post_title' => $subscriber_email,
             'post_type' => 'woostockalert',
             'post_status' => 'woo_subscribed',
-        );
+        ];
 
         $id = wp_insert_post($args);
         if (!is_wp_error($id)) {
-            $default_data = array(
+            $default_data = [
                 'wooinstock_product_id' => $product_id,
                 'wooinstock_subscriber_email' => $subscriber_email,
-            );
+            ];
             foreach ($default_data as $key => $value) {
                 update_post_meta($id, $key, $value);
             }
@@ -125,7 +125,7 @@ class Subscriber {
      * @return array Subscription ID | null
      */
     static function is_already_subscribed($subscriber_email, $product_id) {
-        $args = array(
+        $args = [
             'post_type' => 'woostockalert',
             'fields' => 'ids',
             'posts_per_page' => 1,
@@ -141,7 +141,7 @@ class Subscriber {
 					'value' => $subscriber_email,
                 ],
             ]
-        );
+        ];
         $get_posts = get_posts($args);
         return $get_posts;
     }
@@ -152,17 +152,17 @@ class Subscriber {
      * @return void
      */
     static function update_product_subscriber_count($product_id ) {
-        $args = array(
+        $args = [
             'post_type' => 'woostockalert',
             'post_status' => 'woo_subscribed',
-            'meta_query' => array(
-                array(
+            'meta_query' => [
+                [
                     'key' => 'wooinstock_product_id',
-                    'value' => array($product_id),
+                    'value' => [$product_id],
                     'compare' => 'IN',
-                )),
+                ]],
             'numberposts' => -1,
-        );
+        ];
         $query = get_posts($args);
         update_post_meta($product_id, 'no_of_subscribers', count($query));
     }
@@ -174,11 +174,11 @@ class Subscriber {
      * @return \WP_Error|int
      */
     static function update_subscriber($stockalert_id, $status) {
-        $args = array(
+        $args = [
             'ID' => $stockalert_id,
             'post_type' => 'woostockalert',
             'post_status' => $status,
-        );
+        ];
         $id = wp_update_post($args);
         return $id;
     }
@@ -217,20 +217,20 @@ class Subscriber {
         if(!$product_id || $product_id <= '0') {
             return [];
         }
-        $emails = array();
-        $args = array(
+        $emails = [];
+        $args = [
             'post_type'     => 'woostockalert',
             'fields'        => 'ids',
             'posts_per_page'=> -1,
             'post_status'   => 'woo_subscribed',
-            'meta_query'    => array(
-                array(
+            'meta_query'    => [
+                [
                     'key'     => 'wooinstock_product_id',
                     'value'   => $product_id,
                     'compare' => '='
-                )
-            )
-        );
+                ]
+            ]
+        ];
         $subsciber_post = get_posts($args);
         if ($subsciber_post && count($subsciber_post) > 0) {
             foreach ($subsciber_post as $subsciber_id) {

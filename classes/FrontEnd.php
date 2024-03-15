@@ -5,21 +5,21 @@ namespace StockManager;
 class FrontEnd {
     public function __construct() {
         //enqueue scripts
-        add_action('wp_enqueue_scripts', array(&$this, 'frontend_scripts'));
+        add_action('wp_enqueue_scripts', [&$this, 'frontend_scripts']);
         //enqueue styles
-        add_action('wp_enqueue_scripts', array(&$this, 'frontend_styles'));
+        add_action('wp_enqueue_scripts', [&$this, 'frontend_styles']);
 
-        add_action('woocommerce_simple_add_to_cart', array($this, 'display_product_subscription_form'), 31);
-        add_action('woocommerce_bundle_add_to_cart', array($this, 'display_product_subscription_form'), 31);
-        add_action('woocommerce_subscription_add_to_cart', array($this, 'display_product_subscription_form'), 31);
-        add_action('woocommerce_woosb_add_to_cart', array($this, 'display_product_subscription_form'), 31);
-        add_action('woocommerce_after_variations_form', array($this, 'display_product_subscription_form'), 31);
+        add_action('woocommerce_simple_add_to_cart', [$this, 'display_product_subscription_form'], 31);
+        add_action('woocommerce_bundle_add_to_cart', [$this, 'display_product_subscription_form'], 31);
+        add_action('woocommerce_subscription_add_to_cart', [$this, 'display_product_subscription_form'], 31);
+        add_action('woocommerce_woosb_add_to_cart', [$this, 'display_product_subscription_form'], 31);
+        add_action('woocommerce_after_variations_form', [$this, 'display_product_subscription_form'], 31);
         // Some theme variation disabled by default if it is out of stock so for that workaround solution.
-        add_filter('woocommerce_variation_is_active', array($this, 'enable_disabled_variation_dropdown'), 100, 2);
+        add_filter('woocommerce_variation_is_active', [$this, 'enable_disabled_variation_dropdown'], 100, 2);
         //support for grouped products
-        add_filter('woocommerce_grouped_product_list_column_price', array($this, 'display_in_grouped_product'), 10, 2);
+        add_filter('woocommerce_grouped_product_list_column_price', [$this, 'display_in_grouped_product'], 10, 2);
         // Hover style
-        add_action('wp_head', array($this, 'frontend_hover_styles'));
+        add_action('wp_head', [$this, 'frontend_hover_styles']);
     }
 
     /**
@@ -52,9 +52,9 @@ class FrontEnd {
         if (function_exists('is_product')) {
             if (is_product()) {
                 // Enqueue your frontend javascript from here
-                wp_enqueue_script('stock_manager_frontend_js', $frontend_script_path . 'frontend' . $suffix . '.js', array('jquery'), SM()->version, true);
+                wp_enqueue_script('stock_manager_frontend_js', $frontend_script_path . 'frontend' . $suffix . '.js', ['jquery'], SM()->version, true);
             
-                wp_localize_script('stock_manager_frontend_js', 'woo_stock_manager_script_data', array(
+                wp_localize_script('stock_manager_frontend_js', 'woo_stock_manager_script_data', [
                     'ajax_url' => admin_url('admin-ajax.php', 'relative'),
                     'nonce'  => wp_create_nonce('stock-manager-security-nonce'),
                     'additional_fields' => apply_filters('woocommerce_stock_manager_form_additional_fields', []),
@@ -71,7 +71,7 @@ class FrontEnd {
                     'unsubscribe_button' => $unsubscribe_button_html,
                     'alert_unsubscribe_message' => $settings_array['alert_unsubscribe_message'],
                     'recaptcha_enabled' => apply_filters('woo_stock_manager_recaptcha_enabled', false)
-                ));
+                ]);
             }
         }
     }
@@ -86,7 +86,7 @@ class FrontEnd {
         if (function_exists('is_product')) {
             if (is_product()) {
                 // Enqueue your frontend stylesheet from here
-                wp_enqueue_style('stock_manager_frontend_css', $frontend_style_path . 'frontend' . $suffix . '.css', array(), SM()->version);
+                wp_enqueue_style('stock_manager_frontend_css', $frontend_style_path . 'frontend' . $suffix . '.css', [ ], SM()->version);
             }
         }
     }
@@ -180,7 +180,7 @@ class FrontEnd {
         if(! Subscriber::is_product_outofstock($variation ? $variation->get_id() : $product->get_id(), $variation ? 'variation' : '', true)){
             return "";
         }
-        $stock_manager_fields_array = array();
+        $stock_manager_fields_array = [];
         $stock_manager_fields_html = $user_email = '';
         $separator = apply_filters('woo_fileds_separator', '<br>');
         $settings_array = Utill::get_form_settings_array();
@@ -189,14 +189,14 @@ class FrontEnd {
             $user_email = $current_user->data->user_email;
         }
         $placeholder = $settings_array['email_placeholder_text'];
-        $alert_fields = apply_filters('woo_stock_manager_fileds_array', array(
-            'alert_email' => array(
+        $alert_fields = apply_filters('woo_stock_manager_fileds_array', [
+            'alert_email' => [
                 'type' => 'text',
                 'class'=> 'stock_manager_email woo-fields',
                 'value'=> $user_email,
                 'placeholder' => $placeholder
-            )
-        ), $settings_array);
+            ]
+        ], $settings_array);
         if ($alert_fields) {
             foreach ($alert_fields as $key => $fvalue) {
                 $type = in_array($fvalue['type'], ['recaptcha-v3', 'text', 'number', 'email']) ? esc_attr($fvalue['type']) : 'text';

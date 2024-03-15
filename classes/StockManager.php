@@ -31,7 +31,7 @@ class StockManager {
 
         add_action( 'before_woocommerce_init', [ $this, 'declare_compatibility' ] );
         add_action( 'woocommerce_loaded', [ $this, 'init_plugin' ] );
-        add_action( 'plugins_loaded', [ $this, 'is_stock_alert_loaded'] );
+        add_action( 'plugins_loaded', [ $this, 'is_woocommerce_loaded'] );
     }
 
     /**
@@ -64,7 +64,8 @@ class StockManager {
     }
 
     /**
-     * initilize plugin on WP init
+     * Initilizing plugin on WP init
+     * @return void
      */
     public function init_plugin($file) {
         $this->load_plugin_textdomain();
@@ -72,7 +73,7 @@ class StockManager {
     }
     
     /**
-     * Init all multivendorx classess.
+     * Init all Stock Manageer classess.
      * Access this classes using magic method.
      * @return void
      */
@@ -103,12 +104,11 @@ class StockManager {
      * Take action based on if woocommerce is not loaded
      * @return void
      */
-    public function is_stock_alert_loaded() {
-        if ( Dependencies::woocommerce_plugin_active_check() || ! is_admin() ) {
+    public function is_woocommerce_loaded() {
+        if ( did_action( 'woocommerce_loaded' ) || ! is_admin() ) {
             return;
-        }else{
-            add_action( 'admin_notices', [ Utill::class, 'woocommerce_inactive_notice' ] );
         }
+        add_action('admin_notices', [$this, 'woocommerce_admin_notice']);
     }
 
     /**
@@ -131,7 +131,7 @@ class StockManager {
      * @param   mixed $class
      * @return  object | \WP_Error
      */
-    public function __get( $class ) {
+    public function __get($class) {
         if ( array_key_exists( $class, $this->container ) ) {
             return $this->container[ $class ];
         }

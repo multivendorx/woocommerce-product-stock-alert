@@ -8,7 +8,7 @@ class RestAPI
 {
     function __construct() {
         if (current_user_can('manage_options')) {
-            add_action('rest_api_init', array($this, 'register_restAPI'));
+            add_action('rest_api_init', [$this, 'register_restAPI']);
         }
     }
 
@@ -19,18 +19,18 @@ class RestAPI
     public function register_restAPI() {
         register_rest_route('woo-stockmanager/v1', '/fetch-admin-tabs', [
             'methods' => \WP_REST_Server::READABLE,
-            'callback' => array($this, 'fetch_admin_tabs'),
-            'permission_callback' => array($this, 'stockmanager_permission'),
+            'callback' => [$this, 'fetch_admin_tabs'],
+            'permission_callback' => [$this, 'stockmanager_permission'],
         ]);
         register_rest_route('woo-stockmanager/v1', '/save-stockmanager', [
             'methods' => \WP_REST_Server::EDITABLE,
-            'callback' => array($this, 'save_stockmanager_setting'),
-            'permission_callback' => array($this, 'stockmanager_permission'),
+            'callback' => [$this, 'save_stockmanager_setting'],
+            'permission_callback' => [$this, 'stockmanager_permission'],
         ]);
         register_rest_route('woo-stockmanager/v1', '/close-banner', [
             'methods' => \WP_REST_Server::READABLE,
-            'callback' => array($this, 'close_banner'),
-            'permission_callback' => array($this, 'stockmanager_permission'),
+            'callback' => [$this, 'close_banner'],
+            'permission_callback' => [$this, 'stockmanager_permission'],
         ]);
     }
 

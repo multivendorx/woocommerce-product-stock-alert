@@ -7,24 +7,24 @@ class Admin {
 
     public function __construct() {
         // admin pages manu and submenu
-        add_action('admin_menu', array($this, 'add_settings_page'), 100);
+        add_action('admin_menu', [$this, 'add_settings_page'], 100);
         //admin script and style
-        add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_script'));
+        add_action('admin_enqueue_scripts', [$this, 'enqueue_admin_script']);
 
         // create custom column
-        add_action('manage_edit-product_columns', array($this, 'set_custom_column_header'));
+        add_action('manage_edit-product_columns', [$this, 'set_custom_column_header']);
         // manage stock manager column
-        add_action('manage_product_posts_custom_column', array($this, 'display_subscriber_count_in_custom_column'), 10, 2);
+        add_action('manage_product_posts_custom_column', [$this, 'display_subscriber_count_in_custom_column'], 10, 2);
 
         // show number of subscribers for individual product
-        add_action('woocommerce_product_options_inventory_product_data', array($this, 'display_product_subscriber_count_in_metabox'), 10);
-        add_action('woocommerce_product_after_variable_attributes', array($this, 'display_product_subscriber_count_in_variation_metabox'), 10, 3);
+        add_action('woocommerce_product_options_inventory_product_data', [$this, 'display_product_subscriber_count_in_metabox'], 10);
+        add_action('woocommerce_product_after_variable_attributes', [$this, 'display_product_subscriber_count_in_variation_metabox'], 10, 3);
 
         // bulk action to remove subscribers
-        add_filter('bulk_actions-edit-product', array($this, 'register_subscribers_bulk_actions'));
-        add_filter('handle_bulk_actions-edit-product', array($this, 'subscribers_bulk_action_handler'), 10, 3);
-        add_action('admin_notices', array($this, 'subscribers_bulk_action_admin_notice'));
-        add_action('admin_print_styles-plugins.php', array( $this, 'admin_plugin_page_style'));
+        add_filter('bulk_actions-edit-product', [$this, 'register_subscribers_bulk_actions']);
+        add_filter('handle_bulk_actions-edit-product', [$this, 'subscribers_bulk_action_handler'], 10, 3);
+        add_action('admin_notices', [$this, 'subscribers_bulk_action_admin_notice']);
+        add_action('admin_print_styles-plugins.php', [ $this, 'admin_plugin_page_style']);
     }
 
     /**
@@ -185,40 +185,7 @@ class Admin {
     public function enqueue_admin_script() {
         $suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
 
-        $columns_subscriber = apply_filters('woo_stock_manager_subscribers_list_headers', array(
-            [
-                'name'      =>  __('Date', 'woocommerce-stock-manager'),
-                'selector'  =>  '',
-                'sortable'  =>  false,
-                'selector_choice'  => "date",
-            ],
-            [
-                'name'      =>  __('Product', 'woocommerce-stock-manager'),
-                'selector'  =>  '',
-                'sortable'  =>  false,
-                'selector_choice'  => "product",
-            ],
-            [
-                'name'      =>  __('Email', 'woocommerce-stock-manager'),
-                'selector'  =>  '',
-                'sortable'  =>  false,
-                'selector_choice'  => "email",
-            ],
-            [
-                'name'      =>  __('Registered', 'woocommerce-stock-manager'),
-                'selector'  =>  '',
-                'sortable'  =>  false,
-                'selector_choice'  => "reg_user",
-            ],
-            [
-                'name'      =>  __('Status', 'woocommerce-stock-manager'),
-                'selector'  =>  '',
-                'sortable'  =>  false,
-                'selector_choice'  => "status",
-            ]
-        ));
-
-        $subscription_page_string     =   array(
+        $subscription_page_string     =   [
             'all'           =>  __('All', 'woocommerce-stock-manager'),
             'subscribe'     =>  __('Subscribe', 'woocommerce-stock-manager'),
             'unsubscribe'   =>  __('Unsubscribe', 'woocommerce-stock-manager'),
@@ -226,9 +193,9 @@ class Admin {
             'search'        =>  __('Search by Email', 'woocommerce-stock-manager'),
             'show_product'  =>  __('Search by Product Name', 'woocommerce-stock-manager'),
             'daterenge'     =>  __('DD-MM-YYYY ~ DD-MM-YYYY', 'woocommerce-stock-manager'),
-        );
+        ];
 
-        $setting_string     =   array(
+        $setting_string     =   [
             'form_dec'              =>  __('Form Description', 'woocommerce-stock-manager'),
             'submit_button_text'    =>  __('Submit Button Text', 'woocommerce-stock-manager'),
             'background'            =>  __('Background', 'woocommerce-stock-manager'),
@@ -239,9 +206,9 @@ class Admin {
             'font_size'             =>  __('Font Size', 'woocommerce-stock-manager'),
             'border_radius'         =>  __('Border Radius', 'woocommerce-stock-manager'),
             'border_size'           =>  __('Border Size', 'woocommerce-stock-manager'),
-        );
+        ];
 
-        $pro_settings_list = apply_filters('woo_stock_manager_pro_settings_lists', array(
+        $pro_settings_list = apply_filters('woo_stock_manager_pro_settings_lists', [
             'ban_email_domains',
             'ban_email_domain_text',
             'ban_email_addresses',
@@ -252,9 +219,9 @@ class Admin {
             'selected_mailchimp_list',
             'is_double_optin',
             'is_recaptcha_enable'
-        ));
+        ]);
 
-        $woo_admin_massages_fields = array(
+        $woo_admin_massages_fields = [
             'double_opt_in_success',
             'shown_interest_text',
             'alert_success',
@@ -263,7 +230,7 @@ class Admin {
             'alert_unsubscribe_message',
             'ban_email_domain_text',
             'ban_email_address_text'
-        );
+        ];
         
         if (get_current_screen()->id == 'toplevel_page_woo-stock-manager-setting') {
             wp_enqueue_script( 'woo-stockmanager-script', SM()->plugin_url . 'build/index.js', [ 'wp-element', 'wp-i18n' ], SM()->version, true );
@@ -279,7 +246,6 @@ class Admin {
                 'inventory_manager_laptop'  => SM()->plugin_url . 'src/assets/images/inventory-manager-laptop.png',
                 'inventory_manager_monitor' => SM()->plugin_url . 'src/assets/images/inventory-manager-monitor.jpg',
                 'pro_active'                => apply_filters('woo_stock_manager_pro_active', 'free'),
-                'columns_subscriber'        => $columns_subscriber,
                 'subscription_page_string'  => $subscription_page_string,
                 'download_csv'              => __('Download CSV', 'woocommerce-stock-manager'),
                 'pro_settings_list'         => $pro_settings_list,
@@ -289,17 +255,17 @@ class Admin {
                 'default_massages_fields'   => $woo_admin_massages_fields,
                 'default_massages'          => Utill::get_form_settings_array()
               ]));
-            wp_enqueue_style('woo_stockmanager_style', SM()->plugin_url . 'build/index.css', array(), SM()->version );
-            wp_enqueue_style('woo_admin_rsuite_css', SM()->plugin_url . 'src/assets/admin/css/rsuite-default' . '.min' . '.css', array(), SM()->version );
+            wp_enqueue_style('woo_stockmanager_style', SM()->plugin_url . 'build/index.css',[ ], SM()->version );
+            wp_enqueue_style('woo_admin_rsuite_css', SM()->plugin_url . 'src/assets/admin/css/rsuite-default' . '.min' . '.css',[ ], SM()->version );
         }
-        wp_enqueue_style('stock_manager_product_admin_css', SM()->plugin_url . 'src/assets/admin/css/admin'. $suffix .'.css', array(), SM()->version );
+        wp_enqueue_style('stock_manager_product_admin_css', SM()->plugin_url . 'src/assets/admin/css/admin'. $suffix .'.css',[ ], SM()->version );
     }
 
     /**
      * Custom column addition
      */
     function set_custom_column_header($columns) {
-        return array_merge($columns, array('product_subscriber' => __('Interested Person(s)', 'woocommerce-stock-manager')));
+        return array_merge($columns, ['product_subscriber' => __('Interested Person(s)', 'woocommerce-stock-manager')]);
     }
 
     /**
@@ -338,7 +304,7 @@ class Admin {
             ?>
             <p class="form-row form-row-full interested_person">
                 <label class="stock_label"><?php esc_attr_e( 'Number of Interested Person(s) : ', 'woocommerce-stock-manager' ); ?></label>
-            <div class="variation_no_subscriber"><?php echo esc_html((isset($product_subscriber) && $product_subscriber > 0) ? $product_subscriber : 0); ?></div>
+                <div class="variation_no_subscriber"><?php echo esc_html((isset($product_subscriber) && $product_subscriber > 0) ? $product_subscriber : 0); ?></div>
             </p>
             <?php
         }

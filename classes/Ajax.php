@@ -75,7 +75,7 @@ class Ajax {
         }
 
 		$csv_header_string = '';
-		$csv_headers_array = $csv_body_arrays = $subscribers_list = array();
+		$csv_headers_array = $csv_body_arrays = $subscribers_list = [];
 		$file_name = 'list_subscribers.csv';
 		
 		// Set page headers to force download of CSV
@@ -84,13 +84,13 @@ class Ajax {
 		header("Content-Disposition: attachment;filename={$file_name}");
 		
 		// Set CSV headers
-		$csv_headings = array(
+		$csv_headings = [
 			'product_id',
 			'product_name',
 			'product_sku',
 			'product_type',
 			'subscribers'
-		);
+		];
 		
 		foreach ($csv_headings as $heading) { 
 			$csv_headers_array[] = '"' . $heading . '"';
