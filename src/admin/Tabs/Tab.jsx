@@ -2,21 +2,16 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 import PuffLoader from 'react-spinners/PuffLoader';
-import axios from 'axios';
 import BannerSection from '../Banner/banner';
 import DynamicForm from '../DynamicForm/DynamicForm';
+import { getSettingsJsonData } from "../services/jsonService";
 
 const Tabs = (props) => {
-    const [tabs, setTabs] = useState(null);
-    const [currentTab, setCurrentTab] = useState(props.initialTab);
+    const [ tabs, setTabs ] = useState(null);
+    const [ currentTab, setCurrentTab ] = useState(props.initialTab);
 
     useEffect(() => {
-        axios({
-            url: `${stockManagerAppLocalizer.apiUrl}/stockmanager/v1/fetch-admin-tabs`,
-            headers: { 'X-WP-Nonce' : stockManagerAppLocalizer.nonce },
-        }).then((response) => {
-            setTabs( response.data ? JSON.parse(response.data) : null );
-        });
+        setTabs( getSettingsJsonData() )
     }, []);
 
     const getTabDescription = () => {
@@ -30,26 +25,33 @@ const Tabs = (props) => {
     }
 
     const getTabs = () => {
-        return Object.entries(tabs).map(([tabName, tabContent]) => {
+        // Sort tabs based on priority
+        const sortedTabs = Object.entries(tabs).sort(([, tabContentA], [, tabContentB]) => {
+            return tabContentA.priority - tabContentB.priority;
+        });
+    
+        return sortedTabs.map(([tabName, tabContent]) => {
             return (
                 <Link
-                    className={ currentTab === tabName ? 'active-current-tab' : ''}
+                    key={tabName} // Add a unique key for each tab
+                    className={currentTab === tabName ? 'active-current-tab' : ''}
                     onClick={(e) => {
                         e.preventDefault();
                         setCurrentTab(tabName)
                     }}
                 >
-                    { tabContent.icon && <i className={`${ tabContent.icon }`}></i> }
-                    { tabContent.tablabel }
+                    {tabContent.icon && <i className={`${tabContent.icon}`}></i>}
+                    {tabContent.tablabel}
                     {
-                        ( stockManagerAppLocalizer.pro_active == 'free' ) &&
-                        ( tabName == 'email' || tabName == 'mailchimp' ) &&
-                            <span class="stock-manager-pro-tag">Pro</span> 
+                        (stockManagerAppLocalizer.pro_active == 'free') &&
+                        (tabName == 'email' || tabName == 'mailchimp') &&
+                        <span className="stock-manager-pro-tag"> Pro </span>
                     }
                 </Link>
             );
         });
-    }  
+    }
+      
 
     return (
         <>
