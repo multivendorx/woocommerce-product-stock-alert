@@ -54,7 +54,7 @@ const Tabs = (props) => {
     return (
         <>
             <div className={`woo-general-wrapper woo-${currentTab}`}>
-                {stockManagerAppLocalizer.pro_active === 'free' && <BannerSection />}
+                {stockManagerAppLocalizer.pro_active === 'free' && localStorage.getItem("banner") && <BannerSection />}
                 {
                     <div className="woo-container woo-tab-banner-wrap">
                         <div className={`woo-middle-container-wrapper woo-vertical-tabs`}>

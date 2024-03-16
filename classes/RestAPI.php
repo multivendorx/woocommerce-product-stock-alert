@@ -27,11 +27,6 @@ class RestAPI
             'callback' => [ $this, 'save_stockmanager_setting' ],
             'permission_callback' => [ $this, 'stockmanager_permission' ],
         ] );
-        register_rest_route( SM( ) -> rest_namespace, '/close-banner', [ 
-            'methods' => \WP_REST_Server::READABLE,
-            'callback' => [ $this, 'close_banner' ],
-            'permission_callback' => [ $this, 'stockmanager_permission' ],
-        ] );
     }
 
     /**

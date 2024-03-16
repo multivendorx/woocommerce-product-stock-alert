@@ -8,25 +8,17 @@ class Banner extends Component {
 		super(props);
 		this.state = {
 			open_model: false,
-			open_banner : false,
+			open_banner : localStorage.getItem('banner') == 'true' ? true : false,
 		};
 		this.handleClose = this.handleClose.bind(this);
 		this.handleOpen = this.handleOpen.bind(this);
 		this.handleCloseBanner = this.handleCloseBanner.bind(this);
 	}
-
 	handleCloseBanner() {
-		axios
-			.get(
-				`${stockManagerAppLocalizer.apiUrl}/stockmanager/v1/close-banner`,
-				{headers: { 'X-WP-Nonce' : stockManagerAppLocalizer.nonce }}
-			)
-			
-			.then((response) => {
-				this.setState({
-					open_banner: response.data,
-				});
-			});
+		localStorage.setItem('banner',false)
+		this.setState({
+			open_banner : false
+		})
 	}
 
 	handleClose() {
@@ -40,10 +32,6 @@ class Banner extends Component {
 		});
 	}
 	componentDidMount() {
-
-		this.setState({
-			open_banner: stockManagerAppLocalizer.banner_show,
-		});
 
 		var $ = jQuery;
 		$(document).ready(function () {
@@ -120,81 +108,81 @@ class Banner extends Component {
 								<Popoup/>
 							</Dialog>
 							<div className="woo-carousel-container">
-							<div className="carousel-container">
-								<div class="icon-cross pro-slider-cross" onClick={this.handleCloseBanner}></div>
-								<div class="why-go-pro-tag" onClick={this.handleOpen}>Why Premium</div>
-								<ul className="carousel-list">
-									<li className="carousel-item active">
-										<div className="woo-pro-txt-items">
-											<h3>Double Opt-In {' '}</h3>
-											<p>Experience the power of Double Opt-In for our Stock Alert Form - Guaranteed precision in every notification!{' '}</p>
-											<a
-												href={stockManagerAppLocalizer.pro_url}
-												className="woo-btn btn-red"
-											>
-												View Pricing
-											</a>
-										</div>
-									</li>
-									<li class="carousel-item">
-										<div className="woo-pro-txt-items">
-											<h3>Your Subscription Hub{' '}</h3>
-											<p>Subscription Dashboard - Easily monitor and download lists of out-of-stock subscribers for seamless management.{' '}</p>
-											<a
-												href={stockManagerAppLocalizer.pro_url}
-												className="woo-btn btn-red"
-											>
-												View Pricing
-											</a>
-										</div>
-									</li>
-									<li class="carousel-item">
-										<div className="woo-pro-txt-items">
-											<h3>Mailchimp Bridge{' '}</h3>
-											<p>Seamlessly link WooCommerce out-of-stock subscriptions with Mailchimp for effective marketing.{' '}</p>
-											<a
-												href={stockManagerAppLocalizer.pro_url}
-												className="woo-btn btn-red"
-											>
-												View Pricing
-											</a>
-										</div>
-									</li>
-									<li class="carousel-item">
-										<div className="woo-pro-txt-items">
-											<h3>Unsubscribe Notifications{' '}</h3>
-											<p>User-Initiated Unsubscribe from In-Stock Notifications.{' '}</p>
-											<a
-												href={stockManagerAppLocalizer.pro_url}
-												className="woo-btn btn-red"
-											>
-												View Pricing
-											</a>
-										</div>
-									</li>
-									<li class="carousel-item">
-										<div className="woo-pro-txt-items">
-											<h3>Ban Spam Emails {' '}</h3>
-											<p>Email and Domain Blacklist for Spam Prevention.{' '}</p>
-											<a
-												href={stockManagerAppLocalizer.pro_url}
-												className="woo-btn btn-red"
-											>
-												View Pricing
-											</a>
-										</div>
-									</li>
-								</ul>
-							</div>
-
-							<div class="carousel-controls">
-								<button id="prevBtn"><i className='icon-left-arrow'></i></button>
-								<button id="nextBtn"><i className='icon-right-arrow'></i></button>
-							</div>
+								<div className="carousel-container">
+									<div class="icon-cross pro-slider-cross" onClick={this.handleCloseBanner}></div>
+									<div class="why-go-pro-tag" onClick={this.handleOpen}>Why Premium</div>
+									<ul className="carousel-list">
+										<li className="carousel-item active">
+											<div className="woo-pro-txt-items">
+												<h3>Double Opt-In {' '}</h3>
+												<p>Experience the power of Double Opt-In for our Stock Alert Form - Guaranteed precision in every notification!{' '}</p>
+												<a
+													href={stockManagerAppLocalizer.pro_url}
+													className="woo-btn btn-red"
+												>
+													View Pricing
+												</a>
+											</div>
+										</li>
+										<li class="carousel-item">
+											<div className="woo-pro-txt-items">
+												<h3>Your Subscription Hub{' '}</h3>
+												<p>Subscription Dashboard - Easily monitor and download lists of out-of-stock subscribers for seamless management.{' '}</p>
+												<a
+													href={stockManagerAppLocalizer.pro_url}
+													className="woo-btn btn-red"
+												>
+													View Pricing
+												</a>
+											</div>
+										</li>
+										<li class="carousel-item">
+											<div className="woo-pro-txt-items">
+												<h3>Mailchimp Bridge{' '}</h3>
+												<p>Seamlessly link WooCommerce out-of-stock subscriptions with Mailchimp for effective marketing.{' '}</p>
+												<a
+													href={stockManagerAppLocalizer.pro_url}
+													className="woo-btn btn-red"
+												>
+													View Pricing
+												</a>
+											</div>
+										</li>
+										<li class="carousel-item">
+											<div className="woo-pro-txt-items">
+												<h3>Unsubscribe Notifications{' '}</h3>
+												<p>User-Initiated Unsubscribe from In-Stock Notifications.{' '}</p>
+												<a
+													href={stockManagerAppLocalizer.pro_url}
+													className="woo-btn btn-red"
+												>
+													View Pricing
+												</a>
+											</div>
+										</li>
+										<li class="carousel-item">
+											<div className="woo-pro-txt-items">
+												<h3>Ban Spam Emails {' '}</h3>
+												<p>Email and Domain Blacklist for Spam Prevention.{' '}</p>
+												<a
+													href={stockManagerAppLocalizer.pro_url}
+													className="woo-btn btn-red"
+												>
+													View Pricing
+												</a>
+											</div>
+										</li>
+									</ul>
+								</div>
+								<div class="carousel-controls">
+									<button id="prevBtn"><i className='icon-left-arrow'></i></button>
+									<button id="nextBtn"><i className='icon-right-arrow'></i></button>
+								</div>
 							</div>
 						</div>
-					: ''	
-					: ''}
+					: ''
+				: ''
+				}
 			</>
 		);
 	}

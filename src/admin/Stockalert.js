@@ -6,6 +6,9 @@ import ManageStock from './Managestock/Managestock.jsx'
 import Import from './Managestock/Import.jsx';
 import Export from './Managestock/Export.jsx';
 const Stockalert = () => {
+    if(localStorage.getItem('banner') != 'false'){
+        localStorage.setItem("banner", true);
+    }
     const currentUrl = window.location.href;
     document.querySelectorAll('#toplevel_page_woo-stock-manager-setting>ul>li>a').forEach((element) => {
         element.parentNode.classList.remove('current');

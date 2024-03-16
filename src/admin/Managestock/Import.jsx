@@ -68,11 +68,11 @@ const Import = ( ) => {
         <div className="woo-container">
             <div className='import-page'>
                 <div className="woo-page-title">
-                    <p>{ __( 'Import', 'woocommerce-stock-manager-pro' ) }</p>
+                    <p>{ __( 'Import', 'woocommerce-stock-manager' ) }</p>
                     <button class="import-export-btn" >
                         <Link to={ '?page=woo-stock-manager-setting#&tab=manage-stock' }>
                             <div className='wp-menu-image dashicons-before dashicons-arrow-left-alt'></div>
-                            { __( "Inventory Manager", "woocommerce-stock-manager-pro" ) }
+                            { __( "Inventory Manager", "woocommerce-stock-manager" ) }
                         </Link>
                     </button>
                     {
@@ -84,10 +84,10 @@ const Import = ( ) => {
                     }
                 </div>
                 <div className="import-section">
-                    <p>{ __( 'Upload your CSV file to update stock data for existing products. The file must match the specified format a sample CSV is available for reference.', 'woocommerce-stock-manager-pro' ) }
+                    <p>{ __( 'Upload your CSV file to update stock data for existing products. The file must match the specified format a sample CSV is available for reference.', 'woocommerce-stock-manager' ) }
                     {
                         data &&
-                        <CSVLink enclosingCharacter={ `` } data={ Object.values( data ) } headers={ header } filename={ 'Sample.csv' }>{ __( 'Download Sample CSV', 'woocommerce-stock-manager-pro' ) }</CSVLink>
+                        <CSVLink enclosingCharacter={ `` } data={ Object.values( data ) } headers={ header } filename={ 'Sample.csv' }>{ __( 'Download Sample CSV', 'woocommerce-stock-manager' ) }</CSVLink>
                     }
                     </p>
                     <div className='import-table'>                        
@@ -97,7 +97,7 @@ const Import = ( ) => {
                             <input className='import-input' onChange={ handleFileChange } type="file" name="csv_file" accept=".csv" />
                         </div>
                         <div className='import-upload-btn-section'>
-                            <button onClick={ handleUpload } class="import-btn">{ __( 'Upload CSV', 'woocommerce-stock-manager-pro' ) }</button>
+                            <button onClick={ handleUpload } class="import-btn">{ __( 'Upload CSV', 'woocommerce-stock-manager' ) }</button>
                         </div>
                     </div>
                 </div>

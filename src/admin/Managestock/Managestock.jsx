@@ -92,7 +92,7 @@ const Managestock = () => {
                             <div className="woo-search-and-multistatus-wrap">
                                 <div className="woo-page-title">
                                     <p>
-                                        { __( "Inventory Manager", "woocommerce-stock-manager-pro" ) }
+                                        { __( "Inventory Manager", "woocommerce-stock-manager" ) }
                                     </p>
                                 </div>
                             <div>
@@ -103,7 +103,7 @@ const Managestock = () => {
                                             to={ "?page=woo-stock-manager-setting#&tab=import" }
                                             >
                                             <div className="wp-menu-image dashicons-before dashicons-download"></div>
-                                            { __( "Import", "woocommerce-stock-manager-pro" ) }
+                                            { __( "Import", "woocommerce-stock-manager" ) }
                                             </Link>
                                         </button>
                                     </div>
@@ -113,7 +113,7 @@ const Managestock = () => {
                                             to={ "?page=woo-stock-manager-setting#&tab=export" }
                                             >
                                             <div className="wp-menu-image dashicons-before dashicons-upload"></div>
-                                            { __( "Export", "woocommerce-stock-manager-pro" ) }
+                                            { __( "Export", "woocommerce-stock-manager" ) }
                                             </Link>
                                         </button>
                                     </div>
@@ -147,13 +147,13 @@ const Managestock = () => {
                                     onChange={ ( e ) => { setProductType ( e.target.value ) } }
                                     >
                                         <option value="">
-                                            { __( "Product Type", "woocommerce-stock-manager-pro" ) }
+                                            { __( "Product Type", "woocommerce-stock-manager" ) }
                                         </option>
                                         <option value="Simple">
-                                            { __( "Simple", "woocommerce-stock-manager-pro" ) }
+                                            { __( "Simple", "woocommerce-stock-manager" ) }
                                         </option>
                                         <option value="Variable">
-                                            { __( "Variable", "woocommerce-stock-manager-pro" ) }
+                                            { __( "Variable", "woocommerce-stock-manager" ) }
                                         </option>
                                     </select>
                                 </div>
@@ -162,21 +162,21 @@ const Managestock = () => {
                                     onChange={ ( e ) => { setStockStatus ( e.target.value ) } }
                                     >
                                         <option value="">
-                                            { __( "Stock Status", "woocommerce-stock-manager-pro" ) }
+                                            { __( "Stock Status", "woocommerce-stock-manager" ) }
                                         </option>
                                         <option value="instock">
-                                            { __( "In stock", "woocommerce-stock-manager-pro" ) }
+                                            { __( "In stock", "woocommerce-stock-manager" ) }
                                         </option>
                                         <option value="onbackorder">
-                                            { __( "On backorder", "woocommerce-stock-manager-pro" ) }
+                                            { __( "On backorder", "woocommerce-stock-manager" ) }
                                         </option>
                                         <option value="outofstock">
-                                            { __( "Out of stock", "woocommerce-stock-manager-pro" ) }
+                                            { __( "Out of stock", "woocommerce-stock-manager" ) }
                                         </option>
                                     </select>
                                 </div>
                             </div>
-                            <div>{__( "Results Found: ", "woocommerce-stock-manager-pro" )}{ totalProducts }</div>
+                            <div>{__( "Results Found: ", "woocommerce-stock-manager" )}{ totalProducts }</div>
                         </div>
                             {
                                 //If both the data nad the headers are set then only the Table will be shown else the <PuffLoader/> will be shown

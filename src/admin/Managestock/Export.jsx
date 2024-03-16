@@ -100,24 +100,24 @@ const Export = () => {
         <div className="woo-container">
             <div className='export-page'>
                 <div className="woo-page-title">
-                    <p>{ __( 'Export', 'woocommerce-stock-manager-pro' ) }</p>
+                    <p>{ __( 'Export', 'woocommerce-stock-manager' ) }</p>
                     <button class="import-export-btn" >
                         <Link to={ '?page=woo-stock-manager-setting#&tab=manage-stock' }>
                             <div className='wp-menu-image dashicons-before dashicons-arrow-left-alt'></div>
-                            { __( "Inventory Manager", "woocommerce-stock-manager-pro" ) }
+                            { __( "Inventory Manager", "woocommerce-stock-manager" ) }
                         </Link>
                     </button>
                 </div>
                 <div className="export-section">
-                    <p>{ __( 'Download a CSV file containing stock data. Choose specific fields for CSV download.', 'woocommerce-stock-manager-pro' ) }</p>
+                    <p>{ __( 'Download a CSV file containing stock data. Choose specific fields for CSV download.', 'woocommerce-stock-manager' ) }</p>
                     <div className='export-page-content'>
                         <div className='import-export-btn-section'>
                             <div>
-                                <button class="mvx-select-deselect-trigger" onClick={ handleSelectAll } >{ __( 'Select / Deselect All', 'woocommerce-stock-manager-pro' ) }</button>
+                                <button class="mvx-select-deselect-trigger" onClick={ handleSelectAll } >{ __( 'Select / Deselect All', 'woocommerce-stock-manager' ) }</button>
                             </div>
                         </div>
                         <div className="export-list-section">
-                            <p>{ __( 'Select fields for exports', 'woocommerce-stock-manager-pro' ) }</p>
+                            <p>{ __( 'Select fields for exports', 'woocommerce-stock-manager' ) }</p>
                             <div className='checkbox-container'>
                                 { splitCheckBoxData( 4 ) }
                             </div>
@@ -126,7 +126,7 @@ const Export = () => {
                             <div className='wp-menu-image dashicons-before dashicons-upload'></div>
                             {
                                 data &&
-                                <CSVLink enclosingCharacter={``} data={ Object.values( data ) } headers={ header } filename={ 'Products.csv'} >{ __( 'Export CSV', 'woocommerce-stock-manager-pro' ) }</CSVLink>
+                                <CSVLink enclosingCharacter={``} data={ Object.values( data ) } headers={ header } filename={ 'Products.csv'} >{ __( 'Export CSV', 'woocommerce-stock-manager' ) }</CSVLink>
                             }
                         </button>
                     </div>

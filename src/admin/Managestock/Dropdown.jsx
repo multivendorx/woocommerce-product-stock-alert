@@ -21,6 +21,6 @@ export default function Dropdown({ product , header , headerKey , options , hand
   }else if(header.dependent != undefined && product[header.dependent]){
     return dropdown();
   }else{
-    return <p className={`${header.class} ${product[headerKey]}`}>{__(options[product[headerKey]], "woocommerce-stock-manager-pro")}</p>;
+    return <p className={`${header.class} ${product[headerKey]}`}>{__(options[product[headerKey]], "woocommerce-stock-manager")}</p>;
   }
 }

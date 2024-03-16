@@ -250,8 +250,7 @@ class Admin {
                 'download_csv'              => __( 'Download CSV', 'woocommerce-stock-manager' ), 
                 'pro_settings_list'         => $pro_settings_list, 
                 'pro_url'                   => esc_url( STOCK_MANAGER_PRO_SHOP_URL ), 
-                'setting_string'            => $setting_string, 
-                'banner_show'               => get_option( 'woocommerce_stock_manager_pro_banner_hide' ) ? false : true, 
+                'setting_string'            => $setting_string,
                 'default_massages_fields'   => $woo_admin_massages_fields, 
                 'default_massages'          => Utill::get_form_settings_array( )
               ] ) );

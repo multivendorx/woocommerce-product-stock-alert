@@ -71,7 +71,8 @@ class StockManager {
     public function init_plugin( $file ) {
         $this -> load_plugin_textdomain( );
         $this -> init_classes( );
-    } 
+        do_action( 'stock_manager_loaded' );
+    }
     
     /**
      * Init all Stock Manageer classess.
