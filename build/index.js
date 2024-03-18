@@ -16663,59 +16663,60 @@ function banner() {
   const handleOpen = () => {
     setModal(true);
   };
-  var $ = jQuery;
-  $(document).ready(function () {
-    const $carouselItems = $('.carousel-item');
-    const totalItems = $carouselItems.length;
-    let currentIndex = 0;
-    let interval;
+  if (banner) {
+    document.addEventListener('DOMContentLoaded', function () {
+      const carouselItems = document.querySelectorAll('.carousel-item');
+      const totalItems = carouselItems.length;
+      let currentIndex = 0;
+      let interval;
 
-    // Function to show the current slide and hide others
-    function showSlide(index) {
-      $carouselItems.removeClass('active');
-      $carouselItems.eq(index).addClass('active');
-    }
+      // Function to show the current slide and hide others
+      function showSlide(index) {
+        carouselItems.forEach(item => item.classList.remove('active'));
+        carouselItems[index].classList.add('active');
+      }
 
-    // Function to go to the next slide
-    function nextSlide() {
-      currentIndex = (currentIndex + 1) % totalItems;
+      // Function to go to the next slide
+      function nextSlide() {
+        currentIndex = (currentIndex + 1) % totalItems;
+        showSlide(currentIndex);
+      }
+
+      // Function to go to the previous slide
+      function prevSlide() {
+        currentIndex = (currentIndex - 1 + totalItems) % totalItems;
+        showSlide(currentIndex);
+      }
+
+      // Start the auto-slide interval
+      function startAutoSlide() {
+        interval = setInterval(nextSlide, 7000); // Change slide every 7 seconds
+      }
+
+      // Stop the auto-slide interval
+      function stopAutoSlide() {
+        clearInterval(interval);
+      }
+
+      // Initialize the carousel
       showSlide(currentIndex);
-    }
-
-    // Function to go to the previous slide
-    function prevSlide() {
-      currentIndex = (currentIndex - 1 + totalItems) % totalItems;
-      showSlide(currentIndex);
-    }
-
-    // Start the auto-slide interval
-    function startAutoSlide() {
-      interval = setInterval(nextSlide, 7000); // Change slide every 7 seconds
-    }
-
-    // Stop the auto-slide interval
-    function stopAutoSlide() {
-      clearInterval(interval);
-    }
-
-    // Initialize the carousel
-    showSlide(currentIndex);
-    startAutoSlide();
-
-    // Handle next button click
-    $('#nextBtn').click(function () {
-      nextSlide();
-      stopAutoSlide();
       startAutoSlide();
-    });
 
-    // Handle previous button click
-    $('#prevBtn').click(function () {
-      prevSlide();
-      stopAutoSlide();
-      startAutoSlide();
+      // Handle next button click
+      document.getElementById('nextBtn').addEventListener('click', function () {
+        nextSlide();
+        stopAutoSlide();
+        startAutoSlide();
+      });
+
+      // Handle previous button click
+      document.getElementById('prevBtn').addEventListener('click', function () {
+        prevSlide();
+        stopAutoSlide();
+        startAutoSlide();
+      });
     });
-  });
+  }
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, stockManagerAppLocalizer.pro_active ? banner ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Dialog__WEBPACK_IMPORTED_MODULE_2__["default"], {
     className: "woo-module-popup",
     open: modal,
