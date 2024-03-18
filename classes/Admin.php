@@ -185,29 +185,6 @@ class Admin {
     public function enqueue_admin_script( ) {
         $suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
-        $subscription_page_string     =   [ 
-            'all'           =>  __( 'All', 'woocommerce-stock-manager' ), 
-            'subscribe'     =>  __( 'Subscribe', 'woocommerce-stock-manager' ), 
-            'unsubscribe'   =>  __( 'Unsubscribe', 'woocommerce-stock-manager' ), 
-            'mail_sent'     =>  __( 'Mail Sent', 'woocommerce-stock-manager' ), 
-            'search'        =>  __( 'Search by Email', 'woocommerce-stock-manager' ), 
-            'show_product'  =>  __( 'Search by Product Name', 'woocommerce-stock-manager' ), 
-            'daterenge'     =>  __( 'DD-MM-YYYY ~ DD-MM-YYYY', 'woocommerce-stock-manager' ), 
-        ];
-
-        $setting_string     =   [ 
-            'form_dec'              =>  __( 'Form Description', 'woocommerce-stock-manager' ), 
-            'submit_button_text'    =>  __( 'Submit Button Text', 'woocommerce-stock-manager' ), 
-            'background'            =>  __( 'Background', 'woocommerce-stock-manager' ), 
-            'border'                =>  __( 'Border', 'woocommerce-stock-manager' ), 
-            'hover_background'      =>  __( 'Hover Background', 'woocommerce-stock-manager' ), 
-            'hover_border'          =>  __( 'Hover Border', 'woocommerce-stock-manager' ), 
-            'hover_text'            =>  __( 'Hover Text', 'woocommerce-stock-manager' ), 
-            'font_size'             =>  __( 'Font Size', 'woocommerce-stock-manager' ), 
-            'border_radius'         =>  __( 'Border Radius', 'woocommerce-stock-manager' ), 
-            'border_size'           =>  __( 'Border Size', 'woocommerce-stock-manager' ), 
-        ];
-
         $pro_settings_list = apply_filters( 'woo_stock_manager_pro_settings_lists', [ 
             'ban_email_domains', 
             'ban_email_domain_text', 
@@ -242,19 +219,13 @@ class Admin {
             wp_set_script_translations( 'woo-stockmanager-script', 'woocommerce-stock-manager' );
             wp_localize_script( 'woo-stockmanager-script', 'stockManagerAppLocalizer', apply_filters( 'woo_stock_manager_settings', [ 
                 'apiUrl'                    => untrailingslashit( get_rest_url( ) ), 
-                'nonce'                     => wp_create_nonce( 'wp_rest' ), 
-                'default_alert_text'        => __( 'Receive in-stock notifications for this product.', 'woocommerce-stock-manager' ), 
-                'default_email_place'       => __( 'Enter your email', 'woocommerce-stock-manager' ), 
-                'default_alert_button'      => __( 'Notify me', 'woocommerce-stock-manager' ), 
+                'nonce'                     => wp_create_nonce( 'wp_rest' ),
                 'subscriber_list'           => SM( ) -> plugin_url . 'src/assets/images/subscriber-list.jpg',
-                'pro_active'                => apply_filters( 'woo_stock_manager_pro_active', 'free' ), 
-                'subscription_page_string'  => $subscription_page_string, 
-                'download_csv'              => __( 'Download CSV', 'woocommerce-stock-manager' ), 
+                'pro_active'                => apply_filters( 'woo_stock_manager_pro_active', 'free' ),
                 'settings_databases_value'  => $settings_databases_value,
                 'pro_settings_list'         => $pro_settings_list, 
-                'pro_url'                   => esc_url( STOCK_MANAGER_PRO_SHOP_URL ), 
-                'setting_string'            => $setting_string,
-                'default_massages_fields'   => $woo_admin_massages_fields, 
+                'pro_url'                   => esc_url( STOCK_MANAGER_PRO_SHOP_URL ),
+                'default_massages_fields'   => $woo_admin_massages_fields,
                 'default_massages'          => Utill::get_form_settings_array( )
               ] ) );
             wp_enqueue_style( 'woo_stockmanager_style', SM( ) -> plugin_url . 'build/index.css', [ ], SM( ) -> version );

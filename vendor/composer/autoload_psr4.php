@@ -5,6 +5,6 @@
 $vendorDir = dirname( __DIR__ );
 $baseDir = dirname( $vendorDir );
 
-return array( 
-    'StockManager\\' => array( $baseDir . '/classes' ), 
- );
+return [
+    'StockManager\\' => [ $baseDir . '/classes' ], 
+];

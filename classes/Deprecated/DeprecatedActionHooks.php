@@ -20,24 +20,24 @@ class DeprecatedActionHooks extends \WC_Deprecated_Hooks {
 	 *
 	 * @var array
 	 */
-	protected $deprecated_hooks = array( 
+	protected $deprecated_hooks = [ 
         'wc_product_stock_alert_new_subscriber_added' => 'dc_wc_product_stock_alert_new_subscriber_added', 
 		'woocommerce_stock_manager_form_before' 	  => 'woocommerce_product_stock_alert_form_before', 
 		'woocommerce_stock_manager_form_after' 		  => 'woocommerce_product_stock_alert_form_after', 
 		'woo_stock_manager_settings_after_save'       => 'woo_stock_alert_settings_after_save', 
-	 );
+	];
 
 	/**
 	 * Array of versions on each hook has been deprecated.
 	 *
 	 * @var array
 	 */
-	protected $deprecated_version = array( 
+	protected $deprecated_version = [ 
         'dc_wc_product_stock_alert_new_subscriber_added'=> '2.0.0', 
 		'woocommerce_product_stock_alert_form_before' 	=> '2.4.0', 
 		'woocommerce_product_stock_alert_form_after' 	=> '2.4.0', 
 		'woo_stock_alert_settings_after_save' 			=> '2.4.0', 
-	 );
+	];
 
 	/**
 	 * Hook into the new hook so we can handle deprecated hooks once fired.
@@ -45,7 +45,7 @@ class DeprecatedActionHooks extends \WC_Deprecated_Hooks {
 	 * @param string $hook_name Hook name.
 	 */
 	public function hook_in( $hook_name ) {
-		add_action( $hook_name, array( $this, 'maybe_handle_deprecated_hook' ), -1000, 8 );
+		add_action( $hook_name, [ $this, 'maybe_handle_deprecated_hook' ], -1000, 8 );
 	} 
 
 	/**

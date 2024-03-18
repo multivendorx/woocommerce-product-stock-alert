@@ -7,19 +7,19 @@ class Ajax {
 	public function __construct( ) {
 		
 		// Save customer email in database
-		add_action( 'wp_ajax_alert_ajax', array( &$this, 'subscribe_users' ) );
-		add_action( 'wp_ajax_nopriv_alert_ajax', array( &$this, 'subscribe_users' ) );
+		add_action( 'wp_ajax_alert_ajax', [ &$this, 'subscribe_users' ] );
+		add_action( 'wp_ajax_nopriv_alert_ajax', [ &$this, 'subscribe_users' ] );
 		// Delete unsubscribed users
-		add_action( 'wp_ajax_unsubscribe_button', array( $this, 'unsubscribe_users' ) );
-		add_action( 'wp_ajax_nopriv_unsubscribe_button', array( $this, 'unsubscribe_users' ) );
+		add_action( 'wp_ajax_unsubscribe_button', [ $this, 'unsubscribe_users' ] );
+		add_action( 'wp_ajax_nopriv_unsubscribe_button', [ $this, 'unsubscribe_users' ] );
 		// Export data
-		add_action( 'wp_ajax_export_subscribers', array( $this, 'export_CSV_data' ) );
+		add_action( 'wp_ajax_export_subscribers', [ $this, 'export_CSV_data' ] );
 		//add fields for variation product shortcode
-		add_action( 'wp_ajax_nopriv_get_variation_box_ajax', array( $this, 'get_variation_box_ajax' ) );
-		add_action( 'wp_ajax_get_variation_box_ajax', array( $this, 'get_variation_box_ajax' ) );
+		add_action( 'wp_ajax_nopriv_get_variation_box_ajax', [ $this, 'get_variation_box_ajax' ] );
+		add_action( 'wp_ajax_get_variation_box_ajax', [ $this, 'get_variation_box_ajax' ] );
 		//recaptcha version-3 validate
-		add_action( 'wp_ajax_recaptcha_validate_ajax', array( $this, 'recaptcha_validate_ajax' ) );
-		add_action( 'wp_ajax_nopriv_recaptcha_validate_ajax', array( $this, 'recaptcha_validate_ajax' ) );
+		add_action( 'wp_ajax_recaptcha_validate_ajax', [ $this, 'recaptcha_validate_ajax' ] );
+		add_action( 'wp_ajax_nopriv_recaptcha_validate_ajax', [ $this, 'recaptcha_validate_ajax' ] );
 	} 
 
 	/**

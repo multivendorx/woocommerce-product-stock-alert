@@ -191,7 +191,7 @@ export default function SubscribersList( ) {
                                             className="woo-btn btn-purple"
                                         >
                                             <i className="woo-font icon-download"></i>
-                                            { stockManagerAppLocalizer.download_csv }
+                                            { __( 'Download CSV', 'woocommerce-stock-manager' ) }
                                         </CSVLink>
                                     </div>
                                 </div>
@@ -225,7 +225,7 @@ export default function SubscribersList( ) {
 
                                 <div className="woo-wrap-bulk-all-date">
                                     <div className="woo-header-search-section">
-                                        <input type="text" placeholder={ stockManagerAppLocalizer.subscription_page_string.show_product }
+                                        <input type="text" placeholder={ __( 'Search by Product Name', 'woocommerce-stock-manager' ) }
                                             onChange={ ( event ) => {
                                                 if ( event.target.value.length > 3 ) {
                                                     setProductNameField ( event.target.value );
@@ -239,7 +239,7 @@ export default function SubscribersList( ) {
                                         <label>
                                             <i className="woo-font icon-search"></i>
                                         </label>
-                                        <input type="text" placeholder={ stockManagerAppLocalizer.subscription_page_string.search }
+                                        <input type="text" placeholder={ __( 'Search by Email', 'woocommerce-stock-manager' ) }
                                             onChange={ ( event ) => {
                                                 if ( event.target.value.length > 3 ) {
                                                     setEmailField ( event.target.value );
@@ -249,7 +249,7 @@ export default function SubscribersList( ) {
                                             }}
                                         />
                                     </div>                                    
-                                    <DateRangePicker placeholder={ stockManagerAppLocalizer.subscription_page_string.daterenge }
+                                    <DateRangePicker placeholder={ __( 'DD-MM-YYYY ~ DD-MM-YYYY', 'woocommerce-stock-manager' ) }
                                         onChange={ handleDateRangeChange }
                                     />
                                 </div>

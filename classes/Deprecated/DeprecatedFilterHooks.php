@@ -21,7 +21,7 @@ class DeprecatedFilterHooks extends \WC_Deprecated_Hooks {
 	 *
 	 * @var array
 	 */
-	protected $deprecated_hooks = array( 
+	protected $deprecated_hooks = [
 		'woo_product_stock_alert_do_complete_additional_task' 	=> 'dc_wc_product_stock_alert_do_complete_additional_task', 
 		'woo_product_stock_alert_add_vendor' 					=> 'dc_wc_product_stock_alert_add_vendor', 
 		'woocommerce_email_subject_stock_manager' 				=> 'woocommerce_email_subject_stock_alert', 
@@ -40,14 +40,14 @@ class DeprecatedFilterHooks extends \WC_Deprecated_Hooks {
 		'woo_stock_manager_pro_settings_lists' 					=> 'woocommerce_stock_alert_pro_settings_lists', 
 		'woo_stock_manager_pro_active' 							=> 'woo_stock_alert_pro_active', 
 		'woo_stock_manager_settings' 							=> 'stockalert_settings', 
-	 );
+	 ];
 
 	/**
 	 * Array of versions on each hook has been deprecated.
 	 *
 	 * @var array
 	 */
-	protected $deprecated_version = array( 
+	protected $deprecated_version = [ 
 		'dc_wc_product_stock_alert_add_vendor' 					=> '2.0.0', 
 		'dc_wc_product_stock_alert_do_complete_additional_task' => '2.0.0', 
 		'woocommerce_email_subject_stock_alert' 				=> '2.4.0', 
@@ -66,7 +66,7 @@ class DeprecatedFilterHooks extends \WC_Deprecated_Hooks {
 		'woocommerce_stock_alert_pro_settings_lists' 			=> '2.4.0', 
 		'woo_stock_alert_pro_active' 							=> '2.4.0', 
 		'stockalert_settings' 									=> '2.4.0', 
-	 );
+	 ];
 
 	/**
 	 * Hook into the new hook so we can handle deprecated hooks once fired.
@@ -74,7 +74,7 @@ class DeprecatedFilterHooks extends \WC_Deprecated_Hooks {
 	 * @param string $hook_name Hook name.
 	 */
 	public function hook_in( $hook_name ) {
-		add_filter( $hook_name, array( $this, 'maybe_handle_deprecated_hook' ), -1000, 8 );
+		add_filter( $hook_name, [ $this, 'maybe_handle_deprecated_hook' ], -1000, 8 );
 	} 
 
 	/**

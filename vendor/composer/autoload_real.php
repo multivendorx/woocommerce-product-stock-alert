@@ -22,9 +22,9 @@ class ComposerAutoloaderInit18e3680eb6e1550dee239c6ead15996a
             return self::$loader;
         } 
 
-        spl_autoload_register( array( 'ComposerAutoloaderInit18e3680eb6e1550dee239c6ead15996a', 'loadClassLoader' ), true, true );
+        spl_autoload_register( [ 'ComposerAutoloaderInit18e3680eb6e1550dee239c6ead15996a', 'loadClassLoader' ], true, true );
         self::$loader = $loader = new \Composer\Autoload\ClassLoader( \dirname( __DIR__ ) );
-        spl_autoload_unregister( array( 'ComposerAutoloaderInit18e3680eb6e1550dee239c6ead15996a', 'loadClassLoader' ) );
+        spl_autoload_unregister( [ 'ComposerAutoloaderInit18e3680eb6e1550dee239c6ead15996a', 'loadClassLoader' ] );
 
         require __DIR__ . '/autoload_static.php';
         call_user_func( \Composer\Autoload\ComposerStaticInit18e3680eb6e1550dee239c6ead15996a::getInitializer( $loader ) );

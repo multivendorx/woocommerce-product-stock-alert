@@ -1,6 +1,7 @@
 /* global stockManagerAppLocalizer */
 import React, {useState, useEffect, useRef} from 'react';
 import axios from 'axios';
+import { __ } from "@wordpress/i18n";
 import Dialog from "@mui/material/Dialog";
 import Popoup from '../PopupContent/PopupContent';
 import TextArea from '../CustomInputs/TextArea';
@@ -247,49 +248,49 @@ const DynamicForm = ({ currentTab, tabs, setTabs }) => {
 							<div class="left_side_wrap">
 								<ColorInput
 									wrapperClass={"woo-color-picker-wrap"}
-									description={stockManagerAppLocalizer.setting_string.form_dec}
+									description={ __( 'Form Description', 'woocommerce-stock-manager' ) }
 									inputClass={"woo-setting-color-picker"}
 									onChange={(e) => { handleOnChange(e, 'alert_text_color') }}
 									value={settings.alert_text_color}
 								/>
 								<ColorInput
 									wrapperClass={"woo-color-picker-wrap"}
-									description={stockManagerAppLocalizer.setting_string.submit_button_text}
+									description={ __( 'Submit Button Text', 'woocommerce-stock-manager' ) }
 									inputClass={"woo-setting-color-picker"}
 									onChange={(e) => { handleOnChange(e, 'button_text_color') }}
 									value={settings.button_text_color}
 								/>
 								<ColorInput
 									wrapperClass={"woo-color-picker-wrap"}
-									description={stockManagerAppLocalizer.setting_string.background}
+									description={ __( 'Background', 'woocommerce-stock-manager' ) }
 									inputClass={"woo-setting-color-picker"}
 									onChange={(e) => { handleOnChange(e, 'button_background_color') }}
 									value={settings.button_background_color}
 								/>
 								<ColorInput
 									wrapperClass={"woo-color-picker-wrap"}
-									description={stockManagerAppLocalizer.setting_string.border}
+									description={ __( 'Border', 'woocommerce-stock-manager' ) }
 									inputClass={"woo-setting-color-picker"}
 									onChange={(e) => { handleOnChange(e, 'button_border_color') }}
 									value={settings.button_border_color}
 								/>
 								<ColorInput
 									wrapperClass={"woo-color-picker-wrap"}
-									description={stockManagerAppLocalizer.setting_string.hover_background}
+									description={ __( 'Hover Background', 'woocommerce-stock-manager' ) }
 									inputClass={"woo-setting-color-picker"}
 									onChange={(e) => { handleOnChange(e, 'button_background_color_onhover') }}
 									value={settings.button_background_color_onhover}
 								/>
 								<ColorInput
 									wrapperClass={"woo-color-picker-wrap"}
-									description={stockManagerAppLocalizer.setting_string.hover_border}
+									description={ __( 'Hover Border', 'woocommerce-stock-manager' ) }
 									inputClass={"woo-setting-color-picker"}
 									onChange={(e) => { handleOnChange(e, 'button_border_color_onhover') }}
 									value={settings.button_border_color_onhover}
 								/>
 								<ColorInput
 									wrapperClass={"woo-color-picker-wrap"}
-									description={stockManagerAppLocalizer.setting_string.hover_text}
+									description={ __( 'Hover Text', 'woocommerce-stock-manager' ) }
 									inputClass={"woo-setting-color-picker"}
 									onChange={(e) => { handleOnChange(e, 'button_text_color_onhover') }}
 									value={settings.button_text_color_onhover}
@@ -300,7 +301,7 @@ const DynamicForm = ({ currentTab, tabs, setTabs }) => {
 									wrapperClass={"woo-size-picker-wrap"}
 									subWrapperClass={"woo-progress-picker-wrap"}
 									inputClass={"woo-setting-range-picker"}
-									description={stockManagerAppLocalizer.setting_string.font_size}
+									description={ __( 'Font Size', 'woocommerce-stock-manager' ) }
 									id={"button_font_size"}
 									min={"0"}
 									max={"30"}
@@ -312,7 +313,7 @@ const DynamicForm = ({ currentTab, tabs, setTabs }) => {
 									wrapperClass={"woo-size-picker-wrap"}
 									subWrapperClass={"woo-progress-picker-wrap"}
 									inputClass={"woo-setting-range-picker"}
-									description={stockManagerAppLocalizer.setting_string.border_radius}
+									description={ __( 'Border Radius', 'woocommerce-stock-manager' ) }
 									id={"button_border_radious"}
 									min={"0"}
 									max={"30"}
@@ -324,7 +325,7 @@ const DynamicForm = ({ currentTab, tabs, setTabs }) => {
 									wrapperClass={"woo-size-picker-wrap"}
 									subWrapperClass={"woo-progress-picker-wrap"}
 									inputClass={"woo-setting-range-picker"}
-									description={stockManagerAppLocalizer.setting_string.border_size}
+									description={ __( 'Border Size', 'woocommerce-stock-manager' ) }
 									id={"button_border_size"}
 									min={"0"}
 									max={"30"}
@@ -342,11 +343,11 @@ const DynamicForm = ({ currentTab, tabs, setTabs }) => {
 							{
 								<div class="example_form_view">
 									<div class="example_form_alert_text" style={{ color: settings.alert_text_color }}>
-										{settings.alert_text ? settings.alert_text : stockManagerAppLocalizer.default_alert_text}
+										{settings.alert_text ? settings.alert_text : __( 'Receive in-stock notifications for this product.', 'woocommerce-stock-manager' )}
 									</div>
 									<div class="example_form">
 										<div class="example_form_email">
-											<input type="text" value={settings.email_placeholder_text ? settings.email_placeholder_text : stockManagerAppLocalizer.default_email_place} readOnly />
+											<input type="text" value={settings.email_placeholder_text ? settings.email_placeholder_text :  __( 'Enter your email', 'woocommerce-stock-manager' )} readOnly />
 										</div>
 										<div className='example_alert_button'
 											onMouseEnter={(e) => { setHoverOn(true) }}
@@ -368,7 +369,7 @@ const DynamicForm = ({ currentTab, tabs, setTabs }) => {
 												width: 'fit-content',
 											}}
 										>
-											{settings.button_text ? settings.button_text : stockManagerAppLocalizer.default_alert_button}
+											{settings.button_text ? settings.button_text : __( 'Notify me', 'woocommerce-stock-manager' )}
 										</div>
 									</div>
 								</div>

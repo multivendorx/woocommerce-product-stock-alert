@@ -84,14 +84,14 @@ class SubscriberConfirmationEmail extends \WC_Email {
 	 */
 	function get_content_html( ) {
 		ob_start( );
-		wc_get_template( $this -> template_html, array( 
+		wc_get_template( $this -> template_html, [
 			'email_heading' => $this -> get_heading( ), 
 			'product' 		=> $this -> product, 
 			'customer_email'=> $this -> recipient, 
 			'sent_to_admin' => false, 
 			'plain_text' 	=> false, 
 			'email' 		=> $this, 
-		 ), '', $this -> template_base );
+		], '', $this -> template_base );
 		return ob_get_clean( );
 	} 
 
@@ -103,13 +103,13 @@ class SubscriberConfirmationEmail extends \WC_Email {
 	 */
 	function get_content_plain( ) {
 		ob_start( );
-		wc_get_template( $this -> template_plain, array( 
+		wc_get_template( $this -> template_plain, [
 			'email_heading' => $this -> get_heading( ), 
 			'product' 		=> $this -> product, 
 			'customer_email'=> $this -> recipient, 
 			'sent_to_admin' => false, 
 			'plain_text' 	=> true
-		 ) , '', $this -> template_base );
+		], '', $this -> template_base );
 		return ob_get_clean( );
 	} 
 	

@@ -47,8 +47,8 @@ class AdminEmail extends \WC_Email {
 	 */
 	function trigger( $recipient, $product, $customer_email ) {
 		
-		$this -> recipient = $recipient;
-		$this -> product = $product;
+		$this -> recipient 		= $recipient;
+		$this -> product 		= $product;
 		$this -> customer_email = $customer_email;
 		
 		if ( !$this -> is_enabled( ) || ! $this -> get_recipient( ) ) {
@@ -86,14 +86,14 @@ class AdminEmail extends \WC_Email {
 	 */
 	function get_content_html( ) {
 		ob_start( );
-		wc_get_template( $this -> template_html, array( 
+		wc_get_template( $this -> template_html, [
 			'email_heading' => $this -> get_heading( ), 
 			'product' 		=> $this -> product, 
 			'customer_email'=> $this -> customer_email, 
 			'sent_to_admin' => true, 
 			'plain_text' 	=> false, 
 			'email'			=> $this, 
-		 ), '', $this -> template_base );
+		 ], '', $this -> template_base );
 		return ob_get_clean( );
 	} 
 
@@ -105,13 +105,13 @@ class AdminEmail extends \WC_Email {
 	 */
 	function get_content_plain( ) {
 		ob_start( );
-		wc_get_template( $this -> template_plain, array( 
+		wc_get_template( $this -> template_plain, [ 
 			'email_heading'  => $this -> get_heading( ), 
 			'product' 		 => $this -> product, 
 			'customer_email' => $this -> customer_email, 
 			'sent_to_admin'  => true, 
 			'plain_text'     => true
-		 ) , '', $this -> template_base );
+		 ], '', $this -> template_base );
 		return ob_get_clean( );
 	} 
 	
