@@ -5,6 +5,7 @@ import { __ } from '@wordpress/i18n';
 import { Link } from 'react-router-dom';
 
 const Import = ( ) => {
+    //To fetch all the data for the sample CSV
     useEffect( ( ) => {
         if ( stockManagerAppLocalizer.pro_active != 'free' ) {
             axios({
@@ -25,6 +26,8 @@ const Import = ( ) => {
         setFile( event.target.files[0] );
         setFilename( event.target.files[0].name )
     };
+
+    //Headers to generate the Sample CSV
     const header = [
         { label: 'SKU'          , key: 'sku' },
         { label: 'Manage stock' , key: 'manage_stock' },
@@ -32,6 +35,8 @@ const Import = ( ) => {
         { label: 'Backorders'   , key: 'backorders' },
         { label: 'Stock'        , key: 'stock_quantity' },
     ];
+
+    //Function that process the csv
     const processCSV = (str, delim = ',') => {
         const headers = str.slice( 0, str.indexOf( '\n' ) ).split( delim );
         const rows = str.slice( str.indexOf( '\n' ) + 1 ).split( '\n' );
@@ -45,6 +50,8 @@ const Import = ( ) => {
         })
         return processedCsvData;
     };
+
+    //Function to upload the CSV data
     const handleUpload = () => {
         if ( file ) {
             const reader = new FileReader( );
@@ -64,6 +71,7 @@ const Import = ( ) => {
             }
         }
     };
+
     return (
         <div className="woo-container">
             <div className='import-page'>

@@ -15,13 +15,14 @@ export default function SubscribersList( ) {
     const fetchSubscribersDataUrl = `${ stockManagerAppLocalizer.apiUrl }/stockmanager/v1/get-subscriber-list`;
     const [ rowsPerPage , setRowsPerPage ] = useState( 10 );
     const [ currentPage , setCurrentPage ] = useState( 0 );
-    const [ post_status , setPost_status] = useState( 'any' );
+    const [ post_status , setPost_status ] = useState( 'any' );
     const [ productNameField , setProductNameField ] = useState( '' );
     const [ emailField , setEmailField ] = useState( '' );
     const [ data, setData ] = useState([ ]);
     const [ totalRows , setTotalRows ] = useState( );
-    const [showLoader, setShowLoader] = useState(true);
-    const [showNoDataText, setShowNoDataText] = useState(false);
+    const [ showLoader, setShowLoader ] = useState( true );
+    const [ showNoDataText, setShowNoDataText ] = useState( false );
+    const [ openDialog, setOpenDialog ] = useState ( false );
     const [ subscribersStatus, setSubscribersStatus ] = useState( {
         totalSubscribers: 0 ,
         subscribed: 0,
@@ -35,14 +36,14 @@ export default function SubscribersList( ) {
         start_date: sevenDaysAgo,
         end_date: currentDate
     } )
-    
+
     useEffect(() => {
-        const timer = setTimeout(() => {
-            setShowLoader(false);
-            setShowNoDataText(true);
+        const timer = setTimeout( ( ) => {
+            setShowLoader( false );
+            setShowNoDataText( true );
         }, 6000); // 5 seconds
 
-        return () => clearTimeout(timer); // Cleanup the timer on component unmount
+        return ( ) => clearTimeout(timer); // Cleanup the timer on component unmount
 
     }, []);
 
@@ -51,6 +52,7 @@ export default function SubscribersList( ) {
         margin: 0 auto;
         border-color: red;
     `;
+
     useEffect( ( ) => {
         if( stockManagerAppLocalizer.pro_active != 'free' ) {
             //Fetch the data to show in the table   
@@ -75,7 +77,7 @@ export default function SubscribersList( ) {
         }
         //Data to be loaded for the changes of the following states
     }, [ rowsPerPage, currentPage, post_status, productNameField, emailField, date ] );
-    const [ openDialog, setOpenDialog ] = useState ( false );
+    
     
     const handleDateRangeChange = ( dates ) => {
         if ( dates != null ) {
@@ -108,7 +110,7 @@ export default function SubscribersList( ) {
             selector: row => row.status,
         }
     ];
-    //Pagination component
+    //Pagination component to render Pagination
     const Pagination = ( ) => {
         const handlePageChange = ( { selected } ) => {
             setCurrentPage ( selected );
@@ -196,24 +198,24 @@ export default function SubscribersList( ) {
                                 <div className="woo-search-and-multistatus-wrap">
                                     <ul className="woo-multistatus-ul">
                                         <li className={`woo-multistatus-item ${ post_status == 'any' ? 'status-active' : '' } `}>
-                                            <div onClick={ () => { setPost_status( 'any') ;setTotalRows ( subscribersStatus.totalSubscribers )  } } className="woo-multistatus-check-all ">
+                                            <div onClick={ ( ) => { setPost_status( 'any') ;setTotalRows ( subscribersStatus.totalSubscribers )  } } className="woo-multistatus-check-all ">
                                                 {`All (${ subscribersStatus.totalSubscribers })`}
                                             </div>
                                         </li>
                                         <li  className="woo-multistatus-item woo-divider"></li>
-                                        <li onClick={ () => { setPost_status ( 'woo_subscribed' ) ;setTotalRows ( subscribersStatus.subscribed ) } } className={`woo-multistatus-item ${ post_status == 'woo_subscribed' ? 'status-active' : '' } `}>
+                                        <li onClick={ ( ) => { setPost_status ( 'woo_subscribed' ) ;setTotalRows ( subscribersStatus.subscribed ) } } className={`woo-multistatus-item ${ post_status == 'woo_subscribed' ? 'status-active' : '' } `}>
                                             <div className="woo-multistatus-check-subscribe">
                                                 {`Subscribe (${ subscribersStatus.subscribed })`}
                                             </div>
                                         </li>
                                         <li  className="woo-multistatus-item woo-divider"></li>
-                                        <li onClick={ () => { setPost_status ( 'woo_unsubscribed' ) ;setTotalRows ( subscribersStatus.unsubscribed ) } } className={`woo-multistatus-item ${ post_status == 'woo_unsubscribed' ? 'status-active' : '' } `}>
+                                        <li onClick={ ( ) => { setPost_status ( 'woo_unsubscribed' ) ;setTotalRows ( subscribersStatus.unsubscribed ) } } className={`woo-multistatus-item ${ post_status == 'woo_unsubscribed' ? 'status-active' : '' } `}>
                                             <div className="woo-multistatus-check-unpaid">
                                                 {`Unsubscribe (${ subscribersStatus.unsubscribed })`}
                                             </div>
                                         </li>
                                         <li className="woo-multistatus-item woo-divider"></li>
-                                        <li onClick={ () => { setPost_status ( 'woo_mailsent' ) ;setTotalRows ( subscribersStatus.mailSent ) } } className={`woo-multistatus-item ${ post_status == 'woo_mailsent' ? 'status-active' : '' } `}>
+                                        <li onClick={ ( ) => { setPost_status ( 'woo_mailsent' ) ;setTotalRows ( subscribersStatus.mailSent ) } } className={`woo-multistatus-item ${ post_status == 'woo_mailsent' ? 'status-active' : '' } `}>
                                             <div className="woo-multistatus-check-unpaid">
                                                 {`Mail Sent (${ subscribersStatus.mailSent })`}
                                             </div>
@@ -260,7 +262,7 @@ export default function SubscribersList( ) {
                                                 data={ data }
                                                 selectableRows
                                             />
-                                            { Pagination() }
+                                            { Pagination( ) }
                                         </div>
                                     :
                                         <>

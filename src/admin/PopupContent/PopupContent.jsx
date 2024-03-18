@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 
-const Propopup = () => {
+const Propopup = ( ) => {
     return (
         <>
             <DialogContent>

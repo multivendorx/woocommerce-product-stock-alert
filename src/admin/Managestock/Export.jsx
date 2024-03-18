@@ -16,6 +16,8 @@ const Export = () => {
         { label: 'Backorders', key: 'product_backorders' },
         { label: 'Stock', key: 'product_stock_quantity' },
     ];
+
+    //Fetches the data for generating the csv
     useEffect( ( ) => {
         if (stockManagerAppLocalizer.pro_active != 'free') {
             axios({
@@ -31,6 +33,7 @@ const Export = () => {
     const [ data, setData ] = useState([ ]);
     const [ header, setHeader ] = useState( headers );
     const [ selectAll, setSelectAll ] = useState( true );
+
     //Data to Generate the Checkbox
     const [ checkboxData, setCheckboxData ] = useState([
         { Name: 'Id',           Value: 'product_id',             Checked: true },
@@ -43,6 +46,7 @@ const Export = () => {
         { Name: 'Stock',        Value: 'product_stock_quantity', Checked: true }
     ]);
 
+    //Handles the selection of a csv field
     const handleCheck = ( e, label, key ) => {
         setCheckboxData( ( prevCheckboxData ) =>
             prevCheckboxData.map( ( checkbox ) =>
@@ -71,6 +75,8 @@ const Export = () => {
             setSelectAll( false );
         }
     };
+
+    //splits the checkbox data in parts
     function splitCheckBoxData( parts ) {
         const chunks = [ ];
         for ( let i = 0; i < checkboxData.length; i += parts ) {

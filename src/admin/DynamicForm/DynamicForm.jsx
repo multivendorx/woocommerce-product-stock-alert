@@ -24,11 +24,13 @@ const DynamicForm = ({ currentTab, tabs, setTabs }) => {
 	const tabfields = tabs[currentTab].module;
 	const submitUrl = tabs[currentTab].apiurl;
 
+	//Changes the current Tab
 	useEffect(() => {
 		setSettings(stockManagerAppLocalizer.settings_databases_value[currentTab] ? stockManagerAppLocalizer.settings_databases_value[currentTab] :{});
 		isFirstRender.current = true;
 	}, [currentTab]);
 
+	//Updates the Tab Settings
 	useEffect(() => {
 		if (!settings) return;
 		if (isFirstRender.current) {
@@ -69,6 +71,7 @@ const DynamicForm = ({ currentTab, tabs, setTabs }) => {
 		}
 	}
 
+	//Handles the setting change 
 	const handleOnChange = ( e, key, type = 'single', form_type = '', array_values = [] ) => {
 		if ( !stockManagerAppLocalizer.pro_settings_list.includes( key ) ) {
 			if ( type === 'single' ) {
@@ -112,6 +115,7 @@ const DynamicForm = ({ currentTab, tabs, setTabs }) => {
 		}
 	}
 
+	//Fetches the mailchimp list
 	const handleGetMailchimpList = () => {
 		if (stockManagerAppLocalizer.pro_active != 'free' ) {
 			axios
@@ -126,6 +130,7 @@ const DynamicForm = ({ currentTab, tabs, setTabs }) => {
 		}
 	}
 
+	//Functional component to render the form components
 	const renderForm = () => {
 		return tabfields.map((inputField) => {
 			const key = inputField.key;

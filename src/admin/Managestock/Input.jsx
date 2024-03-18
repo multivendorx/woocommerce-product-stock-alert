@@ -2,6 +2,8 @@ import React from 'react';
 import { __ } from "@wordpress/i18n";
 
 export default function Input( { headerKey, header, product, handleChange, handleInputMouseOut, editButtonOnClick } ) {
+
+    //Functional component to return the edit icon
     const GetIcon = (  ) => {
         return (
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" id="edit">
@@ -9,6 +11,8 @@ export default function Input( { headerKey, header, product, handleChange, handl
             </svg>
           );
     }
+
+    //Functional component to render the input element
     function RenderInput( button , value , type ) {
         return(
             <>
