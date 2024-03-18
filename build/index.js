@@ -17219,7 +17219,7 @@ const DynamicForm = ({
   const tabfields = tabs[currentTab].module;
   const submitUrl = tabs[currentTab].apiurl;
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-    setSettings(tabs[currentTab].databases_value ? tabs[currentTab].databases_value : {});
+    setSettings(stockManagerAppLocalizer.settings_databases_value[currentTab] ? stockManagerAppLocalizer.settings_databases_value[currentTab] : {});
     isFirstRender.current = true;
   }, [currentTab]);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
@@ -18882,6 +18882,8 @@ function SubscribersList() {
   const [emailField, setEmailField] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
   const [data, setData] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
   const [totalRows, setTotalRows] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)();
+  const [showLoader, setShowLoader] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true);
+  const [showNoDataText, setShowNoDataText] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
   const [subscribersStatus, setSubscribersStatus] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
     totalSubscribers: 0,
     subscribed: 0,
@@ -18895,15 +18897,14 @@ function SubscribersList() {
     start_date: sevenDaysAgo,
     end_date: currentDate
   });
-  const debounce = (func, delay) => {
-    let timer;
-    return (...args) => {
-      clearTimeout(timer);
-      timer = setTimeout(() => {
-        func(...args);
-      }, delay);
-    };
-  };
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    const timer = setTimeout(() => {
+      setShowLoader(false);
+      setShowNoDataText(true);
+    }, 6000); // 5 seconds
+
+    return () => clearTimeout(timer); // Cleanup the timer on component unmount
+  }, []);
   const override = (0,_emotion_react__WEBPACK_IMPORTED_MODULE_5__.css)`
         display: block;
         margin: 0 auto;
@@ -19126,12 +19127,13 @@ function SubscribersList() {
     columns: columns,
     data: data,
     selectableRows: true
-  }), Pagination()) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)((react_spinners_PuffLoader__WEBPACK_IMPORTED_MODULE_9___default()), {
-    css: override,
+  }), Pagination()) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, showLoader && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)((react_spinners_PuffLoader__WEBPACK_IMPORTED_MODULE_9___default()), {
     color: '#cd0000',
     size: 200,
     loading: true
-  })))));
+  }), showNoDataText && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "no-data-text"
+  }, "There are no data to display"))))));
 }
 
 /***/ }),
@@ -75873,7 +75875,7 @@ module.exports = JSON.parse('{"form_submission":{"tablabel":"Submission Messages
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"general":{"tablabel":"General","description":"Configure basic product manager settings. ","icon":"icon-general","apiurl":"save-stockmanager","priority":1,"module":[{"key":"is_double_optin","type":"checkbox","class":"woo-toggle-checkbox","label":"Subscriber Double Opt-in","options":[{"key":"is_double_optin","label":"Upgrade to <a href=\\"STOCK_MANAGER_PRO_SHOP_URL\\" target=\\"_blank\\"><span class=\\"pro-strong\\">Pro</span></a> to enable Double Opt-in flow for subscription confirmation.","value":"is_double_optin"}]},{"key":"double_opt_in_success","type":"textarea","class":"woo-setting-wpeditor-class","desc":"Default: Kindly check your inbox to confirm the subscription.","label":"Double Opt-In Success Message","depend_checkbox":"is_double_optin"},{"key":"separator_content","type":"section","label":""},{"key":"is_enable_backorders","type":"checkbox","label":"Allow Subscriptions with Active Backorders","class":"woo-toggle-checkbox","options":[{"key":"is_enable_backorders","label":"Enabling this setting allows users to subscribe to out-of-stock products, even when the backorder option is enabled.","value":"is_enable_backorders"}]},{"key":"separator_content","type":"section","label":""},{"key":"is_enable_no_interest","type":"checkbox","label":"Display Subscriber Count for Out of Stock Items","class":"woo-toggle-checkbox","options":[{"key":"is_enable_no_interest","label":"Enabling this setting shows the subscriber count on the single product page.","value":"is_enable_no_interest"}]},{"key":"shown_interest_text","type":"textarea","class":"woo-setting-wpeditor-class","label":"Subscriber Count Notification Message","desc":"Personalize the notification text to let users know about the quantity of subscribers for out-of-stock item. Note: Use %no_of_subscribed% as number of interest/subscribed persons.","depend_checkbox":"is_enable_no_interest"},{"key":"separator_content","type":"section","label":""},{"key":"is_recaptcha_enable","type":"checkbox","label":"Enable  reCAPTCHA","class":"woo-toggle-checkbox","options":[{"key":"is_recaptcha_enable","label":"Upgrade to <a href=\\"STOCK_MANAGER_PRO_SHOP_URL\\" target=\\"_blank\\"><span class=\\"pro-strong\\">Pro</span></a> for unlocking reCAPTCHA for out-of-stock form subscriptions.","value":"is_recaptcha_enable"}]},{"key":"v3_site_key","type":"text","label":"Site Key","depend_checkbox":"is_recaptcha_enable"},{"key":"v3_secret_key","type":"text","label":"Secret Key","depend_checkbox":"is_recaptcha_enable"},{"key":"separator_content","type":"section","label":""},{"key":"additional_alert_email","type":"textarea","class":"woo-setting-wpeditor-class","desc":"Set the email address to receive notifications when a user subscribes to an out-of-stock product. You can add multiple comma-separated emails.<br/> Default: The admin\'s email is set as the receiver. Exclude the admin\'s email from the list to exclude admin from receiving these notifications.","label":"Recipient Email for New Subscriber"}]}}');
+module.exports = JSON.parse('{"general":{"tablabel":"General","description":"Configure basic product manager settings. ","icon":"icon-general","apiurl":"save-stockmanager","priority":1,"module":[{"key":"is_double_optin","type":"checkbox","class":"woo-toggle-checkbox","label":"Subscriber Double Opt-in","options":[{"key":"is_double_optin","label":"Upgrade to <a href=\\"https://multivendorx.com/woocommerce-product-stock-manager-notifier-pro/?utm_source=WordPressAdmin&utm_medium=PluginSettings&utm_campaign=productsstockmanager\\" target=\\"_blank\\"><span class=\\"pro-strong\\">Pro</span></a> to enable Double Opt-in flow for subscription confirmation.","value":"is_double_optin"}]},{"key":"double_opt_in_success","type":"textarea","class":"woo-setting-wpeditor-class","desc":"Default: Kindly check your inbox to confirm the subscription.","label":"Double Opt-In Success Message","depend_checkbox":"is_double_optin"},{"key":"separator_content","type":"section","label":""},{"key":"is_enable_backorders","type":"checkbox","label":"Allow Subscriptions with Active Backorders","class":"woo-toggle-checkbox","options":[{"key":"is_enable_backorders","label":"Enabling this setting allows users to subscribe to out-of-stock products, even when the backorder option is enabled.","value":"is_enable_backorders"}]},{"key":"separator_content","type":"section","label":""},{"key":"is_enable_no_interest","type":"checkbox","label":"Display Subscriber Count for Out of Stock Items","class":"woo-toggle-checkbox","options":[{"key":"is_enable_no_interest","label":"Enabling this setting shows the subscriber count on the single product page.","value":"is_enable_no_interest"}]},{"key":"shown_interest_text","type":"textarea","class":"woo-setting-wpeditor-class","label":"Subscriber Count Notification Message","desc":"Personalize the notification text to let users know about the quantity of subscribers for out-of-stock item. Note: Use %no_of_subscribed% as number of interest/subscribed persons.","depend_checkbox":"is_enable_no_interest"},{"key":"separator_content","type":"section","label":""},{"key":"is_recaptcha_enable","type":"checkbox","label":"Enable  reCAPTCHA","class":"woo-toggle-checkbox","options":[{"key":"is_recaptcha_enable","label":"Upgrade to <a href=\\"STOCK_MANAGER_PRO_SHOP_URL\\" target=\\"_blank\\"><span class=\\"pro-strong\\">Pro</span></a> for unlocking reCAPTCHA for out-of-stock form subscriptions.","value":"is_recaptcha_enable"}]},{"key":"v3_site_key","type":"text","label":"Site Key","depend_checkbox":"is_recaptcha_enable"},{"key":"v3_secret_key","type":"text","label":"Secret Key","depend_checkbox":"is_recaptcha_enable"},{"key":"separator_content","type":"section","label":""},{"key":"additional_alert_email","type":"textarea","class":"woo-setting-wpeditor-class","desc":"Set the email address to receive notifications when a user subscribes to an out-of-stock product. You can add multiple comma-separated emails.<br/> Default: The admin\'s email is set as the receiver. Exclude the admin\'s email from the list to exclude admin from receiving these notifications.","label":"Recipient Email for New Subscriber"}]}}');
 
 /***/ }),
 

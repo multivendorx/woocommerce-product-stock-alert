@@ -108,8 +108,6 @@ const GoogleMap = (props) => {
 		geocoder.geocode(
 			{ location: { lat: position.lat, lng: position.lng } },
 			(results, status) => {
-				console.log(results);
-				console.log(status);
 				if (status === 'OK') {
 					if (results[0]) {
                         setZoom(12);

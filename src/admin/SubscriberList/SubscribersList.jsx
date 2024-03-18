@@ -11,6 +11,7 @@ import PuffLoader from 'react-spinners/PuffLoader';
 import Popoup from '../PopupContent/PopupContent';
 const { __ } = wp.i18n;
 export default function SubscribersList( ) {
+
     const fetchSubscribersDataUrl = `${ stockManagerAppLocalizer.apiUrl }/stockmanager/v1/get-subscriber-list`;
     const [ rowsPerPage , setRowsPerPage ] = useState( 10 );
     const [ currentPage , setCurrentPage ] = useState( 0 );
@@ -19,6 +20,8 @@ export default function SubscribersList( ) {
     const [ emailField , setEmailField ] = useState( '' );
     const [ data, setData ] = useState([ ]);
     const [ totalRows , setTotalRows ] = useState( );
+    const [showLoader, setShowLoader] = useState(true);
+    const [showNoDataText, setShowNoDataText] = useState(false);
     const [ subscribersStatus, setSubscribersStatus ] = useState( {
         totalSubscribers: 0 ,
         subscribed: 0,
@@ -32,16 +35,16 @@ export default function SubscribersList( ) {
         start_date: sevenDaysAgo,
         end_date: currentDate
     } )
+    
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setShowLoader(false);
+            setShowNoDataText(true);
+        }, 6000); // 5 seconds
 
-    const debounce = (func, delay) => {
-        let timer;
-        return (...args) => {
-          clearTimeout(timer);
-          timer = setTimeout(() => {
-            func(...args);
-          }, delay);
-        };
-    };
+        return () => clearTimeout(timer); // Cleanup the timer on component unmount
+
+    }, []);
 
     const override = css`
         display: block;
@@ -260,12 +263,18 @@ export default function SubscribersList( ) {
                                             { Pagination() }
                                         </div>
                                     :
-                                        <PuffLoader
-                                            css={ override }
-                                            color={ '#cd0000' }
-                                            size={ 200 }
-                                            loading={ true }
-                                        />
+                                        <>
+                                            {showLoader && (
+                                                <PuffLoader
+                                                    color={'#cd0000'}
+                                                    size={200}
+                                                    loading={true}
+                                                />
+                                            )}
+                                            {showNoDataText && (
+                                                <div className='no-data-text' >There are no data to display</div>
+                                            )}
+                                        </>
                                 }                                
                             </div>
                         </div>

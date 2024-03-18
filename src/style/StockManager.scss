@@ -58,6 +58,11 @@ $manageStock-scroll-color: #ece8f1;
   align-items: center;
   gap: 0.5rem;
 }
+.no-data-text{
+  display: flex;
+  justify-content: center;
+  padding: 24px;
+}
 
 .woo-search-and-multistatus-wrap {
   padding: 0;

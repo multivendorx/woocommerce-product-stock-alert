@@ -25,7 +25,7 @@ class Admin {
         add_filter( 'handle_bulk_actions-edit-product', [ $this, 'subscribers_bulk_action_handler' ], 10, 3 );
         add_action( 'admin_notices', [ $this, 'subscribers_bulk_action_admin_notice' ] );
         add_action( 'admin_print_styles-plugins.php', [ $this, 'admin_plugin_page_style' ] );
-    } 
+    }
 
     /**
     * Add options page
@@ -38,7 +38,7 @@ class Admin {
             __( 'Stock Manager', 'woocommerce-stock-manager' ), 
             'manage_options', 
             'woo-stock-manager-setting', 
-            [ $this, 'create_setting_page' ], 
+            [ $this, 'create_setting_page' ],
             'data:image/svg+xml;base64, PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMCAyMCI+PGcgZmlsbD0iIzlFQTNBOCIgZmlsbC1ydWxlPSJub256ZXJvIj4KICAgICAgICAgICAgPHBhdGggZD0iTTE5LjksNS43YzAuMiwwLjktMC4zLDEuOC0xLjEsMmMtMC4yLDAuMS0wLjUsMC4xLTAuNywwYy0wLjYtMC4xLTEuMS0wLjUtMS4zLTEuMiAgICBjLTAuMi0wLjYsMC0xLjIsMC40LTEuNmMwLjItMC4yLDAuNC0wLjMsMC43LTAuNEMxOC44LDQuMywxOS43LDQuOCwxOS45LDUuN3ogTTE3LjgsOC45bC0zLjIsOS45Yy0wLjIsMC41LTAuNywwLjctMS4yLDAuNgogICAgICAgICAgICBMMC42LDE1LjJDMC4xLDE1LTAuMSwxNC41LDAsMTRMNC4zLDEuMmMwLjItMC41LDAuNy0wLjcsMS4yLTAuNkwxNiw0LjFjLTAuNSwwLjctMC43LDEuNy0wLjUsMi42QzE1LjgsNy45LDE2LjcsOC43LDE3LjgsOC45egogICAgICAgICAgICBNMTAuOCw0LjljMC41LDAuMiwxLDAuNSwxLjUsMC43YzAuMi0wLjQsMC0wLjktMC40LTEuMUMxMS40LDQuNCwxMSw0LjUsMTAuOCw0Ljl6IE05LjUsMTUuMmMtMC45LTAuMS0xLjctMC4yLTIuNi0wLjIKICAgICAgICAgICAgYzAuMSwwLjcsMC42LDEuMiwxLjIsMS4yQzguNywxNi4yLDkuMywxNS44LDkuNSwxNS4yeiBNMTIuNyw5YzAtMS43LTEuNC0zLjEtMy4xLTMuMmMtMS4yLDAtMi4yLDAuNS0yLjgsMS41CiAgICAgICAgICAgIGMtMC42LDAuOS0xLjEsMS44LTEuNywyLjdjLTAuMSwwLjEtMC4yLDAuMi0wLjMsMC4xYy0wLjUtMC4yLTAuOCwwLTEuMSwwLjZjLTAuMiwwLjQsMCwwLjgsMC40LDFjMC43LDAuNCwxLjQsMC43LDIuMiwxLjEKICAgICAgICAgICAgYzEuNCwwLjcsMi44LDEuNCw0LjIsMi4xYzAuNCwwLjIsMC44LDAuMSwxLjEtMC40YzAtMC4xLDAuMS0wLjEsMC4xLTAuMmMwLjEtMC4zLDAtMC43LTAuMy0wLjljLTAuMi0wLjEtMC4yLTAuMi0wLjEtMC40CiAgICAgICAgICAgIGMwLjQtMSwwLjgtMiwxLjEtM0MxMi43LDkuNywxMi43LDksMTIuNyw5eiIvPjwvZz48L3N2Zz4=', 
             50
         );
@@ -54,9 +54,9 @@ class Admin {
         
         add_submenu_page( 
             'woo-stock-manager-setting', 
-            __( 'Subscribers List', 'woocommerce-stock-manager' ),
-			// Translators: Subscribers list with a pro sticker.Variable $pro_sticker contains the sticker text.
-            __( 'Subscribers List ', 'woocommerce-stock-manager' ) . $pro_sticker,
+            __( 'Subscriber List', 'woocommerce-stock-manager' ),
+			// Translators: Subscriber list with a pro sticker.Variable $pro_sticker contains the sticker text.
+            __( 'Subscriber List ', 'woocommerce-stock-manager' ) . $pro_sticker,
             'manage_woocommerce',
             'woo-stock-manager-setting#&tab=subscribers-list',
             '__return_null' 
@@ -65,7 +65,7 @@ class Admin {
         add_submenu_page( 
             'woo-stock-manager-setting', 
             __( 'Inventory Manager', 'woocommerce-stock-manager' ),
-			// Translators: Subscribers list with a pro sticker.Variable $pro_sticker contains the sticker text.
+			// Translators: Inventory Manager list with a pro sticker.Variable $pro_sticker contains the sticker text.
             __( 'Inventory Manager', 'woocommerce-stock-manager' ) . $pro_sticker,
             'manage_woocommerce',
             'woo-stock-manager-setting#&tab=manage-stock',
@@ -90,7 +90,7 @@ class Admin {
      */
     public function create_setting_page( ) {
         echo '<div id="woo-admin-stockmanager"></div>';
-    } 
+    }
 
     /**
      * Create Stock Manager Export ( CSV ) option to 'Tool' menu.
@@ -117,7 +117,7 @@ class Admin {
     function register_subscribers_bulk_actions( $bulk_actions ) {
         $bulk_actions[ 'remove_subscribers' ] = __( 'Remove Subscribers', 'woocommerce-stock-manager' );
         return $bulk_actions;
-    } 
+    }
 
     /**
      * Bulk action handler function.
@@ -231,23 +231,26 @@ class Admin {
             'ban_email_domain_text', 
             'ban_email_address_text'
         ];
+        $settings_databases_value =[];
+        $tabs =['general','form_customization','form_submission','email','mailchimp'];
+        foreach($tabs as $tab){
+            $settings_databases_value[$tab] = get_option( 'woo_stock_manager_' . $tab . '_tab_settings' );
+        }
         
         if ( get_current_screen( ) -> id == 'toplevel_page_woo-stock-manager-setting' ) {
             wp_enqueue_script( 'woo-stockmanager-script', SM( ) -> plugin_url . 'build/index.js', [ 'wp-element', 'wp-i18n' ], SM( ) -> version, true );
-            // wp_set_script_translations( 'woo-stockmanager-script', 'woocommerce-stock-manager' );
+            wp_set_script_translations( 'woo-stockmanager-script', 'woocommerce-stock-manager' );
             wp_localize_script( 'woo-stockmanager-script', 'stockManagerAppLocalizer', apply_filters( 'woo_stock_manager_settings', [ 
                 'apiUrl'                    => untrailingslashit( get_rest_url( ) ), 
                 'nonce'                     => wp_create_nonce( 'wp_rest' ), 
                 'default_alert_text'        => __( 'Receive in-stock notifications for this product.', 'woocommerce-stock-manager' ), 
                 'default_email_place'       => __( 'Enter your email', 'woocommerce-stock-manager' ), 
                 'default_alert_button'      => __( 'Notify me', 'woocommerce-stock-manager' ), 
-                'subscriber_list'           => SM( ) -> plugin_url . 'src/assets/images/subscriber-list.jpg', 
-                'inventory_manager_mobile'  => SM( ) -> plugin_url . 'src/assets/images/inventory-manager-mobile.jpg', 
-                'inventory_manager_laptop'  => SM( ) -> plugin_url . 'src/assets/images/inventory-manager-laptop.png', 
-                'inventory_manager_monitor' => SM( ) -> plugin_url . 'src/assets/images/inventory-manager-monitor.jpg', 
+                'subscriber_list'           => SM( ) -> plugin_url . 'src/assets/images/subscriber-list.jpg',
                 'pro_active'                => apply_filters( 'woo_stock_manager_pro_active', 'free' ), 
                 'subscription_page_string'  => $subscription_page_string, 
                 'download_csv'              => __( 'Download CSV', 'woocommerce-stock-manager' ), 
+                'settings_databases_value'  => $settings_databases_value,
                 'pro_settings_list'         => $pro_settings_list, 
                 'pro_url'                   => esc_url( STOCK_MANAGER_PRO_SHOP_URL ), 
                 'setting_string'            => $setting_string,
@@ -258,7 +261,7 @@ class Admin {
             wp_enqueue_style( 'woo_admin_rsuite_css', SM( ) -> plugin_url . 'src/assets/admin/css/rsuite-default' . '.min' . '.css', [ ], SM( ) -> version );
         } 
         wp_enqueue_style( 'stock_manager_product_admin_css', SM( ) -> plugin_url . 'src/assets/admin/css/admin'. $suffix .'.css', [ ], SM( ) -> version );
-    } 
+    }
 
     /**
      * Custom column addition

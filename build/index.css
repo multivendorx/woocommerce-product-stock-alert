@@ -1642,6 +1642,12 @@ input.woo-setting-color-picker::-webkit-color-swatch {
   gap: 0.5rem;
 }
 
+.no-data-text {
+  display: flex;
+  justify-content: center;
+  padding: 24px;
+}
+
 .woo-search-and-multistatus-wrap {
   padding: 0;
   gap: 0.5rem;

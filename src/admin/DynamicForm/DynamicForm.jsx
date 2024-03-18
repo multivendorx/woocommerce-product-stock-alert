@@ -25,7 +25,7 @@ const DynamicForm = ({ currentTab, tabs, setTabs }) => {
 	const submitUrl = tabs[currentTab].apiurl;
 
 	useEffect(() => {
-		setSettings(tabs[currentTab].databases_value ? tabs[currentTab].databases_value :{});
+		setSettings(stockManagerAppLocalizer.settings_databases_value[currentTab] ? stockManagerAppLocalizer.settings_databases_value[currentTab] :{});
 		isFirstRender.current = true;
 	}, [currentTab]);
 
@@ -39,8 +39,6 @@ const DynamicForm = ({ currentTab, tabs, setTabs }) => {
 			setTabs((preData) => {
 				return { ...preData, [currentTab]: { ...preData[currentTab], databases_value: settings } }
 			});
-			console.log(settings)
-			console.log(currentTab)
 			axios({
 				method: 'post',
 				url: stockManagerAppLocalizer.apiUrl + '/stockmanager/v1/' + submitUrl,

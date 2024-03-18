@@ -17,12 +17,7 @@ class RestAPI
      * @return void
      */
     public function register_restAPI( ) {
-        register_rest_route( SM( ) -> rest_namespace, '/fetch-admin-tabs', [ 
-            'methods' => \WP_REST_Server::READABLE,
-            'callback' => [ $this, 'fetch_admin_tabs' ],
-            'permission_callback' => [ $this, 'stockmanager_permission' ],
-        ] );
-        register_rest_route( SM( ) -> rest_namespace, '/save-stockmanager', [ 
+        register_rest_route( SM( ) -> rest_namespace, '/save-stockmanager', [
             'methods' => \WP_REST_Server::EDITABLE,
             'callback' => [ $this, 'save_stockmanager_setting' ],
             'permission_callback' => [ $this, 'stockmanager_permission' ],
@@ -35,24 +30,6 @@ class RestAPI
      */
     public function stockmanager_permission( ) {
         return current_user_can( 'manage_options' );
-    }
-
-    /**
-     * Set banner hide setting to true.
-     * @return \WP_Error| \WP_REST_Response
-     */
-    public function close_banner( ) {
-        update_option( 'woocommerce_stock_manager_pro_banner_hide', true );
-        return rest_ensure_response( false );
-    }
-
-    public function fetch_admin_tabs( ) {
-        $response = AdminSettingTab::get( );
-        foreach ( $response as $tab_name => $tab_content ) {
-            $response[ $tab_name ][ 'databases_value' ] = get_option( 'woo_stock_manager_' . $tab_name . '_tab_settings' );
-        } 
-        $response = wp_json_encode( $response, JSON_PRETTY_PRINT );
-        return rest_ensure_response( $response );
     }
 
     /**
