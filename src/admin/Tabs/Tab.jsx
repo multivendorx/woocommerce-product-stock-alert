@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Link } from 'react-router-dom';
 import PuffLoader from 'react-spinners/PuffLoader';
 import BannerSection from '../Banner/banner';
 import DynamicForm from '../DynamicForm/DynamicForm';
-import { getSettingsJsonData } from "../services/jsonService";
+import { getSettingsJsonData } from "../../assets/services/jsonService";
 
 const Tabs = (props) => {
     const [ tabs, setTabs ] = useState(null);
@@ -56,7 +56,7 @@ const Tabs = (props) => {
     return (
         <>
             <div className={`woo-general-wrapper woo-${currentTab}`}>
-                {stockManagerAppLocalizer.pro_active === 'free' && localStorage.getItem("banner") && <BannerSection />}
+                {stockManagerAppLocalizer.pro_active === 'free' && <BannerSection />}
                 {
                     <div className="woo-container woo-tab-banner-wrap">
                         <div className={`woo-middle-container-wrapper woo-vertical-tabs`}>

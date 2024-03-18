@@ -16628,180 +16628,161 @@ module.exports = exports.default;
 
 /***/ }),
 
-/***/ "./src/admin/Banner/banner.js":
-/*!************************************!*\
-  !*** ./src/admin/Banner/banner.js ***!
-  \************************************/
+/***/ "./src/admin/Banner/banner.jsx":
+/*!*************************************!*\
+  !*** ./src/admin/Banner/banner.jsx ***!
+  \*************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */   "default": () => (/* binding */ banner)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _mui_material_Dialog__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @mui/material/Dialog */ "./node_modules/@mui/material/Dialog/Dialog.js");
 /* harmony import */ var _PopupContent_PopupContent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../PopupContent/PopupContent */ "./src/admin/PopupContent/PopupContent.jsx");
 
-/* global stockManagerAppLocalizer */
 
 
 
-
-class Banner extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      open_model: false,
-      open_banner: localStorage.getItem('banner') == 'true' ? true : false
-    };
-    this.handleClose = this.handleClose.bind(this);
-    this.handleOpen = this.handleOpen.bind(this);
-    this.handleCloseBanner = this.handleCloseBanner.bind(this);
+function banner() {
+  if (localStorage.getItem('banner') != 'false') {
+    localStorage.setItem("banner", true);
   }
-  handleCloseBanner() {
+  const [modal, setModal] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
+  const [banner, setBanner] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(localStorage.getItem('banner') == 'true' ? true : false);
+  const handleCloseBanner = () => {
     localStorage.setItem('banner', false);
-    this.setState({
-      open_banner: false
-    });
-  }
-  handleClose() {
-    this.setState({
-      open_model: false
-    });
-  }
-  handleOpen() {
-    this.setState({
-      open_model: true
-    });
-  }
-  componentDidMount() {
-    var $ = jQuery;
-    $(document).ready(function () {
-      const $carouselList = $('.carousel-list');
-      const $carouselItems = $('.carousel-item');
-      const totalItems = $carouselItems.length;
-      let currentIndex = 0;
-      let interval;
+    setBanner(false);
+  };
+  const handleClose = () => {
+    setModal(false);
+  };
+  const handleOpen = () => {
+    setModal(true);
+  };
+  var $ = jQuery;
+  $(document).ready(function () {
+    const $carouselItems = $('.carousel-item');
+    const totalItems = $carouselItems.length;
+    let currentIndex = 0;
+    let interval;
 
-      // Function to show the current slide and hide others
-      function showSlide(index) {
-        $carouselItems.removeClass('active');
-        $carouselItems.eq(index).addClass('active');
-      }
+    // Function to show the current slide and hide others
+    function showSlide(index) {
+      $carouselItems.removeClass('active');
+      $carouselItems.eq(index).addClass('active');
+    }
 
-      // Function to go to the next slide
-      function nextSlide() {
-        currentIndex = (currentIndex + 1) % totalItems;
-        showSlide(currentIndex);
-      }
-
-      // Function to go to the previous slide
-      function prevSlide() {
-        currentIndex = (currentIndex - 1 + totalItems) % totalItems;
-        showSlide(currentIndex);
-      }
-
-      // Start the auto-slide interval
-      function startAutoSlide() {
-        interval = setInterval(nextSlide, 7000); // Change slide every 7 seconds
-      }
-
-      // Stop the auto-slide interval
-      function stopAutoSlide() {
-        clearInterval(interval);
-      }
-
-      // Initialize the carousel
+    // Function to go to the next slide
+    function nextSlide() {
+      currentIndex = (currentIndex + 1) % totalItems;
       showSlide(currentIndex);
+    }
+
+    // Function to go to the previous slide
+    function prevSlide() {
+      currentIndex = (currentIndex - 1 + totalItems) % totalItems;
+      showSlide(currentIndex);
+    }
+
+    // Start the auto-slide interval
+    function startAutoSlide() {
+      interval = setInterval(nextSlide, 7000); // Change slide every 7 seconds
+    }
+
+    // Stop the auto-slide interval
+    function stopAutoSlide() {
+      clearInterval(interval);
+    }
+
+    // Initialize the carousel
+    showSlide(currentIndex);
+    startAutoSlide();
+
+    // Handle next button click
+    $('#nextBtn').click(function () {
+      nextSlide();
+      stopAutoSlide();
       startAutoSlide();
-
-      // Handle next button click
-      $('#nextBtn').click(function () {
-        nextSlide();
-        stopAutoSlide();
-        startAutoSlide();
-      });
-
-      // Handle previous button click
-      $('#prevBtn').click(function () {
-        prevSlide();
-        stopAutoSlide();
-        startAutoSlide();
-      });
     });
-  }
-  render() {
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, stockManagerAppLocalizer.pro_active ? this.state.open_banner ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Dialog__WEBPACK_IMPORTED_MODULE_2__["default"], {
-      className: "woo-module-popup",
-      open: this.state.open_model,
-      onClose: this.handleClose,
-      "aria-labelledby": "form-dialog-title"
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-      className: "icon-cross stock-manager-popup-cross",
-      onClick: this.handleClose
-    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_PopupContent_PopupContent__WEBPACK_IMPORTED_MODULE_1__["default"], null)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "woo-carousel-container"
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "carousel-container"
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      class: "icon-cross pro-slider-cross",
-      onClick: this.handleCloseBanner
-    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      class: "why-go-pro-tag",
-      onClick: this.handleOpen
-    }, "Why Premium"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("ul", {
-      className: "carousel-list"
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("li", {
-      className: "carousel-item active"
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "woo-pro-txt-items"
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", null, "Double Opt-In ", ' '), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Experience the power of Double Opt-In for our Stock Alert Form - Guaranteed precision in every notification!", ' '), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
-      href: stockManagerAppLocalizer.pro_url,
-      className: "woo-btn btn-red"
-    }, "View Pricing"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("li", {
-      class: "carousel-item"
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "woo-pro-txt-items"
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", null, "Your Subscription Hub", ' '), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Subscription Dashboard - Easily monitor and download lists of out-of-stock subscribers for seamless management.", ' '), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
-      href: stockManagerAppLocalizer.pro_url,
-      className: "woo-btn btn-red"
-    }, "View Pricing"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("li", {
-      class: "carousel-item"
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "woo-pro-txt-items"
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", null, "Mailchimp Bridge", ' '), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Seamlessly link WooCommerce out-of-stock subscriptions with Mailchimp for effective marketing.", ' '), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
-      href: stockManagerAppLocalizer.pro_url,
-      className: "woo-btn btn-red"
-    }, "View Pricing"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("li", {
-      class: "carousel-item"
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "woo-pro-txt-items"
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", null, "Unsubscribe Notifications", ' '), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "User-Initiated Unsubscribe from In-Stock Notifications.", ' '), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
-      href: stockManagerAppLocalizer.pro_url,
-      className: "woo-btn btn-red"
-    }, "View Pricing"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("li", {
-      class: "carousel-item"
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "woo-pro-txt-items"
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", null, "Ban Spam Emails ", ' '), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Email and Domain Blacklist for Spam Prevention.", ' '), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
-      href: stockManagerAppLocalizer.pro_url,
-      className: "woo-btn btn-red"
-    }, "View Pricing"))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      class: "carousel-controls"
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
-      id: "prevBtn"
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("i", {
-      className: "icon-left-arrow"
-    })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
-      id: "nextBtn"
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("i", {
-      className: "icon-right-arrow"
-    }))))) : '' : '');
-  }
+
+    // Handle previous button click
+    $('#prevBtn').click(function () {
+      prevSlide();
+      stopAutoSlide();
+      startAutoSlide();
+    });
+  });
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, stockManagerAppLocalizer.pro_active ? banner ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Dialog__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    className: "woo-module-popup",
+    open: modal,
+    onClose: handleClose,
+    "aria-labelledby": "form-dialog-title"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "icon-cross stock-manager-popup-cross",
+    onClick: handleClose
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_PopupContent_PopupContent__WEBPACK_IMPORTED_MODULE_1__["default"], null)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "woo-carousel-container"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "carousel-container"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    class: "icon-cross pro-slider-cross",
+    onClick: handleCloseBanner
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    class: "why-go-pro-tag",
+    onClick: handleOpen
+  }, "Why Premium"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("ul", {
+    className: "carousel-list"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("li", {
+    className: "carousel-item active"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "woo-pro-txt-items"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", null, "Double Opt-In ", ' '), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Experience the power of Double Opt-In for our Stock Alert Form - Guaranteed precision in every notification!", ' '), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+    href: stockManagerAppLocalizer.pro_url,
+    className: "woo-btn btn-red"
+  }, "View Pricing"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("li", {
+    class: "carousel-item"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "woo-pro-txt-items"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", null, "Your Subscription Hub", ' '), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Subscription Dashboard - Easily monitor and download lists of out-of-stock subscribers for seamless management.", ' '), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+    href: stockManagerAppLocalizer.pro_url,
+    className: "woo-btn btn-red"
+  }, "View Pricing"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("li", {
+    class: "carousel-item"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "woo-pro-txt-items"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", null, "Mailchimp Bridge", ' '), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Seamlessly link WooCommerce out-of-stock subscriptions with Mailchimp for effective marketing.", ' '), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+    href: stockManagerAppLocalizer.pro_url,
+    className: "woo-btn btn-red"
+  }, "View Pricing"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("li", {
+    class: "carousel-item"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "woo-pro-txt-items"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", null, "Unsubscribe Notifications", ' '), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "User-Initiated Unsubscribe from In-Stock Notifications.", ' '), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+    href: stockManagerAppLocalizer.pro_url,
+    className: "woo-btn btn-red"
+  }, "View Pricing"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("li", {
+    class: "carousel-item"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "woo-pro-txt-items"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", null, "Ban Spam Emails ", ' '), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Email and Domain Blacklist for Spam Prevention.", ' '), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+    href: stockManagerAppLocalizer.pro_url,
+    className: "woo-btn btn-red"
+  }, "View Pricing"))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    class: "carousel-controls"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+    id: "prevBtn"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("i", {
+    className: "icon-left-arrow"
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+    id: "nextBtn"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("i", {
+    className: "icon-right-arrow"
+  }))))) : '' : '');
 }
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Banner);
 
 /***/ }),
 
@@ -18815,9 +18796,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const Stockalert = () => {
-  if (localStorage.getItem('banner') != 'false') {
-    localStorage.setItem("banner", true);
-  }
   const currentUrl = window.location.href;
   document.querySelectorAll('#toplevel_page_woo-stock-manager-setting>ul>li>a').forEach(element => {
     element.parentNode.classList.remove('current');
@@ -19154,9 +19132,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
 /* harmony import */ var react_spinners_PuffLoader__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-spinners/PuffLoader */ "./node_modules/react-spinners/PuffLoader.js");
 /* harmony import */ var react_spinners_PuffLoader__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_spinners_PuffLoader__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _Banner_banner__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Banner/banner */ "./src/admin/Banner/banner.js");
+/* harmony import */ var _Banner_banner__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Banner/banner */ "./src/admin/Banner/banner.jsx");
 /* harmony import */ var _DynamicForm_DynamicForm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../DynamicForm/DynamicForm */ "./src/admin/DynamicForm/DynamicForm.jsx");
-/* harmony import */ var _services_jsonService__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/jsonService */ "./src/admin/services/jsonService.js");
+/* harmony import */ var _assets_services_jsonService__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../assets/services/jsonService */ "./src/assets/services/jsonService.js");
 
 /* global stockManagerAppLocalizer */
 
@@ -19169,7 +19147,7 @@ const Tabs = props => {
   const [tabs, setTabs] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
   const [currentTab, setCurrentTab] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(props.initialTab);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-    setTabs((0,_services_jsonService__WEBPACK_IMPORTED_MODULE_3__.getSettingsJsonData)());
+    setTabs((0,_assets_services_jsonService__WEBPACK_IMPORTED_MODULE_3__.getSettingsJsonData)());
   }, []);
   const getTabDescription = () => {
     const {
@@ -19205,7 +19183,7 @@ const Tabs = props => {
   };
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: `woo-general-wrapper woo-${currentTab}`
-  }, stockManagerAppLocalizer.pro_active === 'free' && localStorage.getItem("banner") && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Banner_banner__WEBPACK_IMPORTED_MODULE_1__["default"], null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, stockManagerAppLocalizer.pro_active === 'free' && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Banner_banner__WEBPACK_IMPORTED_MODULE_1__["default"], null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "woo-container woo-tab-banner-wrap"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: `woo-middle-container-wrapper woo-vertical-tabs`
@@ -19229,10 +19207,10 @@ const Tabs = props => {
 
 /***/ }),
 
-/***/ "./src/admin/services/jsonService.js":
-/*!*******************************************!*\
-  !*** ./src/admin/services/jsonService.js ***!
-  \*******************************************/
+/***/ "./src/assets/services/jsonService.js":
+/*!********************************************!*\
+  !*** ./src/assets/services/jsonService.js ***!
+  \********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
