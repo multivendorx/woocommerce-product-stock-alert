@@ -39,6 +39,8 @@ const DynamicForm = ({ currentTab, tabs, setTabs }) => {
 			setTabs((preData) => {
 				return { ...preData, [currentTab]: { ...preData[currentTab], databases_value: settings } }
 			});
+			console.log(settings)
+			console.log(currentTab)
 			axios({
 				method: 'post',
 				url: stockManagerAppLocalizer.apiUrl + '/stockmanager/v1/' + submitUrl,

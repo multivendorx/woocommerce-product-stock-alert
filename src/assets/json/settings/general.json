@@ -15,7 +15,7 @@
           "options": [
             {
               "key": "is_double_optin",
-              "label": "Upgrade to <a href=\"STOCK_MANAGER_PRO_SHOP_URL\" target=\"_blank\"><span class=\"pro-strong\">Pro</span></a> to enable Double Opt-in flow for subscription confirmation.",
+              "label": "Upgrade to <a href=\"https://multivendorx.com/woocommerce-product-stock-manager-notifier-pro/?utm_source=WordPressAdmin&utm_medium=PluginSettings&utm_campaign=productsstockmanager\" target=\"_blank\"><span class=\"pro-strong\">Pro</span></a> to enable Double Opt-in flow for subscription confirmation.",
               "value": "is_double_optin"
             }
           ]
