@@ -1,8 +1,7 @@
 <?php
 
 namespace StockManager;
-
-if ( !defined( 'ABSPATH' ) ) exit;
+defined( 'ABSPATH' ) || exit;
 
 class RestAPI
  {

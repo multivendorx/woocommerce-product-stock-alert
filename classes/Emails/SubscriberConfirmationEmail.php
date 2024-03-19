@@ -2,7 +2,7 @@
 
 namespace StockManager\Emails;
 
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+defined( 'ABSPATH' ) || exit; // Exit if accessed directly
 
 if ( ! class_exists( 'SubscriberConfirmationEmail' ) ) :
 

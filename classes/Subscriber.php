@@ -2,7 +2,7 @@
 
 namespace StockManager;
 
-if ( !defined( 'ABSPATH' ) ) exit;
+defined( 'ABSPATH' ) || exit;
 
 class Subscriber {
     public function __construct( ) {

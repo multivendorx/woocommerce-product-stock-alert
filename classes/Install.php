@@ -1,7 +1,7 @@
 <?php
 
 namespace StockManager;
-
+defined( 'ABSPATH' ) || exit;
 /**
  * Start schedule after plugin activation
  *

@@ -1,6 +1,7 @@
 <?php
 
 namespace StockManager;
+defined( 'ABSPATH' ) || exit;
 
 class Ajax {
 

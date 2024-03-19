@@ -1,6 +1,7 @@
 <?php
 
 namespace StockManager;
+defined( 'ABSPATH' ) || exit;
 use \Automattic\WooCommerce\Utilities\FeaturesUtil;
 
 class StockManager {

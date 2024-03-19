@@ -1,6 +1,7 @@
 <?php
 
 namespace StockManager;
+defined( 'ABSPATH' ) || exit;
 
 class Admin {
     public $settings;
@@ -226,7 +227,7 @@ class Admin {
                 'pro_settings_list'         => $pro_settings_list, 
                 'pro_url'                   => esc_url( STOCK_MANAGER_PRO_SHOP_URL ),
                 'default_massages_fields'   => $woo_admin_massages_fields,
-                'default_massages'          => Utill::get_form_settings_array( )
+                'default_massages'          => $this->get_form_settings_array()
               ] ) );
             wp_enqueue_style( 'woo_stockmanager_style', SM( ) -> plugin_url . 'build/index.css', [ ], SM( ) -> version );
             wp_enqueue_style( 'woo_admin_rsuite_css', SM( ) -> plugin_url . 'src/assets/admin/css/rsuite-default' . '.min' . '.css', [ ], SM( ) -> version );
@@ -265,8 +266,8 @@ class Admin {
                 <span class="no_subscriber"><?php echo esc_html( ( isset( $no_of_subscriber ) && $no_of_subscriber > 0 ) ? $no_of_subscriber : 0 ); ?></span>
             </p>
             <?php
-        } 
-    } 
+        }
+    }
 
     /**
      * Stock Manager news on Product edit page ( variable )
@@ -282,4 +283,40 @@ class Admin {
             <?php
         } 
     } 
+
+    /**
+     * Get the settings arry. Non set value is replaced with default value.
+     * @return array
+     */
+    public static function get_form_settings_array( ) {
+        $general_tab_settings = get_option( 'woo_stock_manager_general_tab_settings', [ ] );
+        $form_customization_tab_settings = get_option( 'woo_stock_manager_form_customization_tab_settings', [ ] );
+        $form_submission_tab_settings = get_option( 'woo_stock_manager_form_submission_tab_settings', [ ] );
+        $email_tab_settings = get_option( 'woo_stock_manager_email_tab_settings', [ ] );
+        
+        return [ 
+            'double_opt_in_success'             => $general_tab_settings[ 'double_opt_in_success' ] ?? '', 
+            'shown_interest_text'               => $general_tab_settings[ 'shown_interest_text' ] ?? '', 
+            'alert_success'                     => $form_submission_tab_settings[ 'alert_success' ] ?? '', 
+            'alert_email_exist'                 => $form_submission_tab_settings[ 'alert_email_exist' ] ?? '', 
+            'valid_email'                       => $form_submission_tab_settings[ 'valid_email' ] ?? '', 
+            'alert_unsubscribe_message'         => $form_submission_tab_settings[ 'alert_unsubscribe_message' ] ?? '', 
+            'email_placeholder_text'            => $form_customization_tab_settings[ 'email_placeholder_text' ] ?? '', 
+            'alert_text'                        => $form_customization_tab_settings[ 'alert_text' ] ?? '', 
+            'button_text'                       => $form_customization_tab_settings[ 'button_text' ] ?? '', 
+            'unsubscribe_button_text'           => $form_customization_tab_settings[ 'unsubscribe_button_text' ] ?? '', 
+            'alert_text_color'                  => $form_customization_tab_settings[ 'alert_text_color' ] ?? '', 
+            'button_background_color'           => $form_customization_tab_settings[ 'button_background_color' ] ?? '', 
+            'button_border_color'               => $form_customization_tab_settings[ 'button_border_color' ] ?? '', 
+            'button_text_color'                 => $form_customization_tab_settings[ 'button_text_color' ] ?? '', 
+            'button_background_color_onhover'   => $form_customization_tab_settings[ 'button_background_color_onhover' ] ?? '', 
+            'button_text_color_onhover'         => $form_customization_tab_settings[ 'button_text_color_onhover' ] ?? '', 
+            'button_border_color_onhover'       => $form_customization_tab_settings[ 'button_border_color_onhover' ] ?? '', 
+            'button_font_size'                  => $form_customization_tab_settings[ 'button_font_size' ] ?? '', 
+            'button_border_size'                => $form_customization_tab_settings[ 'button_border_size' ] ?? '', 
+            'button_border_radious'             => $form_customization_tab_settings[ 'button_border_radious' ] ?? '', 
+            'ban_email_domain_text'             => $email_tab_settings[ 'ban_email_domain_text' ] ?? '', 
+            'ban_email_address_text'            => $email_tab_settings[ 'ban_email_address_text' ] ?? '',
+        ];
+    }
 } 

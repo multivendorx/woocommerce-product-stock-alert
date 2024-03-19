@@ -1,4 +1,5 @@
 <?php
+defined( 'ABSPATH' ) || exit;
 define( 'STOCK_MANAGER_PLUGIN_TOKEN', 'woocommerce-stock-manager' );
 
 define( 'STOCK_MANAGER_TEXT_DOMAIN', 'woocommerce-stock-manager' );

@@ -1,7 +1,7 @@
 <?php
 
 namespace StockManager\Deprecated;
-
+defined( 'ABSPATH' ) || exit;
 /**
 * @deprecated 4.0.0
 * 	wc_deprecated_function( new, version, old )
