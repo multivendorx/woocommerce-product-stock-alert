@@ -247,6 +247,9 @@ class Subscriber {
      * @return array
      */
     static function get_related_product( $product ) {
+        if ( is_numeric( $product ) ){
+            $product = wc_get_product( $product );
+        }
         $product_ids = [ ];
         switch( $product -> get_type( ) ) {
             case 'variable' :
