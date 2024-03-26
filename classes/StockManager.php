@@ -61,8 +61,8 @@ class StockManager {
      * Add High Performance Order Storage Support
      * @return void
      */
-    public function declare_compatibility( $file ) {
-        FeaturesUtil::declare_compatibility( 'custom_order_tables', plugin_basename( $file ), true );
+    public function declare_compatibility( ) {
+        FeaturesUtil::declare_compatibility( 'custom_order_tables', plugin_basename( $this -> file ), true );
     } 
 
     /**
