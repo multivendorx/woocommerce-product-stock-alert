@@ -1,27 +1,19 @@
 import axios from 'axios';
 import { CSVLink } from 'react-csv';
 import { css } from '@emotion/react';
-// import { __ } from '@wordpress/i18n';
+import { __ } from '@wordpress/i18n';
 import { DateRangePicker } from 'rsuite';
 import Dialog from "@mui/material/Dialog";
 import ReactPaginate from "react-paginate";
 import React, { useState, useEffect } from 'react';
-import DataTable from 'react-data-table-component';
-import PuffLoader from 'react-spinners/PuffLoader';
 import Popoup from '../PopupContent/PopupContent';
-const { __ } = wp.i18n;
-export default function SubscribersList( ) {
+import CustomTable from '../CustomLibrary/CustomTable/CustomTable';
+export default function SubscribersList() {
 
     const fetchSubscribersDataUrl = `${ stockManagerAppLocalizer.apiUrl }/stockmanager/v1/get-subscriber-list`;
-    const [ rowsPerPage , setRowsPerPage ] = useState( 10 );
-    const [ currentPage , setCurrentPage ] = useState( 0 );
     const [ post_status , setPost_status ] = useState( 'any' );
-    const [ productNameField , setProductNameField ] = useState( '' );
-    const [ emailField , setEmailField ] = useState( '' );
-    const [ data, setData ] = useState([ ]);
-    const [ totalRows , setTotalRows ] = useState( );
-    const [ showLoader, setShowLoader ] = useState( true );
-    const [ showNoDataText, setShowNoDataText ] = useState( false );
+    const [ data, setData ] = useState([]);
+    const [ totalRows , setTotalRows ] = useState();
     const [ openDialog, setOpenDialog ] = useState ( false );
     const [ subscribersStatus, setSubscribersStatus ] = useState( {
         totalSubscribers: 0 ,
@@ -29,64 +21,100 @@ export default function SubscribersList( ) {
         unsubscribed: 0,
         mailSent: 0
     } )
-    const currentDate = new Date( );
-    const sevenDaysAgo = new Date( );
-    sevenDaysAgo.setDate( currentDate.getDate( ) - 7 );
-    const [ date , setDate ] = useState( {
-        start_date: sevenDaysAgo,
-        end_date: currentDate
-    } )
-
-    useEffect(() => {
-        const timer = setTimeout( ( ) => {
-            setShowLoader( false );
-            setShowNoDataText( true );
-        }, 6000); // 5 seconds
-
-        return ( ) => clearTimeout(timer); // Cleanup the timer on component unmount
-
-    }, []);
-
-    const override = css`
-        display: block;
-        margin: 0 auto;
-        border-color: red;
-    `;
-
-    useEffect( ( ) => {
-        if( stockManagerAppLocalizer.pro_active != 'free' ) {
-            //Fetch the data to show in the table   
-            axios({
-                method: "post",
-                url: fetchSubscribersDataUrl,
-                data: { page: currentPage + 1, row: rowsPerPage, post_status:post_status
-                    ,product_name: productNameField, email: emailField, start_date: date.start_date
-                    ,end_date: date.end_date },
-            }).then((response) => {
-                let parsedData = JSON.parse ( response.data );
-                let subscribe_count = parsedData.subscribe_count;
-                setData  (parsedData.subscribe_list );
-                setTotalRows ( subscribe_count [ post_status ] );
-                setSubscribersStatus ({
-                    totalSubscribers: subscribe_count.any ,
-                    subscribed:       subscribe_count.woo_subscribed,
-                    unsubscribed:     subscribe_count.woo_unsubscribed,
-                    mailSent:         subscribe_count.woo_mailsent
-                })
-            });
-        }
-        //Data to be loaded for the changes of the following states
-    }, [ rowsPerPage, currentPage, post_status, productNameField, emailField, date ] );
+    const currentDate = new Date();
+    const sevenDaysAgo = new Date();
+    sevenDaysAgo.setDate( currentDate.getDate() - 7 );
     
-    
-    const handleDateRangeChange = ( dates ) => {
-        if ( dates != null ) {
-            setDate({
-                start_date : dates[0].toString().replace(/ GMT[+-]\d{4} \(.+$/, ''),
-                end_date   : dates[1].toString().replace(/ GMT[+-]\d{4} \(.+$/, '')
+    function requestData( rowsPerPage = 5, currentPage = 0, productNameField = '' , emailField = '', start_date = sevenDaysAgo, end_date = currentDate ) {
+        //Fetch the data to show in the table   
+        axios({
+            method: "post",
+            url: fetchSubscribersDataUrl,
+            headers: { 'X-WP-Nonce' : stockManagerAppLocalizer.nonce },
+            data: { page: currentPage - 1, row: rowsPerPage, post_status:post_status
+                ,product_name: productNameField, email: emailField, start_date: start_date
+                ,end_date: end_date },
+        }).then((response) => {
+            let parsedData = JSON.parse ( response.data );
+            let subscribe_count = parsedData.subscribe_count;
+            setData  (parsedData.subscribe_list );
+            setTotalRows ( subscribe_count [ post_status ] );
+            setSubscribersStatus ({
+                totalSubscribers: subscribe_count.any ,
+                subscribed:       subscribe_count.woo_subscribed,
+                unsubscribed:     subscribe_count.woo_unsubscribed,
+                mailSent:         subscribe_count.woo_mailsent
             })
+        });
+    }
+
+    const requestApiForData = ( rowsPerPage, currentPage, filterData = {} ) => {
+        requestData( rowsPerPage, currentPage, filterData?.productNameField, filterData?.emailField, filterData?.date?.start_date, filterData?.date?.end_date )        
+    }
+
+    const realtimeFilter = [
+        {
+          name: "productNameField",
+          render: (updateFilter, filterValue) => (
+                <>
+                    <div className="woo-header-search-section">
+                        <input
+                        name="productNameField"
+                        type="text"
+                        placeholder={ __( 'Search by Product Name', 'woocommerce-stock-manager' ) }
+                        onChange={(e) => updateFilter(e.target.name, e.target.value)}
+                        value={filterValue}
+                        />
+                    </div>
+                </>
+            ),
+        },
+        {
+          name: "emailField",
+          render: (updateFilter, filterValue) => (
+                <>
+                    <div className="woo-header-search-section">
+                        <input
+                        name="emailField"
+                        type="text"
+                        placeholder={ __( 'Search by Email', 'woocommerce-stock-manager' ) }
+                        onChange={(e) => updateFilter(e.target.name, e.target.value)}
+                        value={filterValue}
+                        />
+                    </div>
+                </>
+            ),
+        },
+        {
+            name: "date",
+            render: (updateFilter, value) => (
+              <>
+                <DateRangePicker placeholder={ __( 'DD-MM-YYYY ~ DD-MM-YYYY', 'woocommerce-stock-manager' ) }
+                    onChange={(dates) => {
+                        if ( dates != null ) {
+                            updateFilter( "date",{
+                                start_date : dates[0].toString().replace(/ GMT[+-]\d{4} \(.+$/, ''),
+                                end_date   : dates[1].toString().replace(/ GMT[+-]\d{4} \(.+$/, '')
+                            })
+                        } else {
+                            updateFilter( "date",{
+                                start_date : sevenDaysAgo,
+                                end_date   : currentDate
+                            })
+                        }
+                    } }
+                />
+              </>
+            ),
+          }
+      ];
+
+    useEffect( () => {
+        if( stockManagerAppLocalizer.pro_active != 'free' ) {
+            requestData();
         }
-    };
+    }, [] );
+    
     //columns for the data table
     const columns = [
         {
@@ -110,50 +138,6 @@ export default function SubscribersList( ) {
             selector: row => row.status,
         }
     ];
-    //Pagination component to render Pagination
-    const Pagination = ( ) => {
-        const handlePageChange = ( { selected } ) => {
-            setCurrentPage ( selected );
-            window.scrollTo ( {
-            top: 0,
-            behavior: 'smooth',
-            } );
-        };
-        const handleRowsPerPageChange = ( e ) => {
-            setRowsPerPage( parseInt ( e.target.value ) );
-            window.scrollTo({
-            top: 0,
-            behavior: 'smooth',
-            });
-            setCurrentPage( 0 );
-        };
-        return(
-            <div className="pagination">
-                <div>
-                    <label htmlFor="rowsPerPage" > { __( "Rows per page:","woocommerce-stock-manager" ) } </label>
-                    <select id="rowsPerPage" value={ rowsPerPage } onChange={ handleRowsPerPageChange } >
-                        {
-                            [10,25,30,50].map( ( value ) => {
-                            return <option value={value}> {value} </option>
-                            })
-                        }
-                        <option value={ totalRows }>{__( "All", "woocommerce-stock-manager" ) }</option>
-                    </select>          
-                </div>
-                <ReactPaginate
-                className="pagination"
-                previousLabel={"previous"}
-                nextLabel={"next"}
-                breakLabel={"..."}
-                breakClassName={"break-me"}
-                pageCount={ totalRows ? Math.ceil ( totalRows / rowsPerPage ) : 0 }
-                marginPagesDisplayed={ 2 }
-                pageRangeDisplayed={ 2 }
-                onPageChange={ handlePageChange }
-                />
-            </div>
-        )
-    }
     return (
         <div>
             { stockManagerAppLocalizer.pro_active == 'free'  ?
@@ -161,12 +145,12 @@ export default function SubscribersList( ) {
                     <Dialog
                         className="woo-module-popup"
                         open={ openDialog }
-                        onClose={ ( ) => { setOpenDialog( false ) } }
+                        onClose={ () => { setOpenDialog( false ) } }
                         aria-labelledby="form-dialog-title"
                     >
                         <span 
                             className="icon-cross stock-manager-popup-cross"
-                            onClick={ ( ) => { setOpenDialog ( false ) } }
+                            onClick={ () => { setOpenDialog ( false ) } }
                         ></span>
                         <Popoup/>
                     </Dialog>
@@ -174,7 +158,7 @@ export default function SubscribersList( ) {
                         src={ stockManagerAppLocalizer.subscriber_list }
                         alt="subscriber-list"
                         className='subscriber-img'
-                        onClick={ ( ) => { setOpenDialog ( true ) } }
+                        onClick={ () => { setOpenDialog ( true ) } }
                     />
                 </div>
             :
@@ -198,86 +182,42 @@ export default function SubscribersList( ) {
                                 <div className="woo-search-and-multistatus-wrap">
                                     <ul className="woo-multistatus-ul">
                                         <li className={`woo-multistatus-item ${ post_status == 'any' ? 'status-active' : '' } `}>
-                                            <div onClick={ ( ) => { setPost_status( 'any') ;setTotalRows ( subscribersStatus.totalSubscribers )  } } className="woo-multistatus-check-all ">
+                                            <div onClick={ () => { setPost_status( 'any') ;setTotalRows ( subscribersStatus.totalSubscribers )  } } className="woo-multistatus-check-all ">
                                                 {`All (${ subscribersStatus.totalSubscribers })`}
                                             </div>
                                         </li>
                                         <li  className="woo-multistatus-item woo-divider"></li>
-                                        <li onClick={ ( ) => { setPost_status ( 'woo_subscribed' ) ;setTotalRows ( subscribersStatus.subscribed ) } } className={`woo-multistatus-item ${ post_status == 'woo_subscribed' ? 'status-active' : '' } `}>
+                                        <li onClick={ () => { setPost_status ( 'woo_subscribed' ) ;setTotalRows ( subscribersStatus.subscribed ) } } className={`woo-multistatus-item ${ post_status == 'woo_subscribed' ? 'status-active' : '' } `}>
                                             <div className="woo-multistatus-check-subscribe">
                                                 {`Subscribe (${ subscribersStatus.subscribed })`}
                                             </div>
                                         </li>
                                         <li  className="woo-multistatus-item woo-divider"></li>
-                                        <li onClick={ ( ) => { setPost_status ( 'woo_unsubscribed' ) ;setTotalRows ( subscribersStatus.unsubscribed ) } } className={`woo-multistatus-item ${ post_status == 'woo_unsubscribed' ? 'status-active' : '' } `}>
+                                        <li onClick={ () => { setPost_status ( 'woo_unsubscribed' ) ;setTotalRows ( subscribersStatus.unsubscribed ) } } className={`woo-multistatus-item ${ post_status == 'woo_unsubscribed' ? 'status-active' : '' } `}>
                                             <div className="woo-multistatus-check-unpaid">
                                                 {`Unsubscribe (${ subscribersStatus.unsubscribed })`}
                                             </div>
                                         </li>
                                         <li className="woo-multistatus-item woo-divider"></li>
-                                        <li onClick={ ( ) => { setPost_status ( 'woo_mailsent' ) ;setTotalRows ( subscribersStatus.mailSent ) } } className={`woo-multistatus-item ${ post_status == 'woo_mailsent' ? 'status-active' : '' } `}>
+                                        <li onClick={ () => { setPost_status ( 'woo_mailsent' ) ;setTotalRows ( subscribersStatus.mailSent ) } } className={`woo-multistatus-item ${ post_status == 'woo_mailsent' ? 'status-active' : '' } `}>
                                             <div className="woo-multistatus-check-unpaid">
                                                 {`Mail Sent (${ subscribersStatus.mailSent })`}
                                             </div>
                                         </li>
                                     </ul>                                    
-                                </div>
-
-                                <div className="woo-wrap-bulk-all-date">
-                                    <div className="woo-header-search-section">
-                                        <input type="text" placeholder={ __( 'Search by Product Name', 'woocommerce-stock-manager' ) }
-                                            onChange={ ( event ) => {
-                                                if ( event.target.value.length > 3 ) {
-                                                    setProductNameField ( event.target.value );
-                                                } else if ( event.target.value.length <= 1 ) {
-                                                    setProductNameField ( '' );
-                                                }
-                                            }}
-                                        />
-                                    </div>
-                                    <div className="woo-header-search-section">
-                                        <label>
-                                            <i className="woo-font icon-search"></i>
-                                        </label>
-                                        <input type="text" placeholder={ __( 'Search by Email', 'woocommerce-stock-manager' ) }
-                                            onChange={ ( event ) => {
-                                                if ( event.target.value.length > 3 ) {
-                                                    setEmailField ( event.target.value );
-                                                } else if ( event.target.value.length <= 1 ) {
-                                                    setEmailField ( '' );
-                                                }
-                                            }}
-                                        />
-                                    </div>                                    
-                                    <DateRangePicker placeholder={ __( 'DD-MM-YYYY ~ DD-MM-YYYY', 'woocommerce-stock-manager' ) }
-                                        onChange={ handleDateRangeChange }
+                                </div>                                  
+                                <div className="woo-backend-datatable-wrapper">
+                                    <CustomTable 
+                                        data={data}
+                                        columns={columns}
+                                        handlePagination={requestApiForData}
+                                        defaultTotalRows={totalRows}
+                                        defaultRowsParPage={5}
+                                        perPageOption={[5, 10, 25]}
+                                        realtimeFilter={realtimeFilter}
                                     />
-                                </div>
-                                {
-                                    ( data.length > 0 )?
-                                        <div className="woo-backend-datatable-wrapper">
-                                            <DataTable
-                                                className='subscribe-list-table'
-                                                columns={ columns  }
-                                                data={ data }
-                                                selectableRows
-                                            />
-                                            { Pagination( ) }
-                                        </div>
-                                    :
-                                        <>
-                                            {showLoader && (
-                                                <PuffLoader
-                                                    color={'#cd0000'}
-                                                    size={200}
-                                                    loading={true}
-                                                />
-                                            )}
-                                            {showNoDataText && (
-                                                <div className='no-data-text' >There are no data to display</div>
-                                            )}
-                                        </>
-                                }                                
+                                    {console.log(totalRows)}
+                                </div>                       
                             </div>
                         </div>
                 </div>

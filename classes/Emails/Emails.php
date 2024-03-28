@@ -26,17 +26,17 @@ class Emails extends \WC_Email {
 	 * @access public
 	 * @return void
 	 */
-	function __construct( ) {
+	function __construct() {
 
-		$this -> id 			= 'stock_manager';
-		$this -> title 			= __( 'Alert Subscriber', 'woocommerce-stock-manager' );
-		$this -> description	= __( 'Alert customer when their subscribed product becomes in stock', 'woocommerce-stock-manager' );
-		$this -> template_html 	= 'emails/Email.php';
-		$this -> template_plain = 'emails/plain/Email.php';
-		$this -> template_base  = SM( ) -> plugin_path . 'templates/';
+		$this->id 			= 'stock_manager';
+		$this->title 			= __( 'Alert Subscriber', 'woocommerce-stock-manager' );
+		$this->description	= __( 'Alert customer when their subscribed product becomes in stock', 'woocommerce-stock-manager' );
+		$this->template_html 	= 'emails/Email.php';
+		$this->template_plain = 'emails/plain/Email.php';
+		$this->template_base  = SM()->plugin_path . 'templates/';
 		
 		// Call parent constuctor
-		parent::__construct( );
+		parent::__construct();
 	} 
 
 	/**
@@ -47,18 +47,18 @@ class Emails extends \WC_Email {
 	 */
 	function trigger( $recipient, $product ) {
 
-		$this -> customer_email = $recipient;
-		$this -> recipient = $recipient;
-		$this -> product = $product;
+		$this->customer_email = $recipient;
+		$this->recipient = $recipient;
+		$this->product = $product;
 
 		if ( apply_filters( 'woo_product_backin_stock_send_admin', false ) ) {
-			$this -> recipient .= ', ' . get_option( 'admin_email' );
+			$this->recipient .= ', ' . get_option( 'admin_email' );
 		} 
-		if ( ! $this -> is_enabled( ) || ! $this -> get_recipient( ) ) {
+		if ( ! $this->is_enabled() || ! $this->get_recipient() ) {
 			return;
 		} 
 			
-		$this -> send( $this -> get_recipient( ), $this -> get_subject( ), $this -> get_content( ), $this -> get_headers( ), $this -> get_attachments( ) );
+		$this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers(), $this->get_attachments() );
 	} 
 	
 	/**
@@ -67,8 +67,8 @@ class Emails extends \WC_Email {
 	 * @since  1.4.7
 	 * @return string
 	 */
-	public function get_default_subject( ) {
-		return apply_filters( 'woocommerce_email_subject_stock_manager', __( 'Your Subscribed product on {site_title} is available now', 'woocommerce-stock-manager' ), $this -> object );
+	public function get_default_subject() {
+		return apply_filters( 'woocommerce_email_subject_stock_manager', __( 'Your Subscribed product on {site_title} is available now', 'woocommerce-stock-manager' ), $this->object );
 	} 
 
 	/**
@@ -77,8 +77,8 @@ class Emails extends \WC_Email {
 	 * @since  1.4.7
 	 * @return string
 	 */
-	public function get_default_heading( ) {
-		return apply_filters( 'woocommerce_email_heading_stock_manager', __( 'Welcome to {site_title} ', 'woocommerce-stock-manager' ), $this -> object );
+	public function get_default_heading() {
+		return apply_filters( 'woocommerce_email_heading_stock_manager', __( 'Welcome to {site_title} ', 'woocommerce-stock-manager' ), $this->object );
 	} 
 
 	/**
@@ -87,17 +87,17 @@ class Emails extends \WC_Email {
 	 * @access public
 	 * @return string
 	 */
-	function get_content_html( ) {
-		ob_start( );
-		wc_get_template( $this -> template_html, [ 
-			'email_heading' => $this -> get_heading( ), 
-			'product' 		=> $this -> product, 
-			'customer_email'=> $this -> customer_email, 
+	function get_content_html() {
+		ob_start();
+		wc_get_template( $this->template_html, [ 
+			'email_heading' => $this->get_heading(), 
+			'product' 		=> $this->product, 
+			'customer_email'=> $this->customer_email, 
 			'sent_to_admin' => false, 
 			'plain_text' 	=> false, 
 			'email' 		=> $this, 
-		], '', $this -> template_base );
-		return ob_get_clean( );
+		], '', $this->template_base );
+		return ob_get_clean();
 	} 
 
 	/**
@@ -106,16 +106,16 @@ class Emails extends \WC_Email {
 	 * @access public
 	 * @return string
 	 */
-	function get_content_plain( ) {
-		ob_start( );
-		wc_get_template( $this -> template_plain, [ 
-			'email_heading' => $this -> get_heading( ), 
-			'product' 		=> $this -> product, 
-			'customer_email'=> $this -> customer_email, 
+	function get_content_plain() {
+		ob_start();
+		wc_get_template( $this->template_plain, [ 
+			'email_heading' => $this->get_heading(), 
+			'product' 		=> $this->product, 
+			'customer_email'=> $this->customer_email, 
 			'sent_to_admin' => false, 
 			'plain_text' 	=> true
-		], '', $this -> template_base );
-		return ob_get_clean( );
+		], '', $this->template_base );
+		return ob_get_clean();
 	} 	
 } 
 endif;

@@ -7,16 +7,17 @@
  * @return {Array} Array of Object.
  */
 const getSettingsJsonData = () => {
-    const settings = {};
-    const context = require.context(`../json/settings`, false, /\.json$/);
+    const settings = [];
+    const context = require.context('../json/settings', false, /\.js$/); // Adjust the folder path and file extension
     context.keys().forEach((key) => {
-        const data = context(key);
-        // Add each key-value pair from the data object to the settings object
-        Object.keys(data).forEach((dataKey) => {
-            settings[dataKey] = data[dataKey];
-        });
+        const module = context(key);
+        let fileName = key.substring(key.lastIndexOf('/') + 1, key.lastIndexOf('.'));
+        // Check if the module has a default export and push it to the settings array
+        if (module && module.default) {
+            settings[fileName] = module.default;
+        }
     });
     return settings;
-}
+};
 
 export { getSettingsJsonData };

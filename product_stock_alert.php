@@ -16,7 +16,7 @@
 
 if ( !defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 require_once __DIR__ . '/vendor/autoload.php';
-function SM( ) {
+function SM() {
     return \StockManager\StockManager::init( __FILE__ );
 }
-SM( );
+SM();

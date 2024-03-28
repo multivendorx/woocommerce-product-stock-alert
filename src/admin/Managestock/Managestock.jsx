@@ -18,7 +18,7 @@ const Managestock = () => {
     border-color: red;
     `;
     
-    const [ data, setData ] = useState([ ]);
+    const [ data, setData ] = useState([]);
     const [ headers, setHeaders ] = useState([]);
     const [ totalProducts , setTotalProducts ] = useState();
     const [ rowsPerPage , setRowsPerPage ] = useState(10);
@@ -36,6 +36,7 @@ const Managestock = () => {
             axios( {
                 method: "post",
                 url: fetchDataUrl,
+                headers: { 'X-WP-Nonce' : stockManagerAppLocalizer.nonce },
                 data:{ page:currentPage+1 , row:rowsPerPage, product_name:productName, product_sku:productSku,
                      product_type:productType, stock_status: stockStatus, allData: 'false' },
             } ).then( ( response ) => {
@@ -73,16 +74,16 @@ const Managestock = () => {
                 <Dialog
                     className="woo-module-popup"
                     open={ openDialog }
-                    onClose={ ( ) => { setOpenDialog ( false ) } }
+                    onClose={ () => { setOpenDialog ( false ) } }
                     aria-labelledby="form-dialog-title"
                 >
                     <span 
                         className="icon-cross stock-manager-popup-cross"
-                        onClick={ ( ) => { setOpenDialog ( false ) } }
+                        onClick={ () => { setOpenDialog ( false ) } }
                     ></span>
                     <Popoup/>
                 </Dialog>
-                <div onClick={ ( ) => { setOpenDialog ( true ) } } className='inventory-manager'></div>
+                <div onClick={ () => { setOpenDialog ( true ) } } className='inventory-manager'></div>
             </div>
         :
         //If user is pro user he will shown the Inventory Manager Table

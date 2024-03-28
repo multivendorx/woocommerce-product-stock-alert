@@ -7,7 +7,7 @@ use \Automattic\WooCommerce\Utilities\FeaturesUtil;
 class StockManager {
 
     private static $instance = null;
-    private $container       = [ ];
+    private $container       = [];
     private $file;
 
     /**
@@ -17,11 +17,11 @@ class StockManager {
     public function __construct( $file ) {
         require_once trailingslashit( dirname( $file ) ) . '/config.php';
 
-        $this -> file = $file;
-        $this -> container[ 'plugin_url' ] = trailingslashit( plugins_url( '', $plugin = $file ) );
-        $this -> container[ 'plugin_path' ] = trailingslashit( dirname( $file ) );
-        $this -> container[ 'version' ] = STOCK_MANAGER_PLUGIN_VERSION;
-        $this -> container[ 'rest_namespace' ] = STOCK_MANAGER_REST_NAMESPACE;
+        $this->file = $file;
+        $this->container[ 'plugin_url' ]     = trailingslashit( plugins_url( '', $plugin = $file ) );
+        $this->container[ 'plugin_path' ]    = trailingslashit( dirname( $file ) );
+        $this->container[ 'version' ]        = STOCK_MANAGER_PLUGIN_VERSION;
+        $this->container[ 'rest_namespace' ] = STOCK_MANAGER_REST_NAMESPACE;
         // Activation Hooks
         register_activation_hook( $file, [ $this, 'activate' ] );
         // Deactivation Hooks
@@ -40,16 +40,16 @@ class StockManager {
      * Placeholder for activation function.
      * @return void
      */
-    public function activate( ) {
+    public function activate() {
         update_option( 'woo_stock_manager_installed', 1 );
-        $this -> container[ 'install' ] = new Install( );
+        $this->container[ 'install' ] = new Install();
     } 
 
     /**
      * Placeholder for deactivation function.
      * @return void
      */
-    public  function deactivate( ) {
+    public  function deactivate() {
         if ( get_option( 'woo_stock_manager_cron_start' ) ) :
             wp_clear_scheduled_hook( 'woo_stock_manager_start_notification_cron_job' );
             delete_option( 'woo_stock_manager_cron_start' );
@@ -61,8 +61,8 @@ class StockManager {
      * Add High Performance Order Storage Support
      * @return void
      */
-    public function declare_compatibility( ) {
-        FeaturesUtil::declare_compatibility( 'custom_order_tables', plugin_basename( $this -> file ), true );
+    public function declare_compatibility() {
+        FeaturesUtil::declare_compatibility( 'custom_order_tables', plugin_basename( $this->file ), true );
     } 
 
     /**
@@ -70,8 +70,8 @@ class StockManager {
      * @return void
      */
     public function init_plugin( $file ) {
-        $this -> load_plugin_textdomain( );
-        $this -> init_classes( );
+        $this->load_plugin_textdomain();
+        $this->init_classes();
         do_action( 'stock_manager_loaded' );
     }
     
@@ -80,16 +80,16 @@ class StockManager {
      * Access this classes using magic method.
      * @return void
      */
-    public function init_classes( ) {
-        $this -> container[ 'util' ]        = new Utill( );
-        $this -> container[ 'ajax' ]        = new Ajax( );
-        $this -> container[ 'admin' ]       = new Admin( );
-        $this -> container[ 'restapi' ]     = new RestAPI( );
-        $this -> container[ 'frontend' ]    = new FrontEnd( );
-        $this -> container[ 'shortcode' ]   = new Shortcode( );
-        $this -> container[ 'subscriber' ]  = new Subscriber( );
-        $this -> container[ 'filters' ]     = new Deprecated\DeprecatedFilterHooks( );
-        $this -> container[ 'actions' ]     = new Deprecated\DeprecatedActionHooks( );
+    public function init_classes() {
+        $this->container[ 'util' ]        = new Utill();
+        $this->container[ 'ajax' ]        = new Ajax();
+        $this->container[ 'admin' ]       = new Admin();
+        $this->container[ 'restapi' ]     = new RestAPI();
+        $this->container[ 'frontend' ]    = new FrontEnd();
+        $this->container[ 'shortcode' ]   = new Shortcode();
+        $this->container[ 'subscriber' ]  = new Subscriber();
+        $this->container[ 'filters' ]     = new Deprecated\DeprecatedFilterHooks();
+        $this->container[ 'actions' ]     = new Deprecated\DeprecatedActionHooks();
     } 
 
     /**
@@ -97,9 +97,9 @@ class StockManager {
      * @return void
      */
     function setup_email_class( $emails ) {
-        $emails[ 'WC_Admin_Email_Stock_Manager' ] = new Emails\AdminEmail( );
-        $emails[ 'WC_Subscriber_Confirmation_Email_Stock_Manager' ] = new Emails\SubscriberConfirmationEmail( );
-        $emails[ 'WC_Email_Stock_Manager' ] = new Emails\Emails( );
+        $emails[ 'WC_Admin_Email_Stock_Manager' ] = new Emails\AdminEmail();
+        $emails[ 'WC_Subscriber_Confirmation_Email_Stock_Manager' ] = new Emails\SubscriberConfirmationEmail();
+        $emails[ 'WC_Email_Stock_Manager' ] = new Emails\Emails();
         return $emails;
     } 
     
@@ -107,8 +107,8 @@ class StockManager {
      * Take action based on if woocommerce is not loaded
      * @return void
      */
-    public function is_woocommerce_loaded( ) {
-        if ( did_action( 'woocommerce_loaded' ) || ! is_admin( ) ) {
+    public function is_woocommerce_loaded() {
+        if ( did_action( 'woocommerce_loaded' ) || ! is_admin() ) {
             return;
         } 
         add_action( 'admin_notices', [ $this, 'woocommerce_admin_notice' ] );
@@ -121,8 +121,8 @@ class StockManager {
      * @access public
      * @return void
      */
-    public function load_plugin_textdomain( ) {
-        $locale = is_admin( ) && function_exists( 'get_user_locale' ) ? get_user_locale( ) : get_locale( );
+    public function load_plugin_textdomain() {
+        $locale = is_admin() && function_exists( 'get_user_locale' ) ? get_user_locale() : get_locale();
         $locale = apply_filters( 'plugin_locale', $locale, 'woocommerce-stock-manager' );
         load_textdomain( 'woocommerce-stock-manager', WP_LANG_DIR . '/woocommerce-product-stock-alert/woocommerce-product-stock-alert-' . $locale . '.mo' );
         load_plugin_textdomain( 'woocommerce-stock-manager', false, plugin_basename( dirname( dirname( __FILE__ ) ) ) . '/languages' );
@@ -135,8 +135,8 @@ class StockManager {
      * @return  object | \WP_Error
      */
     public function __get( $class ) {
-        if ( array_key_exists( $class, $this -> container ) ) {
-            return $this -> container[ $class ];
+        if ( array_key_exists( $class, $this->container ) ) {
+            return $this->container[ $class ];
         } 
         return new \WP_Error( sprintf( 'Call to unknown class %s.', $class ) );
     } 
@@ -145,7 +145,7 @@ class StockManager {
      * Html for database migration notice.
      * @return void
      */
-    public static function database_migration_notice( ) {
+    public static function database_migration_notice() {
         // check if plugin vertion in databse is not same to current stock manager version
         $plugin_version = get_option( 'woo_stock_manager_version', '' );
         if ( $plugin_version != STOCK_MANAGER_PLUGIN_VERSION ) {

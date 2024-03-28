@@ -14,7 +14,7 @@ export default function DataTable({props}) {
     `;
 
 
-    const Pagination = ( ) => {
+    const Pagination = () => {
         const handlePageChange = ( { selected } ) => {
             props.setCurrentPage ( selected );
             window.scrollTo ( {

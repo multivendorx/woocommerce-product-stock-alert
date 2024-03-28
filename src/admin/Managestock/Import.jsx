@@ -4,13 +4,14 @@ import { CSVLink } from "react-csv";
 import { __ } from '@wordpress/i18n';
 import { Link } from 'react-router-dom';
 
-const Import = ( ) => {
+const Import = () => {
     //To fetch all the data for the sample CSV
-    useEffect( ( ) => {
+    useEffect( () => {
         if ( stockManagerAppLocalizer.pro_active != 'free' ) {
             axios({
                 method: "post",
                 url: `${ stockManagerAppLocalizer.apiUrl }/stockmanager/v1/get-products`,
+                headers: { 'X-WP-Nonce' : stockManagerAppLocalizer.nonce },
                 data:{ allData:'true' },
             } ).then( ( response ) => {
                 let parsedData = JSON.parse( response.data );
@@ -18,7 +19,7 @@ const Import = ( ) => {
             } );
         }
     }, []);
-    const [ data, setData ] = useState([ ]);
+    const [ data, setData ] = useState([]);
     const [ file, setFile ] = useState( null );
     const [ filename, setFilename ] = useState( "" );
     const [ displayMessage, setDisplayMessage ] = useState( '' );
@@ -54,18 +55,18 @@ const Import = ( ) => {
     //Function to upload the CSV data
     const handleUpload = () => {
         if ( file ) {
-            const reader = new FileReader( );
+            const reader = new FileReader();
             reader.readAsText( file  );
             reader.onload = function ( e ) {
                 let csvData = processCSV( e.target.result );
                 axios({
                     method: 'post',
                     url: `${ stockManagerAppLocalizer.apiUrl }/stockmanager/v1/import-products`,
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: { 'X-WP-Nonce' : stockManagerAppLocalizer.nonce, 'Content-Type': 'application/json' },
                     data: { product: csvData }
                 })
                 setDisplayMessage('Csv Data Uploaded Succesfully');
-                setTimeout( ( ) => {
+                setTimeout( () => {
                     setDisplayMessage( '' );
                 }, 2000 );
             }

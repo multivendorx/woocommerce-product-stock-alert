@@ -16787,10 +16787,10 @@ function banner() {
 
 /***/ }),
 
-/***/ "./src/admin/CustomInputs/BasicInput.jsx":
-/*!***********************************************!*\
-  !*** ./src/admin/CustomInputs/BasicInput.jsx ***!
-  \***********************************************/
+/***/ "./src/admin/CustomLibrary/CustomInputs/BasicInput.jsx":
+/*!*************************************************************!*\
+  !*** ./src/admin/CustomLibrary/CustomInputs/BasicInput.jsx ***!
+  \*************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -16838,10 +16838,10 @@ const BasicInput = props => {
 
 /***/ }),
 
-/***/ "./src/admin/CustomInputs/Button.jsx":
-/*!*******************************************!*\
-  !*** ./src/admin/CustomInputs/Button.jsx ***!
-  \*******************************************/
+/***/ "./src/admin/CustomLibrary/CustomInputs/Button.jsx":
+/*!*********************************************************!*\
+  !*** ./src/admin/CustomLibrary/CustomInputs/Button.jsx ***!
+  \*********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -16873,10 +16873,10 @@ function Button(props) {
 
 /***/ }),
 
-/***/ "./src/admin/CustomInputs/CheckBox.jsx":
-/*!*********************************************!*\
-  !*** ./src/admin/CustomInputs/CheckBox.jsx ***!
-  \*********************************************/
+/***/ "./src/admin/CustomLibrary/CustomInputs/CheckBox.jsx":
+/*!***********************************************************!*\
+  !*** ./src/admin/CustomLibrary/CustomInputs/CheckBox.jsx ***!
+  \***********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -16925,10 +16925,10 @@ const CheckBox = props => {
 
 /***/ }),
 
-/***/ "./src/admin/CustomInputs/ColorInput.jsx":
-/*!***********************************************!*\
-  !*** ./src/admin/CustomInputs/ColorInput.jsx ***!
-  \***********************************************/
+/***/ "./src/admin/CustomLibrary/CustomInputs/ColorInput.jsx":
+/*!*************************************************************!*\
+  !*** ./src/admin/CustomLibrary/CustomInputs/ColorInput.jsx ***!
+  \*************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -16955,10 +16955,10 @@ function ColorInput(props) {
 
 /***/ }),
 
-/***/ "./src/admin/CustomInputs/RangeInput.jsx":
-/*!***********************************************!*\
-  !*** ./src/admin/CustomInputs/RangeInput.jsx ***!
-  \***********************************************/
+/***/ "./src/admin/CustomLibrary/CustomInputs/RangeInput.jsx":
+/*!*************************************************************!*\
+  !*** ./src/admin/CustomLibrary/CustomInputs/RangeInput.jsx ***!
+  \*************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -16992,10 +16992,10 @@ function RangeInput(props) {
 
 /***/ }),
 
-/***/ "./src/admin/CustomInputs/SelectInput.jsx":
-/*!************************************************!*\
-  !*** ./src/admin/CustomInputs/SelectInput.jsx ***!
-  \************************************************/
+/***/ "./src/admin/CustomLibrary/CustomInputs/SelectInput.jsx":
+/*!**************************************************************!*\
+  !*** ./src/admin/CustomLibrary/CustomInputs/SelectInput.jsx ***!
+  \**************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -17046,10 +17046,10 @@ const SelectInput = props => {
 
 /***/ }),
 
-/***/ "./src/admin/CustomInputs/TextArea.jsx":
-/*!*********************************************!*\
-  !*** ./src/admin/CustomInputs/TextArea.jsx ***!
-  \*********************************************/
+/***/ "./src/admin/CustomLibrary/CustomInputs/TextArea.jsx":
+/*!***********************************************************!*\
+  !*** ./src/admin/CustomLibrary/CustomInputs/TextArea.jsx ***!
+  \***********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -17096,10 +17096,10 @@ const TextArea = props => {
 
 /***/ }),
 
-/***/ "./src/admin/CustomInputs/Util/BlockText.jsx":
-/*!***************************************************!*\
-  !*** ./src/admin/CustomInputs/Util/BlockText.jsx ***!
-  \***************************************************/
+/***/ "./src/admin/CustomLibrary/CustomInputs/Util/BlockText.jsx":
+/*!*****************************************************************!*\
+  !*** ./src/admin/CustomLibrary/CustomInputs/Util/BlockText.jsx ***!
+  \*****************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -17124,10 +17124,10 @@ const BlockText = props => {
 
 /***/ }),
 
-/***/ "./src/admin/CustomInputs/Util/Section.jsx":
-/*!*************************************************!*\
-  !*** ./src/admin/CustomInputs/Util/Section.jsx ***!
-  \*************************************************/
+/***/ "./src/admin/CustomLibrary/CustomInputs/Util/Section.jsx":
+/*!***************************************************************!*\
+  !*** ./src/admin/CustomLibrary/CustomInputs/Util/Section.jsx ***!
+  \***************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -17144,6 +17144,221 @@ const Section = props => {
   }, "\xA0"));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Section);
+
+/***/ }),
+
+/***/ "./src/admin/CustomLibrary/CustomTable/CustomTable.jsx":
+/*!*************************************************************!*\
+  !*** ./src/admin/CustomLibrary/CustomTable/CustomTable.jsx ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_data_table_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-data-table-component */ "./node_modules/react-data-table-component/dist/index.cjs.js");
+/* harmony import */ var _table_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./table.css */ "./src/admin/CustomLibrary/CustomTable/table.css");
+
+
+
+
+const PENALTI = 28;
+const COOLDOWN = 1;
+// Loading table component.
+const LoadingTable = () => {
+  // Array to represent 10 rows
+  const rows = Array.from({
+    length: 10
+  }, (_, index) => index);
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("table", {
+    className: "tg"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("tbody", null, rows.map((row, rowIndex) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("tr", {
+    key: rowIndex
+  }, Array.from({
+    length: 5
+  }, (_, cellIndex) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", {
+    key: cellIndex,
+    className: "tg-cly1"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "line"
+  }))))))));
+};
+const CustomTable = props => {
+  const {
+    data,
+    // dataset for render table
+    columns,
+    // table column
+    selectable,
+    // option for select row column
+    handleSelect,
+    // callback function handle row select
+    handlePagination,
+    // callback function for handle pagination
+    defaultRowsParPage,
+    // default rows per page by user. if not set default is 10
+    defaultCurrentPage,
+    // default current page by user. if not set default is 1
+    defaultTotalRows,
+    // default total rows for the dataset. user should always provide this.
+    perPageOption,
+    // per page option array. user should always provide.
+    realtimeFilter // filter filds for realtime filter.
+  } = props;
+  const [loading, setLoading] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false); // loading state varaible.
+  const [totalRows, setTotalRows] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(defaultTotalRows || data.length); // total no of row in dataset.
+  const [rowsPerPage, setRowsPerPage] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(defaultRowsParPage || 10); // rows par page. default is 10.
+  const [currentPage, setCurrentPage] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(defaultCurrentPage || 1); // current page state variable.
+  // Realtime filter state variable
+  const [filterData, setFilterData] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({});
+  // Counter variable for cooldown effect
+  const counter = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(0);
+  const counterId = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(0);
+  // Get the last fild of column.
+  const sortableFild = columns[columns.length - 1];
+  // Chek the last column field is dropdown
+  // If not dropdown then push the dropdown field to the column.
+  if (!sortableFild.isDropDown) {
+    columns.push({
+      name: "",
+      cell: row => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+        className: "dropdown_btn"
+      }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+        onClick: e => handleTableExpand(e.currentTarget)
+      }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("i", {
+        class: "mvx-table-module module-arrow-right2"
+      }))),
+      isDropDown: true
+    });
+  }
+  // Function that handle table expand.
+  const handleTableExpand = e => {
+    e.children[0].classList.toggle('module-arrow-down2');
+    e.children[0].classList.toggle('module-arrow-right2');
+    const row = e.parentElement.parentElement.parentElement;
+    row.classList.toggle("active");
+  };
+  // When new data comes, set loading to false.
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    setTotalRows(defaultTotalRows);
+    setLoading(false);
+  }, [data]);
+  // Code for handle cooldown effect.
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    // Check if filter data is empty then this effect is for first time rendering.
+    // Do nothing in this case.
+    if (Object.keys(filterData).length === 0) {
+      return;
+    }
+    // Set counter by penalti
+    counter.current = PENALTI;
+    // Clear previous counter.
+    if (counterId.current) {
+      clearInterval(counterId.current);
+    }
+    // Create new interval
+    const intervalId = setInterval(() => {
+      counter.current -= COOLDOWN;
+      // Cooldown compleate time for db request.
+      if (counter.current < 0) {
+        // Set the loading
+        setLoading(true);
+        // Call filter function
+        handlePagination?.(rowsPerPage, 1, filterData);
+        // Set current page to one.
+        setCurrentPage(1);
+        // Clear the interval.
+        clearInterval(intervalId);
+        counterId.current = 0;
+      }
+    }, 50);
+    // Store the interval id.
+    counterId.current = intervalId;
+  }, [filterData]);
+  // Handle mouse enter function.
+  const handleMouseEnter = () => {
+    props.handleMouseEnter?.();
+  };
+  // Handle mouse leave function.
+  const handleMouseLeave = () => {
+    props.handleMouseLeave?.();
+  };
+  const handlePageChange = async newCurrentPage => {
+    // Start the loading...
+    setLoading(true);
+    // Call the function for handle pagination.
+    handlePagination?.(rowsPerPage, newCurrentPage, filterData);
+    // Set state variable
+    setCurrentPage(newCurrentPage);
+  };
+  // Function handle rows-per-page change.
+  const handleRowsPerPageChange = async newRowsPerPage => {
+    // Start the loading...
+    setLoading(true);
+    // Call the function for handle pagination.
+    handlePagination?.(newRowsPerPage, currentPage, filterData);
+    // Set state variable.
+    setCurrentPage(1);
+    setRowsPerPage(newRowsPerPage);
+  };
+  // Function handle selected row change.
+  const handleOnSelectedRowsChange = async ({
+    selectedRows,
+    selectedCount,
+    allSelected
+  }) => {
+    // Check if any row is select or not.
+    // Prevent extra call on page change.
+    if (selectedCount > 0) {
+      handleSelect?.(selectedRows, selectedCount, allSelected);
+    }
+  };
+  // Function that handle filter change.
+  const handleFilterChange = (key, value) => {
+    // Set filter data
+    setFilterData(prevData => {
+      return {
+        ...prevData,
+        [key]: value
+      };
+    });
+  };
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: `table-container ${loading ? "table-loading" : ""} ${selectable ? "selectable-table" : ""}`
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "woo-wrap-bulk-all-date"
+  }, realtimeFilter && realtimeFilter.map(filter => {
+    return filter.render(handleFilterChange, filterData[filter.name]);
+  })), loading ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(LoadingTable, null) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_data_table_component__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    pagination: true,
+    paginationServer: true,
+    selectableRows: selectable,
+    columns: columns,
+    data: data
+    // Pagination details.
+    ,
+    paginationTotalRows: totalRows,
+    paginationDefaultPage: currentPage,
+    paginationPerPage: rowsPerPage,
+    paginationRowsPerPageOptions: perPageOption
+    // Mouse enter leave callback.
+    ,
+    onRowMouseEnter: handleMouseEnter,
+    onRowMouseLeave: handleMouseLeave
+    // Pagination callback.
+    ,
+    onChangePage: handlePageChange,
+    onChangeRowsPerPage: handleRowsPerPageChange
+    // Row select callback.
+    ,
+    onSelectedRowsChange: handleOnSelectedRowsChange
+  }));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CustomTable);
 
 /***/ }),
 
@@ -17165,15 +17380,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _mui_material_Dialog__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @mui/material/Dialog */ "./node_modules/@mui/material/Dialog/Dialog.js");
 /* harmony import */ var _PopupContent_PopupContent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../PopupContent/PopupContent */ "./src/admin/PopupContent/PopupContent.jsx");
-/* harmony import */ var _CustomInputs_TextArea__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../CustomInputs/TextArea */ "./src/admin/CustomInputs/TextArea.jsx");
-/* harmony import */ var _CustomInputs_CheckBox__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../CustomInputs/CheckBox */ "./src/admin/CustomInputs/CheckBox.jsx");
-/* harmony import */ var _CustomInputs_BasicInput__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../CustomInputs/BasicInput */ "./src/admin/CustomInputs/BasicInput.jsx");
-/* harmony import */ var _CustomInputs_SelectInput__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../CustomInputs/SelectInput */ "./src/admin/CustomInputs/SelectInput.jsx");
-/* harmony import */ var _CustomInputs_Util_Section__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../CustomInputs/Util/Section */ "./src/admin/CustomInputs/Util/Section.jsx");
-/* harmony import */ var _CustomInputs_Util_BlockText__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../CustomInputs/Util/BlockText */ "./src/admin/CustomInputs/Util/BlockText.jsx");
-/* harmony import */ var _CustomInputs_Button__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../CustomInputs/Button */ "./src/admin/CustomInputs/Button.jsx");
-/* harmony import */ var _CustomInputs_ColorInput__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../CustomInputs/ColorInput */ "./src/admin/CustomInputs/ColorInput.jsx");
-/* harmony import */ var _CustomInputs_RangeInput__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../CustomInputs/RangeInput */ "./src/admin/CustomInputs/RangeInput.jsx");
+/* harmony import */ var _CustomLibrary_CustomInputs_TextArea__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../CustomLibrary/CustomInputs/TextArea */ "./src/admin/CustomLibrary/CustomInputs/TextArea.jsx");
+/* harmony import */ var _CustomLibrary_CustomInputs_CheckBox__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../CustomLibrary/CustomInputs/CheckBox */ "./src/admin/CustomLibrary/CustomInputs/CheckBox.jsx");
+/* harmony import */ var _CustomLibrary_CustomInputs_BasicInput__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../CustomLibrary/CustomInputs/BasicInput */ "./src/admin/CustomLibrary/CustomInputs/BasicInput.jsx");
+/* harmony import */ var _CustomLibrary_CustomInputs_SelectInput__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../CustomLibrary/CustomInputs/SelectInput */ "./src/admin/CustomLibrary/CustomInputs/SelectInput.jsx");
+/* harmony import */ var _CustomLibrary_CustomInputs_Util_Section__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../CustomLibrary/CustomInputs/Util/Section */ "./src/admin/CustomLibrary/CustomInputs/Util/Section.jsx");
+/* harmony import */ var _CustomLibrary_CustomInputs_Util_BlockText__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../CustomLibrary/CustomInputs/Util/BlockText */ "./src/admin/CustomLibrary/CustomInputs/Util/BlockText.jsx");
+/* harmony import */ var _CustomLibrary_CustomInputs_Button__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../CustomLibrary/CustomInputs/Button */ "./src/admin/CustomLibrary/CustomInputs/Button.jsx");
+/* harmony import */ var _CustomLibrary_CustomInputs_ColorInput__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../CustomLibrary/CustomInputs/ColorInput */ "./src/admin/CustomLibrary/CustomInputs/ColorInput.jsx");
+/* harmony import */ var _CustomLibrary_CustomInputs_RangeInput__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../CustomLibrary/CustomInputs/RangeInput */ "./src/admin/CustomLibrary/CustomInputs/RangeInput.jsx");
 
 /* global stockManagerAppLocalizer */
 
@@ -17354,7 +17569,7 @@ const DynamicForm = ({
         case 'number':
         case 'url':
         case 'text_api':
-          input = (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_CustomInputs_BasicInput__WEBPACK_IMPORTED_MODULE_5__["default"], {
+          input = (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_CustomLibrary_CustomInputs_BasicInput__WEBPACK_IMPORTED_MODULE_5__["default"], {
             wrapperClass: "woo-settings-basic-input-class",
             inputClass: "woo-setting-form-input",
             key: key,
@@ -17373,7 +17588,7 @@ const DynamicForm = ({
           });
           break;
         case 'textarea':
-          input = (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_CustomInputs_TextArea__WEBPACK_IMPORTED_MODULE_3__["default"], {
+          input = (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_CustomLibrary_CustomInputs_TextArea__WEBPACK_IMPORTED_MODULE_3__["default"], {
             wrapperClass: "woo-setting-from-textarea",
             inputClass: inputField.class ? inputField.class : 'woo-form-input',
             key: key,
@@ -17405,7 +17620,7 @@ const DynamicForm = ({
               dangerouslySetInnerHTML: {
                 __html: option.label
               }
-            }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_CustomInputs_CheckBox__WEBPACK_IMPORTED_MODULE_4__["default"], {
+            }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_CustomLibrary_CustomInputs_CheckBox__WEBPACK_IMPORTED_MODULE_4__["default"], {
               wrapperClass: "woo-toggle-checkbox-content",
               inputClass: inputField.class,
               type: type,
@@ -17441,7 +17656,7 @@ const DynamicForm = ({
             class: "editor-left side"
           }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
             class: "left_side_wrap"
-          }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_CustomInputs_ColorInput__WEBPACK_IMPORTED_MODULE_10__["default"], {
+          }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_CustomLibrary_CustomInputs_ColorInput__WEBPACK_IMPORTED_MODULE_10__["default"], {
             wrapperClass: "woo-color-picker-wrap",
             description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Form Description', 'woocommerce-stock-manager'),
             inputClass: "woo-setting-color-picker",
@@ -17449,7 +17664,7 @@ const DynamicForm = ({
               handleOnChange(e, 'alert_text_color');
             },
             value: settings.alert_text_color
-          }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_CustomInputs_ColorInput__WEBPACK_IMPORTED_MODULE_10__["default"], {
+          }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_CustomLibrary_CustomInputs_ColorInput__WEBPACK_IMPORTED_MODULE_10__["default"], {
             wrapperClass: "woo-color-picker-wrap",
             description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Submit Button Text', 'woocommerce-stock-manager'),
             inputClass: "woo-setting-color-picker",
@@ -17457,7 +17672,7 @@ const DynamicForm = ({
               handleOnChange(e, 'button_text_color');
             },
             value: settings.button_text_color
-          }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_CustomInputs_ColorInput__WEBPACK_IMPORTED_MODULE_10__["default"], {
+          }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_CustomLibrary_CustomInputs_ColorInput__WEBPACK_IMPORTED_MODULE_10__["default"], {
             wrapperClass: "woo-color-picker-wrap",
             description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Background', 'woocommerce-stock-manager'),
             inputClass: "woo-setting-color-picker",
@@ -17465,7 +17680,7 @@ const DynamicForm = ({
               handleOnChange(e, 'button_background_color');
             },
             value: settings.button_background_color
-          }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_CustomInputs_ColorInput__WEBPACK_IMPORTED_MODULE_10__["default"], {
+          }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_CustomLibrary_CustomInputs_ColorInput__WEBPACK_IMPORTED_MODULE_10__["default"], {
             wrapperClass: "woo-color-picker-wrap",
             description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Border', 'woocommerce-stock-manager'),
             inputClass: "woo-setting-color-picker",
@@ -17473,7 +17688,7 @@ const DynamicForm = ({
               handleOnChange(e, 'button_border_color');
             },
             value: settings.button_border_color
-          }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_CustomInputs_ColorInput__WEBPACK_IMPORTED_MODULE_10__["default"], {
+          }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_CustomLibrary_CustomInputs_ColorInput__WEBPACK_IMPORTED_MODULE_10__["default"], {
             wrapperClass: "woo-color-picker-wrap",
             description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Hover Background', 'woocommerce-stock-manager'),
             inputClass: "woo-setting-color-picker",
@@ -17481,7 +17696,7 @@ const DynamicForm = ({
               handleOnChange(e, 'button_background_color_onhover');
             },
             value: settings.button_background_color_onhover
-          }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_CustomInputs_ColorInput__WEBPACK_IMPORTED_MODULE_10__["default"], {
+          }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_CustomLibrary_CustomInputs_ColorInput__WEBPACK_IMPORTED_MODULE_10__["default"], {
             wrapperClass: "woo-color-picker-wrap",
             description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Hover Border', 'woocommerce-stock-manager'),
             inputClass: "woo-setting-color-picker",
@@ -17489,7 +17704,7 @@ const DynamicForm = ({
               handleOnChange(e, 'button_border_color_onhover');
             },
             value: settings.button_border_color_onhover
-          }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_CustomInputs_ColorInput__WEBPACK_IMPORTED_MODULE_10__["default"], {
+          }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_CustomLibrary_CustomInputs_ColorInput__WEBPACK_IMPORTED_MODULE_10__["default"], {
             wrapperClass: "woo-color-picker-wrap",
             description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Hover Text', 'woocommerce-stock-manager'),
             inputClass: "woo-setting-color-picker",
@@ -17499,7 +17714,7 @@ const DynamicForm = ({
             value: settings.button_text_color_onhover
           })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
             class: "right_side_wrap"
-          }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_CustomInputs_RangeInput__WEBPACK_IMPORTED_MODULE_11__["default"], {
+          }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_CustomLibrary_CustomInputs_RangeInput__WEBPACK_IMPORTED_MODULE_11__["default"], {
             wrapperClass: "woo-size-picker-wrap",
             subWrapperClass: "woo-progress-picker-wrap",
             inputClass: "woo-setting-range-picker",
@@ -17512,7 +17727,7 @@ const DynamicForm = ({
               handleOnChange(e, 'button_font_size');
             },
             outputClass: "bubble"
-          }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_CustomInputs_RangeInput__WEBPACK_IMPORTED_MODULE_11__["default"], {
+          }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_CustomLibrary_CustomInputs_RangeInput__WEBPACK_IMPORTED_MODULE_11__["default"], {
             wrapperClass: "woo-size-picker-wrap",
             subWrapperClass: "woo-progress-picker-wrap",
             inputClass: "woo-setting-range-picker",
@@ -17525,7 +17740,7 @@ const DynamicForm = ({
               handleOnChange(e, 'button_border_radious');
             },
             outputClass: "bubble"
-          }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_CustomInputs_RangeInput__WEBPACK_IMPORTED_MODULE_11__["default"], {
+          }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_CustomLibrary_CustomInputs_RangeInput__WEBPACK_IMPORTED_MODULE_11__["default"], {
             wrapperClass: "woo-size-picker-wrap",
             subWrapperClass: "woo-progress-picker-wrap",
             inputClass: "woo-setting-range-picker",
@@ -17589,7 +17804,7 @@ const DynamicForm = ({
               index
             };
           });
-          input = (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_CustomInputs_SelectInput__WEBPACK_IMPORTED_MODULE_6__["default"], {
+          input = (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_CustomLibrary_CustomInputs_SelectInput__WEBPACK_IMPORTED_MODULE_6__["default"], {
             wrapperClass: "woo-form-select-field-wrapper",
             className: key,
             value: value ? value : '',
@@ -17605,7 +17820,7 @@ const DynamicForm = ({
           });
           break;
         case 'button':
-          input = (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_CustomInputs_Button__WEBPACK_IMPORTED_MODULE_9__["default"], {
+          input = (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_CustomLibrary_CustomInputs_Button__WEBPACK_IMPORTED_MODULE_9__["default"], {
             wrapperClass: "woo-button",
             inputClass: "btn default-btn",
             type: "button",
@@ -17616,7 +17831,7 @@ const DynamicForm = ({
           });
           break;
         case 'section':
-          input = (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_CustomInputs_Util_Section__WEBPACK_IMPORTED_MODULE_7__["default"], {
+          input = (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_CustomLibrary_CustomInputs_Util_Section__WEBPACK_IMPORTED_MODULE_7__["default"], {
             wrapperClass: "woo-setting-section-divider"
           });
           break;
@@ -17630,7 +17845,7 @@ const DynamicForm = ({
           }));
           break;
         case 'blocktext':
-          input = (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_CustomInputs_Util_BlockText__WEBPACK_IMPORTED_MODULE_8__["default"], {
+          input = (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_CustomLibrary_CustomInputs_Util_BlockText__WEBPACK_IMPORTED_MODULE_8__["default"], {
             wrapperClass: "woo-blocktext-class",
             blockTextClass: "woo-settings-metabox-description-code",
             value: inputField.blocktext
@@ -17789,6 +18004,9 @@ const Export = () => {
       (0,axios__WEBPACK_IMPORTED_MODULE_3__["default"])({
         method: "post",
         url: `${stockManagerAppLocalizer.apiUrl}/stockmanager/v1/get-products`,
+        headers: {
+          'X-WP-Nonce': stockManagerAppLocalizer.nonce
+        },
         data: {
           allData: 'true'
         }
@@ -17963,6 +18181,9 @@ const Import = () => {
       (0,axios__WEBPACK_IMPORTED_MODULE_3__["default"])({
         method: "post",
         url: `${stockManagerAppLocalizer.apiUrl}/stockmanager/v1/get-products`,
+        headers: {
+          'X-WP-Nonce': stockManagerAppLocalizer.nonce
+        },
         data: {
           allData: 'true'
         }
@@ -18025,6 +18246,7 @@ const Import = () => {
           method: 'post',
           url: `${stockManagerAppLocalizer.apiUrl}/stockmanager/v1/import-products`,
           headers: {
+            'X-WP-Nonce': stockManagerAppLocalizer.nonce,
             'Content-Type': 'application/json'
           },
           data: {
@@ -18205,6 +18427,9 @@ const Managestock = () => {
       (0,axios__WEBPACK_IMPORTED_MODULE_5__["default"])({
         method: "post",
         url: fetchDataUrl,
+        headers: {
+          'X-WP-Nonce': stockManagerAppLocalizer.nonce
+        },
         data: {
           page: currentPage + 1,
           row: rowsPerPage,
@@ -18858,41 +19083,30 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
 /* harmony import */ var react_csv__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-csv */ "./node_modules/react-csv/index.js");
-/* harmony import */ var _emotion_react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @emotion/react */ "./node_modules/@emotion/react/dist/emotion-react.browser.esm.js");
-/* harmony import */ var rsuite__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! rsuite */ "./node_modules/rsuite/esm/DateRangePicker/index.js");
-/* harmony import */ var _mui_material_Dialog__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @mui/material/Dialog */ "./node_modules/@mui/material/Dialog/Dialog.js");
-/* harmony import */ var react_paginate__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-paginate */ "./node_modules/react-paginate/dist/react-paginate.js");
-/* harmony import */ var react_paginate__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_paginate__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var react_data_table_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-data-table-component */ "./node_modules/react-data-table-component/dist/index.cjs.js");
-/* harmony import */ var react_spinners_PuffLoader__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-spinners/PuffLoader */ "./node_modules/react-spinners/PuffLoader.js");
-/* harmony import */ var react_spinners_PuffLoader__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(react_spinners_PuffLoader__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var rsuite__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! rsuite */ "./node_modules/rsuite/esm/DateRangePicker/index.js");
+/* harmony import */ var _mui_material_Dialog__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @mui/material/Dialog */ "./node_modules/@mui/material/Dialog/Dialog.js");
+/* harmony import */ var react_paginate__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-paginate */ "./node_modules/react-paginate/dist/react-paginate.js");
+/* harmony import */ var react_paginate__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_paginate__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _PopupContent_PopupContent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../PopupContent/PopupContent */ "./src/admin/PopupContent/PopupContent.jsx");
-
-
-
-
-// import { __ } from '@wordpress/i18n';
-
+/* harmony import */ var _CustomLibrary_CustomTable_CustomTable__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../CustomLibrary/CustomTable/CustomTable */ "./src/admin/CustomLibrary/CustomTable/CustomTable.jsx");
 
 
 
 
 
 
-const {
-  __
-} = wp.i18n;
+
+
+
+
+
 function SubscribersList() {
   const fetchSubscribersDataUrl = `${stockManagerAppLocalizer.apiUrl}/stockmanager/v1/get-subscriber-list`;
-  const [rowsPerPage, setRowsPerPage] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(10);
-  const [currentPage, setCurrentPage] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0);
   const [post_status, setPost_status] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('any');
-  const [productNameField, setProductNameField] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
-  const [emailField, setEmailField] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
   const [data, setData] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
   const [totalRows, setTotalRows] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)();
-  const [showLoader, setShowLoader] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true);
-  const [showNoDataText, setShowNoDataText] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
   const [openDialog, setOpenDialog] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
   const [subscribersStatus, setSubscribersStatus] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
     totalSubscribers: 0,
@@ -18903,124 +19117,104 @@ function SubscribersList() {
   const currentDate = new Date();
   const sevenDaysAgo = new Date();
   sevenDaysAgo.setDate(currentDate.getDate() - 7);
-  const [date, setDate] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
-    start_date: sevenDaysAgo,
-    end_date: currentDate
-  });
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-    const timer = setTimeout(() => {
-      setShowLoader(false);
-      setShowNoDataText(true);
-    }, 6000); // 5 seconds
-
-    return () => clearTimeout(timer); // Cleanup the timer on component unmount
-  }, []);
-  const override = (0,_emotion_react__WEBPACK_IMPORTED_MODULE_5__.css)`
-        display: block;
-        margin: 0 auto;
-        border-color: red;
-    `;
+  function requestData(rowsPerPage = 5, currentPage = 0, productNameField = '', emailField = '', start_date = sevenDaysAgo, end_date = currentDate) {
+    //Fetch the data to show in the table   
+    (0,axios__WEBPACK_IMPORTED_MODULE_6__["default"])({
+      method: "post",
+      url: fetchSubscribersDataUrl,
+      headers: {
+        'X-WP-Nonce': stockManagerAppLocalizer.nonce
+      },
+      data: {
+        page: currentPage - 1,
+        row: rowsPerPage,
+        post_status: post_status,
+        product_name: productNameField,
+        email: emailField,
+        start_date: start_date,
+        end_date: end_date
+      }
+    }).then(response => {
+      let parsedData = JSON.parse(response.data);
+      let subscribe_count = parsedData.subscribe_count;
+      setData(parsedData.subscribe_list);
+      setTotalRows(subscribe_count[post_status]);
+      setSubscribersStatus({
+        totalSubscribers: subscribe_count.any,
+        subscribed: subscribe_count.woo_subscribed,
+        unsubscribed: subscribe_count.woo_unsubscribed,
+        mailSent: subscribe_count.woo_mailsent
+      });
+    });
+  }
+  const requestApiForData = (rowsPerPage, currentPage, filterData = {}) => {
+    requestData(rowsPerPage, currentPage, filterData?.productNameField, filterData?.emailField, filterData?.date?.start_date, filterData?.date?.end_date);
+  };
+  const realtimeFilter = [{
+    name: "productNameField",
+    render: (updateFilter, filterValue) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: "woo-header-search-section"
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+      name: "productNameField",
+      type: "text",
+      placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Search by Product Name', 'woocommerce-stock-manager'),
+      onChange: e => updateFilter(e.target.name, e.target.value),
+      value: filterValue
+    })))
+  }, {
+    name: "emailField",
+    render: (updateFilter, filterValue) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: "woo-header-search-section"
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+      name: "emailField",
+      type: "text",
+      placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Search by Email', 'woocommerce-stock-manager'),
+      onChange: e => updateFilter(e.target.name, e.target.value),
+      value: filterValue
+    })))
+  }, {
+    name: "date",
+    render: (updateFilter, value) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(rsuite__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('DD-MM-YYYY ~ DD-MM-YYYY', 'woocommerce-stock-manager'),
+      onChange: dates => {
+        if (dates != null) {
+          updateFilter("date", {
+            start_date: dates[0].toString().replace(/ GMT[+-]\d{4} \(.+$/, ''),
+            end_date: dates[1].toString().replace(/ GMT[+-]\d{4} \(.+$/, '')
+          });
+        } else {
+          updateFilter("date", {
+            start_date: sevenDaysAgo,
+            end_date: currentDate
+          });
+        }
+      }
+    }))
+  }];
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     if (stockManagerAppLocalizer.pro_active != 'free') {
-      //Fetch the data to show in the table   
-      (0,axios__WEBPACK_IMPORTED_MODULE_6__["default"])({
-        method: "post",
-        url: fetchSubscribersDataUrl,
-        data: {
-          page: currentPage + 1,
-          row: rowsPerPage,
-          post_status: post_status,
-          product_name: productNameField,
-          email: emailField,
-          start_date: date.start_date,
-          end_date: date.end_date
-        }
-      }).then(response => {
-        let parsedData = JSON.parse(response.data);
-        let subscribe_count = parsedData.subscribe_count;
-        setData(parsedData.subscribe_list);
-        setTotalRows(subscribe_count[post_status]);
-        setSubscribersStatus({
-          totalSubscribers: subscribe_count.any,
-          subscribed: subscribe_count.woo_subscribed,
-          unsubscribed: subscribe_count.woo_unsubscribed,
-          mailSent: subscribe_count.woo_mailsent
-        });
-      });
+      requestData();
     }
-    //Data to be loaded for the changes of the following states
-  }, [rowsPerPage, currentPage, post_status, productNameField, emailField, date]);
-  const handleDateRangeChange = dates => {
-    if (dates != null) {
-      setDate({
-        start_date: dates[0].toString().replace(/ GMT[+-]\d{4} \(.+$/, ''),
-        end_date: dates[1].toString().replace(/ GMT[+-]\d{4} \(.+$/, '')
-      });
-    }
-  };
+  }, []);
+
   //columns for the data table
   const columns = [{
-    name: __("Date", "woocommerce-stock-manager"),
+    name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Date", "woocommerce-stock-manager"),
     selector: row => row.date
   }, {
-    name: __("Email", "woocommerce-stock-manager"),
+    name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Email", "woocommerce-stock-manager"),
     selector: row => row.email
   }, {
-    name: __("Product", "woocommerce-stock-manager"),
+    name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Product", "woocommerce-stock-manager"),
     selector: row => row.product
   }, {
-    name: __("Registered", "woocommerce-stock-manager"),
+    name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Registered", "woocommerce-stock-manager"),
     selector: row => row.reg_user
   }, {
-    name: __("Status", "woocommerce-stock-manager"),
+    name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Status", "woocommerce-stock-manager"),
     selector: row => row.status
   }];
-  //Pagination component to render Pagination
-  const Pagination = () => {
-    const handlePageChange = ({
-      selected
-    }) => {
-      setCurrentPage(selected);
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    };
-    const handleRowsPerPageChange = e => {
-      setRowsPerPage(parseInt(e.target.value));
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-      setCurrentPage(0);
-    };
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "pagination"
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
-      htmlFor: "rowsPerPage"
-    }, " ", __("Rows per page:", "woocommerce-stock-manager"), " "), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
-      id: "rowsPerPage",
-      value: rowsPerPage,
-      onChange: handleRowsPerPageChange
-    }, [10, 25, 30, 50].map(value => {
-      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
-        value: value
-      }, " ", value, " ");
-    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
-      value: totalRows
-    }, __("All", "woocommerce-stock-manager")))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)((react_paginate__WEBPACK_IMPORTED_MODULE_2___default()), {
-      className: "pagination",
-      previousLabel: "previous",
-      nextLabel: "next",
-      breakLabel: "...",
-      breakClassName: "break-me",
-      pageCount: totalRows ? Math.ceil(totalRows / rowsPerPage) : 0,
-      marginPagesDisplayed: 2,
-      pageRangeDisplayed: 2,
-      onPageChange: handlePageChange
-    }));
-  };
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, stockManagerAppLocalizer.pro_active == 'free' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Dialog__WEBPACK_IMPORTED_MODULE_7__["default"], {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, stockManagerAppLocalizer.pro_active == 'free' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Dialog__WEBPACK_IMPORTED_MODULE_8__["default"], {
     className: "woo-module-popup",
     open: openDialog,
     onClose: () => {
@@ -19047,7 +19241,7 @@ function SubscribersList() {
     className: "woo-middle-container-wrapper"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "woo-page-title"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, __("Subscriber List", "woocommerce-stock-manager")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Subscriber List", "woocommerce-stock-manager")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "download-btn-subscriber-list"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_csv__WEBPACK_IMPORTED_MODULE_1__.CSVLink, {
     data: data,
@@ -19056,7 +19250,7 @@ function SubscribersList() {
     className: "woo-btn btn-purple"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("i", {
     className: "woo-font icon-download"
-  }), __('Download CSV', 'woocommerce-stock-manager')))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Download CSV', 'woocommerce-stock-manager')))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "woo-search-and-multistatus-wrap"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("ul", {
     className: "woo-multistatus-ul"
@@ -19099,50 +19293,16 @@ function SubscribersList() {
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "woo-multistatus-check-unpaid"
   }, `Mail Sent (${subscribersStatus.mailSent})`)))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "woo-wrap-bulk-all-date"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "woo-header-search-section"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
-    type: "text",
-    placeholder: __('Search by Product Name', 'woocommerce-stock-manager'),
-    onChange: event => {
-      if (event.target.value.length > 3) {
-        setProductNameField(event.target.value);
-      } else if (event.target.value.length <= 1) {
-        setProductNameField('');
-      }
-    }
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "woo-header-search-section"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("i", {
-    className: "woo-font icon-search"
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
-    type: "text",
-    placeholder: __('Search by Email', 'woocommerce-stock-manager'),
-    onChange: event => {
-      if (event.target.value.length > 3) {
-        setEmailField(event.target.value);
-      } else if (event.target.value.length <= 1) {
-        setEmailField('');
-      }
-    }
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(rsuite__WEBPACK_IMPORTED_MODULE_8__["default"], {
-    placeholder: __('DD-MM-YYYY ~ DD-MM-YYYY', 'woocommerce-stock-manager'),
-    onChange: handleDateRangeChange
-  })), data.length > 0 ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "woo-backend-datatable-wrapper"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_data_table_component__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    className: "subscribe-list-table",
-    columns: columns,
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_CustomLibrary_CustomTable_CustomTable__WEBPACK_IMPORTED_MODULE_5__["default"], {
     data: data,
-    selectableRows: true
-  }), Pagination()) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, showLoader && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)((react_spinners_PuffLoader__WEBPACK_IMPORTED_MODULE_9___default()), {
-    color: '#cd0000',
-    size: 200,
-    loading: true
-  }), showNoDataText && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "no-data-text"
-  }, "There are no data to display"))))));
+    columns: columns,
+    handlePagination: requestApiForData,
+    defaultTotalRows: totalRows,
+    defaultRowsParPage: 5,
+    perPageOption: [5, 10, 25],
+    realtimeFilter: realtimeFilter
+  }), console.log(totalRows))))));
 }
 
 /***/ }),
@@ -19238,6 +19398,338 @@ const Tabs = props => {
 
 /***/ }),
 
+/***/ "./src/assets/json/settings/email.js":
+/*!*******************************************!*\
+  !*** ./src/assets/json/settings/email.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  tablabel: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Email Blocker", "woocommerce-stock-manager"),
+  priority: 4,
+  apiurl: "save-stockmanager",
+  description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Ban Email Control Center.", "woocommerce-stock-manager"),
+  icon: "icon-email-setting",
+  module: [{
+    key: "ban_email_domains",
+    type: "textarea",
+    class: "woo-setting-wpeditor-class",
+    desc: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Specify email domains that are restricted from subscribing. You can add multiple commma seperated emails.", "woocommerce-stock-manager"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Blocked Email Domains", "woocommerce-stock-manager")
+  }, {
+    key: "ban_email_domain_text",
+    type: "textarea",
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Blocked Domain Alert Message", "woocommerce-stock-manager"),
+    desc: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)(" Create an alert message for users attempting to subscribe from blocked domains.", "woocommerce-stock-manager")
+  }, {
+    key: "ban_email_addresses",
+    type: "textarea",
+    class: "woo-setting-wpeditor-class",
+    desc: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Specify email addresses that are restricted from subscribing. You can add multiple commma seperated emails.", "woocommerce-stock-manager"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Blocked Email Addresses", "woocommerce-stock-manager")
+  }, {
+    key: "ban_email_address_text",
+    type: "textarea",
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Blocked Email Alert Message", "woocommerce-stock-manager"),
+    desc: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Create an alert message for users attempting to subscribe from blocked Email ID.", "woocommerce-stock-manager")
+  }]
+});
+
+/***/ }),
+
+/***/ "./src/assets/json/settings/form_customization.js":
+/*!********************************************************!*\
+  !*** ./src/assets/json/settings/form_customization.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  tablabel: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Form Customization", "woocommerce-stock-manager"),
+  description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Configure form settings.", "woocommerce-stock-manager"),
+  icon: "icon-form-customization",
+  priority: 2,
+  apiurl: "save-stockmanager",
+  module: [{
+    key: "separator_content",
+    type: "heading",
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("no_label", "woocommerce-stock-manager"),
+    blocktext: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Text Customization", "woocommerce-stock-manager")
+  }, {
+    key: "email_placeholder_text",
+    type: "text",
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Email Field Placeholder", "woocommerce-stock-manager"),
+    desc: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("It will represent email field placeholder text.", "woocommerce-stock-manager"),
+    placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Enter your email", "woocommerce-stock-manager")
+  }, {
+    key: "alert_text",
+    type: "textarea",
+    class: "woo-setting-wpeditor-class",
+    desc: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Descriptive text guiding users on the purpose of providing their email address above the email entry field.", "woocommerce-stock-manager"),
+    placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Receive in-stock notifications for this product.", "woocommerce-stock-manager"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Subscription Purpose Description", "woocommerce-stock-manager")
+  }, {
+    key: "button_text",
+    type: "text",
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Subscribe Button", "woocommerce-stock-manager"),
+    desc: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Modify the subscribe button text. By default we display Notify Me.", "woocommerce-stock-manager"),
+    placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Notify Me", "woocommerce-stock-manager")
+  }, {
+    key: "unsubscribe_button_text",
+    type: "text",
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Unsubscribe Button", "woocommerce-stock-manager"),
+    desc: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Modify the un-subscribe button text. By default we display Unsubscribe.", "woocommerce-stock-manager"),
+    placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Unsubscribe", "woocommerce-stock-manager")
+  }, {
+    key: "separator_content",
+    type: "heading",
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("no_label", "woocommerce-stock-manager"),
+    blocktext: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Alert Box Customizer", "woocommerce-stock-manager")
+  }, {
+    key: "custom_example_form",
+    type: "example_form",
+    class: "woo-setting-own-class",
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sample Form", "woocommerce-stock-manager")
+  }, {
+    key: "button_color_section",
+    type: "form_customize_table",
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Customization Settings", "woocommerce-stock-manager")
+  }]
+});
+
+/***/ }),
+
+/***/ "./src/assets/json/settings/form_submission.js":
+/*!*****************************************************!*\
+  !*** ./src/assets/json/settings/form_submission.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  tablabel: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Submission Messages", "woocommerce-stock-manager"),
+  description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Customize message that appears after user submits the form.", "woocommerce-stock-manager"),
+  icon: "icon-form-submission",
+  priority: 3,
+  apiurl: "save-stockmanager",
+  module: [{
+    key: "alert_success",
+    type: "textarea",
+    class: "woo-setting-wpeditor-class",
+    // Translators: This message display dynamic product title and emails.
+    desc: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Tip: Utilize %product_title% for dynamic product titles and %customer_email% for personalized customer email addresses in your messages.", "woocommerce-stock-manager"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Successful Form Submission", "woocommerce-stock-manager")
+  }, {
+    key: "alert_email_exist",
+    type: "textarea",
+    class: "woo-setting-wpeditor-class",
+    // Translators: This message display dynamic product title and emails.
+    desc: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Tip: Enhance personalization by incorporating %product_title% for dynamic product titles and %customer_email% for individual customer emails.", "woocommerce-stock-manager"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Repeated Subscription Alert", "woocommerce-stock-manager")
+  }, {
+    key: "valid_email",
+    type: "textarea",
+    class: "woo-setting-wpeditor-class",
+    desc: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Personalize the message shown to users when they try to subscribe with an invalid email address.", "woocommerce-stock-manager"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Email Validation Error", "woocommerce-stock-manager")
+  }, {
+    key: "alert_unsubscribe_message",
+    type: "textarea",
+    class: "woo-setting-wpeditor-class",
+    desc: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Modify the text that confirms user that they have successful unsubscribe.", "woocommerce-stock-manager"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Unsubscribe Confirmation", "woocommerce-stock-manager")
+  }]
+});
+
+/***/ }),
+
+/***/ "./src/assets/json/settings/general.js":
+/*!*********************************************!*\
+  !*** ./src/assets/json/settings/general.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  tablabel: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("General", "woocommerce-stock-manager"),
+  description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Configure basic product manager settings.", "woocommerce-stock-manager"),
+  icon: 'icon-general',
+  priority: 1,
+  apiurl: 'save-stockmanager',
+  module: [{
+    key: 'is_double_optin',
+    type: 'checkbox',
+    class: 'woo-toggle-checkbox',
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Subscriber Double Opt-in", "woocommerce-stock-manager"),
+    options: [{
+      key: "is_double_optin",
+      label: stockManagerAppLocalizer.pro_active == 'free' ? stockManagerAppLocalizer.is_double_optin_free : stockManagerAppLocalizer.is_double_optin_pro,
+      value: "is_double_optin"
+    }]
+  }, {
+    key: 'double_opt_in_success',
+    type: 'textarea',
+    class: 'woo-setting-wpeditor-class',
+    desc: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Default: Kindly check your inbox to confirm the subscription.", "woocommerce-stock-manager-pro"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Double Opt-In Success Message", "woocommerce-stock-manager-pro"),
+    depend_checkbox: 'is_double_optin'
+  }, {
+    key: 'separator_content',
+    type: 'section',
+    label: ""
+  }, {
+    key: 'is_enable_backorders',
+    type: 'checkbox',
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Allow Subscriptions with Active Backorders", "woocommerce-stock-manager"),
+    class: 'woo-toggle-checkbox',
+    options: [{
+      key: "is_enable_backorders",
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Enabling this setting allows users to subscribe to out-of-stock products, even when the backorder option is enabled.", "woocommerce-stock-manager"),
+      value: "is_enable_backorders"
+    }]
+  }, {
+    key: 'separator_content',
+    type: 'section',
+    label: ""
+  }, {
+    key: 'is_enable_no_interest',
+    type: 'checkbox',
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Display Subscriber Count for Out of Stock Items", "woocommerce-stock-manager"),
+    class: 'woo-toggle-checkbox',
+    options: [{
+      key: "is_enable_no_interest",
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Enabling this setting shows the subscriber count on the single product page.", "woocommerce-stock-manager"),
+      value: "is_enable_no_interest"
+    }]
+  }, {
+    key: 'shown_interest_text',
+    type: 'textarea',
+    class: 'woo-setting-wpeditor-class',
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Subscriber Count Notification Message", "woocommerce-stock-manager"),
+    desc: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Personalize the notification text to let users know about the quantity of subscribers for out-of-stock item. Note: Use %no_of_subscribed% as number of interest/subscribed persons.", "woocommerce-stock-manager"),
+    depend_checkbox: 'is_enable_no_interest'
+  }, {
+    key: 'separator_content',
+    type: 'section',
+    label: ""
+  }, {
+    key: 'is_recaptcha_enable',
+    type: 'checkbox',
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Enable  reCAPTCHA", "woocommerce-stock-manager-pro"),
+    class: 'woo-toggle-checkbox',
+    options: [{
+      key: "is_recaptcha_enable",
+      label: stockManagerAppLocalizer.pro_active == 'free' ? stockManagerAppLocalizer.is_recaptcha_enable_free : stockManagerAppLocalizer.is_recaptcha_enable_pro,
+      value: "is_recaptcha_enable"
+    }]
+  }, {
+    key: 'v3_site_key',
+    type: 'text',
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Site Key", "woocommerce-stock-manager-pro"),
+    depend_checkbox: 'is_recaptcha_enable'
+  }, {
+    key: 'v3_secret_key',
+    type: 'text',
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Secret Key", "woocommerce-stock-manager-pro"),
+    depend_checkbox: 'is_recaptcha_enable'
+  }, {
+    key: 'separator_content',
+    type: 'section',
+    label: ""
+  }, {
+    key: 'additional_alert_email',
+    type: 'textarea',
+    class: 'woo-setting-wpeditor-class',
+    desc: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Set the email address to receive notifications when a user subscribes to an out-of-stock product. You can add multiple comma-separated emails.<br/> Default: The admin\'s email is set as the receiver. Exclude the admin\'s email from the list to exclude admin from receiving these notifications.", "woocommerce-stock-manager"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Recipient Email for New Subscriber", "woocommerce-stock-manager")
+  }]
+});
+
+/***/ }),
+
+/***/ "./src/assets/json/settings/mailchimp.js":
+/*!***********************************************!*\
+  !*** ./src/assets/json/settings/mailchimp.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  tablabel: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Mailchimp Integration", "woocommerce-stock-manager"),
+  description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Configure mailChimp settings. ", "woocommerce-stock-manager"),
+  apiurl: "save-stockmanager",
+  priority: 5,
+  icon: "icon-mailchimp-setting",
+  module: [{
+    key: "is_mailchimp_enable",
+    type: "checkbox",
+    class: "woo-toggle-checkbox",
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Enable Mailchimp", "woocommerce-stock-manager"),
+    options: [{
+      key: "is_mailchimp_enable",
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Enable this to activate Mailchimp.", "woocommerce-stock-manager"),
+      value: "is_mailchimp_enable"
+    }]
+  }, {
+    key: "mailchimp_api",
+    type: "text_api",
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Mailchimp API", "woocommerce-stock-manager"),
+    desc: "",
+    depend_checkbox: "is_mailchimp_enable"
+  }, {
+    key: "get_mailchimp_list_button",
+    type: "button",
+    label: "no_label",
+    api_link: "stockmanager/v1/get-mailchimp-list",
+    depend_checkbox: "is_mailchimp_enable"
+  }, {
+    key: "selected_mailchimp_list",
+    type: "mailchimp_select",
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Mailchimp List", "woocommerce-stock-manager"),
+    desc: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Select a Mailchimp list.", "woocommerce-stock-manager"),
+    options: [],
+    depend_checkbox: "is_mailchimp_enable"
+  }]
+});
+
+/***/ }),
+
 /***/ "./src/assets/services/jsonService.js":
 /*!********************************************!*\
   !*** ./src/assets/services/jsonService.js ***!
@@ -19258,14 +19750,15 @@ __webpack_require__.r(__webpack_exports__);
  * @return {Array} Array of Object.
  */
 const getSettingsJsonData = () => {
-  const settings = {};
-  const context = __webpack_require__("./src/assets/json/settings sync \\.json$");
+  const settings = [];
+  const context = __webpack_require__("./src/assets/json/settings sync \\.js$"); // Adjust the folder path and file extension
   context.keys().forEach(key => {
-    const data = context(key);
-    // Add each key-value pair from the data object to the settings object
-    Object.keys(data).forEach(dataKey => {
-      settings[dataKey] = data[dataKey];
-    });
+    const module = context(key);
+    let fileName = key.substring(key.lastIndexOf('/') + 1, key.lastIndexOf('.'));
+    // Check if the module has a default export and push it to the settings array
+    if (module && module.default) {
+      settings[fileName] = module.default;
+    }
   });
   return settings;
 };
@@ -41645,6 +42138,19 @@ function memoizeOne(resultFn, isEqual) {
 }
 
 
+
+
+/***/ }),
+
+/***/ "./src/admin/CustomLibrary/CustomTable/table.css":
+/*!*******************************************************!*\
+  !*** ./src/admin/CustomLibrary/CustomTable/table.css ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
 
 
 /***/ }),
@@ -66221,18 +66727,18 @@ var index =  react__WEBPACK_IMPORTED_MODULE_0__.useLayoutEffect ;
 
 /***/ }),
 
-/***/ "./src/assets/json/settings sync \\.json$":
-/*!*************************************************************!*\
-  !*** ./src/assets/json/settings/ sync nonrecursive \.json$ ***!
-  \*************************************************************/
+/***/ "./src/assets/json/settings sync \\.js$":
+/*!***********************************************************!*\
+  !*** ./src/assets/json/settings/ sync nonrecursive \.js$ ***!
+  \***********************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var map = {
-	"./email.json": "./src/assets/json/settings/email.json",
-	"./form_customization.json": "./src/assets/json/settings/form_customization.json",
-	"./form_submission.json": "./src/assets/json/settings/form_submission.json",
-	"./general.json": "./src/assets/json/settings/general.json",
-	"./mailchimp.json": "./src/assets/json/settings/mailchimp.json"
+	"./email.js": "./src/assets/json/settings/email.js",
+	"./form_customization.js": "./src/assets/json/settings/form_customization.js",
+	"./form_submission.js": "./src/assets/json/settings/form_submission.js",
+	"./general.js": "./src/assets/json/settings/general.js",
+	"./mailchimp.js": "./src/assets/json/settings/mailchimp.js"
 };
 
 
@@ -66253,7 +66759,7 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = "./src/assets/json/settings sync \\.json$";
+webpackContext.id = "./src/assets/json/settings sync \\.js$";
 
 /***/ }),
 
@@ -75841,61 +76347,6 @@ function __disposeResources(env) {
   __disposeResources,
 });
 
-
-/***/ }),
-
-/***/ "./src/assets/json/settings/email.json":
-/*!*********************************************!*\
-  !*** ./src/assets/json/settings/email.json ***!
-  \*********************************************/
-/***/ ((module) => {
-
-"use strict";
-module.exports = JSON.parse('{"email":{"tablabel":"Email Blocker","description":"Ban Email Control Center.","icon":"icon-email-setting","apiurl":"save-stockmanager","priority":4,"module":[{"key":"ban_email_domains","type":"textarea","class":"woo-setting-wpeditor-class","desc":"Specify email domains that are restricted from subscribing. You can add multiple commma seperated emails.","label":"Blocked Email Domains"},{"key":"ban_email_domain_text","type":"textarea","label":"Blocked Domain Alert Message","desc":" Create an alert message for users attempting to subscribe from blocked domains."},{"key":"ban_email_addresses","type":"textarea","class":"woo-setting-wpeditor-class","desc":"Specify email addresses that are restricted from subscribing. You can add multiple commma seperated emails.","label":"Blocked Email Addresses"},{"key":"ban_email_address_text","type":"textarea","label":"Blocked Email Alert Message","desc":"Create an alert message for users attempting to subscribe from blocked Email ID."}]}}');
-
-/***/ }),
-
-/***/ "./src/assets/json/settings/form_customization.json":
-/*!**********************************************************!*\
-  !*** ./src/assets/json/settings/form_customization.json ***!
-  \**********************************************************/
-/***/ ((module) => {
-
-"use strict";
-module.exports = JSON.parse('{"form_customization":{"tablabel":"Form Customization","description":"Configure form settings.","icon":"icon-form-customization","apiurl":"save-stockmanager","priority":2,"module":[{"key":"separator_content","type":"heading","label":"no_label","blocktext":"Text Customization"},{"key":"email_placeholder_text","type":"text","label":"Email Field Placeholder","desc":"It will represent email field placeholder text.","placeholder":"Enter your email"},{"key":"alert_text","type":"textarea","class":"woo-setting-wpeditor-class","desc":"Descriptive text guiding users on the purpose of providing their email address above the email entry field.","placeholder":"Receive in-stock notifications for this product.","label":"Subscription Purpose Description"},{"key":"button_text","type":"text","label":"Subscribe Button","desc":"Modify the subscribe button text. By default we display Notify Me.","placeholder":"Notify Me"},{"key":"unsubscribe_button_text","type":"text","label":"Unsubscribe Button","desc":"Modify the un-subscribe button text. By default we display Unsubscribe.","placeholder":"Unsubscribe"},{"key":"separator_content","type":"heading","label":"no_label","blocktext":"Alert Box Customizer"},{"key":"custom_example_form","type":"example_form","class":"woo-setting-own-class","label":"Sample Form"},{"key":"button_color_section","type":"form_customize_table","label":"Customization Settings"}]}}');
-
-/***/ }),
-
-/***/ "./src/assets/json/settings/form_submission.json":
-/*!*******************************************************!*\
-  !*** ./src/assets/json/settings/form_submission.json ***!
-  \*******************************************************/
-/***/ ((module) => {
-
-"use strict";
-module.exports = JSON.parse('{"form_submission":{"tablabel":"Submission Messages","description":"Customize message that appears after user submits the form.","icon":"icon-form-submission","apiurl":"save-stockmanager","priority":3,"module":[{"key":"alert_success","type":"textarea","class":"woo-setting-wpeditor-class","desc":"Tip: Utilize %product_title% for dynamic product titles and %customer_email% for personalized customer email addresses in your messages.","label":"Successful Form Submission"},{"key":"alert_email_exist","type":"textarea","class":"woo-setting-wpeditor-class","desc":"Tip: Enhance personalization by incorporating %product_title% for dynamic product titles and %customer_email% for individual customer emails.","label":"Repeated Subscription Alert"},{"key":"valid_email","type":"textarea","class":"woo-setting-wpeditor-class","desc":"Personalize the message shown to users when they try to subscribe with an invalid email address.","label":"Email Validation Error"},{"key":"alert_unsubscribe_message","type":"textarea","class":"woo-setting-wpeditor-class","desc":"Modify the text that confirms user that they have successful unsubscribe.","label":"Unsubscribe Confirmation"}]}}');
-
-/***/ }),
-
-/***/ "./src/assets/json/settings/general.json":
-/*!***********************************************!*\
-  !*** ./src/assets/json/settings/general.json ***!
-  \***********************************************/
-/***/ ((module) => {
-
-"use strict";
-module.exports = JSON.parse('{"general":{"tablabel":"General","description":"Configure basic product manager settings. ","icon":"icon-general","apiurl":"save-stockmanager","priority":1,"module":[{"key":"is_double_optin","type":"checkbox","class":"woo-toggle-checkbox","label":"Subscriber Double Opt-in","options":[{"key":"is_double_optin","label":"Upgrade to <a href=\\"https://multivendorx.com/woocommerce-product-stock-manager-notifier-pro/?utm_source=WordPressAdmin&utm_medium=PluginSettings&utm_campaign=productsstockmanager\\" target=\\"_blank\\"><span class=\\"pro-strong\\">Pro</span></a> to enable Double Opt-in flow for subscription confirmation.","value":"is_double_optin"}]},{"key":"double_opt_in_success","type":"textarea","class":"woo-setting-wpeditor-class","desc":"Default: Kindly check your inbox to confirm the subscription.","label":"Double Opt-In Success Message","depend_checkbox":"is_double_optin"},{"key":"separator_content","type":"section","label":""},{"key":"is_enable_backorders","type":"checkbox","label":"Allow Subscriptions with Active Backorders","class":"woo-toggle-checkbox","options":[{"key":"is_enable_backorders","label":"Enabling this setting allows users to subscribe to out-of-stock products, even when the backorder option is enabled.","value":"is_enable_backorders"}]},{"key":"separator_content","type":"section","label":""},{"key":"is_enable_no_interest","type":"checkbox","label":"Display Subscriber Count for Out of Stock Items","class":"woo-toggle-checkbox","options":[{"key":"is_enable_no_interest","label":"Enabling this setting shows the subscriber count on the single product page.","value":"is_enable_no_interest"}]},{"key":"shown_interest_text","type":"textarea","class":"woo-setting-wpeditor-class","label":"Subscriber Count Notification Message","desc":"Personalize the notification text to let users know about the quantity of subscribers for out-of-stock item. Note: Use %no_of_subscribed% as number of interest/subscribed persons.","depend_checkbox":"is_enable_no_interest"},{"key":"separator_content","type":"section","label":""},{"key":"is_recaptcha_enable","type":"checkbox","label":"Enable  reCAPTCHA","class":"woo-toggle-checkbox","options":[{"key":"is_recaptcha_enable","label":"Upgrade to <a href=\\"STOCK_MANAGER_PRO_SHOP_URL\\" target=\\"_blank\\"><span class=\\"pro-strong\\">Pro</span></a> for unlocking reCAPTCHA for out-of-stock form subscriptions.","value":"is_recaptcha_enable"}]},{"key":"v3_site_key","type":"text","label":"Site Key","depend_checkbox":"is_recaptcha_enable"},{"key":"v3_secret_key","type":"text","label":"Secret Key","depend_checkbox":"is_recaptcha_enable"},{"key":"separator_content","type":"section","label":""},{"key":"additional_alert_email","type":"textarea","class":"woo-setting-wpeditor-class","desc":"Set the email address to receive notifications when a user subscribes to an out-of-stock product. You can add multiple comma-separated emails.<br/> Default: The admin\'s email is set as the receiver. Exclude the admin\'s email from the list to exclude admin from receiving these notifications.","label":"Recipient Email for New Subscriber"}]}}');
-
-/***/ }),
-
-/***/ "./src/assets/json/settings/mailchimp.json":
-/*!*************************************************!*\
-  !*** ./src/assets/json/settings/mailchimp.json ***!
-  \*************************************************/
-/***/ ((module) => {
-
-"use strict";
-module.exports = JSON.parse('{"mailchimp":{"tablabel":"Mailchimp Integration","description":"Configure mailChimp settings.","apiurl":"save-stockmanager","icon":"icon-mailchimp-setting","priority":5,"module":[{"key":"is_mailchimp_enable","type":"checkbox","class":"woo-toggle-checkbox","label":"Enable Mailchimp","options":[{"key":"is_mailchimp_enable","label":"Enable this to activate Mailchimp.","value":"is_mailchimp_enable"}]},{"key":"mailchimp_api","type":"text_api","label":"Mailchimp API","desc":"","depend_checkbox":"is_mailchimp_enable"},{"key":"get_mailchimp_list_button","type":"button","label":"no_label","api_link":"stockmanager/v1/get-mailchimp-list","depend_checkbox":"is_mailchimp_enable"},{"key":"selected_mailchimp_list","type":"mailchimp_select","label":"Mailchimp List","desc":"Select a Mailchimp list.","options":[],"depend_checkbox":"is_mailchimp_enable"}]}}');
 
 /***/ })
 

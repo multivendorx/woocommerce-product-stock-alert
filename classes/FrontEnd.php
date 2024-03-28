@@ -4,7 +4,7 @@ namespace StockManager;
 defined( 'ABSPATH' ) || exit;
 
 class FrontEnd {
-    public function __construct( ) {
+    public function __construct() {
         //enqueue scripts
         add_action( 'wp_enqueue_scripts', [ &$this, 'frontend_scripts' ] );
         //enqueue styles
@@ -27,11 +27,11 @@ class FrontEnd {
      * Enque Frontend's JavaScript. And Send Localize data.
      * @return void
      */
-    function frontend_scripts( ) {
-        $frontend_script_path = SM( ) -> plugin_url . 'src/assets/frontend/js/';
+    function frontend_scripts() {
+        $frontend_script_path = SM()->plugin_url . 'src/assets/frontend/js/';
         $suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
         $suffix = ''; /// Should be removed.
-        $settings_array = Utill::get_form_settings_array( );
+        $settings_array = Utill::get_form_settings_array();
 
         $border_size = ( !empty( $settings_array[ 'button_border_size' ] ) ) ? $settings_array[ 'button_border_size' ].'px' : '1px';
 
@@ -51,14 +51,14 @@ class FrontEnd {
         $unsubscribe_button_html = '<button class="unsubscribe_button" style="' . $button_css .'">' . $settings_array[ 'unsubscribe_button_text' ] . '</button>';
 
         if ( function_exists( 'is_product' ) ) {
-            if ( is_product( ) ) {
+            if ( is_product() ) {
                 // Enqueue your frontend javascript from here
-                wp_enqueue_script( 'stock_manager_frontend_js', $frontend_script_path . 'frontend' . $suffix . '.js', [ 'jquery' ], SM( ) -> version, true );
+                wp_enqueue_script( 'stock_manager_frontend_js', $frontend_script_path . 'frontend' . $suffix . '.js', [ 'jquery' ], SM()->version, true );
             
                 wp_localize_script( 'stock_manager_frontend_js', 'woo_stock_manager_script_data', [ 
                     'ajax_url' => admin_url( 'admin-ajax.php', 'relative' ), 
                     'nonce'  => wp_create_nonce( 'stock-manager-security-nonce' ), 
-                    'additional_fields' => apply_filters( 'woocommerce_stock_manager_form_additional_fields', [ ] ), 
+                    'additional_fields' => apply_filters( 'woocommerce_stock_manager_form_additional_fields', [] ), 
                     'button_html' => $subscribe_button_html, 
                     'alert_success' => $settings_array[ 'alert_success' ], 
                     'alert_email_exist' => $settings_array[ 'alert_email_exist' ], 
@@ -81,13 +81,13 @@ class FrontEnd {
      * Enqueue fronted css. 
      * @return void
      */
-    function frontend_styles( ) {
-        $frontend_style_path = SM( ) -> plugin_url . 'src/assets/frontend/css/';
+    function frontend_styles() {
+        $frontend_style_path = SM()->plugin_url . 'src/assets/frontend/css/';
         $suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
         if ( function_exists( 'is_product' ) ) {
-            if ( is_product( ) ) {
+            if ( is_product() ) {
                 // Enqueue your frontend stylesheet from here
-                wp_enqueue_style( 'stock_manager_frontend_css', $frontend_style_path . 'frontend' . $suffix . '.css', [ ], SM( ) -> version );
+                wp_enqueue_style( 'stock_manager_frontend_css', $frontend_style_path . 'frontend' . $suffix . '.css', [], SM()->version );
             } 
         } 
     } 
@@ -96,8 +96,8 @@ class FrontEnd {
      * Set frontend's button hover style on 'wp_head' hook.
      * @return void
      */
-    function frontend_hover_styles( ) {
-        $settings_array = Utill::get_form_settings_array( );
+    function frontend_hover_styles() {
+        $settings_array = Utill::get_form_settings_array();
         $button_onhover_style = $border_size = '';
         $border_size = ( !empty( $settings_array[ 'button_border_size' ] ) ) ? $settings_array[ 'button_border_size' ].'px' : '1px';
 
@@ -121,22 +121,22 @@ class FrontEnd {
      *
      * @version 1.0.0
      */
-    public function display_product_subscription_form( ) {
+    public function display_product_subscription_form() {
         global $product;
 
         if ( empty( $product ) )
             return;
 
-        if ( $product -> is_type( 'variable' ) ) {
-            $get_variations = count( $product -> get_children( ) ) <= apply_filters( 'woocommerce_ajax_variation_threshold', 30, $product );
-            $get_variations = $get_variations ? $product -> get_available_variations( ) : false;
+        if ( $product->is_type( 'variable' ) ) {
+            $get_variations = count( $product->get_children() ) <= apply_filters( 'woocommerce_ajax_variation_threshold', 30, $product );
+            $get_variations = $get_variations ? $product->get_available_variations() : false;
             if ( $get_variations ) {
-                echo '<div class="stock_notifier-shortcode-subscribe-form" data-product-id="' . esc_attr( $product -> get_id( ) ) . '"></div>';
+                echo '<div class="stock_notifier-shortcode-subscribe-form" data-product-id="' . esc_attr( $product->get_id() ) . '"></div>';
             } else {
-                echo ( $this -> get_subscribe_form( $product ) );
+                echo ( $this->get_subscribe_form( $product ) );
             } 
         } else {
-            echo ( $this -> get_subscribe_form( $product ) );
+            echo ( $this->get_subscribe_form( $product ) );
         } 
     } 
 
@@ -149,7 +149,7 @@ class FrontEnd {
      * @version 1.0.0
      */
     public function display_in_grouped_product( $value, $child ) {
-        $value = $value . $this -> get_subscribe_form( $child );
+        $value = $value . $this->get_subscribe_form( $child );
         return $value;
     } 
 
@@ -178,16 +178,16 @@ class FrontEnd {
      * @return string HTML of subscribe form
      */
     public function get_subscribe_form( $product, $variation = null ) {
-        if ( ! Subscriber::is_product_outofstock( $variation ? $variation -> get_id( ) : $product -> get_id( ), $variation ? 'variation' : '', true ) ) {
+        if ( ! Subscriber::is_product_outofstock( $variation ? $variation->get_id() : $product->get_id(), $variation ? 'variation' : '', true ) ) {
             return "";
         } 
-        $stock_manager_fields_array = [ ];
+        $stock_manager_fields_array = [];
         $stock_manager_fields_html = $user_email = '';
         $separator = apply_filters( 'woo_fileds_separator', '<br>' );
-        $settings_array = Utill::get_form_settings_array( );
-        if ( is_user_logged_in( ) ) {
-            $current_user = wp_get_current_user( );
-            $user_email = $current_user -> data -> user_email;
+        $settings_array = Utill::get_form_settings_array();
+        if ( is_user_logged_in() ) {
+            $current_user = wp_get_current_user();
+            $user_email = $current_user->data->user_email;
         } 
         $placeholder = $settings_array[ 'email_placeholder_text' ];
         $alert_fields = apply_filters( 'woo_stock_manager_fileds_array', [ 
@@ -212,7 +212,7 @@ class FrontEnd {
 
                         $recaptchaScript = '
                         <script>
-                            grecaptcha.ready( function ( ) {
+                            grecaptcha.ready( function () {
                                 grecaptcha.execute( "' . $sitekey . '" ).then( function ( token ) {
                                     var recaptchaResponse = document.getElementById( "recaptchav3_response" );
                                     recaptchaResponse.value = token;
@@ -224,10 +224,10 @@ class FrontEnd {
                         $recaptchaSiteKeyInput = '<input type="hidden" id="recaptchav3_sitekey" name="recaptchav3_sitekey" value="' . esc_html( $sitekey ) . '" />';
                         $recaptchaSecretKeyInput = '<input type="hidden" id="recaptchav3_secretkey" name="recaptchav3_secretkey" value="' . esc_html( $secretkey ) . '" />';
 
-                        $stock_manager_fields_array[ ] = $recaptchaScript . $recaptchaResponseInput . $recaptchaSiteKeyInput . $recaptchaSecretKeyInput;
+                        $stock_manager_fields_array[] = $recaptchaScript . $recaptchaResponseInput . $recaptchaSiteKeyInput . $recaptchaSecretKeyInput;
                         break;
                     default:
-                        $stock_manager_fields_array[ ] = '<input id="woo_stock_manager_' . $key . '" type="' . $type . '" name="' . $key . '" class="' . $class . '" value="' . $value . '" placeholder="' . $placeholder . '" >';
+                        $stock_manager_fields_array[] = '<input id="woo_stock_manager_' . $key . '" type="' . $type . '" name="' . $key . '" class="' . $class . '" value="' . $value . '" placeholder="' . $placeholder . '" >';
                         break;
                 } 
             } 
@@ -253,7 +253,7 @@ class FrontEnd {
 
         $button_html = '<button style="' . $button_css .'" class="stock_manager_button alert_button_hover" name="alert_button">' . esc_html( $settings_array[ 'button_text' ] ) . '</button>';
 
-        $interested_person = get_post_meta( $variation ? $variation -> get_id( ) : $product -> get_id( ), 'no_of_subscribers', true );
+        $interested_person = get_post_meta( $variation ? $variation->get_id() : $product->get_id(), 'no_of_subscribers', true );
         $interested_person = ( isset( $interested_person ) && $interested_person > 0 ) ? $interested_person : 0;
 
         $shown_interest_html = '';
@@ -270,9 +270,9 @@ class FrontEnd {
             ' . $alert_text_html . '
             <div class="woo_fields_wrap"> ' . $stock_manager_fields_html . '' . $button_html . '
             </div>
-            <input type="hidden" class="current_product_id" value="' . esc_attr( $product -> get_id( ) ) . '" />
-            <input type="hidden" class="current_variation_id" value="' . esc_attr( $variation ? $variation -> get_id( ) : 0 ) . '" />
-            <input type="hidden" class="current_product_name" value="' . esc_attr( $product -> get_title( ) ) . '" />
+            <input type="hidden" class="current_product_id" value="' . esc_attr( $product->get_id() ) . '" />
+            <input type="hidden" class="current_variation_id" value="' . esc_attr( $variation ? $variation->get_id() : 0 ) . '" />
+            <input type="hidden" class="current_product_name" value="' . esc_attr( $product->get_title() ) . '" />
             ' . $shown_interest_html . '
         </div>';
     } 

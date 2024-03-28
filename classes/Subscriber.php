@@ -5,7 +5,7 @@ namespace StockManager;
 defined( 'ABSPATH' ) || exit;
 
 class Subscriber {
-    public function __construct( ) {
+    public function __construct() {
         add_action( 'woo_stock_manager_start_notification_cron_job', [ $this, 'send_instock_notification_corn' ] );
         add_action( 'woocommerce_update_product', [ $this, 'send_instock_notification' ], 10, 2 );
     } 
@@ -15,7 +15,7 @@ class Subscriber {
      * It will run every hour through corn job.
      * @return void
      */
-    function send_instock_notification_corn( ) {
+    function send_instock_notification_corn() {
         $posts = get_posts( [ 
             'post_type' => 'product', 
             'post_status' => 'publish', 
@@ -23,7 +23,7 @@ class Subscriber {
         ] );
         if ( $posts ) {
             foreach( $posts as $posts ) {
-                self::send_instock_notification( $posts -> ID, wc_get_product( $posts -> ID ) );
+                self::send_instock_notification( $posts->ID, wc_get_product( $posts->ID ) );
             } 
         } 
     } 
@@ -37,7 +37,7 @@ class Subscriber {
     function send_instock_notification( $product_id, $product ) {
         $related_products = self::get_related_product( $product );
         foreach( $related_products as $product_id ) {
-            $this -> notify_all_product_subscribers( $product_id );
+            $this->notify_all_product_subscribers( $product_id );
         } 
     } 
 
@@ -54,13 +54,13 @@ class Subscriber {
         if ( ! $product_object ) {
             return;
         } 
-        if ( ! $product_object -> is_type( 'variable' ) ) {
-            if ( ! self::is_product_outofstock( $product_id, $product_object -> is_type( 'variation' ) ? 'variation' : '', true ) ) {
+        if ( ! $product_object->is_type( 'variable' ) ) {
+            if ( ! self::is_product_outofstock( $product_id, $product_object->is_type( 'variation' ) ? 'variation' : '', true ) ) {
                 $product_subscribers = self::get_product_subscribers_email( $product_id );
                 if ( isset( $product_subscribers ) && !empty( $product_subscribers ) ) {
-                    $email = WC( ) -> mailer( ) -> emails[ 'WC_Email_Stock_Manager' ];
+                    $email = WC()->mailer()->emails[ 'WC_Email_Stock_Manager' ];
                     foreach ( $product_subscribers as $subscribe_id => $to ) {
-                        $email -> trigger( $to, $product_object );
+                        $email->trigger( $to, $product_object );
                         self::update_subscriber( $subscribe_id, 'woo_mailsent' );
                     } 
                     delete_post_meta( $product_id, 'no_of_subscribers' );
@@ -191,21 +191,21 @@ class Subscriber {
      * @return void
      */
     static function insert_subscriber_email_trigger( $product, $customer_email ) {
-        $admin_mail = WC( ) -> mailer( ) -> emails[ 'WC_Admin_Email_Stock_Manager' ];
-        $cust_mail = WC( ) -> mailer( ) -> emails[ 'WC_Subscriber_Confirmation_Email_Stock_Manager' ];
+        $admin_mail = WC()->mailer()->emails[ 'WC_Admin_Email_Stock_Manager' ];
+        $cust_mail = WC()->mailer()->emails[ 'WC_Subscriber_Confirmation_Email_Stock_Manager' ];
         $general_tab_settings = get_option( 'woo_stock_manager_general_tab_settings' );
         $additional_email = ( isset( $general_tab_settings[ 'additional_alert_email' ] ) ) ? $general_tab_settings[ 'additional_alert_email' ] : '';
 
         if ( function_exists( 'get_mvx_product_vendors' ) ) {
-            $vendor = get_mvx_product_vendors( wc_get_product( $product ) -> get_id( ) );
+            $vendor = get_mvx_product_vendors( wc_get_product( $product )->get_id() );
             if ( $vendor && apply_filters( 'woo_stock_manager_add_vendor', true ) ) {
-                $additional_email .= ', '. sanitize_email( $vendor -> user_data -> user_email );  
+                $additional_email .= ', '. sanitize_email( $vendor->user_data->user_email );  
             } 
         } 
         
         if ( !empty( $additional_email ) )
-            $admin_mail -> trigger( $additional_email, $product, $customer_email );
-        $cust_mail -> trigger( $customer_email, $product );
+            $admin_mail->trigger( $additional_email, $product, $customer_email );
+        $cust_mail->trigger( $customer_email, $product );
     } 
 
     /**
@@ -215,9 +215,9 @@ class Subscriber {
      */
     static function get_product_subscribers_email( $product_id ) {
         if ( !$product_id || $product_id <= '0' ) {
-            return [ ];
+            return [];
         } 
-        $emails = [ ];
+        $emails = [];
         $args = [ 
             'post_type'     => 'woostockalert', 
             'fields'        => 'ids', 
@@ -250,27 +250,27 @@ class Subscriber {
         if ( is_numeric( $product ) ){
             $product = wc_get_product( $product );
         }
-        $product_ids = [ ];
-        switch( $product -> get_type( ) ) {
+        $product_ids = [];
+        switch( $product->get_type() ) {
             case 'variable' :
-                if ( $product -> has_child( ) ) {
-                    $product_ids = $product -> get_children( );
+                if ( $product->has_child() ) {
+                    $product_ids = $product->get_children();
                 } else {
-                    $product_ids[ ] = $product -> get_id( );
+                    $product_ids[] = $product->get_id();
                 } 
                 break;
             case 'simple' :
-                $product_ids[ ] = $product -> get_id( );
+                $product_ids[] = $product->get_id();
                 break;
             default :
-                $product_ids[ ] = $product -> get_id( ); 
+                $product_ids[] = $product->get_id(); 
         } 
         return $product_ids;
     } 
 
     /**
      * Bias variable is used to controll biasness of outcome in uncertain input
-     * Bias = true -> product outofstock | Bias = false -> product instock
+     * Bias = true->product outofstock | Bias = false->product instock
      * @param mixed $product_id
      * @param mixed $type
      * @param mixed $bias
@@ -281,14 +281,14 @@ class Subscriber {
 
         if ( $type == 'variation' ) {
             $child_obj      = new \WC_Product_Variation( $product_id );
-            $manage_stock   = $child_obj -> managing_stock( );
-            $stock_quantity = intval( $child_obj -> get_stock_quantity( ) );
-            $stock_status   = $child_obj -> get_stock_status( );
+            $manage_stock   = $child_obj->managing_stock();
+            $stock_quantity = intval( $child_obj->get_stock_quantity() );
+            $stock_status   = $child_obj->get_stock_status();
         } else {
             $product        = wc_get_product( $product_id );
-            $manage_stock   = $product -> get_manage_stock( );
-            $stock_quantity = $product -> get_stock_quantity( );
-            $stock_status   = $product -> get_stock_status( );
+            $manage_stock   = $product->get_manage_stock();
+            $stock_quantity = $product->get_stock_quantity();
+            $stock_status   = $product->get_stock_status();
         } 
 
         $general_tab_settings = get_option( 'woo_stock_manager_general_tab_settings' );

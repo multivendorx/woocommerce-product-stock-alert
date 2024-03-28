@@ -18,11 +18,12 @@ const Export = () => {
     ];
 
     //Fetches the data for generating the csv
-    useEffect( ( ) => {
+    useEffect( () => {
         if (stockManagerAppLocalizer.pro_active != 'free') {
             axios({
                 method: "post",
                 url: `${ stockManagerAppLocalizer.apiUrl }/stockmanager/v1/get-products`,
+                headers: { 'X-WP-Nonce' : stockManagerAppLocalizer.nonce },
                 data:{ allData: 'true' },
             }).then( ( response ) => {
                 let parsedData = JSON.parse( response.data );
@@ -30,7 +31,7 @@ const Export = () => {
             });
         }
     }, []);
-    const [ data, setData ] = useState([ ]);
+    const [ data, setData ] = useState([]);
     const [ header, setHeader ] = useState( headers );
     const [ selectAll, setSelectAll ] = useState( true );
 
@@ -64,21 +65,21 @@ const Export = () => {
         }
     };
 
-    const handleSelectAll = ( ) => {
+    const handleSelectAll = () => {
         if ( !selectAll ) {
             setCheckboxData( checkboxData.map( item => ( { ...item, Checked: true } ) ) );
             setHeader( headers);
             setSelectAll( true);
         } else {
             setCheckboxData( checkboxData.map( item => ( { ...item, Checked: false } ) ) );
-            setHeader([ ]);
+            setHeader([]);
             setSelectAll( false );
         }
     };
 
     //splits the checkbox data in parts
     function splitCheckBoxData( parts ) {
-        const chunks = [ ];
+        const chunks = [];
         for ( let i = 0; i < checkboxData.length; i += parts ) {
             const chunk = checkboxData.slice( i, i + parts );
             const chunkElements = chunk.map( ( checkbox ) => (

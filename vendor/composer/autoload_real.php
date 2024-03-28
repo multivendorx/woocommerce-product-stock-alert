@@ -16,7 +16,7 @@ class ComposerAutoloaderInit18e3680eb6e1550dee239c6ead15996a
     /**
      * @return \Composer\Autoload\ClassLoader
      */
-    public static function getLoader( )
+    public static function getLoader()
     {
         if ( null !== self::$loader ) {
             return self::$loader;
@@ -29,7 +29,7 @@ class ComposerAutoloaderInit18e3680eb6e1550dee239c6ead15996a
         require __DIR__ . '/autoload_static.php';
         call_user_func( \Composer\Autoload\ComposerStaticInit18e3680eb6e1550dee239c6ead15996a::getInitializer( $loader ) );
 
-        $loader -> register( true );
+        $loader->register( true );
 
         return $loader;
     } 

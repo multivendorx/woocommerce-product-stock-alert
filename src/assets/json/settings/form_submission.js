@@ -1,0 +1,40 @@
+import { __ } from '@wordpress/i18n';
+export default {
+    tablabel: __("Submission Messages", "woocommerce-stock-manager"),
+    description: __("Customize message that appears after user submits the form.", "woocommerce-stock-manager"),
+    icon: "icon-form-submission",
+    priority: 3,
+    apiurl: "save-stockmanager",
+    module: [
+        {
+            key: "alert_success",
+            type: "textarea",
+            class: "woo-setting-wpeditor-class",
+            // Translators: This message display dynamic product title and emails.
+            desc: __("Tip: Utilize %product_title% for dynamic product titles and %customer_email% for personalized customer email addresses in your messages.", "woocommerce-stock-manager"),
+            label: __("Successful Form Submission", "woocommerce-stock-manager"),
+        },
+        {
+            key: "alert_email_exist",
+            type: "textarea",
+            class: "woo-setting-wpeditor-class",
+            // Translators: This message display dynamic product title and emails.
+            desc: __("Tip: Enhance personalization by incorporating %product_title% for dynamic product titles and %customer_email% for individual customer emails.", "woocommerce-stock-manager"),
+            label: __("Repeated Subscription Alert", "woocommerce-stock-manager"),
+        },
+        {
+            key: "valid_email",
+            type: "textarea",
+            class: "woo-setting-wpeditor-class",
+            desc: __("Personalize the message shown to users when they try to subscribe with an invalid email address.", "woocommerce-stock-manager"),
+            label: __("Email Validation Error", "woocommerce-stock-manager"),
+        },
+        {
+            key: "alert_unsubscribe_message",
+            type: "textarea",
+            class: "woo-setting-wpeditor-class",
+            desc: __("Modify the text that confirms user that they have successful unsubscribe.", "woocommerce-stock-manager"),
+            label: __("Unsubscribe Confirmation", "woocommerce-stock-manager"),
+        },
+    ]
+};

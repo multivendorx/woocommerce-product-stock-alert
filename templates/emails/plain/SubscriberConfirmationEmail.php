@@ -13,11 +13,11 @@ echo sprintf( esc_html( "Hi there. You have successfully subscribed a product. W
 
 echo "\n****************************************************\n\n";
 
-echo "\n Product Name : " . esc_html( $product -> get_name( ) ) ;
+echo "\n Product Name : " . esc_html( $product->get_name() ) ;
 
 echo "\n\n Product Price : " . esc_html( wc_price( wc_get_price_to_display( $product ) ) ) ;
 
-echo "\n\n Product link : " . esc_html( $product -> get_permalink( ) ) ; 
+echo "\n\n Product link : " . esc_html( $product->get_permalink() ) ; 
 
 echo "\n\n\n****************************************************\n\n";
 

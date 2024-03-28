@@ -9,7 +9,7 @@ class Utill {
      * Function to console and debug errors.
      */
     public static function log( $str ) {
-        $file = SM( ) -> plugin_path . 'log/woo-stock-manager.log';
+        $file = SM()->plugin_path . 'log/woo-stock-manager.log';
         if ( file_exists( $file ) ) {
             // Open the file to get existing content
             $str = var_export( $str, true );
@@ -31,11 +31,11 @@ class Utill {
      * Get the settings arry. Non set value is replaced with default value.
      * @return array
      */
-    public static function get_form_settings_array( ) {
-        $general_tab_settings = get_option( 'woo_stock_manager_general_tab_settings', [ ] );
-        $form_customization_tab_settings = get_option( 'woo_stock_manager_form_customization_tab_settings', [ ] );
-        $form_submission_tab_settings = get_option( 'woo_stock_manager_form_submission_tab_settings', [ ] );
-        $email_tab_settings = get_option( 'woo_stock_manager_email_tab_settings', [ ] );
+    public static function get_form_settings_array() {
+        $general_tab_settings = get_option( 'woo_stock_manager_general_tab_settings', [] );
+        $form_customization_tab_settings = get_option( 'woo_stock_manager_form_customization_tab_settings', [] );
+        $form_submission_tab_settings = get_option( 'woo_stock_manager_form_submission_tab_settings', [] );
+        $email_tab_settings = get_option( 'woo_stock_manager_email_tab_settings', [] );
         
         return [ 
             'double_opt_in_success'             => $general_tab_settings[ 'double_opt_in_success' ] ?? '', 

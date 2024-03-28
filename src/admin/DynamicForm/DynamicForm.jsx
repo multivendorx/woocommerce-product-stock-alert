@@ -4,15 +4,15 @@ import axios from 'axios';
 import { __ } from "@wordpress/i18n";
 import Dialog from "@mui/material/Dialog";
 import Popoup from '../PopupContent/PopupContent';
-import TextArea from '../CustomInputs/TextArea';
-import CheckBox from '../CustomInputs/CheckBox';
-import BasicInput from '../CustomInputs/BasicInput';
-import SelectInput from '../CustomInputs/SelectInput';
-import Section from '../CustomInputs/Util/Section';
-import BlockText from '../CustomInputs/Util/BlockText';
-import Button from '../CustomInputs/Button';
-import ColorInput from '../CustomInputs/ColorInput';
-import RangeInput from '../CustomInputs/RangeInput';
+import TextArea from '../CustomLibrary/CustomInputs/TextArea';
+import CheckBox from '../CustomLibrary/CustomInputs/CheckBox';
+import BasicInput from '../CustomLibrary/CustomInputs/BasicInput';
+import SelectInput from '../CustomLibrary/CustomInputs/SelectInput';
+import Section from '../CustomLibrary/CustomInputs/Util/Section';
+import BlockText from '../CustomLibrary/CustomInputs/Util/BlockText';
+import Button from '../CustomLibrary/CustomInputs/Button';
+import ColorInput from '../CustomLibrary/CustomInputs/ColorInput';
+import RangeInput from '../CustomLibrary/CustomInputs/RangeInput';
 
 const DynamicForm = ({ currentTab, tabs, setTabs }) => {
 	const isFirstRender = useRef(true);
@@ -52,7 +52,7 @@ const DynamicForm = ({ currentTab, tabs, setTabs }) => {
 				},
 			}).then((res) => {
 				setErrorDisplay(res.data.error);
-				setTimeout(( ) => {
+				setTimeout(() => {
 					setErrorDisplay('');
 				}, 2000);
 			});
@@ -60,7 +60,7 @@ const DynamicForm = ({ currentTab, tabs, setTabs }) => {
 		submitData();
 	}, [ settings ] );
 
-	const handleModelClose = ( ) => {
+	const handleModelClose = () => {
 		setModelOpen( false );
 	}
 	

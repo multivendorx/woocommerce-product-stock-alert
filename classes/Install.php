@@ -9,15 +9,15 @@ defined( 'ABSPATH' ) || exit;
 
 class Install {
     
-    public function __construct( ) {
-        $this -> stock_manager_data_migrate( );
-        $this -> start_cron_job( );
-        $this -> registers_post_status( );
+    public function __construct() {
+        $this->stock_manager_data_migrate();
+        $this->start_cron_job();
+        $this->registers_post_status();
     } 
     /**
      * Function to register the post status
      */
-    function registers_post_status( ) {
+    function registers_post_status() {
         register_post_status( 'woo_mailsent', [ 
             'label' => _x( 'Mail Sent', 'woostockalert', 'woocommerce-stock-manager' ), 
             'public' => true, 
@@ -51,9 +51,9 @@ class Install {
      * Function that schedule hook for notification corn job.
      * @return void
      */
-    function start_cron_job( ) {
+    function start_cron_job() {
         wp_clear_scheduled_hook( 'woo_stock_manager_start_notification_cron_job' );
-        wp_schedule_event( time( ), 'hourly', 'woo_stock_manager_start_notification_cron_job' );
+        wp_schedule_event( time(), 'hourly', 'woo_stock_manager_start_notification_cron_job' );
         update_option( 'woo_stock_manager_cron_start', true );
     } 
 
@@ -61,8 +61,8 @@ class Install {
      * Data migration function. Run on installation time.
      * @return void
      */
-    function stock_manager_data_migrate( ) {
-        $current_version = SM( ) -> version;
+    function stock_manager_data_migrate() {
+        $current_version = SM()->version;
         $previous_version = get_option( "woo_stock_manager_version" );
 
         // Used to check the plugin version before 2.1.0
@@ -157,7 +157,7 @@ class Install {
 
             // Settings arrays for version 2.3.0, 
             // For version 2.3.0 'woo_product_stock_alert_version' was set.
-            $woo_general_tab_settings = $woo_customization_tab_settings = $woo_submition_tab_settings = $woo_email_tab_settings = [ ];
+            $woo_general_tab_settings = $woo_customization_tab_settings = $woo_submition_tab_settings = $woo_email_tab_settings = [];
             if ( get_option( 'woo_product_stock_alert_version' ) ) {
                 delete_option( 'woo_product_stock_alert_version' );
                 $woo_general_tab_settings = get_option( 'woo_stock_alert_general_tab_settings' );

@@ -6,7 +6,7 @@ defined( 'ABSPATH' ) || exit;
 class Admin {
     public $settings;
 
-    public function __construct( ) {
+    public function __construct() {
         // admin pages manu and submenu
         add_action( 'admin_menu', [ $this, 'add_settings_page' ], 100 );
         //admin script and style
@@ -31,7 +31,7 @@ class Admin {
     /**
     * Add options page
     */
-    public function add_settings_page( ) {
+    public function add_settings_page() {
         $pro_sticker = apply_filters( 'is_stock_manager_pro_inactive', true ) ? '<span class="stock-manager-pro-tag">Pro</span>' : '';
 
         add_menu_page( 
@@ -89,7 +89,7 @@ class Admin {
      * Create empty div. React root from here.
      * @return void
      */
-    public function create_setting_page( ) {
+    public function create_setting_page() {
         echo '<div id="woo-admin-stockmanager"></div>';
     }
 
@@ -97,7 +97,7 @@ class Admin {
      * Create Stock Manager Export ( CSV ) option to 'Tool' menu.
      * @return void
      */
-    public function create_csv_export_page( ) {
+    public function create_csv_export_page() {
         ?>
             <div class="wrap">
             <h1><?php __( 'Stock Manager Export', 'woocommerce-stock-manager' ) ?></h1>
@@ -149,7 +149,7 @@ class Admin {
      * Set Admin notice in time of bulk action.
      * @return void
      */
-    function subscribers_bulk_action_admin_notice( ) {
+    function subscribers_bulk_action_admin_notice() {
         if ( !empty( $_REQUEST[ 'bulk_remove_subscribers' ] ) ) {
             $bulk_remove_count = intval( $_REQUEST[ 'bulk_remove_subscribers' ] );
 			// Translators: This message is to display removed subscribers count for the product
@@ -161,7 +161,7 @@ class Admin {
      * Set style for admin's setting pages.
      * @return void
      */
-    public function admin_plugin_page_style( ) {
+    public function admin_plugin_page_style() {
         ?>
         <style>
             a.stock-manager-pro-plugin {
@@ -183,7 +183,7 @@ class Admin {
      * Enqueue JavaScript for admin fronend page and localize script.
      * @return void
      */
-    public function enqueue_admin_script( ) {
+    public function enqueue_admin_script() {
         $suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
         $pro_settings_list = apply_filters( 'woo_stock_manager_pro_settings_lists', [ 
@@ -215,24 +215,28 @@ class Admin {
             $settings_databases_value[$tab] = get_option( 'woo_stock_manager_' . $tab . '_tab_settings' );
         }
         
-        if ( get_current_screen( ) -> id == 'toplevel_page_woo-stock-manager-setting' ) {
-            wp_enqueue_script( 'woo-stockmanager-script', SM( ) -> plugin_url . 'build/index.js', [ 'wp-element', 'wp-i18n' ], SM( ) -> version, true );
+        if ( get_current_screen()->id == 'toplevel_page_woo-stock-manager-setting' ) {
+            wp_enqueue_script( 'woo-stockmanager-script', SM()->plugin_url . 'build/index.js', [ 'wp-element', 'wp-i18n' ], SM()->version, true );
             wp_set_script_translations( 'woo-stockmanager-script', 'woocommerce-stock-manager' );
             wp_localize_script( 'woo-stockmanager-script', 'stockManagerAppLocalizer', apply_filters( 'woo_stock_manager_settings', [ 
-                'apiUrl'                    => untrailingslashit( get_rest_url( ) ), 
+                'apiUrl'                    => untrailingslashit( get_rest_url() ), 
                 'nonce'                     => wp_create_nonce( 'wp_rest' ),
-                'subscriber_list'           => SM( ) -> plugin_url . 'src/assets/images/subscriber-list.jpg',
+                'subscriber_list'           => SM()->plugin_url . 'src/assets/images/subscriber-list.jpg',
                 'pro_active'                => apply_filters( 'woo_stock_manager_pro_active', 'free' ),
                 'settings_databases_value'  => $settings_databases_value,
-                'pro_settings_list'         => $pro_settings_list, 
+                'pro_settings_list'         => $pro_settings_list,
                 'pro_url'                   => esc_url( STOCK_MANAGER_PRO_SHOP_URL ),
+                'is_double_optin_free'      => __("Upgrade to <a href=\"" . STOCK_MANAGER_PRO_SHOP_URL . "\" target=\"_blank\"><span class=\"pro-strong\">Pro</span></a> to enable Double Opt-in flow for subscription confirmation.", "woocommerce-stock-manager"),
+                'is_double_optin_pro'       => __('Enable Double Opt-in flow for subscription confirmation.', 'woocommerce-stock-manager-pro'),
+                'is_recaptcha_enable_free'  => __("Upgrade to <a href=\"" . STOCK_MANAGER_PRO_SHOP_URL . "\" target=\"_blank\"><span class=\"pro-strong\">Pro</span></a> for unlocking reCAPTCHA for out-of-stock form subscriptions.", "woocommerce-stock-manager"), 
+                'is_recaptcha_enable_pro'   => __('Get your v3 reCAPTCHA site key and secret key from <a href="https://developers.google.com/recaptcha" target="_blank">here</a>.', 'woocommerce-stock-manager-pro'),
                 'default_massages_fields'   => $woo_admin_massages_fields,
                 'default_massages'          => Utill::get_form_settings_array()
               ] ) );
-            wp_enqueue_style( 'woo_stockmanager_style', SM( ) -> plugin_url . 'build/index.css', [ ], SM( ) -> version );
-            wp_enqueue_style( 'woo_admin_rsuite_css', SM( ) -> plugin_url . 'src/assets/admin/css/rsuite-default' . '.min' . '.css', [ ], SM( ) -> version );
+            wp_enqueue_style( 'woo_stockmanager_style', SM()->plugin_url . 'build/index.css', [], SM()->version );
+            wp_enqueue_style( 'woo_admin_rsuite_css', SM()->plugin_url . 'src/assets/admin/css/rsuite-default' . '.min' . '.css', [], SM()->version );
         } 
-        wp_enqueue_style( 'stock_manager_product_admin_css', SM( ) -> plugin_url . 'src/assets/admin/css/admin'. $suffix .'.css', [ ], SM( ) -> version );
+        wp_enqueue_style( 'stock_manager_product_admin_css', SM()->plugin_url . 'src/assets/admin/css/admin'. $suffix .'.css', [], SM()->version );
     }
 
     /**
@@ -255,11 +259,11 @@ class Admin {
     /**
      * Stock Manager news on Product edit page ( simple )
      */
-    function display_product_subscriber_count_in_metabox( ) {
+    function display_product_subscriber_count_in_metabox() {
         global $post;
 
-        if ( Subscriber::is_product_outofstock( $post -> ID ) ) {
-            $no_of_subscriber = get_post_meta( $post -> ID, 'no_of_subscribers', true );
+        if ( Subscriber::is_product_outofstock( $post->ID ) ) {
+            $no_of_subscriber = get_post_meta( $post->ID, 'no_of_subscribers', true );
             ?>
             <p class="form-field _stock_field">
                 <label class=""><?php esc_attr_e( 'Number of Interested Person( s )', 'woocommerce-stock-manager' ); ?></label>
@@ -273,8 +277,8 @@ class Admin {
      * Stock Manager news on Product edit page ( variable )
      */
     function display_product_subscriber_count_in_variation_metabox( $loop, $variation_data, $variation ) {
-        if ( Subscriber::is_product_outofstock( $variation -> ID, 'variation' ) ) {
-            $product_subscriber = get_post_meta( $variation -> ID, 'no_of_subscribers', true );
+        if ( Subscriber::is_product_outofstock( $variation->ID, 'variation' ) ) {
+            $product_subscriber = get_post_meta( $variation->ID, 'no_of_subscribers', true );
             ?>
             <p class="form-row form-row-full interested_person">
                 <label class="stock_label"><?php esc_attr_e( 'Number of Interested Person( s ) : ', 'woocommerce-stock-manager' ); ?></label>

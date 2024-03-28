@@ -1,3 +1,242 @@
+/*!***************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./src/admin/CustomLibrary/CustomTable/table.css ***!
+  \***************************************************************************************************************************************************************************************************/
+/* Icons Part Start Here */
+@font-face {
+    font-family: 'mvx-table-module';
+    src:  url(fonts/mvx-table-module.684ccd28.eot);
+    src:  url(fonts/mvx-table-module.684ccd28.eot#iefix) format('embedded-opentype'),
+      url(fonts/mvx-table-module.55d87874.ttf) format('truetype'),
+      url(fonts/mvx-table-module.80a38f84.woff) format('woff'),
+      url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/Pgo8IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiID4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8bWV0YWRhdGE+R2VuZXJhdGVkIGJ5IEljb01vb248L21ldGFkYXRhPgo8ZGVmcz4KPGZvbnQgaWQ9Im12eC10YWJsZS1tb2R1bGUiIGhvcml6LWFkdi14PSIxMDI0Ij4KPGZvbnQtZmFjZSB1bml0cy1wZXItZW09IjEwMjQiIGFzY2VudD0iOTYwIiBkZXNjZW50PSItNjQiIC8+CjxtaXNzaW5nLWdseXBoIGhvcml6LWFkdi14PSIxMDI0IiAvPgo8Z2x5cGggdW5pY29kZT0iJiN4MjA7IiBob3Jpei1hZHYteD0iNTEyIiBkPSIiIC8+CjxnbHlwaCB1bmljb2RlPSImI3hlYTNjOyIgZ2x5cGgtbmFtZT0iYXJyb3ctcmlnaHQyIiBkPSJNNjIxLjI1NCA4Mi43NDZsMzIwIDMyMGMyNC45OTQgMjQuOTkyIDI0Ljk5NCA2NS41MTYgMCA5MC41MWwtMzIwIDMyMGMtMjQuOTk0IDI0Ljk5Mi02NS41MTYgMjQuOTkyLTkwLjUxIDAtMjQuOTk0LTI0Ljk5NC0yNC45OTQtNjUuNTE2IDAtOTAuNTFsMjEwLjc0Ni0yMTAuNzQ2aC02MTMuNDljLTM1LjM0NiAwLTY0LTI4LjY1NC02NC02NHMyOC42NTQtNjQgNjQtNjRoNjEzLjQ5bC0yMTAuNzQ2LTIxMC43NDZjLTEyLjQ5Ni0xMi40OTYtMTguNzQ0LTI4Ljg3Ni0xOC43NDQtNDUuMjU0czYuMjQ4LTMyLjc1OCAxOC43NDQtNDUuMjU0YzI0Ljk5NC0yNC45OTQgNjUuNTE2LTI0Ljk5NCA5MC41MSAweiIgLz4KPGdseXBoIHVuaWNvZGU9IiYjeGVhM2U7IiBnbHlwaC1uYW1lPSJhcnJvdy1kb3duMiIgZD0iTTg3Ny4yNTQgMzM4Ljc0NmwtMzIwLTMyMGMtMjQuOTkyLTI0Ljk5NC02NS41MTQtMjQuOTk0LTkwLjUwOCAwbC0zMjAgMzIwYy0yNC45OTQgMjQuOTk0LTI0Ljk5NCA2NS41MTYgMCA5MC41MSAyNC45OTQgMjQuOTk2IDY1LjUxNiAyNC45OTYgOTAuNTEgMGwyMTAuNzQ0LTIxMC43NDZ2NjEzLjQ5YzAgMzUuMzQ2IDI4LjY1NCA2NCA2NCA2NHM2NC0yOC42NTQgNjQtNjR2LTYxMy40OWwyMTAuNzQ2IDIxMC43NDZjMTIuNDk2IDEyLjQ5NiAyOC44NzYgMTguNzQ0IDQ1LjI1NCAxOC43NDRzMzIuNzU4LTYuMjQ4IDQ1LjI1NC0xOC43NDZjMjQuOTk0LTI0Ljk5NCAyNC45OTQtNjUuNTE0IDAtOTAuNTA4eiIgLz4KPC9mb250PjwvZGVmcz48L3N2Zz4=#mvx-table-module) format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+  }
+  
+  [class^="module-"], [class*=" module-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'mvx-table-module' !important;
+    speak: never;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+  
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  .module-arrow-right2:before {
+    content: "\ea3c";
+  }
+  .module-arrow-down2:before {
+    content: "\ea3e";
+  }
+  /* Icons Part End Here */
+  
+  /* Loading table animation start here */
+  
+  .table-container {
+    width: 100%;
+    padding: 1rem;
+  }
+  
+  .tg {
+    border-collapse: collapse;
+    border-spacing: 0;
+    border-color: #ccc;
+    width: 100%;
+  }
+  
+  .tg .rdt_TableCell {
+    font-size: 0.882rem;
+    padding: 0.63rem 0.315rem;
+    border-style: solid;
+    border-width: 0.0rem;
+    overflow: hidden;
+    word-break: normal;
+    border-color: #ccc;
+    color: #333;
+    background-color: #fff;
+  }
+  
+  .tg tr:first-child .rdt_TableCell {
+    font-size: 0.882rem;
+    font-weight: normal;
+    padding: 0.63rem 0.315rem;
+    border-style: solid;
+    border-width: 0.0rem;
+    overflow: hidden;
+    word-break: normal;
+    border-color: #ccc;
+    color: #333;
+    background-color: #f0f0f0;
+  }
+  
+  .line {
+    float: left;
+    max-width: 6.3rem;
+    width: 100%;
+    height: 1.008rem;
+    margin-top: 0.756rem;
+    border-radius: 0.441rem;
+    background-image: linear-gradient(
+      90deg,
+      #f4f4f4 0.0rem,
+      rgba(229, 229, 229, 0.8) 2.52rem,
+      #f4f4f4 5.04rem
+    );
+    background-size: 37.8rem;
+    animation: shine-lines 2s infinite ease-out;
+  }
+  
+  @keyframes shine-lines {
+    0% {
+      background-position: -6.3rem;
+    }
+    40%,
+    100% {
+      background-position: 8.82rem;
+    }
+  }
+  
+  /* Loading table animation end here */
+  
+  .table-container .rdt_TableHead {
+    border-radius: 0.25rem;
+  }
+  
+  .rdt_Table .rdt_TableHeadRow {
+    border: 0.063rem solid rgba(0, 0, 0, 0.2);
+    border-bottom: none;
+    background: #e7e7e7;
+    border-top-right-radius: 0.5rem;
+    border-top-left-radius: 0.5rem;
+  }
+  .rdt_Table .rdt_TableHeadRow .rdt_TableCol:last-child {
+    display: none;
+  }
+  .rdt_TableBody .rdt_TableRow {
+    border-left: 0.063rem solid rgba(0, 0, 0, 0.2);
+    border-right: 0.063rem solid rgba(0, 0, 0, 0.2);
+    position: relative;
+  }
+  .rdt_TableBody .rdt_TableRow:nth-child(even) {
+    background: rgb(245, 245, 245);
+  }
+  .rdt_TableBody .rdt_TableRow .rdt_TableCell:last-child {
+    max-width: 2.52rem;
+    min-width: 2.52rem;
+    top: 0.35rem;
+    right: 0.75rem;
+    padding: 0;
+    width: 100%;
+    flex-grow: unset;
+    position: absolute;
+    display: none;
+  }
+  .dropdown_btn {
+    width: 100%;
+  }
+  .dropdown_btn button {
+    cursor: pointer;
+    width: 100%;
+    outline: none;
+    border: none;
+    padding: 0.25rem 0.1rem;
+    background: #ccc;
+    border-radius: 0.25rem;
+    font-size: 1rem;
+  }
+  .rdt_TableBody .rdt_TableRow .rdt_TableCell .table-row-custom {
+    display: flex;
+    -moz-column-gap: 3rem;
+         column-gap: 3rem;
+    min-height: 100%;
+    align-items: center;
+    text-wrap: nowrap;
+  }
+  .rdt_TableBody .rdt_TableRow .rdt_TableCell .table-row-custom h4 {
+    display: none;
+  }
+  
+  @media only screen and (max-width: 79.002rem) {
+    .rdt_TableHeadRow {
+      padding: 0.313rem;
+    }
+    .rdt_TableHeadRow .rdt_TableCol {
+      min-width: 3.15rem;
+      width: 100%;
+      display: none;
+    }
+    .rdt_TableHeadRow .rdt_TableCol:first-child,
+    .rdt_TableHeadRow .rdt_TableCol:nth-child(2),
+    .rdt_TableHeadRow .rdt_TableCol:nth-child(3) {
+      display: block;
+    }
+    .rdt_TableBody .rdt_TableRow .rdt_TableCell {
+      width: 100%;
+      display: inline-block;
+      min-width: 3.15rem;
+      background-color: #ccc;
+      height: 2.25rem;
+    }
+    .rdt_TableBody .rdt_TableRow {
+      padding: 0.313rem;
+      display: block;
+      max-height: 3rem;
+      transition: max-height 0.3s linear;
+      overflow: hidden;
+    }
+    .rdt_TableBody .rdt_TableRow .rdt_TableCell:first-child,
+    .rdt_TableBody .rdt_TableRow .rdt_TableCell:nth-child(2),
+    .rdt_TableBody .rdt_TableRow .rdt_TableCell:nth-child(3) {
+      width: 33%;
+      background: transparent !important; /* To adjust default background-color */
+      margin-bottom: 0.5rem;
+    }
+    .rdt_TableBody .rdt_TableRow .rdt_TableCell:last-child {
+      display: flex;
+      background-color: transparent;
+    }
+    .rdt_TableBody .rdt_TableRow.active {
+      max-height: 35.875rem;
+    }
+    .rdt_TableBody .rdt_TableRow .rdt_TableCell .table-row-custom h4 {
+      display: block;
+      font-weight: 500;
+    }
+    .rdt_TableBody .rdt_TableRow .rdt_TableCell:first-child .table-row-custom h4,
+    .rdt_TableBody .rdt_TableRow .rdt_TableCell:nth-child(2) .table-row-custom h4,
+    .rdt_TableBody
+      .rdt_TableRow
+      .rdt_TableCell:nth-child(3)
+      .table-row-custom
+      h4 {
+      display: none;
+    }
+    .selectable-table .rdt_TableRow .rdt_TableCell:first-child{
+      min-width: 1.89rem;
+      max-width: 3.15rem;
+      width: auto !important; /* To adjust default width */
+    }
+    .selectable-table .rdt_TableHeadRow .rdt_TableCol:first-child{
+      min-width: 1.89rem;
+      max-width: 0.15rem;
+      width: auto !important; /* To adjust default width */
+    }
+  }
+  
+  @media only screen and (max-width: 370px){
+    .rdt_TableBody .rdt_TableRow .rdt_TableCell .table-row-custom *{
+      font-size: 0.85rem !important;
+    }
+  }
+  /* Table start end */
+  
 /*!********************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/style/main.scss ***!
   \********************************************************************************************************************************************************************************************************************************************/

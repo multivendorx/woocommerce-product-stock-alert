@@ -88,8 +88,8 @@ class DeprecatedFilterHooks extends \WC_Deprecated_Hooks {
 	 */
 	public function handle_deprecated_hook( $new_hook, $old_hook, $new_callback_args, $return_value ) {
 		if ( has_filter( $old_hook ) ) {
-			$this -> display_notice( $old_hook, $new_hook );
-			$return_value = $this -> trigger_hook( $old_hook, $new_callback_args );
+			$this->display_notice( $old_hook, $new_hook );
+			$return_value = $this->trigger_hook( $old_hook, $new_callback_args );
 		} 
 		return $return_value;
 	} 

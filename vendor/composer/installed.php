@@ -6,7 +6,7 @@
         'reference' => NULL, 
         'type' => 'library', 
         'install_path' => __DIR__ . '/../../', 
-        'aliases' => array( ), 
+        'aliases' => array(), 
         'dev' => true, 
     ), 
     'versions' => array( 
@@ -16,7 +16,7 @@
             'reference' => NULL, 
             'type' => 'library', 
             'install_path' => __DIR__ . '/../../', 
-            'aliases' => array( ), 
+            'aliases' => array(), 
             'dev_requirement' => false, 
         ), 
     ), 

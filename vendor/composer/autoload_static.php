@@ -26,10 +26,10 @@ class ComposerStaticInit18e3680eb6e1550dee239c6ead15996a
 
     public static function getInitializer( ClassLoader $loader )
     {
-        return \Closure::bind( function ( ) use ( $loader ) {
-            $loader -> prefixLengthsPsr4 = ComposerStaticInit18e3680eb6e1550dee239c6ead15996a::$prefixLengthsPsr4;
-            $loader -> prefixDirsPsr4 = ComposerStaticInit18e3680eb6e1550dee239c6ead15996a::$prefixDirsPsr4;
-            $loader -> classMap = ComposerStaticInit18e3680eb6e1550dee239c6ead15996a::$classMap;
+        return \Closure::bind( function () use ( $loader ) {
+            $loader->prefixLengthsPsr4 = ComposerStaticInit18e3680eb6e1550dee239c6ead15996a::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit18e3680eb6e1550dee239c6ead15996a::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit18e3680eb6e1550dee239c6ead15996a::$classMap;
 
         } , null, ClassLoader::class );
     } 
