@@ -40,8 +40,9 @@ const CustomTable = (props) => {
     perPageOption, // per page option array. user should always provide.
     realtimeFilter, // filter filds for realtime filter.
   } = props;
+
   const [loading, setLoading] = useState(false); // loading state varaible.
-  const [totalRows, setTotalRows] = useState(defaultTotalRows || data.length); // total no of row in dataset.
+  const [totalRows, setTotalRows] = useState(defaultTotalRows); // total no of row in dataset.
   const [rowsPerPage, setRowsPerPage] = useState(defaultRowsParPage || 10); // rows par page. default is 10.
   const [currentPage, setCurrentPage] = useState(defaultCurrentPage || 1); // current page state variable.
   // Realtime filter state variable
@@ -49,8 +50,10 @@ const CustomTable = (props) => {
   // Counter variable for cooldown effect
   const counter = useRef(0);
   const counterId = useRef(0);
+
   // Get the last fild of column.
   const sortableFild = columns[columns.length - 1];
+
   // Chek the last column field is dropdown
   // If not dropdown then push the dropdown field to the column.
   if (!sortableFild.isDropDown) {
@@ -66,6 +69,7 @@ const CustomTable = (props) => {
       isDropDown: true,
     });
   }
+
   // Function that handle table expand.
   const handleTableExpand = (e) => {
     e.children[0].classList.toggle('module-arrow-down2');
@@ -73,11 +77,13 @@ const CustomTable = (props) => {
     const row = e.parentElement.parentElement.parentElement;
     row.classList.toggle("active");
   }
+
   // When new data comes, set loading to false.
   useEffect(() => {
     setTotalRows(defaultTotalRows);
     setLoading(false);
-  }, [data]);
+  }, [data, defaultTotalRows]);
+
   // Code for handle cooldown effect.
   useEffect(() => {
     // Check if filter data is empty then this effect is for first time rendering.
@@ -110,6 +116,7 @@ const CustomTable = (props) => {
     // Store the interval id.
     counterId.current = intervalId;
   }, [filterData]);
+
   // Handle mouse enter function.
   const handleMouseEnter = () => {
     props.handleMouseEnter?.();
@@ -158,6 +165,7 @@ const CustomTable = (props) => {
       };
     });
   };
+
   return (
     <div className={`table-container ${loading ? "table-loading" : ""} ${selectable ? "selectable-table" : ""}`}>
       <div className="woo-wrap-bulk-all-date">
@@ -189,8 +197,8 @@ const CustomTable = (props) => {
           onChangeRowsPerPage={handleRowsPerPageChange}
           // Row select callback.
           onSelectedRowsChange={handleOnSelectedRowsChange}
-        />
-      )}
+          />
+          )}
     </div>
   );
 };

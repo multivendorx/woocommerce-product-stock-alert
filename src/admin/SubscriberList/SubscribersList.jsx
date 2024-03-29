@@ -1,10 +1,8 @@
 import axios from 'axios';
 import { CSVLink } from 'react-csv';
-import { css } from '@emotion/react';
 import { __ } from '@wordpress/i18n';
 import { DateRangePicker } from 'rsuite';
 import Dialog from "@mui/material/Dialog";
-import ReactPaginate from "react-paginate";
 import React, { useState, useEffect } from 'react';
 import Popoup from '../PopupContent/PopupContent';
 import CustomTable from '../CustomLibrary/CustomTable/CustomTable';
@@ -25,13 +23,13 @@ export default function SubscribersList() {
     const sevenDaysAgo = new Date();
     sevenDaysAgo.setDate( currentDate.getDate() - 7 );
     
-    function requestData( rowsPerPage = 5, currentPage = 0, productNameField = '' , emailField = '', start_date = sevenDaysAgo, end_date = currentDate ) {
-        //Fetch the data to show in the table   
+    function requestData( rowsPerPage = 10, currentPage = 1, productNameField = '' , emailField = '', start_date = sevenDaysAgo, end_date = currentDate ) {
+        //Fetch the data to show in the table
         axios({
             method: "post",
             url: fetchSubscribersDataUrl,
             headers: { 'X-WP-Nonce' : stockManagerAppLocalizer.nonce },
-            data: { page: currentPage - 1, row: rowsPerPage, post_status:post_status
+            data: { page: currentPage , row: rowsPerPage, post_status:post_status
                 ,product_name: productNameField, email: emailField, start_date: start_date
                 ,end_date: end_date },
         }).then((response) => {
@@ -113,7 +111,7 @@ export default function SubscribersList() {
         if( stockManagerAppLocalizer.pro_active != 'free' ) {
             requestData();
         }
-    }, [] );
+    }, [post_status] );
     
     //columns for the data table
     const columns = [
@@ -207,16 +205,17 @@ export default function SubscribersList() {
                                     </ul>                                    
                                 </div>                                  
                                 <div className="woo-backend-datatable-wrapper">
-                                    <CustomTable 
-                                        data={data}
-                                        columns={columns}
-                                        handlePagination={requestApiForData}
-                                        defaultTotalRows={totalRows}
-                                        defaultRowsParPage={5}
-                                        perPageOption={[5, 10, 25]}
-                                        realtimeFilter={realtimeFilter}
-                                    />
-                                    {console.log(totalRows)}
+                                    {
+                                        <CustomTable 
+                                            data={data}
+                                            columns={columns}
+                                            handlePagination={requestApiForData}
+                                            defaultRowsParPage={10}
+                                            defaultTotalRows={totalRows}
+                                            perPageOption={[10, 25, 50]}
+                                            realtimeFilter={realtimeFilter}
+                                        />
+                                    }
                                 </div>                       
                             </div>
                         </div>

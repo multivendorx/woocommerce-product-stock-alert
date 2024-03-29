@@ -62,7 +62,7 @@ class Subscriber {
                     foreach ( $product_subscribers as $subscribe_id => $to ) {
                         $email->trigger( $to, $product_object );
                         self::update_subscriber( $subscribe_id, 'woo_mailsent' );
-                    } 
+                    }
                     delete_post_meta( $product_id, 'no_of_subscribers' );
                 } 
             } 
@@ -177,7 +177,7 @@ class Subscriber {
         $args = [ 
             'ID' => $stockalert_id, 
             'post_type' => 'woostockalert', 
-            'post_status' => $status, 
+            'post_status' => $status,
         ];
         $id = wp_update_post( $args );
         return $id;

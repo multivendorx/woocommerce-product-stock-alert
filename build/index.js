@@ -17210,7 +17210,7 @@ const CustomTable = props => {
     realtimeFilter // filter filds for realtime filter.
   } = props;
   const [loading, setLoading] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false); // loading state varaible.
-  const [totalRows, setTotalRows] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(defaultTotalRows || data.length); // total no of row in dataset.
+  const [totalRows, setTotalRows] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(defaultTotalRows); // total no of row in dataset.
   const [rowsPerPage, setRowsPerPage] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(defaultRowsParPage || 10); // rows par page. default is 10.
   const [currentPage, setCurrentPage] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(defaultCurrentPage || 1); // current page state variable.
   // Realtime filter state variable
@@ -17218,8 +17218,10 @@ const CustomTable = props => {
   // Counter variable for cooldown effect
   const counter = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(0);
   const counterId = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(0);
+
   // Get the last fild of column.
   const sortableFild = columns[columns.length - 1];
+
   // Chek the last column field is dropdown
   // If not dropdown then push the dropdown field to the column.
   if (!sortableFild.isDropDown) {
@@ -17235,6 +17237,7 @@ const CustomTable = props => {
       isDropDown: true
     });
   }
+
   // Function that handle table expand.
   const handleTableExpand = e => {
     e.children[0].classList.toggle('module-arrow-down2');
@@ -17242,11 +17245,13 @@ const CustomTable = props => {
     const row = e.parentElement.parentElement.parentElement;
     row.classList.toggle("active");
   };
+
   // When new data comes, set loading to false.
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     setTotalRows(defaultTotalRows);
     setLoading(false);
-  }, [data]);
+  }, [data, defaultTotalRows]);
+
   // Code for handle cooldown effect.
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     // Check if filter data is empty then this effect is for first time rendering.
@@ -17279,6 +17284,7 @@ const CustomTable = props => {
     // Store the interval id.
     counterId.current = intervalId;
   }, [filterData]);
+
   // Handle mouse enter function.
   const handleMouseEnter = () => {
     props.handleMouseEnter?.();
@@ -19081,18 +19087,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
 /* harmony import */ var react_csv__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-csv */ "./node_modules/react-csv/index.js");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var rsuite__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! rsuite */ "./node_modules/rsuite/esm/DateRangePicker/index.js");
-/* harmony import */ var _mui_material_Dialog__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @mui/material/Dialog */ "./node_modules/@mui/material/Dialog/Dialog.js");
-/* harmony import */ var react_paginate__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-paginate */ "./node_modules/react-paginate/dist/react-paginate.js");
-/* harmony import */ var react_paginate__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_paginate__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _PopupContent_PopupContent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../PopupContent/PopupContent */ "./src/admin/PopupContent/PopupContent.jsx");
-/* harmony import */ var _CustomLibrary_CustomTable_CustomTable__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../CustomLibrary/CustomTable/CustomTable */ "./src/admin/CustomLibrary/CustomTable/CustomTable.jsx");
-
-
+/* harmony import */ var rsuite__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! rsuite */ "./node_modules/rsuite/esm/DateRangePicker/index.js");
+/* harmony import */ var _mui_material_Dialog__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @mui/material/Dialog */ "./node_modules/@mui/material/Dialog/Dialog.js");
+/* harmony import */ var _PopupContent_PopupContent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../PopupContent/PopupContent */ "./src/admin/PopupContent/PopupContent.jsx");
+/* harmony import */ var _CustomLibrary_CustomTable_CustomTable__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../CustomLibrary/CustomTable/CustomTable */ "./src/admin/CustomLibrary/CustomTable/CustomTable.jsx");
 
 
 
@@ -19117,16 +19119,16 @@ function SubscribersList() {
   const currentDate = new Date();
   const sevenDaysAgo = new Date();
   sevenDaysAgo.setDate(currentDate.getDate() - 7);
-  function requestData(rowsPerPage = 5, currentPage = 0, productNameField = '', emailField = '', start_date = sevenDaysAgo, end_date = currentDate) {
-    //Fetch the data to show in the table   
-    (0,axios__WEBPACK_IMPORTED_MODULE_6__["default"])({
+  function requestData(rowsPerPage = 10, currentPage = 1, productNameField = '', emailField = '', start_date = sevenDaysAgo, end_date = currentDate) {
+    //Fetch the data to show in the table
+    (0,axios__WEBPACK_IMPORTED_MODULE_5__["default"])({
       method: "post",
       url: fetchSubscribersDataUrl,
       headers: {
         'X-WP-Nonce': stockManagerAppLocalizer.nonce
       },
       data: {
-        page: currentPage - 1,
+        page: currentPage,
         row: rowsPerPage,
         post_status: post_status,
         product_name: productNameField,
@@ -19174,7 +19176,7 @@ function SubscribersList() {
     })))
   }, {
     name: "date",
-    render: (updateFilter, value) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(rsuite__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    render: (updateFilter, value) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(rsuite__WEBPACK_IMPORTED_MODULE_6__["default"], {
       placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('DD-MM-YYYY ~ DD-MM-YYYY', 'woocommerce-stock-manager'),
       onChange: dates => {
         if (dates != null) {
@@ -19195,7 +19197,7 @@ function SubscribersList() {
     if (stockManagerAppLocalizer.pro_active != 'free') {
       requestData();
     }
-  }, []);
+  }, [post_status]);
 
   //columns for the data table
   const columns = [{
@@ -19214,7 +19216,7 @@ function SubscribersList() {
     name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Status", "woocommerce-stock-manager"),
     selector: row => row.status
   }];
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, stockManagerAppLocalizer.pro_active == 'free' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Dialog__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, stockManagerAppLocalizer.pro_active == 'free' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Dialog__WEBPACK_IMPORTED_MODULE_7__["default"], {
     className: "woo-module-popup",
     open: openDialog,
     onClose: () => {
@@ -19226,7 +19228,7 @@ function SubscribersList() {
     onClick: () => {
       setOpenDialog(false);
     }
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_PopupContent_PopupContent__WEBPACK_IMPORTED_MODULE_4__["default"], null)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_PopupContent_PopupContent__WEBPACK_IMPORTED_MODULE_3__["default"], null)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: stockManagerAppLocalizer.subscriber_list,
     alt: "subscriber-list",
     className: "subscriber-img",
@@ -19294,15 +19296,15 @@ function SubscribersList() {
     className: "woo-multistatus-check-unpaid"
   }, `Mail Sent (${subscribersStatus.mailSent})`)))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "woo-backend-datatable-wrapper"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_CustomLibrary_CustomTable_CustomTable__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_CustomLibrary_CustomTable_CustomTable__WEBPACK_IMPORTED_MODULE_4__["default"], {
     data: data,
     columns: columns,
     handlePagination: requestApiForData,
+    defaultRowsParPage: 10,
     defaultTotalRows: totalRows,
-    defaultRowsParPage: 5,
-    perPageOption: [5, 10, 25],
+    perPageOption: [10, 25, 50],
     realtimeFilter: realtimeFilter
-  }), console.log(totalRows))))));
+  }))))));
 }
 
 /***/ }),
