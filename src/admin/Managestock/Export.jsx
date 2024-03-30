@@ -37,14 +37,14 @@ const Export = () => {
 
     //Data to Generate the Checkbox
     const [ checkboxData, setCheckboxData ] = useState([
-        { Name: 'Id',           Value: 'product_id',             Checked: true },
-        { Name: 'Type',         Value: 'product_type',           Checked: true },
-        { Name: 'SKU',          Value: 'product_sku',            Checked: true },
-        { Name: 'Name',         Value: 'product_name',           Checked: true },
-        { Name: 'Manage stock', Value: 'product_manage_stock',   Checked: true },
-        { Name: 'Stock status', Value: 'product_stock_status',   Checked: true },
-        { Name: 'Backorders',   Value: 'product_backorders',     Checked: true },
-        { Name: 'Stock',        Value: 'product_stock_quantity', Checked: true }
+        { Name: 'Id',           Value: 'id',             Checked: true },
+        { Name: 'Type',         Value: 'type',           Checked: true },
+        { Name: 'SKU',          Value: 'sku',            Checked: true },
+        { Name: 'Name',         Value: 'name',           Checked: true },
+        { Name: 'Manage_stock', Value: 'manage_stock',   Checked: true },
+        { Name: 'Stock_status', Value: 'stock_status',   Checked: true },
+        { Name: 'Backorders',   Value: 'backorders',     Checked: true },
+        { Name: 'Stock',        Value: 'stock_quantity', Checked: true }
     ]);
 
     //Handles the selection of a csv field
@@ -131,10 +131,11 @@ const Export = () => {
                         </div>
                         <button class="import-export-btn">
                             <div className='wp-menu-image dashicons-before dashicons-upload'></div>
+                            {console.log(Object.values(data))}
                             {
                                 data &&
                                 <CSVLink enclosingCharacter={``} data={ Object.values( data ) } headers={ header } filename={ 'Products.csv'} >{ __( 'Export CSV', 'woocommerce-stock-manager' ) }</CSVLink>
-                            }
+                            }   
                         </button>
                     </div>
                 </div>

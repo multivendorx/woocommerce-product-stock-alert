@@ -47,4 +47,4 @@ class RestAPI
         $all_details[ 'error' ] = __( 'Settings Saved', 'woocommerce-stock-manager' );
         return $all_details;
     }
-} 
+}

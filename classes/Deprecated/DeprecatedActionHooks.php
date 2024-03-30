@@ -46,7 +46,7 @@ class DeprecatedActionHooks extends \WC_Deprecated_Hooks {
 	 */
 	public function hook_in( $hook_name ) {
 		add_action( $hook_name, [ $this, 'maybe_handle_deprecated_hook' ], -1000, 8 );
-	} 
+	}
 
 	/**
 	 * If the old hook is in-use, trigger it.
@@ -61,9 +61,9 @@ class DeprecatedActionHooks extends \WC_Deprecated_Hooks {
 		if ( has_action( $old_hook ) ) {
 			$this->display_notice( $old_hook, $new_hook );
 			$return_value = $this->trigger_hook( $old_hook, $new_callback_args );
-		} 
+		}
 		return $return_value;
-	} 
+	}
 
 	/**
 	 * Fire off a legacy hook with it's args.
@@ -74,5 +74,5 @@ class DeprecatedActionHooks extends \WC_Deprecated_Hooks {
 	 */
 	protected function trigger_hook( $old_hook, $new_callback_args ) {
 		do_action_ref_array( $old_hook, $new_callback_args );
-	} 
-} 
+	}
+}

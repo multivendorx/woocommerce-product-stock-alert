@@ -9,6 +9,7 @@ import CustomTable from '../CustomLibrary/CustomTable/CustomTable';
 export default function SubscribersList() {
 
     const fetchSubscribersDataUrl = `${ stockManagerAppLocalizer.apiUrl }/stockmanager/v1/get-subscriber-list`;
+    const fetchSubscribersCount = `${ stockManagerAppLocalizer.apiUrl }/stockmanager/v1/get-subscriber-count`;
     const [ post_status , setPost_status ] = useState( 'any' );
     const [ data, setData ] = useState([]);
     const [ totalRows , setTotalRows ] = useState();
@@ -34,21 +35,39 @@ export default function SubscribersList() {
                 ,end_date: end_date },
         }).then((response) => {
             let parsedData = JSON.parse ( response.data );
-            let subscribe_count = parsedData.subscribe_count;
-            setData  (parsedData.subscribe_list );
-            setTotalRows ( subscribe_count [ post_status ] );
-            setSubscribersStatus ({
-                totalSubscribers: subscribe_count.any ,
-                subscribed:       subscribe_count.woo_subscribed,
-                unsubscribed:     subscribe_count.woo_unsubscribed,
-                mailSent:         subscribe_count.woo_mailsent
-            })
+            setData( parsedData );
         });
     }
 
     const requestApiForData = ( rowsPerPage, currentPage, filterData = {} ) => {
         requestData( rowsPerPage, currentPage, filterData?.productNameField, filterData?.emailField, filterData?.date?.start_date, filterData?.date?.end_date )        
     }
+
+    useEffect( () => {
+        if ( stockManagerAppLocalizer.pro_active != 'free' ) {
+            requestData();
+        }
+    }, [post_status] );
+    
+    useEffect( () => {
+        if ( stockManagerAppLocalizer.pro_active != 'free' ) {
+            axios({
+                method: "post",
+                url: fetchSubscribersCount,
+                headers: { 'X-WP-Nonce' : stockManagerAppLocalizer.nonce }
+            }).then((response) => {
+                let parsedData = JSON.parse ( response.data );
+                setTotalRows ( parsedData.any );
+                setSubscribersStatus ({
+                    totalSubscribers: parsedData.any ,
+                    subscribed:       parsedData.woo_subscribed,
+                    unsubscribed:     parsedData.woo_unsubscribed,
+                    mailSent:         parsedData.woo_mailsent
+                })
+            })
+
+        }
+    }, [] )
 
     const realtimeFilter = [
         {
@@ -106,12 +125,6 @@ export default function SubscribersList() {
             ),
           }
       ];
-
-    useEffect( () => {
-        if( stockManagerAppLocalizer.pro_active != 'free' ) {
-            requestData();
-        }
-    }, [post_status] );
     
     //columns for the data table
     const columns = [
@@ -180,18 +193,18 @@ export default function SubscribersList() {
                                 <div className="woo-search-and-multistatus-wrap">
                                     <ul className="woo-multistatus-ul">
                                         <li className={`woo-multistatus-item ${ post_status == 'any' ? 'status-active' : '' } `}>
-                                            <div onClick={ () => { setPost_status( 'any') ;setTotalRows ( subscribersStatus.totalSubscribers )  } } className="woo-multistatus-check-all ">
+                                            <div onClick={ () => { setPost_status( 'any') ; setTotalRows ( subscribersStatus.totalSubscribers )  } } className="woo-multistatus-check-all ">
                                                 {`All (${ subscribersStatus.totalSubscribers })`}
                                             </div>
                                         </li>
                                         <li  className="woo-multistatus-item woo-divider"></li>
-                                        <li onClick={ () => { setPost_status ( 'woo_subscribed' ) ;setTotalRows ( subscribersStatus.subscribed ) } } className={`woo-multistatus-item ${ post_status == 'woo_subscribed' ? 'status-active' : '' } `}>
+                                        <li onClick={ () => { setPost_status ( 'woo_subscribed' ) ; setTotalRows ( subscribersStatus.subscribed ) } } className={`woo-multistatus-item ${ post_status == 'woo_subscribed' ? 'status-active' : '' } `}>
                                             <div className="woo-multistatus-check-subscribe">
                                                 {`Subscribe (${ subscribersStatus.subscribed })`}
                                             </div>
                                         </li>
                                         <li  className="woo-multistatus-item woo-divider"></li>
-                                        <li onClick={ () => { setPost_status ( 'woo_unsubscribed' ) ;setTotalRows ( subscribersStatus.unsubscribed ) } } className={`woo-multistatus-item ${ post_status == 'woo_unsubscribed' ? 'status-active' : '' } `}>
+                                        <li onClick={ () => { setPost_status ( 'woo_unsubscribed' ) ; setTotalRows ( subscribersStatus.unsubscribed ) } } className={`woo-multistatus-item ${ post_status == 'woo_unsubscribed' ? 'status-active' : '' } `}>
                                             <div className="woo-multistatus-check-unpaid">
                                                 {`Unsubscribe (${ subscribersStatus.unsubscribed })`}
                                             </div>
@@ -216,7 +229,7 @@ export default function SubscribersList() {
                                             realtimeFilter={realtimeFilter}
                                         />
                                     }
-                                </div>                       
+                                </div>
                             </div>
                         </div>
                 </div>

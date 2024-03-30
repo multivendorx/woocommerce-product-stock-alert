@@ -83,7 +83,7 @@ class Admin {
         );
 
         remove_submenu_page( 'woo-stock-manager-setting', 'woo-stock-manager-setting' );
-    } 
+    }
 
     /**
      * Create empty div. React root from here.
@@ -108,7 +108,7 @@ class Admin {
             </form>
             </div>
         <?php
-    } 
+    }
 
     /**
      * Register bulk action in 'all product' table.
@@ -130,7 +130,7 @@ class Admin {
     function subscribers_bulk_action_handler( $redirect_to, $doaction, $post_ids ) {
         if ( $doaction !== 'remove_subscribers' ) {
             return $redirect_to;
-        } 
+        }
         foreach ( $post_ids as $post_id ) {
             $product_ids = Subscriber::get_related_product( wc_get_product( $post_id ) );
             foreach ( $product_ids as $product_id ) {
@@ -139,11 +139,11 @@ class Admin {
                     Subscriber::update_subscriber( $alert_id, 'woo_unsubscribed' );
                 } 
                 delete_post_meta( $product_id, 'no_of_subscribers' );
-            } 
-        } 
+            }
+        }
         $redirect_to = add_query_arg( 'bulk_remove_subscribers', count( $post_ids ), $redirect_to );
         return $redirect_to;
-    } 
+    }
 
     /**
      * Set Admin notice in time of bulk action.
@@ -154,8 +154,8 @@ class Admin {
             $bulk_remove_count = intval( $_REQUEST[ 'bulk_remove_subscribers' ] );
 			// Translators: This message is to display removed subscribers count for the product
             printf( '<div id="message" class="updated fade"><p>' . esc_html( _n( 'Removed subscribers from %s product.', 'Removed subscribers from %s products.', $bulk_remove_count, 'woocommerce-stock-manager' ) ). '</p></div>', esc_html( $bulk_remove_count ) );
-        } 
-    } 
+        }
+    }
 
     /**
      * Set style for admin's setting pages.
@@ -169,15 +169,15 @@ class Admin {
                 background: linear-gradient( 110deg, rgb( 63, 20, 115 ) 0%, 25%, rgb( 175 59 116 ) 50%, 75%, rgb( 219 75 84 ) 100% );
                 -webkit-background-clip: text;
                 -webkit-text-fill-color: transparent;
-            } 
+            }
             a.stock-manager-pro-plugin:hover {
                 background: #3f1473;
                 -webkit-background-clip: text;
                 -webkit-text-fill-color: transparent;
-            } 
+            }
         </style>
         <?php
-    } 
+    }
 
     /**
      * Enqueue JavaScript for admin fronend page and localize script.
@@ -235,7 +235,7 @@ class Admin {
               ] ) );
             wp_enqueue_style( 'woo_stockmanager_style', SM()->plugin_url . 'build/index.css', [], SM()->version );
             wp_enqueue_style( 'woo_admin_rsuite_css', SM()->plugin_url . 'src/assets/admin/css/rsuite-default' . '.min' . '.css', [], SM()->version );
-        } 
+        }
         wp_enqueue_style( 'stock_manager_product_admin_css', SM()->plugin_url . 'src/assets/admin/css/admin'. $suffix .'.css', [], SM()->version );
     }
 
@@ -244,7 +244,7 @@ class Admin {
      */
     function set_custom_column_header( $columns ) {
         return array_merge( $columns, [ 'product_subscriber' => __( 'Interested Person( s )', 'woocommerce-stock-manager' ) ] );
-    } 
+    }
 
     /**
      * Manage custom column for Stock Manager
@@ -253,8 +253,8 @@ class Admin {
         if ( $column_name == 'product_subscriber' ) {
             $no_of_subscriber = get_post_meta( $post_id, 'no_of_subscribers', true );
             echo '<div class="product-subscribtion-column">' . esc_html( ( isset( $no_of_subscriber ) && $no_of_subscriber > 0 ) ? $no_of_subscriber : 0 ) . '</div>';
-        } 
-    } 
+        }
+    }
 
     /**
      * Stock Manager news on Product edit page ( simple )
@@ -285,6 +285,6 @@ class Admin {
                 <div class="variation_no_subscriber"><?php echo esc_html( ( isset( $product_subscriber ) && $product_subscriber > 0 ) ? $product_subscriber : 0 ); ?></div>
             </p>
             <?php
-        } 
-    } 
-} 
+        }
+    }
+}

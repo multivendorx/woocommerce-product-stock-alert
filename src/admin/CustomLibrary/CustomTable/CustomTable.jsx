@@ -3,6 +3,7 @@ import DataTable from "react-data-table-component";
 import "./table.css";
 const PENALTI = 28;
 const COOLDOWN = 1;
+
 // Loading table component.
 const LoadingTable = () => {
   // Array to represent 10 rows
@@ -69,6 +70,10 @@ const CustomTable = (props) => {
       isDropDown: true,
     });
   }
+
+    function clear() {
+        console.log("hello")
+    }
 
   // Function that handle table expand.
   const handleTableExpand = (e) => {

@@ -21,7 +21,7 @@ class Ajax {
 		//recaptcha version-3 validate
 		add_action( 'wp_ajax_recaptcha_validate_ajax', [ $this, 'recaptcha_validate_ajax' ] );
 		add_action( 'wp_ajax_nopriv_recaptcha_validate_ajax', [ $this, 'recaptcha_validate_ajax' ] );
-	} 
+	}
 
 	/**
 	 * This funtion check recaptcha validation.
@@ -31,7 +31,7 @@ class Ajax {
 		if ( ! check_ajax_referer( 'stock-manager-security-nonce', 'nonce', false ) ) {
 			wp_send_json_error( 'Invalid security token sent.' );
 			wp_die();
-		} 
+		}
         $recaptcha_secret = isset( $_POST[ 'captcha_secret' ] ) ? sanitize_text_field( $_POST[ 'captcha_secret' ] ) : '';
         $recaptcha_response = isset( $_POST[ 'captcha_response' ] ) ? sanitize_text_field( $_POST[ 'captcha_response' ] ) : '';
         $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
@@ -42,9 +42,9 @@ class Ajax {
             echo 0;
         } else {
         	echo 1;
-        } 
+        }
         die();
-	} 
+	}
 	
 	/**
 	 * Preaper data for CSV. CSV contain all stockmanager subscribtion details.
@@ -61,7 +61,7 @@ class Ajax {
 
 		if ( is_array( $argument ) && count( $argument ) > 0 ) {
 			$default_argument = array_merge( $default_argument, $argument );
-		} 
+		}
 
         $products = get_posts( $default_argument );
 
@@ -71,9 +71,9 @@ class Ajax {
 				$subscribers = Subscriber::get_product_subscribers_email( $product_id );
                 if ( $subscribers && !empty( $subscribers ) ) {
 					$get_subscribed_user[ $product_id ] = $subscribers;
-                } 
-            } 
-        } 
+                }
+            }
+        }
 
 		$csv_header_string = '';
 		$csv_headers_array = $csv_body_arrays = $subscribers_list = [];
@@ -95,7 +95,7 @@ class Ajax {
 		
 		foreach ( $csv_headings as $heading ) { 
 			$csv_headers_array[] = '"' . $heading . '"';
-		} 
+		}
 		$csv_header_string = implode( ', ', $csv_headers_array );
 
 		if ( isset( $get_subscribed_user ) && !empty( $get_subscribed_user ) ) {
@@ -108,20 +108,20 @@ class Ajax {
 						'"'.$product->get_sku().'"', 
 						'"'.$product->get_type().'"', 
 						'"'.$subscriber.'"'
-					 ];
-				} 
-			} 
-		} 
+					];
+				}
+			}
+		}
 		
 		echo esc_html( $csv_header_string );
 		if ( isset( $csv_body_arrays ) && !empty( $csv_body_arrays ) ) {
 			foreach ( $csv_body_arrays as $csv_body_array ) {
 				echo "\r\n";
 				echo esc_html( implode( ", ", $csv_body_array ) );
-			} 
-		} 
+			}
+		}
 		exit();
-	} 
+	}
 
 	/**
 	 * Unsubscribe a user through ajax call.
@@ -131,7 +131,7 @@ class Ajax {
 		if ( ! check_ajax_referer( 'stock-manager-security-nonce', 'nonce', false ) ) {
 			wp_send_json_error( 'Invalid security token sent.' );
 			wp_die();
-		} 
+		}
 		$customer_email = isset( $_POST[ 'customer_email' ] ) ? sanitize_email( $_POST[ 'customer_email' ] ) : '';
 		$product_id = isset( $_POST[ 'product_id' ] ) ? absint( $_POST[ 'product_id' ] ) : '';
 		$variation_id = isset( $_POST[ 'var_id' ] ) ? absint( $_POST[ 'var_id' ] ) : 0;
@@ -142,11 +142,11 @@ class Ajax {
 				$success = Subscriber::unsubscribe_user( $variation_id, $customer_email );
 			} else {
 				$success = Subscriber::unsubscribe_user( $product_id, $customer_email );
-			} 
-		} 
+			}
+		}
 		echo esc_html( $success );
 		die();
-	} 
+	}
 	
 	/**
 	 * Subscribe a user through ajax call.
@@ -156,7 +156,7 @@ class Ajax {
 		if ( ! check_ajax_referer( 'stock-manager-security-nonce', 'nonce', false ) ) {
 			wp_send_json_error( 'Invalid security token sent.' );
 			wp_die();
-		} 
+		}
 		$customer_email = isset( $_POST[ 'email' ] ) ? sanitize_email( $_POST[ 'email' ] ) : '';
 		$product_id = isset( $_POST[ 'product_id' ] ) ? absint( $_POST[ 'product_id' ] ) : '';
 		$variation_id = isset( $_POST[ 'variation_id' ] ) ? absint( $_POST[ 'variation_id' ] ) : 0;
@@ -176,11 +176,11 @@ class Ajax {
 				Subscriber::subscribe_user( $customer_email, $product_id );
 				Subscriber::insert_subscriber_email_trigger( wc_get_product( $product_id ), $customer_email );
 				$status = true;
-			} 
-		} 
+			}
+		}
 		echo esc_html( $status );
 		die();
-	} 
+	}
 
 	/**
 	 * Get the subscription form for variation product through ajax call.
@@ -190,15 +190,15 @@ class Ajax {
 		if ( ! check_ajax_referer( 'stock-manager-security-nonce', 'nonce', false ) ) {
 			wp_send_json_error( 'Invalid security token sent.' );
 			wp_die();
-		} 
+		}
 		$product_id = isset( $_POST[ 'product_id' ] ) ? absint( $_POST[ 'product_id' ] ) : '';
 		$child_id = isset( $_POST[ 'variation_id' ] ) ? absint( $_POST[ 'variation_id' ] ) : '';
 		$product = wc_get_product( $product_id );
 		$child_obj = null;
 		if ( $child_id && !empty( $child_id ) ) {
 			$child_obj = new \WC_Product_Variation( $child_id );
-		} 
+		}
 		echo esc_html( SM()->frontend->get_subscribe_form( $product, $child_obj ) );
 		die();
-	} 
-} 
+	}
+}

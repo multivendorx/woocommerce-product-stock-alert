@@ -36,7 +36,7 @@ class SubscriberConfirmationEmail extends \WC_Email {
 		
 		// Call parent constuctor
 		parent::__construct();
-	} 
+	}
 
 	/**
 	 * trigger function.
@@ -51,10 +51,10 @@ class SubscriberConfirmationEmail extends \WC_Email {
 		
 		if ( !$this->is_enabled() || ! $this->get_recipient() ) {
 			return;
-		} 
+		}
 			
 		$this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers(), $this->get_attachments() );
-	} 
+	}
 
 	/**
 	 * Get email subject.
@@ -64,7 +64,7 @@ class SubscriberConfirmationEmail extends \WC_Email {
 	 */
 	public function get_default_subject() {
 		return apply_filters( 'woocommerce_email_subject_stock_manager', __( 'You have subscribed a product on {site_title} ', 'woocommerce-stock-manager' ), $this->object );
-	} 
+	}
 
 	/**
 	 * Get email heading.
@@ -74,7 +74,7 @@ class SubscriberConfirmationEmail extends \WC_Email {
 	 */
 	public function get_default_heading() {
 		return apply_filters( 'woocommerce_email_heading_stock_manager', __( 'Welcome to {site_title} ', 'woocommerce-stock-manager' ), $this->object );
-	} 
+	}
 
 	/**
 	 * get_content_html function.
@@ -93,7 +93,7 @@ class SubscriberConfirmationEmail extends \WC_Email {
 			'email' 		=> $this, 
 		], '', $this->template_base );
 		return ob_get_clean();
-	} 
+	}
 
 	/**
 	 * get_content_plain function.
@@ -111,7 +111,6 @@ class SubscriberConfirmationEmail extends \WC_Email {
 			'plain_text' 	=> true
 		], '', $this->template_base );
 		return ob_get_clean();
-	} 
-	
-} 
+	}	
+}
 endif;

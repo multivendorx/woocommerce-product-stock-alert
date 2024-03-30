@@ -62,4 +62,4 @@ class Utill {
             'ban_email_address_text'            => $email_tab_settings[ 'ban_email_address_text' ] ?? '',
         ];
     }
-} 
+}

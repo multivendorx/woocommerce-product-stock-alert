@@ -37,7 +37,7 @@ class Emails extends \WC_Email {
 		
 		// Call parent constuctor
 		parent::__construct();
-	} 
+	}
 
 	/**
 	 * trigger function.
@@ -53,13 +53,13 @@ class Emails extends \WC_Email {
 
 		if ( apply_filters( 'woo_product_backin_stock_send_admin', false ) ) {
 			$this->recipient .= ', ' . get_option( 'admin_email' );
-		} 
+		}
 		if ( ! $this->is_enabled() || ! $this->get_recipient() ) {
 			return;
-		} 
+		}
 			
 		$this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers(), $this->get_attachments() );
-	} 
+	}
 	
 	/**
 	 * Get email subject.
@@ -69,7 +69,7 @@ class Emails extends \WC_Email {
 	 */
 	public function get_default_subject() {
 		return apply_filters( 'woocommerce_email_subject_stock_manager', __( 'Your Subscribed product on {site_title} is available now', 'woocommerce-stock-manager' ), $this->object );
-	} 
+	}
 
 	/**
 	 * Get email heading.
@@ -79,7 +79,7 @@ class Emails extends \WC_Email {
 	 */
 	public function get_default_heading() {
 		return apply_filters( 'woocommerce_email_heading_stock_manager', __( 'Welcome to {site_title} ', 'woocommerce-stock-manager' ), $this->object );
-	} 
+	}
 
 	/**
 	 * get_content_html function.
@@ -98,7 +98,7 @@ class Emails extends \WC_Email {
 			'email' 		=> $this, 
 		], '', $this->template_base );
 		return ob_get_clean();
-	} 
+	}
 
 	/**
 	 * get_content_plain function.
@@ -116,6 +116,6 @@ class Emails extends \WC_Email {
 			'plain_text' 	=> true
 		], '', $this->template_base );
 		return ob_get_clean();
-	} 	
-} 
+	}
+}
 endif;

@@ -10,7 +10,7 @@ class Shortcode {
 		// Product Stock Manager Form Shortcode.
 		add_shortcode( 'display_stock_manager_form', [ $this, 'display_stock_manager_form' ] );
         add_shortcode( 'display_stock_alert_form', [ $this, 'display_stock_manager_form' ] );
-	} 
+	}
 
     /**
 	 * display stock Manager form wrapper function for Shortcode rendering
@@ -24,7 +24,7 @@ class Shortcode {
         ob_start();
         call_user_func( [ $this, 'output' ] );
         return ob_get_clean();
-    } 
+    }
 
 	/**
      * Display Stock Manager Form
@@ -50,5 +50,5 @@ class Shortcode {
         remove_action( 'woocommerce_grouped_add_to_cart',   [ SM()->frontend, 'display_in_simple_product' ], 32 );
         remove_filter( 'woocommerce_available_variation',   [ SM()->frontend, 'display_in_variation' ], 10 );
         remove_filter( 'woocommerce_variation_is_active',   [ SM()->frontend, 'enable_disabled_variation_dropdown' ], 100, );
-    } 
-} 
+    }
+}

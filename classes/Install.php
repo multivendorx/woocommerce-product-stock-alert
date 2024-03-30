@@ -22,7 +22,7 @@ class Install {
         wp_clear_scheduled_hook( 'woo_stock_manager_start_notification_cron_job' );
         wp_schedule_event( time(), 'hourly', 'woo_stock_manager_start_notification_cron_job' );
         update_option( 'woo_stock_manager_cron_start', true );
-    } 
+    }
 
     /**
      * Data migration function. Run on installation time.
@@ -99,11 +99,11 @@ class Install {
                     if ( $product_subscribers && !empty( $product_subscribers ) ) {
                         foreach( $product_subscribers as $subscriber_email ) {
                             Subscriber::subscribe_user( $subscriber_email, $product_id );
-                        } 
-                    } 
+                        }
+                    }
                     delete_post_meta( $product_id, '_product_subscriber' );
-                } 
-            } 
+                }
+            }
 
             // Settings array for version upto 2.0.0
             $dc_plugin_settings = get_option( 'dc_woo_product_stock_alert_general_settings_name' );
@@ -139,7 +139,7 @@ class Install {
                     delete_option( 'woo_stock_alert_form_submission_tab_settings' );
                 if ( $woo_email_tab_settings )
                     delete_option( 'woo_stock_alert_email_tab_settings' );
-            } 
+            }
             
             // Replace all default value by previous settings.
             foreach( $general_settings as $key => $value ) {
@@ -149,8 +149,8 @@ class Install {
                     $general_settings[ $key ] = $mvx_general_tab_settings[ $key ];
                 } elseif ( $dc_plugin_settings && isset( $dc_plugin_settings[ $key ] ) && $dc_plugin_settings[ $key ] != '' ) {
                     $general_settings[ $key ] = $dc_plugin_settings[ $key ];
-                } 
-            } 
+                }
+            }
     
             foreach( $customization_settings as $key => $value ) {
                 if ( $woo_customization_tab_settings && isset( $woo_customization_tab_settings[ $key ] ) && $woo_customization_tab_settings[ $key ] != '' ) {
@@ -159,8 +159,8 @@ class Install {
                     $customization_settings[ $key ] = $mvx_customization_tab_settings[ $key ];
                 } elseif ( $dc_plugin_settings && isset( $dc_plugin_settings[ $key ] ) && $dc_plugin_settings[ $key ] != '' ) {
                     $customization_settings[ $key ] = $dc_plugin_settings[ $key ];
-                } 
-            } 
+                }
+            }
     
             foreach( $submit_settings as $key => $value ) {
                 if ( $woo_submition_tab_settings && isset( $woo_submition_tab_settings[ $key ] ) && $woo_submition_tab_settings[ $key ] != '' ) {
@@ -169,14 +169,14 @@ class Install {
                     $submit_settings[ $key ] = $mvx_submition_tab_settings[ $key ];
                 } elseif ( $dc_plugin_settings && isset( $dc_plugin_settings[ $key ] ) && $dc_plugin_settings[ $key ] != '' ) {
                     $submit_settings[ $key ] = $dc_plugin_settings[ $key ];
-                } 
-            } 
+                }
+            }
 
             delete_option( 'dc_product_stock_alert_installed' );
             delete_option( 'woo_product_stock_alert_installed' );
             delete_option( 'dc_product_stock_alert_activate' );
             delete_option( 'woo_product_stock_alert_activate' );
-        } 
+        }
 
         update_option( 'woo_stock_manager_general_tab_settings', $general_settings );
         update_option( 'woo_stock_manager_form_customization_tab_settings', $customization_settings );
@@ -184,5 +184,5 @@ class Install {
         update_option( 'woo_stock_manager_email_tab_settings', $email_settings );
 
         update_option( 'woo_stock_manager_version', $current_version );
-    } 
-} 
+    }
+}

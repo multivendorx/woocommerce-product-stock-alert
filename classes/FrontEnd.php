@@ -21,7 +21,7 @@ class FrontEnd {
         add_filter( 'woocommerce_grouped_product_list_column_price', [ $this, 'display_in_grouped_product' ], 10, 2 );
         // Hover style
         add_action( 'wp_head', [ $this, 'frontend_hover_styles' ] );
-    } 
+    }
 
     /**
      * Enque Frontend's JavaScript. And Send Localize data.
@@ -73,9 +73,9 @@ class FrontEnd {
                     'alert_unsubscribe_message' => $settings_array[ 'alert_unsubscribe_message' ], 
                     'recaptcha_enabled' => apply_filters( 'woo_stock_manager_recaptcha_enabled', false )
                 ] );
-            } 
-        } 
-    } 
+            }
+        }
+    }
 
     /**
      * Enqueue fronted css. 
@@ -88,9 +88,9 @@ class FrontEnd {
             if ( is_product() ) {
                 // Enqueue your frontend stylesheet from here
                 wp_enqueue_style( 'stock_manager_frontend_css', $frontend_style_path . 'frontend' . $suffix . '.css', [], SM()->version );
-            } 
-        } 
-    } 
+            }
+        }
+    }
 
     /**
      * Set frontend's button hover style on 'wp_head' hook.
@@ -113,8 +113,8 @@ class FrontEnd {
                 '. esc_html( $button_onhover_style ) .'
                 } 
             </style>';
-        } 
-    } 
+        }
+    }
 
     /**
      * Display product subscription form if product is outof stock
@@ -134,11 +134,11 @@ class FrontEnd {
                 echo '<div class="stock_notifier-shortcode-subscribe-form" data-product-id="' . esc_attr( $product->get_id() ) . '"></div>';
             } else {
                 echo ( $this->get_subscribe_form( $product ) );
-            } 
+            }
         } else {
             echo ( $this->get_subscribe_form( $product ) );
-        } 
-    } 
+        }
+    }
 
     /**
      * Display Request Stock Form for grouped product
@@ -151,7 +151,7 @@ class FrontEnd {
     public function display_in_grouped_product( $value, $child ) {
         $value = $value . $this->get_subscribe_form( $child );
         return $value;
-    } 
+    }
 
     /**
      * Enable disabled variation dropdown
@@ -165,9 +165,9 @@ class FrontEnd {
         $ignore_disabled_variation = isset( $get_disabled_variation ) && '1' == $get_disabled_variation ? true : false;
         if ( !$ignore_disabled_variation ) {
             $active = true;
-        } 
+        }
         return $active;
-    } 
+    }
     
     /**
      * Get subscribe from's HTML content for a particular product.
@@ -180,7 +180,7 @@ class FrontEnd {
     public function get_subscribe_form( $product, $variation = null ) {
         if ( ! Subscriber::is_product_outofstock( $variation ? $variation->get_id() : $product->get_id(), $variation ? 'variation' : '', true ) ) {
             return "";
-        } 
+        }
         $stock_manager_fields_array = [];
         $stock_manager_fields_html = $user_email = '';
         $separator = apply_filters( 'woo_fileds_separator', '<br>' );
@@ -188,7 +188,7 @@ class FrontEnd {
         if ( is_user_logged_in() ) {
             $current_user = wp_get_current_user();
             $user_email = $current_user->data->user_email;
-        } 
+        }
         $placeholder = $settings_array[ 'email_placeholder_text' ];
         $alert_fields = apply_filters( 'woo_stock_manager_fileds_array', [ 
             'alert_email' => [ 
@@ -229,12 +229,12 @@ class FrontEnd {
                     default:
                         $stock_manager_fields_array[] = '<input id="woo_stock_manager_' . $key . '" type="' . $type . '" name="' . $key . '" class="' . $class . '" value="' . $value . '" placeholder="' . $placeholder . '" >';
                         break;
-                } 
-            } 
-        } 
+                }
+            }
+        }
         if ( $stock_manager_fields_array ) {
             $stock_manager_fields_html = implode( $separator, $stock_manager_fields_array );
-        } 
+        }
 
         $alert_text_html = '<h5 style="color:' . esc_html( $settings_array[ 'alert_text_color' ] ) . '" class="subscribe_for_interest_text">' . esc_html( $settings_array[ 'alert_text' ] ) . '</h5>';
 
@@ -263,7 +263,7 @@ class FrontEnd {
         if ( $is_enable_no_interest && $interested_person != 0 && $shown_interest_text ) {
             $shown_interest_text = str_replace( "%no_of_subscribed%", $interested_person, $shown_interest_text );
             $shown_interest_html = '<p>' . $shown_interest_text . '</p>';
-        } 
+        }
 
         return
         '<div id="stock_notifier_main_form" class="stock_notifier-subscribe-form" style="border-radius:10px;">
@@ -275,5 +275,5 @@ class FrontEnd {
             <input type="hidden" class="current_product_name" value="' . esc_attr( $product->get_title() ) . '" />
             ' . $shown_interest_html . '
         </div>';
-    } 
-} 
+    }
+}

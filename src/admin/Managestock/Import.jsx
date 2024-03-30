@@ -19,6 +19,7 @@ const Import = () => {
             } );
         }
     }, []);
+    
     const [ data, setData ] = useState([]);
     const [ file, setFile ] = useState( null );
     const [ filename, setFilename ] = useState( "" );
@@ -31,8 +32,8 @@ const Import = () => {
     //Headers to generate the Sample CSV
     const header = [
         { label: 'SKU'          , key: 'sku' },
-        { label: 'Manage stock' , key: 'manage_stock' },
-        { label: 'Stock status' , key: 'stock_status' },
+        { label: 'Manage_stock' , key: 'manage_stock' },
+        { label: 'Stock_status' , key: 'stock_status' },
         { label: 'Backorders'   , key: 'backorders' },
         { label: 'Stock'        , key: 'stock_quantity' },
     ];

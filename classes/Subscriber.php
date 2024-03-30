@@ -8,7 +8,7 @@ class Subscriber {
     public function __construct() {
         add_action( 'woo_stock_manager_start_notification_cron_job', [ $this, 'send_instock_notification_corn' ] );
         add_action( 'woocommerce_update_product', [ $this, 'send_instock_notification' ], 10, 2 );
-    } 
+    }
     
     /**
      * Send instock notification on every product's subscriber if product is instock.
@@ -24,9 +24,9 @@ class Subscriber {
         if ( $posts ) {
             foreach( $posts as $posts ) {
                 self::send_instock_notification( $posts->ID, wc_get_product( $posts->ID ) );
-            } 
-        } 
-    } 
+            }
+        }
+    }
     
     /**
      * Send instock notification of a product's all subscribers on 'woocommerce_update_product' hook
@@ -38,8 +38,8 @@ class Subscriber {
         $related_products = self::get_related_product( $product );
         foreach( $related_products as $product_id ) {
             $this->notify_all_product_subscribers( $product_id );
-        } 
-    } 
+        }
+    }
 
     /**
      * Send notification to all subscriber, subscribed to a particular product.
@@ -49,11 +49,11 @@ class Subscriber {
     function notify_all_product_subscribers( $product_id ) {
         if ( ! $product_id ) {
             return;
-        } 
+        }
         $product_object = wc_get_product( $product_id );
         if ( ! $product_object ) {
             return;
-        } 
+        }
         if ( ! $product_object->is_type( 'variable' ) ) {
             if ( ! self::is_product_outofstock( $product_id, $product_object->is_type( 'variation' ) ? 'variation' : '', true ) ) {
                 $product_subscribers = self::get_product_subscribers_email( $product_id );
@@ -64,10 +64,10 @@ class Subscriber {
                         self::update_subscriber( $subscribe_id, 'woo_mailsent' );
                     }
                     delete_post_meta( $product_id, 'no_of_subscribers' );
-                } 
-            } 
-        } 
-    } 
+                }
+            }
+        }
+    }
     
     /**
      * Insert a subscriber to a product.
@@ -95,8 +95,8 @@ class Subscriber {
             return $id;
         } else {
             return false;
-        } 
-    } 
+        }
+    }
 
     /**
      * Function that unsubscribe a particular user if the user is already subscribed
@@ -109,13 +109,13 @@ class Subscriber {
         if ( $unsubscribe_post ) {
             if ( is_array( $unsubscribe_post ) ) {
                 $unsubscribe_post = $unsubscribe_post[ 0 ];
-            } 
+            }
             self::update_subscriber( $unsubscribe_post, 'woo_unsubscribed' );
             self::update_product_subscriber_count( $unsubscribe_post );
             return true;
-        } 
+        }
         return false;
-    } 
+    }
 
     /**
      * Check if a user subscribed to a product.
@@ -144,7 +144,7 @@ class Subscriber {
         ];
         $get_posts = get_posts( $args );
         return $get_posts;
-    } 
+    }
 
     /**
      * Update the subscriber count for a product

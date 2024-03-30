@@ -34,7 +34,7 @@ class StockManager {
         add_action( 'before_woocommerce_init', [ $this, 'declare_compatibility' ] );
         add_action( 'woocommerce_loaded', [ $this, 'init_plugin' ] );
         add_action( 'plugins_loaded', [ $this, 'is_woocommerce_loaded' ] );
-    } 
+    }
 
     /**
      * Placeholder for activation function.
@@ -43,7 +43,7 @@ class StockManager {
     public function activate() {
         update_option( 'woo_stock_manager_installed', 1 );
         $this->container[ 'install' ] = new Install();
-    } 
+    }
 
     /**
      * Placeholder for deactivation function.
@@ -55,7 +55,7 @@ class StockManager {
             delete_option( 'woo_stock_manager_cron_start' );
         endif;
         delete_option( 'woo_stock_manager_installed' );
-    } 
+    }
 
     /**
      * Add High Performance Order Storage Support
@@ -63,7 +63,7 @@ class StockManager {
      */
     public function declare_compatibility() {
         FeaturesUtil::declare_compatibility( 'custom_order_tables', plugin_basename( $this->file ), true );
-    } 
+    }
 
     /**
      * Initilizing plugin on WP init
@@ -91,7 +91,7 @@ class StockManager {
         $this->container[ 'subscriber' ]  = new Subscriber();
         $this->container[ 'filters' ]     = new Deprecated\DeprecatedFilterHooks();
         $this->container[ 'actions' ]     = new Deprecated\DeprecatedActionHooks();
-    } 
+    }
 
     /**
      * Add Stock Alert Email Class
@@ -102,7 +102,7 @@ class StockManager {
         $emails[ 'WC_Subscriber_Confirmation_Email_Stock_Manager' ] = new Emails\SubscriberConfirmationEmail();
         $emails[ 'WC_Email_Stock_Manager' ] = new Emails\Emails();
         return $emails;
-    } 
+    }
     
     /**
      * Take action based on if woocommerce is not loaded
@@ -113,7 +113,7 @@ class StockManager {
             return;
         } 
         add_action( 'admin_notices', [ $this, 'woocommerce_admin_notice' ] );
-    } 
+    }
 
     /**
      * Load Localisation files.
@@ -127,7 +127,7 @@ class StockManager {
         $locale = apply_filters( 'plugin_locale', $locale, 'woocommerce-stock-manager' );
         load_textdomain( 'woocommerce-stock-manager', WP_LANG_DIR . '/woocommerce-product-stock-alert/woocommerce-product-stock-alert-' . $locale . '.mo' );
         load_plugin_textdomain( 'woocommerce-stock-manager', false, plugin_basename( dirname( dirname( __FILE__ ) ) ) . '/languages' );
-    } 
+    }
 
     /**
      * Magic getter function to get the reference of class.
@@ -140,7 +140,7 @@ class StockManager {
             return $this->container[ $class ];
         } 
         return new \WP_Error( sprintf( 'Call to unknown class %s.', $class ) );
-    } 
+    }
 
     /**
      * Html for database migration notice.
@@ -155,7 +155,7 @@ class StockManager {
                 <p><?php esc_html( "The Product Stock Manager & Notifier for WooCommerce is experiencing configuration issues. To ensure proper functioning, kindly deactivate and then activate the plugin." ) ?></p>
             </div>
             <?php
-        } 
+        }
     }
 
     /**
@@ -171,7 +171,7 @@ class StockManager {
         ];
         if ( apply_filters( 'is_stock_manager_pro_inactive', true ) ) {
             $links[ 'go_pro' ] = '<a href="' . STOCK_MANAGER_PRO_SHOP_URL . '" class="stock-manager-pro-plugin" target="_blank">' . __( 'Get Pro', 'woocommerce-stock-manager' ) . '</a>';
-        } 
+        }
         return array_merge( $plugin_links, $links );
     }
 
@@ -182,7 +182,7 @@ class StockManager {
         register_post_status( 'woo_mailsent', [ 
             'label' => _x( 'Mail Sent', 'woostockalert', 'woocommerce-stock-manager' ), 
             'public' => true, 
-            'exclude_from_search' => true, 
+            'exclude_from_search' => false, 
             'show_in_admin_all_list' => true, 
             'show_in_admin_status_list' => true, /* translators: %s: count */
             'label_count' => _n_noop( 'Mail Sent <span class="count">( %s )</span>', 'Mail Sent <span class="count">( %s )</span>', 'woocommerce-stock-manager' ), 
@@ -191,7 +191,7 @@ class StockManager {
         register_post_status( 'woo_subscribed', [ 
             'label' => _x( 'Subscribed', 'woostockalert', 'woocommerce-stock-manager' ), 
             'public' => true, 
-            'exclude_from_search' => true, 
+            'exclude_from_search' => false, 
             'show_in_admin_all_list' => true, 
             'show_in_admin_status_list' => true, /* translators: %s: count */
             'label_count' => _n_noop( 'Subscribed <span class="count">( %s )</span>', 'Subscribed <span class="count">( %s )</span>' ), 
@@ -200,7 +200,7 @@ class StockManager {
         register_post_status( 'woo_unsubscribed', [ 
             'label' => _x( 'Unsubscribed', 'woostockalert', 'woocommerce-stock-manager' ), 
             'public' => true, 
-            'exclude_from_search' => true, 
+            'exclude_from_search' => false, 
             'show_in_admin_all_list' => true, 
             'show_in_admin_status_list' => true, /* translators: %s: count */
             'label_count' => _n_noop( 'Unsubscribed <span class="count">( %s )</span>', 'Unsubscribed <span class="count">( %s )</span>' ), 
@@ -217,7 +217,7 @@ class StockManager {
     public static function init( $file ) {
         if ( self::$instance === null ) {
             self::$instance = new self( $file );
-        } 
+        }
         return self::$instance;
-    } 
-} 
+    }
+}
