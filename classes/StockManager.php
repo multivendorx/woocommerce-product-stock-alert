@@ -50,10 +50,11 @@ class StockManager {
      * @return void
      */
     public  function deactivate() {
-        if ( get_option( 'woo_stock_manager_cron_start' ) ) :
+        if ( get_option( 'woo_stock_manager_cron_start' ) ) {
             wp_clear_scheduled_hook( 'woo_stock_manager_start_notification_cron_job' );
             delete_option( 'woo_stock_manager_cron_start' );
-        endif;
+        }
+        
         delete_option( 'woo_stock_manager_installed' );
     }
 
@@ -72,7 +73,7 @@ class StockManager {
     public function init_plugin( $file ) {
         $this->load_plugin_textdomain();
         $this->init_classes();
-        $this->registers_post_status();
+
         do_action( 'stock_manager_loaded' );
     }
     
@@ -175,37 +176,6 @@ class StockManager {
         return array_merge( $plugin_links, $links );
     }
 
-    /**
-     * Function to register the post status
-     */
-    function registers_post_status() {
-        register_post_status( 'woo_mailsent', [ 
-            'label' => _x( 'Mail Sent', 'woostockalert', 'woocommerce-stock-manager' ), 
-            'public' => true, 
-            'exclude_from_search' => false, 
-            'show_in_admin_all_list' => true, 
-            'show_in_admin_status_list' => true, /* translators: %s: count */
-            'label_count' => _n_noop( 'Mail Sent <span class="count">( %s )</span>', 'Mail Sent <span class="count">( %s )</span>', 'woocommerce-stock-manager' ), 
-        ] );
-
-        register_post_status( 'woo_subscribed', [ 
-            'label' => _x( 'Subscribed', 'woostockalert', 'woocommerce-stock-manager' ), 
-            'public' => true, 
-            'exclude_from_search' => false, 
-            'show_in_admin_all_list' => true, 
-            'show_in_admin_status_list' => true, /* translators: %s: count */
-            'label_count' => _n_noop( 'Subscribed <span class="count">( %s )</span>', 'Subscribed <span class="count">( %s )</span>' ), 
-        ] );
-
-        register_post_status( 'woo_unsubscribed', [ 
-            'label' => _x( 'Unsubscribed', 'woostockalert', 'woocommerce-stock-manager' ), 
-            'public' => true, 
-            'exclude_from_search' => false, 
-            'show_in_admin_all_list' => true, 
-            'show_in_admin_status_list' => true, /* translators: %s: count */
-            'label_count' => _n_noop( 'Unsubscribed <span class="count">( %s )</span>', 'Unsubscribed <span class="count">( %s )</span>' ), 
-        ] );
-    }
 
     /**
      * Initializes the MultiVendorX class.

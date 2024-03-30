@@ -10,8 +10,29 @@ defined( 'ABSPATH' ) || exit;
 class Install {
     
     public function __construct() {
+        $this->create_database_table();
         $this->stock_manager_data_migrate();
         $this->start_cron_job();
+    }
+
+    public function create_database_table() {
+        global $wpdb;
+
+        $collate = '';
+        if ($wpdb->has_cap('collation')) {
+            $collate = $wpdb->get_charset_collate();
+        }
+
+        $wpdb->query(
+            "CREATE TABLE IF NOT EXISTS `" . $wpdb->prefix . "stockalert_subscribers` (
+                `id` bigint(20) NOT NULL AUTO_INCREMENT,
+                `product_id` bigint(20) NOT NULL,
+                `email` varchar(50) NOT NULL,
+                `status` varchar(20) NOT NULL,
+                `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                PRIMARY KEY (`id`)
+            ) $collate;"
+        );
     }
 
     /**

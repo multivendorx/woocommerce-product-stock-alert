@@ -8,6 +8,39 @@ class Subscriber {
     public function __construct() {
         add_action( 'woo_stock_manager_start_notification_cron_job', [ $this, 'send_instock_notification_corn' ] );
         add_action( 'woocommerce_update_product', [ $this, 'send_instock_notification' ], 10, 2 );
+        $this->registers_post_status();
+    }
+
+    /**
+     * Function to register the post status
+     */
+    function registers_post_status() {
+        register_post_status( 'woo_mailsent', [ 
+            'label' => _x( 'Mail Sent', 'woostockalert', 'woocommerce-stock-manager' ), 
+            'public' => true, 
+            'exclude_from_search' => false, 
+            'show_in_admin_all_list' => true, 
+            'show_in_admin_status_list' => true, /* translators: %s: count */
+            'label_count' => _n_noop( 'Mail Sent <span class="count">( %s )</span>', 'Mail Sent <span class="count">( %s )</span>', 'woocommerce-stock-manager' ), 
+        ] );
+
+        register_post_status( 'woo_subscribed', [ 
+            'label' => _x( 'Subscribed', 'woostockalert', 'woocommerce-stock-manager' ), 
+            'public' => true, 
+            'exclude_from_search' => false, 
+            'show_in_admin_all_list' => true, 
+            'show_in_admin_status_list' => true, /* translators: %s: count */
+            'label_count' => _n_noop( 'Subscribed <span class="count">( %s )</span>', 'Subscribed <span class="count">( %s )</span>' ), 
+        ] );
+
+        register_post_status( 'woo_unsubscribed', [ 
+            'label' => _x( 'Unsubscribed', 'woostockalert', 'woocommerce-stock-manager' ), 
+            'public' => true, 
+            'exclude_from_search' => false, 
+            'show_in_admin_all_list' => true, 
+            'show_in_admin_status_list' => true, /* translators: %s: count */
+            'label_count' => _n_noop( 'Unsubscribed <span class="count">( %s )</span>', 'Unsubscribed <span class="count">( %s )</span>' ), 
+        ] );
     }
     
     /**
@@ -50,10 +83,13 @@ class Subscriber {
         if ( ! $product_id ) {
             return;
         }
+
         $product_object = wc_get_product( $product_id );
+
         if ( ! $product_object ) {
             return;
         }
+
         if ( ! $product_object->is_type( 'variable' ) ) {
             if ( ! self::is_product_outofstock( $product_id, $product_object->is_type( 'variation' ) ? 'variation' : '', true ) ) {
                 $product_subscribers = self::get_product_subscribers_email( $product_id );
@@ -76,6 +112,7 @@ class Subscriber {
      * @return \WP_Error|bool|int
      */
     static function subscribe_user( $subscriber_email, $product_id ) {
+
         $args = [ 
             'post_title' => $subscriber_email, 
             'post_type' => 'woostockalert', 
@@ -152,7 +189,7 @@ class Subscriber {
      * @return void
      */
     static function update_product_subscriber_count( $product_id ) {
-        $args = [ 
+        $args = [
             'post_type'   => 'woostockalert', 
             'post_status' => 'woo_subscribed', 
             'meta_query'  => [ 
@@ -163,9 +200,11 @@ class Subscriber {
                 ] ], 
             'numberposts' => -1, 
         ];
+
         $query = get_posts( $args );
+
         update_post_meta( $product_id, 'no_of_subscribers', count( $query ) );
-    } 
+    }
 
     /**
      * Update the status of stockalert subscriber.
@@ -174,9 +213,9 @@ class Subscriber {
      * @return \WP_Error|int
      */
     static function update_subscriber( $stockalert_id, $status ) {
-        $args = [ 
-            'ID' => $stockalert_id, 
-            'post_type' => 'woostockalert', 
+        $args = [
+            'ID' => $stockalert_id,
+            'post_type' => 'woostockalert',
             'post_status' => $status,
         ];
         $id = wp_update_post( $args );
@@ -200,25 +239,37 @@ class Subscriber {
             $vendor = get_mvx_product_vendors( wc_get_product( $product )->get_id() );
             if ( $vendor && apply_filters( 'woo_stock_manager_add_vendor', true ) ) {
                 $additional_email .= ', '. sanitize_email( $vendor->user_data->user_email );  
-            } 
-        } 
+            }
+        }
         
         if ( !empty( $additional_email ) )
             $admin_mail->trigger( $additional_email, $product, $customer_email );
         $cust_mail->trigger( $customer_email, $product );
-    } 
+    }
 
     /**
      * Get the email of all subscriber of a particular product.
      * @param int $product_id
      * @return array array of email
      */
-    static function get_product_subscribers_email( $product_id ) {
+    public function get_product_subscribers_email( $product_id ) {
+        global $wpdb;
         if ( !$product_id || $product_id <= '0' ) {
             return [];
-        } 
+        }
+
+        // Construct the SQL query to count subscribers for each status
+        // $email_query = $wpdb->prepare(
+        //     "SELECT email
+        //     FROM `". $wpdb->prefix ."stockalert_subscribers`
+        //     WHERE product_id =  %s", $product_id);
+        // // Execute the count query
+        // $emails = $wpdb->get_results( $email_query, OBJECT_K );
+        // SM()->util->log(print_r($email));
+
         $emails = [];
-        $args = [ 
+
+        $args = [
             'post_type'     => 'woostockalert', 
             'fields'        => 'ids', 
             'posts_per_page'=> -1, 
@@ -236,10 +287,11 @@ class Subscriber {
             foreach ( $subsciber_post as $subsciber_id ) {
                 $email = get_post_meta( $subsciber_id, 'wooinstock_subscriber_email', true );
                 $emails[ $subsciber_id ] = $email ? $email : '';
-            } 
-        } 
+            }
+        }
+        SM()->util->log(print_r($emails));
         return $emails;
-    } 
+    }
 
     /**
      * Get all child ids if a prodcut is variable else get product id
