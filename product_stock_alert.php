@@ -14,20 +14,9 @@
  * Domain Path: /languages/
  */
 
-if (!defined('ABSPATH')) exit; // Exit if accessed directly
-
+if ( !defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 require_once __DIR__ . '/vendor/autoload.php';
-
-if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option( 'active_plugins')))) {
-	add_action(
-	'before_woocommerce_init',
-		function () {
-			if (class_exists('\Automattic\WooCommerce\Utilities\FeaturesUtil')) {
-				\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', plugin_basename( __FILE__ ), true );
-			}
-		}
-	);
+function SM() {
+    return \StockManager\StockManager::init( __FILE__ );
 }
-
-global $Woo_Stock_Manager;
-$Woo_Stock_Manager = new \StockManager\StockManager( __FILE__ );
+SM();

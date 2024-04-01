@@ -1,0 +1,1026 @@
+@font-face {
+  font-family: 'woo-stock-alert';
+  src: url('fonts/woo-stock-alert.eot?r0aunu');
+  src: url('fonts/woo-stock-alert.eot?r0aunu#iefix') format('embedded-opentype'),
+    url('fonts/woo-stock-alert.ttf?r0aunu') format('truetype'),
+    url('fonts/woo-stock-alert.woff?r0aunu') format('woff'),
+    url('fonts/woo-stock-alert.svg?r0aunu#woo-stock-alert') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+$manageStock-base-color: #f2eff5;
+$manageStock-boder-color: #d4d1d9;
+$manageStock-border: 0.063rem solid #d4d1d9;
+$manageStock-title-color: #181718;
+$manageStock-paragraph-color: #5e5d60;
+$manageStock-border-radius: 0.25rem;
+$manageStock-button-border-radius: 0.25rem;
+$manageStock-fill-color: #fdfdfe;
+$manageStock-theme-color: #65438f;
+$manageStock-header-background: #f7f6f9;
+$manageStock-section-background: #fbfafc;
+$manageStock-code-back: #fdf9fb;
+$manageStock-code-line: #dfb1c7;
+$manageStock-purple-btn-hover: #795b9d;
+$manageStock-font-white: #f9f8fb;
+$manageStock-grey-icon: #8e8b91;
+$manageStock-rejected-vendor-font: #df5d65;
+$manageStock-rejected-vendor-back: #fefbfc;
+$manageStock-approve-font-color: #522c81;
+$manageStock-red-btn-back: #e35047;
+$manageStock-red-icon: #e26f76;
+$manageStock-code-font: #b74f82;
+$manageStock-small-code-back: #fbf5f8;
+$manageStock-blue-icon: #9f8ab9;
+$manageStock-scroll-color: #ece8f1;
+
+
+// Custome Inventory Manager Css
+
+.subscribe-list-table{
+  overflow-x: scroll !important; // to overwrite ocerflow visible to scroll
+}
+
+.woo-middle-container-wrapper {
+  background-color: #fff;
+  padding: 1rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.313rem;
+  box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.12);
+}
+
+.stock-reports-download {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+.no-data-text{
+  display: flex;
+  justify-content: center;
+  padding: 24px;
+}
+
+.woo-search-and-multistatus-wrap {
+  padding: 0;
+  gap: 0.5rem;
+}
+
+.import-page .woo-page-title {
+  margin-bottom: 0.938rem;
+}
+
+
+.woo-middle-container-wrapper .woo-backend-datatable-wrapper .rdt_TableHeadRow {
+  border: none !important; // to adjust default border on datatable
+  border-bottom: 0;
+  margin: 0 !important; // to adjust datatable margin from all side
+  border-radius: 0 !important; // to adjust datatable birder-radius
+}
+
+.woo-middle-container-wrapper .woo-backend-datatable-wrapper .sc-dmlpXa.koyZDM {
+  border-radius: 0.25rem;
+  border: 0.063rem solid rgba($color: #000000, $alpha: 0.3);
+}
+
+.woo-middle-container-wrapper .woo-backend-datatable-wrapper .rdt_Table .rdt_TableBody .rdt_TableRow {
+  padding: 0.625rem 0;
+  font-size: 1rem !important; // to adjust datatable fontsize
+  border-radius: 0;
+  margin: 0 !important; // to adjust datatable margin
+  border-left: 0;
+  border-right: 0;
+}
+
+.woo-middle-container-wrapper .woo-backend-datatable-wrapper .rdt_Pagination {
+  margin: 1rem 0;
+  gap: 0.625rem;
+}
+
+.woo-middle-container-wrapper .rdt_TableCell {
+  width: 100%;
+}
+.woo-middle-container-wrapper .rdt_TableCell .custome-toggle-default {
+  width: fit-content !important; // to adjust toggle btn width
+  min-width: 6.25rem !important; // to adjust toggle btn min-width
+  top: -0.75rem;
+}
+
+.woo-middle-container-wrapper .woo-backend-datatable-wrapper .rdt_Table .rdt_TableBody .rdt_TableRow {
+  &:nth-child(-2n+4) {
+    border: none !important; // to adjust datatable row border
+  }
+}
+
+#woo-admin-stockmanager input:focus,
+#woo-admin-stockmanager textarea:focus {
+  outline: none !important; // to adjust box shadow for input tag and textarea for all stockmanager
+  box-shadow: none !important; // to adjust box shadow for input tag and textarea for all stockmanager
+}
+
+#woo-admin-stockmanager select:focus {
+  color: inherit;
+  border: none !important; // Adjust border as none to overwrite default border
+  box-shadow: none;
+}
+#woo-admin-stockmanager select:hover {
+  color: inherit; 
+}
+
+.custom-select {
+  display: flex;
+  align-items: center;
+  font-weight: normal;
+  border: $manageStock-border;
+  border-radius: $manageStock-border-radius;
+  height: 2.5rem;
+  position: relative;
+  background-color: $manageStock-fill-color;
+  cursor: pointer;
+}
+
+#woo-admin-stockmanager select {
+  -webkit-appearance: none;
+  width: 100%;
+  border: none;
+  background: #fff0 url('../assets/images/download.svg') no-repeat right 5px top 55%;
+}
+
+.table-image {
+  border-radius: 0.313rem;
+  overflow: hidden;
+  border: 0.125rem solid rgba($color: #000000, $alpha: 0.3);
+  width: 4.375rem;
+  height: 4.375rem;
+  margin: 0 !important; // to adjust product image margin
+}
+
+.import-export-btn {
+  display: flex;
+  align-items: center;
+  border: 0.063rem solid #d4d1d9;
+  background-color: #65438f;
+  color: #f9f8fb;
+  border-radius: 0.25rem;
+  padding: 0.75rem 1.5rem;
+  position: relative;
+  font-size: 0.9rem;
+  width: fit-content;
+  margin-left: auto;
+}
+
+.download-btn-subscriber-list{
+  display: flex;
+  align-items: center;
+  border: 0.063rem solid #d4d1d9;
+  background-color: #65438f;
+  color: #f9f8fb;
+  border-radius: 0.25rem;
+  padding: 0.75rem 1.5rem;
+  position: relative;
+  font-size: 0.9rem;
+  width: fit-content;
+}
+.download-btn-subscriber-list a{
+  text-decoration: none;
+  color: #f9f8fb;
+}
+.download-btn-subscriber-list a:hover{
+  text-decoration: none;
+}
+
+.import-export-btn .wp-menu-image::before {
+  padding: 0;
+  padding-right: 0.313rem;
+}
+
+.export,
+.import {
+  padding-bottom: 0.5rem;
+}
+
+.input-field-edit {
+  border: none !important; // to adjust input field border for stock manager
+  outline: none !important; // to adjust input field boutline for stock manager
+}
+
+.outofstock {
+  color: red !important; // to adjust stock status as there current status
+}
+.instock {
+  color: green !important; // to adjust stock status as there current status
+}
+.onbackorder {
+  color: #e0a100 !important; // to adjust stock status as there current status
+}
+
+.export-import {
+  display: flex;
+  columns: $manageStock-paragraph-color;
+}
+
+.import-section th,
+.import-section td {
+  text-align: center;
+  border-bottom: 0.063rem solid
+    rgba($color: #000000, $alpha: 0.2);
+  padding: 0.625rem;
+}
+
+.import-section td {
+  border-bottom: none;
+}
+
+.export-section {
+  margin-top: 0.938rem;
+}
+
+.import-export-btn a {
+  color: $manageStock-font-white;
+  display: flex;
+}
+
+.import-export-btn a:hover {
+  text-decoration: none;
+}
+
+.import-export-btn a:focus {
+  box-shadow: none;
+  text-decoration: none;
+}
+
+.export-list-btn {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+.export-list-section {
+  padding: 0.625rem 0 0.938rem;
+  display: flex;
+  gap: 2rem;
+}
+.export-list-section p {
+  font-weight: 600;
+  font-size: 1.15rem;
+  color: #000;
+}
+.export-list-section .checkbox-container {
+  display: flex;
+  gap: 2rem;
+}
+.export-list-section .chunk-container {
+  max-width: 12.5rem;
+  width: 100%;
+}
+
+.mvx-select-deselect-trigger {
+  border: 0.063rem solid #d4d1d9;
+  color: #181718;
+  border-radius: 0.25rem;
+  width: fit-content;
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+  transition: 0.3s;
+  cursor: pointer;
+}
+.export-page-content {
+  max-width: 40.625rem;
+  width: 100%;
+}
+.mvx-select-deselect-trigger:hover {
+  border: 0.063rem solid #000000;
+}
+
+@media only screen and (max-width: 500px) {
+  .export-list-section {
+    flex-direction: column;
+    gap: 0rem;
+    align-items: start;
+  }
+  .export-list-section .checkbox-container .chunk-container {
+    width: 100%;
+    max-width: 31.25rem;
+  }
+  .export-feature-card {
+    justify-content: space-between;
+  }
+  .export-list-section .checkbox-container {
+    flex-direction: column;
+    gap: 0;
+    width: 100%;
+  }
+}
+
+.custome-toggle label {
+  position: absolute !important; // to adjust custome toggle btn lable position
+  cursor: pointer;
+  text-indent: -624.938rem;
+  width: 2.5rem;
+  height: 1.188rem;
+  background: grey;
+  display: block;
+  border-radius: 6.25rem;
+  position: relative;
+  background: #c0c0c0;
+  top: 0;
+  left: 0;
+}
+
+.sale-price-error-message {
+  position: absolute;
+  top: 3.75rem;
+  left: -50%;
+  transform: translateX(5%);
+  border: 0.063rem solid #65438f;
+  width: 12.5rem;
+  text-align: center;
+  z-index: 1;
+  background-color: #65438f;
+  color: white;
+  display: none;
+  padding: 0.625rem 0.313rem;
+}
+
+.import-page,
+.export-page {
+  background-color: #ffffff;
+  padding: 1.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.25rem;
+  box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.12);
+}
+
+.import-section p,
+.export-section p {
+  font-size: 1rem;
+  padding-bottom: 0.625rem;
+}
+
+.import-section h2,
+.export-section h2 {
+  margin: 0.625rem 0;
+}
+
+.import-table {
+  padding: 1.5rem;
+  box-shadow: 0 0 0.2rem
+    rgba($color: #000000, $alpha: 0.2);
+  margin-bottom: 0.625rem;
+  border-radius: 0.25rem;
+}
+.import-table .import-export-btn {
+  margin: auto;
+  margin-bottom: 0.625rem;
+}
+#woo-admin-stockmanager input[type="number"]::-webkit-inner-spin-button {
+  display: none;
+}
+
+.import-csv-section {
+  border-radius: 0.5rem;
+  border: 0.063rem solid rgba(0, 0, 0, 0.284);
+  border-style: dashed;
+  padding: 2rem 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  height: 9.375rem;
+  flex-direction: column;
+  margin-bottom: 0.938rem;
+  cursor: pointer;
+  position: relative;
+}
+.import-csv-section .import-input {
+  height: 8.125rem;
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+.import-csv-section p {
+  text-align: center;
+}
+
+.export-feature-card {
+  display: flex;
+  gap: 2rem;
+  padding: 0.5rem 0;
+}
+
+.export-feature-card h1 {
+  font-size: 1rem;
+  width: 6.875rem;
+  font-weight: 400;
+}
+
+.export-container,
+.import-container {
+  max-width: 43.75rem;
+  width: 100%;
+  padding: 1.25rem;
+  border: 0.063rem solid
+    rgba($color: #000000, $alpha: 0.2);
+  background: #fff;
+}
+
+.custome-toggle-default {
+  position: relative;
+  z-index: 1;
+  top: -0.75rem;
+  left: 50%;
+  transform: translateX(-20%);
+}
+
+.custome-toggle-default::after {
+  content: "";
+  position: absolute;
+  top: 0.35rem;
+  left: 2.3rem;
+  width: 0.25rem;
+  height: 0.25rem;
+  transform: translateY(50%);
+  border: 0.0625rem solid #65438f;
+  border-radius: 8rem;
+  transition: 0.3s;
+  z-index: 0;
+}
+
+.custome-toggle-default input {
+  position: absolute;
+  width: 3.3rem;
+  height: 1.5rem;
+  top: 0.313rem;
+  z-index: 2;
+  opacity: 0;
+  left: 0;
+}
+
+.custome-toggle-default label {
+  position: absolute;
+  cursor: pointer;
+  width: 3.3rem;
+  height: 1.5rem;
+  background: transparent;
+  display: block;
+  border-radius: 8rem;
+  border: 0.125rem solid #d4d1d9;
+}
+
+.custome-toggle-default label::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0.5rem;
+  width: 0.17rem;
+  height: 0.57rem;
+  background: #fdfdfe;
+  transition: 0.3s;
+}
+
+.custome-toggle-default label::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0.313rem;
+  width: 0.875rem;
+  height: 0.875rem;
+  background: #65438f;
+  border-radius: 90rem;
+  transition: 0.3s;
+  z-index: 1;
+}
+
+.custome-toggle-default:has(input[type="checkbox"]:checked) label {
+  background: #65438f;
+  border: 0.125rem solid #65438f;
+}
+
+.custome-toggle-default:has(input[type="checkbox"]:checked) label::after {
+  left: calc(100% - 1.313rem);
+  transform: translatey(-50%);
+  background-color: #fdfdfe;
+}
+
+.import-export-btn-section {
+  margin: 0.5rem 0;
+  margin-right: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+.import-btn-section {
+  display: flex;
+  align-items: center;
+  justify-content: end !important; // to adjust import button section button position
+  gap: 0.5rem;
+  margin-bottom: 0.625rem;
+}
+.import-btn-section * {
+  margin: 0 !important; // to adjust import button section button margin
+}
+.import-export-btn-section > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+.import-btn {
+  padding: 0.75rem 1.5rem;
+  background: #795b9d;
+  border-radius: 2rem;
+  color: white;
+  max-width: 25rem;
+  width: 100%;
+}
+.import-upload-btn-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.setting-btn {
+  width: 1.563rem;
+  height: 1.563rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  background-color: #65438f;
+  border-radius: 0.313rem;
+  cursor: pointer;
+  border: none;
+}
+.bar {
+  width: 50%;
+  height: 0.125rem;
+  background-color: rgb(229, 229, 229);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border-radius: 0.125rem;
+}
+.bar::before {
+  content: "";
+  width: 0.125rem;
+  height: 0.125rem;
+  background-color: rgb(126, 117, 255);
+  position: absolute;
+  border-radius: 50%;
+  border: 0.063rem solid white;
+  transition: all 0.3s;
+  box-shadow: 0rem 0rem 0.313rem white;
+}
+.bar1::before {
+  transform: translateX(-0.25rem);
+}
+.bar2::before {
+  transform: translateX(0.25rem);
+}
+.setting-btn:hover .bar1::before {
+  transform: translateX(0.25rem);
+}
+.setting-btn:hover .bar2::before {
+  transform: translateX(-0.25rem);
+}
+
+.edit-btn-product {
+  width: 1.563rem;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  opacity: 0;
+  transition: opacity 0.2s linear;
+}
+#woo-admin-stockmanager td:hover .edit-btn-product {
+  opacity: 1;
+}
+.edit-btn-product svg {
+  width: 1.25rem;
+}
+.table-row-meta-data input {
+  width: 100%;
+  text-align: center;
+  background: transparent;
+  outline: none;
+  border: none;
+}
+.table-row-meta-data input.active {
+  border: 0.063rem solid rgba(0, 0, 0, 0.2);
+}
+.woo-backend-datatable-wrapper {
+  overflow-x: scroll;
+}
+.woo-backend-datatable-wrapper::-webkit-scrollbar{
+  margin: 0;
+  height: 8px;
+  background: transparent;
+}
+.woo-backend-datatable-wrapper::-webkit-scrollbar-thumb{
+  background: #522C81;
+}
+.woo-backend-datatable-wrapper table {
+  border-radius: 0.25rem;
+  border: 0.063rem solid rgba(0, 0, 0, 0.24);
+  width: 100%;
+}
+.woo-backend-datatable-wrapper table input {
+  padding: 0;
+}
+
+.woo-backend-datatable-wrapper thead {
+  border-radius: 0.25rem;
+  background-color: rgb(236, 236, 236);
+}
+
+.woo-backend-datatable-wrapper tbody tr:nth-child(even) {
+  background: rgb(247, 247, 247);
+}
+.woo-backend-datatable-wrapper tbody tr:nth-child(odd) {
+  background: rgb(255, 255, 255);
+}
+
+.table-row:first-child {
+  min-width: 2.5rem;
+  max-width: 2.5rem;
+}
+.table-row.product_image {
+  max-width: 5rem;
+  min-width: 4.375rem;
+}
+.table-row.product_sku {
+  max-width: 7.5rem;
+  min-width: 6.25rem;
+}
+.table-row.product_name {
+  max-width: 12.5rem;
+  min-width: 7.5rem;
+}
+.table-row.product_type {
+  max-width: 6.25rem;
+  min-width: 5rem;
+}
+.table-row.product_type .table-row-meta-data {
+  width: 100%;
+}
+.table-row.product_manage_stock {
+  max-width: 5rem;
+  min-width: 5rem;
+}
+.table-row.product_stock_quantity {
+  max-width: 7.5rem;
+  min-width: 7.5rem;
+}
+.table-row.product_stock_status .table-row-meta-data {
+  width: 100%;
+  justify-content: flex-start;
+}
+.table-row.product_manage_stock .table-data-container .table-row-meta-data,
+.table-row.product_backorders .table-data-container .table-row-meta-data {
+  width: 100%;
+  justify-content: flex-start;
+}
+.table-row.product_manage_stock
+  .table-data-container
+  .table-row-meta-data
+  .custome-toggle-default {
+  left: 10%;
+}
+.table-row.product_stock_status {
+  min-width: 8.125rem;
+}
+.table-row.product_backorders {
+  max-width: 5.625rem;
+  min-width: 5.625rem;
+}
+.table-row {
+  min-width: 5rem;
+  max-width: 9.375rem;
+  padding: 0.313rem;
+  text-align: center;
+  font-size: 1.01rem;
+}
+
+.table-head {
+  font-weight: 600;
+}
+
+.table-data-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.table-row-meta-data {
+  width: calc(100% - 1.563rem);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.table-row-meta-data h1 {
+  display: none;
+}
+
+.product_image .table-data-container .table-row-meta-data {
+  width: 100%;
+}
+.product_image .table-data-container .table-row-meta-data h1,
+.product_name .table-data-container .table-row-meta-data h1 {
+  display: none;
+}
+
+.table-row-meta-data img {
+  width: 3.125rem;
+  height: 3.125rem;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 0.313rem;
+  box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.1);
+}
+
+.table-row.product-product_name .table-row-meta-data h1 {
+  display: none !important; // force to display none for all product table heading on desktop screen size
+}
+
+.product_manage_stock .table-data-container {
+  justify-content: flex-start;
+}
+
+.product_stock_status .table-row-meta-data {
+  width: 100%;
+}
+
+.dropdown_btn {
+  position: absolute;
+  top: 1.25rem;
+  right: 0.938rem;
+  display: none;
+  border-radius: 0.188rem;
+}
+.dropdown_btn.active button svg {
+  transform: rotate(90deg);
+}
+.dropdown_btn button {
+  width: 1.563rem;
+  height: 1.563rem;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.dropdown_btn button svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  transition: transform 0.3s linear;
+}
+
+.table-data-container .table-row-meta-data p {
+  width: 100%;
+  display: block;
+  font-size: 1.01rem;
+  color: rgb(44, 51, 56);
+}
+.table-data-container .table-row-meta-data p {
+  width: 100%;
+  display: block;
+  font-size: 1.01rem;
+  color: rgb(44, 51, 56);
+}
+.product_stock_status.outofstock,
+.product_backorders.no {
+  font-size: 0.875rem !important; // force to reduce font size for select tag font size
+}
+.table-row.product_stock_quantity .table-row-meta-data p {
+  padding-right: 1.5rem;
+}
+
+.custome-toggle-default input {
+  width: 3.125rem;
+}
+
+@media only screen and (max-width: 1320px) {
+  .table-data-container .table-row-meta-data p {
+    text-align: left;
+  }
+  .woo-backend-datatable-wrapper thead tr {
+    padding: 0.313rem;
+    display: block;
+  }
+  .woo-backend-datatable-wrapper tbody tr {
+    padding: 0.313rem;
+    display: block;
+    position: relative;
+    max-height: 4.375rem;
+    transition: max-height 0.4s linear;
+    overflow: hidden;
+  }
+  .woo-backend-datatable-wrapper thead tr td {
+    display: none;
+  }
+  .woo-backend-datatable-wrapper thead tr td:nth-child(1),
+  .woo-backend-datatable-wrapper thead tr td:nth-child(2),
+  .woo-backend-datatable-wrapper thead tr td:nth-child(3) {
+    display: inline-flex;
+  }
+  .woo-backend-datatable-wrapper tbody tr td.table-row {
+    max-width: 100% !important; // force to set width for laptop screen
+    display: block;
+    background: rgb(238, 238, 238);
+  }
+  .woo-backend-datatable-wrapper tbody tr td:nth-child(1),
+  .woo-backend-datatable-wrapper tbody tr td:nth-child(2),
+  .woo-backend-datatable-wrapper tbody tr td:nth-child(3) {
+    background: transparent;
+    display: inline-block !important; // force to set display type for laptop screen
+  }
+  .woo-backend-datatable-wrapper tbody tr.active {
+    max-height: 62.5rem;
+    overflow-y: scroll;
+  }
+  .woo-backend-datatable-wrapper tbody tr.active::-webkit-scrollbar {
+    margin: 0;
+    width: 0.313;
+  }
+  .woo-backend-datatable-wrapper tbody tr.active::-webkit-scrollbar-thumb {
+    background-color: #522c81;
+  }
+
+  .table-row-meta-data {
+    max-width: 18.75rem;
+  }
+  .table-row-meta-data h1 {
+    display: block;
+    font-size: 1rem;
+    font-weight: 500;
+    min-width: 7.5rem;
+    text-align: left;
+  }
+  .woo-backend-datatable-wrapper tbody tr td:nth-child(1) .table-data-container,
+  .woo-backend-datatable-wrapper tbody tr td:nth-child(2) .table-data-container,
+  .woo-backend-datatable-wrapper
+    tbody
+    tr
+    td:nth-child(3)
+    .table-data-container {
+    justify-content: center;
+    padding: 0;
+  }
+  .table-data-container {
+    justify-content: flex-start;
+    padding: 0.313rem 0.625rem;
+  }
+  .custome-toggle-default {
+    left: 0 !important; // force to set position for laptop screen
+    z-index: 99;
+  }
+  .table-row.product_stock_status .table-row-meta-data {
+    justify-content: flex-start;
+  }
+  .table-row-meta-data input {
+    text-align: left;
+  }
+  .dropdown_btn {
+    display: block;
+  }
+  .table-row.product_sku {
+    margin-top: 0.625rem;
+  }
+}
+
+@media only screen and (max-width: 560px) {
+  .woo-backend-datatable-wrapper tbody tr td:nth-child(3) {
+    max-width: 8.75rem !important; // force to set width for mobile screen
+  }
+}
+.woo-backend-datatable-wrapper > .pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0.75rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.woo-backend-datatable-wrapper > .pagination div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.woo-backend-datatable-wrapper > .pagination div label {
+  display: block;
+  width: 6.25rem;
+}
+.woo-backend-datatable-wrapper > .pagination div #rowsPerPage {
+  width: 4.375rem;
+}
+.woo-backend-datatable-wrapper > .pagination .pagination {
+  width: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0;
+  gap: 0.5rem;
+}
+.woo-backend-datatable-wrapper > .pagination .pagination li {
+  margin-bottom: 0;
+}
+.woo-backend-datatable-wrapper > .pagination .pagination li.selected {
+  border: 0.063rem solid #522c81;
+}
+.woo-backend-datatable-wrapper > .pagination .pagination li a {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: #522c81;
+  background: white;
+  text-transform: capitalize;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  border: 0.063rem solid white;
+  box-shadow: 0 0 0.625rem
+    rgba($color: #000000, $alpha: 0.164);
+  text-decoration: none;
+}
+.woo-backend-datatable-wrapper > .pagination .pagination li.disabled a {
+  background: #4949495b;
+  cursor: not-allowed;
+  color: white;
+}
+
+#woo-admin-stockmanager tr.expand {
+  background-color: #f7fcff !important; // force to set background color for variable product only
+  border: 0.063rem solid rgb(172, 172, 172);
+}
+#woo-admin-stockmanager tr.expand:first-child {
+  border-bottom: none !important; // force to set border color for first variable product only
+}
+#woo-admin-stockmanager tr.expand:last-child {
+  border-top: none !important; // force to set border color for last variable product only
+}
+
+.custom-select select {
+  min-height: auto !important; // force to set min height for custome select for make it resposive
+}
+.table-row.product_stock_status .table-row-meta-data p,
+.table-row.product_backorders .table-row-meta-data p {
+  padding-left: 0.625rem;
+  text-align: left;
+  font-size: 0.875rem;
+}
+.inventory-manager {
+  background-image: url("../assets/images/inventory-manager-monitor.png") !important; // force to set image for ungrade with pro for desktop-screen
+  background-repeat: no-repeat;
+  background-position: top left;
+  background-size: contain;
+  height: 100vh;
+}
+@media only screen and (max-width: 1100px) {
+  .inventory-manager {
+    background-image: url("../assets/images/inventory-manager-laptop.jpeg") !important; // force to set image for ungrade with pro for laptop-screen
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: contain;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .MuiPaper-root {
+    padding: 1rem;
+  }
+  .css-ypiqx9-MuiDialogContent-root {
+    padding: 0 !important; // to adjust padding for dailog box child element
+  }
+}
+@media only screen and (max-width: 650px) {
+  .inventory-manager {
+    background-image: url("../assets/images/inventory-manager-phone.jpeg") !important; // force to set image for ungrade with pro for mobile-screen
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: contain;
+  }
+}
+@media only screen and (max-width: 567px) {
+  .woo-image-overlay .woo-banner-content p {
+    max-width: 80%;
+  }
+}
+
+.table-row-meta-data select option {
+  color: black !important; // force to set default color for only option tag
+}
+
+.expand .table-row.product_name .table-data-container .edit-btn-product {
+  display: none !important; // force to set display as none for variable product edit button
+}

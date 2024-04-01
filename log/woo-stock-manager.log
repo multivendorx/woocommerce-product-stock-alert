@@ -1,0 +1,66 @@
+array (
+  0 => 
+  (object) array(
+     'id' => '671',
+     'date' => '2024-03-30 15:36:56',
+     'email' => 'admin@gmail.com',
+     'status' => 'woo_unsubscribed',
+     'meta_key' => 'wooinstock_product_id',
+     'meta_value' => '14',
+  ),
+  1 => 
+  (object) array(
+     'id' => '672',
+     'date' => '2024-03-30 15:37:10',
+     'email' => 'admin1@gmail.com',
+     'status' => 'woo_subscribed',
+     'meta_key' => 'wooinstock_product_id',
+     'meta_value' => '14',
+  ),
+  2 => 
+  (object) array(
+     'id' => '673',
+     'date' => '2024-03-30 15:37:22',
+     'email' => 'admin2@gmail.com',
+     'status' => 'woo_subscribed',
+     'meta_key' => 'wooinstock_product_id',
+     'meta_value' => '14',
+  ),
+  3 => 
+  (object) array(
+     'id' => '674',
+     'date' => '2024-03-30 18:42:10',
+     'email' => 'admin5@gmail.com',
+     'status' => 'woo_unsubscribed',
+     'meta_key' => 'wooinstock_product_id',
+     'meta_value' => '14',
+  ),
+  4 => 
+  (object) array(
+     'id' => '675',
+     'date' => '2024-03-30 18:49:37',
+     'email' => 'admin1@gmail.com',
+     'status' => 'woo_subscribed',
+     'meta_key' => 'wooinstock_product_id',
+     'meta_value' => '17',
+  ),
+  5 => 
+  (object) array(
+     'id' => '676',
+     'date' => '2024-03-30 18:49:48',
+     'email' => 'admin2@gmail.com',
+     'status' => 'woo_subscribed',
+     'meta_key' => 'wooinstock_product_id',
+     'meta_value' => '17',
+  ),
+  6 => 
+  (object) array(
+     'id' => '680',
+     'date' => '2024-03-30 19:31:10',
+     'email' => 'admin5@gmail.com',
+     'status' => 'woo_subscribed',
+     'meta_key' => 'wooinstock_product_id',
+     'meta_value' => '14',
+  ),
+)
+-------------------------------------
