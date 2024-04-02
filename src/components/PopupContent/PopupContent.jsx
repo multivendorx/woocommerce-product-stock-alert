@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
+import './popupContent.scss';
 
 const Propopup = () => {
     return (

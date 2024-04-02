@@ -5,7 +5,7 @@ export default {
     priority: 2,
     name: __("Form Customization", "woocommerce-stock-manager"),
     desc: __("Configure form settings.", "woocommerce-stock-manager"),
-    icon: "icon-form-customization",
+    icon: "font-file-submission",
     submitUrl: "save-stockmanager",
     modal: [
         {

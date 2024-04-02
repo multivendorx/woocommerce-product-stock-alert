@@ -6,7 +6,7 @@ import App from './app.js';
  * Import the stylesheet for the plugin.
  */
 import './style/common.scss';
-import './style/StockManager.scss';
+// import './style/StockManager.scss';
 
 // Render the App component into the DOM
-render(<BrowserRouter><App /></BrowserRouter>, document.getElementById('woo-admin-stockmanager'));
+render(<BrowserRouter><App /></BrowserRouter>, document.getElementById('admin-stockmanager'));

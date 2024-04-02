@@ -5,7 +5,7 @@ export default {
     priority: 3,
     name: __("Submission Messages", "woocommerce-stock-manager"),
     desc: __("Customize message that appears after user submits the form.", "woocommerce-stock-manager"),
-    icon: "icon-form-submission",
+    icon: "font-submission-message",
     submitUrl: "save-stockmanager",
     modal: [
         {

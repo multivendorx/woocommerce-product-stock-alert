@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import DataTable from "react-data-table-component";
-import "./table.css";
+import "./table.scss";
 
 const PENALTI = 28;
 const COOLDOWN = 1;
@@ -26,6 +26,17 @@ const LoadingTable = () => {
           ))}
         </tbody>
       </table>
+    </>
+  );
+};
+
+export const TableCell = (props) => {
+  return (
+    <>
+      <div title={props.value} className="table-row-custom">
+          <h4>{props.title}</h4>
+          <p>{props.value}</p>
+      </div>
     </>
   );
 };
@@ -64,9 +75,9 @@ const CustomTable = (props) => {
     columns.push({
       name: "",
       cell: (row) => (
-        <div className="dropdown_btn">
+        <div className="table-dropdown_btn">
           <button onClick={(e) => handleTableExpand(e.currentTarget)}>
-            <i class="mvx-table-module module-arrow-right2"></i>
+            <i class="mvx-font font-arrow-right"></i>
           </button>
         </div>
       ),
@@ -76,8 +87,8 @@ const CustomTable = (props) => {
 
   // Function that handle table expand.
   const handleTableExpand = (e) => {
-    e.children[0].classList.toggle('module-arrow-down2');
-    e.children[0].classList.toggle('module-arrow-right2');
+    e.children[0].classList.toggle('font-arrow-down');
+    e.children[0].classList.toggle('font-arrow-right');
     const row = e.parentElement.parentElement.parentElement;
     row.classList.toggle("active");
   }
@@ -175,14 +186,21 @@ const CustomTable = (props) => {
     });
   };
 
+  // Contain which type count is currently active.
+  const typeCountActive = filterData.typeCount || 'all';
+
   return (
     <div className={`table-container ${loading ? "table-loading" : ""} ${selectable ? "selectable-table" : ""}`}>
-      <div>
+      <div className="admin-table-wrapper-filter">
         {
           typeCounts &&
-          typeCounts.map(countInfo => (
-            <div onClick={(e) => { setFilterData({ typeCount: countInfo.key }) } } className={ filterData[countInfo.key] ? 'status-active' : '' }>
-              { `${countInfo.name} (${countInfo.count})`}
+          typeCounts.map( (countInfo) => (
+            <div
+              onClick={(e) => { setFilterData({ typeCount: countInfo.key }) }}
+              className={countInfo.key == typeCountActive ? 'type-count-active' : ''}
+            >
+              {console.log(filterData)}
+              { `${countInfo.name} (${countInfo.count})` }
             </div>
           ))
         }

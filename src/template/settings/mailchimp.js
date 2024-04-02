@@ -5,7 +5,7 @@ export default {
     priority: 5,
     name: __("Mailchimp Integration", "woocommerce-stock-manager"),
     desc: __("Configure mailChimp settings. ", "woocommerce-stock-manager"),
-    icon: "icon-mailchimp-setting",
+    icon: "font-mailchimp",
     proDependent: true,
     submitUrl: "save-stockmanager",
     modal: [
@@ -24,7 +24,7 @@ export default {
         },
         {
             key: "mailchimp_api",
-            type: "text_api",
+            type: "text",
             label: __("Mailchimp API", "woocommerce-stock-manager"),
             desc: "",
             depend_checkbox: "is_mailchimp_enable",
@@ -38,7 +38,7 @@ export default {
         },
         {
             key: "selected_mailchimp_list",
-            type: "mailchimp_select",
+            type: "select",
             label: __("Mailchimp List", "woocommerce-stock-manager"),
             desc: __("Select a Mailchimp list.", "woocommerce-stock-manager"),
             options: [],

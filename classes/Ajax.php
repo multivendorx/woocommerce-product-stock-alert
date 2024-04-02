@@ -126,11 +126,14 @@ class Ajax {
 		if ( ! check_ajax_referer( 'stock-manager-security-nonce', 'nonce', false ) ) {
 			wp_send_json_error( 'Invalid security token sent.' );
 			wp_die();
-		} 
+		}
+		
 		$customer_email = isset( $_POST[ 'customer_email' ] ) ? sanitize_email( $_POST[ 'customer_email' ] ) : '';
 		$product_id = isset( $_POST[ 'product_id' ] ) ? absint( $_POST[ 'product_id' ] ) : '';
 		$variation_id = isset( $_POST[ 'var_id' ] ) ? absint( $_POST[ 'var_id' ] ) : 0;
+
 		$success = false;
+
 		if ( $product_id && !empty( $product_id ) && !empty( $customer_email ) ) {
 			$product = wc_get_product( $product_id );
 			if ( $product && $product->is_type( 'variable' ) && $variation_id > 0 ) {

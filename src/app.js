@@ -4,8 +4,8 @@ import { useLocation } from 'react-router-dom';
 import Settings from './components/Settings/Settings.jsx';
 import SubscribersList from './components/SubscriberList/SubscribersList.jsx';
 import ManageStock from './components/Managestock/Managestock.jsx';
-import Import from './components/Managestock/Import.jsx';
-import Export from './components/Managestock/Export.jsx';
+import Import from './components/Managestock/ImportExport/Import.jsx';
+import Export from './components/Managestock/ImportExport/Export.jsx';
 
 const App = () => {
     const currentUrl = window.location.href;

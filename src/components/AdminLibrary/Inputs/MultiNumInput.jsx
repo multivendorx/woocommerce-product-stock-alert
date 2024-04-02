@@ -32,8 +32,8 @@ const MultiNumInput = (props) => {
                 </div>
                 {
                     props.description &&
-                    <p className={props.descClass}>
-                        {props.description}
+                    <p className={props.descClass} dangerouslySetInnerHTML={{__html: props.description}}>
+                       
                     </p>
                 }
             </div>

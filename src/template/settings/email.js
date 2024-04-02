@@ -5,7 +5,7 @@ export default {
     priority: 4,
     name: __("Email Blocker", "woocommerce-stock-manager"),
     desc: __("Ban Email Control Center.", "woocommerce-stock-manager"),
-    icon: "icon-email-setting",
+    icon: "font-mail",
     proDependent: true,
     submitUrl: "save-stockmanager",
     modal: [

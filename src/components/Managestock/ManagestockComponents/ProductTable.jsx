@@ -1,5 +1,6 @@
 import React, { useState , useEffect } from "react";
 import axios from "axios";
+import { __ } from "@wordpress/i18n";
 import ReactPaginate from "react-paginate";
 import Dropdown from "./Dropdown";
 import Input from "./Input";

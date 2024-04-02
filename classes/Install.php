@@ -9,6 +9,16 @@ defined( 'ABSPATH' ) || exit;
 
 class Install {
     /**
+     * Map old status of post table to new status of subscriber table
+     * @var array
+     */
+    const STATUS_MAP = [
+        'woo_subscribed'    => 'subscribed',
+        'woo_unsubscribed'  => 'unsubscribed',
+        'woo_mailsent'      => 'mailsent'
+    ];
+
+    /**
      * Used for check migration is running or not.
      * @var bool | null
      */
@@ -38,46 +48,51 @@ class Install {
      */
     public static function subscriber_migration() {
         global $wpdb;
-
-        // Get woosubscribe post and post meta
-        $subscribe_datas = $wpdb->get_results(
-            "SELECT wp_posts.ID as id,
-                wp_posts.post_date as date,
-                wp_posts.post_title as email,
-                wp_posts.post_status as status,
-                pm.meta_value as product_id
-            FROM wp_posts, wp_postmeta as pm
-            WHERE wp_posts.post_type = 'woostockalert'
-            AND pm.post_id = wp_posts.ID
-            AND pm.meta_key = 'wooinstock_product_id'
-            "
-        );
-
-        // Prepare insert value
-        $values = '';
-
-        foreach( $subscribe_datas as $subscribe_data ) {
-
-            $product_id = $subscribe_data['product_id'];
-            $email      = $subscribe_data['email'];
-            $status     = $subscribe_data['status'];
-            $date       = $subscribe_data['date'];
-
-            $values .= "( {$product_id},  {$email}, {$status}, {$date} ),";
-        }
-
         
-        if ( $values ) {
-            // Remove last , from $value
-            $values = substr($values, 0, -1);
-
-            $result = $wpdb->query(
-                " INSERT IGNORE INTO your_table_name (product_id, email, status, create_time) VALUES {$values} "
+        try {
+            // Get woosubscribe post and post meta
+            $subscribe_datas = $wpdb->get_results(
+                "SELECT wp_posts.ID as id,
+                    wp_posts.post_date as date,
+                    wp_posts.post_title as email,
+                    wp_posts.post_status as status,
+                    wp_posts.post_author as user_id,
+                    pm.meta_value as product_id
+                FROM wp_posts, wp_postmeta as pm
+                WHERE wp_posts.post_type = 'woostockalert'
+                AND pm.post_id = wp_posts.ID
+                AND pm.meta_key = 'wooinstock_product_id'
+                ", ARRAY_A
             );
+            
+            // Prepare insert value
+            $VALUES = "";
+            
+            foreach ( $subscribe_datas as $subscribe_data ) {
+                
+                $product_id = $subscribe_data[ 'product_id' ];
+                $user_id    = $subscribe_data['user_id'];
+                $email      = $subscribe_data['email'];
+                $status     = self::STATUS_MAP[ $subscribe_data['status'] ];
+                $date       = $subscribe_data['date'];
+                
+                $VALUES .= "( {$product_id}, {$user_id},  '{$email}', '{$status}', '{$date}' ),";
+            }
+
+            // If result exist then insert those result into custom table
+            if ($VALUES) {
+                // Remove last , from $value
+                $VALUES = substr($VALUES, 0, -1);
+
+                $wpdb->query(
+                    "INSERT IGNORE INTO {$wpdb->prefix}stockalert_subscribers (product_id, user_id, email, status, create_time ) VALUES {$VALUES} "
+                );
+            }
+        } catch ( \Exception $e ) {
+            Utill::log( $e->getMessage() );
         }
-        
     
-        // delete_option( 'stock_manager_migration_running' );
+        delete_option( 'stock_manager_migration_running' );
     }
 
     /**
@@ -97,6 +112,7 @@ class Install {
             "CREATE TABLE IF NOT EXISTS `" . $wpdb->prefix . "stockalert_subscribers` (
                 `id` bigint(20) NOT NULL AUTO_INCREMENT,
                 `product_id` bigint(20) NOT NULL,
+                `user_id` bigint(20) NOT NULL DEFAULT 0,
                 `email` varchar(50) NOT NULL,
                 `status` varchar(20) NOT NULL,
                 `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,

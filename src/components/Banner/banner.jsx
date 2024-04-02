@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Dialog from "@mui/material/Dialog";
 import Popoup from '../PopupContent/PopupContent';
+import './banner.scss';
 
 export default function banner() {
     if(localStorage.getItem('banner') != 'false'){
@@ -80,7 +81,7 @@ export default function banner() {
         <>
             {appLocalizer.pro_active ? 
                 banner ?
-                    <div>
+                    <div className="custom-banner">
                         <Dialog
                             className="woo-module-popup"
                             open={modal}
@@ -88,14 +89,14 @@ export default function banner() {
                             aria-labelledby="form-dialog-title"
                         >	
                             <span 
-                                className="icon-cross stock-manager-popup-cross"
+                                className="mvx-font font-cross stock-manager-popup-cross"
                                 onClick={handleClose}
                             ></span>
                             <Popoup/>
                         </Dialog>
                         <div className="woo-carousel-container">
                             <div className="carousel-container">
-                                <div class="icon-cross pro-slider-cross" onClick={handleCloseBanner}></div>
+                                <div class="mvx-font font-cross pro-slider-cross" onClick={handleCloseBanner}></div>
                                 <div class="why-go-pro-tag" onClick={handleOpen}>Why Premium</div>
                                 <ul className="carousel-list">
                                     <li className="carousel-item active">
@@ -161,8 +162,8 @@ export default function banner() {
                                 </ul>
                             </div>
                             <div class="carousel-controls">
-                                <button id="prevBtn"><i className='icon-left-arrow'></i></button>
-                                <button id="nextBtn"><i className='icon-right-arrow'></i></button>
+                                <button id="prevBtn"><i className='mvx-font font-arrow-left'></i></button>
+                                <button id="nextBtn"><i className='mvx-font font-arrow-right'></i></button>
                             </div>
                         </div>
                     </div>

@@ -1,0 +1,122 @@
+$base-color: #f2eff5;
+$border-color: #d4d1d9;
+$fill-color: #fdfdfe;
+$theme-color: #181718;
+$header-background: #f7f6f9;
+$icon-color: #9f8ab9;
+
+@mixin flex($direction: row, $justify: center, $align: center) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+#admin-stockmanager {
+  .mvx-general-wrapper {
+    .mvx-container {
+      gap: 1.2rem;
+      background-color: $base-color;
+      padding: 2rem 1.5rem;
+      min-height: 54rem;
+      @include flex(column, start);
+
+      .mvx-middle-container-wrapper {
+        width: 100%;
+        min-width: 60%;
+
+        .mvx-tab-description-start {
+          text-align: center;
+          background-color: $header-background;
+          border-radius: 0.25rem;
+          margin: 0 0 2rem;
+          border: 0.063rem solid $border-color;
+          padding: 2rem;
+
+          .mvx-tab-name {
+            color: $theme-color;
+            font-size: 1.25rem;
+            font-weight: 500;
+            padding-bottom: 0.5rem;
+          }
+        }
+
+        .mvx-middle-child-container {
+          @include flex(row, start, start);
+          flex-wrap: wrap;
+
+          .mvx-current-tab-lists {
+            border-bottom: 0.06rem solid $border-color;
+            margin-right: -0.06rem;
+            height: auto;
+            width: 22%;
+
+            .active-current-tab {
+              position: relative;
+              background-color: $fill-color;
+            }
+
+            a {
+              display: flex;
+              align-items: center;
+              background-color: #f9f8fb;
+              border: 0.063rem solid $border-color;
+              border-bottom-width: 0.063rem;
+              border-bottom-style: solid;
+              border-bottom-color: $border-color;
+              transition: 0.3s;
+              padding: 1rem 1.2rem;
+              margin-bottom: 0;
+              border-bottom: 0;
+              text-decoration: none;
+              color: $theme-color;
+              position: relative;
+
+              i {
+                padding-right: 0.5rem;
+                color: $icon-color;
+                font-size: 1.15rem;
+              }
+            }
+          }
+
+          .mvx-tab-content {
+            width: 78%;
+            padding: 2.5rem;
+            border: 0.063rem solid $border-color;
+            height: auto;
+            min-height: 63rem;
+            background-color: $fill-color;
+            position: relative;
+          }
+        }
+      }
+    }
+    .mvx-notic-display-title {
+      background-color: #bf6290;
+      color: $fill-color;
+      padding: 0.5rem 1rem;
+      border-radius: 0.12rem;
+      position: fixed;
+      top: 15%;
+      right: 1rem;
+      z-index: 9999;
+
+      i{
+        margin-right: 0.25rem;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  #admin-stockmanager .mvx-general-wrapper .mvx-container .mvx-middle-container-wrapper .mvx-middle-child-container {
+    @include flex(column, start, start);
+    .mvx-current-tab-lists {
+      width: 100%;
+    }
+    .mvx-tab-content {
+      width: 100%;
+    }
+  }
+}

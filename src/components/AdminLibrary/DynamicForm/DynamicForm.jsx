@@ -1,12 +1,15 @@
 import { useState, useEffect, useRef } from 'react';
+import "./dynamicForm.scss";
 import CustomInput from '../Inputs';
-import Dialog from "@mui/material/Dialog";
-import Popoup from '../../PopupContent/PopupContent';
+
 // import context.
 import { useSetting } from "../../../contexts/SettingContext";
 
 // import services function
 import { getApiLink, sendApiResponse } from '../../../services/apiService';
+import Dialog from "@mui/material/Dialog";
+import Popoup from '../../PopupContent/PopupContent';
+
 
 const DynamicForm = (props) => {
 
@@ -88,8 +91,8 @@ const DynamicForm = (props) => {
                 updateSetting( key, prevData );
             }
         } else {
-			setModelOpen(true);
-		}
+            setModelOpen(true);
+        }
     }
 
     const handleMultiNumberChange = ( e, key, optionKey, index ) => {
@@ -596,8 +599,8 @@ const DynamicForm = (props) => {
     }
 
     const handleModelClose = () => {
-		setModelOpen(false);
-	}
+        setModelOpen(false);
+    }
 
     return (
         <>
@@ -609,25 +612,25 @@ const DynamicForm = (props) => {
                     aria-labelledby="form-dialog-title"
                 >
                     <span
-                        className="icon-cross"
+                        className="mvx-font font-cross"
                         onClick={handleModelClose}
                     ></span>
                     <Popoup />
                 </Dialog>
                 {
                     successMsg &&
-					<div className="mvx-notic-display-title">
-						<i className="mvx-font icon-yes"></i>
-						{ successMsg }
-					</div>
-				}
-				<form
-					className="mvx-dynamic-form"
-					onSubmit={(e) => { handleSubmit(e) }}
-				>
-					{ renderForm() }
-				</form>
-			</div>
+                    <div className="mvx-notic-display-title">
+                        <i className="mvx-font font-icon-yes"></i>
+                        { successMsg }
+                    </div>
+                }
+                <form
+                    className="mvx-dynamic-form"
+                    onSubmit={(e) => { handleSubmit(e) }}
+                >
+                    { renderForm() }
+                </form>
+            </div>
         </>
     );
 }

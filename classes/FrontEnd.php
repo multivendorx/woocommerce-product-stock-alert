@@ -54,7 +54,7 @@ class FrontEnd {
             // Enqueue your frontend javascript from here
             wp_enqueue_script( 'stock_manager_frontend_js', $frontend_script_path . 'frontend' . $suffix . '.js', [ 'jquery' ], SM()->version, true );
         
-            wp_localize_script( 'stock_manager_frontend_js', 'woo_stock_manager_script_data', [ 
+            wp_localize_script( 'stock_manager_frontend_js', 'woo_stock_manager_script_data', [
                 'ajax_url' => admin_url( 'admin-ajax.php', 'relative' ), 
                 'nonce'  => wp_create_nonce( 'stock-manager-security-nonce' ), 
                 'additional_fields' => apply_filters( 'woocommerce_stock_manager_form_additional_fields', [] ), 
@@ -71,9 +71,9 @@ class FrontEnd {
                 'unsubscribe_button' => $unsubscribe_button_html, 
                 'alert_unsubscribe_message' => $settings_array[ 'alert_unsubscribe_message' ], 
                 'recaptcha_enabled' => apply_filters( 'woo_stock_manager_recaptcha_enabled', false )
-            ] );
+            ]);
         }
-    } 
+    }
 
     /**
      * Enqueue fronted css. 

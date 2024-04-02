@@ -6,7 +6,9 @@ import PuffLoader from 'react-spinners/PuffLoader';
 import { css } from '@emotion/react';
 import Popoup from '../PopupContent/PopupContent';
 import { Link } from 'react-router-dom';
-import ProductTable from './ProductTable';
+import ProductTable from './ManagestockComponents/ProductTable';
+import "./Managestock.scss";
+// import './Import_Export/style.scss';
 
 const Managestock = () => {
     
@@ -78,7 +80,7 @@ const Managestock = () => {
                     aria-labelledby="form-dialog-title"
                 >
                     <span 
-                        className="icon-cross stock-manager-popup-cross"
+                        className="mvx-font font-cross stock-manager-popup-cross"
                         onClick={ () => { setOpenDialog ( false ) } }
                     ></span>
                     <Popoup/>
@@ -88,9 +90,9 @@ const Managestock = () => {
         :
         //If user is pro user he will shown the Inventory Manager Table
             <div className="woo-subscriber-list">
-                    <div className="woo-container">
+                    <div className="woo-container manage-stock-container">
                         <div className="woo-middle-container-wrapper">
-                            <div className="woo-search-and-multistatus-wrap">
+                            <div className="woo-search-and-multistatus-wrap manage-stock-wrapper">
                                 <div className="woo-page-title">
                                     <p>
                                         { __( "Inventory Manager", "woocommerce-stock-manager" ) }
@@ -127,7 +129,7 @@ const Managestock = () => {
                             </div>
                             )}
                         </div>
-                        <div className="woo-search-and-multistatus-wrap">
+                        <div className="woo-search-and-multistatus-wrap manage-stock-wrapper">
                             <div class="woo-wrap-bulk-all-date">
                                 <div class="woo-header-search-section">
                                     <input
@@ -182,7 +184,7 @@ const Managestock = () => {
                             {
                                 //If both the data nad the headers are set then only the Table will be shown else the <PuffLoader/> will be shown
                                 (( data && Object.keys( data ).length > 0 ) && ( headers && Object.keys( headers ).length > 0))?
-                                    <div className="woo-backend-datatable-wrapper">
+                                    <div className="woo-backend-datatable-wrapper manage-stock-table">
                                         <ProductTable 
                                             setData={ setData } 
                                             setDisplayMessage={ setDisplayMessage }

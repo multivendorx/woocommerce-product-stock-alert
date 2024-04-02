@@ -4,17 +4,23 @@ namespace StockManager;
 
 defined( 'ABSPATH' ) || exit;
 
+/**
+ * StockManager Subscribe class
+ */
 class Subscriber {
     public function __construct() {
         add_action( 'woo_stock_manager_start_notification_cron_job', [ $this, 'send_instock_notification_corn' ] );
         add_action( 'woocommerce_update_product', [ $this, 'send_instock_notification' ], 10, 2 );
         add_action( 'stock_manager_start_subscriber_migration', [ Install::class, 'subscriber_migration' ] );
 
-        $this->registers_post_status();
+        if ( Install::is_migration_running() ) {
+            $this->registers_post_status();
+        }
     }
 
     /**
-     * Function to register the post status
+     * Function to register the post status.
+     * @return void
      */
     function registers_post_status() {
         register_post_status( 'woo_mailsent', [ 
@@ -113,31 +119,53 @@ class Subscriber {
      * @return \WP_Error|bool|int
      */
     static function subscribe_user( $subscriber_email, $product_id ) {
-        $args = [ 
-            'post_title' => $subscriber_email, 
-            'post_type' => 'woostockalert', 
-            'post_status' => 'woo_subscribed', 
-        ];
+        global $wpdb;
 
-        $id = wp_insert_post( $args );
+        if ( Install::is_migration_running() ) {
+            $id = wp_insert_post([ 
+                'post_title' => $subscriber_email, 
+                'post_type' => 'woostockalert', 
+                'post_status' => 'woo_subscribed', 
+            ]);
+    
+            if ( ! is_wp_error( $id ) ) {
+                $default_data = [ 
+                    'wooinstock_product_id' => $product_id, 
+                    'wooinstock_subscriber_email' => $subscriber_email, 
+                ];
+    
+                foreach ( $default_data as $key => $value ) {
+                    update_post_meta( $id, $key, $value );
+                }
+    
+                self::update_product_subscriber_count( $product_id );
+    
+                return $id;
+            } else {
+                return false;
+            }
+        } else {
+            // Get current user id.
+            $user_id = wp_get_current_user()->ID;
 
-        if ( ! is_wp_error( $id ) ) {
-            $default_data = [ 
-                'wooinstock_product_id' => $product_id, 
-                'wooinstock_subscriber_email' => $subscriber_email, 
-            ];
+            // Insert new subscriber.
+            $response = $wpdb->query(
+                $wpdb->prepare(
+                    "INSERT IGNORE INTO {$wpdb->prefix}stockalert_subscribers
+                    ( product_id, user_id, email, status )
+                    VALUES ( %d, %d, %s, %s )",
+                    [ $product_id, $user_id, $subscriber_email, 'subscribed' ]
+                )
+            );
 
-            foreach ( $default_data as $key => $value ) {
-                update_post_meta( $id, $key, $value );
+            // Update the product subscriber count after new subscriber insert.
+            if ( $response ) {
+                self::update_product_subscriber_count( $product_id );
             }
 
-            self::update_product_subscriber_count( $product_id );
-
-            return $id;
-        } else {
-            return false;
-        } 
-    } 
+            return $response;
+        }
+    }
 
     /**
      * Function that unsubscribe a particular user if the user is already subscribed
@@ -146,46 +174,65 @@ class Subscriber {
      * @return bool
      */
     static function unsubscribe_user( $product_id, $customer_email ) {
+        // Check the user is already subscribed or not
         $unsubscribe_post = self::is_already_subscribed( $customer_email, $product_id );
+
         if ( $unsubscribe_post ) {
             if ( is_array( $unsubscribe_post ) ) {
                 $unsubscribe_post = $unsubscribe_post[ 0 ];
-            } 
+            }
+
             self::update_subscriber( $unsubscribe_post, 'woo_unsubscribed' );
-            self::update_product_subscriber_count( $unsubscribe_post );
+            self::update_product_subscriber_count( $product_id );
+
             return true;
-        } 
+        }
+
         return false;
-    } 
+    }
 
     /**
      * Check if a user subscribed to a product.
      * If the user subscribed to the product it return the subscription ID, Or null.
      * @param mixed $subscriber_email
      * @param mixed $product_id
-     * @return array Subscription ID | null
+     * @return array | string Subscription ID | null
      */
     static function is_already_subscribed( $subscriber_email, $product_id ) {
-        $args = [ 
-            'post_type'    => 'woostockalert', 
-            'fields'       => 'ids', 
-            'posts_per_page' => 1, 
-            'post_status'  => 'woo_subscribed', 
-			'meta_query'   => [ 
-				'relation' => 'AND', 
-				[ 
-					'key'   => 'wooinstock_product_id', 
-					'value' => $product_id, 
-                ], 
-				[ 
-					'key'   => 'wooinstock_subscriber_email', 
-					'value' => $subscriber_email, 
-                ], 
-            ]
-        ];
-        $get_posts = get_posts( $args );
-        return $get_posts;
-    } 
+        global $wpdb;
+
+        // If migration is running get the result from post table. 
+        if ( Install::is_migration_running() ) {
+            return get_posts([
+                'post_type'      => 'woostockalert',
+                'fields'         => 'ids',
+                'posts_per_page' => 1,
+                'post_status'    => 'woo_subscribed',
+                'meta_query'     => [
+                    'relation'   => 'AND',
+                    [ 
+                        'key'   => 'wooinstock_product_id',
+                        'value' => $product_id,
+                    ],
+                    [
+                        'key'   => 'wooinstock_subscriber_email',
+                        'value' => $subscriber_email,
+                    ], 
+                ]
+            ]);
+        } else {
+            // Get the result from custom subscribers table. 
+            return $wpdb->get_var(
+                $wpdb->prepare(
+                    "SELECT id FROM {$wpdb->prefix}stockalert_subscribers
+                    WHERE product_id = %d
+                    AND email = %s
+                    AND status = %s",
+                    [ $product_id, $subscriber_email, 'subscribed' ]
+                )
+            );
+        }
+    }
 
     /**
      * Update the subscriber count for a product
@@ -193,19 +240,40 @@ class Subscriber {
      * @return void
      */
     static function update_product_subscriber_count( $product_id ) {
-        $args = [ 
-            'post_type'   => 'woostockalert', 
-            'post_status' => 'woo_subscribed', 
-            'meta_query'  => [ 
-                [ 
-                    'key'     => 'wooinstock_product_id', 
-                    'value'   => [ $product_id ], 
-                    'compare' => 'IN', 
-                ] ], 
-            'numberposts' => -1, 
-        ];
-        $query = get_posts( $args );
-        update_post_meta( $product_id, 'no_of_subscribers', count( $query ) );
+        global $wpdb;
+
+        $subscriber_count = 0;
+
+        if ( Install::is_migration_running() ) {
+
+            // Get all woostockalert data of a particular product. 
+            $subscription = get_posts([ 
+                'post_type'   => 'woostockalert', 
+                'post_status' => 'woo_subscribed', 
+                'meta_query'  => [ 
+                    [ 
+                        'key'     => 'wooinstock_product_id', 
+                        'value'   => [ $product_id ], 
+                        'compare' => 'IN', 
+                    ] ],
+                'fields'      => 'ids',
+                'numberposts' => -1, 
+            ]);
+
+            // Count the number of subscription.
+            $subscriber_count = count( $subscription );
+
+        } else {
+            // Get subscriber count.
+            $subscriber_count = $wpdb->get_var(
+                "SELECT COUNT(*) FROM {$wpdb->prefix}stockalert_subscribers
+                WHERE product_id = {$product_id}
+                AND status = 'subscribed'"
+            );
+        }
+
+        // Update subscriber count in product's meta.
+        update_post_meta( $product_id, 'no_of_subscribers', $subscriber_count );
     } 
 
     /**
@@ -215,14 +283,30 @@ class Subscriber {
      * @return \WP_Error|int
      */
     static function update_subscriber( $stockalert_id, $status ) {
-        $args = [ 
-            'ID' => $stockalert_id, 
-            'post_type' => 'woostockalert', 
-            'post_status' => $status,
-        ];
-        $id = wp_update_post( $args );
-        return $id;
-    } 
+        global $wpdb;
+
+        // In time of migration running update the status in post table. 
+        if ( Install::is_migration_running() ) {
+
+            // Update woostockalert post typ's status.
+            $post_id = wp_update_post([ 
+                'ID'          => $stockalert_id, 
+                'post_type'   => 'woostockalert', 
+                'post_status' => $status,
+            ]);
+
+            return $post_id;
+        } else {
+            // Update subscrib status
+            $response = $wpdb->update(
+                "{$wpdb->prefix}stockalert_subscribers",
+                [ "status" => $status ],
+                [ "id"     => $stockalert_id ]
+            );
+
+            return $stockalert_id;
+        }
+    }
 
     /**
      * Trigger the email for a indivisual customer in time of subscribe.
@@ -232,22 +316,31 @@ class Subscriber {
      * @return void
      */
     static function insert_subscriber_email_trigger( $product, $customer_email ) {
+        // Get email object.
         $admin_mail = WC()->mailer()->emails[ 'WC_Admin_Email_Stock_Manager' ];
-        $cust_mail = WC()->mailer()->emails[ 'WC_Subscriber_Confirmation_Email_Stock_Manager' ];
-        $general_tab_settings = get_option( 'woo_stock_manager_general_tab_settings' );
-        $additional_email = ( isset( $general_tab_settings[ 'additional_alert_email' ] ) ) ? $general_tab_settings[ 'additional_alert_email' ] : '';
+        $cust_mail  = WC()->mailer()->emails[ 'WC_Subscriber_Confirmation_Email_Stock_Manager' ];
 
+        // Get additional email from global setting.
+        $general_tab_settings = get_option( 'woo_stock_manager_general_tab_settings' );
+        $additional_email     = $general_tab_settings[ 'additional_alert_email' ] ?? '';
+
+        // Add vendor's email.
         if ( function_exists( 'get_mvx_product_vendors' ) ) {
-            $vendor = get_mvx_product_vendors( wc_get_product( $product )->get_id() );
+            $vendor = get_mvx_product_vendors( $product->get_id() );
+
+            // Append vendor's email as additional email.
             if ( $vendor && apply_filters( 'woo_stock_manager_add_vendor', true ) ) {
                 $additional_email .= ', '. sanitize_email( $vendor->user_data->user_email );  
             } 
-        } 
+        }
         
-        if ( !empty( $additional_email ) )
+        // Trigger the additional email.
+        if ( ! empty( $additional_email ) )
             $admin_mail->trigger( $additional_email, $product, $customer_email );
+
+        // Trigger customer email.
         $cust_mail->trigger( $customer_email, $product );
-    } 
+    }
 
     /**
      * Get the email of all subscriber of a particular product.
@@ -280,24 +373,32 @@ class Subscriber {
             ];
     
             $subsciber_post = get_posts( $args );
+
             if ( $subsciber_post && count( $subsciber_post ) > 0 ) {
                 foreach ( $subsciber_post as $subsciber_id ) {
                     $email = get_post_meta( $subsciber_id, 'wooinstock_subscriber_email', true );
                     $emails[ $subsciber_id ] = $email ? $email : '';
                 }
             }
+
         } else {
             // Migration is over use custom subscription table for information
-            $emails = $wpdb->query(
-                $wpdb->prepare( '',  )
+            $emails_data = $wpdb->get_results(
+                $wpdb->prepare(
+                    "SELECT id, email from {$wpdb->prefix}stockalert_subscribers
+                    WHERE product_id = %d AND status = %s",
+                    [ $product_id, 'subscribed' ]
+                )
             );
 
+            // Prepare email data
+            foreach ( $emails_data as $email ) {
+                $emails[ $email->id ] = $email->email;
+            }
         }
 
-
-
         return $emails;
-    } 
+    }
 
     /**
      * Get all child ids if a prodcut is variable else get product id
@@ -305,11 +406,13 @@ class Subscriber {
      * @return array
      */
     static function get_related_product( $product ) {
+        // If product is not woocommerce product object.
         if ( is_numeric( $product ) ){
             $product = wc_get_product( $product );
         }
 
         $product_ids = [];
+
         switch( $product->get_type() ) {
             case 'variable' :
                 if ( $product->has_child() ) {
@@ -323,7 +426,8 @@ class Subscriber {
                 break;
             default :
                 $product_ids[] = $product->get_id(); 
-        } 
+        }
+
         return $product_ids;
     } 
 

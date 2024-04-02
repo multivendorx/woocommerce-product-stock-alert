@@ -180,6 +180,10 @@ $animation-duration: 2s;
           padding: 0.25rem 0.1rem;
           border-radius: $border-radius-small;
           background: transparent;
+
+          i{
+            font-size: 0.75rem;
+          }
         }
       }
     }

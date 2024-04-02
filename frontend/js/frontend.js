@@ -1,42 +1,6 @@
 "use strict";
-jQuery(function ($) {
-    // class instockNotifier {
-    //     constructor() {
-    //         $(document).on('click', '.stock_manager_button', this.subscribe );
-    //         $(document).on('click', '.unsubscribe_button', this.unsubscribe );
-    //         $(document).on('change', 'input.variation_id', this.getVariationSubscribeForm);
-    //     }
 
-    //     subscribe (e) {
-    //         e.preventDefault();
-    //         $(this).text(woo_stock_manager_script_data.processing);
-    //         $(this).addClass("stk_disabled");
-    //         const recaptcha_enabled = woo_stock_manager_script_data.recaptcha_enabled;
-    //         const form = $(this).closest('.stock_notifier-subscribe-form');
-            
-    //         if (recaptcha_enabled) {
-    //             const recaptcha_secret = form.find('#recaptchav3_secretkey').val();
-    //             const recaptcha_response = form.find('#recaptchav3_response').val();
-    //             const recaptcha = {
-    //                 action: 'recaptcha_validate_ajax',
-    //                 nonce: woo_stock_manager_script_data.nonce,
-    //                 captcha_secret : recaptcha_secret,
-    //                 captcha_response : recaptcha_response
-    //             }
-
-    //             $.post(woo_stock_manager_script_data.ajax_url, recaptcha, function(response) {
-    //                 if (response == 1) {
-    //                     instock_notifier.process_form(form.find('.stock_manager_email').val(), form.find('.current_product_id').val(), form.find('.current_variation_id').val(), form.find('.current_product_name').val());
-    //                 } else {
-    //                     alert('Oops, recaptcha not varified!');
-    //                     $(this).removeClass("stk_disabled");
-    //                 }
-    //             });
-    //         } else {
-    //             instock_notifier.process_form(form.find('.stock_manager_email').val(), form.find('.current_product_id').val(), form.find('.current_variation_id').val(), form.find('.current_product_name').val());
-    //         }
-    //     }
-    // }
+jQuery( function ($) {
 
     var instock_notifier = {
         init: function () {

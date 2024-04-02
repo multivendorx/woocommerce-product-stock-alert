@@ -1,4 +1,5 @@
 import React from 'react';
+import { __ } from "@wordpress/i18n";
 
 export default function Input( { headerKey, header, product, handleChange, handleInputMouseOut, editButtonOnClick } ) {
 

@@ -5,7 +5,7 @@ export default {
     priority: 1,
     name: __("General", "woocommerce-stock-manager"),
     desc: __("Configure basic product manager settings.", "woocommerce-stock-manager"),
-    icon: 'icon-general',
+    icon: 'font-settings',
     submitUrl: 'save-stockmanager',
     modal: [
         {

@@ -3,6 +3,7 @@ import axios from 'axios';
 import { CSVLink } from "react-csv";
 import { __ } from '@wordpress/i18n';
 import { Link } from 'react-router-dom';
+import "./style.scss";
 
 const Export = () => {
     //Headers to generate the CSV

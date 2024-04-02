@@ -232,14 +232,12 @@ class Admin {
                 'is_recaptcha_enable_pro'   => __('Get your v3 reCAPTCHA site key and secret key from <a href="https://developers.google.com/recaptcha" target="_blank">here</a>.', 'woocommerce-stock-manager-pro'),
                 'default_massages_fields'   => $woo_admin_massages_fields,
                 'default_massages'          => Utill::get_form_settings_array()
-              ] ) );
+            ] ) );
 
-            //temparary enqueue
             wp_enqueue_style( 'woo_stockmanager_style', SM()->plugin_url . 'build/index.css', [], SM()->version );
-            wp_enqueue_style( 'woo_admin_rsuite_css', SM()->plugin_url . 'src/style/css/rsuite-default' . '.min' . '.css', [], SM()->version );
         }
-        //temparary enqueue
-        wp_enqueue_style( 'stock_manager_product_admin_css', SM()->plugin_url . 'build/index.css', [], SM()->version );
+        
+        wp_enqueue_style( 'stock_manager_product_admin_css', SM()->plugin_url . 'frontend/css/admin' . '.min' . '.css', [], SM()->version );
     }
 
     /**

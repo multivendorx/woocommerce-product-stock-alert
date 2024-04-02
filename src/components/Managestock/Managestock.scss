@@ -1,15 +1,3 @@
-@font-face {
-  font-family: 'woo-stock-alert';
-  src: url('fonts/woo-stock-alert.eot?r0aunu');
-  src: url('fonts/woo-stock-alert.eot?r0aunu#iefix') format('embedded-opentype'),
-    url('fonts/woo-stock-alert.ttf?r0aunu') format('truetype'),
-    url('fonts/woo-stock-alert.woff?r0aunu') format('woff'),
-    url('fonts/woo-stock-alert.svg?r0aunu#woo-stock-alert') format('svg');
-  font-weight: normal;
-  font-style: normal;
-  font-display: block;
-}
-
 $manageStock-base-color: #f2eff5;
 $manageStock-boder-color: #d4d1d9;
 $manageStock-border: 0.063rem solid #d4d1d9;
@@ -37,40 +25,15 @@ $manageStock-blue-icon: #9f8ab9;
 $manageStock-scroll-color: #ece8f1;
 
 
-// Custome Inventory Manager Css
-
-.subscribe-list-table{
-  overflow-x: scroll !important; // to overwrite ocerflow visible to scroll
+//for loader purpose-----
+.woo-middle-container-wrapper > span {
+  display: block;
+  margin: 0 auto;
 }
 
-.woo-middle-container-wrapper {
-  background-color: #fff;
-  padding: 1rem 1.5rem;
-  display: flex;
-  flex-direction: column;
-  border-radius: 0.313rem;
-  box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.12);
-}
-
-.stock-reports-download {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 0.5rem;
-}
-.no-data-text{
-  display: flex;
-  justify-content: center;
-  padding: 24px;
-}
-
-.woo-search-and-multistatus-wrap {
-  padding: 0;
-  gap: 0.5rem;
-}
-
-.import-page .woo-page-title {
-  margin-bottom: 0.938rem;
+.manage-stock-wrapper{
+  padding: 0 !important; // Overwrite common.css file css to set padding
+  gap: 0.5rem !important; // Overwrite common.css file css to set padding
 }
 
 
@@ -86,7 +49,11 @@ $manageStock-scroll-color: #ece8f1;
   border: 0.063rem solid rgba($color: #000000, $alpha: 0.3);
 }
 
-.woo-middle-container-wrapper .woo-backend-datatable-wrapper .rdt_Table .rdt_TableBody .rdt_TableRow {
+.woo-middle-container-wrapper
+  .woo-backend-datatable-wrapper
+  .rdt_Table
+  .rdt_TableBody
+  .rdt_TableRow {
   padding: 0.625rem 0;
   font-size: 1rem !important; // to adjust datatable fontsize
   border-radius: 0;
@@ -109,25 +76,29 @@ $manageStock-scroll-color: #ece8f1;
   top: -0.75rem;
 }
 
-.woo-middle-container-wrapper .woo-backend-datatable-wrapper .rdt_Table .rdt_TableBody .rdt_TableRow {
-  &:nth-child(-2n+4) {
+.woo-middle-container-wrapper
+  .woo-backend-datatable-wrapper
+  .rdt_Table
+  .rdt_TableBody
+  .rdt_TableRow {
+  &:nth-child(-2n + 4) {
     border: none !important; // to adjust datatable row border
   }
 }
 
-#woo-admin-stockmanager input:focus,
-#woo-admin-stockmanager textarea:focus {
+#admin-stockmanager input:focus,
+#admin-stockmanager textarea:focus {
   outline: none !important; // to adjust box shadow for input tag and textarea for all stockmanager
   box-shadow: none !important; // to adjust box shadow for input tag and textarea for all stockmanager
 }
 
-#woo-admin-stockmanager select:focus {
+#admin-stockmanager select:focus {
   color: inherit;
   border: none !important; // Adjust border as none to overwrite default border
   box-shadow: none;
 }
-#woo-admin-stockmanager select:hover {
-  color: inherit; 
+#admin-stockmanager select:hover {
+  color: inherit;
 }
 
 .custom-select {
@@ -142,20 +113,11 @@ $manageStock-scroll-color: #ece8f1;
   cursor: pointer;
 }
 
-#woo-admin-stockmanager select {
+.manage-stock-container select {
   -webkit-appearance: none;
   width: 100%;
   border: none;
-  background: #fff0 url('../assets/images/download.svg') no-repeat right 5px top 55%;
-}
-
-.table-image {
-  border-radius: 0.313rem;
-  overflow: hidden;
-  border: 0.125rem solid rgba($color: #000000, $alpha: 0.3);
-  width: 4.375rem;
-  height: 4.375rem;
-  margin: 0 !important; // to adjust product image margin
+  background: #fff0 url('../../assets/images/download.svg') no-repeat right 5px top 55%;
 }
 
 .import-export-btn {
@@ -171,8 +133,17 @@ $manageStock-scroll-color: #ece8f1;
   width: fit-content;
   margin-left: auto;
 }
+.table-image {
+  border-radius: 0.313rem;
+  overflow: hidden;
+  border: 0.125rem solid rgba($color: #000000, $alpha: 0.3);
+  width: 4.375rem;
+  height: 4.375rem;
+  margin: 0 !important; // to adjust product image margin
+}
 
-.download-btn-subscriber-list{
+
+.download-btn-subscriber-list {
   display: flex;
   align-items: center;
   border: 0.063rem solid #d4d1d9;
@@ -184,11 +155,11 @@ $manageStock-scroll-color: #ece8f1;
   font-size: 0.9rem;
   width: fit-content;
 }
-.download-btn-subscriber-list a{
+.download-btn-subscriber-list a {
   text-decoration: none;
   color: #f9f8fb;
 }
-.download-btn-subscriber-list a:hover{
+.download-btn-subscriber-list a:hover {
   text-decoration: none;
 }
 
@@ -225,8 +196,7 @@ $manageStock-scroll-color: #ece8f1;
 .import-section th,
 .import-section td {
   text-align: center;
-  border-bottom: 0.063rem solid
-    rgba($color: #000000, $alpha: 0.2);
+  border-bottom: 0.063rem solid rgba($color: #000000, $alpha: 0.2);
   padding: 0.625rem;
 }
 
@@ -368,8 +338,7 @@ $manageStock-scroll-color: #ece8f1;
 
 .import-table {
   padding: 1.5rem;
-  box-shadow: 0 0 0.2rem
-    rgba($color: #000000, $alpha: 0.2);
+  box-shadow: 0 0 0.2rem rgba($color: #000000, $alpha: 0.2);
   margin-bottom: 0.625rem;
   border-radius: 0.25rem;
 }
@@ -377,7 +346,7 @@ $manageStock-scroll-color: #ece8f1;
   margin: auto;
   margin-bottom: 0.625rem;
 }
-#woo-admin-stockmanager input[type="number"]::-webkit-inner-spin-button {
+#admin-stockmanager input[type="number"]::-webkit-inner-spin-button {
   display: none;
 }
 
@@ -425,8 +394,7 @@ $manageStock-scroll-color: #ece8f1;
   max-width: 43.75rem;
   width: 100%;
   padding: 1.25rem;
-  border: 0.063rem solid
-    rgba($color: #000000, $alpha: 0.2);
+  border: 0.063rem solid rgba($color: #000000, $alpha: 0.2);
   background: #fff;
 }
 
@@ -604,7 +572,7 @@ $manageStock-scroll-color: #ece8f1;
   opacity: 0;
   transition: opacity 0.2s linear;
 }
-#woo-admin-stockmanager td:hover .edit-btn-product {
+#admin-stockmanager td:hover .edit-btn-product {
   opacity: 1;
 }
 .edit-btn-product svg {
@@ -623,13 +591,13 @@ $manageStock-scroll-color: #ece8f1;
 .woo-backend-datatable-wrapper {
   overflow-x: scroll;
 }
-.woo-backend-datatable-wrapper::-webkit-scrollbar{
+.woo-backend-datatable-wrapper::-webkit-scrollbar {
   margin: 0;
   height: 8px;
   background: transparent;
 }
-.woo-backend-datatable-wrapper::-webkit-scrollbar-thumb{
-  background: #522C81;
+.woo-backend-datatable-wrapper::-webkit-scrollbar-thumb {
+  background: #522c81;
 }
 .woo-backend-datatable-wrapper table {
   border-radius: 0.25rem;
@@ -813,7 +781,7 @@ $manageStock-scroll-color: #ece8f1;
   width: 3.125rem;
 }
 
-@media only screen and (max-width: 1320px) {
+@media only screen and (max-width: 1355px) {
   .table-data-container .table-row-meta-data p {
     text-align: left;
   }
@@ -850,7 +818,7 @@ $manageStock-scroll-color: #ece8f1;
   }
   .woo-backend-datatable-wrapper tbody tr.active {
     max-height: 62.5rem;
-    overflow-y: scroll;
+    overflow-y: auto;
   }
   .woo-backend-datatable-wrapper tbody tr.active::-webkit-scrollbar {
     margin: 0;
@@ -950,8 +918,7 @@ $manageStock-scroll-color: #ece8f1;
   border-radius: 0.25rem;
   cursor: pointer;
   border: 0.063rem solid white;
-  box-shadow: 0 0 0.625rem
-    rgba($color: #000000, $alpha: 0.164);
+  box-shadow: 0 0 0.625rem rgba($color: #000000, $alpha: 0.164);
   text-decoration: none;
 }
 .woo-backend-datatable-wrapper > .pagination .pagination li.disabled a {
@@ -960,14 +927,14 @@ $manageStock-scroll-color: #ece8f1;
   color: white;
 }
 
-#woo-admin-stockmanager tr.expand {
+#admin-stockmanager tr.expand {
   background-color: #f7fcff !important; // force to set background color for variable product only
   border: 0.063rem solid rgb(172, 172, 172);
 }
-#woo-admin-stockmanager tr.expand:first-child {
+#admin-stockmanager tr.expand:first-child {
   border-bottom: none !important; // force to set border color for first variable product only
 }
-#woo-admin-stockmanager tr.expand:last-child {
+#admin-stockmanager tr.expand:last-child {
   border-top: none !important; // force to set border color for last variable product only
 }
 
@@ -981,7 +948,7 @@ $manageStock-scroll-color: #ece8f1;
   font-size: 0.875rem;
 }
 .inventory-manager {
-  background-image: url("../assets/images/inventory-manager-monitor.png") !important; // force to set image for ungrade with pro for desktop-screen
+  background-image: url("../../assets/images/inventory-manager-monitor.png") !important; // force to set image for ungrade with pro for desktop-screen
   background-repeat: no-repeat;
   background-position: top left;
   background-size: contain;
@@ -989,7 +956,7 @@ $manageStock-scroll-color: #ece8f1;
 }
 @media only screen and (max-width: 1100px) {
   .inventory-manager {
-    background-image: url("../assets/images/inventory-manager-laptop.jpeg") !important; // force to set image for ungrade with pro for laptop-screen
+      background-image: url("../../assets/images/inventory-manager-laptop.jpeg") !important; // force to set image for ungrade with pro for laptop-screen
     background-repeat: no-repeat;
     background-position: top;
     background-size: contain;
@@ -1005,7 +972,7 @@ $manageStock-scroll-color: #ece8f1;
 }
 @media only screen and (max-width: 650px) {
   .inventory-manager {
-    background-image: url("../assets/images/inventory-manager-phone.jpeg") !important; // force to set image for ungrade with pro for mobile-screen
+      background-image: url("../../assets/images/inventory-manager-phone.jpeg") !important; // force to set image for ungrade with pro for mobile-screen
     background-repeat: no-repeat;
     background-position: top;
     background-size: contain;
