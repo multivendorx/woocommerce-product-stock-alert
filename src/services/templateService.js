@@ -7,17 +7,41 @@
  * @return {Array} Array of Object.
  */
 const getTemplateData = () => {
-    const settings = [];
+
+    // Required the context.
+    const context = require.context( '../template/settings', true, /\.js$/ ); // Adjust the folder path and file extension
+
+    // Prepare the structure here...
+    function importAll(context) {
+        const folderStructure = [];
+      
+        context.keys().forEach(key => {
+            const path = key.substring(2); // Remove './' from the beginning of the path
+            const parts = path.split('/');
+            const fileName = parts.pop();
+            let currentFolder = folderStructure;
+      
+            // Traverse the folder structure and create objects
+            parts.forEach(folder => {
+                let folderObject = currentFolder.find( item => item.name === folder && item.type === 'folder' );
+                if ( ! folderObject ) {
+                    folderObject = { name: folder, type: 'folder', content: [] };
+                    currentFolder.push(folderObject);
+                }
+                currentFolder = folderObject.content;
+            });
+      
+            // Add the file to the appropriate folder
+            currentFolder.push({ name: fileName.replace('.js', ''), type: 'file', content: context(key).default });
+        });
+
+        return folderStructure;
+    }
     
-    const context = require.context('../template/settings', false, /\.js$/); // Adjust the folder path and file extension
-    context.keys().forEach((key) => {
-        const module = context(key);
-        let fileName = key.substring(key.lastIndexOf('/') + 1, key.lastIndexOf('.'));
-        // Check if the module has a default export and push it to the settings array
-        if (module && module.default) {
-            settings.push( module.default );
-        }
-    });
+    const settings = importAll( context );
+    
+    // Debugg here...
+    // console.log(settings);
 
     return settings;
 };

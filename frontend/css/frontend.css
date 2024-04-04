@@ -1,10 +1,10 @@
 .alert_container {
-	margin-bottom: 20px;
+	margin-bottom: 1.26rem;
 }
 
 .stock_manager_email {
-	margin-bottom: 10px;
-	width: 250px;
+	margin-bottom: 0.63rem;
+	width: 15.75rem;
 }
 
 .stk_disabled{
@@ -13,7 +13,7 @@
 }
 
 h5.subscribe_for_interest_text {
-	margin-bottom: 5px;
+	margin-bottom: 0.315rem;
 }
 
 .alert_container_bk {
@@ -21,11 +21,11 @@ h5.subscribe_for_interest_text {
 }
 
 .alert_container p {
-  margin-bottom: 0px;
-  font-size: 11px;
+  margin-bottom: 0.0rem;
+  font-size: 0.693rem;
   font-weight: bold;
   font-style: italic;
-  margin-top: 4px;
+  margin-top: 0.252rem;
 }
 
 .stock_manager_button.alert_loader {
@@ -35,26 +35,26 @@ h5.subscribe_for_interest_text {
 .stock_manager_button.alert_loader:before {
   content: "";
   display: inline-block;
-  width: 10px;
-  height: 10px;
-  margin-right: 10px;
+  width: 0.63rem;
+  height: 0.63rem;
+  margin-right: 0.63rem;
   border-radius: 50%;
-  border: 2px solid white;
+  border: 0.126rem solid white;
   border-left-color: transparent;
   border-top-color: transparent;
   animation: loading 1s linear infinite;
 }
 
 button.stock_manager_button {
-  margin: 5px;
+  margin: 0.315rem;
 }
 
 .registered_message {
-  margin-bottom: 20px;
+  margin-bottom: 1.26rem;
 }
 
 button.unsubscribe_button {
-  margin: 15px 0;
+  margin: 0.945rem 0;
 }
 
 @keyframes loading{

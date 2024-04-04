@@ -154,11 +154,13 @@ class Ajax {
 		if ( ! check_ajax_referer( 'stock-manager-security-nonce', 'nonce', false ) ) {
 			wp_send_json_error( 'Invalid security token sent.' );
 			wp_die();
-		} 
+		}
+
 		$customer_email = isset( $_POST[ 'email' ] ) ? sanitize_email( $_POST[ 'email' ] ) : '';
-		$product_id = isset( $_POST[ 'product_id' ] ) ? absint( $_POST[ 'product_id' ] ) : '';
-		$variation_id = isset( $_POST[ 'variation_id' ] ) ? absint( $_POST[ 'variation_id' ] ) : 0;
-		$status = '';
+		$product_id 	= isset( $_POST[ 'product_id' ] ) ? absint( $_POST[ 'product_id' ] ) : '';
+		$variation_id 	= isset( $_POST[ 'variation_id' ] ) ? absint( $_POST[ 'variation_id' ] ) : 0;
+		$status 		= '';
+
 		if ( $product_id && !empty( $product_id ) && !empty( $customer_email ) ) {
 			$product_id = ( $variation_id && $variation_id > 0 ) ? $variation_id : $product_id;
 			$do_complete_additional_task = apply_filters( 'woo_stock_manager_do_complete_additional_task', false );
@@ -175,7 +177,8 @@ class Ajax {
 				Subscriber::insert_subscriber_email_trigger( wc_get_product( $product_id ), $customer_email );
 				$status = true;
 			} 
-		} 
+		}
+
 		echo esc_html( $status );
 		die();
 	} 

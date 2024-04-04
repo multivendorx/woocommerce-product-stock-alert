@@ -1,5 +1,4 @@
 import { __ } from '@wordpress/i18n';
-
 export default {
     id: 'form_customization',
     priority: 2,
@@ -50,15 +49,8 @@ export default {
             blocktext: __("Alert Box Customizer", "woocommerce-stock-manager"),
         },
         {
-            key: "custom_example_form",
-            type: "example_form",
-            class: "woo-setting-own-class",
-            label: __("Sample Form", "woocommerce-stock-manager")
-        },
-        {
-            key: "button_color_section",
-            type: "form_customize_table",
-            label: __("Customization Settings", "woocommerce-stock-manager"),
-        },
+            type: "button_customizer",
+            label: __("Customize Button", "woocommerce-stock-manager")
+        }
     ]
 };

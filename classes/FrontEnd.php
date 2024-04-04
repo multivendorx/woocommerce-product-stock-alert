@@ -54,7 +54,7 @@ class FrontEnd {
             // Enqueue your frontend javascript from here
             wp_enqueue_script( 'stock_manager_frontend_js', $frontend_script_path . 'frontend' . $suffix . '.js', [ 'jquery' ], SM()->version, true );
         
-            wp_localize_script( 'stock_manager_frontend_js', 'woo_stock_manager_script_data', [
+            wp_localize_script( 'stock_manager_frontend_js', 'localizeData', [
                 'ajax_url' => admin_url( 'admin-ajax.php', 'relative' ), 
                 'nonce'  => wp_create_nonce( 'stock-manager-security-nonce' ), 
                 'additional_fields' => apply_filters( 'woocommerce_stock_manager_form_additional_fields', [] ), 

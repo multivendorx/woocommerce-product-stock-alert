@@ -90,7 +90,7 @@ class Admin {
      * @return void
      */
     public function create_setting_page() {
-        echo '<div id="woo-admin-stockmanager"></div>';
+        echo '<div id="admin-stockmanager"></div>';
     }
 
     /**
@@ -209,6 +209,7 @@ class Admin {
             'ban_email_domain_text', 
             'ban_email_address_text'
         ];
+        
         $settings_databases_value =[];
         $tabs =['general','form_customization','form_submission','email','mailchimp'];
         foreach($tabs as $tab){

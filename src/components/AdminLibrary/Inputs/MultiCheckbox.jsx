@@ -38,8 +38,8 @@ const MultiCheckBox = (props) => {
                                 <label htmlFor={`${props.idPrefix}-${option.key}`}></label>
                             </div>
                             {
-                                !props.rightContent &&
-                                <p className={props.rightContentClass}>{option.label}</p>
+                                ! props.rightContent &&
+                                <p className={props.rightContentClass} dangerouslySetInnerHTML={{ __html: option.label }}></p>
                             }
                             {
                                 option.hints &&
@@ -55,8 +55,7 @@ const MultiCheckBox = (props) => {
             }
             {
                 props.description &&
-                <p className={props.descClass} dangerouslySetInnerHTML= {{__html: props.description}}>
-                </p>
+                <p className={props.descClass} dangerouslySetInnerHTML= {{__html: props.description}}></p>
             }
         </div>
     );

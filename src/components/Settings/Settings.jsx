@@ -3,6 +3,7 @@
 import { useLocation } from "react-router-dom";
 import DynamicForm from "../AdminLibrary/DynamicForm/DynamicForm";
 import Tabs from '../AdminLibrary/Tabs/Tabs';
+import Support from "../AdminLibrary/Suppot/Support";
 import BannerSection from '../Banner/banner';
 
 // import context
@@ -26,17 +27,27 @@ const Settings = () => {
     
     // Render the dinamic form.
     const getForm = (currentTab) => {
+
         // get the setting context
         const { setting, settingName, setSetting } = useSetting();
         const settingModal = getSettingById( settingsArray, currentTab );
 
         if ( settingName != currentTab ) {
-            setSetting( currentTab, appLocalizer.settings_databases_value[currentTab] );
+            setSetting( currentTab, appLocalizer.settings_databases_value[currentTab] || {} );
         }
 
         useEffect(() => {
             appLocalizer.settings_databases_value[settingName] = setting;
         }, [setting]);
+
+        // Reander spacial component...
+        if ( currentTab === 'support' ) {
+            return (
+                <Support
+                    content={settingModal}
+                />
+            );
+        }
 
         return (
             <>

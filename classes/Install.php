@@ -26,7 +26,6 @@ class Install {
     
     public function __construct() {
         $this->create_database_table();
-        $this->stock_manager_data_migrate();
         $this->start_cron_job();
     }
 
@@ -49,6 +48,8 @@ class Install {
     public static function subscriber_migration() {
         global $wpdb;
         
+        self::stock_manager_data_migrate();
+
         try {
             // Get woosubscribe post and post meta
             $subscribe_datas = $wpdb->get_results(
@@ -80,26 +81,48 @@ class Install {
             }
 
             // If result exist then insert those result into custom table
-            if ($VALUES) {
-                // Remove last , from $value
-                $VALUES = substr($VALUES, 0, -1);
+            if ( $VALUES ) {
+                // Remove last ','
+                $VALUES = substr( $VALUES, 0, -1 );
 
                 $wpdb->query(
                     "INSERT IGNORE INTO {$wpdb->prefix}stockalert_subscribers (product_id, user_id, email, status, create_time ) VALUES {$VALUES} "
                 );
             }
+
+            // Delete the post seperatly, If there is problem in migration post will not delete permanently
+            foreach( $subscribe_datas as $subscribe_data ) {
+                wp_delete_post( $subscribe_data[ 'id' ] );
+            }
+
+            // Get subscriber count
+            $subscriber_counts = $wpdb->get_results(
+                $wpdb->prepare(
+                    "SELECT product_id, COUNT(*) as count from {$wpdb->prefix}stockalert_subscribers
+                    WHERE status = %s
+                    GROUP BY product_id",
+                    [ 'subscribed' ]
+                )
+            );
+
+            // Update subscriber count
+            foreach ( $subscriber_counts as $count_data ) {
+                update_post_meta( $count_data->product_id, 'no_of_subscribers', $count_data->count );
+            }
+
+            delete_option( 'stock_manager_migration_running' );
+            self::$migration_running = false;
+
         } catch ( \Exception $e ) {
             Utill::log( $e->getMessage() );
         }
-    
-        delete_option( 'stock_manager_migration_running' );
     }
 
     /**
      * Create database table for subscriber.
      * @return void
      */
-    public function create_database_table() {
+    private function create_database_table() {
         global $wpdb;
 
         $collate = '';
@@ -126,7 +149,7 @@ class Install {
      * Function that schedule hook for notification corn job.
      * @return void
      */
-    function start_cron_job() {
+    private function start_cron_job() {
         // Migrate subscriber data from post table
         wp_clear_scheduled_hook( 'stock_manager_start_subscriber_migration' );
         wp_schedule_event( time(), 'hourly', 'stock_manager_start_subscriber_migration' );
@@ -142,7 +165,7 @@ class Install {
      * Data migration function. Run on installation time.
      * @return void
      */
-    function stock_manager_data_migrate() {
+    private static function stock_manager_data_migrate() {
         $current_version = SM()->version;
         $previous_version = get_option( "woo_stock_manager_version" );
 

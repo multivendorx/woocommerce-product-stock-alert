@@ -4,7 +4,7 @@
   border-radius: 0.25rem;
   border: 0.063rem solid #d4d1d9;
 
-  .rs-stack{
+  .rs-stack {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -66,4 +66,26 @@ input.rs-picker-toggle-textbox {
   padding: 0.063rem;
   text-align: center;
   vertical-align: middle;
+}
+
+.download-btn-subscriber-list {
+  display: flex;
+  align-items: center;
+  border: 0.063rem solid #d4d1d9;
+  background-color: #65438f;
+  color: #f9f8fb;
+  border-radius: 0.25rem;
+  padding: 0.75rem 1.5rem;
+  position: relative;
+  font-size: 0.9rem;
+  width: fit-content;
+
+  a {
+    text-decoration: none;
+    color: #f9f8fb;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
 }

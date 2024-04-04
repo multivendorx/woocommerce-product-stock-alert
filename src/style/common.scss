@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'mvx-font';
-  src:  url('fonts/mvx-font.eot?aygtag');
-  src:  url('fonts/mvx-font.eot?aygtag#iefix') format('embedded-opentype'),
-    url('fonts/mvx-font.ttf?aygtag') format('truetype'),
-    url('fonts/mvx-font.woff?aygtag') format('woff'),
-    url('fonts/mvx-font.svg?aygtag#mvx-font') format('svg');
+  src:  url('fonts/mvx-font.eot?hgwy93');
+  src:  url('fonts/mvx-font.eot?hgwy93#iefix') format('embedded-opentype'),
+    url('fonts/mvx-font.ttf?hgwy93') format('truetype'),
+    url('fonts/mvx-font.woff?hgwy93') format('woff'),
+    url('fonts/mvx-font.svg?hgwy93#mvx-font') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -25,6 +25,9 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.font-resize:before {
+  content: "\e90e";
+}
 .font-arrow-down:before {
   content: "\e90a";
 }
@@ -39,6 +42,21 @@
 }
 .font-mailchimp:before {
   content: "\e900";
+}
+.font-link:before {
+  content: "\e90d";
+}
+.font-crop-free:before {
+  content: "\e90f";
+}
+.font-text-fields:before {
+  content: "\e910";
+}
+.font-send:before {
+  content: "\e90c";
+}
+.font-menu:before {
+  content: "\e90b";
 }
 .font-cross:before {
   content: "\e905";
@@ -58,6 +76,8 @@
 .font-settings:before {
   content: "\e904";
 }
+
+
 
 
 $base-color: #f2eff5;
@@ -110,6 +130,11 @@ input, textarea{
     text-decoration: none;
   }
 }
+
+#admin-stockmanager{
+  margin-top: 5px;
+}
+
 
 .woo-module-popup span.font-cross{
   font-size: 1.25rem;

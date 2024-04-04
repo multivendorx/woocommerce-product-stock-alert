@@ -1,0 +1,72 @@
+.required {
+	color: red;
+}
+
+.no_subscriber {
+	font-size: 1.5rem;
+	color: green;
+}
+
+.no_subscriber_zero {
+	font-size:1.5rem;
+	color: red;
+}
+
+.interested_person {
+	margin-top: 2rem;
+}
+
+.stock_label {
+	text-align: center;
+	font-weight: bold;
+}
+
+.variation_no_subscriber {
+	text-align: center;
+	font-size: 1.75rem;
+	margin: 1.26rem;
+	color: green;
+}
+
+.variation_no_subscriber_zero {
+	text-align: center;
+	font-size: 1.75rem;
+	margin: 1.25rem;
+	color: red;
+}
+
+.stock_column {
+	color: green;
+	font-size: 1rem;
+}
+
+.stock_column_zero {
+	color: red;
+	font-size: 1rem;
+}
+
+/*pro tag*/
+span.admin-pro-tag {
+	position: absolute;
+	right: .25rem;
+	background: #522c81;
+	color: #fdfdfe;
+	padding: .125rem .4rem;
+	top: 50%;
+	transform: translateY(-50%);
+	border-radius: .625rem;
+	font-size: .625rem;
+	text-align: center;
+	line-height: 1;
+	text-transform: capitalize
+}
+
+#adminmenu .wp-submenu li {
+	position: relative;
+}
+
+.product-subscribtion-column {
+	color: #181817;
+	font-weight: 600;
+	font-size: 1rem;
+}

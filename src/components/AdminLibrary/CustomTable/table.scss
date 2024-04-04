@@ -156,7 +156,7 @@ $animation-duration: 2s;
         h4 {
           display: none;
           margin: 0;
-          max-width: 150px;
+          max-width: 9.45rem;
           width: 100%;
         }
 
@@ -231,7 +231,7 @@ $animation-duration: 2s;
             }
           }
           &:nth-child(3) {
-            max-width: 150px;
+            max-width: 9.45rem;
             width: 100%;
           }
 
@@ -266,27 +266,27 @@ $animation-duration: 2s;
       }
     }
 
-    @media only screen and (max-width: 600px) {
+    @media only screen and (max-width: 37.8rem) {
       .rdt_TableBody .rdt_TableRow {
         .rdt_TableCell {
           &:nth-child(3) {
-            max-width: 100px;
+            max-width: 6.3rem;
             width: 100%;
           }
         }
       }
     }
-    @media only screen and (max-width: 440px) {
+    @media only screen and (max-width: 27.72rem) {
       .rdt_TableBody .rdt_TableRow {
         .rdt_TableCell {
           &:nth-child(3) {
-            max-width: 50px;
+            max-width: 3.15rem;
             width: 100%;
           }
         }
       }
     }
-    @media only screen and (max-width: 370px) {
+    @media only screen and (max-width: 23.31rem) {
       .rdt_TableBody .rdt_TableRow .rdt_TableCell .table-row-custom * {
         font-size: 0.85rem !important;
       }

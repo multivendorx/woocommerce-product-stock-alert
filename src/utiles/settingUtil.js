@@ -4,9 +4,43 @@
  * @returns {Array}
  */
 const getSettingsByPriority = ( settings ) => {
+    
     if ( Array.isArray( settings ) ) {
-        settings.sort((a, b) => a.priority - b.priority);
+        
+        settings.sort((firstSet, secondSet) => {
+            
+            // Variable contain priority of two compairable element.
+            let firstPriority   = 0;
+            let secondPriority  = 0;
+
+            // First check if the settings have child.
+            // First Recursively sort the childs !!!importent.
+            if ( firstSet.type == 'folder' ) {
+                firstSet.content = getSettingsByPriority( firstSet.content );
+                
+                // Set first child's priority to parent's priority
+                const firstChild = firstSet.content[0];
+                firstPriority = firstChild.content.priority;
+
+            } else {
+                firstPriority = firstSet.content.priority;
+            }
+
+            if (secondSet.type === 'folder') {
+                secondSet.content = getSettingsByPriority( secondSet.content );
+                
+                // Set first child's priority to parent's priority
+                const firstChild = secondSet.content[0];
+                secondPriority = firstChild.content.priority;
+
+            } else {
+                secondPriority = secondSet.content.priority
+            }
+
+            return firstPriority - secondPriority;
+        });
     }
+
     return settings;
 }
 
@@ -16,10 +50,38 @@ const getSettingsByPriority = ( settings ) => {
  * @param {*} ids 
  * @returns filter setting.
  */
-const filterSettingByIds = ( settings, ids ) => {
-    if ( Array.isArray( settings ) && Array.isArray( ids ) ) {
-        return settings.filter( ( setting ) => ids.includes( setting.id ) );
+const filterSettingByIds = (settings, ids) => {
+
+    if (Array.isArray(settings) && Array.isArray(ids)) {
+        
+        // Filter the array here
+        const filterSettings = [];
+
+        for( let setting of settings ) {
+
+            // Setting has child
+            if (setting.type === 'folder') {
+
+                // Prepare all childs recursivelly
+                const settingContent = filterSettingByIds(setting.content, ids);
+
+                if (settingContent.length) {
+                    // Insert by deep copy. Otherwise it will change original object.
+                    filterSettings.push( { ...setting, 'content': settingContent } );                 
+                }
+
+                continue;
+            }
+
+            if ( ids.includes( setting.content.id ) ) {
+                filterSettings.push( setting );
+            }
+
+        }
+
+        return filterSettings;
     }
+
     return settings;
 }
 
@@ -29,9 +91,39 @@ const filterSettingByIds = ( settings, ids ) => {
  * @returns {*}
  */
 const getDefaultSettings = ( settings ) => {
+
     if ( Array.isArray( settings ) ) {
-        return settings.filter( ( setting ) => ! setting.pro_dependent && ! setting.module_dependent );
+        
+        // Filter the array here
+        const filterSettings = [];
+
+        settings.forEach(setting => {
+            
+            // Setting has childs
+            if (setting.type === 'folder') {
+
+                // Prepare all childs recursivelly
+                setting.content = getDefaultSettings( setting.content );
+
+                if ( setting.content.length ) {
+                    filterSettings.push( setting );                    
+                }
+
+                return;
+            }
+
+            // Append setting if its content is not empty and free setting
+            if (
+                ! setting.content.pro_dependent &&
+                ! setting.content.module_dependent
+            ) {
+                filterSettings.push( setting );
+            }
+        });
+
+        return filterSettings;
     }
+
     return settings;
 }
 
@@ -41,7 +133,7 @@ const getDefaultSettings = ( settings ) => {
  * @param {*} ids 
  * @returns 
  */
-const getAvialableSettings = ( settings, ids ) => {
+const getAvialableSettings = (settings, ids = []) => {
     return getSettingsByPriority( [ ...getDefaultSettings( settings ) , ...filterSettingByIds( settings, ids ) ] );
 }
 
@@ -54,8 +146,31 @@ const getAvialableSettings = ( settings, ids ) => {
  */
 const getSettingById = ( settings, settingId ) => {
     if ( Array.isArray( settings ) ) {
-        return settings.find( ( { id } ) => id === settingId ) || [];
+
+        // Iterate through all settings
+        for ( let setting of settings ) {
+            
+            // If setting has child first search setting in childs
+            if ( setting.type === 'folder' ) {
+                
+                // Get settingContent from child recursivlly
+                const settingContent = getSettingById( setting.content, settingId );
+
+                // If settingContent has found
+                if ( Object.keys(settingContent).length ) {
+                    return settingContent;
+                }
+
+                continue;
+            }
+
+            // If id matched
+            if (setting.content.id === settingId) {
+                return setting.content;
+            }
+        }
     }
+
     return [];
 }
 
@@ -71,17 +186,21 @@ const isActiveSetting = ( setting, proActive, ids ) => {
     if ( ! setting.module_dependent ) {
         return true;
     }
+
     // Module setting
-    if ( ids.includes( setting.id ) ) {
+    if (ids.includes(setting.id)) {
+        
         // Free module setting return true.
         if ( ! setting.pro_dependent ) {
             return true;
         }
+
         // Pro module setting and pro is active return true.
         if ( proActive ) {
             return true;
         }
     }
+
     return false;
 }
 

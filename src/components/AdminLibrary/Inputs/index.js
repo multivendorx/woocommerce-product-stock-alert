@@ -11,7 +11,6 @@ import Recaptcha from './Recaptcha.jsx';
 import SelectInput from './SelectInput.jsx';
 import TextArea from './TextArea.jsx';
 import ToggleRectangle from './ToggleRectangle.jsx';
-
 // Util component import
 import BlockText from './Util/BlockText.jsx';
 import GoogleMap from './Util/GoogleMap.jsx';
@@ -20,10 +19,12 @@ import Section from './Util/Section.jsx';
 import Seperator from './Util/Separator.jsx';
 import Table from './Util/Table.jsx';
 import WpEditor from './Util/WpEditor.jsx';
-
+// Spacial component import
+import ButtonCustomizer from './Special/ButtonCustomizer.jsx';
 // Export Component's object as default.
 export default {
     BasicInput,
+    ButtonCustomizer,
     CalendarInput,
     CheckBox,
     FileInput,
