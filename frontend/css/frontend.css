@@ -1,0 +1,67 @@
+.alert_container {
+	margin-bottom: 1.26rem;
+}
+
+.stock_manager_email {
+	margin-bottom: 0.63rem;
+	width: 15.75rem;
+}
+
+.stk_disabled{
+	cursor: not-allowed;
+  opacity: 0.5 !important;
+}
+
+h5.subscribe_for_interest_text {
+	margin-bottom: 0.315rem;
+}
+
+.alert_container_bk {
+	display: none;
+}
+
+.alert_container p {
+  margin-bottom: 0.0rem;
+  font-size: 0.693rem;
+  font-weight: bold;
+  font-style: italic;
+  margin-top: 0.252rem;
+}
+
+.stock_manager_button.alert_loader {
+  cursor: not-allowed;
+}
+
+.stock_manager_button.alert_loader:before {
+  content: "";
+  display: inline-block;
+  width: 0.63rem;
+  height: 0.63rem;
+  margin-right: 0.63rem;
+  border-radius: 50%;
+  border: 0.126rem solid white;
+  border-left-color: transparent;
+  border-top-color: transparent;
+  animation: loading 1s linear infinite;
+}
+
+button.stock_manager_button {
+  margin: 0.315rem;
+}
+
+.registered_message {
+  margin-bottom: 1.26rem;
+}
+
+button.unsubscribe_button {
+  margin: 0.945rem 0;
+}
+
+@keyframes loading{
+  0%{
+    transform: rotate(0deg);
+  }
+  100%{
+    transform: rotate(360deg);
+  }
+}

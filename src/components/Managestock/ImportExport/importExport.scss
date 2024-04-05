@@ -1,0 +1,321 @@
+$manageStock-border: 0.063rem solid #d4d1d9;
+$manageStock-fill-color: #fdfdfe;
+
+.stock-reports-download {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.no-data-text {
+  display: flex;
+  justify-content: center;
+  padding: 1.512rem;
+}
+
+.import-page .woo-page-title {
+  margin-bottom: 0.938rem;
+}
+
+.import-section {
+
+  th,
+  td {
+    text-align: center;
+    border-bottom: 0.063rem solid rgba($color: #000000, $alpha: 0.2);
+    padding: 0.625rem;
+  }
+
+  td {
+    border-bottom: none;
+  }
+
+  p {
+    font-size: 1rem;
+    padding-bottom: 0.625rem;
+  }
+
+  h2 {
+    margin: 0.625rem 0;
+  }
+}
+
+.export-section {
+  margin-top: 0.938rem;
+
+  p {
+    font-size: 1rem;
+    padding-bottom: 0.625rem;
+  }
+
+  h2 {
+    margin: 0.625rem 0;
+  }
+}
+
+.export-list-section {
+  padding: 0.625rem 0 0.938rem;
+  display: flex;
+  gap: 2rem;
+
+  p {
+    font-weight: 600;
+    font-size: 1.15rem;
+    color: #000;
+  }
+
+  .checkbox-container {
+    display: flex;
+    gap: 2rem;
+  }
+
+  .chunk-container {
+    max-width: 12.5rem;
+    width: 100%;
+  }
+}
+
+.mvx-select-deselect-trigger {
+  border: 0.063rem solid #d4d1d9;
+  color: #181718;
+  border-radius: 0.25rem;
+  width: fit-content;
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+  transition: 0.3s;
+  cursor: pointer;
+
+  &:hover {
+    border: 0.063rem solid #000000;
+  }
+}
+
+.export-page-content {
+  max-width: 40.625rem;
+  width: 100%;
+}
+
+.import-page,
+.export-page {
+  background-color: #ffffff;
+  padding: 1.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.25rem;
+  box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.12);
+}
+
+.import-table {
+  padding: 1.5rem;
+  box-shadow: 0 0 0.2rem rgba($color: #000000, $alpha: 0.2);
+  margin-bottom: 0.625rem;
+  border-radius: 0.25rem;
+  background-color: $manageStock-fill-color;
+
+  .import-export-btn {
+    margin: auto;
+    margin-bottom: 0.625rem;
+  }
+}
+
+.import-csv-section {
+  border-radius: 0.5rem;
+  border: 0.063rem solid rgba(0, 0, 0, 0.284);
+  border-style: dashed;
+  padding: 2rem 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  height: 9.375rem;
+  flex-direction: column;
+  margin-bottom: 0.938rem;
+  cursor: pointer;
+  position: relative;
+
+  .import-input {
+    height: 8.125rem;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+  }
+
+  p {
+    text-align: center;
+  }
+}
+
+.export-feature-card {
+  display: flex;
+  gap: 2rem;
+  padding: 0.5rem 0;
+
+  h1 {
+    font-size: 1rem;
+    width: 6.875rem;
+    font-weight: 400;
+  }
+}
+
+#admin-stockmanager input[type="number"]::-webkit-inner-spin-button {
+  display: none;
+}
+
+.export-container,
+.import-container {
+  max-width: 43.75rem;
+  width: 100%;
+  padding: 1.25rem;
+  border: 0.063rem solid rgba($color: #000000, $alpha: 0.2);
+  background: #fff;
+}
+
+.custome-toggle-default {
+  position: relative;
+  z-index: 1;
+  top: -0.75rem;
+  left: 50%;
+  transform: translateX(-20%);
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0.35rem;
+    left: 2.3rem;
+    width: 0.25rem;
+    height: 0.25rem;
+    transform: translateY(50%);
+    border: 0.0625rem solid #65438f;
+    border-radius: 8rem;
+    transition: 0.3s;
+    z-index: 0;
+  }
+
+  input {
+    position: absolute;
+    width: 3.3rem;
+    height: 1.5rem;
+    top: 0.313rem;
+    z-index: 2;
+    opacity: 0;
+    left: 0;
+  }
+
+  label {
+    position: absolute;
+    cursor: pointer;
+    width: 3.3rem;
+    height: 1.5rem;
+    background: transparent;
+    display: block;
+    border-radius: 8rem;
+    border: 0.125rem solid #d4d1d9;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left: 0.5rem;
+      width: 0.17rem;
+      height: 0.57rem;
+      background: #fdfdfe;
+      transition: 0.3s;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left: 0.313rem;
+      width: 0.875rem;
+      height: 0.875rem;
+      background: #65438f;
+      border-radius: 90rem;
+      transition: 0.3s;
+      z-index: 1;
+    }
+  }
+
+  &:has(input[type="checkbox"]:checked) label {
+    background: #65438f;
+    border: 0.125rem solid #65438f;
+
+    &::after {
+      left: calc(100% - 1.313rem);
+      transform: translatey(-50%);
+      background-color: #fdfdfe;
+    }
+  }
+}
+
+.import-export-btn-section {
+  margin: 0.5rem 0;
+  margin-right: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+
+  * {
+    margin: 0 !important; // to adjust import button section button margin
+  }
+
+  &>div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+}
+.import-btn {
+  padding: 0.75rem 1.5rem;
+  background: #795b9d;
+  border-radius: 2rem;
+  color: white;
+  max-width: 25rem;
+  width: 100%;
+}
+
+.import-btn-section {
+  display: flex;
+  align-items: center;
+  justify-content: end !important; // to adjust import button section button position
+  gap: 0.5rem;
+  margin-bottom: 0.625rem;
+}
+
+.import-upload-btn-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media only screen and (max-width: 31.5rem) {
+  .export-list-section {
+    flex-direction: column;
+    gap: 0rem;
+    align-items: start;
+
+    .checkbox-container {
+      flex-direction: column;
+      gap: 0;
+      width: 100%;
+
+      .chunk-container {
+        width: 100%;
+        max-width: 31.25rem;
+      }
+    }
+  }
+
+  .export-feature-card {
+    justify-content: space-between;
+  }
+}
