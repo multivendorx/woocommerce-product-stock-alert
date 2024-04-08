@@ -96,7 +96,7 @@ const Support = () => {
 
   return (
     <>
-      <div className="mvx-dynamic-fields-wrapper">
+      <div className="dynamic-fields-wrapper">
         <div className="support-container">
           <div className="support-header-wrapper">
             <h1 className="support-heading">
@@ -125,7 +125,7 @@ const Support = () => {
                   <>
                     <div key={index} className="support-quick-link-items">
                       <div className="icon-bar">
-                        <i className={`mvx-font font-${item.icon}`}></i>
+                        <i className={`admin-font font-${item.icon}`}></i>
                       </div>
                       <div className="content">
                         <a href={item.link} target="_blank">{item.title}</a>

@@ -23,28 +23,28 @@ const Customizer = (props) => {
           className="btn-customizer-menu-items"
           onClick={(e) => setSelect("border")}
         >
-          <i className="mvx-font font-crop-free"></i>
+          <i className="admin-font font-crop-free"></i>
         </div>
         <div
         title="Text Style"
           className="btn-customizer-menu-items"
           onClick={(e) => setSelect("font")}
         >
-           <i className="mvx-font font-text-fields"></i>
+           <i className="admin-font font-text-fields"></i>
         </div>
         <div
         title="Change Size"
           className="btn-customizer-menu-items"
           onClick={(e) => setSelect("size")}
         >
-           <i className="mvx-font font-resize"></i>
+           <i className="admin-font font-resize"></i>
         </div>
         <div
           title="Add Url"
           className="btn-customizer-menu-items"
           onClick={(e) => setSelect("link")}
         >
-          <i className="mvx-font font-link"></i>
+          <i className="admin-font font-link"></i>
         </div>
       </div>
       {(select === "color" ||
@@ -55,7 +55,7 @@ const Customizer = (props) => {
         <div className="customizer-setting-wrapper">
           {/* Wrapper close btn */}
           <button onClick={(e) => setSelect("")} className="wrapper-close">
-            <i className="mvx-font font-cross"></i>
+            <i className="admin-font font-cross"></i>
           </button>
 
           {/* Render selcted setting */}
@@ -327,7 +327,7 @@ const Customizer = (props) => {
                     placeholder="Paste your url/link"
                   />
                   <button>
-                    <i className="mvx-font font-send"></i>
+                    <i className="admin-font font-send"></i>
                   </button>
                 </div>
               </div>

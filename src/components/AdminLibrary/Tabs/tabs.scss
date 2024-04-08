@@ -13,25 +13,25 @@ $icon-color: #9f8ab9;
 }
 
 #admin-stockmanager {
-  .mvx-general-wrapper {
-    .mvx-container {
+  .general-wrapper {
+    .container {
       gap: 1.2rem;
       background-color: $base-color;
       padding: 2rem 1.5rem;
       min-height: 54rem;
       @include flex(column, start);
 
-      .mvx-middle-container-wrapper {
+      .middle-container-wrapper {
         width: 100%;
         min-width: 60%;
 
-        .mvx-tab-description-start {
+        .tab-description-start {
           padding: 2rem 2rem;
           margin-bottom: 0.35rem;
           background-color: $fill-color;
           border: 0.063rem solid $border-color;
 
-          .mvx-tab-name {
+          .tab-name {
             color: $theme-color;
             font-size: 1.5rem;
             font-weight: 500;
@@ -39,18 +39,18 @@ $icon-color: #9f8ab9;
           }
         }
 
-        .mvx-middle-child-container {
+        .middle-child-container {
           @include flex(row, start, start);
           gap: 1rem;
 
-          .mvx-current-tab-lists {
+          .current-tab-lists {
             height: auto;
             max-width: 15.75rem;
             width: 100%;
             position: sticky;
             top: 3rem;
 
-            .mvx-current-tab-lists-container {
+            .current-tab-lists-container {
               .active-current-tab {
                 position: relative;
                 background-color: rgb(225 225 225);
@@ -89,6 +89,7 @@ $icon-color: #9f8ab9;
                 }
 
                 .tab-menu-dropdown-icon{
+                  margin: 0;
                   margin-left: auto;
                   width: 1.5rem;
                   height: 1.5rem;
@@ -171,6 +172,9 @@ $icon-color: #9f8ab9;
             }
 
             .menu-coll-btn {
+              border: none;
+              outline: none;
+              cursor: pointer;
               display: flex;
               align-items: center;
               transition: 0.3s;
@@ -201,10 +205,10 @@ $icon-color: #9f8ab9;
             }
           }
 
-          .mvx-current-tab-lists.showMenu {
+          .current-tab-lists.showMenu {
             max-width: 2.52rem;
 
-            .mvx-current-tab-lists-container {
+            .current-tab-lists-container {
               a {
                 padding: 0.5rem;
 
@@ -215,7 +219,7 @@ $icon-color: #9f8ab9;
             }
           }
 
-          .mvx-tab-content {
+          .tab-content {
             width: 100%;
             height: auto;
             min-height: 63rem;
@@ -251,7 +255,7 @@ $icon-color: #9f8ab9;
       }
     }
 
-    .mvx-notic-display-title {
+    .notic-display-title {
       background-color: #bf6290;
       color: $fill-color;
       padding: 0.5rem 1rem;
@@ -270,11 +274,11 @@ $icon-color: #9f8ab9;
 
 @media only screen and (max-width: 48.321rem) {
   #admin-stockmanager {
-    .mvx-general-wrapper {
-      .mvx-container {
-        .mvx-middle-container-wrapper {
-          .mvx-middle-child-container {
-            .mvx-current-tab-lists {
+    .general-wrapper {
+      .container {
+        .middle-container-wrapper {
+          .middle-child-container {
+            .current-tab-lists {
               max-width: 100vw;
               width: 0%;
               overflow: hidden;
@@ -283,8 +287,9 @@ $icon-color: #9f8ab9;
               z-index: 100000;
               top: 0;
               left: 0;
+              background: rgba($color: #000000, $alpha: 0.5);
 
-              .mvx-current-tab-lists-container {
+              .current-tab-lists-container {
                 height: 100%;
                 background: white;
                 padding: 2rem;
@@ -304,11 +309,11 @@ $icon-color: #9f8ab9;
               }
             }
 
-            .mvx-current-tab-lists.active {
+            .current-tab-lists.active {
               width: 100%;
             }
 
-            .mvx-tab-content {
+            .tab-content {
               width: 100%;
             }
           }

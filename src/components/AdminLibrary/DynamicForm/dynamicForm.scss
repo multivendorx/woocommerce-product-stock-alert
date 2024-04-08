@@ -16,48 +16,47 @@ $label-width-mobile: 100%;
 $input-width-mobile: 100%;
 $fill-color: #fdfdfe;
 
-.mvx-tab-content {
-
-  .mvx-dynamic-fields-wrapper{
+.tab-content {
+  .dynamic-fields-wrapper {
     background-color: $fill-color;
     border: 0.063rem solid $border-color;
     min-height: 53rem;
 
-    .mvx-dynamic-form {
+    .dynamic-form {
       padding-top: 2.5rem;
-      .mvx-form-group {
+      .form-group {
         display: flex;
         align-items: start;
         justify-content: space-between;
         flex-wrap: wrap;
         gap: $gap;
         padding: $padding-y $padding-x;
-  
-        .mvx-settings-form-label {
+
+        .settings-form-label {
           width: $label-width-desktop;
           color: $text-color;
           word-wrap: break-word;
-  
+
           p {
             font-size: 0.875rem;
             color: $text-color;
           }
         }
-  
-        .mvx-settings-input-content {
+
+        .settings-input-content {
           width: $input-width-desktop;
           color: $secondary-text-color;
           position: relative;
-  
-          .mvx-toggle-checkbox-content {
+
+          .toggle-checkbox-content {
             margin-left: auto;
             position: relative;
             margin-bottom: 0.625rem;
 
-            span.admin-pro-tag{
+            span.admin-pro-tag {
               left: 3.625rem;
             }
-  
+
             &::after {
               content: "";
               position: absolute;
@@ -70,14 +69,14 @@ $fill-color: #fdfdfe;
               transition: 0.3s;
               z-index: 0;
             }
-  
+
             input {
               height: 0;
               width: 0;
               visibility: hidden;
               display: none;
             }
-  
+
             label {
               cursor: pointer;
               width: 3.3rem;
@@ -87,7 +86,7 @@ $fill-color: #fdfdfe;
               border-radius: 8rem;
               position: relative;
               border: 0.125rem solid $border-color;
-  
+
               &::before {
                 content: "";
                 position: absolute;
@@ -123,15 +122,15 @@ $fill-color: #fdfdfe;
               background-color: $secondary-color;
             }
           }
-  
+
           input,
           textarea {
             width: 100%;
             border: 0.063rem solid $border-color;
           }
         }
-  
-        .mvx-settings-metabox-description {
+
+        .settings-metabox-description {
           margin-top: 0.625rem;
           font-style: italic;
           font-size: 0.75rem;
@@ -139,29 +138,33 @@ $fill-color: #fdfdfe;
         }
       }
     }
-  
-    .mvx-setting-section-divider {
+
+    .setting-section-divider {
       background-color: $divider-color;
       height: 0.05rem;
       margin: $margin-y $margin-x;
     }
   }
 
+}
+@media only screen and (max-width: 48.321rem) {
+  .tab-content {
+    .dynamic-fields-wrapper {
+      .dynamic-form {
+        .form-group {
+          flex-direction: column;
+          .settings-form-label {
+            width: $label-width-mobile;
+          }
 
-  @media only screen and (max-width: 48.321rem) {
-    .mvx-dynamic-form {
-      .mvx-form-group {
-        .mvx-settings-form-label {
-          width: $label-width-mobile;
-        }
-
-        .mvx-settings-input-content {
-          width: $input-width-mobile;
+          .settings-input-content {
+            width: $input-width-mobile;
+          }
         }
       }
-    }
-    .mvx-setting-section-divider {
-      margin: $margin-y $margin-x;
+      .setting-section-divider {
+        margin: $margin-y $margin-x;
+      }
     }
   }
 }

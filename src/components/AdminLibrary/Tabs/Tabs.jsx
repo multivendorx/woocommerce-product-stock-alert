@@ -13,7 +13,7 @@ const Tabs = ( props ) => {
     const showTabSection = (tab) => {
         return tab.link ? (
             <a href={ tab.link }>
-                { tab.icon && <i className={`mvx-font ${ tab.icon }`}></i> }
+                { tab.icon && <i className={`admin-font ${ tab.icon }`}></i> }
                 { menuCol ? null : tab.name }
             </a>
         ) : (
@@ -21,7 +21,7 @@ const Tabs = ( props ) => {
                 className={ currentTab === tab.id ? 'active-current-tab' : '' }
                 to={ prepareUrl( tab.id ) }
             >
-                { tab.icon && <i className={` mvx-font ${ tab.icon } `} ></i> }
+                { tab.icon && <i className={` admin-font ${ tab.icon } `} ></i> }
                 { menuCol ? null : tab.name }
                 { menuCol  ? null :
                     ( appLocalizer.pro_active == 'free' ) && tab.proDependent &&
@@ -43,13 +43,13 @@ const Tabs = ( props ) => {
                 }
             }}
         >
-            { tab.icon && <i className={` mvx-font ${ tab.icon } `} ></i> }
+            { tab.icon && <i className={` admin-font ${ tab.icon } `} ></i> }
             {menuCol ? null : tab.name}
             {menuCol ? null : (
                 openedSubtab == tab.id ? 
-                    <p className='tab-menu-dropdown-icon active'><i className='mvx-font font-arrow-right'></i></p>
+                    <p className='tab-menu-dropdown-icon active'><i className='admin-font font-arrow-right'></i></p>
                     :
-                    <p className='tab-menu-dropdown-icon'><i className='mvx-font font-arrow-right'></i></p>
+                    <p className='tab-menu-dropdown-icon'><i className='admin-font font-arrow-right'></i></p>
             )}
         </Link>
     }
@@ -60,8 +60,8 @@ const Tabs = ( props ) => {
         return tabData.map( ( {content, type} ) => {
             if ( type === 'file' ) {
                 return  content.id === currentTab &&
-                    <div className="mvx-tab-description-start">
-                        <div className="mvx-tab-name">{ content.name }</div>
+                    <div className="tab-description-start">
+                        <div className="tab-name">{ content.name }</div>
                         <p>{ content.desc }</p>
                     </div>
             } else if ( type === 'folder' ) {
@@ -72,7 +72,7 @@ const Tabs = ( props ) => {
     }
 
     const handleMenu =()=>{
-        let menudiv = document.getElementById('mvx-current-tab-lists');
+        let menudiv = document.getElementById('current-tab-lists');
         menudiv.classList.toggle('active');
     }
 
@@ -82,33 +82,33 @@ const Tabs = ( props ) => {
     
     return (
         <>
-            <div className={` mvx-general-wrapper mvx-${ props.queryName } `}>
+            <div className={` general-wrapper ${ props.queryName } `}>
                 { HeaderSection && <HeaderSection />}
-                <div className="mvx-container">
+                <div className="container">
                 
                 { BannerSection && <BannerSection />}
 
                 <nav className='admin-panel-nav'>
-                    <button onClick={handleMenu}><i className='mvx-font font-menu'></i></button>
+                    <button onClick={handleMenu}><i className='admin-font font-menu'></i></button>
                     <div className='brand'>
                         <img src={Brand} alt="logo" />
                     </div>
                 </nav>
 
                     <div
-                        className={ `mvx-middle-container-wrapper ${
+                        className={ `middle-container-wrapper ${
                             props.horizontally
-                                ? 'mvx-horizontal-tabs'
-                                : 'mvx-vertical-tabs'
+                                ? 'horizontal-tabs'
+                                : 'vertical-tabs'
                         }`}
                     >
-                        <div className="mvx-middle-child-container">
-                            <div id='mvx-current-tab-lists' className={`${menuCol ? 'showMenu' : ''} mvx-current-tab-lists`}>
-                                <div className='mvx-current-tab-lists-container'>
+                        <div className="middle-child-container">
+                            <div id='current-tab-lists' className={`${menuCol ? 'showMenu' : ''} current-tab-lists`}>
+                                <div className='current-tab-lists-container'>
                                     <div className='brand'>
                                         {menuCol ? <img src={BrandSmall} alt="logo" /> : <img src={Brand} alt="logo" />}
                                     {menuCol ? null : <p>Stock Manager</p>}
-                                        <button onClick={handleMenu} className='menu-close'><i className='mvx-font font-cross'></i></button>
+                                        <button onClick={handleMenu} className='menu-close'><i className='admin-font font-cross'></i></button>
                                     </div>
 
                                     {
@@ -136,10 +136,10 @@ const Tabs = ( props ) => {
                                             </div>
                                         })
                                     }
-                                    <button className='menu-coll-btn' onClick={handleMenuShow}><span><i className='mvx-font font-arrow-left'></i></span>{menuCol ? null : 'Collapse'}</button>
+                                    <button className='menu-coll-btn' onClick={handleMenuShow}><span><i className='admin-font font-arrow-left'></i></span>{menuCol ? null : 'Collapse'}</button>
                                 </div>
                             </div>
-                            <div className="mvx-tab-content">
+                            <div className="tab-content">
                                 {/* Render name and description of the current tab */}
                                 { getTabDescription( tabData ) }
                                 {/* Render the form from parent component for better controll */}

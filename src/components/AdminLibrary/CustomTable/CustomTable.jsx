@@ -77,7 +77,7 @@ const CustomTable = (props) => {
       cell: (row) => (
         <div className="table-dropdown_btn">
           <button onClick={(e) => handleTableExpand(e.currentTarget)}>
-            <i class="mvx-font font-arrow-right"></i>
+            <i class="admin-font font-arrow-right"></i>
           </button>
         </div>
       ),

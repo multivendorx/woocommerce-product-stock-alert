@@ -1,14 +1,11 @@
 "use strict";
-
 // On page load
 jQuery(function ($) {
-
     /**
      * Subscriber form dom object
      * @var {object} dom object
      */
-    const form = $(this).closest('.stock_notifier-subscribe-form');
-    
+    const form = $(document).find('.stock_notifier-subscribe-form');
     /**
      * Init event listener on page loading.
      * @return {undefined}
@@ -18,7 +15,6 @@ jQuery(function ($) {
         $(document).on('click', '.unsubscribe_button', unsubscribe);
         $(document).on('change', 'input.variation_id', getVariationSubscribeForm);
     }
-
     /**
      * Subscribe user on subscribe button click.
      * @param {object} event dom event object.
@@ -27,19 +23,14 @@ jQuery(function ($) {
     function subscribe(event) {
         // Prevent default from submittion.
         event.preventDefault();
-
         // Set button as processing and disable click event.
         $(this).text(localizeData.processing);
         $(this).addClass("stk_disabled");
-        
         const recaptcha_enabled = localizeData.recaptcha_enabled;
-        
         // Recaptch is enabled validate recaptch then process form
         if (recaptcha_enabled) {
-            
             const recaptcha_secret   = form.find('#recaptchav3_secretkey').val();
             const recaptcha_response = form.find('#recaptchav3_response').val();
-            
             // Prepare recaptch request data.
             const recaptcha_request = {
                 action:           'recaptcha_validate_ajax',
@@ -47,15 +38,12 @@ jQuery(function ($) {
                 captcha_secret:   recaptcha_secret,
                 captcha_response: recaptcha_response
             }
-
             // Request for recaptch validation
             $.post(localizeData.ajax_url, recaptcha_request, function (response) {
-                
                 // If valid response process form submition.
                 if (response) {
                     processForm();
                 } else {
-
                     // Response is not a valid response alert and enable click.
                     alert('Oops, recaptcha not varified!');
                     $(this).removeClass("stk_disabled");
@@ -65,7 +53,6 @@ jQuery(function ($) {
             processForm();
         }
     }
-
     /**
      * Process subscription
      * @param {undefined}
@@ -75,7 +62,7 @@ jQuery(function ($) {
         let customerEmail   = form.find('.stock_manager_email').val();
         let productId       = form.find('.current_product_id').val();
         let variationId     = form.find('.current_variation_id').val();
-        
+        let productTitle    = form.find('.current_product_name').val();
         // Get data from localizer
         let buttonHtml      = localizeData.button_html;
         let successMessage  = localizeData.alert_success;
@@ -87,19 +74,14 @@ jQuery(function ($) {
         let banEmailAddress = localizeData.ban_email_address_text;
         let doubleOptInText = localizeData.double_opt_in_success;
         let unsubButtonHtml = localizeData.unsubscribe_button;
-        
         // Prepare success message
         successMessage = successMessage.replace('%product_title%', customerEmail);
         successMessage = successMessage.replace('%customer_email%', customerEmail);
-        
         // Prepare email exist data
-        emailExist = emailExist.replace('%product_title%', pro_title);
+        emailExist = emailExist.replace('%product_title%', productTitle);
         emailExist = emailExist.replace('%customer_email%', customerEmail);
-        
         if (isEmail(customerEmail)) {
-            
             $(this).toggleClass('alert_loader').blur();
-            
             // Request data for subscription
             let requestData = {
                 action:      'alert_ajax',
@@ -108,15 +90,12 @@ jQuery(function ($) {
                 product_id:   productId,
                 variation_id: variationId
             }
-
-            // Add additional fields data 
+            // Add additional fields data
             localizeData.additional_fields.forEach(element => {
                 requestData[element] = $('#woo_stock_manager_' + element).val();
             });
-            
             // Request for subscription
-            $.post(localizeData.ajax_url, responseData, function (response) {
-                
+            $.post(localizeData.ajax_url, requestData, function (response) {
                 // Handle response
                 if (response == '0') {
                     $(`.stock_notifier-subscribe-form`).html(`<div class="registered_message"> ${errorMessage} <a href="${window.location}"> ${tryAgainMessage} </a></div>`);
@@ -138,21 +117,17 @@ jQuery(function ($) {
             $(".stock_manager_button").replaceWith(buttonHtml);
         }
     }
-
     /**
      * Unsubscribe user on subscribe button click.
      * @param {object} event dom event object.
      * @return {undefined}
      */
     function unsubscribe(event) {
-        
         // Prevent default from submittion.
         event.preventDefault();
-
         // Set button as processing and disable click event.
         $(this).text(localizeData.processing);
         $(this).addClass("stk_disabled");
-        
         // Unsubscribe request data
         const unsubscribe_request = {
             action:         'unsubscribe_button',
@@ -161,14 +136,12 @@ jQuery(function ($) {
             product_id:     form.find('.product_id').val(),
             var_id:         form.find('.variation_id').val(),
         };
-        
         // Prepare success message on subscribe.
         let success_message = localizeData.alert_unsubscribe_message;
-        success_message     = success_message.replace('%customer_email%', customer_data.customer_email);
+        success_message     = success_message.replace('%customer_email%', unsubscribe_request.customer_email);
         let error_message   = localizeData.error_occurs;
-        
         // Request for unsubscribe user.
-        $.post(localizeData.ajax_url, customer_data, function (response) {
+        $.post(localizeData.ajax_url, unsubscribe_request, function (response) {
             // unsubscribe success
             if (response) {
                 $('.stock_notifier-subscribe-form')
@@ -177,23 +150,18 @@ jQuery(function ($) {
                 $('.stock_notifier-subscribe-form')
                     .html(`<div class="registered_message"> ${ error_message }<a href="${ window.location }"> ${ localizeData.try_again }</a></div>`);
             }
-
             // Enable submit button.
             $(this).removeClass("stk_disabled");
         });
     }
-
     /**
      * Get subscription form of variation product.
      */
     function getVariationSubscribeForm() {
-
         const variationId = Number($(this).val());
         const productId   = Number($('.stock_notifier-shortcode-subscribe-form').data('product-id'));
-
         // Subscription form exist and variation id exist
         if ($('.stock_notifier-shortcode-subscribe-form').length && variationId) {
-
             // Request body for subscription form
             const subscriptionFormRequest = {
                 action:       'get_variation_box_ajax',
@@ -201,10 +169,8 @@ jQuery(function ($) {
                 product_id:   productId,
                 variation_id: variationId
             };
-
             // Request for subscription form
             $.post(localizeData.ajax_url, subscriptionFormRequest, function ( response ) {
-                
                 // Set subscription form as inner-html
                 $('.stock_notifier-shortcode-subscribe-form').html( response );
             });
@@ -214,22 +180,17 @@ jQuery(function ($) {
             $('.stock_notifier-shortcode-subscribe-form').html("");
         }
     }
-
     /**
      * Check the email is valid email or not.
      * @param {String} email email to check
      * @returns {boolean} if the email is valid return true otherwise false
      */
-    function isEmail( email ) {
-        
+    function isEmail(email) {
         if ( ! email ) return false;
-
         // Regular expressing for email check
         const regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-        
         return regex.test( email );
     }
-
     // Call init function
     init();
 });

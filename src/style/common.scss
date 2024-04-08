@@ -1,10 +1,10 @@
 @font-face {
-  font-family: 'mvx-font';
-  src:  url('fonts/mvx-font.eot?1kix7m');
-  src:  url('fonts/mvx-font.eot?1kix7m#iefix') format('embedded-opentype'),
-    url('fonts/mvx-font.ttf?1kix7m') format('truetype'),
-    url('fonts/mvx-font.woff?1kix7m') format('woff'),
-    url('fonts/mvx-font.svg?1kix7m#mvx-font') format('svg');
+  font-family: 'admin-font';
+  src:  url('fonts/admin-font.eot?r3umvz');
+  src:  url('fonts/admin-font.eot?r3umvz#iefix') format('embedded-opentype'),
+    url('fonts/admin-font.ttf?r3umvz') format('truetype'),
+    url('fonts/admin-font.woff?r3umvz') format('woff'),
+    url('fonts/admin-font.svg?r3umvz#admin-font') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -12,7 +12,7 @@
 
 [class^="font-"], [class*=" font-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: 'mvx-font' !important;
+  font-family: 'admin-font' !important;
   speak: never;
   font-style: normal;
   font-weight: normal;
@@ -81,6 +81,7 @@
 }
 
 
+
 $base-color: #f2eff5;
 $border-color: #d4d1d9;
 $title-color: #181718;
@@ -128,6 +129,14 @@ input, textarea{
   cursor: pointer;
 
   &:hover {
+    text-decoration: none;
+  }
+}
+
+a{
+  text-decoration: none;
+
+  &:hover{
     text-decoration: none;
   }
 }
