@@ -41,12 +41,11 @@ class RestAPI
         $all_details = [];
         $get_settings_data = $request->get_param( 'setting' );
         $settingsname = $request->get_param( 'settingName' );
-       
         $settingsname = str_replace( "-", "_", $settingsname );
         $optionname = 'woo_stock_manager_' . $settingsname . '_tab_settings';
-        
+
         // save the settings in database
-        update_option( $optionname, $get_settings_data );
+        SM()->setting->update_option( $optionname, $get_settings_data );
 
         do_action( 'woo_stock_manager_settings_after_save', $settingsname, $get_settings_data );
 

@@ -32,27 +32,7 @@ class Admin {
     * Add options page
     */
     public function add_settings_page() {
-        $pro_sticker = apply_filters( 'is_stock_manager_pro_inactive', true ) 
-        ? 
-        '<span 
-            class="stock-manager-pro-tag"
-            style="
-            position: absolute;
-            right: 0.25rem;
-            background: #522c81;
-            color: #fdfdfe;
-            padding: 0.125rem 0.35rem;
-            top: 50%;
-            transform: translateY(-50%);
-            border-radius: 0.625rem;
-            font-size: 0.625rem;
-            text-align: center;
-            line-height: 1;
-            text-transform: capitalize;
-            "
-        >
-        Pro
-        </span>' : '';
+        $pro_sticker = apply_filters( 'is_stock_manager_pro_inactive', true ) ? '<span class="stock-manager-pro-tag">Pro</span>' : '';
 
         add_menu_page( 
             __( 'Stock Manager', 'woocommerce-stock-manager' ), 
@@ -230,10 +210,13 @@ class Admin {
             'ban_email_address_text'
         ];
         
+        // Get all tab setting's database value
         $settings_databases_value =[];
-        $tabs =['general','form_customization','form_submission','email','mailchimp'];
-        foreach($tabs as $tab){
-            $settings_databases_value[$tab] = get_option( 'woo_stock_manager_' . $tab . '_tab_settings' );
+
+        $tabs_names =[ 'general', 'form_customization', 'form_submission', 'email', 'mailchimp' ];
+
+        foreach( $tabs_names as $tab_name ) {
+            $settings_databases_value[ $tab_name ] = SM()->setting->get_option( 'woo_stock_manager_' . $tab_name . '_tab_settings' );
         }
         
         if ( get_current_screen()->id == 'toplevel_page_woo-stock-manager-setting' ) {

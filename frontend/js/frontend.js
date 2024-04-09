@@ -1,20 +1,24 @@
 "use strict";
+
 // On page load
 jQuery(function ($) {
+
     /**
      * Subscriber form dom object
      * @var {object} dom object
      */
-    const form = $(document).find('.stock_notifier-subscribe-form');
+    const form = $(document).find('.stock-notifier-subscribe-form');
+
     /**
      * Init event listener on page loading.
      * @return {undefined}
      */
     function init() {
-        $(document).on('click', '.stock_manager_button', subscribe);
-        $(document).on('click', '.unsubscribe_button', unsubscribe);
+        $(document).on('click', '.stock-manager-button', subscribe);
+        $(document).on('click', '.unsubscribe-button', unsubscribe);
         $(document).on('change', 'input.variation_id', getVariationSubscribeForm);
     }
+
     /**
      * Subscribe user on subscribe button click.
      * @param {object} event dom event object.
@@ -23,14 +27,19 @@ jQuery(function ($) {
     function subscribe(event) {
         // Prevent default from submittion.
         event.preventDefault();
+
         // Set button as processing and disable click event.
         $(this).text(localizeData.processing);
         $(this).addClass("stk_disabled");
+        
         const recaptcha_enabled = localizeData.recaptcha_enabled;
+        
         // Recaptch is enabled validate recaptch then process form
         if (recaptcha_enabled) {
+            
             const recaptcha_secret   = form.find('#recaptchav3_secretkey').val();
             const recaptcha_response = form.find('#recaptchav3_response').val();
+            
             // Prepare recaptch request data.
             const recaptcha_request = {
                 action:           'recaptcha_validate_ajax',
@@ -38,12 +47,15 @@ jQuery(function ($) {
                 captcha_secret:   recaptcha_secret,
                 captcha_response: recaptcha_response
             }
+
             // Request for recaptch validation
             $.post(localizeData.ajax_url, recaptcha_request, function (response) {
+                
                 // If valid response process form submition.
                 if (response) {
                     processForm();
                 } else {
+
                     // Response is not a valid response alert and enable click.
                     alert('Oops, recaptcha not varified!');
                     $(this).removeClass("stk_disabled");
@@ -53,16 +65,18 @@ jQuery(function ($) {
             processForm();
         }
     }
+
     /**
      * Process subscription
      * @param {undefined}
      */
     function processForm() {
         // Get data from form.
-        let customerEmail   = form.find('.stock_manager_email').val();
-        let productId       = form.find('.current_product_id').val();
-        let variationId     = form.find('.current_variation_id').val();
-        let productTitle    = form.find('.current_product_name').val();
+        let customerEmail   = form.find('.stock-manager-email').val();
+        let productId       = form.find('.current-product-id').val();
+        let variationId     = form.find('.current-variation-id').val();
+        let productTitle    = form.find('.current-product-name').val();
+        
         // Get data from localizer
         let buttonHtml      = localizeData.button_html;
         let successMessage  = localizeData.alert_success;
@@ -74,14 +88,19 @@ jQuery(function ($) {
         let banEmailAddress = localizeData.ban_email_address_text;
         let doubleOptInText = localizeData.double_opt_in_success;
         let unsubButtonHtml = localizeData.unsubscribe_button;
+        
         // Prepare success message
         successMessage = successMessage.replace('%product_title%', customerEmail);
         successMessage = successMessage.replace('%customer_email%', customerEmail);
+        
         // Prepare email exist data
         emailExist = emailExist.replace('%product_title%', productTitle);
         emailExist = emailExist.replace('%customer_email%', customerEmail);
+        
         if (isEmail(customerEmail)) {
+            
             $(this).toggleClass('alert_loader').blur();
+            
             // Request data for subscription
             let requestData = {
                 action:      'alert_ajax',
@@ -90,44 +109,51 @@ jQuery(function ($) {
                 product_id:   productId,
                 variation_id: variationId
             }
-            // Add additional fields data
+
+            // Add additional fields data 
             localizeData.additional_fields.forEach(element => {
                 requestData[element] = $('#woo_stock_manager_' + element).val();
             });
+            
             // Request for subscription
             $.post(localizeData.ajax_url, requestData, function (response) {
+                
                 // Handle response
                 if (response == '0') {
-                    $(`.stock_notifier-subscribe-form`).html(`<div class="registered_message"> ${errorMessage} <a href="${window.location}"> ${tryAgainMessage} </a></div>`);
+                    $(`.stock-notifier-subscribe-form`).html(`<div class="registered-message"> ${errorMessage} <a href="${window.location}"> ${tryAgainMessage} </a></div>`);
                 } else if (response == '/*?%already_registered%?*/') {
-                    $(`.stock_notifier-subscribe-form`).html(`<div class="registered_message">${emailExist}</div>${unsubButtonHtml}<input type="hidden" class="subscribed_email" value="${customerEmail}" /><input type="hidden" class="product_id" value="${productId}" /><input type="hidden" class="variation_id" value="${variationId}" />`);
-                } else if (response == '/*?%ban_email_address%?*/') {
-                    $(`.responseData_error_message`).remove() && $(`.stock_notifier-subscribe-form`).append($(`<p class="responseData_error_message ban_email_address">${banEmailAddress}</p>`));
+                    $(`.stock-notifier-subscribe-form`).html(`<div class="registered-message">${emailExist}</div>${unsubButtonHtml}<input type="hidden" class="subscribed_email" value="${customerEmail}" /><input type="hidden" class="product_id" value="${productId}" /><input type="hidden" class="variation_id" value="${variationId}" />`);
+                } else if (response == '/*?%ban-email-address%?*/') {
+                    $(`.responsedata-error-message`).remove() && $(`.stock-notifier-subscribe-form`).append($(`<p class="responsedata-error-message ban-email-address">${banEmailAddress}</p>`));
                 } else if (response == '/*?%ban_email_domain%?*/') {
-                    $(`.responseData_error_message`).remove() && $(`.stock_notifier-subscribe-form`).append($(`<p class="responseData_error_message ban_email_address">${banEmailDomin}</p>`));
+                    $(`.responsedata-error-message`).remove() && $(`.stock-notifier-subscribe-form`).append($(`<p class="responsedata-error-message ban-email-address">${banEmailDomin}</p>`));
                 } else if (response == '/*?%double_opt_in%?*/') {
-                    $(`.stock_notifier-subscribe-form`).html(`<div class="registered_message"> ${doubleOptInText}</div>`);
+                    $(`.stock-notifier-subscribe-form`).html(`<div class="registered-message"> ${doubleOptInText}</div>`);
                 } else {
-                    $(`.stock_notifier-subscribe-form`).html(`<div class="registered_message">${successMessage}</div>`);
+                    $(`.stock-notifier-subscribe-form`).html(`<div class="registered-message">${successMessage}</div>`);
                 }
-                $(".stock_manager_button").replaceWith(buttonHtml);
+                $(".stock-manager-button").replaceWith(buttonHtml);
             });
         } else {
-            $('.responseData_error_message').remove() && $('.stock_notifier-subscribe-form').append($(`<p style="color:#e2401c;" class="responseData_error_message">${validEmail}</p>`));
-            $(".stock_manager_button").replaceWith(buttonHtml);
+            $('.responsedata-error-message').remove() && $('.stock-notifier-subscribe-form').append($(`<p style="color:#e2401c;" class="responsedata-error-message">${validEmail}</p>`));
+            $(".stock-manager-button").replaceWith(buttonHtml);
         }
     }
+
     /**
      * Unsubscribe user on subscribe button click.
      * @param {object} event dom event object.
      * @return {undefined}
      */
     function unsubscribe(event) {
+        
         // Prevent default from submittion.
         event.preventDefault();
+
         // Set button as processing and disable click event.
         $(this).text(localizeData.processing);
         $(this).addClass("stk_disabled");
+        
         // Unsubscribe request data
         const unsubscribe_request = {
             action:         'unsubscribe_button',
@@ -136,32 +162,39 @@ jQuery(function ($) {
             product_id:     form.find('.product_id').val(),
             var_id:         form.find('.variation_id').val(),
         };
+        
         // Prepare success message on subscribe.
         let success_message = localizeData.alert_unsubscribe_message;
         success_message     = success_message.replace('%customer_email%', unsubscribe_request.customer_email);
         let error_message   = localizeData.error_occurs;
+        
         // Request for unsubscribe user.
         $.post(localizeData.ajax_url, unsubscribe_request, function (response) {
             // unsubscribe success
             if (response) {
-                $('.stock_notifier-subscribe-form')
-                    .html(`<div class="registered_message"> ${ success_message }</div>`);
+                $('.stock-notifier-subscribe-form')
+                    .html(`<div class="registered-message"> ${ success_message }</div>`);
             } else {
-                $('.stock_notifier-subscribe-form')
-                    .html(`<div class="registered_message"> ${ error_message }<a href="${ window.location }"> ${ localizeData.try_again }</a></div>`);
+                $('.stock-notifier-subscribe-form')
+                    .html(`<div class="registered-message"> ${ error_message }<a href="${ window.location }"> ${ localizeData.try_again }</a></div>`);
             }
+
             // Enable submit button.
             $(this).removeClass("stk_disabled");
         });
     }
+
     /**
      * Get subscription form of variation product.
      */
     function getVariationSubscribeForm() {
+
         const variationId = Number($(this).val());
-        const productId   = Number($('.stock_notifier-shortcode-subscribe-form').data('product-id'));
+        const productId   = Number($('.stock-notifier-shortcode-subscribe-form').data('product-id'));
+
         // Subscription form exist and variation id exist
-        if ($('.stock_notifier-shortcode-subscribe-form').length && variationId) {
+        if ($('.stock-notifier-shortcode-subscribe-form').length && variationId) {
+
             // Request body for subscription form
             const subscriptionFormRequest = {
                 action:       'get_variation_box_ajax',
@@ -169,17 +202,20 @@ jQuery(function ($) {
                 product_id:   productId,
                 variation_id: variationId
             };
+
             // Request for subscription form
             $.post(localizeData.ajax_url, subscriptionFormRequest, function ( response ) {
+                
                 // Set subscription form as inner-html
-                $('.stock_notifier-shortcode-subscribe-form').html( response );
+                $('.stock-notifier-shortcode-subscribe-form').html( response );
             });
         }
         else {
             // Variation not exist.
-            $('.stock_notifier-shortcode-subscribe-form').html("");
+            $('.stock-notifier-shortcode-subscribe-form').html("");
         }
     }
+
     /**
      * Check the email is valid email or not.
      * @param {String} email email to check
@@ -187,10 +223,13 @@ jQuery(function ($) {
      */
     function isEmail(email) {
         if ( ! email ) return false;
+
         // Regular expressing for email check
         const regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        
         return regex.test( email );
     }
+
     // Call init function
     init();
 });
