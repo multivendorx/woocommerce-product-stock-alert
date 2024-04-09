@@ -196,7 +196,7 @@ const DynamicForm = (props) => {
         case "number":
           input = (
             <CustomInput.BasicInput
-              wrapperClass="mvx-setting-form-input"
+              wrapperClass="setting-form-input"
               descClass="settings-metabox-description"
               description={inputField.desc}
               key={inputField.key}
@@ -216,8 +216,8 @@ const DynamicForm = (props) => {
         case "textarea":
           input = (
             <CustomInput.TextArea
-              wrapperClass="mvx-setting-from-textarea"
-              inputClass={inputField.class || "mvx-form-input"}
+              wrapperClass="setting-from-textarea"
+              inputClass={inputField.class || "form-input"}
               descClass="settings-metabox-description"
               description={inputField.desc}
               key={inputField.key}
@@ -236,7 +236,7 @@ const DynamicForm = (props) => {
         case "normalfile":
           input = (
             <CustomInput.BasicInput
-              inputClass="mvx-setting-form-input"
+              inputClass="setting-form-input"
               type="file"
               key={inputField.key}
               name={inputField.name}
@@ -252,14 +252,14 @@ const DynamicForm = (props) => {
         case "file":
           input = (
             <CustomInput.FileInput
-              wrapperClass="mvx-setting-file-uploader-class"
+              wrapperClass="setting-file-uploader-class"
               descClass="settings-metabox-description"
               description={inputField.desc}
-              inputClass={`${inputField.key} mvx-form-input`}
+              inputClass={`${inputField.key} form-input`}
               imageSrc={value || appLocalizer.default_logo}
               imageWidth={inputField.width}
               imageHeight={inputField.height}
-              buttonClass="mvx-btn btn-purple"
+              buttonClass="btn btn-purple"
               openUploader={appLocalizer.global_string.open_uploader}
               type="hidden"
               key={inputField.key}
@@ -279,8 +279,8 @@ const DynamicForm = (props) => {
         case "color":
           input = (
             <CustomInput.BasicInput
-              wrapperClass="mvx-settings-color-picker-parent-class"
-              inputClass="mvx-setting-color-picker"
+              wrapperClass="settings-color-picker-parent-class"
+              inputClass="setting-color-picker"
               descClass="settings-metabox-description"
               description={inputField.desc}
               key={inputField.key}
@@ -299,7 +299,7 @@ const DynamicForm = (props) => {
         case "calender":
           input = (
             <CustomInput.CalendarInput
-              wrapperClass="mvx-settings-calender"
+              wrapperClass="settings-calender"
               inputClass="teal"
               multiple={true}
               value={setting[inputField.key]?.split(",") || ""}
@@ -314,14 +314,14 @@ const DynamicForm = (props) => {
         case "map":
           input = (
             <CustomInput.MapsInput
-              wrapperClass="mvx-settings-basic-input-class"
+              wrapperClass="settings-basic-input-class"
               inputClass="regular-text"
               descClass="settings-metabox-description"
               description={inputField.desc}
               id="searchStoreAddress"
               placeholder="Enter store location"
               containerId="store-maps"
-              containerClass="store-maps, mvx-gmap"
+              containerClass="store-maps, gmap"
               proSetting={isProSetting(inputField.key)}
             />
           );
@@ -329,12 +329,12 @@ const DynamicForm = (props) => {
 
         case "button":
           input = (
-            <div className="mvx-form-button-group">
+            <div className="form-button-group">
               <div className="setting-section-divider">&nbsp;</div>
               <label className="settings-form-label"></label>
               <div className="settings-input-content">
                 <CustomInput.BasicInput
-                  wrapperClass="mvx-settings-basic-input-class"
+                  wrapperClass="settings-basic-input-class"
                   inputClass="btn default-btn"
                   descClass="settings-metabox-description"
                   description={inputField.desc}
@@ -351,12 +351,12 @@ const DynamicForm = (props) => {
         case "multi_number":
           input = (
             <CustomInput.MultiNumInput
-              parentWrapperClass="mvx-settings-basic-input-class"
-              childWrapperClass="mvx-settings-basic-child-wrap"
-              inputWrapperClass="mvx-settings-basic-input-child-class"
-              innerInputWrapperClass="mvx-setting-form-input"
-              inputLabelClass="mvx-setting-form-input-label"
-              idPrefix="mvx-setting-integer-input"
+              parentWrapperClass="settings-basic-input-class"
+              childWrapperClass="settings-basic-child-wrap"
+              inputWrapperClass="settings-basic-input-child-class"
+              innerInputWrapperClass="setting-form-input"
+              inputLabelClass="setting-form-input-label"
+              idPrefix="setting-integer-input"
               keyName={inputField.key}
               inputClass={inputField.class}
               value={setting[inputField.key]}
@@ -370,10 +370,10 @@ const DynamicForm = (props) => {
         case "radio":
           input = (
             <CustomInput.RadioInput
-              wrapperClass="mvx-settings-form-group-radio"
-              inputWrapperClass="mvx-radio-input-label-wrap"
-              inputClass="mvx-setting-form-input"
-              descClass="mvx-settings-form-group-radio"
+              wrapperClass="settings-form-group-radio"
+              inputWrapperClass="radio-input-label-wrap"
+              inputClass="setting-form-input"
+              descClass="settings-form-group-radio"
               activeClass="radio-select-active"
               description={inputField.desc}
               value={value}
@@ -392,13 +392,13 @@ const DynamicForm = (props) => {
           input = (
             <CustomInput.RadioInput
               wrapperClass="form-group-radio-select"
-              inputWrapperClass="mvx-radioselect-class"
-              inputClass="mvx-setting-form-input"
-              radiSelectLabelClass="mvx-radio-select-under-label-class"
-              labelImgClass="mvx-section-img-fluid"
-              labelOverlayClass="mvx-radioselect-overlay-text"
+              inputWrapperClass="radioselect-class"
+              inputClass="setting-form-input"
+              radiSelectLabelClass="radio-select-under-label-class"
+              labelImgClass="section-img-fluid"
+              labelOverlayClass="radioselect-overlay-text"
               labelOverlayText="Select your Store"
-              idPrefix="mvx-radio-select-under"
+              idPrefix="radio-select-under"
               descClass="settings-metabox-description"
               activeClass="radio-select-active"
               description={inputField.desc}
@@ -419,9 +419,9 @@ const DynamicForm = (props) => {
           input = (
             <CustomInput.RadioInput
               wrapperClass="form-group-radio-color"
-              inputWrapperClass="mvx-settings-radio-color "
-              inputClass="mvx-setting-form-input"
-              idPrefix="mvx-radio-color-under"
+              inputWrapperClass="settings-radio-color "
+              inputClass="setting-form-input"
+              idPrefix="radio-color-under"
               activeClass="radio-color-active"
               descClass="settings-metabox-description"
               description={inputField.desc}
@@ -441,11 +441,11 @@ const DynamicForm = (props) => {
         case "toggle_rectangle":
           input = (
             <CustomInput.ToggleRectangle
-              wrapperClass="mvx-settings-form-group-radio"
-              inputWrapperClass="mvx-toggle-rectangle-merge"
-              inputClass="mvx-setting-form-input"
+              wrapperClass="settings-form-group-radio"
+              inputWrapperClass="toggle-rectangle-merge"
+              inputClass="setting-form-input"
               descClass="settings-metabox-description"
-              idPrefix="mvx-toggle-rectangle"
+              idPrefix="toggle-rectangle"
               description={inputField.desc}
               value={value}
               name={inputField.name}
@@ -468,7 +468,7 @@ const DynamicForm = (props) => {
 
           input = (
             <CustomInput.SelectInput
-              wrapperClass="mvx-form-select-field-wrapper"
+              wrapperClass="form-select-field-wrapper"
               descClass="settings-metabox-description"
               description={inputField.desc}
               inputClass={inputField.key}
@@ -485,9 +485,9 @@ const DynamicForm = (props) => {
         case "multi-select":
           input = (
             <CustomInput.SelectInput
-              wrapperClass="mvx-settings-from-multi-select"
+              wrapperClass="settings-from-multi-select"
               descClass="settings-metabox-description"
-              selectDeselectClass="mvx-select-deselect-trigger"
+              selectDeselectClass="select-deselect-trigger"
               selectDeselect={inputField.select_deselect}
               selectDeselectValue={
                 appLocalizer.global_string.select_deselect_all
@@ -511,7 +511,7 @@ const DynamicForm = (props) => {
         case "country":
           input = (
             <CustomInput.SelectInput
-              wrapperClass="mvx-country-choice-class"
+              wrapperClass="country-choice-class"
               descClass="settings-metabox-description"
               description={inputField.desc}
               inputClass={inputField.key}
@@ -528,7 +528,7 @@ const DynamicForm = (props) => {
         case "state":
           input = (
             <CustomInput.SelectInput
-              wrapperClass="mvx-state-choice-class"
+              wrapperClass="state-choice-class"
               descClass="settings-metabox-description"
               description={inputField.desc}
               inputClass={inputField.key}
@@ -545,16 +545,16 @@ const DynamicForm = (props) => {
         case "checkbox":
           input = (
             <CustomInput.MultiCheckBox
-              wrapperClass="mvx-checkbox-list-side-by-side"
+              wrapperClass="checkbox-list-side-by-side"
               descClass="settings-metabox-description"
               description={inputField.desc}
-              selectDeselectClass="mvx-select-deselect-trigger"
-              inputWrapperClass="mvx-toggle-checkbox-header"
+              selectDeselectClass="select-deselect-trigger"
+              inputWrapperClass="toggle-checkbox-header"
               inputInnerWrapperClass="toggle-checkbox-content"
               inputClass={inputField.class}
               hintOuterClass="dashicons dashicons-info"
-              hintInnerClass="mvx-hover-tooltip"
-              idPrefix="mvx-toggle-switch"
+              hintInnerClass="hover-tooltip"
+              idPrefix="toggle-switch"
               selectDeselect={inputField.select_deselect}
               selectDeselectValue="Select / Deselect All"
               rightContentClass="settings-metabox-description"
@@ -575,11 +575,11 @@ const DynamicForm = (props) => {
         case "table":
           input = (
             <CustomInput.Table
-              wrapperClass="mvx-settings-mvx-form-table"
-              tableWrapperClass="mvx-settings-table-wrap"
-              trWrapperClass="mvx-settings-tr-wrap"
-              thWrapperClass="mvx-settings-th-wrap"
-              tdWrapperClass="mvx-settings-td-wrap"
+              wrapperClass="settings-form-table"
+              tableWrapperClass="settings-table-wrap"
+              trWrapperClass="settings-tr-wrap"
+              thWrapperClass="settings-th-wrap"
+              tdWrapperClass="settings-td-wrap"
               descClass="settings-metabox-description"
               headOptions={inputField.label_options}
               bodyOptions={inputField.options}
@@ -619,7 +619,7 @@ const DynamicForm = (props) => {
         case "blocktext":
           input = (
             <CustomInput.BlockText
-              wrapperClass="mvx-blocktext-class"
+              wrapperClass="blocktext-class"
               blockTextClass="settings-metabox-description-code"
               value={inputField.blocktext}
             />
@@ -640,7 +640,20 @@ const DynamicForm = (props) => {
             />
           );
           break;
-      }
+
+        case "connect_select":
+          input = (
+            <CustomInput.ConnectSelect
+              value={value}
+              key={inputField.key}
+              optionKey={inputField.optionKey}
+              onChange={(e) => handleChange(e, inputField.key)}
+              settingChanged={settingChanged}
+              apiLink={inputField.apiLink}
+            />
+          );
+          break;
+        }
 
       return inputField.type === "section" ||
         inputField.label === "no_label" ? (
@@ -680,7 +693,7 @@ const DynamicForm = (props) => {
           <Popoup />
         </Dialog>
         {successMsg && (
-          <div className="mvx-notic-display-title">
+          <div className="notic-display-title">
             <i className="admin-font font-icon-yes"></i>
             {successMsg}
           </div>
