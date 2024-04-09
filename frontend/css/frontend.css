@@ -2,7 +2,7 @@
 	margin-bottom: 1.26rem;
 }
 
-.stock_manager_email {
+.stock-manager-email {
 	margin-bottom: 0.63rem;
 	width: 15.75rem;
 }
@@ -28,11 +28,11 @@ h5.subscribe_for_interest_text {
   margin-top: 0.252rem;
 }
 
-.stock_manager_button.alert_loader {
+.stock-manager-button.alert_loader {
   cursor: not-allowed;
 }
 
-.stock_manager_button.alert_loader:before {
+.stock-manager-button.alert_loader:before {
   content: "";
   display: inline-block;
   width: 0.63rem;
@@ -45,15 +45,15 @@ h5.subscribe_for_interest_text {
   animation: loading 1s linear infinite;
 }
 
-button.stock_manager_button {
+button.stock-manager-button {
   margin: 0.315rem;
 }
 
-.registered_message {
+.registered-message {
   margin-bottom: 1.26rem;
 }
 
-button.unsubscribe_button {
+button.unsubscribe-button {
   margin: 0.945rem 0;
 }
 

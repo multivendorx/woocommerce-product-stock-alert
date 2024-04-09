@@ -1,6 +1,7 @@
 <?php
 
 namespace StockManager;
+
 defined( 'ABSPATH' ) || exit;
 /**
  * Start schedule after plugin activation
@@ -139,7 +140,7 @@ class Install {
                 `email` varchar(50) NOT NULL,
                 `status` varchar(20) NOT NULL,
                 `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                UNIQUE KEY unique_product_email (product_id, email),
+                UNIQUE KEY unique_product_email_status (product_id, email, status),
                 PRIMARY KEY (`id`)
             ) $collate;"
         );
@@ -151,8 +152,7 @@ class Install {
      */
     private function start_cron_job() {
         // Migrate subscriber data from post table
-        wp_clear_scheduled_hook( 'stock_manager_start_subscriber_migration' );
-        wp_schedule_event( time(), 'hourly', 'stock_manager_start_subscriber_migration' );
+        wp_schedule_single_event( time(), 'stock_manager_start_subscriber_migration' );
         update_option( 'stock_manager_migration_running', true );
 
         // Notify user if product is instock
@@ -223,10 +223,10 @@ class Install {
 	            'meta_query'    => [ 
                     [ 
                         'key'     => '_product_subscriber', 
-                        'compare' => 'EXISTS', 
+                        'compare' => 'EXISTS',
                     ], 
                 ], 
-            ] );
+            ]);
             
             // Database migration for subscriber data before version 2.3.0
             foreach( $all_product_ids as $product_id ) {

@@ -7,15 +7,15 @@ jQuery(function ($) {
      * Subscriber form dom object
      * @var {object} dom object
      */
-    const form = $(this).closest('.stock_notifier-subscribe-form');
-    
+    const form = $(document).find('.stock-notifier-subscribe-form');
+
     /**
      * Init event listener on page loading.
      * @return {undefined}
      */
     function init() {
-        $(document).on('click', '.stock_manager_button', subscribe);
-        $(document).on('click', '.unsubscribe_button', unsubscribe);
+        $(document).on('click', '.stock-manager-button', subscribe);
+        $(document).on('click', '.unsubscribe-button', unsubscribe);
         $(document).on('change', 'input.variation_id', getVariationSubscribeForm);
     }
 
@@ -72,9 +72,10 @@ jQuery(function ($) {
      */
     function processForm() {
         // Get data from form.
-        let customerEmail   = form.find('.stock_manager_email').val();
-        let productId       = form.find('.current_product_id').val();
-        let variationId     = form.find('.current_variation_id').val();
+        let customerEmail   = form.find('.stock-manager-email').val();
+        let productId       = form.find('.current-product-id').val();
+        let variationId     = form.find('.current-variation-id').val();
+        let productTitle    = form.find('.current-product-name').val();
         
         // Get data from localizer
         let buttonHtml      = localizeData.button_html;
@@ -93,7 +94,7 @@ jQuery(function ($) {
         successMessage = successMessage.replace('%customer_email%', customerEmail);
         
         // Prepare email exist data
-        emailExist = emailExist.replace('%product_title%', pro_title);
+        emailExist = emailExist.replace('%product_title%', productTitle);
         emailExist = emailExist.replace('%customer_email%', customerEmail);
         
         if (isEmail(customerEmail)) {
@@ -115,27 +116,27 @@ jQuery(function ($) {
             });
             
             // Request for subscription
-            $.post(localizeData.ajax_url, responseData, function (response) {
+            $.post(localizeData.ajax_url, requestData, function (response) {
                 
                 // Handle response
                 if (response == '0') {
-                    $(`.stock_notifier-subscribe-form`).html(`<div class="registered_message"> ${errorMessage} <a href="${window.location}"> ${tryAgainMessage} </a></div>`);
+                    $(`.stock-notifier-subscribe-form`).html(`<div class="registered-message"> ${errorMessage} <a href="${window.location}"> ${tryAgainMessage} </a></div>`);
                 } else if (response == '/*?%already_registered%?*/') {
-                    $(`.stock_notifier-subscribe-form`).html(`<div class="registered_message">${emailExist}</div>${unsubButtonHtml}<input type="hidden" class="subscribed_email" value="${customerEmail}" /><input type="hidden" class="product_id" value="${productId}" /><input type="hidden" class="variation_id" value="${variationId}" />`);
-                } else if (response == '/*?%ban_email_address%?*/') {
-                    $(`.responseData_error_message`).remove() && $(`.stock_notifier-subscribe-form`).append($(`<p class="responseData_error_message ban_email_address">${banEmailAddress}</p>`));
+                    $(`.stock-notifier-subscribe-form`).html(`<div class="registered-message">${emailExist}</div>${unsubButtonHtml}<input type="hidden" class="subscribed_email" value="${customerEmail}" /><input type="hidden" class="product_id" value="${productId}" /><input type="hidden" class="variation_id" value="${variationId}" />`);
+                } else if (response == '/*?%ban-email-address%?*/') {
+                    $(`.responsedata-error-message`).remove() && $(`.stock-notifier-subscribe-form`).append($(`<p class="responsedata-error-message ban-email-address">${banEmailAddress}</p>`));
                 } else if (response == '/*?%ban_email_domain%?*/') {
-                    $(`.responseData_error_message`).remove() && $(`.stock_notifier-subscribe-form`).append($(`<p class="responseData_error_message ban_email_address">${banEmailDomin}</p>`));
+                    $(`.responsedata-error-message`).remove() && $(`.stock-notifier-subscribe-form`).append($(`<p class="responsedata-error-message ban-email-address">${banEmailDomin}</p>`));
                 } else if (response == '/*?%double_opt_in%?*/') {
-                    $(`.stock_notifier-subscribe-form`).html(`<div class="registered_message"> ${doubleOptInText}</div>`);
+                    $(`.stock-notifier-subscribe-form`).html(`<div class="registered-message"> ${doubleOptInText}</div>`);
                 } else {
-                    $(`.stock_notifier-subscribe-form`).html(`<div class="registered_message">${successMessage}</div>`);
+                    $(`.stock-notifier-subscribe-form`).html(`<div class="registered-message">${successMessage}</div>`);
                 }
-                $(".stock_manager_button").replaceWith(buttonHtml);
+                $(".stock-manager-button").replaceWith(buttonHtml);
             });
         } else {
-            $('.responseData_error_message').remove() && $('.stock_notifier-subscribe-form').append($(`<p style="color:#e2401c;" class="responseData_error_message">${validEmail}</p>`));
-            $(".stock_manager_button").replaceWith(buttonHtml);
+            $('.responsedata-error-message').remove() && $('.stock-notifier-subscribe-form').append($(`<p style="color:#e2401c;" class="responsedata-error-message">${validEmail}</p>`));
+            $(".stock-manager-button").replaceWith(buttonHtml);
         }
     }
 
@@ -164,18 +165,18 @@ jQuery(function ($) {
         
         // Prepare success message on subscribe.
         let success_message = localizeData.alert_unsubscribe_message;
-        success_message     = success_message.replace('%customer_email%', customer_data.customer_email);
+        success_message     = success_message.replace('%customer_email%', unsubscribe_request.customer_email);
         let error_message   = localizeData.error_occurs;
         
         // Request for unsubscribe user.
-        $.post(localizeData.ajax_url, customer_data, function (response) {
+        $.post(localizeData.ajax_url, unsubscribe_request, function (response) {
             // unsubscribe success
             if (response) {
-                $('.stock_notifier-subscribe-form')
-                    .html(`<div class="registered_message"> ${ success_message }</div>`);
+                $('.stock-notifier-subscribe-form')
+                    .html(`<div class="registered-message"> ${ success_message }</div>`);
             } else {
-                $('.stock_notifier-subscribe-form')
-                    .html(`<div class="registered_message"> ${ error_message }<a href="${ window.location }"> ${ localizeData.try_again }</a></div>`);
+                $('.stock-notifier-subscribe-form')
+                    .html(`<div class="registered-message"> ${ error_message }<a href="${ window.location }"> ${ localizeData.try_again }</a></div>`);
             }
 
             // Enable submit button.
@@ -189,10 +190,10 @@ jQuery(function ($) {
     function getVariationSubscribeForm() {
 
         const variationId = Number($(this).val());
-        const productId   = Number($('.stock_notifier-shortcode-subscribe-form').data('product-id'));
+        const productId   = Number($('.stock-notifier-shortcode-subscribe-form').data('product-id'));
 
         // Subscription form exist and variation id exist
-        if ($('.stock_notifier-shortcode-subscribe-form').length && variationId) {
+        if ($('.stock-notifier-shortcode-subscribe-form').length && variationId) {
 
             // Request body for subscription form
             const subscriptionFormRequest = {
@@ -206,12 +207,12 @@ jQuery(function ($) {
             $.post(localizeData.ajax_url, subscriptionFormRequest, function ( response ) {
                 
                 // Set subscription form as inner-html
-                $('.stock_notifier-shortcode-subscribe-form').html( response );
+                $('.stock-notifier-shortcode-subscribe-form').html( response );
             });
         }
         else {
             // Variation not exist.
-            $('.stock_notifier-shortcode-subscribe-form').html("");
+            $('.stock-notifier-shortcode-subscribe-form').html("");
         }
     }
 
@@ -220,8 +221,7 @@ jQuery(function ($) {
      * @param {String} email email to check
      * @returns {boolean} if the email is valid return true otherwise false
      */
-    function isEmail( email ) {
-        
+    function isEmail(email) {
         if ( ! email ) return false;
 
         // Regular expressing for email check

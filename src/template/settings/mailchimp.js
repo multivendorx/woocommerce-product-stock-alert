@@ -30,18 +30,12 @@ export default {
             depend_checkbox: "is_mailchimp_enable",
         },
         {
-            key: "get_mailchimp_list_button",
-            type: "button",
-            label: "no_label",
-            api_link: "stockmanager/v1/get-mailchimp-list",
-            depend_checkbox: "is_mailchimp_enable",
-        },
-        {
             key: "selected_mailchimp_list",
-            type: "select",
+            optionKey: "mailchimp_list_options",
+            type: "connect_select",
             label: __("Mailchimp List", "woocommerce-stock-manager"),
             desc: __("Select a Mailchimp list.", "woocommerce-stock-manager"),
-            options: [],
+            apiLink: "get-mailchimp-list",
             depend_checkbox: "is_mailchimp_enable",
         },
     ]

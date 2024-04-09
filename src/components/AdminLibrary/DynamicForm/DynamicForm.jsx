@@ -10,6 +10,7 @@ import { getApiLink, sendApiResponse } from "../../../services/apiService";
 import Dialog from "@mui/material/Dialog";
 import Popoup from "../../PopupContent/PopupContent";
 
+
 const DynamicForm = (props) => {
   const { modal, submitUrl, id } = props.setting;
   const { setting, updateSetting } = useSetting();
@@ -42,12 +43,19 @@ const DynamicForm = (props) => {
     }
   }, [setting]);
 
+  const isProSetting = ( key ) => {
+    return  appLocalizer.pro_active && props.proSetting?.includes( key );
+  }
+
+
   const handleChange = (event, key, type = 'single', fromType = 'simple', arrayValue = []) => {
-    if ( appLocalizer.pro_active && props.proSetting?.includes( key ) ) {
+    if ( isProSetting( key ) ) {
         setModelOpen(true);
         return;
     }
+
     settingChanged.current = true;
+
     if ( type === 'single' ) {
         if (fromType === 'simple') {
             updateSetting( key, event.target.value );
@@ -188,8 +196,8 @@ const DynamicForm = (props) => {
         case "number":
           input = (
             <CustomInput.BasicInput
-              wrapperClass="mvx-setting-form-input"
-              descClass="mvx-settings-metabox-description"
+              wrapperClass="setting-form-input"
+              descClass="settings-metabox-description"
               description={inputField.desc}
               key={inputField.key}
               id={inputField.id}
@@ -197,6 +205,7 @@ const DynamicForm = (props) => {
               type={inputField.type}
               placeholder={inputField.placeholder}
               value={value}
+              proSetting={isProSetting(inputField.key)}
               onChange={(e) => {
                 handleChange(e, inputField.key);
               }}
@@ -207,15 +216,16 @@ const DynamicForm = (props) => {
         case "textarea":
           input = (
             <CustomInput.TextArea
-              wrapperClass="mvx-setting-from-textarea"
-              inputClass={inputField.class || "mvx-form-input"}
-              descClass="mvx-settings-metabox-description"
+              wrapperClass="setting-from-textarea"
+              inputClass={inputField.class || "form-input"}
+              descClass="settings-metabox-description"
               description={inputField.desc}
               key={inputField.key}
               id={inputField.id}
               name={inputField.name}
               placeholder={inputField.placeholder}
               value={value}
+              proSetting={isProSetting(inputField.key)}
               onChange={(e) => {
                 handleChange(e, inputField.key);
               }}
@@ -226,11 +236,12 @@ const DynamicForm = (props) => {
         case "normalfile":
           input = (
             <CustomInput.BasicInput
-              inputClass="mvx-setting-form-input"
+              inputClass="setting-form-input"
               type="file"
               key={inputField.key}
               name={inputField.name}
               value={value}
+              proSetting={isProSetting(inputField.key)}
               onChange={(e) => {
                 handleChange(e, inputField.key);
               }}
@@ -241,19 +252,20 @@ const DynamicForm = (props) => {
         case "file":
           input = (
             <CustomInput.FileInput
-              wrapperClass="mvx-setting-file-uploader-class"
-              descClass="mvx-settings-metabox-description"
+              wrapperClass="setting-file-uploader-class"
+              descClass="settings-metabox-description"
               description={inputField.desc}
-              inputClass={`${inputField.key} mvx-form-input`}
+              inputClass={`${inputField.key} form-input`}
               imageSrc={value || appLocalizer.default_logo}
               imageWidth={inputField.width}
               imageHeight={inputField.height}
-              buttonClass="mvx-btn btn-purple"
+              buttonClass="btn btn-purple"
               openUploader={appLocalizer.global_string.open_uploader}
               type="hidden"
               key={inputField.key}
               name={inputField.name}
               value={value}
+              proSetting={isProSetting(inputField.key)}
               onChange={(e) => {
                 handleChange(e, inputField.key);
               }}
@@ -267,15 +279,16 @@ const DynamicForm = (props) => {
         case "color":
           input = (
             <CustomInput.BasicInput
-              wrapperClass="mvx-settings-color-picker-parent-class"
-              inputClass="mvx-setting-color-picker"
-              descClass="mvx-settings-metabox-description"
+              wrapperClass="settings-color-picker-parent-class"
+              inputClass="setting-color-picker"
+              descClass="settings-metabox-description"
               description={inputField.desc}
               key={inputField.key}
               id={inputField.id}
               name={inputField.name}
               type={inputField.type}
               value={value || "#000000"}
+              proSetting={isProSetting(inputField.key)}
               onChange={(e) => {
                 handleChange(e, inputField.key);
               }}
@@ -286,10 +299,11 @@ const DynamicForm = (props) => {
         case "calender":
           input = (
             <CustomInput.CalendarInput
-              wrapperClass="mvx-settings-calender"
+              wrapperClass="settings-calender"
               inputClass="teal"
               multiple={true}
               value={setting[inputField.key]?.split(",") || ""}
+              proSetting={isProSetting(inputField.key)}
               onChange={(e) => {
                 handleChange(e, inputField.key, "single", inputField.type);
               }}
@@ -300,31 +314,33 @@ const DynamicForm = (props) => {
         case "map":
           input = (
             <CustomInput.MapsInput
-              wrapperClass="mvx-settings-basic-input-class"
+              wrapperClass="settings-basic-input-class"
               inputClass="regular-text"
-              descClass="mvx-settings-metabox-description"
+              descClass="settings-metabox-description"
               description={inputField.desc}
               id="searchStoreAddress"
               placeholder="Enter store location"
               containerId="store-maps"
-              containerClass="store-maps, mvx-gmap"
+              containerClass="store-maps, gmap"
+              proSetting={isProSetting(inputField.key)}
             />
           );
           break;
 
         case "button":
           input = (
-            <div className="mvx-form-button-group">
-              <div className="mvx-setting-section-divider">&nbsp;</div>
-              <label className="mvx-settings-form-label"></label>
-              <div className="mvx-settings-input-content">
+            <div className="form-button-group">
+              <div className="setting-section-divider">&nbsp;</div>
+              <label className="settings-form-label"></label>
+              <div className="settings-input-content">
                 <CustomInput.BasicInput
-                  wrapperClass="mvx-settings-basic-input-class"
+                  wrapperClass="settings-basic-input-class"
                   inputClass="btn default-btn"
-                  descClass="mvx-settings-metabox-description"
+                  descClass="settings-metabox-description"
                   description={inputField.desc}
                   type={inputField.type}
                   placeholder={inputField.placeholder}
+                  proSetting={isProSetting(inputField.key)}
                   // onChange={handleChange}
                 />
               </div>
@@ -335,17 +351,18 @@ const DynamicForm = (props) => {
         case "multi_number":
           input = (
             <CustomInput.MultiNumInput
-              parentWrapperClass="mvx-settings-basic-input-class"
-              childWrapperClass="mvx-settings-basic-child-wrap"
-              inputWrapperClass="mvx-settings-basic-input-child-class"
-              innerInputWrapperClass="mvx-setting-form-input"
-              inputLabelClass="mvx-setting-form-input-label"
-              idPrefix="mvx-setting-integer-input"
+              parentWrapperClass="settings-basic-input-class"
+              childWrapperClass="settings-basic-child-wrap"
+              inputWrapperClass="settings-basic-input-child-class"
+              innerInputWrapperClass="setting-form-input"
+              inputLabelClass="setting-form-input-label"
+              idPrefix="setting-integer-input"
               keyName={inputField.key}
               inputClass={inputField.class}
               value={setting[inputField.key]}
               options={inputField.options}
               onChange={handleMultiNumberChange}
+              proSetting={isProSetting(inputField.key)}
             />
           );
           break;
@@ -353,16 +370,17 @@ const DynamicForm = (props) => {
         case "radio":
           input = (
             <CustomInput.RadioInput
-              wrapperClass="mvx-settings-mvx-form-group-radio"
-              inputWrapperClass="mvx-radio-input-label-wrap"
-              inputClass="mvx-setting-form-input"
-              descClass="mvx-settings-mvx-form-group-radio"
+              wrapperClass="settings-form-group-radio"
+              inputWrapperClass="radio-input-label-wrap"
+              inputClass="setting-form-input"
+              descClass="settings-form-group-radio"
               activeClass="radio-select-active"
               description={inputField.desc}
               value={value}
               name={inputField.name}
               keyName={inputField.key}
               options={inputField.options}
+              proSetting={isProSetting(inputField.key)}
               onChange={(e) => {
                 handleChange(e, inputField.key);
               }}
@@ -373,15 +391,15 @@ const DynamicForm = (props) => {
         case "radio_select":
           input = (
             <CustomInput.RadioInput
-              wrapperClass="mvx-form-group-radio-select"
-              inputWrapperClass="mvx-radioselect-class"
-              inputClass="mvx-setting-form-input"
-              radiSelectLabelClass="mvx-radio-select-under-label-class"
-              labelImgClass="mvx-section-img-fluid"
-              labelOverlayClass="mvx-radioselect-overlay-text"
+              wrapperClass="form-group-radio-select"
+              inputWrapperClass="radioselect-class"
+              inputClass="setting-form-input"
+              radiSelectLabelClass="radio-select-under-label-class"
+              labelImgClass="section-img-fluid"
+              labelOverlayClass="radioselect-overlay-text"
               labelOverlayText="Select your Store"
-              idPrefix="mvx-radio-select-under"
-              descClass="mvx-settings-metabox-description"
+              idPrefix="radio-select-under"
+              descClass="settings-metabox-description"
               activeClass="radio-select-active"
               description={inputField.desc}
               type="radio-select"
@@ -389,6 +407,7 @@ const DynamicForm = (props) => {
               name={inputField.name}
               keyName={inputField.key}
               options={inputField.options}
+              proSetting={isProSetting(inputField.key)}
               onChange={(e) => {
                 handleChange(e, inputField.key);
               }}
@@ -399,18 +418,19 @@ const DynamicForm = (props) => {
         case "radio_color":
           input = (
             <CustomInput.RadioInput
-              wrapperClass="mvx-form-group-radio-color"
-              inputWrapperClass="mvx-settings-radio-color "
-              inputClass="mvx-setting-form-input"
-              idPrefix="mvx-radio-color-under"
+              wrapperClass="form-group-radio-color"
+              inputWrapperClass="settings-radio-color "
+              inputClass="setting-form-input"
+              idPrefix="radio-color-under"
               activeClass="radio-color-active"
-              descClass="mvx-settings-metabox-description"
+              descClass="settings-metabox-description"
               description={inputField.desc}
               type="radio-color"
               value={value}
               name={inputField.name}
               keyName={inputField.key}
               options={inputField.options}
+              proSetting={isProSetting(inputField.key)}
               onChange={(e) => {
                 handleChange(e, inputField.key);
               }}
@@ -421,16 +441,17 @@ const DynamicForm = (props) => {
         case "toggle_rectangle":
           input = (
             <CustomInput.ToggleRectangle
-              wrapperClass="mvx-settings-mvx-form-group-radio"
-              inputWrapperClass="mvx-toggle-rectangle-merge"
-              inputClass="mvx-setting-form-input"
-              descClass="mvx-settings-metabox-description"
-              idPrefix="mvx-toggle-rectangle"
+              wrapperClass="settings-form-group-radio"
+              inputWrapperClass="toggle-rectangle-merge"
+              inputClass="setting-form-input"
+              descClass="settings-metabox-description"
+              idPrefix="toggle-rectangle"
               description={inputField.desc}
               value={value}
               name={inputField.name}
               keyName={inputField.key}
               options={inputField.options}
+              proSetting={isProSetting(inputField.key)}
               onChange={(e) => {
                 handleChange(e, inputField.key);
               }}
@@ -447,12 +468,13 @@ const DynamicForm = (props) => {
 
           input = (
             <CustomInput.SelectInput
-              wrapperClass="mvx-form-select-field-wrapper"
-              descClass="mvx-settings-metabox-description"
+              wrapperClass="form-select-field-wrapper"
+              descClass="settings-metabox-description"
               description={inputField.desc}
               inputClass={inputField.key}
               options={options}
               value={value}
+              proSetting={isProSetting(inputField.key)}
               onChange={(e, data) => {
                 handleChange(e, inputField.key, "single", "select", data);
               }}
@@ -463,9 +485,9 @@ const DynamicForm = (props) => {
         case "multi-select":
           input = (
             <CustomInput.SelectInput
-              wrapperClass="mvx-settings-from-multi-select"
-              descClass="mvx-settings-metabox-description"
-              selectDeselectClass="mvx-select-deselect-trigger"
+              wrapperClass="settings-from-multi-select"
+              descClass="settings-metabox-description"
+              selectDeselectClass="select-deselect-trigger"
               selectDeselect={inputField.select_deselect}
               selectDeselectValue={
                 appLocalizer.global_string.select_deselect_all
@@ -475,6 +497,7 @@ const DynamicForm = (props) => {
               options={inputField.options}
               type="multi-select"
               value={value}
+              proSetting={isProSetting(inputField.key)}
               onChange={(e, data) => {
                 handleChange(e, inputField.key, "single", "multi-select", data);
               }}
@@ -488,12 +511,13 @@ const DynamicForm = (props) => {
         case "country":
           input = (
             <CustomInput.SelectInput
-              wrapperClass="mvx-country-choice-class"
-              descClass="mvx-settings-metabox-description"
+              wrapperClass="country-choice-class"
+              descClass="settings-metabox-description"
               description={inputField.desc}
               inputClass={inputField.key}
               options={inputField.options}
               value={value}
+              proSetting={isProSetting(inputField.key)}
               onChange={(e, data) => {
                 handleChange(e, inputField.key, "single", "country", data);
               }}
@@ -504,12 +528,13 @@ const DynamicForm = (props) => {
         case "state":
           input = (
             <CustomInput.SelectInput
-              wrapperClass="mvx-state-choice-class"
-              descClass="mvx-settings-metabox-description"
+              wrapperClass="state-choice-class"
+              descClass="settings-metabox-description"
               description={inputField.desc}
               inputClass={inputField.key}
               options={countryState}
               value={value}
+              proSetting={isProSetting(inputField.key)}
               onChange={(e, data) => {
                 handleChange(e, inputField.key, "single", "select", data);
               }}
@@ -520,22 +545,23 @@ const DynamicForm = (props) => {
         case "checkbox":
           input = (
             <CustomInput.MultiCheckBox
-              wrapperClass="mvx-checkbox-list-side-by-side"
-              descClass="mvx-settings-metabox-description"
+              wrapperClass="checkbox-list-side-by-side"
+              descClass="settings-metabox-description"
               description={inputField.desc}
-              selectDeselectClass="mvx-select-deselect-trigger"
-              inputWrapperClass="mvx-toggle-checkbox-header"
-              inputInnerWrapperClass="mvx-toggle-checkbox-content"
+              selectDeselectClass="select-deselect-trigger"
+              inputWrapperClass="toggle-checkbox-header"
+              inputInnerWrapperClass="toggle-checkbox-content"
               inputClass={inputField.class}
               hintOuterClass="dashicons dashicons-info"
-              hintInnerClass="mvx-hover-tooltip"
-              idPrefix="mvx-toggle-switch"
+              hintInnerClass="hover-tooltip"
+              idPrefix="toggle-switch"
               selectDeselect={inputField.select_deselect}
               selectDeselectValue="Select / Deselect All"
-              rightContentClass="mvx-settings-metabox-description"
+              rightContentClass="settings-metabox-description"
               rightContent={inputField.right_content}
               options={inputField.options}
               value={value}
+              proSetting={isProSetting(inputField.key)}
               onChange={(e) => {
                 handleChange(e, inputField.key, "multiple");
               }}
@@ -549,12 +575,12 @@ const DynamicForm = (props) => {
         case "table":
           input = (
             <CustomInput.Table
-              wrapperClass="mvx-settings-mvx-form-table"
-              tableWrapperClass="mvx-settings-table-wrap"
-              trWrapperClass="mvx-settings-tr-wrap"
-              thWrapperClass="mvx-settings-th-wrap"
-              tdWrapperClass="mvx-settings-td-wrap"
-              descClass="mvx-settings-metabox-description"
+              wrapperClass="settings-form-table"
+              tableWrapperClass="settings-table-wrap"
+              trWrapperClass="settings-tr-wrap"
+              thWrapperClass="settings-th-wrap"
+              tdWrapperClass="settings-td-wrap"
+              descClass="settings-metabox-description"
               headOptions={inputField.label_options}
               bodyOptions={inputField.options}
             />
@@ -576,8 +602,8 @@ const DynamicForm = (props) => {
         case "label":
           input = (
             <CustomInput.Label
-              wrapperClass="mvx-form-group-only-label"
-              descClass="mvx-settings-metabox-description"
+              wrapperClass="form-group-only-label"
+              descClass="settings-metabox-description"
               value={inputField.valuename}
               description={inputField.desc}
             />
@@ -586,15 +612,15 @@ const DynamicForm = (props) => {
 
         case "section":
           input = (
-            <CustomInput.Section wrapperClass="mvx-setting-section-divider" />
+            <CustomInput.Section wrapperClass="setting-section-divider" />
           );
           break;
 
         case "blocktext":
           input = (
             <CustomInput.BlockText
-              wrapperClass="mvx-blocktext-class"
-              blockTextClass="mvx-settings-metabox-description-code"
+              wrapperClass="blocktext-class"
+              blockTextClass="settings-metabox-description-code"
               value={inputField.blocktext}
             />
           );
@@ -609,25 +635,39 @@ const DynamicForm = (props) => {
           input = (
             <CustomInput.ButtonCustomizer
               buttonText={setting.button_text}
+              proSetting={isProSetting(inputField.key)}
               onChange={(e, key) => handleChange(e, key)}
             />
           );
           break;
-      }
+
+        case "connect_select":
+          input = (
+            <CustomInput.ConnectSelect
+              value={value}
+              key={inputField.key}
+              optionKey={inputField.optionKey}
+              onChange={(e) => handleChange(e, inputField.key)}
+              settingChanged={settingChanged}
+              apiLink={inputField.apiLink}
+            />
+          );
+          break;
+        }
 
       return inputField.type === "section" ||
         inputField.label === "no_label" ? (
         input
       ) : (
-        <div key={"g" + inputField.key} className="mvx-form-group">
+        <div key={"g" + inputField.key} className="form-group">
           <label
-            className="mvx-settings-form-label"
+            className="settings-form-label"
             key={"l" + inputField.key}
             htmlFor={inputField.key}
           >
             <p>{inputField.label}</p>
           </label>
-          <div className="mvx-settings-input-content">{input}{appLocalizer.pro_active == 'free' && props.proSetting?.includes( inputField.key ) && <span className="admin-pro-tag">pro</span> }</div>
+          <div className="settings-input-content">{input}</div>
         </div>
       );
     });
@@ -639,7 +679,7 @@ const DynamicForm = (props) => {
 
   return (
     <>
-      <div className="mvx-dynamic-fields-wrapper">
+      <div className="dynamic-fields-wrapper">
         <Dialog
           className="woo-module-popup"
           open={modelOpen}
@@ -647,19 +687,19 @@ const DynamicForm = (props) => {
           aria-labelledby="form-dialog-title"
         >
           <span
-            className="mvx-font font-cross"
+            className="admin-font font-cross"
             onClick={handleModelClose}
           ></span>
           <Popoup />
         </Dialog>
         {successMsg && (
-          <div className="mvx-notic-display-title">
-            <i className="mvx-font font-icon-yes"></i>
+          <div className="notic-display-title">
+            <i className="admin-font font-icon-yes"></i>
             {successMsg}
           </div>
         )}
         <form
-          className="mvx-dynamic-form"
+          className="dynamic-form"
           onSubmit={(e) => {
             handleSubmit(e);
           }}

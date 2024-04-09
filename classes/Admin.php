@@ -210,10 +210,13 @@ class Admin {
             'ban_email_address_text'
         ];
         
+        // Get all tab setting's database value
         $settings_databases_value =[];
-        $tabs =['general','form_customization','form_submission','email','mailchimp'];
-        foreach($tabs as $tab){
-            $settings_databases_value[$tab] = get_option( 'woo_stock_manager_' . $tab . '_tab_settings' );
+
+        $tabs_names =[ 'general', 'form_customization', 'form_submission', 'email', 'mailchimp' ];
+
+        foreach( $tabs_names as $tab_name ) {
+            $settings_databases_value[ $tab_name ] = SM()->setting->get_option( 'woo_stock_manager_' . $tab_name . '_tab_settings' );
         }
         
         if ( get_current_screen()->id == 'toplevel_page_woo-stock-manager-setting' ) {
