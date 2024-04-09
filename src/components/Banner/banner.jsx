@@ -105,6 +105,7 @@ export default function banner() {
                                             <p>Experience the power of Double Opt-In for our Stock Alert Form - Guaranteed precision in every notification!{' '}</p>
                                             <a
                                                 href={appLocalizer.pro_url}
+                                                target='_blank'
                                                 className="woo-btn btn-red"
                                             >
                                                 View Pricing
@@ -117,6 +118,7 @@ export default function banner() {
                                             <p>Subscription Dashboard - Easily monitor and download lists of out-of-stock subscribers for seamless management.{' '}</p>
                                             <a
                                                 href={appLocalizer.pro_url}
+                                                target='_blank'
                                                 className="woo-btn btn-red"
                                             >
                                                 View Pricing
@@ -129,6 +131,7 @@ export default function banner() {
                                             <p>Seamlessly link WooCommerce out-of-stock subscriptions with Mailchimp for effective marketing.{' '}</p>
                                             <a
                                                 href={appLocalizer.pro_url}
+                                                target='_blank'
                                                 className="woo-btn btn-red"
                                             >
                                                 View Pricing
@@ -141,6 +144,7 @@ export default function banner() {
                                             <p>User-Initiated Unsubscribe from In-Stock Notifications.{' '}</p>
                                             <a
                                                 href={appLocalizer.pro_url}
+                                                target='_blank'
                                                 className="woo-btn btn-red"
                                             >
                                                 View Pricing
@@ -153,6 +157,7 @@ export default function banner() {
                                             <p>Email and Domain Blacklist for Spam Prevention.{' '}</p>
                                             <a
                                                 href={appLocalizer.pro_url}
+                                                target='_blank'
                                                 className="woo-btn btn-red"
                                             >
                                                 View Pricing
