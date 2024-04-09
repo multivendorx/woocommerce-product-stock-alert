@@ -84,7 +84,7 @@ class Setting {
      * @param mixed $option_key option table's key
      * @return mixed
      */
-    public function get_setting( $key, $default = null, $option_key = null ) {
+    public function get_setting( $key, $default = '', $option_key = null ) {
 
         // If option key is not provided
         if ( ! $option_key ) {

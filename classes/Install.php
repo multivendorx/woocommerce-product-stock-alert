@@ -235,7 +235,7 @@ class Install {
                     $product_subscribers = get_post_meta( $product_id, '_product_subscriber', true );
                     if ( $product_subscribers && !empty( $product_subscribers ) ) {
                         foreach( $product_subscribers as $subscriber_email ) {
-                            Subscriber::subscribe_user( $subscriber_email, $product_id );
+                            Subscriber::insert_subscriber( $subscriber_email, $product_id );
                         }
                     }
                     delete_post_meta( $product_id, '_product_subscriber' );

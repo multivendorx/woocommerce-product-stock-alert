@@ -137,9 +137,9 @@ class Ajax {
 		if ( $product_id && !empty( $product_id ) && !empty( $customer_email ) ) {
 			$product = wc_get_product( $product_id );
 			if ( $product && $product->is_type( 'variable' ) && $variation_id > 0 ) {
-				$success = Subscriber::unsubscribe_user( $variation_id, $customer_email );
+				$success = Subscriber::remove_subscriber( $variation_id, $customer_email );
 			} else {
-				$success = Subscriber::unsubscribe_user( $product_id, $customer_email );
+				$success = Subscriber::remove_subscriber( $product_id, $customer_email );
 			} 
 		} 
 		echo esc_html( $success );
@@ -173,7 +173,7 @@ class Ajax {
 			} else if ( $is_accept_email_address ) {
 				$status = apply_filters( 'woo_stock_manager_accept_email', true, $customer_email, $product_id );
 			} else {
-				Subscriber::subscribe_user( $customer_email, $product_id );
+				Subscriber::insert_subscriber( $customer_email, $product_id );
 				Subscriber::insert_subscriber_email_trigger( wc_get_product( $product_id ), $customer_email );
 				$status = true;
 			} 

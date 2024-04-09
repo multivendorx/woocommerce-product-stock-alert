@@ -32,7 +32,24 @@ class Admin {
     * Add options page
     */
     public function add_settings_page() {
-        $pro_sticker = apply_filters( 'is_stock_manager_pro_inactive', true ) ? '<span class="stock-manager-pro-tag">Pro</span>' : '';
+        $pro_sticker = apply_filters( 'is_stock_manager_pro_inactive', true ) ? 
+        '<span 
+            class="stock-manager-pro-tag"
+            style="
+            position: absolute;
+            right: 0.25rem;
+            background: #522c81;
+            color: #fdfdfe;
+            padding: 0.125rem 0.35rem;
+            top: 50%;
+            transform: translateY(-50%);
+            border-radius: 0.625rem;
+            font-size: 0.625rem;
+            text-align: center;
+            line-height: 1;
+            text-transform: capitalize;
+            "
+        > Pro </span>' : '';
 
         add_menu_page( 
             __( 'Stock Manager', 'woocommerce-stock-manager' ), 

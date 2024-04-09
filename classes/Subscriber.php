@@ -118,7 +118,7 @@ class Subscriber {
      * @param mixed $product_id
      * @return \WP_Error|bool|int
      */
-    static function subscribe_user( $subscriber_email, $product_id ) {
+    static function insert_subscriber( $subscriber_email, $product_id ) {
         global $wpdb;
 
         // Get current user id.
@@ -172,7 +172,7 @@ class Subscriber {
      * @param string $customer_email
      * @return bool
      */
-    static function unsubscribe_user( $product_id, $customer_email ) {
+    static function remove_subscriber( $product_id, $customer_email ) {
         // Check the user is already subscribed or not
         $unsubscribe_post = self::is_already_subscribed( $customer_email, $product_id );
 
