@@ -86,7 +86,7 @@ class Ajax {
 			'product_sku', 
 			'product_type', 
 			'subscribers'
-		 ];
+		];
 		
 		foreach ( $csv_headings as $heading ) { 
 			$csv_headers_array[] = '"' . $heading . '"';
@@ -137,9 +137,9 @@ class Ajax {
 		if ( $product_id && !empty( $product_id ) && !empty( $customer_email ) ) {
 			$product = wc_get_product( $product_id );
 			if ( $product && $product->is_type( 'variable' ) && $variation_id > 0 ) {
-				$success = Subscriber::unsubscribe_user( $variation_id, $customer_email );
+				$success = Subscriber::remove_subscriber( $variation_id, $customer_email );
 			} else {
-				$success = Subscriber::unsubscribe_user( $product_id, $customer_email );
+				$success = Subscriber::remove_subscriber( $product_id, $customer_email );
 			} 
 		} 
 		echo esc_html( $success );
@@ -165,7 +165,7 @@ class Ajax {
 			$product_id = ( $variation_id && $variation_id > 0 ) ? $variation_id : $product_id;
 			$do_complete_additional_task = apply_filters( 'woo_stock_manager_do_complete_additional_task', false );
         	$is_accept_email_address = apply_filters( 'woo_stock_manager_is_accept_email_address', false );
-        
+
 			if ( Subscriber::is_already_subscribed( $customer_email, $product_id ) ) {
 				$status = '/*?%already_registered%?*/';
 			} else if ( $do_complete_additional_task ) {
@@ -173,7 +173,7 @@ class Ajax {
 			} else if ( $is_accept_email_address ) {
 				$status = apply_filters( 'woo_stock_manager_accept_email', true, $customer_email, $product_id );
 			} else {
-				Subscriber::subscribe_user( $customer_email, $product_id );
+				Subscriber::insert_subscriber( $customer_email, $product_id );
 				Subscriber::insert_subscriber_email_trigger( wc_get_product( $product_id ), $customer_email );
 				$status = true;
 			} 

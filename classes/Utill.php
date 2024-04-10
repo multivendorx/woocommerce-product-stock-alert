@@ -38,34 +38,29 @@ class Utill {
      * @return array
      */
     public static function get_form_settings_array() {
-        $general_tab_settings = get_option( 'woo_stock_manager_general_tab_settings', [] );
-        $form_customization_tab_settings = get_option( 'woo_stock_manager_form_customization_tab_settings', [] );
-        $form_submission_tab_settings = get_option( 'woo_stock_manager_form_submission_tab_settings', [] );
-        $email_tab_settings = get_option( 'woo_stock_manager_email_tab_settings', [] );
-        
-        return [ 
-            'double_opt_in_success'             => $general_tab_settings[ 'double_opt_in_success' ] ?? '', 
-            'shown_interest_text'               => $general_tab_settings[ 'shown_interest_text' ] ?? '', 
-            'alert_success'                     => $form_submission_tab_settings[ 'alert_success' ] ?? '', 
-            'alert_email_exist'                 => $form_submission_tab_settings[ 'alert_email_exist' ] ?? '', 
-            'valid_email'                       => $form_submission_tab_settings[ 'valid_email' ] ?? '', 
-            'alert_unsubscribe_message'         => $form_submission_tab_settings[ 'alert_unsubscribe_message' ] ?? '', 
-            'email_placeholder_text'            => $form_customization_tab_settings[ 'email_placeholder_text' ] ?? '', 
-            'alert_text'                        => $form_customization_tab_settings[ 'alert_text' ] ?? '', 
-            'button_text'                       => $form_customization_tab_settings[ 'button_text' ] ?? '', 
-            'unsubscribe_button_text'           => $form_customization_tab_settings[ 'unsubscribe_button_text' ] ?? '', 
-            'alert_text_color'                  => $form_customization_tab_settings[ 'alert_text_color' ] ?? '', 
-            'button_background_color'           => $form_customization_tab_settings[ 'button_background_color' ] ?? '', 
-            'button_border_color'               => $form_customization_tab_settings[ 'button_border_color' ] ?? '', 
-            'button_text_color'                 => $form_customization_tab_settings[ 'button_text_color' ] ?? '', 
-            'button_background_color_onhover'   => $form_customization_tab_settings[ 'button_background_color_onhover' ] ?? '', 
-            'button_text_color_onhover'         => $form_customization_tab_settings[ 'button_text_color_onhover' ] ?? '', 
-            'button_border_color_onhover'       => $form_customization_tab_settings[ 'button_border_color_onhover' ] ?? '', 
-            'button_font_size'                  => $form_customization_tab_settings[ 'button_font_size' ] ?? '', 
-            'button_border_size'                => $form_customization_tab_settings[ 'button_border_size' ] ?? '', 
-            'button_border_radious'             => $form_customization_tab_settings[ 'button_border_radious' ] ?? '', 
-            'ban_email_domain_text'             => $email_tab_settings[ 'ban_email_domain_text' ] ?? '', 
-            'ban_email_address_text'            => $email_tab_settings[ 'ban_email_address_text' ] ?? '',
+        return [
+            'double_opt_in_success'           => SM()->setting->get_setting( 'double_opt_in_success' ),
+            'shown_interest_text'             => SM()->setting->get_setting( 'shown_interest_text' ),
+            'alert_success'                   => SM()->setting->get_setting( 'alert_success' ),
+            'alert_email_exist'               => SM()->setting->get_setting( 'alert_email_exist' ),
+            'valid_email'                     => SM()->setting->get_setting( 'valid_email' ),
+            'alert_unsubscribe_message'       => SM()->setting->get_setting( 'alert_unsubscribe_message' ),
+            'email_placeholder_text'          => SM()->setting->get_setting( 'email_placeholder_text' ),
+            'alert_text'                      => SM()->setting->get_setting( 'alert_text' ),
+            'button_text'                     => SM()->setting->get_setting( 'button_text' ),
+            'unsubscribe_button_text'         => SM()->setting->get_setting( 'unsubscribe_button_text' ),
+            'alert_text_color'                => SM()->setting->get_setting( 'alert_text_color' ),
+            'button_background_color'         => SM()->setting->get_setting( 'button_background_color' ),
+            'button_border_color'             => SM()->setting->get_setting( 'button_border_color' ),
+            'button_text_color'               => SM()->setting->get_setting( 'button_text_color' ),
+            'button_background_color_onhover' => SM()->setting->get_setting( 'button_background_color_onhover' ),
+            'button_text_color_onhover'       => SM()->setting->get_setting( 'button_text_color_onhover' ),
+            'button_border_color_onhover'     => SM()->setting->get_setting( 'button_border_color_onhover' ),
+            'button_font_size'                => SM()->setting->get_setting( 'button_font_size' ),
+            'button_border_size'              => SM()->setting->get_setting( 'button_border_size' ),
+            'button_border_radious'           => SM()->setting->get_setting( 'button_border_radious' ),
+            'ban_email_domain_text'           => SM()->setting->get_setting( 'ban_email_domain_text' ),
+            'ban_email_address_text'          => SM()->setting->get_setting( 'ban_email_address_text' ),
         ];
     }
 } 

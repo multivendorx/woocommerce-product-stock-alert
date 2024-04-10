@@ -118,19 +118,43 @@ class Subscriber {
      * @param mixed $product_id
      * @return \WP_Error|bool|int
      */
-    static function subscribe_user( $subscriber_email, $product_id ) {
+    static function insert_subscriber( $subscriber_email, $product_id ) {
         global $wpdb;
 
         // Get current user id.
         $user_id = wp_get_current_user()->ID;
+        
+        // Check the email is already register or not
+        $subscriber = $wpdb->get_row(
+            $wpdb->prepare(
+                "SELECT * FROM {$wpdb->prefix}stockalert_subscribers 
+                WHERE product_id = %d
+                AND email = %s",
+                [ $product_id, $subscriber_email ]
+            )
+        );
+
+        // Update the status and create time of the subscriber row
+        if ( $subscriber ) {
+            return $response = $wpdb->update(
+                "{$wpdb->prefix}stockalert_subscribers",
+                [
+                    "status"      => 'subscribed',
+                    "create_time" => current_time( 'mysql' )
+                ],
+                [ "id" => $subscriber->id ]
+            );
+        }
 
         // Insert new subscriber.
         $response = $wpdb->query(
             $wpdb->prepare(
-                "INSERT IGNORE INTO {$wpdb->prefix}stockalert_subscribers
+                "INSERT INTO {$wpdb->prefix}stockalert_subscribers
                 ( product_id, user_id, email, status )
-                VALUES ( %d, %d, %s, %s )",
-                [ $product_id, $user_id, $subscriber_email, 'subscribed' ]
+                VALUES ( %d, %d, %s, %s )
+                ON DUPLICATE KEY UPDATE
+                status = %s",
+                [ $product_id, $user_id, $subscriber_email, 'subscribed', 'subscribed' ]
             )
         );
 
@@ -148,7 +172,7 @@ class Subscriber {
      * @param string $customer_email
      * @return bool
      */
-    static function unsubscribe_user( $product_id, $customer_email ) {
+    static function remove_subscriber( $product_id, $customer_email ) {
         // Check the user is already subscribed or not
         $unsubscribe_post = self::is_already_subscribed( $customer_email, $product_id );
 
@@ -157,7 +181,7 @@ class Subscriber {
                 $unsubscribe_post = $unsubscribe_post[ 0 ];
             }
 
-            self::update_subscriber( $unsubscribe_post, 'woo_unsubscribed' );
+            self::update_subscriber( $unsubscribe_post, 'unsubscribed' );
             self::update_product_subscriber_count( $product_id );
 
             return true;
@@ -175,7 +199,7 @@ class Subscriber {
      */
     static function is_already_subscribed( $subscriber_email, $product_id ) {
         global $wpdb;
-
+			
         // Get the result from custom subscribers table. 
         return $wpdb->get_var(
             $wpdb->prepare(
@@ -195,8 +219,6 @@ class Subscriber {
      */
     static function update_product_subscriber_count( $product_id ) {
         global $wpdb;
-
-        $subscriber_count = 0;
 
         // Get subscriber count.
         $subscriber_count = $wpdb->get_var(

@@ -14,7 +14,7 @@
  * Domain Path: /languages/
  */
 
-defined( 'ABSPATH' ) || die; // Die if accessed directly
+defined( 'ABSPATH' ) || exit; // Exit if accessed directly
 
 require_once __DIR__ . '/vendor/autoload.php';
 

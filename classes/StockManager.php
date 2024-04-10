@@ -84,14 +84,18 @@ class StockManager {
      */
     public function init_classes() {
         $this->container[ 'util' ]        = new Utill();
+        $this->container[ 'setting' ]     = new Setting();
         $this->container[ 'ajax' ]        = new Ajax();
-        $this->container[ 'admin' ]       = new Admin();
-        $this->container[ 'restapi' ]     = new RestAPI();
         $this->container[ 'frontend' ]    = new FrontEnd();
         $this->container[ 'shortcode' ]   = new Shortcode();
         $this->container[ 'subscriber' ]  = new Subscriber();
         $this->container[ 'filters' ]     = new Deprecated\DeprecatedFilterHooks();
         $this->container[ 'actions' ]     = new Deprecated\DeprecatedActionHooks();
+        
+        if ( is_admin() ) {
+            $this->container[ 'admin' ]       = new Admin();
+            $this->container[ 'restapi' ]     = new RestAPI();
+        }
     } 
 
     /**
@@ -114,7 +118,8 @@ class StockManager {
             return;
         } 
         add_action( 'admin_notices', [ $this, 'woocommerce_admin_notice' ] );
-    } 
+        Install::stock_manager_data_migrate();
+    }
 
     /**
      * Load Localisation files.
@@ -141,7 +146,15 @@ class StockManager {
             return $this->container[ $class ];
         } 
         return new \WP_Error( sprintf( 'Call to unknown class %s.', $class ) );
-    } 
+    }
+
+    /**
+     * Admin notice for woocommerce inactiove
+     * @return void
+     */
+    public static function woocommerce_admin_notice() {
+
+    }
 
     /**
      * Html for database migration notice.

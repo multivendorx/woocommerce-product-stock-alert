@@ -48,7 +48,6 @@
 /*pro tag*/
 span.admin-pro-tag {
 	position: absolute;
-	width: fit-content;
 	right: .25rem;
 	background: #522c81;
 	color: #fdfdfe;

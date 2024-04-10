@@ -22,7 +22,7 @@ class Shortcode {
 	 */
 	function display_stock_manager_form( $attr ) {
         ob_start();
-
+        
         do_action( 'woocommerce_stock_manager_form_before' );
 
         SM()->frontend->display_product_subscription_form();

@@ -47,8 +47,8 @@ class FrontEnd {
         if ( !empty( $settings_array[ 'button_border_redious' ] ) )
             $button_css .= "border-radius:" . $settings_array[ 'button_border_redious' ] . "px;";
 
-        $subscribe_button_html = '<button style="' . $button_css .'" class="stock_manager_button alert_button_hover" name="alert_button">' . $settings_array[ 'button_text' ] . '</button>';
-        $unsubscribe_button_html = '<button class="unsubscribe_button" style="' . $button_css .'">' . $settings_array[ 'unsubscribe_button_text' ] . '</button>';
+        $subscribe_button_html = '<button style="' . $button_css .'" class="stock-manager-button alert_button_hover" name="alert_button">' . $settings_array[ 'button_text' ] . '</button>';
+        $unsubscribe_button_html = '<button class="unsubscribe-button" style="' . $button_css .'">' . $settings_array[ 'unsubscribe_button_text' ] . '</button>';
 
         if ( is_product() || is_shop() || is_product_category() ) {
             // Enqueue your frontend javascript from here
@@ -129,7 +129,7 @@ class FrontEnd {
             $get_variations = count( $product->get_children() ) <= apply_filters( 'woocommerce_ajax_variation_threshold', 30, $product );
             $get_variations = $get_variations ? $product->get_available_variations() : false;
             if ( $get_variations ) {
-                echo '<div class="stock_notifier-shortcode-subscribe-form" data-product-id="' . esc_attr( $product->get_id() ) . '"></div>';
+                echo '<div class="stock-notifier-shortcode-subscribe-form" data-product-id="' . esc_attr( $product->get_id() ) . '"></div>';
             } else {
                 echo ( $this->get_subscribe_form( $product ) );
             } 
@@ -191,7 +191,7 @@ class FrontEnd {
         $alert_fields = apply_filters( 'woo_stock_manager_fileds_array', [ 
             'alert_email' => [ 
                 'type' => 'text', 
-                'class'=> 'stock_manager_email woo-fields', 
+                'class'=> 'stock-manager-email woo-fields', 
                 'value'=> $user_email, 
                 'placeholder' => $placeholder
             ]
@@ -249,7 +249,7 @@ class FrontEnd {
         if ( !empty( $settings_array[ 'button_border_radious' ] ) )
             $button_css .= "border-radius:" . esc_html( $settings_array[ 'button_border_radious' ] ) . "px;";
 
-        $button_html = '<button style="' . $button_css .'" class="stock_manager_button alert_button_hover" name="alert_button">' . esc_html( $settings_array[ 'button_text' ] ) . '</button>';
+        $button_html = '<button style="' . $button_css .'" class="stock-manager-button alert_button_hover" name="alert_button">' . esc_html( $settings_array[ 'button_text' ] ) . '</button>';
 
         $interested_person = get_post_meta( $variation ? $variation->get_id() : $product->get_id(), 'no_of_subscribers', true );
         $interested_person = ( isset( $interested_person ) && $interested_person > 0 ) ? $interested_person : 0;
@@ -264,13 +264,13 @@ class FrontEnd {
         } 
 
         return
-        '<div id="stock_notifier_main_form" class="stock_notifier-subscribe-form" style="border-radius:10px;">
+        '<div id="stock_notifier_main_form" class="stock-notifier-subscribe-form" style="border-radius:10px;">
             ' . $alert_text_html . '
             <div class="woo_fields_wrap"> ' . $stock_manager_fields_html . '' . $button_html . '
             </div>
-            <input type="hidden" class="current_product_id" value="' . esc_attr( $product->get_id() ) . '" />
-            <input type="hidden" class="current_variation_id" value="' . esc_attr( $variation ? $variation->get_id() : 0 ) . '" />
-            <input type="hidden" class="current_product_name" value="' . esc_attr( $product->get_title() ) . '" />
+            <input type="hidden" class="current-product-id" value="' . esc_attr( $product->get_id() ) . '" />
+            <input type="hidden" class="current-variation-id" value="' . esc_attr( $variation ? $variation->get_id() : 0 ) . '" />
+            <input type="hidden" class="current-product-name" value="' . esc_attr( $product->get_title() ) . '" />
             ' . $shown_interest_html . '
         </div>';
     } 
