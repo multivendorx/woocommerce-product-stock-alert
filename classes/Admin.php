@@ -299,7 +299,7 @@ class Admin {
      * Stock Manager news on Product edit page ( variable )
      */
     function display_product_subscriber_count_in_variation_metabox( $loop, $variation_data, $variation ) {
-        if ( Subscriber::is_product_outofstock( $variation ) ) {
+        if ( Subscriber::is_product_outofstock( wc_get_product( $variation->ID ) ) ) {
             $product_subscriber = get_post_meta( $variation->ID, 'no_of_subscribers', true );
             ?>
             <p class="form-row form-row-full interested_person">
@@ -308,5 +308,5 @@ class Admin {
             </p>
             <?php
         } 
-    } 
-} 
+    }
+}
