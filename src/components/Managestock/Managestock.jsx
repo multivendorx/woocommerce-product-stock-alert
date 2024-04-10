@@ -40,7 +40,7 @@ const Managestock = () => {
                 url: fetchDataUrl,
                 headers: { 'X-WP-Nonce' : appLocalizer.nonce },
                 data:{ page:currentPage+1 , row:rowsPerPage, product_name:productName, product_sku:productSku,
-                     product_type:productType, stock_status: stockStatus, allData: 'false' },
+                     product_type:productType, stock_status: stockStatus },
             } ).then( ( response ) => {
                 let parsedData = JSON.parse( response.data );
                 setData( parsedData.products );
