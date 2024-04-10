@@ -51,12 +51,13 @@ class StockManager {
      * @return void
      */
     public  function deactivate() {
-        if ( get_option( 'woo_stock_manager_cron_start' ) ) :
+        if ( get_option( 'woo_stock_manager_cron_start' ) ) {
             wp_clear_scheduled_hook( 'woo_stock_manager_start_notification_cron_job' );
             delete_option( 'woo_stock_manager_cron_start' );
-        endif;
+        }
+
         delete_option( 'woo_stock_manager_installed' );
-    } 
+    }
 
     /**
      * Add High Performance Order Storage Support
@@ -91,11 +92,8 @@ class StockManager {
         $this->container[ 'subscriber' ]  = new Subscriber();
         $this->container[ 'filters' ]     = new Deprecated\DeprecatedFilterHooks();
         $this->container[ 'actions' ]     = new Deprecated\DeprecatedActionHooks();
-        
-        if ( is_admin() ) {
-            $this->container[ 'admin' ]       = new Admin();
-            $this->container[ 'restapi' ]     = new RestAPI();
-        }
+        $this->container[ 'admin' ]       = new Admin();
+        $this->container[ 'restapi' ]     = new RestAPI();
     } 
 
     /**
@@ -118,7 +116,6 @@ class StockManager {
             return;
         } 
         add_action( 'admin_notices', [ $this, 'woocommerce_admin_notice' ] );
-        Install::stock_manager_data_migrate();
     }
 
     /**
@@ -153,7 +150,11 @@ class StockManager {
      * @return void
      */
     public static function woocommerce_admin_notice() {
-
+        ?>
+        <div id="message" class="error">
+            <p><?php printf(__('%sProduct Stock Manager & Notifier for WooCommerce is inactive.%s The %sWooCommerce plugin%s must be active for the Product Stock Manager & Notifier for WooCommerce to work. Please %sinstall & activate WooCommerce%s', 'woocommerce-stock-manager'), '<strong>', '</strong>', '<a target="_blank" href="http://wordpress.org/extend/plugins/woocommerce/">', '</a>', '<a href="' . admin_url('plugins.php') . '">', ' &raquo;</a>'); ?></p>
+        </div>
+        <?php
     }
 
     /**
@@ -185,7 +186,7 @@ class StockManager {
         ];
         if ( apply_filters( 'is_stock_manager_pro_inactive', true ) ) {
             $links[ 'go_pro' ] = '<a href="' . STOCK_MANAGER_PRO_SHOP_URL . '" class="stock-manager-pro-plugin" target="_blank">' . __( 'Get Pro', 'woocommerce-stock-manager' ) . '</a>';
-        } 
+        }
         return array_merge( $plugin_links, $links );
     }
 

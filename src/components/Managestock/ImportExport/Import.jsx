@@ -11,9 +11,8 @@ const Import = () => {
         if ( appLocalizer.pro_active != 'free' ) {
             axios({
                 method: "post",
-                url: `${ appLocalizer.apiUrl }/stockmanager/v1/get-products`,
+                url: `${ appLocalizer.apiUrl }/stockmanager/v1/all-products`,
                 headers: { 'X-WP-Nonce' : appLocalizer.nonce },
-                data:{ allData:'true' },
             } ).then( ( response ) => {
                 let parsedData = JSON.parse( response.data );
                 setData( parsedData ); 
