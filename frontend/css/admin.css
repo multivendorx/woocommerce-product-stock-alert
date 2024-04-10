@@ -49,6 +49,7 @@
 span.admin-pro-tag {
 	position: absolute;
 	right: .25rem;
+	width: fit-content;
 	background: #522c81;
 	color: #fdfdfe;
 	padding: .125rem .4rem;
