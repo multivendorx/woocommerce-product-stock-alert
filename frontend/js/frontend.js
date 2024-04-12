@@ -7,7 +7,7 @@ jQuery(function ($) {
      * Subscriber form dom object
      * @var {object} dom object
      */
-    const form = $(document).find('.stock-notifier-subscribe-form');
+    let form = $(document).find('.stock-notifier-subscribe-form');
 
     /**
      * Init event listener on page loading.
@@ -71,6 +71,7 @@ jQuery(function ($) {
      * @param {undefined}
      */
     function processForm() {
+        console.log(form);
         // Get data from form.
         let customerEmail   = form.find('.stock-manager-email').val();
         let productId       = form.find('.current-product-id').val();
@@ -96,7 +97,7 @@ jQuery(function ($) {
         // Prepare email exist data
         emailExist = emailExist.replace('%product_title%', productTitle);
         emailExist = emailExist.replace('%customer_email%', customerEmail);
-        
+
         if (isEmail(customerEmail)) {
             
             $(this).toggleClass('alert_loader').blur();
@@ -117,13 +118,12 @@ jQuery(function ($) {
             
             // Request for subscription
             $.post(localizeData.ajax_url, requestData, function (response) {
-                
                 // Handle response
                 if (response == '0') {
                     $(`.stock-notifier-subscribe-form`).html(`<div class="registered-message"> ${errorMessage} <a href="${window.location}"> ${tryAgainMessage} </a></div>`);
                 } else if (response == '/*?%already_registered%?*/') {
                     $(`.stock-notifier-subscribe-form`).html(`<div class="registered-message">${emailExist}</div>${unsubButtonHtml}<input type="hidden" class="subscribed_email" value="${customerEmail}" /><input type="hidden" class="product_id" value="${productId}" /><input type="hidden" class="variation_id" value="${variationId}" />`);
-                } else if (response == '/*?%ban-email-address%?*/') {
+                } else if (response == '/*?%ban_email_address%?*/') {
                     $(`.responsedata-error-message`).remove() && $(`.stock-notifier-subscribe-form`).append($(`<p class="responsedata-error-message ban-email-address">${banEmailAddress}</p>`));
                 } else if (response == '/*?%ban_email_domain%?*/') {
                     $(`.responsedata-error-message`).remove() && $(`.stock-notifier-subscribe-form`).append($(`<p class="responsedata-error-message ban-email-address">${banEmailDomin}</p>`));
@@ -204,10 +204,11 @@ jQuery(function ($) {
             };
 
             // Request for subscription form
-            $.post(localizeData.ajax_url, subscriptionFormRequest, function ( response ) {
+            $.post( localizeData.ajax_url, subscriptionFormRequest, function ( response ) {
                 
                 // Set subscription form as inner-html
                 $('.stock-notifier-shortcode-subscribe-form').html( response );
+                form = $(document).find('.stock-notifier-subscribe-form');
             });
         }
         else {

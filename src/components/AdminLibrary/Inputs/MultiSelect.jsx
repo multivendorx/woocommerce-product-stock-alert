@@ -4,7 +4,7 @@ const MultiSelect = (props) => {
             <div className={props.wrapperClass}>
                 {m.select_deselect ? (
                     <div
-                        className="mvx-select-deselect-trigger"
+                        className="select-deselect-trigger"
                         onClick={(e) => {
                             this.onMultiSelectDeselectChange(e, m);
                         }}

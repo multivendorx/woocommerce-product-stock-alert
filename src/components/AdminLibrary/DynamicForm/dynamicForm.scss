@@ -128,6 +128,23 @@ $fill-color: #fdfdfe;
             width: 100%;
             border: 0.063rem solid $border-color;
           }
+
+          /*pro tag*/
+          span.admin-pro-tag {
+            position: absolute;
+            width: fit-content;
+            right: 0.25rem;
+            background: #522c81;
+            color: #fdfdfe;
+            padding: 0.125rem 0.4rem;
+            top: 50%;
+            transform: translateY(-50%);
+            border-radius: 0.625rem;
+            font-size: 0.625rem;
+            text-align: center;
+            line-height: 1;
+            text-transform: capitalize;
+          }
         }
 
         .settings-metabox-description {
@@ -145,7 +162,6 @@ $fill-color: #fdfdfe;
       margin: $margin-y $margin-x;
     }
   }
-
 }
 @media only screen and (max-width: 48.321rem) {
   .tab-content {

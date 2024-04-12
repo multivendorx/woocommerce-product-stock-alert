@@ -36,14 +36,14 @@ class Ajax {
         $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
 
         $recaptcha =  wp_remote_get( $recaptcha_url . '?secret=' . $recaptcha_secret . '&response=' . $recaptcha_response );
-        $recaptcha = json_decode( $recaptcha );
+        
         if ( !$recaptcha->success || $recaptcha->score < 0.5 ) {
             echo 0;
         } else {
         	echo 1;
         } 
         die();
-	} 
+	}
 	
 	/**
 	 * Preaper data for CSV. CSV contain all stockmanager subscribtion details.
@@ -181,7 +181,7 @@ class Ajax {
 
 		echo esc_html( $status );
 		die();
-	} 
+	}
 
 	/**
 	 * Get the subscription form for variation product through ajax call.
@@ -199,7 +199,7 @@ class Ajax {
 		if ( $child_id && !empty( $child_id ) ) {
 			$child_obj = new \WC_Product_Variation( $child_id );
 		} 
-		echo esc_html( SM()->frontend->get_subscribe_form( $product, $child_obj ) );
+		echo SM()->frontend->get_subscribe_form( $product, $child_obj );
 		die();
 	} 
 } 
