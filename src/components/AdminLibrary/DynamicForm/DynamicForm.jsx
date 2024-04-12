@@ -83,7 +83,7 @@ const DynamicForm = (props) => {
         }
     } else {
         let prevData = setting[key] || [];
-        if ( ! prevData || prevData == 'enabled' || prevData == true ) {
+        if ( ! prevData || typeof prevData == 'string' || prevData == true ) {
           prevData = [ key ];
         }
         prevData = prevData.filter((data) => data != event.target.value);
