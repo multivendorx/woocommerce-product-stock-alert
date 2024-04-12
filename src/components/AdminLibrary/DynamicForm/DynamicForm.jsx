@@ -83,6 +83,9 @@ const DynamicForm = (props) => {
         }
     } else {
         let prevData = setting[key] || [];
+        if ( ! prevData || prevData == 'enabled' || prevData == true ) {
+          prevData = [ key ];
+        }
         prevData = prevData.filter((data) => data != event.target.value);
         if ( event.target.checked ) {
             prevData.push( event.target.value );

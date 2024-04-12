@@ -163,10 +163,9 @@ class Setting {
      * @return string
      */
     private function get_option_key( $key ) {
-        
-        foreach ( $this->settings as $option_key => $setting ) {            
+        foreach ( $this->settings as $option_key => $setting ) {     
             // Key exist in a particular setting.
-            if ( array_key_exists( $key, $setting ) ) {
+            if ( is_array( $setting ) && array_key_exists( $key, $setting ) ) {
                 return $option_key;
             }
         }
