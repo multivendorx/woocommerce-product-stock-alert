@@ -5,7 +5,7 @@ export default {
     priority: 10,
     name: __("Support", "woocommerce-stock-manager"),
     desc: __("Configure basic product manager settings.", "woocommerce-stock-manager"),
-    icon: 'font-settings',
+    icon: 'font-support',
     modal: [
         
     ]
