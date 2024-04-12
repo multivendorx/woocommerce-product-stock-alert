@@ -36,14 +36,14 @@ class Ajax {
         $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
 
         $recaptcha =  wp_remote_get( $recaptcha_url . '?secret=' . $recaptcha_secret . '&response=' . $recaptcha_response );
-        $recaptcha = json_decode( $recaptcha );
+        
         if ( !$recaptcha->success || $recaptcha->score < 0.5 ) {
             echo 0;
         } else {
         	echo 1;
         } 
         die();
-	} 
+	}
 	
 	/**
 	 * Preaper data for CSV. CSV contain all stockmanager subscribtion details.
