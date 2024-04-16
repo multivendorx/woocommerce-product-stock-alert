@@ -131,16 +131,21 @@
       transition: 1s;
     }
   
-    .question {
-      display: flex;
+    button.question {
+      display: flex !important;
       font-size: 1rem;
       font-weight: 500;
       color: #65438f;
       display: flex;
       justify-content: space-between;
+      width: 100%;
+      padding: 0;
   
       h3{
         font-size: 1.1rem;
+        line-height: normal;
+        text-align: left;
+        width: 100%;
       }
   
       svg {
@@ -177,9 +182,9 @@
       text-align: left;
       font-size: 0.85rem;
       line-height: 1.4;
-      height: 0%;
       animation: slidein 0.4s;
       animation-fill-mode: forwards;
+      margin-top: 0.5rem;
     }
   
     @keyframes slidein {
@@ -203,6 +208,7 @@
 
       .video-support-wrapper{
         width: 100%;
+        min-width: 100%;
       }
 
       .support-quick-link{
