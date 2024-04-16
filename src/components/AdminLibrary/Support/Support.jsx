@@ -20,7 +20,7 @@ const questions = [
   {
     id: 4,
     question: 'Do you support Google reCaptcha for the out-of-stock form?',
-    answer: 'Yes, Product Stock Manager & Notifier Pro has support for reCaptcha.',
+    answer: 'Yes, <a href="https://multivendorx.com/woocommerce-product-stock-manager-notifier-pro/?utm_source=WordPressAdmin&utm_medium=PluginSettings&utm_campaign=productsstockmanager" target="_blank">Product Stock Manager & Notifier Pro</a> has support for reCaptcha.',
   },
   
 ]
@@ -64,7 +64,7 @@ function FAQ(props) {
            </svg>
         </div>     
       </button>
-      <div className={isActive? 'answer active' : 'answer'}>{props.answer}</div>
+      <div className={isActive? 'answer active' : 'answer'} dangerouslySetInnerHTML={{__html: props.answer}}></div>
       </div>
      )
    }
@@ -77,19 +77,19 @@ const Support = () => {
       title: "Get in Touch with Support",
       icon: "mail",
       description: "Reach out to the support team for assistance or guidance.",
-      link: "link1",
+      link: "https://multivendorx.com/contact-us/?utm_source=WordPressAdmin&utm_medium=PluginSettings&utm_campaign=productsstockmanager",
     },
     {
       title: "Explore Documentation",
       icon: "submission-message",
       description: "Understand the plugin and its settings.",
-      link: "https://multivendorx.com/docs/knowledgebase/products-stock-manager-notifier-for-woocommerce/",
+      link: "https://multivendorx.com/docs/knowledgebase/products-stock-manager-notifier-for-woocommerce/?utm_source=WordPressAdmin&utm_medium=PluginSettings&utm_campaign=productsstockmanager",
     },
     {
       title: "Contribute Here",
       icon: "support",
       description: "To participation in product enhancement.",
-      link: "link3",
+      link: "https://github.com/multivendorx/woocommerce-product-stock-alert/issues",
     },
   ];
 

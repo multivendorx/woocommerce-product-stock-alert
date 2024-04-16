@@ -105,7 +105,7 @@ class Subscriber {
 
             foreach ( $product_subscribers as $subscribe_id => $to ) {
                 $email->trigger( $to, $product );
-                self::update_subscriber( $subscribe_id, 'woo_mailsent' );
+                self::update_subscriber( $subscribe_id, 'mailsent' );
             }
 
             delete_post_meta( $product->get_id(), 'no_of_subscribers' );
