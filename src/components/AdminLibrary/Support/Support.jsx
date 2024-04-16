@@ -4,23 +4,23 @@ import "./support.scss";
 const questions = [
   {
     id: 1,
-    question: 'Popular Articles',
-    answer: 'Suspendisse ipsum elit, hendrerit id eleifend at, condimentum et mauris. Curabitur et libero vel arcu dignissim pulvinar ut ac leo. In sit amet orci et erat accumsan interdum.',
+    question: 'Why am I not receiving any emails when a customer subscribes for an out-of-stock product?',
+    answer: 'Please install a plugin like Email Log and perform a test subscription. If the email appears in the Email Log list, it suggests that there might be an issue with your email server. We recommend reaching out to your server administrator to address this matter.',
   },
-    {
+  {
     id: 2,
-    question: 'Fix problems & request removals',
-    answer: 'Suspendisse ipsum elit, hendrerit id eleifend at, condimentum et mauris. Curabitur et libero vel arcu dignissim pulvinar ut ac leo. In sit amet orci et erat accumsan interdum.',
+    question: 'Why is the out-of-stock form not appearing?',
+    answer: 'There might be a theme conflict issue. To troubleshoot, switch to a default theme like Twenty Twenty-Four and check if the form appears.',
   },
-    {
+  {
     id: 3,
-    question: 'Browse the web',
-    answer: 'Suspendisse ipsum elit, hendrerit id eleifend at, condimentum et mauris. Curabitur et libero vel arcu dignissim pulvinar ut ac leo. In sit amet orci et erat accumsan interdum.',
+    question: 'Does Product Stock Manager & Notifier support product variations?',
+    answer: 'Yes, product variations are fully supported and editable from the Inventory Manager. Product Stock Manager & Notifier handles variable products with ease and uses an expandable feature to make managing variations clear and straightforward.',
   },
-      {
+  {
     id: 4,
-    question: 'Search on your phone or tablet',
-    answer: 'Suspendisse ipsum elit, hendrerit id eleifend at, condimentum et mauris. Curabitur et libero vel arcu dignissim pulvinar ut ac leo. In sit amet orci et erat accumsan interdum.',
+    question: 'Do you support Google reCaptcha for the out-of-stock form?',
+    answer: 'Yes, Product Stock Manager & Notifier Pro has support for reCaptcha.',
   },
   
 ]
@@ -55,17 +55,17 @@ function FAQ(props) {
      setActive(!isActive)
    }
      return(
-       <div className="question-wrapper">
-       <div className='question' id={props.id}>
-         <h3>{props.question}</h3>
-         <button onClick={() => handleClick(props.id)}>
-            <svg className={isActive? 'active' : ''} viewBox="0 0 320 512" width="100" title="angle-down">
-              <path d="M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z" />
-            </svg>
-         </button>     
-       </div>
-       <div className={isActive? 'answer active' : 'answer'}>{props.answer}</div>
-       </div>
+      <div className="question-wrapper">
+      <button onClick={() => handleClick(props.id)} className='question' id={props.id}>
+        <h3>{props.question}</h3>
+        <div>
+           <svg className={isActive? 'active' : ''} viewBox="0 0 320 512" width="100" title="angle-down">
+             <path d="M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z" />
+           </svg>
+        </div>     
+      </button>
+      <div className={isActive? 'answer active' : 'answer'}>{props.answer}</div>
+      </div>
      )
    }
 
