@@ -20,7 +20,7 @@ const questions = [
   {
     id: 4,
     question: 'Do you support Google reCaptcha for the out-of-stock form?',
-    answer: 'Yes, Product Stock Manager & Notifier Pro has support for reCaptcha.',
+    answer: 'Yes, <a href="https://multivendorx.com/woocommerce-product-stock-manager-notifier-pro/" target="_blank">Product Stock Manager & Notifier Pro</a> has support for reCaptcha.',
   },
   
 ]
@@ -64,7 +64,7 @@ function FAQ(props) {
            </svg>
         </div>     
       </button>
-      <div className={isActive? 'answer active' : 'answer'}>{props.answer}</div>
+      <div className={isActive? 'answer active' : 'answer'} dangerouslySetInnerHTML={{__html: props.answer}}></div>
       </div>
      )
    }
