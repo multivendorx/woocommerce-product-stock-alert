@@ -77,7 +77,7 @@ const Support = () => {
       title: "Get in Touch with Support",
       icon: "mail",
       description: "Reach out to the support team for assistance or guidance.",
-      link: "link1",
+      link: "https://multivendorx.com/contact-us",
     },
     {
       title: "Explore Documentation",
@@ -89,7 +89,7 @@ const Support = () => {
       title: "Contribute Here",
       icon: "support",
       description: "To participation in product enhancement.",
-      link: "link3",
+      link: "https://github.com/multivendorx/woocommerce-product-stock-alert/issues",
     },
   ];
 
