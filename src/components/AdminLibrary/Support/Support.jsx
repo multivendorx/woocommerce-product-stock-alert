@@ -77,13 +77,13 @@ const Support = () => {
       title: "Get in Touch with Support",
       icon: "mail",
       description: "Reach out to the support team for assistance or guidance.",
-      link: "https://multivendorx.com/contact-us",
+      link: "https://multivendorx.com/contact-us?utm_source=WordPressAdmin&utm_medium=PluginSettings&utm_campaign=productsstockmanager",
     },
     {
       title: "Explore Documentation",
       icon: "submission-message",
       description: "Understand the plugin and its settings.",
-      link: "https://multivendorx.com/docs/knowledgebase/products-stock-manager-notifier-for-woocommerce/",
+      link: "https://multivendorx.com/docs/knowledgebase/products-stock-manager-notifier-for-woocommerce/?utm_source=WordPressAdmin&utm_medium=PluginSettings&utm_campaign=productsstockmanager",
     },
     {
       title: "Contribute Here",
