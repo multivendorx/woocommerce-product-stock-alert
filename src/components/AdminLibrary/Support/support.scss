@@ -185,6 +185,11 @@
       animation: slidein 0.4s;
       animation-fill-mode: forwards;
       margin-top: 0.5rem;
+
+      a{
+        color: #65438f;
+        font-weight: 500;
+      }
     }
   
     @keyframes slidein {
