@@ -167,7 +167,7 @@ class StockManager {
         if ( $plugin_version != STOCK_MANAGER_PLUGIN_VERSION ) {
             ?>
             <div id="message" class="error">
-                <p><?php esc_html( "The Product Stock Manager & Notifier for WooCommerce is experiencing configuration issues. To ensure proper functioning, kindly deactivate and then activate the plugin." ) ?></p>
+                <p><?php _e( "The Product Stock Manager & Notifier for WooCommerce is experiencing configuration issues. To ensure proper functioning, kindly deactivate and then activate the plugin." ) ?></p>
             </div>
             <?php
         } 
