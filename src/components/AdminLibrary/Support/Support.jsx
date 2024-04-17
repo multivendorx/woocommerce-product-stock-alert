@@ -74,7 +74,7 @@ const Support = () => {
 
   const supportLink = [
     {
-      title: "Get in Touch with Support",
+      title: "Get in touch with Support",
       icon: "mail",
       description: "Reach out to the support team for assistance or guidance.",
       link: "https://multivendorx.com/contact-us/?utm_source=WordPressAdmin&utm_medium=PluginSettings&utm_campaign=productsstockmanager",
