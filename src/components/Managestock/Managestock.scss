@@ -452,6 +452,13 @@ $manageStock-scroll-color: #ece8f1;
 
 .table-head {
   font-weight: 600;
+
+  .table-row {
+    &:first-child{
+      min-width: 2.25rem;
+      max-width: 2.25rem;
+    }
+  }
 }
 
 .table-data-container {
