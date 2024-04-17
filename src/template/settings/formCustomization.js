@@ -3,7 +3,7 @@ export default {
     id: 'form_customization',
     priority: 2,
     name: __("Form Customization", "woocommerce-stock-manager"),
-    desc: __("Configure form settings.", "woocommerce-stock-manager"),
+    desc: __("Adjust the appearance and layout of stock alert form.", "woocommerce-stock-manager"),
     icon: "font-file-submission",
     submitUrl: "save-stockmanager",
     modal: [

@@ -4,7 +4,7 @@ export default {
     id: "email",
     priority: 4,
     name: __("Email Blocker", "woocommerce-stock-manager"),
-    desc: __("Ban Email Control Center.", "woocommerce-stock-manager"),
+    desc: __("Prevent registration of subscribers from specified domains or addresses.", "woocommerce-stock-manager"),
     icon: "font-mail",
     proDependent: true,
     submitUrl: "save-stockmanager",
@@ -14,7 +14,7 @@ export default {
             type: "textarea",
             class: "woo-setting-wpeditor-class",
             desc: __("Specify email domains that are restricted from subscribing. You can add multiple commma seperated emails.", "woocommerce-stock-manager"),
-            label: __("Blocked Email Domains", "woocommerce-stock-manager"),
+            label: __("Block Email Domains", "woocommerce-stock-manager"),
         },
         {
             key: "ban_email_domain_text",
