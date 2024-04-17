@@ -137,7 +137,7 @@ Manual installation method requires downloading the [Product Stock Manager & Not
 
 == Changelog ==
 
-= 2.5.0 - 2024-04-16 =
+= 2.5.0 - 2024-04-17 =
 * Added - WordPress 6.5.2 compatibility.
 * Added - WooCommerce 8.7.0 compatibility.
 * Added - Revamped plugin codes for improved performance.
