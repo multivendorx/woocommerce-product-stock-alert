@@ -12,7 +12,7 @@ export default {
             key: 'is_double_optin',
             type: 'checkbox',
             class: 'woo-toggle-checkbox',
-            label: __("Subscriber Double Opt-in", "woocommerce-stock-manager"),
+            label: __("Subscriber double opt-in", "woocommerce-stock-manager"),
             options: [
                 {
                     key: "is_double_optin",
@@ -26,7 +26,7 @@ export default {
             type: 'textarea',
             class: 'woo-setting-wpeditor-class',
             desc: __("Default: Kindly check your inbox to confirm the subscription.", "woocommerce-stock-manager-pro"),
-            label: __("Double Opt-In Success Message", "woocommerce-stock-manager-pro"),
+            label: __("Double opt-in success message", "woocommerce-stock-manager-pro"),
             depend_checkbox: 'is_double_optin',
         },
         {
@@ -37,7 +37,7 @@ export default {
         {
             key: 'is_enable_backorders',
             type: 'checkbox',
-            label: __("Allow Subscriptions with Active Backorders", "woocommerce-stock-manager"),
+            label: __("Allow subscriptions with active backorders", "woocommerce-stock-manager"),
             class: 'woo-toggle-checkbox',
             options: [
                 {
@@ -55,7 +55,7 @@ export default {
         {
             key: 'is_enable_no_interest',
             type: 'checkbox',
-            label: __("Display Subscriber Count for Out of Stock Items", "woocommerce-stock-manager"),
+            label: __("Display subscriber count for out of stock items", "woocommerce-stock-manager"),
             class: 'woo-toggle-checkbox',
             options: [
                 {
@@ -69,7 +69,7 @@ export default {
             key: 'shown_interest_text',
             type: 'textarea',
             class: 'woo-setting-wpeditor-class',
-            label: __("Subscriber Count Notification Message", "woocommerce-stock-manager"),
+            label: __("Subscriber count notification message", "woocommerce-stock-manager"),
             desc: __("Personalize the notification text to let users know about the quantity of subscribers for out-of-stock item. Note: Use %no_of_subscribed% as number of interest/subscribed persons.", "woocommerce-stock-manager"),
             depend_checkbox: 'is_enable_no_interest',
         },
@@ -113,7 +113,7 @@ export default {
             type: 'textarea',
             class: 'woo-setting-wpeditor-class',
             desc: __("Set the email address to receive notifications when a user subscribes to an out-of-stock product. You can add multiple comma-separated emails.<br/> Default: The admin\'s email is set as the receiver. Exclude the admin\'s email from the list to exclude admin from receiving these notifications.", "woocommerce-stock-manager"),
-            label: __("Recipient Email for New Subscriber", "woocommerce-stock-manager"),
+            label: __("Recipient email for new subscriber", "woocommerce-stock-manager"),
         },
     ]
 };
