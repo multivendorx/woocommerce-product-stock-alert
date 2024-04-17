@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'admin-font';
-  src:  url('fonts/admin-font.eot?6kvxzk');
-  src:  url('fonts/admin-font.eot?6kvxzk#iefix') format('embedded-opentype'),
-    url('fonts/admin-font.ttf?6kvxzk') format('truetype'),
-    url('fonts/admin-font.woff?6kvxzk') format('woff'),
-    url('fonts/admin-font.svg?6kvxzk#admin-font') format('svg');
+  src:  url('fonts/admin-font.eot?nofply');
+  src:  url('fonts/admin-font.eot?nofply#iefix') format('embedded-opentype'),
+    url('fonts/admin-font.ttf?nofply') format('truetype'),
+    url('fonts/admin-font.woff?nofply') format('woff'),
+    url('fonts/admin-font.svg?nofply#admin-font') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -43,10 +43,10 @@
 .font-mailchimp:before {
   content: "\e900";
 }
-.font-create:before {
-  content: "\e912";
+.font-keyboard_arrow_down:before {
+  content: "\e913";
 }
-.font-mode_edit:before {
+.font-create:before {
   content: "\e912";
 }
 .font-edit:before {
@@ -88,6 +88,7 @@
 .font-settings:before {
   content: "\e904";
 }
+
 
 
 
