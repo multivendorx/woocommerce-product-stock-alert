@@ -76,10 +76,6 @@ $icon-color: #9f8ab9;
 
                 &:hover {
                   background-color: $fill-color;
-
-                  .tab-menu-dropdown-icon{
-                    background-color: #f2eff5;
-                  }
                 }
 
                 i {
@@ -96,19 +92,18 @@ $icon-color: #9f8ab9;
                   display: flex;
                   align-items: center;
                   justify-content: center;
-                  background-color: #fff;
-                  transform: rotate(0);
+                  transform: rotate(-90deg);
                   transition: transform 0.3s linear;
                   border-radius: 0.25rem;
 
                   &.active{
-                   transform: rotate(90deg);
+                   transform: rotate(0);
                   //  transition: transform 0.3s linear;
                   }
 
                   i{
                     padding-right: 0;
-                    font-size: 0.65rem;
+                    font-size: 1.25rem;
                   }
                 }
               }

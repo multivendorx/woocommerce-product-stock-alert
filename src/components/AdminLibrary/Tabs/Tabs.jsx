@@ -47,9 +47,9 @@ const Tabs = ( props ) => {
             {menuCol ? null : tab.name}
             {menuCol ? null : (
                 openedSubtab == tab.id ? 
-                    <p className='tab-menu-dropdown-icon active'><i className='admin-font font-arrow-right'></i></p>
+                    <p className='tab-menu-dropdown-icon active'><i className='admin-font font-keyboard_arrow_down'></i></p>
                     :
-                    <p className='tab-menu-dropdown-icon'><i className='admin-font font-arrow-right'></i></p>
+                    <p className='tab-menu-dropdown-icon'><i className='admin-font font-keyboard_arrow_down'></i></p>
             )}
         </Link>
     }
