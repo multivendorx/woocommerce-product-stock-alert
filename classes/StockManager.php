@@ -20,6 +20,8 @@ class StockManager {
         $this->file = $file;
         $this->container[ 'plugin_url' ]     = trailingslashit( plugins_url( '', $plugin = $file ) );
         $this->container[ 'plugin_path' ]    = trailingslashit( dirname( $file ) );
+        $this->container[ 'plugin_base' ]    = plugin_basename( $file );
+
         $this->container[ 'version' ]        = STOCK_MANAGER_PLUGIN_VERSION;
         $this->container[ 'rest_namespace' ] = STOCK_MANAGER_REST_NAMESPACE;
         
@@ -35,7 +37,27 @@ class StockManager {
         add_action( 'before_woocommerce_init', [ $this, 'declare_compatibility' ] );
         add_action( 'woocommerce_loaded', [ $this, 'init_plugin' ] );
         add_action( 'plugins_loaded', [ $this, 'is_woocommerce_loaded' ] );
+        add_filter( 'plugin_row_meta', [ $this, 'plugin_row_meta' ], 10, 2 );
     } 
+
+    /**
+     * Add Metadata in plugin row.
+     * @param array $links 
+     * @param string $file
+     * @return array
+     */
+    public function plugin_row_meta( $links, $file ) {
+        if ( SM()->plugin_base === $file ) {
+            $row_meta = [
+            	'docs'    => '<a href="' . esc_url( STOCK_MANAGER_DOC_URL ) . '" aria-label="' . esc_attr__( 'View WooCommerce documentation', 'woocommerce-stock-manager' ) . '" target="_blank">' . esc_html__( 'Docs', 'woocommerce-stock-manager' ) . '</a>',
+            	'support' => '<a href="' . esc_url( STOCK_MANAGER_SUPPORT_URL ) . '" aria-label="' . esc_attr__( 'Visit community forums', 'woocommerce' ) . '" target="_blank">' . esc_html__( 'Support', 'woocommerce' ) . '</a>',
+            ];
+
+            return array_merge( $links, $row_meta );
+        }
+
+        return $links;
+	}
 
     /**
      * Placeholder for activation function.
@@ -202,5 +224,5 @@ class StockManager {
             self::$instance = new self( $file );
         } 
         return self::$instance;
-    } 
+    }
 } 
