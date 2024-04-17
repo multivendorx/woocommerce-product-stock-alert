@@ -1,6 +1,12 @@
 == Changelog ==
 ----------------------------------------------------------------------------------------------
 
+= 2.5.0 - 2024-04-17 =
+* Added - WordPress 6.5.2 compatibility.
+* Added - WooCommerce 8.7.0 compatibility.
+* Added - Revamped plugin codes for improved performance.
+* Added - Enhanced user experience.
+
 = 2.4.2 - 2024-01-25 =
 * Fixed - Rest API related Vulnerability issue.
 * Fixed - Plugin settings page 404 error tied to WordPress permalink structure.
