@@ -178,25 +178,29 @@ export default function SubscribersList() {
   const columns = [
     {
       name: __("Date", "woocommerce-stock-manager"),
-      cell: (row) => <TableCell title={"Date"} value={row.date} />,
+      cell: (row) => <TableCell title="Date" > {row.date} </TableCell>,
     },
     {
       name: __("Email", "woocommerce-stock-manager"),
-      cell: (row) => <TableCell title={"Email"} value={row.email} />,
+      cell: (row) =>
+        <TableCell title="Email">
+          {row.email}
+          {
+            row.user_link &&
+            <a href={ row.user_link } target="_blank"><i>😊</i></a>
+          }
+        </TableCell>,
     },
     {
       name: __("Product", "woocommerce-stock-manager"),
-      cell: (row) => <TableCell title={"Product"} value={row.product} />,
-    },
-    {
-      name: __("Registered", "woocommerce-stock-manager"),
-      cell: (row) => <TableCell title={"Registered"} value={row.reg_user} />,
+      cell: (row) => <TableCell title="Product" > { row.product } </TableCell>,
     },
     {
       name: __("Status", "woocommerce-stock-manager"),
-      cell: (row) => <TableCell title={"status"} value={row.status} />,
+      cell: (row) => <TableCell title="status" > {row.status} </TableCell>,
     },
   ];
+
   return (
     <div>
       {appLocalizer.pro_active == "free" ? (
