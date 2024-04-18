@@ -16,14 +16,17 @@ $icon-color: #9f8ab9;
   .general-wrapper {
     .container {
       gap: 1.2rem;
-      background-color: $base-color;
-      padding: 2rem 1.5rem;
+      padding: 2rem 1rem;
       min-height: 54rem;
       @include flex(column, start);
 
       .middle-container-wrapper {
         width: 100%;
         min-width: 60%;
+        border: 0.115rem solid rgba(0, 0, 0, 0.125);
+        border-right: 0;
+        padding-left: 0.5rem;
+        border-radius: 0.25rem;
 
         .tab-description-start {
           padding: 2rem 2rem;
@@ -136,7 +139,7 @@ $icon-color: #9f8ab9;
             }
 
             .brand {
-              margin: 0.5rem 0 3.75rem;
+              margin: 1.25rem 0 2.5rem 0.75rem;
               position: relative;
 
               p{
@@ -272,6 +275,8 @@ $icon-color: #9f8ab9;
     .general-wrapper {
       .container {
         .middle-container-wrapper {
+          border: none;
+          padding: 0;
           .middle-child-container {
             .current-tab-lists {
               max-width: 100vw;

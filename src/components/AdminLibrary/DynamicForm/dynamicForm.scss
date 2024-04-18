@@ -11,7 +11,7 @@ $padding-x: 2rem;
 $margin-y: 2rem;
 $margin-x: 0;
 $label-width-desktop: 28%;
-$input-width-desktop: 65%;
+$input-width-desktop: 70%;
 $label-width-mobile: 100%;
 $input-width-mobile: 100%;
 $fill-color: #fdfdfe;
@@ -20,7 +20,7 @@ $fill-color: #fdfdfe;
   .dynamic-fields-wrapper {
     background-color: $fill-color;
     border: 0.063rem solid $border-color;
-    min-height: 53rem;
+    min-height: 56rem;
 
     .dynamic-form {
       padding-top: 2.5rem;

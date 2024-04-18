@@ -1,7 +1,7 @@
 @font-face {
   font-family: 'admin-font';
-  src:  url('fonts/admin-font.eot?nofply');
-  src:  url('fonts/admin-font.eot?nofply#iefix') format('embedded-opentype'),
+  src: url('fonts/admin-font.eot?nofply');
+  src: url('fonts/admin-font.eot?nofply#iefix') format('embedded-opentype'),
     url('fonts/admin-font.ttf?nofply') format('truetype'),
     url('fonts/admin-font.woff?nofply') format('woff'),
     url('fonts/admin-font.svg?nofply#admin-font') format('svg');
@@ -10,7 +10,8 @@
   font-display: block;
 }
 
-[class^="font-"], [class*=" font-"] {
+[class^="font-"],
+[class*=" font-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'admin-font' !important;
   speak: never;
@@ -28,70 +29,86 @@
 .font-resize:before {
   content: "\e90e";
 }
+
 .font-arrow-down:before {
   content: "\e90a";
 }
+
 .font-arrow-up:before {
   content: "\e909";
 }
+
 .font-arrow-right:before {
   content: "\e907";
 }
+
 .font-arrow-left:before {
   content: "\e908";
 }
+
 .font-mailchimp:before {
   content: "\e900";
 }
+
 .font-keyboard_arrow_down:before {
   content: "\e913";
 }
+
 .font-create:before {
   content: "\e912";
 }
+
 .font-edit:before {
   content: "\e912";
 }
+
 .font-support:before {
   content: "\e911";
 }
+
 .font-link:before {
   content: "\e90d";
 }
+
 .font-crop-free:before {
   content: "\e90f";
 }
+
 .font-text-fields:before {
   content: "\e910";
 }
+
 .font-send:before {
   content: "\e90c";
 }
+
 .font-menu:before {
   content: "\e90b";
 }
+
 .font-cross:before {
   content: "\e905";
 }
+
 .font-icon-yes:before {
   content: "\e906";
 }
+
 .font-mail:before {
   content: "\e901";
 }
+
 .font-file-submission:before {
   content: "\e902";
 }
+
 .font-submission-message:before {
   content: "\e903";
 }
+
 .font-settings:before {
   content: "\e904";
 }
-
-
-
-
 
 $base-color: #f2eff5;
 $border-color: #d4d1d9;
@@ -116,7 +133,8 @@ $purple-btn-hover: #795b9d;
   align-items: $align;
 }
 
-input, textarea{
+input,
+textarea {
   outline: none;
   border: none;
   background-color: transparent;
@@ -144,20 +162,28 @@ input, textarea{
   }
 }
 
-a{
+a {
   text-decoration: none;
 
-  &:hover{
+  &:hover {
     text-decoration: none;
   }
 }
 
-#admin-stockmanager{
+#wpcontent {
+  background-color: #f6edff !important; // To overwrite default page backgound
+}
+
+#admin-stockmanager {
   margin-top: 5px;
+
+  *{
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  }
 }
 
 
-.woo-module-popup span.font-cross{
+.woo-module-popup span.font-cross {
   font-size: 1.25rem;
   cursor: pointer;
 }
@@ -236,13 +262,14 @@ a{
   }
 }
 
-#adminmenu .wp-submenu{
+#adminmenu .wp-submenu {
   a {
     position: relative;
   }
-  li{
-    a{
-      .stock-manager-pro-tag{
+
+  li {
+    a {
+      .stock-manager-pro-tag {
         right: 0.25rem;
         padding: 0.125rem 0.5rem !important; // To overright inline css for menu hover
       }
@@ -298,4 +325,3 @@ a{
     }
   }
 }
-

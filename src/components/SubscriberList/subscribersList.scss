@@ -1,3 +1,12 @@
+.woo-subscriber-list {
+  .woo-middle-container-wrapper {
+    background-color: transparent;
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+}
+
 .rs-picker-toggle.rs-btn.rs-btn-default {
   background-color: #fdfdfe;
   padding: 0.563rem 1rem;
@@ -19,12 +28,14 @@
     margin-top: 0rem;
   }
 }
+
 img.subscriber-img {
   object-fit: cover;
   object-position: center center;
   height: 100%;
   width: 100%;
 }
+
 span.rs-picker-toggle-placeholder {
   display: none;
 }
@@ -38,6 +49,17 @@ input.rs-picker-toggle-textbox {
 
 .rs-picker-cleanable.rs-picker-daterange .rs-picker-toggle.rs-btn {
   padding-right: 1rem;
+}
+
+.rs-stack-item {
+  svg {
+    margin: 0 !important; // To overwrite react datepicker library css
+  }
+}
+
+.rs-picker-default .rs-picker-toggle.rs-btn {
+  padding-bottom: 0.25rem !important; // To overwrite react datepicker library css
+  padding-top: 0.25rem !important; // To overwrite react datepicker library css
 }
 
 .rs-picker-toggle.rs-btn.rs-btn-default {
@@ -88,4 +110,28 @@ input.rs-picker-toggle-textbox {
       text-decoration: none;
     }
   }
+}
+
+.rdt_Table {
+  background-color: transparent !important; // To overwrite table.css default css
+
+  .rdt_TableHeadRow {
+    border: none !important; // To overwrite table.css default css
+    background: #fff !important; // To overwrite table.css default css
+    border-top-right-radius: 0 !important; // To overwrite table.css default css
+    border-top-left-radius: 0 !important; // To overwrite table.css default css
+  }
+
+
+  .rdt_TableBody {
+    .rdt_TableRow {
+      margin: 0.5rem 0 !important; // To overwrite table.css default css
+      border: none !important;
+    }
+  }
+}
+
+.rdt_Pagination {
+  background-color: transparent !important; // To overwrite table.css default css
+  border: none !important; // To overwrite table.css default css
 }
