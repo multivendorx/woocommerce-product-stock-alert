@@ -50,7 +50,7 @@ class StockManager {
         if ( SM()->plugin_base === $file ) {
             $row_meta = [
             	'docs'    => '<a href="' . esc_url( STOCK_MANAGER_DOC_URL ) . '" aria-label="' . esc_attr__( 'View WooCommerce documentation', 'woocommerce-stock-manager' ) . '" target="_blank">' . esc_html__( 'Docs', 'woocommerce-stock-manager' ) . '</a>',
-            	'support' => '<a href="' . esc_url( STOCK_MANAGER_SUPPORT_URL ) . '" aria-label="' . esc_attr__( 'Visit community forums', 'woocommerce' ) . '" target="_blank">' . esc_html__( 'Support', 'woocommerce' ) . '</a>',
+            	'support' => '<a href="' . esc_url( STOCK_MANAGER_SUPPORT_URL ) . '" aria-label="' . esc_attr__( 'Visit community forums', 'woocommerce-stock-manager' ) . '" target="_blank">' . esc_html__( 'Support', 'woocommerce-stock-manager' ) . '</a>',
             ];
 
             return array_merge( $links, $row_meta );

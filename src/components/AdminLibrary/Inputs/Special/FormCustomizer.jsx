@@ -21,8 +21,8 @@ const FormCustomizer = (props) => {
                         <p ref={currentHoverOn === 'description' ? buttonRef : null} onClick={(e) => setCurrentHoverOn('description')} className={currentHoverOn === 'description' && 'active'}>dsgsfdsz</p>
                     </div>
                     <div className='form-section'>
-                        <div ref={currentHoverOn === 'email_input' ? buttonRef : null} className='input-section'>
-                            <input readOnly onClick={(e) => setCurrentHoverOn('email_input')} className={currentHoverOn === 'email_input' && 'active'} type="email" placeholder='Place your email id' />
+                        <div className='input-section'>
+                            <input ref={currentHoverOn === 'email_input' ? buttonRef : null} readOnly onClick={(e) => setCurrentHoverOn('email_input')} className={currentHoverOn === 'email_input' && 'active'} type="email" placeholder='Place your email id' />
 
                             {currentHoverOn === 'email_input' && (
                                 <>
@@ -30,20 +30,7 @@ const FormCustomizer = (props) => {
                                         <p>Email</p><span><i className='admin-font font-edit'></i></span>
                                     </div>
                                 </>
-                            )}
-
-                            <div className='setting-wrapper'>
-                                <div className='seeting-nav'>...</div>
-                                <button onClick={(e) => {
-                                    e.preventDefault()
-                                }} className="wrapper-close"><i class="admin-font font-cross"></i></button>
-                                <div className="setting-section-dev">
-                                    <span class="label">Placeholder text</span>
-                                    <div class="property-section">
-                                        <input type="email" placeholder='Put your email id' />
-                                    </div>
-                                </div>
-                            </div>
+                             )}
                         </div>
                         <div className='button-section'>
                             <ButtonCustomizer
