@@ -30,9 +30,10 @@ $icon-color: #9f8ab9;
 
         .tab-description-start {
           padding: 2rem 2rem;
-          margin-bottom: 0.35rem;
+          margin-bottom: 0.15rem;
           background-color: $fill-color;
           border: 0.063rem solid $border-color;
+          border-top: none;
 
           .tab-name {
             color: $theme-color;
@@ -186,6 +187,7 @@ $icon-color: #9f8ab9;
               border-radius: 0.25rem;
               font-weight: 400;
               width: 100%;
+              background-color: transparent;
 
               &:hover {
                 background-color: $fill-color;
