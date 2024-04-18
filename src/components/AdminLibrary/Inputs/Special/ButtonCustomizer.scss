@@ -1,9 +1,11 @@
 .settings-input-content {
   .btn-wrapper {
+    position: relative;
     .btn-customizer {
       width: fit-content;
-      position: relative;
+      position: absolute;
       margin-top: 0.5rem;
+      padding-bottom: 3rem;
 
       .btn-customizer-menu {
         display: flex;
@@ -46,7 +48,7 @@
         position: relative;
         top: 0.315rem;
         background: #f8f8f8;
-        width: 100%;
+        width: 280px;
         padding: 1rem;
         border: 0.125rem solid rgba($color: #000000, $alpha: 0.125);
         box-shadow: 0 0.25rem 0.5rem rgba($color: #000000, $alpha: 0.125);
@@ -185,17 +187,15 @@
     }
 
     .btn-wrapper-edit-button {
-      margin-left: 0.75rem;
       cursor: pointer;
       background: transparent;
     }
 
     .btn-preview {
-      margin-bottom: 0.5rem;
 
-      &.active {
+      &.active, &:hover {
         box-shadow:
-        0px 0px 0px 4px rgb(255, 255, 255), 0px 0px 0px 7px rgba(33, 33, 33, 0.7)
+        0px 0px 0px 2px rgb(255, 255, 255), 0px 0px 0px 3px rgba(33, 33, 33, 0.5) !important;
       }
     }
   }

@@ -31,6 +31,24 @@ $animation-duration: 2s;
   .table-container {
     width: 100%;
 
+    .wrap-bulk-all-date{
+      display: flex;
+      align-items: center;
+      max-width: 650px;
+      width: 100%;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+
+      & > div{
+        flex: 1 0 160px;
+
+        input[type='text'], input[type='email'], input[type='number']{
+          width: 100%;
+        }
+      }
+    }
+
     nav div.lcunyj svg {
       display: none;
     }
@@ -41,6 +59,7 @@ $animation-duration: 2s;
       flex-wrap: wrap;
       margin-bottom: 0.75rem;
       gap: 0.75rem;
+      cursor: pointer;
 
       div.type-count-active {
         color: $primary-color;
@@ -57,7 +76,7 @@ $animation-duration: 2s;
       border-color: $border-color;
       width: 100%;
 
-      .rdt_TableCell {
+      td {
         padding: $padding-small;
         border-style: solid;
         border-width: $border-width-medium;
@@ -72,7 +91,7 @@ $animation-duration: 2s;
         }
       }
 
-      tr:first-child .rdt_TableCell {
+      tr:first-child .tg-cly1 {
         font-weight: normal;
         padding: $padding-small;
         border-style: solid;
@@ -87,7 +106,6 @@ $animation-duration: 2s;
 
     .line {
       float: left;
-      max-width: $line-height-small;
       width: 100%;
       height: $line-height-small;
       margin-top: $padding-small;

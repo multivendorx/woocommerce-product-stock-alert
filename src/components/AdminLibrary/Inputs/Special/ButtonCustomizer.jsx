@@ -248,6 +248,36 @@ const Customizer = (props) => {
               <div className="simple">
                 <div className="section">
                   <span className="lable">
+                    {__("Subscribe button text", "woocommerce-stock-manager")}
+                  </span>
+                  <div className="property-section">
+                    <div class="PB-range-slider-div">
+                      <input
+                        className="PB-range-slider"
+                        type="text"
+                        value={setting.button_font_size ? setting.button_font_size : 12}
+                        onChange={(e) => props.onChange(e, "button_font_size")}
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className="section">
+                  <span className="lable">
+                    {__("Unsubscribe button text", "woocommerce-stock-manager")}
+                  </span>
+                  <div className="property-section">
+                    <div class="PB-range-slider-div">
+                      <input
+                        className="PB-range-slider"
+                        type="text"
+                        value={setting.button_font_size ? setting.button_font_size : 12}
+                        onChange={(e) => props.onChange(e, "button_font_size")}
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className="section">
+                  <span className="lable">
                     {__("Font Size", "woocommerce-stock-manager")}
                   </span>
                   <div className="property-section">
@@ -352,7 +382,7 @@ const Customizer = (props) => {
   );
 };
 const ButtonCustomizer = (props) => {
-  const { buttonText, onChange } = props;
+  const { onChange } = props;
   const [hoverOn, setHoverOn] = useState(false);
   const [buttonHoverOn, setButtonHoverOn] = useState(false);
   const { setting } = useSetting();
@@ -402,16 +432,7 @@ useEffect(()=>{
             setButtonHoverOn(false);
           }}
         >
-          {buttonText}
-        </button>
-        <button 
-          onClick={(e) => {
-            e.preventDefault();
-            setHoverOn(!hoverOn);
-          }} 
-          className="btn-wrapper-edit-button"
-          >
-          <i className="admin-font font-create"></i>
+          {setting.button_text}
         </button>
         {hoverOn && (
           <div className="btn-customizer">

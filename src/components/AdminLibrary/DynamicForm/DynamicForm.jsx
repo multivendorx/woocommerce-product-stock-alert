@@ -9,6 +9,7 @@ import { useSetting } from "../../../contexts/SettingContext";
 import { getApiLink, sendApiResponse } from "../../../services/apiService";
 import Dialog from "@mui/material/Dialog";
 import Popoup from "../../PopupContent/PopupContent";
+import FormCustomizer from "../Inputs/Special/FormCustomizer";
 
 
 const DynamicForm = (props) => {
@@ -643,6 +644,16 @@ const DynamicForm = (props) => {
             />
           );
           break;
+
+          case "form_customizer":
+            input = (
+             <FormCustomizer
+             value={value}
+             buttonText={setting.button_text}
+              proSetting={isProSetting(inputField.key)}
+              onChange={(e, key) => handleChange(e, key)}/>
+            );
+            break;
 
         case "connect_select":
           input = (

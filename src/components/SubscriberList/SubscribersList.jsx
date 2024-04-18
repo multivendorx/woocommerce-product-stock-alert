@@ -10,6 +10,7 @@ import CustomTable, {
 } from "../AdminLibrary/CustomTable/CustomTable";
 import "./subscribersList.scss";
 import "./rsuite-default.min.css";
+import isAfter from 'date-fns/isAfter';
 
 export default function SubscribersList() {
   const fetchSubscribersDataUrl = `${appLocalizer.apiUrl}/stockmanager/v1/get-subscriber-list`;
@@ -19,17 +20,14 @@ export default function SubscribersList() {
   const [totalRows, setTotalRows] = useState();
   const [openDialog, setOpenDialog] = useState(false);
   const [subscribersStatus, setSubscribersStatus] = useState(null);
-  const currentDate = new Date();
-  const sevenDaysAgo = new Date();
-  sevenDaysAgo.setDate(currentDate.getDate() - 7);
 
   function requestData(
     rowsPerPage = 10,
     currentPage = 1,
     productNameField = "",
     emailField = "",
-    start_date = sevenDaysAgo,
-    end_date = currentDate,
+    start_date = new Date(0),
+    end_date = new Date(),
     postStatus
   ) {
     //Fetch the data to show in the table
@@ -152,6 +150,7 @@ export default function SubscribersList() {
               "DD-MM-YYYY ~ DD-MM-YYYY",
               "woocommerce-stock-manager"
             )}
+            shouldDisableDate={date => isAfter(date, new Date())}
             onChange={(dates) => {
               if (dates != null) {
                 updateFilter("date", {

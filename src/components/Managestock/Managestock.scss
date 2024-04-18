@@ -84,33 +84,36 @@ $manageStock-scroll-color: #ece8f1;
 }
 
 #admin-stockmanager {
-  input:focus,
-  textarea:focus {
-    outline: none !important; // to adjust box shadow for input tag and textarea for all stockmanager
-    box-shadow: none !important; // to adjust box shadow for input tag and textarea for all stockmanager
-  }
 
-  select {
-    .custom-select {
-      display: flex;
-      align-items: center;
-      font-weight: normal;
-      border: $manageStock-border;
-      border-radius: $manageStock-border-radius;
-      height: 2.5rem;
-      position: relative;
-      background-color: $manageStock-fill-color;
-      cursor: pointer;
+  .woo-middle-container-wrapper{
+    input:focus,
+    textarea:focus {
+      outline: none !important; // to adjust box shadow for input tag and textarea for all stockmanager
+      box-shadow: none !important; // to adjust box shadow for input tag and textarea for all stockmanager
     }
-
-    &:focus {
-      color: inherit;
-      border: none !important; // Adjust border as none to overwrite default border
-      box-shadow: none;
-    }
-
-    &:hover {
-      color: inherit;
+  
+    select {
+      .custom-select {
+        display: flex;
+        align-items: center;
+        font-weight: normal;
+        border: $manageStock-border;
+        border-radius: $manageStock-border-radius;
+        height: 2.5rem;
+        position: relative;
+        background-color: $manageStock-fill-color;
+        cursor: pointer;
+      }
+  
+      &:focus {
+        color: inherit;
+        border: none !important; // Adjust border as none to overwrite default border
+        box-shadow: none;
+      }
+  
+      &:hover {
+        color: inherit;
+      }
     }
   }
 
