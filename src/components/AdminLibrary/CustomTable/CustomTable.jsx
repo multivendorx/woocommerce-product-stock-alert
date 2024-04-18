@@ -35,7 +35,7 @@ export const TableCell = (props) => {
     <>
       <div title={props.value} className="table-row-custom">
           <h4>{props.title}</h4>
-          { props.children }
+          <p>{props.value}</p>
       </div>
     </>
   );
@@ -199,13 +199,14 @@ const CustomTable = (props) => {
               onClick={(e) => { setFilterData({ typeCount: countInfo.key }) }}
               className={countInfo.key == typeCountActive ? 'type-count-active' : ''}
             >
+              {console.log(filterData)}
               { `${countInfo.name} (${countInfo.count})` }
             </div>
           ))
         }
       </div>
       
-      <div className="woo-wrap-bulk-all-date">
+      <div className="wrap-bulk-all-date">
         {/* Render realtime filter */}
         {realtimeFilter &&
           realtimeFilter.map((filter) => {

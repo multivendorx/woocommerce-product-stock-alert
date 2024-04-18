@@ -171,14 +171,19 @@ a {
 }
 
 #wpcontent {
-  background-color: #f6edff !important; // To overwrite default page backgound
+  background-color: #f9f2ff !important; // To overwrite default page backgound
+}
+
+input:focus{
+  outline: none;
+  border: none;
 }
 
 #admin-stockmanager {
   margin-top: 5px;
 
   *{
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    font-family: "Segoe UI", sans-serif;
   }
 }
 
@@ -190,7 +195,7 @@ a {
 
 // //tab part start here
 .woo-container {
-  background-color: #f2eff5;
+  background-color: #f9f2ff;
   padding: 2rem 1.5rem;
   min-height: 54rem;
 }

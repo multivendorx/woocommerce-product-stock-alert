@@ -52,9 +52,71 @@
                     align-items: center;
                     justify-content: center;
                     gap: 0.5rem;
+                    cursor: pointer;
 
                     span{
                         
+                    }
+                }
+
+                .setting-wrapper{
+                    position: absolute;
+                    background: #f8f8f8;
+                    width: 250px;
+                    top: 50px;
+                    padding: 1rem;
+                    border: 0.125rem solid rgba(0, 0, 0, 0.125);
+                    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.125);
+                    border-radius: 0.25rem;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 0.75rem;
+                    z-index: 1;
+
+                    .seeting-nav{
+                        position: absolute;
+                        top: 10px;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        cursor: move;
+                        user-select: none;
+                    }
+
+                    .setting-section-dev{
+                        display: flex;
+                        flex-direction: column;
+                        gap: 0.5rem;
+
+                        .label{
+                            color: #000;
+                            font-weight: 400;
+                        }
+
+                        .property-section{
+                            display: flex;
+                            gap: 0.5rem;
+
+                            input{
+                                &:hover, &:focus{
+                                    box-shadow: none !important; 
+                                }
+                            }
+                        }
+                    }
+
+                    .wrapper-close{
+                        position: absolute;
+                        right: -0.756rem;
+                        top: -0.945rem;
+                        background: #fff;
+                        box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.125);
+                        border-radius: 50%;
+                        width: 1.701rem;
+                        height: 1.701rem;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        font-size: 1.25rem;
                     }
                 }
             }
