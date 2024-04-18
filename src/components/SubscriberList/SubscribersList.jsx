@@ -233,7 +233,7 @@ export default function SubscribersList() {
       ) : (
         <div className="woo-subscriber-list">
           <div className="woo-container">
-            <div className="woo-middle-container-wrapper">
+            <div className="woo-middle-container-wrapper subscriber-container-wrapper">
               <div className="woo-page-title">
                 <p>{__("Subscriber List", "woocommerce-stock-manager")}</p>
                 <div className="download-btn-subscriber-list">

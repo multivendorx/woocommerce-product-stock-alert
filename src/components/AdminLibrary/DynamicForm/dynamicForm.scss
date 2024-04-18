@@ -20,6 +20,7 @@ $fill-color: #fdfdfe;
   .dynamic-fields-wrapper {
     background-color: $fill-color;
     border: 0.063rem solid $border-color;
+    border-bottom: none;
     min-height: 56rem;
 
     .dynamic-form {
