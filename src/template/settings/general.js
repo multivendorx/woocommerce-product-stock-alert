@@ -27,7 +27,10 @@ export default {
             class: 'woo-setting-wpeditor-class',
             desc: __("Default: Kindly check your inbox to confirm the subscription.", "woocommerce-stock-manager-pro"),
             label: __("Double opt-in success message", "woocommerce-stock-manager-pro"),
-            depend_checkbox: 'is_double_optin',
+            dependent: {
+                key: "is_double_optin",
+                set: true,
+            }
         },
         {
             key: 'separator_content',
@@ -71,7 +74,10 @@ export default {
             class: 'woo-setting-wpeditor-class',
             label: __("Subscriber count notification message", "woocommerce-stock-manager"),
             desc: __("Personalize the notification text to let users know about the quantity of subscribers for out-of-stock item. Note: Use %no_of_subscribed% as number of interest/subscribed persons.", "woocommerce-stock-manager"),
-            depend_checkbox: 'is_enable_no_interest',
+            dependent: {
+                key: "is_enable_no_interest",
+                set: true
+            }
         },
         {
             key: 'separator_content',
@@ -95,13 +101,19 @@ export default {
             key: 'v3_site_key',
             type: 'text',
             label: __("Site Key", "woocommerce-stock-manager-pro"),
-            depend_checkbox: 'is_recaptcha_enable',
+            dependent: {
+                key: "is_recaptcha_enable",
+                set: true,
+            }
         },
         {
             key: 'v3_secret_key',
             type: 'text',
             label: __("Secret Key", "woocommerce-stock-manager-pro"),
-            depend_checkbox: 'is_recaptcha_enable',
+            dependent: {
+                key: "is_recaptcha_enable",
+                set: true,
+            }
         },
         {
             key: 'separator_content',
