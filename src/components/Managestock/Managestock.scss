@@ -139,7 +139,6 @@ $manageStock-scroll-color: #ece8f1;
   }
 }
 
-<<<<<<< HEAD
 .manage-stock-container{
   padding: 2rem 1rem !important; // To overwrite default admin css
 
@@ -150,14 +149,6 @@ $manageStock-scroll-color: #ece8f1;
     background: #fff0 url("../../assets/images/download.svg") no-repeat right 0.315rem
       top 55%;
   }
-=======
-.manage-stock-container select {
-  -webkit-appearance: none;
-  width: 100%;
-  border: none;
-  background: #fff0 url("../../assets/images/download.svg") no-repeat right 0.315rem
-    top 55%;
->>>>>>> c984b96 (react code clean)
 }
 
 .import-export-btn {
