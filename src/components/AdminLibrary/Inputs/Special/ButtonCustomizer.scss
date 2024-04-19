@@ -48,7 +48,11 @@
         position: relative;
         top: 0.315rem;
         background: #f8f8f8;
+<<<<<<< HEAD
         width: 280px;
+=======
+        width: 17.64rem;
+>>>>>>> c984b96 (react code clean)
         padding: 1rem;
         border: 0.125rem solid rgba($color: #000000, $alpha: 0.125);
         box-shadow: 0 0.25rem 0.5rem rgba($color: #000000, $alpha: 0.125);
@@ -179,7 +183,11 @@
             span {
               color: red;
               font-weight: 800;
+<<<<<<< HEAD
               padding-right: 2px;
+=======
+              padding-right: 0.126rem;
+>>>>>>> c984b96 (react code clean)
             }
           }
         }
@@ -195,7 +203,11 @@
 
       &.active, &:hover {
         box-shadow:
+<<<<<<< HEAD
         0px 0px 0px 2px rgb(255, 255, 255), 0px 0px 0px 3px rgba(33, 33, 33, 0.5) !important;
+=======
+        0.0rem 0.0rem 0.0rem 0.126rem rgb(255, 255, 255), 0.0rem 0.0rem 0.0rem 0.189rem rgba(33, 33, 33, 0.5) !important;
+>>>>>>> c984b96 (react code clean)
       }
     }
   }
@@ -247,4 +259,8 @@
 
 .PB-range-slidervalue {
   font-weight: 600;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> c984b96 (react code clean)

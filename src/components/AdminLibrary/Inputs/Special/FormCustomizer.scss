@@ -6,6 +6,7 @@
         .label-section {
             margin-bottom: 0.55rem;
 
+<<<<<<< HEAD
             p {
                 font-size: 0.95rem;
                 cursor: pointer;
@@ -13,27 +14,52 @@
                 &.active, &:hover{
                     box-shadow:
                     0px 0px 0px 2px rgb(255, 255, 255), 0px 0px 0px 3px rgba(33, 33, 33, 0.5)
+=======
+            input {
+                font-size: 0.95rem;
+                cursor: pointer;
+                width: fit-content !important;
+                border: none !important;
+
+                &.active,
+                &:hover {
+                    box-shadow:
+                        0.0rem 0.0rem 0.0rem 0.126rem rgb(255, 255, 255), 0.0rem 0.0rem 0.0rem 0.189rem rgba(33, 33, 33, 0.5)
+>>>>>>> c984b96 (react code clean)
                 }
             }
         }
 
         .form-section {
             display: grid;
+<<<<<<< HEAD
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             width: 100%;
             row-gap: 1.25rem;
             column-gap: 0.75rem;
             
+=======
+            grid-template-columns: repeat(auto-fit, minmax(11.34rem, 1fr));
+            width: 100%;
+            row-gap: 1.25rem;
+            column-gap: 0.75rem;
+
+>>>>>>> c984b96 (react code clean)
             .input-section {
                 max-width: 100%;
                 display: flex;
                 align-items: center;
                 position: relative;
+<<<<<<< HEAD
                 
+=======
+
+>>>>>>> c984b96 (react code clean)
                 input {
                     cursor: pointer;
                     width: 100%;
                     padding: 0.25rem 0.5rem;
+<<<<<<< HEAD
                     
                     &:hover, &.active, &:focus{
                         box-shadow:
@@ -45,6 +71,21 @@
                     position: absolute;
                     bottom: 111%;
                     left: 0px;
+=======
+
+                    &:hover,
+                    &.active,
+                    &:focus {
+                        box-shadow:
+                            0.0rem 0.0rem 0.0rem 0.126rem rgb(255, 255, 255), 0.0rem 0.0rem 0.0rem 0.189rem rgba(33, 33, 33, 0.5) !important; // To overwrite stock manager.scss
+                    }
+                }
+
+                .input-editor {
+                    position: absolute;
+                    bottom: 111%;
+                    left: 0.0rem;
+>>>>>>> c984b96 (react code clean)
                     background: rgb(13, 0, 23);
                     color: #fff;
                     padding: 0.35rem;
@@ -54,6 +95,7 @@
                     gap: 0.5rem;
                     cursor: pointer;
 
+<<<<<<< HEAD
                     span{
                         
                     }
@@ -65,6 +107,17 @@
                     width: 250px;
                     top: 50px;
                     padding: 1rem;
+=======
+                    span {}
+                }
+
+                .setting-wrapper {
+                    position: absolute;
+                    background: #f8f8f8;
+                    width: 15.75rem;
+                    top: 3.15rem;
+                    padding: 1.5rem 1rem;
+>>>>>>> c984b96 (react code clean)
                     border: 0.125rem solid rgba(0, 0, 0, 0.125);
                     box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.125);
                     border-radius: 0.25rem;
@@ -73,25 +126,44 @@
                     gap: 0.75rem;
                     z-index: 1;
 
+<<<<<<< HEAD
                     .seeting-nav{
                         position: absolute;
                         top: 10px;
+=======
+                    .seeting-nav {
+                        position: absolute;
+                        top: 0.0rem;
+>>>>>>> c984b96 (react code clean)
                         left: 50%;
                         transform: translateX(-50%);
                         cursor: move;
                         user-select: none;
+<<<<<<< HEAD
                     }
 
                     .setting-section-dev{
+=======
+                        line-height: 0;
+                        font-size: 1.75rem;
+                    }
+
+                    .setting-section-dev {
+>>>>>>> c984b96 (react code clean)
                         display: flex;
                         flex-direction: column;
                         gap: 0.5rem;
 
+<<<<<<< HEAD
                         .label{
+=======
+                        .label {
+>>>>>>> c984b96 (react code clean)
                             color: #000;
                             font-weight: 400;
                         }
 
+<<<<<<< HEAD
                         .property-section{
                             display: flex;
                             gap: 0.5rem;
@@ -99,12 +171,27 @@
                             input{
                                 &:hover, &:focus{
                                     box-shadow: none !important; 
+=======
+                        .property-section {
+                            display: flex;
+                            gap: 0.5rem;
+
+                            input {
+
+                                &:hover,
+                                &:focus {
+                                    box-shadow: none !important;
+>>>>>>> c984b96 (react code clean)
                                 }
                             }
                         }
                     }
 
+<<<<<<< HEAD
                     .wrapper-close{
+=======
+                    .wrapper-close {
+>>>>>>> c984b96 (react code clean)
                         position: absolute;
                         right: -0.756rem;
                         top: -0.945rem;
