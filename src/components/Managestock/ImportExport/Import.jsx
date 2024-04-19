@@ -8,7 +8,7 @@ import "./importExport.scss";
 const Import = () => {
     //To fetch all the data for the sample CSV
     useEffect( () => {
-        if ( appLocalizer.pro_active != 'free' ) {
+        if ( appLocalizer.pro_active ) {
             axios({
                 method: "post",
                 url: `${ appLocalizer.apiUrl }/stockmanager/v1/all-products`,
@@ -79,7 +79,7 @@ const Import = () => {
                 <div className="woo-page-title">
                     <p>{ __( 'Import', 'woocommerce-stock-manager' ) }</p>
                     <button class="import-export-btn" >
-                        <Link to={ '?page=woo-stock-manager-setting#&tab=manage-stock' }>
+                        <Link to={ '?page=stock-manager#&tab=manage-stock' }>
                             <div className='wp-menu-image dashicons-before dashicons-arrow-left-alt'></div>
                             { __( "Inventory Manager", "woocommerce-stock-manager" ) }
                         </Link>

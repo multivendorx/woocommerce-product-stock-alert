@@ -14,28 +14,6 @@ export default {
             blocktext: __("Text Customization", "woocommerce-stock-manager"),
         },
         {
-            key: "email_placeholder_text",
-            type: "text",
-            label: __("Email field placeholder", "woocommerce-stock-manager"),
-            desc: __("Customize the text displayed inside the email input field.", "woocommerce-stock-manager"),
-            placeholder: __("Enter your email", "woocommerce-stock-manager"),
-        },
-        {
-            key: "alert_text",
-            type: "textarea",
-            class: "woo-setting-wpeditor-class",
-            desc: __("Descriptive text guiding users on the purpose of providing their email address above the email entry field.", "woocommerce-stock-manager"),
-            placeholder: __("Receive in-stock notifications for this product.", "woocommerce-stock-manager"),
-            label: __("Subscription purpose description", "woocommerce-stock-manager"),
-        },
-        {
-            key: "button_text",
-            type: "text",
-            label: __("Subscribe button", "woocommerce-stock-manager"),
-            desc: __("Modify the subscribe button text. By default we display Notify Me.", "woocommerce-stock-manager"),
-            placeholder: __("Notify Me", "woocommerce-stock-manager"),
-        },
-        {
             key: "unsubscribe_button_text",
             type: "text",
             label: __("Unsubscribe button", "woocommerce-stock-manager"),
@@ -49,8 +27,9 @@ export default {
             blocktext: __("Alert Box Customizer", "woocommerce-stock-manager"),
         },
         {
-            type: "button_customizer",
-            label: __("Customize button", "woocommerce-stock-manager")
+            key: "subscribe_form",
+            type: "form_customizer",
+            label: __("Customize form", "woocommerce-stock-manager")
         }
     ]
 };

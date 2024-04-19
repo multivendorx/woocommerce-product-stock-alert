@@ -63,13 +63,13 @@ export default function SubscribersList() {
   };
 
   useEffect(() => {
-    if (appLocalizer.pro_active != "free") {
+    if (appLocalizer.pro_active) {
       requestData();
     }
   }, [postStatus]);
 
   useEffect(() => {
-    if (appLocalizer.pro_active != "free") {
+    if (appLocalizer.pro_active) {
       axios({
         method: "post",
         url: fetchSubscribersCount,
@@ -177,8 +177,14 @@ export default function SubscribersList() {
   //columns for the data table
   const columns = [
     {
-      name: __("Date", "woocommerce-stock-manager"),
-      cell: (row) => <TableCell title="Date" > {row.date} </TableCell>,
+      name: __("Image", "woocommerce-stock-manager"),
+      cell: (row) => <TableCell title="Image" >
+        <img src={row.image} alt="product_image" />
+      </TableCell>,
+    },
+    {
+      name: __("Product", "woocommerce-stock-manager"),
+      cell: (row) => <TableCell title="Product" > { row.product } </TableCell>,
     },
     {
       name: __("Email", "woocommerce-stock-manager"),
@@ -187,23 +193,27 @@ export default function SubscribersList() {
           {row.email}
           {
             row.user_link &&
-            <a href={ row.user_link } target="_blank"><i>😊</i></a>
+            <a className="user-profile" href={ row.user_link } target="_blank"><i className="admin-font font-person"></i></a>
           }
         </TableCell>,
     },
     {
-      name: __("Product", "woocommerce-stock-manager"),
-      cell: (row) => <TableCell title="Product" > { row.product } </TableCell>,
+      name: __("Date", "woocommerce-stock-manager"),
+      cell: (row) => <TableCell title="Date" > {row.date} </TableCell>,
     },
     {
       name: __("Status", "woocommerce-stock-manager"),
-      cell: (row) => <TableCell title="status" > {row.status} </TableCell>,
+      cell: (row) => <TableCell title="status" > 
+        <p 
+         className={row.status_key === 'mailsent' ? 'sent' : (row.status_key === 'subscribed' ? 'subscribed' : 'unsubscribed')}
+        >{row.status}</p>
+      </TableCell>,
     },
   ];
 
   return (
     <div>
-      {appLocalizer.pro_active == "free" ? (
+      { ! appLocalizer.pro_active ? (
         <div>
           <Dialog
             className="woo-module-popup"
@@ -233,7 +243,7 @@ export default function SubscribersList() {
       ) : (
         <div className="woo-subscriber-list">
           <div className="woo-container">
-            <div className="woo-middle-container-wrapper subscriber-container-wrapper">
+            <div className="subscriber-container-wrapper">
               <div className="woo-page-title">
                 <p>{__("Subscriber List", "woocommerce-stock-manager")}</p>
                 <div className="download-btn-subscriber-list">

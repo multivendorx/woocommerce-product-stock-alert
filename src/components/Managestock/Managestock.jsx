@@ -33,7 +33,7 @@ const Managestock = () => {
     const [ stockStatus, setStockStatus ] = useState('');
     
     useEffect(() => {
-        if( appLocalizer.pro_active != 'free' ) {
+        if( appLocalizer.pro_active ) {
             //Fetch the data to show in the table
             axios( {
                 method: "post",
@@ -70,7 +70,7 @@ const Managestock = () => {
     
     return( 
     <>
-        { appLocalizer.pro_active === 'free'  ?
+        { ! appLocalizer.pro_active ?
         //If the user is free user he will be shown a Inventory Manager image
             <div className='subscriber-img' >
                 <Dialog
@@ -103,7 +103,7 @@ const Managestock = () => {
                                     <div className="pull-right import">
                                         <button class="import-export-btn">
                                             <Link
-                                            to={ "?page=woo-stock-manager-setting#&tab=import" }
+                                            to={ "?page=stock-manager#&tab=import" }
                                             >
                                             <div className="wp-menu-image dashicons-before dashicons-download"></div>
                                             { __( "Import", "woocommerce-stock-manager" ) }
@@ -113,7 +113,7 @@ const Managestock = () => {
                                     <div className="pull-right export">
                                         <button class="import-export-btn">
                                             <Link
-                                            to={ "?page=woo-stock-manager-setting#&tab=export" }
+                                            to={ "?page=stock-manager#&tab=export" }
                                             >
                                             <div className="wp-menu-image dashicons-before dashicons-upload"></div>
                                             { __( "Export", "woocommerce-stock-manager" ) }

@@ -37,7 +37,9 @@ const ConnectSelect = (props) => {
         value={setting[key]}
         proSetting={false}
         onChange={(e) => {
-          props.onChange(e, key);
+          if ( ! props.proSettingChanged()) {
+            props.onChange(e, key);
+          }
         }}
       />
   
@@ -45,11 +47,13 @@ const ConnectSelect = (props) => {
         <button
           onClick={(e) => {
             e.preventDefault();
-            updateSelectOption();
-            setLoading(true);
+            if ( ! props.proSettingChanged()) {
+              updateSelectOption();
+              setLoading(true);
+            }
           }}
         >
-          Connect
+          Fetch List
         </button>
 
         {
@@ -67,7 +71,9 @@ const ConnectSelect = (props) => {
         <SelectInput
           onChange={(e) => {
             e = { target: { value: e.value } };
-            props.onChange(e, props.selectKey);
+            if ( ! props.proSettingChanged()) {
+              props.onChange(e, props.selectKey);
+            }
           }}
           options={sellectOption}
           value={props.value}
