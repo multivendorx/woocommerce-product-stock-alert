@@ -63,13 +63,13 @@ export default function SubscribersList() {
   };
 
   useEffect(() => {
-    if (appLocalizer.pro_active != "free") {
+    if (appLocalizer.pro_active) {
       requestData();
     }
   }, [postStatus]);
 
   useEffect(() => {
-    if (appLocalizer.pro_active != "free") {
+    if (appLocalizer.pro_active) {
       axios({
         method: "post",
         url: fetchSubscribersCount,
@@ -203,7 +203,7 @@ export default function SubscribersList() {
 
   return (
     <div>
-      {appLocalizer.pro_active == "free" ? (
+      { ! appLocalizer.pro_active ? (
         <div>
           <Dialog
             className="woo-module-popup"
@@ -233,7 +233,7 @@ export default function SubscribersList() {
       ) : (
         <div className="woo-subscriber-list">
           <div className="woo-container">
-            <div className="woo-middle-container-wrapper subscriber-container-wrapper">
+            <div className="woo-middle-container-wrapper">
               <div className="woo-page-title">
                 <p>{__("Subscriber List", "woocommerce-stock-manager")}</p>
                 <div className="download-btn-subscriber-list">

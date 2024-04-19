@@ -24,7 +24,7 @@ const Tabs = ( props ) => {
                 { tab.icon && <i className={` admin-font ${ tab.icon } `} ></i> }
                 { menuCol ? null : tab.name }
                 { menuCol  ? null :
-                    ( appLocalizer.pro_active == 'free' ) && tab.proDependent &&
+                    ( ! appLocalizer.pro_active ) && tab.proDependent &&
                     <span class="admin-pro-tag">Pro</span> 
                 }
             </Link>

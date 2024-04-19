@@ -12,7 +12,7 @@ import Popoup from "../../PopupContent/PopupContent";
 import FormCustomizer from "../Inputs/Special/FormCustomizer";
 
 // Variable for controll coldown effect submit time
-const PENALTI  = 10;
+const PENALTY  = 10;
 const COOLDOWN = 1;
 
 const DynamicForm = (props) => {
@@ -32,7 +32,7 @@ const DynamicForm = (props) => {
       settingChanged.current = false;
 
       // Set counter by penalti
-      counter.current = PENALTI;
+      counter.current = PENALTY;
       // Clear previous counter.
       if (counterId.current) {
         clearInterval(counterId.current);
@@ -70,17 +70,16 @@ const DynamicForm = (props) => {
     }
   }, [setting]);
 
-  const isProSetting = ( key ) => {
-    return  appLocalizer.pro_active && props.proSetting?.includes( key );
+  const proSettingChanged = (isProSetting) => {
+    if (isProSetting && !appLocalizer.pro_active) {
+      setModelOpen(true);
+      return true;
+    }
+    return false;
   }
 
 
   const handleChange = (event, key, type = 'single', fromType = 'simple', arrayValue = []) => {
-    if ( isProSetting( key ) ) {
-        setModelOpen(true);
-        return;
-    }
-
     settingChanged.current = true;
 
     if ( type === 'single' ) {
@@ -218,9 +217,11 @@ const DynamicForm = (props) => {
               type={inputField.type}
               placeholder={inputField.placeholder}
               value={value}
-              proSetting={isProSetting(inputField.key)}
+              proSetting={inputField.proSetting}
               onChange={(e) => {
-                handleChange(e, inputField.key);
+                if ( ! proSettingChanged( inputField.proSetting ) ) {
+                  handleChange(e, inputField.key);
+                }
               }}
             />
           );
@@ -238,9 +239,11 @@ const DynamicForm = (props) => {
               name={inputField.name}
               placeholder={inputField.placeholder}
               value={value}
-              proSetting={isProSetting(inputField.key)}
+              proSetting={inputField.proSetting}
               onChange={(e) => {
-                handleChange(e, inputField.key);
+                if ( ! proSettingChanged( inputField.proSetting ) ) {
+                  handleChange(e, inputField.key);
+                }
               }}
             />
           );
@@ -254,9 +257,11 @@ const DynamicForm = (props) => {
               key={inputField.key}
               name={inputField.name}
               value={value}
-              proSetting={isProSetting(inputField.key)}
+              proSetting={inputField.proSetting}
               onChange={(e) => {
-                handleChange(e, inputField.key);
+                if ( ! proSettingChanged( inputField.proSetting ) ) {
+                  handleChange(e, inputField.key);
+                }
               }}
             />
           );
@@ -278,9 +283,11 @@ const DynamicForm = (props) => {
               key={inputField.key}
               name={inputField.name}
               value={value}
-              proSetting={isProSetting(inputField.key)}
+              proSetting={inputField.proSetting}
               onChange={(e) => {
-                handleChange(e, inputField.key);
+                if ( ! proSettingChanged( inputField.proSetting ) ) {
+                  handleChange(e, inputField.key);
+                }
               }}
               onButtonClick={(e) => {
                 runUploader(inputField.key);
@@ -301,9 +308,11 @@ const DynamicForm = (props) => {
               name={inputField.name}
               type={inputField.type}
               value={value || "#000000"}
-              proSetting={isProSetting(inputField.key)}
+              proSetting={inputField.proSetting}
               onChange={(e) => {
-                handleChange(e, inputField.key);
+                if ( ! proSettingChanged( inputField.proSetting ) ) {
+                  handleChange(e, inputField.key);
+                }
               }}
             />
           );
@@ -316,9 +325,11 @@ const DynamicForm = (props) => {
               inputClass="teal"
               multiple={true}
               value={setting[inputField.key]?.split(",") || ""}
-              proSetting={isProSetting(inputField.key)}
+              proSetting={inputField.proSetting}
               onChange={(e) => {
-                handleChange(e, inputField.key, "single", inputField.type);
+                if ( ! proSettingChanged( inputField.proSetting ) ) {
+                  handleChange(e, inputField.key, "single", inputField.type);
+                }
               }}
             />
           );
@@ -335,7 +346,7 @@ const DynamicForm = (props) => {
               placeholder="Enter store location"
               containerId="store-maps"
               containerClass="store-maps, gmap"
-              proSetting={isProSetting(inputField.key)}
+              proSetting={inputField.proSetting}
             />
           );
           break;
@@ -353,7 +364,7 @@ const DynamicForm = (props) => {
                   description={inputField.desc}
                   type={inputField.type}
                   placeholder={inputField.placeholder}
-                  proSetting={isProSetting(inputField.key)}
+                  proSetting={inputField.proSetting}
                   // onChange={handleChange}
                 />
               </div>
@@ -375,7 +386,7 @@ const DynamicForm = (props) => {
               value={setting[inputField.key]}
               options={inputField.options}
               onChange={handleMultiNumberChange}
-              proSetting={isProSetting(inputField.key)}
+              proSetting={inputField.proSetting}
             />
           );
           break;
@@ -393,9 +404,11 @@ const DynamicForm = (props) => {
               name={inputField.name}
               keyName={inputField.key}
               options={inputField.options}
-              proSetting={isProSetting(inputField.key)}
+              proSetting={inputField.proSetting}
               onChange={(e) => {
-                handleChange(e, inputField.key);
+                if ( ! proSettingChanged( inputField.proSetting ) ) {
+                  handleChange(e, inputField.key);
+                }
               }}
             />
           );
@@ -420,9 +433,11 @@ const DynamicForm = (props) => {
               name={inputField.name}
               keyName={inputField.key}
               options={inputField.options}
-              proSetting={isProSetting(inputField.key)}
+              proSetting={inputField.proSetting}
               onChange={(e) => {
-                handleChange(e, inputField.key);
+                if ( ! proSettingChanged( inputField.proSetting ) ) {
+                  handleChange(e, inputField.key);
+                }
               }}
             />
           );
@@ -443,9 +458,11 @@ const DynamicForm = (props) => {
               name={inputField.name}
               keyName={inputField.key}
               options={inputField.options}
-              proSetting={isProSetting(inputField.key)}
+              proSetting={inputField.proSetting}
               onChange={(e) => {
-                handleChange(e, inputField.key);
+                if ( ! proSettingChanged( inputField.proSetting ) ) {
+                  handleChange(e, inputField.key);
+                }
               }}
             />
           );
@@ -464,9 +481,11 @@ const DynamicForm = (props) => {
               name={inputField.name}
               keyName={inputField.key}
               options={inputField.options}
-              proSetting={isProSetting(inputField.key)}
+              proSetting={inputField.proSetting}
               onChange={(e) => {
-                handleChange(e, inputField.key);
+                if ( ! proSettingChanged( inputField.proSetting ) ) {
+                  handleChange(e, inputField.key);
+                }
               }}
             />
           );
@@ -487,9 +506,11 @@ const DynamicForm = (props) => {
               inputClass={inputField.key}
               options={options}
               value={value}
-              proSetting={isProSetting(inputField.key)}
+              proSetting={inputField.proSetting}
               onChange={(e, data) => {
-                handleChange(e, inputField.key, "single", "select", data);
+                if ( ! proSettingChanged( inputField.proSetting ) ) {
+                  handleChange(e, inputField.key, "single", "select", data);
+                }
               }}
             />
           );
@@ -510,9 +531,11 @@ const DynamicForm = (props) => {
               options={inputField.options}
               type="multi-select"
               value={value}
-              proSetting={isProSetting(inputField.key)}
+              proSetting={inputField.proSetting}
               onChange={(e, data) => {
-                handleChange(e, inputField.key, "single", "multi-select", data);
+                if ( ! proSettingChanged( inputField.proSetting ) ) {
+                  handleChange(e, inputField.key, "single", "multi-select", data);
+                }
               }}
               onMultiSelectDeselectChange={(e) =>
                 handlMultiSelectDeselectChange(e, inputField)
@@ -530,9 +553,11 @@ const DynamicForm = (props) => {
               inputClass={inputField.key}
               options={inputField.options}
               value={value}
-              proSetting={isProSetting(inputField.key)}
+              proSetting={inputField.proSetting}
               onChange={(e, data) => {
-                handleChange(e, inputField.key, "single", "country", data);
+                if ( ! proSettingChanged( inputField.proSetting ) ) {
+                  handleChange(e, inputField.key, "single", "country", data);
+                }
               }}
             />
           );
@@ -547,9 +572,11 @@ const DynamicForm = (props) => {
               inputClass={inputField.key}
               options={countryState}
               value={value}
-              proSetting={isProSetting(inputField.key)}
+              proSetting={inputField.proSetting}
               onChange={(e, data) => {
-                handleChange(e, inputField.key, "single", "select", data);
+                if ( ! proSettingChanged( inputField.proSetting ) ) {
+                  handleChange(e, inputField.key, "single", "select", data);
+                }
               }}
             />
           );
@@ -575,7 +602,9 @@ const DynamicForm = (props) => {
               options={inputField.options}
               value={value}
               onChange={(e) => {
-                handleChange(e, inputField.key, "multiple");
+                if ( ! proSettingChanged( inputField.proSetting ) ) {
+                  handleChange(e, inputField.key, "multiple");
+                }
               }}
               onMultiSelectDeselectChange={(e) =>
                 handlMultiSelectDeselectChange( inputField.key, inputField.options )
@@ -605,7 +634,9 @@ const DynamicForm = (props) => {
               apiKey={appLocalizer.mvx_tinymce_key}
               value={value}
               onEditorChange={(e) => {
-                handleChange(e, inputField.key, "simple", "wpeditor");
+                if ( ! proSettingChanged( inputField.proSetting ) ) {
+                  handleChange(e, inputField.key, "simple", "wpeditor");
+                }
               }}
             />
           );
@@ -647,29 +678,41 @@ const DynamicForm = (props) => {
           input = (
             <CustomInput.ButtonCustomizer
               buttonText={setting.button_text}
-              proSetting={isProSetting(inputField.key)}
-              onChange={(e, key) => handleChange(e, key)}
+              proSetting={inputField.proSetting}
+              onChange={(e, key) => {
+                if ( ! proSettingChanged( inputField.proSetting ) ) {
+                  handleChange(e, key);
+                }
+              }}
             />
           );
           break;
 
           case "form_customizer":
             input = (
-             <FormCustomizer
-             value={value}
-             buttonText={setting.button_text}
-              proSetting={isProSetting(inputField.key)}
-              onChange={(e, key) => handleChange(e, key)}/>
+              <FormCustomizer
+                value={value}
+                buttonText={setting.button_text}
+                proSetting={inputField.proSetting}
+                onChange={(e, key) => {
+                  if ( ! proSettingChanged( inputField.proSetting ) ) {
+                    handleChange(e, key);
+                  }
+                }}
+              />
             );
             break;
 
-        case "connect_select":
+        case "api_connect":
           input = (
             <CustomInput.ConnectSelect
               key={inputField.key}
               selectKey={inputField.selectKey}
               optionKey={inputField.optionKey}
               onChange={handleChange}
+              proSettingChanged={
+                () => proSettingChanged(inputField.proSetting)
+              }
               settingChanged={settingChanged}
               apiLink={inputField.apiLink}
             />

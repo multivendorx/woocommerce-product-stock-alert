@@ -63,8 +63,8 @@ const Settings = () => {
                     tabData={ settingsArray }
                     currentTab={ location.get( 'subtab' ) }
                     getForm={getForm}
-                    BannerSection = {appLocalizer.pro_active === 'free' && BannerSection}
-                    prepareUrl={(subTab) => `?page=woo-stock-manager-setting#&tab=settings&subtab=${subTab}` }
+                    BannerSection = { ! appLocalizer.pro_active && BannerSection }
+                    prepareUrl={(subTab) => `?page=stock-manager#&tab=settings&subtab=${subTab}` }
                 />
             </SettingProvider>
         </>

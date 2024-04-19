@@ -71,4 +71,12 @@ class Utill {
 
         return $form_settings;
     }
+
+    /**
+     * Check pro plugin is acrive or not
+     * @return bool
+     */
+    public static function is_pro_active() {
+        return defined( 'STOCK_MANAGER_PRO_PLUGIN_VERSION' );
+    }
 } 
