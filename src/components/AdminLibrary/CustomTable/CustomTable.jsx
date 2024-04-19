@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import DataTable from "react-data-table-component";
 import "./table.scss";
 
-const PENALTI = 28;
+const PENALTY = 28;
 const COOLDOWN = 1;
 
 // Loading table component.
@@ -107,7 +107,7 @@ const CustomTable = (props) => {
       return;
     }
     // Set counter by penalti
-    counter.current = PENALTI;
+    counter.current = PENALTY;
     // Clear previous counter.
     if (counterId.current) {
       clearInterval(counterId.current);
@@ -205,7 +205,7 @@ const CustomTable = (props) => {
         }
       </div>
       
-      <div className="woo-wrap-bulk-all-date">
+      <div className="wrap-bulk-all-date">
         {/* Render realtime filter */}
         {realtimeFilter &&
           realtimeFilter.map((filter) => {

@@ -55,38 +55,38 @@ class Admin {
             __( 'Stock Manager', 'woocommerce-stock-manager' ), 
             __( 'Stock Manager', 'woocommerce-stock-manager' ), 
             'manage_options', 
-            'woo-stock-manager-setting', 
+            'stock-manager', 
             [ $this, 'create_setting_page' ],
             'data:image/svg+xml;base64, PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMCAyMCI+PGcgZmlsbD0iIzlFQTNBOCIgZmlsbC1ydWxlPSJub256ZXJvIj4KICAgICAgICAgICAgPHBhdGggZD0iTTE5LjksNS43YzAuMiwwLjktMC4zLDEuOC0xLjEsMmMtMC4yLDAuMS0wLjUsMC4xLTAuNywwYy0wLjYtMC4xLTEuMS0wLjUtMS4zLTEuMiAgICBjLTAuMi0wLjYsMC0xLjIsMC40LTEuNmMwLjItMC4yLDAuNC0wLjMsMC43LTAuNEMxOC44LDQuMywxOS43LDQuOCwxOS45LDUuN3ogTTE3LjgsOC45bC0zLjIsOS45Yy0wLjIsMC41LTAuNywwLjctMS4yLDAuNgogICAgICAgICAgICBMMC42LDE1LjJDMC4xLDE1LTAuMSwxNC41LDAsMTRMNC4zLDEuMmMwLjItMC41LDAuNy0wLjcsMS4yLTAuNkwxNiw0LjFjLTAuNSwwLjctMC43LDEuNy0wLjUsMi42QzE1LjgsNy45LDE2LjcsOC43LDE3LjgsOC45egogICAgICAgICAgICBNMTAuOCw0LjljMC41LDAuMiwxLDAuNSwxLjUsMC43YzAuMi0wLjQsMC0wLjktMC40LTEuMUMxMS40LDQuNCwxMSw0LjUsMTAuOCw0Ljl6IE05LjUsMTUuMmMtMC45LTAuMS0xLjctMC4yLTIuNi0wLjIKICAgICAgICAgICAgYzAuMSwwLjcsMC42LDEuMiwxLjIsMS4yQzguNywxNi4yLDkuMywxNS44LDkuNSwxNS4yeiBNMTIuNyw5YzAtMS43LTEuNC0zLjEtMy4xLTMuMmMtMS4yLDAtMi4yLDAuNS0yLjgsMS41CiAgICAgICAgICAgIGMtMC42LDAuOS0xLjEsMS44LTEuNywyLjdjLTAuMSwwLjEtMC4yLDAuMi0wLjMsMC4xYy0wLjUtMC4yLTAuOCwwLTEuMSwwLjZjLTAuMiwwLjQsMCwwLjgsMC40LDFjMC43LDAuNCwxLjQsMC43LDIuMiwxLjEKICAgICAgICAgICAgYzEuNCwwLjcsMi44LDEuNCw0LjIsMi4xYzAuNCwwLjIsMC44LDAuMSwxLjEtMC40YzAtMC4xLDAuMS0wLjEsMC4xLTAuMmMwLjEtMC4zLDAtMC43LTAuMy0wLjljLTAuMi0wLjEtMC4yLTAuMi0wLjEtMC40CiAgICAgICAgICAgIGMwLjQtMSwwLjgtMiwxLjEtM0MxMi43LDkuNywxMi43LDksMTIuNyw5eiIvPjwvZz48L3N2Zz4=', 
             50
         );
 
         add_submenu_page( 
-            'woo-stock-manager-setting',
+            'stock-manager',
             __( 'Settings', 'woocommerce-stock-manager' ),
             __( 'Settings', 'woocommerce-stock-manager' ),
             'manage_options',
-            'woo-stock-manager-setting#&tab=settings&subtab=general', 
+            'stock-manager#&tab=settings&subtab=general', 
             '__return_null'                                         
         );
         
         add_submenu_page( 
-            'woo-stock-manager-setting', 
+            'stock-manager', 
             __( 'Subscriber List', 'woocommerce-stock-manager' ),
 			// Translators: Subscriber list with a pro sticker.Variable $pro_sticker contains the sticker text.
             __( 'Subscriber List ', 'woocommerce-stock-manager' ) . $pro_sticker,
             'manage_woocommerce',
-            'woo-stock-manager-setting#&tab=subscribers-list',
+            'stock-manager#&tab=subscribers-list',
             '__return_null' 
         );
         
         add_submenu_page( 
-            'woo-stock-manager-setting', 
+            'stock-manager', 
             __( 'Inventory Manager', 'woocommerce-stock-manager' ),
 			// Translators: Inventory Manager list with a pro sticker.Variable $pro_sticker contains the sticker text.
             __( 'Inventory Manager', 'woocommerce-stock-manager' ) . $pro_sticker,
             'manage_woocommerce',
-            'woo-stock-manager-setting#&tab=manage-stock',
+            'stock-manager#&tab=manage-stock',
             '__return_null' 
         );
 
@@ -99,7 +99,7 @@ class Admin {
             [ $this, 'create_csv_export_page' ]
         );
 
-        remove_submenu_page( 'woo-stock-manager-setting', 'woo-stock-manager-setting' );
+        remove_submenu_page( 'stock-manager', 'stock-manager' );
     } 
 
     /**
@@ -203,30 +203,6 @@ class Admin {
     public function enqueue_admin_script() {
         $suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
-        $pro_settings_list = apply_filters( 'woo_stock_manager_pro_settings_lists', [ 
-            'ban_email_domains', 
-            'ban_email_domain_text', 
-            'ban_email_addresses', 
-            'ban_email_address_text', 
-            'is_mailchimp_enable', 
-            'mailchimp_api', 
-            'get-mailchimp-list_button', 
-            'selected_mailchimp_list', 
-            'is_double_optin', 
-            'is_recaptcha_enable'
-        ] );
-
-        $woo_admin_massages_fields = [ 
-            'double_opt_in_success', 
-            'shown_interest_text', 
-            'alert_success', 
-            'alert_email_exist', 
-            'valid_email', 
-            'alert_unsubscribe_message', 
-            'ban_email_domain_text', 
-            'ban_email_address_text'
-        ];
-        
         // Get all tab setting's database value
         $settings_databases_value =[];
 
@@ -236,23 +212,20 @@ class Admin {
             $settings_databases_value[ $tab_name ] = SM()->setting->get_option( 'woo_stock_manager_' . $tab_name . '_tab_settings' );
         }
         
-        if ( get_current_screen()->id == 'toplevel_page_woo-stock-manager-setting' ) {
+        if ( get_current_screen()->id == 'toplevel_page_stock-manager' ) {
             wp_enqueue_script( 'woo-stockmanager-script', SM()->plugin_url . 'build/index.js', [ 'wp-element', 'wp-i18n' ], SM()->version, true );
             wp_set_script_translations( 'woo-stockmanager-script', 'woocommerce-stock-manager' );
             wp_localize_script( 'woo-stockmanager-script', 'appLocalizer', apply_filters( 'woo_stock_manager_settings', [ 
                 'apiUrl'                    => untrailingslashit( get_rest_url() ), 
                 'nonce'                     => wp_create_nonce( 'wp_rest' ),
                 'subscriber_list'           => SM()->plugin_url . 'src/assets/images/subscriber-list.jpg',
-                'pro_active'                => apply_filters( 'woo_stock_manager_pro_active', 'free' ),
+                'pro_active'                => Utill::is_pro_active(),
                 'settings_databases_value'  => $settings_databases_value,
-                'pro_settings_list'         => $pro_settings_list,
                 'pro_url'                   => esc_url( STOCK_MANAGER_PRO_SHOP_URL ),
                 'is_double_optin_free'      => __("Upgrade to <a href=\"" . STOCK_MANAGER_PRO_SHOP_URL . "\" target=\"_blank\"><span class=\"pro-strong\">Pro</span></a> to enable Double Opt-in flow for subscription confirmation.", "woocommerce-stock-manager"),
                 'is_double_optin_pro'       => __('Enable Double Opt-in flow for subscription confirmation.', 'woocommerce-stock-manager-pro'),
                 'is_recaptcha_enable_free'  => __("Upgrade to <a href=\"" . STOCK_MANAGER_PRO_SHOP_URL . "\" target=\"_blank\"><span class=\"pro-strong\">Pro</span></a> for unlocking reCAPTCHA for out-of-stock form subscriptions.", "woocommerce-stock-manager"), 
                 'is_recaptcha_enable_pro'   => __('Get your v3 reCAPTCHA site key and secret key from <a href="https://developers.google.com/recaptcha" target="_blank">here</a>.', 'woocommerce-stock-manager-pro'),
-                'default_massages_fields'   => $woo_admin_massages_fields,
-                'default_massages'          => Utill::get_form_settings_array()
             ] ) );
 
             wp_enqueue_style( 'woo_stockmanager_style', SM()->plugin_url . 'build/index.css', [], SM()->version );

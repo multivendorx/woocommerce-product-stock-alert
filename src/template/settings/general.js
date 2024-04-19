@@ -16,10 +16,11 @@ export default {
             options: [
                 {
                     key: "is_double_optin",
-                    label: appLocalizer.pro_active == 'free' ? appLocalizer.is_double_optin_free : appLocalizer.is_double_optin_pro ,
+                    label: ! appLocalizer.pro_active ? appLocalizer.is_double_optin_free : appLocalizer.is_double_optin_pro ,
                     value: "is_double_optin"
                 }
-            ]
+            ],
+            proSetting: true,
         },
         {
             key: 'double_opt_in_success',
@@ -30,7 +31,8 @@ export default {
             dependent: {
                 key: "is_double_optin",
                 set: true,
-            }
+            },
+            proSetting: true,
         },
         {
             key: 'separator_content',
@@ -92,10 +94,11 @@ export default {
             options: [
                 {
                     key: "is_recaptcha_enable",
-                    label: appLocalizer.pro_active == 'free' ? appLocalizer.is_recaptcha_enable_free : appLocalizer.is_recaptcha_enable_pro ,
+                    label: ! appLocalizer.pro_active ? appLocalizer.is_recaptcha_enable_free : appLocalizer.is_recaptcha_enable_pro ,
                     value: "is_recaptcha_enable"
                 }
-            ]
+            ],
+            proSetting: true,
         },
         {
             key: 'v3_site_key',

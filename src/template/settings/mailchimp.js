@@ -20,7 +20,8 @@ export default {
                     label: __("Enable this to activate Mailchimp.", "woocommerce-stock-manager"),
                     value: "is_mailchimp_enable"
                 }
-            ]
+            ],
+            proSetting: true,
         },
         {
             // Spacial input field
@@ -34,7 +35,8 @@ export default {
             dependent: {
                 key: "is_mailchimp_enable",
                 set: true,
-            }
+            },
+            proSetting: true,
         },
     ]
 };

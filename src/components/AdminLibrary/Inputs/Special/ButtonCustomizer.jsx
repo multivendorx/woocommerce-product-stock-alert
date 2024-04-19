@@ -233,7 +233,7 @@ const Customizer = (props) => {
                     />
                     <input
                       type="text"
-                      value={setting.button_border_color_onhover ? setting.button_border_color_onhover: '#000000' }
+                        value={setting.button_border_color_onhover ? setting.button_border_color_onhover: '#000000' }
                       onChange={(e) =>
                         props.onChange(e, "button_border_color_onhover")
                       }
@@ -248,30 +248,15 @@ const Customizer = (props) => {
               <div className="simple">
                 <div className="section">
                   <span className="lable">
-                    {__("Subscribe button text", "woocommerce-stock-manager")}
+                    {__("Button text", "woocommerce-stock-manager")}
                   </span>
                   <div className="property-section">
                     <div class="PB-range-slider-div">
                       <input
                         className="PB-range-slider"
                         type="text"
-                        value={setting.button_font_size ? setting.button_font_size : 12}
-                        onChange={(e) => props.onChange(e, "button_font_size")}
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div className="section">
-                  <span className="lable">
-                    {__("Unsubscribe button text", "woocommerce-stock-manager")}
-                  </span>
-                  <div className="property-section">
-                    <div class="PB-range-slider-div">
-                      <input
-                        className="PB-range-slider"
-                        type="text"
-                        value={setting.button_font_size ? setting.button_font_size : 12}
-                        onChange={(e) => props.onChange(e, "button_font_size")}
+                        value={setting.button_text}
+                        onChange={(e) => props.onChange(e, "button_text")}
                       />
                     </div>
                   </div>
@@ -403,15 +388,15 @@ const ButtonCustomizer = (props) => {
     fontWeight: setting.button_font_width,
     padding: setting.button_padding + 'px',
     margin: setting.button_margin + 'px',
-};
+  };
 
-const buttonRef = useRef();
-useEffect(()=>{
-  document.body.addEventListener( "click" , (event) => {
-    if ( ! buttonRef.current.contains(event.target) ) {
-      setHoverOn( false );
-    }
-  })
+  const buttonRef = useRef();
+  useEffect(() => {
+    document.body.addEventListener("click", (event) => {
+      if (!buttonRef?.current.contains(event.target)) {
+        setHoverOn(false);
+      }
+    })
 },[])
 
 
