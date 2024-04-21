@@ -59,11 +59,11 @@ const Tabs = ( props ) => {
 
         return tabData.map( ( {content, type} ) => {
             if ( type === 'file' ) {
-                return  content.id === currentTab &&
-                    <div className="tab-description-start">
+                return  content.id === currentTab && content.id !== 'support' &&
+                    (<div className="tab-description-start">
                         <div className="tab-name">{ content.name }</div>
                         <p>{ content.desc }</p>
-                    </div>
+                    </div>)
             } else if ( type === 'folder' ) {
                 // Get tabdescription from child by recursion
                 return getTabDescription( content );

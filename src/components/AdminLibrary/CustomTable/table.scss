@@ -67,7 +67,7 @@ $animation-duration: 2s;
     }
 
     * {
-      font-size: 1rem;
+      font-size: 0.95rem;
     }
 
     .tg {
@@ -170,6 +170,11 @@ $animation-duration: 2s;
         text-wrap: nowrap;
         overflow: hidden;
         height: 100%;
+        gap: 0.25rem;
+
+        i{
+          color: #65438f;
+        }
 
         h4 {
           display: none;

@@ -53,7 +53,7 @@ $manageStock-scroll-color: #ece8f1;
       .rdt_TableBody {
         .rdt_TableRow {
           padding: 0.625rem 0;
-          font-size: 1rem !important; // to adjust datatable fontsize
+          font-size: 0.95rem !important; // to adjust datatable fontsize
           border-radius: 0;
           margin: 0 !important; // to adjust datatable margin
           border-left: 0;
@@ -84,14 +84,27 @@ $manageStock-scroll-color: #ece8f1;
 }
 
 #admin-stockmanager {
+  .woo-middle-container-wrapper {
+    .woo-wrap-bulk-all-date {
+      input,
+      textarea {
+        outline: none !important;
+        border: none !important;
+        box-shadow: 0 0 0 0.025rem #2271b1 !important; // to adjust box shadow for input tag and textarea for all stockmanager
+        &:focus {
+          outline: none !important;
+          border: none !important;
+          box-shadow: 0 0 0 0.025rem #2271b1 !important; // to adjust box shadow for input tag and textarea for all stockmanager
+        }
+      }
+    }
 
-  .woo-middle-container-wrapper{
     input:focus,
     textarea:focus {
       outline: none !important; // to adjust box shadow for input tag and textarea for all stockmanager
       box-shadow: none !important; // to adjust box shadow for input tag and textarea for all stockmanager
     }
-  
+
     select {
       .custom-select {
         display: flex;
@@ -104,13 +117,13 @@ $manageStock-scroll-color: #ece8f1;
         background-color: $manageStock-fill-color;
         cursor: pointer;
       }
-  
+
       &:focus {
         color: inherit;
         border: none !important; // Adjust border as none to overwrite default border
         box-shadow: none;
       }
-  
+
       &:hover {
         color: inherit;
       }
@@ -139,15 +152,15 @@ $manageStock-scroll-color: #ece8f1;
   }
 }
 
-.manage-stock-container{
+.manage-stock-container {
   padding: 2rem 1rem !important; // To overwrite default admin css
 
   select {
     -webkit-appearance: none;
     width: 100%;
     border: none;
-    background: #fff0 url("../../assets/images/download.svg") no-repeat right 0.315rem
-      top 55%;
+    background: #fff0 url("../../assets/images/download.svg") no-repeat right
+      0.315rem top 55%;
   }
 }
 
@@ -454,14 +467,14 @@ $manageStock-scroll-color: #ece8f1;
   max-width: 9.375rem;
   padding: 0.313rem;
   text-align: center;
-  font-size: 1.01rem;
+  font-size: 0.95rem;
 }
 
 .table-head {
   font-weight: 600;
 
   .table-row {
-    &:first-child{
+    &:first-child {
       min-width: 2.25rem;
       max-width: 2.25rem;
     }
@@ -544,13 +557,13 @@ $manageStock-scroll-color: #ece8f1;
 .table-data-container .table-row-meta-data p {
   width: 100%;
   display: block;
-  font-size: 1.01rem;
+  font-size: 0.95rem;
   color: rgb(44, 51, 56);
 }
 
 .product_stock_status.outofstock,
 .product_backorders.no {
-  font-size: 0.875rem !important; // force to reduce font size for select tag font size
+  font-size: 0.95rem !important; // force to reduce font size for select tag font size
 }
 
 .table-row.product_stock_quantity .table-row-meta-data p {
@@ -589,7 +602,7 @@ $manageStock-scroll-color: #ece8f1;
         max-height: 4.375rem;
         transition: max-height 0.4s linear;
         overflow: hidden;
-        
+
         td.table-row {
           max-width: 100% !important; // force to set width for laptop screen
           display: block;
@@ -632,12 +645,12 @@ $manageStock-scroll-color: #ece8f1;
     max-width: 18.75rem;
     h1 {
       display: block;
-      font-size: 1rem;
+      font-size: 0.95rem;
       font-weight: 500;
       min-width: 7.5rem;
       text-align: left;
     }
-  }    
+  }
 
   .custome-toggle-default {
     left: 0 !important; // force to set position for laptop screen
@@ -718,7 +731,7 @@ $manageStock-scroll-color: #ece8f1;
       li.selected {
         border: 0.063rem solid #522c81;
       }
-      li.disabled{
+      li.disabled {
         a {
           background: #4949495b;
           cursor: not-allowed;
@@ -737,7 +750,7 @@ $manageStock-scroll-color: #ece8f1;
 .table-row.product_backorders .table-row-meta-data p {
   padding-left: 0.625rem;
   text-align: left;
-  font-size: 0.875rem;
+  font-size: 0.95rem;
 }
 
 .inventory-manager {

@@ -177,8 +177,14 @@ export default function SubscribersList() {
   //columns for the data table
   const columns = [
     {
-      name: __("Date", "woocommerce-stock-manager"),
-      cell: (row) => <TableCell title="Date" > {row.date} </TableCell>,
+      name: __("Image", "woocommerce-stock-manager"),
+      cell: (row) => <TableCell title="Image" >
+        <img src={row.image} alt="product_image" />
+      </TableCell>,
+    },
+    {
+      name: __("Product", "woocommerce-stock-manager"),
+      cell: (row) => <TableCell title="Product" > { row.product } </TableCell>,
     },
     {
       name: __("Email", "woocommerce-stock-manager"),
@@ -187,17 +193,21 @@ export default function SubscribersList() {
           {row.email}
           {
             row.user_link &&
-            <a href={ row.user_link } target="_blank"><i>😊</i></a>
+            <a className="user-profile" href={ row.user_link } target="_blank"><i className="admin-font font-person"></i></a>
           }
         </TableCell>,
     },
     {
-      name: __("Product", "woocommerce-stock-manager"),
-      cell: (row) => <TableCell title="Product" > { row.product } </TableCell>,
+      name: __("Date", "woocommerce-stock-manager"),
+      cell: (row) => <TableCell title="Date" > {row.date} </TableCell>,
     },
     {
       name: __("Status", "woocommerce-stock-manager"),
-      cell: (row) => <TableCell title="status" > {row.status} </TableCell>,
+      cell: (row) => <TableCell title="status" > 
+        <p 
+         className={row.status_key === 'mailsent' ? 'sent' : (row.status_key === 'subscribed' ? 'subscribed' : 'unsubscribed')}
+        >{row.status}</p>
+      </TableCell>,
     },
   ];
 

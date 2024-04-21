@@ -6,7 +6,9 @@
         .label-section {
             margin-bottom: 0.55rem;
 
-            p {
+            input {
+                border: none !important; // To overwrite dynamic form scss
+                width: fit-content !important; // To overwrite dynamic form scss
                 font-size: 0.95rem;
                 cursor: pointer;
                 width: fit-content;

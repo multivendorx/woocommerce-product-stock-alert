@@ -205,7 +205,7 @@ const CustomTable = (props) => {
         }
       </div>
       
-      <div className="woo-wrap-bulk-all-date">
+      <div className="wrap-bulk-all-date">
         {/* Render realtime filter */}
         {realtimeFilter &&
           realtimeFilter.map((filter) => {
