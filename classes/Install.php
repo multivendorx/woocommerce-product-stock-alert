@@ -176,7 +176,7 @@ class Install {
 
         // Default messages for settings array.
         // Those will modify if previous settings was set.
-        $general_settings = [ 
+        $appearance_settings = [ 
             'is_enable_backorders' => false, 
             'is_enable_no_interest' => false, 
             'is_double_optin' => false, 
@@ -291,9 +291,9 @@ class Install {
             );
             
             // Replace all default value by previous settings.
-            foreach( $general_settings as $key => $value ) {
+            foreach( $appearance_settings as $key => $value ) {
                 if ( isset( $tab_settings[ $key ] ) && $tab_settings[ $key ] != '' ) {
-                    $general_settings[ $key ] = $tab_settings[ $key ];
+                    $appearance_settings[ $key ] = $tab_settings[ $key ];
                 }
             }
 
@@ -309,7 +309,14 @@ class Install {
             delete_option( 'woo_product_stock_alert_activate' );
         }
 
-        update_option( 'woo_stock_manager_general_tab_settings', $general_settings );
+        // Get customization_tab_setting and merge with general setting
+        $customization_tab_setting = get_option( 'woo_stock_manager_form_customization_tab_settings', [] );
+        delete_option( 'woo_stock_manager_form_customization_tab_settings' );
+        update_option(
+            'woo_stock_manager_appearance_tab_settings',
+            array_merge( $appearance_settings, $customization_tab_setting )
+        );
+
         update_option( 'woo_stock_manager_form_submission_tab_settings', $submit_settings );
         update_option( 'woo_stock_manager_email_tab_settings', $email_settings );
 

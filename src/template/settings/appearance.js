@@ -1,7 +1,7 @@
 import { __ } from '@wordpress/i18n';
 
 export default {
-    id: 'general',
+    id: 'appearance',
     priority: 1,
     name: __("Appearance", "woocommerce-stock-manager"),
     desc: __("Configure basic product manager settings.", "woocommerce-stock-manager"),
@@ -62,11 +62,6 @@ export default {
             ]
         },
         {
-            key: 'separator_content',
-            type: 'section',
-            label: "",
-        },
-        {
             key: 'shown_interest_text',
             type: 'textarea',
             class: 'woo-setting-wpeditor-class',
@@ -95,11 +90,6 @@ export default {
                 }
             ],
             proSetting: true,
-        },
-        {
-            key: 'separator_content',
-            type: 'section',
-            label: "",
         },
         {
             key: 'double_opt_in_success',
@@ -131,11 +121,6 @@ export default {
                 }
             ],
             proSetting: true,
-        },
-        {
-            key: 'separator_content',
-            type: 'section',
-            label: "",
         },
         {
             key: 'v3_site_key',

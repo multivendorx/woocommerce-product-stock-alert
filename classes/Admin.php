@@ -66,7 +66,7 @@ class Admin {
             __( 'Settings', 'woocommerce-stock-manager' ),
             __( 'Settings', 'woocommerce-stock-manager' ),
             'manage_options',
-            'stock-manager#&tab=settings&subtab=general', 
+            'stock-manager#&tab=settings&subtab=appearance', 
             '__return_null'                                         
         );
         
@@ -206,7 +206,7 @@ class Admin {
         // Get all tab setting's database value
         $settings_databases_value =[];
 
-        $tabs_names =[ 'general', 'form_submission', 'email', 'mailchimp' ];
+        $tabs_names =[ 'appearance', 'form_submission', 'email', 'mailchimp' ];
 
         foreach( $tabs_names as $tab_name ) {
             $settings_databases_value[ $tab_name ] = SM()->setting->get_option( 'woo_stock_manager_' . $tab_name . '_tab_settings' );
