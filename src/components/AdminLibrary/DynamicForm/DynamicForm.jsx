@@ -70,6 +70,10 @@ const DynamicForm = (props) => {
     }
   }, [setting]);
 
+  const isProSetting = (proDependent) => {
+    return proDependent && !appLocalizer.pro_active;
+  }
+
   const proSettingChanged = (isProSetting) => {
     if (isProSetting && !appLocalizer.pro_active) {
       setModelOpen(true);

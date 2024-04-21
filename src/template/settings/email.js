@@ -18,11 +18,21 @@ export default {
             proSetting: true,
         },
         {
+            key: 'separator_content',
+            type: 'section',
+            label: "",
+        },
+        {
             key: "ban_email_domain_text",
             type: "textarea",
             label: __("Blocked domain alert message", "woocommerce-stock-manager"),
             desc: __(" Create an alert message for users attempting to subscribe from blocked domains.", "woocommerce-stock-manager"),
             proSetting: true,
+        },
+        {
+            key: 'separator_content',
+            type: 'section',
+            label: "",
         },
         {
             key: "ban_email_addresses",
@@ -31,6 +41,11 @@ export default {
             desc: __("Specify email addresses that are restricted from subscribing. You can add multiple commma seperated emails.", "woocommerce-stock-manager"),
             label: __("Blocked email addresses", "woocommerce-stock-manager"),
             proSetting: true,
+        },
+        {
+            key: 'separator_content',
+            type: 'section',
+            label: "",
         },
         {
             key: "ban_email_address_text",
