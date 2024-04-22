@@ -1,38 +1,29 @@
 import { __ } from '@wordpress/i18n';
 
 export default {
-    id: 'general',
+    id: 'appearance',
     priority: 1,
-    name: __("General", "woocommerce-stock-manager"),
+    name: __("Appearance", "woocommerce-stock-manager"),
     desc: __("Configure basic product manager settings.", "woocommerce-stock-manager"),
     icon: 'font-settings',
     submitUrl: 'save-stockmanager',
     modal: [
         {
-            key: 'is_double_optin',
-            type: 'checkbox',
-            class: 'woo-toggle-checkbox',
-            label: __("Subscriber double opt-in", "woocommerce-stock-manager"),
-            options: [
-                {
-                    key: "is_double_optin",
-                    label: ! appLocalizer.pro_active ? appLocalizer.is_double_optin_free : appLocalizer.is_double_optin_pro ,
-                    value: "is_double_optin"
-                }
-            ],
-            proSetting: true,
+            key: "subscribe_form",
+            type: "form_customizer",
+            label: __("Personalize Layout", "woocommerce-stock-manager")
         },
         {
-            key: 'double_opt_in_success',
-            type: 'textarea',
-            class: 'woo-setting-wpeditor-class',
-            desc: __("Default: Kindly check your inbox to confirm the subscription.", "woocommerce-stock-manager-pro"),
-            label: __("Double opt-in success message", "woocommerce-stock-manager-pro"),
-            dependent: {
-                key: "is_double_optin",
-                set: true,
-            },
-            proSetting: true,
+            key: 'separator_content',
+            type: 'section',
+            label: "",
+        },
+        {
+            key: "unsubscribe_button_text",
+            type: "text",
+            label: __('"Unsubscribe" Button Caption ', "woocommerce-stock-manager"),
+            desc: __("Modify the un-subscribe button text. By default we display Unsubscribe.", "woocommerce-stock-manager"),
+            placeholder: __("Unsubscribe", "woocommerce-stock-manager"),
         },
         {
             key: 'separator_content',
@@ -42,7 +33,7 @@ export default {
         {
             key: 'is_enable_backorders',
             type: 'checkbox',
-            label: __("Allow subscriptions with active backorders", "woocommerce-stock-manager"),
+            label: __("Allow Backorder Subscriptions", "woocommerce-stock-manager"),
             class: 'woo-toggle-checkbox',
             options: [
                 {
@@ -80,6 +71,37 @@ export default {
                 key: "is_enable_no_interest",
                 set: true
             }
+        },
+        {
+            key: 'separator_content',
+            type: 'section',
+            label: "",
+        },
+        {
+            key: 'is_double_optin',
+            type: 'checkbox',
+            class: 'woo-toggle-checkbox',
+            label: __("Subscriber double opt-in", "woocommerce-stock-manager"),
+            options: [
+                {
+                    key: "is_double_optin",
+                    label: ! appLocalizer.pro_active ? appLocalizer.is_double_optin_free : appLocalizer.is_double_optin_pro ,
+                    value: "is_double_optin"
+                }
+            ],
+            proSetting: true,
+        },
+        {
+            key: 'double_opt_in_success',
+            type: 'textarea',
+            class: 'woo-setting-wpeditor-class',
+            desc: __("Default: Kindly check your inbox to confirm the subscription.", "woocommerce-stock-manager-pro"),
+            label: __("Double opt-in success message", "woocommerce-stock-manager-pro"),
+            dependent: {
+                key: "is_double_optin",
+                set: true,
+            },
+            proSetting: true,
         },
         {
             key: 'separator_content',

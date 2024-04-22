@@ -66,8 +66,7 @@ class Setting {
          */
         $this->settings_keys = apply_filters( 'stockmanager_register_settings_keys', [
             'stockmanager_extra_settings',
-            'woo_stock_manager_general_tab_settings',
-            'woo_stock_manager_form_customization_tab_settings',
+            'woo_stock_manager_appearance_tab_settings',
             'woo_stock_manager_form_submission_tab_settings',
             'woo_stock_manager_email_tab_settings',
             'woo_stock_manager_mailchimp_tab_settings',

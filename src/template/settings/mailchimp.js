@@ -4,7 +4,7 @@ export default {
     id: "mailchimp",
     priority: 5,
     name: __("Mailchimp Integration", "woocommerce-stock-manager"),
-    desc: __("Configure mailChimp settings. ", "woocommerce-stock-manager"),
+    desc: __("Connect your website with Mailchimp, to transfer of user data for email marketing purposes.", "woocommerce-stock-manager"),
     icon: "font-mailchimp",
     proDependent: true,
     submitUrl: "save-stockmanager",
@@ -31,7 +31,7 @@ export default {
             apiLink: "get-mailchimp-list",
             type: "api_connect",
             label: __("Mailchimp API", "woocommerce-stock-manager"),
-            desc: "",
+            desc: __("Get your MailChimp API from your MailChimp account (https://us20.admin.mailchimp.com/account/api/manage/#create). For further help, please check this doc.", "woocommerce-stock-manager"),
             dependent: {
                 key: "is_mailchimp_enable",
                 set: true,

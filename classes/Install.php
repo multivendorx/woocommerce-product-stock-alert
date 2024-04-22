@@ -176,16 +176,16 @@ class Install {
 
         // Default messages for settings array.
         // Those will modify if previous settings was set.
-        $general_settings = [ 
+        $appearance_settings = [ 
             'is_enable_backorders' => false, 
             'is_enable_no_interest' => false, 
             'is_double_optin' => false, 
             'is_remove_admin_email' => false, 
             'double_opt_in_success' => __( 'Kindly check your inbox to confirm the subscription.', 'woocommerce-stock-manager' ), 
             'shown_interest_text' => __( 'Kindly check your inbox to confirm the subscription.', 'woocommerce-stock-manager' ), 
-            'additional_alert_email' => get_option( 'admin_email' )
-        ];
-        $customization_settings = [ 
+            'additional_alert_email' => get_option( 'admin_email' ),
+            
+            // Form customization settings
             'email_placeholder_text' => __( 'Enter your email', 'woocommerce-stock-manager' ), 
             'alert_text' => __( 'Receive in-stock notifications for this.', 'woocommerce-stock-manager' ), 
             'button_text' => __( 'Notify me', 'woocommerce-stock-manager' ), 
@@ -243,12 +243,12 @@ class Install {
             }
 
             // Settings array for version upto 2.0.0
-            $dc_plugin_settings = get_option( 'dc_woo_product_stock_alert_general_settings_name' );
+            $dc_plugin_settings = get_option( 'dc_woo_product_stock_alert_general_settings_name', [] );
             
             // Settings array for version from 2.1.0 to 2.2.0
-            $mvx_general_tab_settings = get_option( 'mvx_woo_stock_alert_general_tab_settings' );
-            $mvx_customization_tab_settings = get_option( 'mvx_woo_stock_alert_form_customization_tab_settings' );
-            $mvx_submition_tab_settings = get_option( 'mvx_woo_stock_alert_form_submission_tab_settings' );
+            $mvx_general_tab_settings = get_option( 'mvx_woo_stock_alert_general_tab_settings', [] );
+            $mvx_customization_tab_settings = get_option( 'mvx_woo_stock_alert_form_customization_tab_settings', [] );
+            $mvx_submition_tab_settings = get_option( 'mvx_woo_stock_alert_form_submission_tab_settings', [] );
             
             if ( $dc_plugin_settings )
                 delete_option( 'dc_woo_product_stock_alert_general_settings_name' );
@@ -264,10 +264,10 @@ class Install {
             $woo_general_tab_settings = $woo_customization_tab_settings = $woo_submition_tab_settings = $woo_email_tab_settings = [];
             if ( get_option( 'woo_product_stock_alert_version' ) ) {
                 delete_option( 'woo_product_stock_alert_version' );
-                $woo_general_tab_settings = get_option( 'woo_stock_alert_general_tab_settings' );
-                $woo_customization_tab_settings = get_option( 'woo_stock_alert_form_customization_tab_settings' );
-                $woo_submition_tab_settings = get_option( 'woo_stock_alert_form_submission_tab_settings' );
-                $woo_email_tab_settings = get_option( 'woo_stock_alert_email_tab_settings' );
+                $woo_general_tab_settings = get_option( 'woo_stock_alert_general_tab_settings', [] );
+                $woo_customization_tab_settings = get_option( 'woo_stock_alert_form_customization_tab_settings', [] );
+                $woo_submition_tab_settings = get_option( 'woo_stock_alert_form_submission_tab_settings', [] );
+                $woo_email_tab_settings = get_option( 'woo_stock_alert_email_tab_settings', [] );
                 if ( $woo_general_tab_settings )
                     delete_option( 'woo_stock_alert_general_tab_settings' );
                 if ( $woo_customization_tab_settings )
@@ -277,35 +277,29 @@ class Install {
                 if ( $woo_email_tab_settings )
                     delete_option( 'woo_stock_alert_email_tab_settings' );
             }
+
+            // Merge all setting array
+            $tab_settings = array_merge(
+                $dc_plugin_settings,
+                $mvx_general_tab_settings,
+                $mvx_customization_tab_settings,
+                $mvx_submition_tab_settings,
+                $woo_general_tab_settings,
+                $woo_customization_tab_settings,
+                $woo_submition_tab_settings,
+                $woo_email_tab_settings
+            );
             
             // Replace all default value by previous settings.
-            foreach( $general_settings as $key => $value ) {
-                if ( $woo_general_tab_settings && isset( $woo_general_tab_settings[ $key ] ) && $woo_general_tab_settings[ $key ] != '' ) {
-                    $general_settings[ $key ] = $woo_general_tab_settings[ $key ];
-                } elseif ( $mvx_general_tab_settings && isset( $mvx_general_tab_settings[ $key ] ) && $mvx_general_tab_settings[ $key ] != '' ) {
-                    $general_settings[ $key ] = $mvx_general_tab_settings[ $key ];
-                } elseif ( $dc_plugin_settings && isset( $dc_plugin_settings[ $key ] ) && $dc_plugin_settings[ $key ] != '' ) {
-                    $general_settings[ $key ] = $dc_plugin_settings[ $key ];
+            foreach( $appearance_settings as $key => $value ) {
+                if ( isset( $tab_settings[ $key ] ) && $tab_settings[ $key ] != '' ) {
+                    $appearance_settings[ $key ] = $tab_settings[ $key ];
                 }
             }
-    
-            foreach( $customization_settings as $key => $value ) {
-                if ( $woo_customization_tab_settings && isset( $woo_customization_tab_settings[ $key ] ) && $woo_customization_tab_settings[ $key ] != '' ) {
-                    $customization_settings[ $key ] = $woo_customization_tab_settings[ $key ];
-                } elseif ( $mvx_customization_tab_settings && isset( $mvx_customization_tab_settings[ $key ] ) && $mvx_customization_tab_settings[ $key ] != '' ) {
-                    $customization_settings[ $key ] = $mvx_customization_tab_settings[ $key ];
-                } elseif ( $dc_plugin_settings && isset( $dc_plugin_settings[ $key ] ) && $dc_plugin_settings[ $key ] != '' ) {
-                    $customization_settings[ $key ] = $dc_plugin_settings[ $key ];
-                }
-            }
-    
+
             foreach( $submit_settings as $key => $value ) {
-                if ( $woo_submition_tab_settings && isset( $woo_submition_tab_settings[ $key ] ) && $woo_submition_tab_settings[ $key ] != '' ) {
-                    $submit_settings[ $key ] = $woo_submition_tab_settings[ $key ];
-                } elseif ( $mvx_submition_tab_settings && isset( $mvx_submition_tab_settings[ $key ] ) && $mvx_submition_tab_settings[ $key ] != '' ) {
-                    $submit_settings[ $key ] = $mvx_submition_tab_settings[ $key ];
-                } elseif ( $dc_plugin_settings && isset( $dc_plugin_settings[ $key ] ) && $dc_plugin_settings[ $key ] != '' ) {
-                    $submit_settings[ $key ] = $dc_plugin_settings[ $key ];
+                if ( isset( $tab_settings[ $key ] ) && $tab_settings[ $key ] != '' ) {
+                    $submit_settings[ $key ] = $tab_settings[ $key ];
                 }
             }
 
@@ -315,8 +309,14 @@ class Install {
             delete_option( 'woo_product_stock_alert_activate' );
         }
 
-        update_option( 'woo_stock_manager_general_tab_settings', $general_settings );
-        update_option( 'woo_stock_manager_form_customization_tab_settings', $customization_settings );
+        // Get customization_tab_setting and merge with general setting
+        $customization_tab_setting = get_option( 'woo_stock_manager_form_customization_tab_settings', [] );
+        delete_option( 'woo_stock_manager_form_customization_tab_settings' );
+        update_option(
+            'woo_stock_manager_appearance_tab_settings',
+            array_merge( $appearance_settings, $customization_tab_setting )
+        );
+
         update_option( 'woo_stock_manager_form_submission_tab_settings', $submit_settings );
         update_option( 'woo_stock_manager_email_tab_settings', $email_settings );
 

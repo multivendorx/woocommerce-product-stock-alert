@@ -3,8 +3,8 @@ import { __ } from '@wordpress/i18n';
 export default {
     id: 'form_submission',
     priority: 3,
-    name: __("Submission Messages", "woocommerce-stock-manager"),
-    desc: __("Customize message that appears after user submits the form.", "woocommerce-stock-manager"),
+    name: __("Promt Messages", "woocommerce-stock-manager"),
+    desc: __("Manage user interaction messages post-form submission efficiently.", "woocommerce-stock-manager"),
     icon: "font-submission-message",
     submitUrl: "save-stockmanager",
     modal: [
@@ -17,6 +17,11 @@ export default {
             label: __("Successful form submission", "woocommerce-stock-manager"),
         },
         {
+            key: 'separator_content',
+            type: 'section',
+            label: "",
+        },
+        {
             key: "alert_email_exist",
             type: "textarea",
             class: "woo-setting-wpeditor-class",
@@ -25,11 +30,21 @@ export default {
             label: __("Repeated subscription alert", "woocommerce-stock-manager"),
         },
         {
+            key: 'separator_content',
+            type: 'section',
+            label: "",
+        },
+        {
             key: "valid_email",
             type: "textarea",
             class: "woo-setting-wpeditor-class",
             desc: __("Personalize the message shown to users when they try to subscribe with an invalid email address.", "woocommerce-stock-manager"),
             label: __("Email validation error", "woocommerce-stock-manager"),
+        },
+        {
+            key: 'separator_content',
+            type: 'section',
+            label: "",
         },
         {
             key: "alert_unsubscribe_message",
