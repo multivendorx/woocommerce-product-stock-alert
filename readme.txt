@@ -175,7 +175,7 @@ Manual installation method requires downloading the [Product Stock Manager & Not
 * Fixed - Admin dashboard loading issue.
 * Fixed - Undefined array warning.
 * Enhancement - migration in a cron.
-* Dev - Added `woo_product_backin_stock_send_admin` filter.
+* Dev - Added `product_backin_stock_send_admin` filter.
 * Updated - Language files.
 
 = 2.1.0 - 2023-09-18 =

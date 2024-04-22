@@ -95,7 +95,7 @@ class Admin {
             __( 'WC Stock Manager Export', 'woocommerce-stock-manager' ),
             __( 'WC Stock Manager Export', 'woocommerce-stock-manager' ),
             'manage_options', 
-            'woo-product-stock-manager-export-admin',
+            'product-stock-manager-export-admin',
             [ $this, 'create_csv_export_page' ]
         );
 
@@ -153,7 +153,7 @@ class Admin {
             foreach ( $product_ids as $product_id ) {
                 $emails = Subscriber::get_product_subscribers_email( $product_id );
                 foreach ( $emails as $alert_id => $to ) {
-                    Subscriber::update_subscriber( $alert_id, 'woo_unsubscribed' );
+                    Subscriber::update_subscriber( $alert_id, 'unsubscribed' );
                 } 
                 delete_post_meta( $product_id, 'no_of_subscribers' );
             } 
@@ -213,9 +213,9 @@ class Admin {
         }
         
         if ( get_current_screen()->id == 'toplevel_page_stock-manager' ) {
-            wp_enqueue_script( 'woo-stockmanager-script', SM()->plugin_url . 'build/index.js', [ 'wp-element', 'wp-i18n' ], SM()->version, true );
-            wp_set_script_translations( 'woo-stockmanager-script', 'woocommerce-stock-manager' );
-            wp_localize_script( 'woo-stockmanager-script', 'appLocalizer', apply_filters( 'woo_stock_manager_settings', [ 
+            wp_enqueue_script( 'stockmanager-script', SM()->plugin_url . 'build/index.js', [ 'wp-element', 'wp-i18n' ], SM()->version, true );
+            wp_set_script_translations( 'stockmanager-script', 'woocommerce-stock-manager' );
+            wp_localize_script( 'stockmanager-script', 'appLocalizer', apply_filters( 'stock_manager_settings', [ 
                 'apiUrl'                    => untrailingslashit( get_rest_url() ), 
                 'nonce'                     => wp_create_nonce( 'wp_rest' ),
                 'subscriber_list'           => SM()->plugin_url . 'src/assets/images/subscriber-list.jpg',
@@ -228,7 +228,7 @@ class Admin {
                 'is_recaptcha_enable_pro'   => __('Get your v3 reCAPTCHA site key and secret key from <a href="https://developers.google.com/recaptcha" target="_blank">here</a>.', 'woocommerce-stock-manager-pro'),
             ] ) );
 
-            wp_enqueue_style( 'woo_stockmanager_style', SM()->plugin_url . 'build/index.css', [], SM()->version );
+            wp_enqueue_style( 'stockmanager_style', SM()->plugin_url . 'build/index.css', [], SM()->version );
         }
         
         wp_enqueue_style( 'stock_manager_product_admin_css', SM()->plugin_url . 'frontend/css/admin' . '.min' . '.css', [], SM()->version );

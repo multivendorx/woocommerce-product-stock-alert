@@ -163,15 +163,15 @@ class Ajax {
 
 		if ( $product_id && !empty( $product_id ) && !empty( $customer_email ) ) {
 			$product_id = ( $variation_id && $variation_id > 0 ) ? $variation_id : $product_id;
-			$do_complete_additional_task = apply_filters( 'woo_stock_manager_do_complete_additional_task', false );
-        	$is_accept_email_address = apply_filters( 'woo_stock_manager_is_accept_email_address', false );
+			$do_complete_additional_task = apply_filters( 'stock_manager_do_complete_additional_task', false );
+        	$is_accept_email_address = apply_filters( 'stock_manager_is_accept_email_address', false );
 
 			if ( Subscriber::is_already_subscribed( $customer_email, $product_id ) ) {
 				$status = '/*?%already_registered%?*/';
 			} else if ( $do_complete_additional_task ) {
-				$status = apply_filters( 'woo_stock_manager_new_subscriber_added', true, $customer_email, $product_id );
+				$status = apply_filters( 'stock_manager_new_subscriber_added', true, $customer_email, $product_id );
 			} else if ( $is_accept_email_address ) {
-				$status = apply_filters( 'woo_stock_manager_accept_email', true, $customer_email, $product_id );
+				$status = apply_filters( 'stock_manager_accept_email', true, $customer_email, $product_id );
 			} else {
 				Subscriber::insert_subscriber( $customer_email, $product_id );
 				Subscriber::insert_subscriber_email_trigger( wc_get_product( $product_id ), $customer_email );

@@ -51,7 +51,7 @@ class Emails extends \WC_Email {
 		$this->recipient = $recipient;
 		$this->product = $product;
 
-		if ( apply_filters( 'woo_product_backin_stock_send_admin', false ) ) {
+		if ( apply_filters( 'product_backin_stock_send_admin', false ) ) {
 			$this->recipient .= ', ' . get_option( 'admin_email' );
 		} 
 		if ( ! $this->is_enabled() || ! $this->get_recipient() ) {
