@@ -225,7 +225,7 @@ class Admin {
                 'is_double_optin_free'      => __("Upgrade to <a href=\"" . STOCK_MANAGER_PRO_SHOP_URL . "\" target=\"_blank\"><span class=\"pro-strong\">Pro</span></a> to enable Double Opt-in flow for subscription confirmation.", "woocommerce-stock-manager"),
                 'is_double_optin_pro'       => __('Enable Double Opt-in flow for subscription confirmation.', 'woocommerce-stock-manager-pro'),
                 'is_recaptcha_enable_free'  => __("Upgrade to <a href=\"" . STOCK_MANAGER_PRO_SHOP_URL . "\" target=\"_blank\"><span class=\"pro-strong\">Pro</span></a> for unlocking reCAPTCHA for out-of-stock form subscriptions.", "woocommerce-stock-manager"), 
-                'is_recaptcha_enable_pro'   => __('Get your v3 reCAPTCHA site key and secret key from <a href="https://developers.google.com/recaptcha" target="_blank">here</a>.', 'woocommerce-stock-manager-pro'),
+                'is_recaptcha_enable_pro'   => __('Enable this to prevent automated bots from submitting forms. Get your v3 reCAPTCHA site key and secret key from <a href="https://developers.google.com/recaptcha" target="_blank">here</a>.', 'woocommerce-stock-manager-pro'),
             ] ) );
 
             wp_enqueue_style( 'stockmanager_style', SM()->plugin_url . 'build/index.css', [], SM()->version );

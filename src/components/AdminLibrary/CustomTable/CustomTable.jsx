@@ -96,7 +96,11 @@ const CustomTable = (props) => {
   // When new data comes, set loading to false.
   useEffect(() => {
     setTotalRows(defaultTotalRows);
-    setLoading(false);
+    if (data === null) {
+      setLoading(true);
+    } else {
+      setLoading(false);
+    }
   }, [data, defaultTotalRows]);
 
   // Code for handle cooldown effect.
@@ -220,7 +224,7 @@ const CustomTable = (props) => {
           paginationServer
           selectableRows={selectable}
           columns={columns}
-          data={data}
+          data={data || []}
           // Pagination details.
           paginationTotalRows={totalRows}
           paginationDefaultPage={currentPage}

@@ -16,7 +16,7 @@ export default function SubscribersList() {
   const fetchSubscribersDataUrl = `${appLocalizer.apiUrl}/stockmanager/v1/get-subscriber-list`;
   const fetchSubscribersCount = `${appLocalizer.apiUrl}/stockmanager/v1/get-table-segment`;
   const [postStatus, setPostStatus] = useState("");
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(null);
   const [totalRows, setTotalRows] = useState();
   const [openDialog, setOpenDialog] = useState(false);
   const [subscribersStatus, setSubscribersStatus] = useState(null);
@@ -248,7 +248,7 @@ export default function SubscribersList() {
                 <p>{__("Subscriber List", "woocommerce-stock-manager")}</p>
                 <div className="download-btn-subscriber-list">
                   <CSVLink
-                    data={data}
+                    data={data || []}
                     headers={appLocalizer.columns_subscriber_list}
                     filename={"Subscribers.csv"}
                     className="woo-btn btn-purple"
@@ -259,7 +259,7 @@ export default function SubscribersList() {
                 </div>
               </div>
 
-              <div className="admin-table-wrapper">
+                <div className="admin-table-wrapper">
                 {
                   <CustomTable
                     data={data}
