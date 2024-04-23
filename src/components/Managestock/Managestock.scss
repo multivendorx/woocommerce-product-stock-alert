@@ -325,14 +325,17 @@ $manageStock-scroll-color: #ece8f1;
 
 .edit-btn-product {
   width: 1.563rem;
+  display: flex;
   padding: 0;
   margin: 0;
   background: transparent;
   opacity: 0;
   transition: opacity 0.2s linear;
+  align-items: center;
+  justify-content: center;
 
   svg {
-    width: 1.25rem;
+    width: 1rem;
   }
 }
 
@@ -471,7 +474,7 @@ $manageStock-scroll-color: #ece8f1;
 }
 
 .table-head {
-  font-weight: 600;
+  font-weight: 500;
 
   .table-row {
     &:first-child {
@@ -557,13 +560,13 @@ $manageStock-scroll-color: #ece8f1;
 .table-data-container .table-row-meta-data p {
   width: 100%;
   display: block;
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   color: rgb(44, 51, 56);
 }
 
 .product_stock_status.outofstock,
 .product_backorders.no {
-  font-size: 0.95rem !important; // force to reduce font size for select tag font size
+  font-size: 0.9rem !important; // force to reduce font size for select tag font size
 }
 
 .table-row.product_stock_quantity .table-row-meta-data p {

@@ -171,7 +171,7 @@ a {
 }
 
 #wpcontent {
-  background-color: #f2eff5 !important; // To overwrite default page backgound
+  background-color: #f2eff5 !important; // To overwrite default page background
 }
 
 input:focus{
@@ -183,7 +183,8 @@ input:focus{
   margin-top: 5px;
 
   *{
-    font-family: "Segoe UI", sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    -webkit-font-smoothing: subpixel-antialiased;
   }
 }
 
