@@ -8,7 +8,6 @@
 
             input {
                 border: none !important; // To overwrite dynamic form scss
-                width: fit-content !important; // To overwrite dynamic form scss
                 font-size: 0.95rem;
                 cursor: pointer;
                 width: fit-content;
@@ -20,10 +19,10 @@
         }
 
         .form-section {
-            display: grid;
+            display: grid; 
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             width: 100%;
-            row-gap: 1.25rem;
+            row-gap: 0.75rem;
             column-gap: 0.75rem;
             
             .input-section {
@@ -75,13 +74,16 @@
                     gap: 0.75rem;
                     z-index: 1;
 
-                    .seeting-nav{
+                    .setting-nav{
                         position: absolute;
-                        top: 10px;
+                        top: 0;
                         left: 50%;
                         transform: translateX(-50%);
                         cursor: move;
                         user-select: none;
+                        line-height: 0;
+                        user-select: none;
+                        font-size: 1.5rem;
                     }
 
                     .setting-section-dev{

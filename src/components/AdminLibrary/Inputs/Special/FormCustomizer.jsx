@@ -61,7 +61,7 @@ const FormCustomizer = (props) => {
                                         // Text section has select
                                         currentEditSection === 'text' &&
                                         <div className='setting-wrapper'>
-                                            <div className='seeting-nav'>...</div>
+                                            <div className='setting-nav'>...</div>
                                             <button onClick={(e) => {
                                                 e.preventDefault();
                                                 setCurrentEditSection('');

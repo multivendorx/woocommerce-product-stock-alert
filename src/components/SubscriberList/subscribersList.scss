@@ -181,13 +181,41 @@ input.rs-picker-toggle-textbox {
   color: red;
 }
 .table-row-custom img{
-  width: 4rem;
-  height: 4rem;
+  width: 2.75rem;
+  height: 3rem;
+  padding: 0.25rem 0;
 }
 
 .rdt_TableCol, .rdt_TableCell{
   &:first-child{
     width: 5rem;
-    flex: inherit;
+  }
+} 
+
+@media only screen and (max-width: 85.365rem) {
+  .rdt_TableHead{
+    .rdt_TableHeadRow{
+      .rdt_TableCol{
+        &:first-child{
+          max-width: 5rem !important; // To overwrite table.scss max-width
+        }
+      }
+    }
+  }
+  .rdt_TableRow{
+    .rdt_TableCell{
+      &:first-child{
+        max-width: 5rem !important; // To overwrite table.scss max-width
+        .table-row-custom{
+          &:first-child{
+            display: contents !important; // To overwrite table.scss display for img
+          }
+          img{
+            height: 2rem;
+            padding: 0;
+          }
+        }
+      }
+    }
   }
 }
