@@ -64,21 +64,21 @@ class StockManager {
      * @return void
      */
     public function activate() {
-        update_option( 'woo_stock_manager_installed', 1 );
+        update_option( 'stock_manager_installed', 1 );
         $this->container[ 'install' ] = new Install();
-    } 
+    }
 
     /**
      * Placeholder for deactivation function.
      * @return void
      */
     public  function deactivate() {
-        if ( get_option( 'woo_stock_manager_cron_start' ) ) {
-            wp_clear_scheduled_hook( 'woo_stock_manager_start_notification_cron_job' );
-            delete_option( 'woo_stock_manager_cron_start' );
+        if ( get_option( 'stock_manager_cron_start' ) ) {
+            wp_clear_scheduled_hook( 'stock_manager_start_notification_cron_job' );
+            delete_option( 'stock_manager_cron_start' );
         }
 
-        delete_option( 'woo_stock_manager_installed' );
+        delete_option( 'stock_manager_installed' );
     }
 
     /**

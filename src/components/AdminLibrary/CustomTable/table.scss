@@ -34,14 +34,14 @@ $animation-duration: 2s;
     .wrap-bulk-all-date{
       display: flex;
       align-items: center;
-      max-width: 650px;
+      max-width: 40.95rem;
       width: 100%;
       gap: 0.75rem;
       flex-wrap: wrap;
       margin-bottom: 1rem;
 
       & > div{
-        flex: 1 0 160px;
+        flex: 1 0 10.08rem;
 
         input[type='text'], input[type='email'], input[type='number']{
           width: 100%;
@@ -253,10 +253,6 @@ $animation-duration: 2s;
               display: none;
             }
           }
-          &:nth-child(3) {
-            max-width: 11rem;
-            width: 100%;
-          }
 
           &:last-child {
             display: flex;
@@ -288,22 +284,11 @@ $animation-duration: 2s;
         }
       }
     }
-
-    @media only screen and (max-width: 37.8rem) {
-      .rdt_TableBody .rdt_TableRow {
-        .rdt_TableCell {
-          &:nth-child(3) {
-            max-width: 6.3rem;
-            width: 100%;
-          }
-        }
-      }
-    }
     @media only screen and (max-width: 27.72rem) {
       .rdt_TableBody .rdt_TableRow {
         .rdt_TableCell {
           &:nth-child(3) {
-            max-width: 3.15rem;
+            max-width: 8.15rem;
             width: 100%;
           }
         }

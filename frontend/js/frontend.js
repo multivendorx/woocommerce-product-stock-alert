@@ -113,7 +113,7 @@ jQuery(function ($) {
 
             // Add additional fields data 
             localizeData.additional_fields.forEach(element => {
-                requestData[element] = $('#woo_stock_manager_' + element).val();
+                requestData[element] = $('#stock_manager_' + element).val();
             });
             
             // Request for subscription

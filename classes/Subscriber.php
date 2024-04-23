@@ -9,7 +9,7 @@ defined( 'ABSPATH' ) || exit;
  */
 class Subscriber {
     public function __construct() {
-        add_action( 'woo_stock_manager_start_notification_cron_job', [ $this, 'send_instock_notification_corn' ] );
+        add_action( 'stock_manager_start_notification_cron_job', [ $this, 'send_instock_notification_corn' ] );
         add_action( 'woocommerce_update_product', [ $this, 'send_instock_notification' ], 10, 2 );
         add_action( 'stock_manager_start_subscriber_migration', [ Install::class, 'subscriber_migration' ] );
 
@@ -271,7 +271,7 @@ class Subscriber {
             $vendor = get_mvx_product_vendors( $product->get_id() );
 
             // Append vendor's email as additional email.
-            if ( $vendor && apply_filters( 'woo_stock_manager_add_vendor', true ) ) {
+            if ( $vendor && apply_filters( 'stock_manager_add_vendor', true ) ) {
                 $additional_email .= ', '. sanitize_email( $vendor->user_data->user_email );  
             } 
         }

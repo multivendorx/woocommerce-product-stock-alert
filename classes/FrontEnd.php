@@ -70,7 +70,7 @@ class FrontEnd {
                 'try_again' => __( 'Please try again.', 'woocommerce-stock-manager' ), 
                 'unsubscribe_button' => $unsubscribe_button_html, 
                 'alert_unsubscribe_message' => $settings_array[ 'alert_unsubscribe_message' ], 
-                'recaptcha_enabled' => apply_filters( 'woo_stock_manager_recaptcha_enabled', false )
+                'recaptcha_enabled' => apply_filters( 'stock_manager_recaptcha_enabled', false )
             ]);
         }
     }
@@ -181,17 +181,17 @@ class FrontEnd {
         } 
         $stock_manager_fields_array = [];
         $stock_manager_fields_html = $user_email = '';
-        $separator = apply_filters( 'woo_fileds_separator', '<br>' );
+        $separator = apply_filters( 'stock_manager_form_fileds_separator', '<br>' );
         $settings_array = Utill::get_form_settings_array();
         if ( is_user_logged_in() ) {
             $current_user = wp_get_current_user();
             $user_email = $current_user->data->user_email;
         } 
         $placeholder = $settings_array[ 'email_placeholder_text' ];
-        $alert_fields = apply_filters( 'woo_stock_manager_fileds_array', [ 
+        $alert_fields = apply_filters( 'stock_manager_fileds_array', [ 
             'alert_email' => [ 
                 'type' => 'text', 
-                'class'=> 'stock-manager-email woo-fields', 
+                'class'=> 'stock-manager-email', 
                 'value'=> $user_email, 
                 'placeholder' => $placeholder
             ]
@@ -225,7 +225,7 @@ class FrontEnd {
                         $stock_manager_fields_array[] = $recaptchaScript . $recaptchaResponseInput . $recaptchaSiteKeyInput . $recaptchaSecretKeyInput;
                         break;
                     default:
-                        $stock_manager_fields_array[] = '<input id="woo_stock_manager_' . $key . '" type="' . $type . '" name="' . $key . '" class="' . $class . '" value="' . $value . '" placeholder="' . $placeholder . '" >';
+                        $stock_manager_fields_array[] = '<input id="stock_manager_' . $key . '" type="' . $type . '" name="' . $key . '" class="' . $class . '" value="' . $value . '" placeholder="' . $placeholder . '" >';
                         break;
                 } 
             } 
@@ -266,7 +266,7 @@ class FrontEnd {
         return
         '<div id="stock_notifier_main_form" class="stock-notifier-subscribe-form" style="border-radius:10px;">
             ' . $alert_text_html . '
-            <div class="woo_fields_wrap"> ' . $stock_manager_fields_html . '' . $button_html . '
+            <div class="fields_wrap"> ' . $stock_manager_fields_html . '' . $button_html . '
             </div>
             <input type="hidden" class="current-product-id" value="' . esc_attr( $product->get_id() ) . '" />
             <input type="hidden" class="current-variation-id" value="' . esc_attr( $variation ? $variation->get_id() : 0 ) . '" />

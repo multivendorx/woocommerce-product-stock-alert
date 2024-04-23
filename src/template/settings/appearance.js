@@ -4,7 +4,7 @@ export default {
     id: 'appearance',
     priority: 1,
     name: __("Appearance", "woocommerce-stock-manager"),
-    desc: __("Configure basic product manager settings.", "woocommerce-stock-manager"),
+    desc: __("Personalize stock alert form behavior.", "woocommerce-stock-manager"),
     icon: 'font-settings',
     submitUrl: 'save-stockmanager',
     modal: [
@@ -22,7 +22,7 @@ export default {
             key: "unsubscribe_button_text",
             type: "text",
             label: __('"Unsubscribe" Button Caption ', "woocommerce-stock-manager"),
-            desc: __("Modify the un-subscribe button text. By default we display Unsubscribe.", "woocommerce-stock-manager"),
+            desc: __("Modify the un-subscribe button text. By default we display \"Unsubscribe\".", "woocommerce-stock-manager"),
             placeholder: __("Unsubscribe", "woocommerce-stock-manager"),
         },
         {
@@ -51,7 +51,7 @@ export default {
         {
             key: 'is_enable_no_interest',
             type: 'checkbox',
-            label: __("Display subscriber count for out of stock items", "woocommerce-stock-manager"),
+            label: __("Display subscriber count for out of stock", "woocommerce-stock-manager"),
             class: 'woo-toggle-checkbox',
             options: [
                 {
@@ -111,7 +111,7 @@ export default {
         {
             key: 'is_recaptcha_enable',
             type: 'checkbox',
-            label: __("Enable  reCAPTCHA", "woocommerce-stock-manager-pro"),
+            label: __("Enable  reCaptcha", "woocommerce-stock-manager-pro"),
             class: 'woo-toggle-checkbox',
             options: [
                 {

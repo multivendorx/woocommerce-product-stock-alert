@@ -47,7 +47,7 @@ class RestAPI
         // save the settings in database
         SM()->setting->update_option( $optionname, $get_settings_data );
 
-        do_action( 'woo_stock_manager_settings_after_save', $settingsname, $get_settings_data );
+        do_action( 'stock_manager_settings_after_save', $settingsname, $get_settings_data );
 
         $all_details[ 'error' ] = __( 'Settings Saved', 'woocommerce-stock-manager' );
 

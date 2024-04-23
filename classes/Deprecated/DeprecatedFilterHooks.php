@@ -39,8 +39,17 @@ class DeprecatedFilterHooks extends \WC_Deprecated_Hooks {
 		'woo_stock_manager_subscribers_list_headers' 			=> 'woo_stock_alert_subscribers_list_headers', 
 		'woo_stock_manager_pro_settings_lists' 					=> 'woocommerce_stock_alert_pro_settings_lists', 
 		'woo_stock_manager_pro_active' 							=> 'woo_stock_alert_pro_active', 
-		'woo_stock_manager_settings' 							=> 'stockalert_settings', 
-	 ];
+		'woo_stock_manager_settings' 							=> 'stockalert_settings',
+		'stock_manager_fileds_array'							=> 'woo_stock_manager_fileds_array',
+		'stock_manager_form_fileds_separator'					=> 'woo_fileds_separator',
+		'stock_manager_recaptcha_enabled' 						=> 'woo_stock_manager_recaptcha_enabled',  
+		'stock_manager_do_complete_additional_task' 			=> 'woo_stock_manager_do_complete_additional_task', 
+		'stock_manager_is_accept_email_address' 				=> 'woo_stock_manager_is_accept_email_address', 
+		'stock_manager_new_subscriber_added' 					=> 'woo_stock_manager_new_subscriber_added', 
+		'stock_manager_accept_email' 							=> 'woo_stock_manager_accept_email',
+		'stock_manager_add_vendor'								=> 'woo_stock_manager_add_vendor',
+		'product_backin_stock_send_admin'						=> 'product_backin_stock_send_admin'
+	];
 
 	/**
 	 * Array of versions on each hook has been deprecated.
@@ -65,7 +74,18 @@ class DeprecatedFilterHooks extends \WC_Deprecated_Hooks {
 		'woo_stock_alert_subscribers_list_headers' 				=> '2.4.0', 
 		'woocommerce_stock_alert_pro_settings_lists' 			=> '2.4.0', 
 		'woo_stock_alert_pro_active' 							=> '2.4.0', 
-		'stockalert_settings' 									=> '2.4.0', 
+		'stockalert_settings' 									=> '2.4.0',
+		'woo_stock_manager_fileds_array'						=> '2.4.2',
+		'woo_fileds_separator'									=> '2.4.2',
+		'woo_stock_manager_recaptcha_enabled'					=> '2.4.2',  
+		'woo_stock_manager_do_complete_additional_task'			=> '2.4.2', 
+		'woo_stock_manager_is_accept_email_address'				=> '2.4.2', 
+		'woo_stock_manager_new_subscriber_added'				=> '2.4.2', 
+		'woo_stock_manager_accept_email'						=> '2.4.2', 
+		'woo_stock_manager_subscribers_list_headers'			=> '2.4.2', 
+		'woo_stock_manager_pro_settings_lists'					=> '2.4.2',
+		'woo_stock_manager_add_vendor'							=> '2.4.2',
+		'product_backin_stock_send_admin'					=> '2.4.2',
 	 ];
 
 	/**
