@@ -23,11 +23,93 @@ $manageStock-code-font: #b74f82;
 $manageStock-small-code-back: #fbf5f8;
 $manageStock-blue-icon: #9f8ab9;
 $manageStock-scroll-color: #ece8f1;
+$border-color: rgba(0, 0, 0, 0.2);
+$background-color: #fff;
+$padding-small: 0.4rem;
+$padding-medium: 1rem;
+$font-color: #333;
+$background-secondary-color: #ccc;
+$even-row-color: rgb(245, 245, 245);
+$head-row-background: #e7e7e7;
+$border-color: rgba(0, 0, 0, 0.2);
+$shine-background: linear-gradient(
+  90deg,
+  #f4f4f4 0rem,
+  rgba(229, 229, 229, 0.8) 2.52rem,
+  #f4f4f4 5.04rem
+);
+
+$line-height-small: 1.008rem;
+$line-height-medium: 2.25rem;
+
+$border-width-small: 0.063rem;
+$border-width-medium: 0rem;
+
+$border-radius-small: 0.25rem;
+$border-radius-medium: 0.441rem;
+$border-radius-large: 0.5rem;
+
+$animation-duration: 2s;
 
 //for loader purpose-----
 .woo-middle-container-wrapper > span {
   display: block;
   margin: 0 auto;
+}
+
+.tg {
+  border-collapse: collapse;
+  border-spacing: 0;
+  border-color: $border-color;
+  width: 100%;
+
+  td {
+    padding: $padding-small;
+    border-style: solid;
+    border-width: $border-width-medium;
+    overflow: hidden;
+    word-break: normal;
+    border-color: $border-color;
+    color: $font-color;
+    background-color: $background-color;
+
+    &:first-child {
+      display: block;
+    }
+  }
+
+  tr:first-child .tg-cly1 {
+    font-weight: normal;
+    padding: $padding-small;
+    border-style: solid;
+    border-width: $border-width-medium;
+    overflow: hidden;
+    word-break: normal;
+    border-color: $border-color;
+    color: $font-color;
+    background-color: $head-row-background;
+  }
+}
+
+.line {
+  float: left;
+  width: 100%;
+  height: $line-height-small;
+  margin-top: $padding-small;
+  border-radius: $border-radius-medium;
+  background-image: $shine-background;
+  background-size: 37.8rem;
+  animation: shine-lines $animation-duration infinite ease-out;
+}
+
+@keyframes shine-lines {
+  0% {
+    background-position: -$line-height-small;
+  }
+  40%,
+  100% {
+    background-position: 8.82rem;
+  }
 }
 
 .manage-stock-wrapper {
