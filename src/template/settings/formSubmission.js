@@ -3,7 +3,7 @@ import { __ } from '@wordpress/i18n';
 export default {
     id: 'form_submission',
     priority: 3,
-    name: __("Promt Messages", "woocommerce-stock-manager"),
+    name: __("Prompt Messages", "woocommerce-stock-manager"),
     desc: __("Manage user interaction messages post-form submission efficiently.", "woocommerce-stock-manager"),
     icon: "font-submission-message",
     submitUrl: "save-stockmanager",

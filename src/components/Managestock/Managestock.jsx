@@ -8,9 +8,33 @@ import Popoup from '../PopupContent/PopupContent';
 import { Link } from 'react-router-dom';
 import ProductTable from './ManagestockComponents/ProductTable';
 import "./Managestock.scss";
-// import './Import_Export/style.scss';
+
 
 const Managestock = () => {
+    // Loading table component.
+    const LoadingTable = () => {
+        // Array to represent 10 rows
+        const rows = Array.from({ length: 10 }, (_, index) => index);
+        return (
+          <>
+            <table className="tg">
+              <tbody>
+                {/* Loop to render 10 table rows */}
+                {rows.map((row, rowIndex) => (
+                  <tr key={rowIndex}>
+                    {/* Loop to render 8 cells in each row */}
+                    {Array.from({ length: 5 }, (_, cellIndex) => (
+                      <td key={cellIndex} className="tg-cly1">
+                        <div className="line" />
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </>
+        );
+      };
     
     const fetchDataUrl = `${ appLocalizer.apiUrl }/stockmanager/v1/get-products`;
     
@@ -198,12 +222,7 @@ const Managestock = () => {
                                         />
                                     </div>
                                 :
-                                    <PuffLoader
-                                        css={ override }
-                                        color={ '#cd0000' }
-                                        size={ 200 }
-                                        loading={ true }
-                                    />
+                                    <LoadingTable />
                             }
                         </div>
                     </div>

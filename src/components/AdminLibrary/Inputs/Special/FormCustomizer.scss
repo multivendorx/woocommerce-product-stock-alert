@@ -8,22 +8,21 @@
 
             input {
                 border: none !important; // To overwrite dynamic form scss
-                width: fit-content !important; // To overwrite dynamic form scss
                 font-size: 0.95rem;
                 cursor: pointer;
                 width: fit-content;
                 &.active, &:hover{
                     box-shadow:
-                    0px 0px 0px 2px rgb(255, 255, 255), 0px 0px 0px 3px rgba(33, 33, 33, 0.5)
+                    0.0rem 0.0rem 0.0rem 0.126rem rgb(255, 255, 255), 0.0rem 0.0rem 0.0rem 0.189rem rgba(33, 33, 33, 0.5)
                 }
             }
         }
 
         .form-section {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(11.34rem, 1fr));
             width: 100%;
-            row-gap: 1.25rem;
+            row-gap: 0.75rem;
             column-gap: 0.75rem;
             
             .input-section {
@@ -39,14 +38,14 @@
                     
                     &:hover, &.active, &:focus{
                         box-shadow:
-                        0px 0px 0px 2px rgb(255, 255, 255), 0px 0px 0px 3px rgba(33, 33, 33, 0.5) !important; // To overwrite stock manager.scss
+                        0.0rem 0.0rem 0.0rem 0.126rem rgb(255, 255, 255), 0.0rem 0.0rem 0.0rem 0.189rem rgba(33, 33, 33, 0.5) !important; // To overwrite stock manager.scss
                     }
                 }
 
                 .input-editor{
                     position: absolute;
                     bottom: 111%;
-                    left: 0px;
+                    left: 0.0rem;
                     background: rgb(13, 0, 23);
                     color: #fff;
                     padding: 0.35rem;
@@ -64,8 +63,8 @@
                 .setting-wrapper{
                     position: absolute;
                     background: #f8f8f8;
-                    width: 250px;
-                    top: 50px;
+                    width: 15.75rem;
+                    top: 3.15rem;
                     padding: 1rem;
                     border: 0.125rem solid rgba(0, 0, 0, 0.125);
                     box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.125);
@@ -75,13 +74,16 @@
                     gap: 0.75rem;
                     z-index: 1;
 
-                    .seeting-nav{
+                    .setting-nav{
                         position: absolute;
-                        top: 10px;
+                        top: 0;
                         left: 50%;
                         transform: translateX(-50%);
                         cursor: move;
                         user-select: none;
+                        line-height: 0;
+                        user-select: none;
+                        font-size: 1.5rem;
                     }
 
                     .setting-section-dev{

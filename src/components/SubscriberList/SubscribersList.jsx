@@ -16,7 +16,8 @@ export default function SubscribersList() {
   const fetchSubscribersDataUrl = `${appLocalizer.apiUrl}/stockmanager/v1/get-subscriber-list`;
   const fetchSubscribersCount = `${appLocalizer.apiUrl}/stockmanager/v1/get-table-segment`;
   const [postStatus, setPostStatus] = useState("");
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(null);
+  const [selectedRows, setSelectedRows] = useState([]);
   const [totalRows, setTotalRows] = useState();
   const [openDialog, setOpenDialog] = useState(false);
   const [subscribersStatus, setSubscribersStatus] = useState(null);
@@ -61,6 +62,13 @@ export default function SubscribersList() {
       filterData.typeCount
     );
   };
+
+  const filterForCSV = ( datas ) => {
+    if ( selectedRows.length ) {
+      datas = selectedRows;
+    } 
+    return datas.map(({date, product, email, status}) => { return {date, product, email, status} } );
+  }
 
   useEffect(() => {
     if (appLocalizer.pro_active) {
@@ -177,14 +185,12 @@ export default function SubscribersList() {
   //columns for the data table
   const columns = [
     {
-      name: __("Image", "woocommerce-stock-manager"),
-      cell: (row) => <TableCell title="Image" >
-        <img src={row.image} alt="product_image" />
-      </TableCell>,
-    },
-    {
       name: __("Product", "woocommerce-stock-manager"),
-      cell: (row) => <TableCell title="Product" > { row.product } </TableCell>,
+      cell: (row) => 
+        <TableCell title="Product" >
+          <img src={row.image} alt="product_image" />
+          <p>{ row.product }</p> 
+        </TableCell>,
     },
     {
       name: __("Email", "woocommerce-stock-manager"),
@@ -248,7 +254,7 @@ export default function SubscribersList() {
                 <p>{__("Subscriber List", "woocommerce-stock-manager")}</p>
                 <div className="download-btn-subscriber-list">
                   <CSVLink
-                    data={data}
+                    data={filterForCSV(data || [])}
                     headers={appLocalizer.columns_subscriber_list}
                     filename={"Subscribers.csv"}
                     className="woo-btn btn-purple"
@@ -259,11 +265,15 @@ export default function SubscribersList() {
                 </div>
               </div>
 
-              <div className="admin-table-wrapper">
+                <div className="admin-table-wrapper">
                 {
-                  <CustomTable
+                    <CustomTable
                     data={data}
                     columns={columns}
+                    selectable = {true}
+                    handleSelect = {(selectRows) => {
+                      setSelectedRows(selectRows);
+                    }}
                     handlePagination={requestApiForData}
                     defaultRowsParPage={10}
                     defaultTotalRows={totalRows}

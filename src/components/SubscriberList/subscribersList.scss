@@ -1,18 +1,20 @@
 @font-face {
-  font-family: 'admin-font';
-  src:  url('fonts/admin-font.eot?uvhhhx');
-  src:  url('fonts/admin-font.eot?uvhhhx#iefix') format('embedded-opentype'),
-    url('fonts/admin-font.ttf?uvhhhx') format('truetype'),
-    url('fonts/admin-font.woff?uvhhhx') format('woff'),
-    url('fonts/admin-font.svg?uvhhhx#admin-font') format('svg');
+  font-family: "admin-font";
+  src: url("fonts/admin-font.eot?uvhhhx");
+  src:
+    url("fonts/admin-font.eot?uvhhhx#iefix") format("embedded-opentype"),
+    url("fonts/admin-font.ttf?uvhhhx") format("truetype"),
+    url("fonts/admin-font.woff?uvhhhx") format("woff"),
+    url("fonts/admin-font.svg?uvhhhx#admin-font") format("svg");
   font-weight: normal;
   font-style: normal;
   font-display: block;
 }
 
-[class^="font"], [class*=" font"] {
+[class^="font"],
+[class*=" font"] {
   /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: 'admin-font' !important;
+  font-family: "admin-font" !important;
   speak: never;
   font-style: normal;
   font-weight: normal;
@@ -154,7 +156,6 @@ input.rs-picker-toggle-textbox {
     border-top-left-radius: 0 !important; // To overwrite table.css default css
   }
 
-
   .rdt_TableBody {
     .rdt_TableRow {
       margin: 0.5rem 0 0 !important; // To overwrite table.css default css
@@ -169,25 +170,104 @@ input.rs-picker-toggle-textbox {
   border: none !important; // To overwrite table.css default css
 }
 
-.sent{
+.sent {
   color: green;
 }
 
-.subscribed{
+.subscribed {
   color: #65438f;
 }
 
-.unsubscribed{
+.unsubscribed {
   color: red;
 }
-.table-row-custom img{
-  width: 4rem;
-  height: 4rem;
+.table-row-custom img {
+  width: 2.75rem;
+  height: 3rem;
+  padding: 0.25rem 0;
 }
 
-.rdt_TableCol, .rdt_TableCell{
-  &:first-child{
-    width: 5rem;
-    flex: inherit;
+@media only screen and (max-width: 85.365rem) {
+  .admin-table-wrapper {
+    .table-container {
+      .rdt_TableHeadRow{
+        .rdt_TableCol{
+          &:first-child{
+            flex: 0 0 1rem;
+            min-width: 0.5rem;
+            width: 1rem;
+            display: flex;
+          }
+          &:nth-child(4){
+            display: block;
+          }
+        }
+      }
+      .rdt_TableBody {
+        .rdt_TableRow {
+          .rdt_TableCell {
+            &:nth-child(1) {
+              min-width: 0.5rem;
+              width: 1rem;
+            }
+            &:nth-child(4) {
+              display: inline-block;
+              width: 30%;
+              background-color: transparent;
+              .table-row-custom{
+                h4{
+                  display: none;
+                }
+              }
+            }
+            &:nth-child(2) {
+              .table-row-custom {
+                img {
+                  position: absolute;
+                }
+                p{
+                  position: relative;
+                  left: 3.15rem;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 35.28rem){
+  .admin-table-wrapper {
+    .table-container {
+      .rdt_TableHeadRow{
+        .rdt_TableCol{
+          &:nth-child(4){
+            display: none;
+          }
+        }
+      }
+      .rdt_TableBody {
+        .rdt_TableRow {
+          .rdt_TableCell {
+            &:nth-child(1) {
+              min-width: 0.5rem;
+              width: 1rem;
+            }
+            &:nth-child(4) {
+              display: inline-block;
+              width: 100%;
+              background-color: #ccc;
+              .table-row-custom{
+                h4{
+                  display: block;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }

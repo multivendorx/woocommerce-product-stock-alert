@@ -14,10 +14,10 @@ export default {
             type: "checkbox",
             class: "woo-toggle-checkbox",
             label: __("Enable Mailchimp", "woocommerce-stock-manager"),
+            desc: __("Get your MailChimp API from your MailChimp <a href='https://us20.admin.mailchimp.com/account/api/manage/#create'>account</a>. For further help, please check this doc.", "woocommerce-stock-manager"),
             options: [
                 {
                     key: "is_mailchimp_enable",
-                    label: __("Enable this to activate Mailchimp.", "woocommerce-stock-manager"),
                     value: "is_mailchimp_enable"
                 }
             ],
@@ -31,7 +31,6 @@ export default {
             apiLink: "get-mailchimp-list",
             type: "api_connect",
             label: __("Mailchimp API", "woocommerce-stock-manager"),
-            desc: __("Get your MailChimp API from your MailChimp account (https://us20.admin.mailchimp.com/account/api/manage/#create). For further help, please check this doc.", "woocommerce-stock-manager"),
             dependent: {
                 key: "is_mailchimp_enable",
                 set: true,
