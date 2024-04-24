@@ -17,7 +17,7 @@ const CheckBox = (props) => {
                 />
                 {
                     props.label &&
-                    <label htmlFor={`woo-toggle-switch-${props.label}`} ></label>
+                    <label htmlFor={`admin-toggle-switch-${props.label}`} ></label>
                 }
                  {
                     props.proSetting && <span className="admin-pro-tag">pro</span>

@@ -52,12 +52,12 @@ $border-radius-large: 0.5rem;
 $animation-duration: 2s;
 
 //for loader purpose-----
-.woo-middle-container-wrapper > span {
+.admin-middle-container-wrapper > span {
   display: block;
   margin: 0 auto;
 }
 
-.tg {
+.load-table {
   border-collapse: collapse;
   border-spacing: 0;
   border-color: $border-color;
@@ -78,7 +78,7 @@ $animation-duration: 2s;
     }
   }
 
-  tr:first-child .tg-cly1 {
+  tr:first-child .load-table-td {
     font-weight: normal;
     padding: $padding-small;
     border-style: solid;
@@ -117,8 +117,8 @@ $animation-duration: 2s;
   gap: 0.5rem !important; // Overwrite common.css file css to set padding
 }
 
-.woo-middle-container-wrapper {
-  .woo-backend-datatable-wrapper {
+.admin-middle-container-wrapper {
+  .admin-backend-datatable-wrapper {
     .rdt_TableHeadRow {
       border: none !important; // to adjust default border on datatable
       border-bottom: 0;
@@ -132,6 +132,9 @@ $animation-duration: 2s;
     }
 
     .rdt_Table {
+      *{
+        font-size: 0.85rem;
+      }
       .rdt_TableBody {
         .rdt_TableRow {
           padding: 0.625rem 0;
@@ -166,8 +169,8 @@ $animation-duration: 2s;
 }
 
 #admin-stockmanager {
-  .woo-middle-container-wrapper {
-    .woo-wrap-bulk-all-date {
+  .admin-middle-container-wrapper {
+    .admin-wrap-bulk-all-date {
       input,
       textarea {
         outline: none !important;
@@ -177,6 +180,12 @@ $animation-duration: 2s;
           outline: none !important;
           border: none !important;
           box-shadow: 0 0 0 0.025rem #2271b1 !important; // to adjust box shadow for input tag and textarea for all stockmanager
+        }
+      }
+
+      .custom-select{
+        select{
+          box-shadow: 0 0 0 0.025rem #2271b1 !important;
         }
       }
     }
@@ -235,14 +244,13 @@ $animation-duration: 2s;
 }
 
 .manage-stock-container {
-  padding: 2rem 1rem !important; // To overwrite default admin css
-
   select {
     -webkit-appearance: none;
+    border: none !important; // To overwrite default wordpress css
     width: 100%;
-    border: none;
     background: #fff0 url("../../assets/images/download.svg") no-repeat right
       0.315rem top 55%;
+      font-size: 0.85rem;
   }
 }
 
@@ -253,7 +261,7 @@ $animation-duration: 2s;
   background-color: #65438f;
   color: #f9f8fb;
   border-radius: 0.25rem;
-  padding: 0.75rem 1.5rem;
+  padding: 0.5rem 1.25rem;
   position: relative;
   font-size: 0.9rem;
   width: fit-content;
@@ -327,7 +335,7 @@ $animation-duration: 2s;
   left: 0;
 }
 
-.woo-notic-display-title {
+.admin-notic-display-title {
   background-color: #bf6290;
   color: $manageStock-fill-color;
   padding: 0.5rem 1rem;
@@ -435,7 +443,7 @@ $animation-duration: 2s;
   }
 }
 
-.woo-backend-datatable-wrapper {
+.admin-backend-datatable-wrapper {
   overflow-x: scroll;
 
   &::-webkit-scrollbar {
@@ -646,10 +654,6 @@ $animation-duration: 2s;
   color: rgb(44, 51, 56);
 }
 
-.product_stock_status.outofstock,
-.product_backorders.no {
-  font-size: 0.9rem !important; // force to reduce font size for select tag font size
-}
 
 .table-row.product_stock_quantity .table-row-meta-data p {
   padding-right: 1.5rem;
@@ -664,7 +668,7 @@ $animation-duration: 2s;
     text-align: left;
   }
 
-  .woo-backend-datatable-wrapper {
+  .admin-backend-datatable-wrapper {
     thead {
       tr {
         padding: 0.313rem;
@@ -760,12 +764,12 @@ $animation-duration: 2s;
 }
 
 @media only screen and (max-width: 35.28rem) {
-  .woo-backend-datatable-wrapper tbody tr td:nth-child(3) {
+  .admin-backend-datatable-wrapper tbody tr td:nth-child(3) {
     max-width: 8.75rem !important; // force to set width for mobile screen
   }
 }
 
-.woo-backend-datatable-wrapper {
+.admin-backend-datatable-wrapper {
   & > .pagination {
     display: flex;
     align-items: center;
@@ -835,7 +839,7 @@ $animation-duration: 2s;
 .table-row.product_backorders .table-row-meta-data p {
   padding-left: 0.625rem;
   text-align: left;
-  font-size: 0.95rem;
+  font-size: 0.85rem;
 }
 
 .inventory-manager {
@@ -875,7 +879,7 @@ $animation-duration: 2s;
 }
 
 @media only screen and (max-width: 35.721rem) {
-  .woo-image-overlay .woo-banner-content p {
+  .admin-image-overlay .admin-banner-content p {
     max-width: 80%;
   }
 }

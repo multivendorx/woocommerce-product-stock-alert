@@ -104,9 +104,9 @@ const Export = () => {
         return chunks;
     }
     return (
-        <div className="woo-container">
+        <div className="admin-container">
             <div className='export-page'>
-                <div className="woo-page-title">
+                <div className="admin-page-title">
                     <p>{ __( 'Export', 'woocommerce-stock-manager' ) }</p>
                     <button class="import-export-btn" >
                         <Link to={ '?page=stock-manager#&tab=manage-stock' }>

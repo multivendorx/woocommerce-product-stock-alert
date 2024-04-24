@@ -31,7 +31,7 @@
   content: "\e520";
 }
 
-.woo-subscriber-list {
+.admin-subscriber-list {
   .subscriber-container-wrapper {
     background-color: transparent;
     padding: 0;
@@ -131,7 +131,7 @@ input.rs-picker-toggle-textbox {
   background-color: #65438f;
   color: #f9f8fb;
   border-radius: 0.25rem;
-  padding: 0.75rem 1.5rem;
+  padding: 0.5rem 1.25rem;
   position: relative;
   font-size: 0.9rem;
   width: fit-content;
@@ -146,29 +146,29 @@ input.rs-picker-toggle-textbox {
   }
 }
 
-.rdt_Table {
-  background-color: transparent !important; // To overwrite table.css default css
+// .rdt_Table {
+//   background-color: transparent !important; // To overwrite table.css default css
 
-  .rdt_TableHeadRow {
-    border: none !important; // To overwrite table.css default css
-    background: #fff !important; // To overwrite table.css default css
-    border-top-right-radius: 0 !important; // To overwrite table.css default css
-    border-top-left-radius: 0 !important; // To overwrite table.css default css
-  }
+//   .rdt_TableHeadRow {
+//     border: none !important; // To overwrite table.css default css
+//     background: #fff !important; // To overwrite table.css default css
+//     border-top-right-radius: 0 !important; // To overwrite table.css default css
+//     border-top-left-radius: 0 !important; // To overwrite table.css default css
+//   }
 
-  .rdt_TableBody {
-    .rdt_TableRow {
-      margin: 0.5rem 0 0 !important; // To overwrite table.css default css
-      border: none !important;
-    }
-  }
-}
+//   .rdt_TableBody {
+//     .rdt_TableRow {
+//       margin: 0.5rem 0 0 !important; // To overwrite table.css default css
+//       border: none !important;
+//     }
+//   }
+// }
 
-.rdt_Pagination {
-  // background-color: transparent !important; // To overwrite table.css default css
-  margin-top: 0.5rem;
-  border: none !important; // To overwrite table.css default css
-}
+// .rdt_Pagination {
+//   // background-color: transparent !important; // To overwrite table.css default css
+//   margin-top: 0.5rem;
+//   border: none !important; // To overwrite table.css default css
+// }
 
 .sent {
   color: green;
@@ -181,59 +181,59 @@ input.rs-picker-toggle-textbox {
 .unsubscribed {
   color: red;
 }
-.table-row-custom img {
-  width: 2.75rem;
-  height: 3rem;
-  padding: 0.25rem 0;
-}
+// .table-row-custom img {
+//   width: 2.75rem;
+//   height: 3rem;
+//   padding: 0.25rem 0;
+// }
 
-@media only screen and (max-width: 85.365rem) {
+@media only screen and (max-width: 1260px) {
   .admin-table-wrapper {
     .table-container {
-      .rdt_TableHeadRow{
-        .rdt_TableCol{
-          &:first-child{
-            flex: 0 0 1rem;
-            min-width: 0.5rem;
-            width: 1rem;
-            display: flex;
-          }
-          &:nth-child(4){
-            display: block;
-          }
-        }
-      }
-      .rdt_TableBody {
-        .rdt_TableRow {
-          .rdt_TableCell {
-            &:nth-child(1) {
-              min-width: 0.5rem;
-              width: 1rem;
-            }
-            &:nth-child(4) {
-              display: inline-block;
-              width: 30%;
-              background-color: transparent;
-              .table-row-custom{
-                h4{
-                  display: none;
-                }
-              }
-            }
-            &:nth-child(2) {
-              .table-row-custom {
-                img {
-                  position: absolute;
-                }
-                p{
-                  position: relative;
-                  left: 3.15rem;
-                }
-              }
-            }
-          }
-        }
-      }
+      // .rdt_TableHeadRow{
+      //   .rdt_TableCol{
+      //     &:first-child{
+      //       flex: 0 0 1.25rem;
+      //       min-width: 0.5rem;
+      //       width: 1rem;
+      //       display: flex;
+      //     }
+      //     &:nth-child(4){
+      //       display: block;
+      //     }
+      //   }
+      // }
+      // .rdt_TableBody {
+      //   .rdt_TableRow {
+      //     .rdt_TableCell {
+      //       &:nth-child(1) {
+      //         min-width: 0.5rem;
+      //         width: 1rem;
+      //       }
+      //       &:nth-child(4) {
+      //         display: inline-block;
+      //         width: 30%;
+      //         background-color: transparent;
+      //         .table-row-custom{
+      //           h4{
+      //             display: none;
+      //           }
+      //         }
+      //       }
+      //       &:nth-child(2) {
+      //         .table-row-custom {
+      //           img {
+      //             position: absolute;
+      //           }
+      //           p{
+      //             position: relative;
+      //             left: 3.15rem;
+      //           }
+      //         }
+      //       }
+      //     }
+      //   }
+      // }
     }
   }
 }
@@ -241,33 +241,33 @@ input.rs-picker-toggle-textbox {
 @media only screen and (max-width: 35.28rem){
   .admin-table-wrapper {
     .table-container {
-      .rdt_TableHeadRow{
-        .rdt_TableCol{
-          &:nth-child(4){
-            display: none;
-          }
-        }
-      }
-      .rdt_TableBody {
-        .rdt_TableRow {
-          .rdt_TableCell {
-            &:nth-child(1) {
-              min-width: 0.5rem;
-              width: 1rem;
-            }
-            &:nth-child(4) {
-              display: inline-block;
-              width: 100%;
-              background-color: #ccc;
-              .table-row-custom{
-                h4{
-                  display: block;
-                }
-              }
-            }
-          }
-        }
-      }
+      // .rdt_TableHeadRow{
+      //   .rdt_TableCol{
+      //     &:nth-child(4){
+      //       display: none;
+      //     }
+      //   }
+      // }
+      // .rdt_TableBody {
+      //   .rdt_TableRow {
+      //     .rdt_TableCell {
+      //       &:nth-child(1) {
+      //         min-width: 0.5rem;
+      //         width: 1rem;
+      //       }
+      //       &:nth-child(4) {
+      //         display: inline-block;
+      //         width: 100%;
+      //         background-color: #ccc;
+      //         .table-row-custom{
+      //           h4{
+      //             display: block;
+      //           }
+      //         }
+      //       }
+      //     }
+      //   }
+      // }
     }
   }
 }

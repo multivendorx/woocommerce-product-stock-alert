@@ -10,7 +10,7 @@ class Utill {
      * Function to console and debug errors.
      */
     public static function log( $str ) {
-        $file = SM()->plugin_path . 'log/woo-stock-manager.log';
+        $file = SM()->plugin_path . 'log/admin-stock-manager.log';
 
         if ( file_exists( $file ) ) {
             // Open the file to get existing content

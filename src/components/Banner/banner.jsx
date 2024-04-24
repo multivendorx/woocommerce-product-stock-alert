@@ -83,7 +83,7 @@ export default function banner() {
                 banner ?
                     <div className="custom-banner">
                         <Dialog
-                            className="woo-module-popup"
+                            className="admin-module-popup"
                             open={modal}
                             onClose={handleClose}
                             aria-labelledby="form-dialog-title"
@@ -94,71 +94,71 @@ export default function banner() {
                             ></span>
                             <Popoup/>
                         </Dialog>
-                        <div className="woo-carousel-container">
+                        <div className="admin-carousel-container">
                             <div className="carousel-container">
                                 <div class="admin-font font-cross pro-slider-cross" onClick={handleCloseBanner}></div>
                                 <div class="why-go-pro-tag" onClick={handleOpen}>Why Premium</div>
                                 <ul className="carousel-list">
                                     <li className="carousel-item active">
-                                        <div className="woo-pro-txt-items">
+                                        <div className="admin-pro-txt-items">
                                             <h3>Double Opt-In {' '}</h3>
                                             <p>Experience the power of Double Opt-In for our Stock Alert Form - Guaranteed precision in every notification!{' '}</p>
                                             <a
                                                 href={appLocalizer.pro_url}
                                                 target='_blank'
-                                                className="woo-btn btn-red"
+                                                className="admin-btn btn-red"
                                             >
                                                 View Pricing
                                             </a>
                                         </div>
                                     </li>
                                     <li class="carousel-item">
-                                        <div className="woo-pro-txt-items">
+                                        <div className="admin-pro-txt-items">
                                             <h3>Your Subscription Hub{' '}</h3>
                                             <p>Subscription Dashboard - Easily monitor and download lists of out-of-stock subscribers for seamless management.{' '}</p>
                                             <a
                                                 href={appLocalizer.pro_url}
                                                 target='_blank'
-                                                className="woo-btn btn-red"
+                                                className="admin-btn btn-red"
                                             >
                                                 View Pricing
                                             </a>
                                         </div>
                                     </li>
                                     <li class="carousel-item">
-                                        <div className="woo-pro-txt-items">
+                                        <div className="admin-pro-txt-items">
                                             <h3>Mailchimp Bridge{' '}</h3>
                                             <p>Seamlessly link WooCommerce out-of-stock subscriptions with Mailchimp for effective marketing.{' '}</p>
                                             <a
                                                 href={appLocalizer.pro_url}
                                                 target='_blank'
-                                                className="woo-btn btn-red"
+                                                className="admin-btn btn-red"
                                             >
                                                 View Pricing
                                             </a>
                                         </div>
                                     </li>
                                     <li class="carousel-item">
-                                        <div className="woo-pro-txt-items">
+                                        <div className="admin-pro-txt-items">
                                             <h3>Unsubscribe Notifications{' '}</h3>
                                             <p>User-Initiated Unsubscribe from In-Stock Notifications.{' '}</p>
                                             <a
                                                 href={appLocalizer.pro_url}
                                                 target='_blank'
-                                                className="woo-btn btn-red"
+                                                className="admin-btn btn-red"
                                             >
                                                 View Pricing
                                             </a>
                                         </div>
                                     </li>
                                     <li class="carousel-item">
-                                        <div className="woo-pro-txt-items">
+                                        <div className="admin-pro-txt-items">
                                             <h3>Ban Spam Emails {' '}</h3>
                                             <p>Email and Domain Blacklist for Spam Prevention.{' '}</p>
                                             <a
                                                 href={appLocalizer.pro_url}
                                                 target='_blank'
-                                                className="woo-btn btn-red"
+                                                className="admin-btn btn-red"
                                             >
                                                 View Pricing
                                             </a>

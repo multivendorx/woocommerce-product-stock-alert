@@ -9,11 +9,11 @@ const Propopup = () => {
         <>
             <DialogContent>
                 <DialogContentText>
-                    <div className="woo-module-dialog-content">
-                        <div className="woo-image-overlay">
-                            <div className="woo-overlay-content">
+                    <div className="admin-module-dialog-content">
+                        <div className="admin-image-overlay">
+                            <div className="admin-overlay-content">
                                 <h1 className="banner-header">Unlock <span className="banner-pro-tag">Pro</span> </h1>
-                                <div className="woo-banner-content">
+                                <div className="admin-banner-content">
                                     <strong>Boost to Product Stock Manager & Notifier Pro to access premium features!</strong>
                                     <p>&nbsp;</p>
                                     <p>1. Double Opt-in.</p>
@@ -26,7 +26,7 @@ const Propopup = () => {
                                     <p>8. Stock Manager Dashboard</p>
                                     <p>9. Export/Import Stock   </p>
                                 </div>
-                                <a className="woo-go-pro-btn" target="_blank" href={appLocalizer.pro_url}>Upgrade to Pro</a>
+                                <a className="admin-go-pro-btn" target="_blank" href={appLocalizer.pro_url}>Upgrade to Pro</a>
                             </div>
                         </div>
                     </div>

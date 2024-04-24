@@ -1,10 +1,11 @@
 @font-face {
-  font-family: 'admin-font';
-  src: url('fonts/admin-font.eot?nofply');
-  src: url('fonts/admin-font.eot?nofply#iefix') format('embedded-opentype'),
-    url('fonts/admin-font.ttf?nofply') format('truetype'),
-    url('fonts/admin-font.woff?nofply') format('woff'),
-    url('fonts/admin-font.svg?nofply#admin-font') format('svg');
+  font-family: "admin-font";
+  src: url("fonts/admin-font.eot?nofply");
+  src:
+    url("fonts/admin-font.eot?nofply#iefix") format("embedded-opentype"),
+    url("fonts/admin-font.ttf?nofply") format("truetype"),
+    url("fonts/admin-font.woff?nofply") format("woff"),
+    url("fonts/admin-font.svg?nofply#admin-font") format("svg");
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -13,7 +14,7 @@
 [class^="font-"],
 [class*=" font-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: 'admin-font' !important;
+  font-family: "admin-font" !important;
   speak: never;
   font-style: normal;
   font-weight: normal;
@@ -171,10 +172,10 @@ a {
 }
 
 #wpcontent {
-  background-color: #f2eff5 !important; // To overwrite default page background
+  background-color: #f3effc !important; // To overwrite default page background
 }
 
-input:focus{
+input:focus {
   outline: none;
   border: none;
 }
@@ -182,19 +183,19 @@ input:focus{
 #admin-stockmanager {
   margin-top: 0.315rem;
 
-  *{
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  * {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
     -webkit-font-smoothing: subpixel-antialiased;
   }
 }
 
-
-.woo-module-popup span.font-cross {
+.admin-module-popup span.font-cross {
   font-size: 1.25rem;
   cursor: pointer;
 }
 
-.woo-search-and-multistatus-wrap {
+.admin-search-and-multistatus-wrap {
   @include flexprops(center);
   gap: 1rem;
   justify-content: space-between;
@@ -202,17 +203,17 @@ input:focus{
   flex-wrap: wrap;
   margin-bottom: 0.5rem;
 
-  .woo-multistatus-ul {
+  .admin-multistatus-ul {
     margin: 0;
     cursor: pointer;
     @include flexprops(center);
     flex-wrap: wrap;
 
-    .woo-multistatus-item.status-active {
+    .admin-multistatus-item.status-active {
       color: $theme-color;
     }
 
-    .woo-multistatus-item {
+    .admin-multistatus-item {
       margin: 0;
       font-size: 0.875rem;
       color: $paragraph-color;
@@ -222,7 +223,7 @@ input:focus{
       }
     }
 
-    .woo-divider {
+    .admin-divider {
       width: 0.051rem;
       background-color: $paragraph-color;
       margin: 0 0.4rem;
@@ -231,29 +232,29 @@ input:focus{
   }
 }
 
-.woo-wrap-bulk-all-date {
+.admin-wrap-bulk-all-date {
   @include flexprops(center);
   gap: 0.5rem 0.5rem;
   flex-wrap: wrap;
   padding-bottom: 0.5rem;
 }
 
-.woo-page-title {
+.admin-page-title {
   @include flexprops(center);
   flex-wrap: wrap;
   margin-bottom: 0.5rem;
   justify-content: space-between;
 
   p {
-    font-size: 1.5rem;
     color: $title-color;
     margin-right: 0.7rem;
+    font-size: 1.5rem;
   }
 
   .pull-right {
     margin: 0.4rem 0 0 auto;
 
-    .woo-btn.btn-purple {
+    .admin-btn.btn-purple {
       @include purple-btn();
       @include button();
       font-size: 0.875rem;
@@ -276,51 +277,156 @@ input:focus{
   }
 }
 
-
 .stock-manager-popup-cross {
   text-align: right;
   cursor: pointer;
 }
 
-.woo-middle-container-wrapper {
-  background-color: #fff;
-  padding: 1rem 1.5rem;
+.admin-middle-container-wrapper {
+  padding-right: 1.5rem;
   display: flex;
   flex-direction: column;
-  border-radius: 0.313rem;
-  box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.12);
 }
 
-.mvx-container {
-  a {
-    color: #65438f;
-    line-height: 1rem;
-    text-decoration: none;
-  }
+code {
+  background: #fbf5f8;
+  color: #b74f82;
+  font-style: normal;
+}
 
-  code {
-    background: #fbf5f8;
-    color: #b74f82;
-    font-style: normal;
-  }
+p.admin-settings-metabox-description-code {
+  padding: 0.5rem 1rem;
+  margin: 0.5rem 0;
+  background: #fdf9fb;
+  color: #b74f82;
+  border-radius: 0.25rem;
+  position: relative;
 
-  p.mvx-settings-metabox-description-code {
-    padding: 0.5rem 1rem;
-    margin: 0.5rem 0;
-    background: #fdf9fb;
-    color: #b74f82;
+  &::before {
+    position: absolute;
+    content: "";
+    left: 0;
+    top: 0;
+    width: 0.25rem;
     border-radius: 0.25rem;
-    position: relative;
+    background-color: #dfb1c7;
+    height: 100%;
+  }
+}
 
-    &::before {
-      position: absolute;
-      content: "";
-      left: 0;
-      top: 0;
-      width: 0.25rem;
-      border-radius: 0.25rem;
-      background-color: #dfb1c7;
-      height: 100%;
+
+// Table Css Here //
+
+.rdt_Table{
+
+  $font-color: #333;
+  $background-color: #fff;
+  $primary-color: #65438f;
+  $background-secondary-color: #ccc;
+  $even-row-color: rgb(245, 245, 245);
+  $head-row-background: #e7e7e7;
+  $border-color: rgba(0, 0, 0, 0.2);
+  $shine-background: linear-gradient(
+  90deg,
+  #f4f4f4 0rem,
+  rgba(229, 229, 229, 0.8) 2.52rem,
+  #f4f4f4 5.04rem
+);
+
+$padding-small: 0.4rem;
+$padding-medium: 1rem;
+
+$line-height-small: 1.008rem;
+$line-height-medium: 2.25rem;
+
+$border-width-small: 0.063rem;
+$border-width-medium: 0rem;
+
+$border-radius-small: 0.25rem;
+$border-radius-medium: 0.441rem;
+$border-radius-large: 0.5rem;
+
+$animation-duration: 2s;
+
+
+  background-color: transparent !important; // To overwrite react data-table default css
+  width: 100% !important; // To overwrite react data-table default css
+
+  .rdt_TableHeadRow{
+    background-color: #e5e5e5;
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+    border: 0.063rem solid rgba(0, 0, 0, 0.24);
+    border-bottom: none;
+    transition: all 0.3s linear;
+    
+    .rdt_TableCol{
+      background-color: transparent;
+      
+      &:last-child {
+        display: none;
+      }
+    }
+  }
+  
+  .rdt_TableBody{
+    .rdt_TableRow{
+      border: 0.063rem solid rgba(0, 0, 0, 0.24);
+      border-top: none;
+      border-bottom: none;
+      
+      .rdt_TableCell{
+        padding: 0.5rem 1rem;
+
+        &:last-child{
+          max-width: 2.52rem;
+          min-width: 2.52rem;
+          top: $padding-small;
+          right: $padding-medium;
+          padding: 0;
+          width: 100%;
+          flex-grow: unset;
+          position: absolute;
+          display: none;
+        }
+
+        .table-row-custom{
+          display: flex;
+          align-items: center;
+          text-wrap: wrap;
+          word-wrap: break-word;
+          gap: 0.5rem;
+
+          img{
+            width: 3.125rem;
+            height: 3.125rem;
+            object-fit: cover;
+            object-position: center;
+            border-radius: 0.313rem;
+            box-shadow: 0 0 0.125rem rgba(0, 0, 0, 0.0125);
+          }
+
+          i{
+            color: #65438f;
+          }
+
+          h4 {
+            display: none;
+            margin: 0;
+            max-width: 9.45rem;
+            width: 100%;
+          }
+  
+          p {
+            margin: 0;
+            overflow: hidden;
+          }
+        }
+      }
+
+      &:hover {
+        background: $even-row-color;
+      }
     }
   }
 }

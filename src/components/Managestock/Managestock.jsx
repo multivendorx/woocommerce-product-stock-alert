@@ -17,14 +17,14 @@ const Managestock = () => {
         const rows = Array.from({ length: 10 }, (_, index) => index);
         return (
           <>
-            <table className="tg">
+            <table className="load-table">
               <tbody>
                 {/* Loop to render 10 table rows */}
                 {rows.map((row, rowIndex) => (
                   <tr key={rowIndex}>
                     {/* Loop to render 8 cells in each row */}
                     {Array.from({ length: 5 }, (_, cellIndex) => (
-                      <td key={cellIndex} className="tg-cly1">
+                      <td key={cellIndex} className="load-table-td">
                         <div className="line" />
                       </td>
                     ))}
@@ -98,7 +98,7 @@ const Managestock = () => {
         //If the user is free user he will be shown a Inventory Manager image
             <div className='subscriber-img' >
                 <Dialog
-                    className="woo-module-popup"
+                    className="admin-module-popup"
                     open={ openDialog }
                     onClose={ () => { setOpenDialog ( false ) } }
                     aria-labelledby="form-dialog-title"
@@ -113,11 +113,11 @@ const Managestock = () => {
             </div>
         :
         //If user is pro user he will shown the Inventory Manager Table
-            <div className="woo-subscriber-list">
-                    <div className="woo-container manage-stock-container">
-                        <div className="woo-middle-container-wrapper">
-                            <div className="woo-search-and-multistatus-wrap manage-stock-wrapper">
-                                <div className="woo-page-title">
+            <div className="admin-subscriber-list">
+                    <div className="admin-container manage-stock-container">
+                        <div className="admin-middle-container-wrapper">
+                            <div className="admin-search-and-multistatus-wrap manage-stock-wrapper">
+                                <div className="admin-page-title">
                                     <p>
                                         { __( "Inventory Manager", "woocommerce-stock-manager" ) }
                                     </p>
@@ -147,22 +147,22 @@ const Managestock = () => {
                                 </div>
                             </div>
                             { displayMessage && (
-                            <div className="woo-notic-display-title">
+                            <div className="admin-notic-display-title">
                                 <i className="icon-success-notification"></i>
                                 { displayMessage }
                             </div>
                             )}
                         </div>
-                        <div className="woo-search-and-multistatus-wrap manage-stock-wrapper">
-                            <div class="woo-wrap-bulk-all-date">
-                                <div class="woo-header-search-section">
+                        <div className="admin-search-and-multistatus-wrap manage-stock-wrapper">
+                            <div class="admin-wrap-bulk-all-date">
+                                <div class="admin-header-search-section">
                                     <input
                                     type="text"
                                     placeholder="Search by Name..."
                                     onChange={ handleInputName }
                                     />
                                 </div>
-                                <div class="woo-header-search-section">
+                                <div class="admin-header-search-section">
                                     <input
                                     type="text"
                                     placeholder="Search by SKU..."
@@ -208,7 +208,7 @@ const Managestock = () => {
                             {
                                 //If both the data nad the headers are set then only the Table will be shown else the <PuffLoader/> will be shown
                                 (( data && Object.keys( data ).length > 0 ) && ( headers && Object.keys( headers ).length > 0))?
-                                    <div className="woo-backend-datatable-wrapper manage-stock-table">
+                                    <div className="admin-backend-datatable-wrapper manage-stock-table">
                                         <ProductTable 
                                             setData={ setData } 
                                             setDisplayMessage={ setDisplayMessage }

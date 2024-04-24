@@ -750,7 +750,7 @@ const DynamicForm = (props) => {
     <>
       <div className="dynamic-fields-wrapper">
         <Dialog
-          className="woo-module-popup"
+          className="admin-module-popup"
           open={modelOpen}
           onClose={handleModelClose}
           aria-labelledby="form-dialog-title"
