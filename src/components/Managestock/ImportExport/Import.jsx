@@ -86,8 +86,8 @@ const Import = () => {
                     </button>
                     {
                         displayMessage &&
-                        <div className="admin-notic-display-title">
-                            <i className="icon-success-notification"></i>
+                        <div className="admin-notice-display-title">
+                            <i className="admin-font font-icon-yes"></i>
                             { displayMessage }
                         </div>
                     }

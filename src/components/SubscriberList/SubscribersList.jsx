@@ -248,44 +248,38 @@ export default function SubscribersList() {
         </div>
       ) : (
         <div className="admin-subscriber-list">
-          <div className="admin-container">
-            <div className="subscriber-container-wrapper">
-              <div className="admin-page-title">
-                <p>{__("Subscriber List", "woocommerce-stock-manager")}</p>
-                <div className="download-btn-subscriber-list">
-                  <CSVLink
-                    data={filterForCSV(data || [])}
-                    headers={appLocalizer.columns_subscriber_list}
-                    filename={"Subscribers.csv"}
-                    className="admin-btn btn-purple"
-                  >
-                    <i className="admin-font icon-download"></i>
-                    {__("Download CSV", "woocommerce-stock-manager")}
-                  </CSVLink>
-                </div>
-              </div>
-
-                <div className="admin-table-wrapper">
-                {
-                    <CustomTable
-                    data={data}
-                    columns={columns}
-                    selectable = {true}
-                    handleSelect = {(selectRows) => {
-                      setSelectedRows(selectRows);
-                    }}
-                    handlePagination={requestApiForData}
-                    defaultRowsParPage={10}
-                    defaultTotalRows={totalRows}
-                    perPageOption={[10, 25, 50]}
-                    realtimeFilter={realtimeFilter}
-                    typeCounts={subscribersStatus}
-                  />
-                }
-              </div>
+          <div className="admin-page-title">
+            <p>{__("Subscriber List", "woocommerce-stock-manager")}</p>
+            <div className="download-btn-subscriber-list">
+              <CSVLink
+                data={filterForCSV(data || [])}
+                headers={appLocalizer.columns_subscriber_list}
+                filename={"Subscribers.csv"}
+                className="admin-btn btn-purple"
+              >
+               <div className="wp-menu-image dashicons-before dashicons-download"></div>
+                {__("Download CSV", "woocommerce-stock-manager")}
+              </CSVLink>
             </div>
           </div>
-        </div>
+
+            {
+                <CustomTable
+                data={data}
+                columns={columns}
+                selectable = {true}
+                handleSelect = {(selectRows) => {
+                  setSelectedRows(selectRows);
+                }}
+                handlePagination={requestApiForData}
+                defaultRowsParPage={10}
+                defaultTotalRows={totalRows}
+                perPageOption={[10, 25, 50]}
+                realtimeFilter={realtimeFilter}
+                typeCounts={subscribersStatus}
+              />
+            }
+          </div>
       )}
     </div>
   );

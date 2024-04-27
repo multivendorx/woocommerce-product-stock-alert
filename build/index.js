@@ -18271,7 +18271,7 @@ const DynamicForm = props => {
         case "email":
         case "number":
           input = (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Inputs__WEBPACK_IMPORTED_MODULE_2__["default"].BasicInput, {
-            wrapperClass: "setting-form-input",
+            wrapperClass: `setting-form-input`,
             descClass: "settings-metabox-description",
             description: inputField.desc,
             key: inputField.key,
@@ -18706,7 +18706,7 @@ const DynamicForm = props => {
       }
       return inputField.type === "section" || inputField.label === "no_label" ? input : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
         key: "g" + inputField.key,
-        className: "form-group"
+        className: `form-group ${inputField.classes ? inputField.classes : ''}`
       }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
         className: "settings-form-label",
         key: "l" + inputField.key,
@@ -18730,7 +18730,7 @@ const DynamicForm = props => {
     className: "admin-font font-cross",
     onClick: handleModelClose
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_PopupContent_PopupContent__WEBPACK_IMPORTED_MODULE_5__["default"], null)), successMsg && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "notic-display-title"
+    className: "admin-notice-display-title"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("i", {
     className: "admin-font font-icon-yes"
   }), successMsg), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("form", {
@@ -20484,12 +20484,15 @@ const Support = () => {
   }, "We want to help you enjoy a wonderful experience with all of our products.")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "support-card"
   }, supportLink.map((item, index) => {
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+      href: item.link,
+      target: "_blank",
       className: "card-item"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("i", {
       className: `admin-font font-${item.icon}`
     }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
-      href: item.link
+      href: item.link,
+      target: "_blank"
     }, item.title), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, item.description)));
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "video-faq-wrapper"
@@ -20556,14 +20559,14 @@ const Tabs = props => {
     BannerSection
   } = props;
   const [menuCol, setMenuCol] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
-  const [openedSubtab, setOpenedSubtab] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
+  const [openedSubtab, setOpenedSubtab] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("");
   const showTabSection = tab => {
     return tab.link ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
       href: tab.link
     }, tab.icon && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("i", {
       className: `admin-font ${tab.icon}`
     }), menuCol ? null : tab.name) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
-      className: currentTab === tab.id ? 'active-current-tab' : '',
+      className: currentTab === tab.id ? "active-current-tab" : "",
       to: prepareUrl(tab.id)
     }, tab.icon && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("i", {
       className: ` admin-font ${tab.icon} `
@@ -20573,11 +20576,11 @@ const Tabs = props => {
   };
   const showHideMenu = tab => {
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
-      className: currentTab === tab.id ? 'active-current-tab' : '',
+      className: currentTab === tab.id ? "active-current-tab" : "",
       onClick: e => {
         e.preventDefault();
         if (openedSubtab == tab.id) {
-          setOpenedSubtab('');
+          setOpenedSubtab("");
         } else {
           setOpenedSubtab(tab.id);
         }
@@ -20601,67 +20604,52 @@ const Tabs = props => {
       content,
       type
     }) => {
-      if (type === 'file') {
-        return content.id === currentTab && content.id !== 'support' && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      if (type === "file") {
+        return content.id === currentTab && content.id !== "support" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
           className: "tab-description-start"
         }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
           className: "tab-name"
         }, content.name), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, content.desc));
-      } else if (type === 'folder') {
+      } else if (type === "folder") {
         // Get tabdescription from child by recursion
         return getTabDescription(content);
       }
     });
   };
   const handleMenu = () => {
-    let menudiv = document.getElementById('current-tab-lists');
-    menudiv.classList.toggle('active');
+    let menudiv = document.getElementById("current-tab-lists");
+    menudiv.classList.toggle("active");
   };
   const handleMenuShow = () => {
     setMenuCol(!menuCol);
   };
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: ` general-wrapper ${props.queryName} `
-  }, HeaderSection && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(HeaderSection, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "container"
-  }, BannerSection && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(BannerSection, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("nav", {
+  }, HeaderSection && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(HeaderSection, null), BannerSection && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(BannerSection, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("nav", {
     className: "admin-panel-nav"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "brand"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Stock Manager"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "by", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+    src: _assets_images_Brand_png__WEBPACK_IMPORTED_MODULE_1__,
+    alt: "logo"
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
     onClick: handleMenu
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("i", {
     className: "admin-font font-menu"
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "brand"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
-    src: _assets_images_Brand_png__WEBPACK_IMPORTED_MODULE_1__,
-    alt: "logo"
   }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: `middle-container-wrapper ${props.horizontally ? 'horizontal-tabs' : 'vertical-tabs'}`
+    className: `middle-container-wrapper ${props.horizontally ? "horizontal-tabs" : "vertical-tabs"}`
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "middle-child-container"
+    className: `${menuCol ? "showMenu" : ""} middle-child-container`
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     id: "current-tab-lists",
-    className: `${menuCol ? 'showMenu' : ''} current-tab-lists`
+    className: "current-tab-lists"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "current-tab-lists-container"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "brand"
-  }, menuCol ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
-    src: _assets_images_Brand_small_png__WEBPACK_IMPORTED_MODULE_2__,
-    alt: "logo"
-  }) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
-    src: _assets_images_Brand_png__WEBPACK_IMPORTED_MODULE_1__,
-    alt: "logo"
-  }), menuCol ? null : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Stock Manager"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
-    onClick: handleMenu,
-    className: "menu-close"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("i", {
-    className: "admin-font font-cross"
-  }))), tabData.map(({
+  }, tabData.map(({
     type,
     content
   }) => {
-    if (type !== 'folder') {
+    if (type !== "folder") {
       return showTabSection(content);
     }
 
@@ -20669,7 +20657,7 @@ const Tabs = props => {
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "tab-wrapper"
     }, showHideMenu(content[0].content), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: `subtab-wrapper ${menuCol && 'show'} ${openedSubtab == content[0].content.id && 'active'}`
+      className: `subtab-wrapper ${menuCol && "show"} ${openedSubtab == content[0].content.id && "active"}`
     }, content.slice(1).map(({
       type,
       content
@@ -20681,9 +20669,14 @@ const Tabs = props => {
     onClick: handleMenuShow
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("i", {
     className: "admin-font font-arrow-left"
-  })), menuCol ? null : 'Collapse'))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  })), menuCol ? null : "Collapse"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+    onClick: handleMenu,
+    className: "menu-close"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("i", {
+    className: "admin-font font-cross"
+  })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "tab-content"
-  }, getTabDescription(tabData), getForm(currentTab)))))));
+  }, getTabDescription(tabData), getForm(currentTab))))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Tabs);
 
@@ -21182,9 +21175,9 @@ const Import = () => {
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "wp-menu-image dashicons-before dashicons-arrow-left-alt"
   }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Inventory Manager", "woocommerce-stock-manager"))), displayMessage && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "admin-notic-display-title"
+    className: "admin-notice-display-title"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("i", {
-    className: "icon-success-notification"
+    className: "admin-font font-icon-yes"
   }), displayMessage)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "import-section"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Upload your CSV file to update stock data for existing products. The file must match the specified format a sample CSV is available for reference.', 'woocommerce-stock-manager'), data && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_csv__WEBPACK_IMPORTED_MODULE_1__.CSVLink, {
@@ -21273,18 +21266,18 @@ const Managestock = () => {
     display: block;
     margin: 0 auto;
     border-color: red;
-    `;
+  `;
   const [data, setData] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
   const [headers, setHeaders] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
   const [totalProducts, setTotalProducts] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)();
   const [rowsPerPage, setRowsPerPage] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(10);
   const [currentPage, setCurrentPage] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0);
-  const [displayMessage, setDisplayMessage] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
+  const [displayMessage, setDisplayMessage] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("");
   const [openDialog, setOpenDialog] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
-  const [productName, setProductName] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
-  const [productSku, setProductSku] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
-  const [productType, setProductType] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
-  const [stockStatus, setStockStatus] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
+  const [productName, setProductName] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("");
+  const [productSku, setProductSku] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("");
+  const [productType, setProductType] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("");
+  const [stockStatus, setStockStatus] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("");
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     if (appLocalizer.pro_active) {
       //Fetch the data to show in the table
@@ -21292,7 +21285,7 @@ const Managestock = () => {
         method: "post",
         url: fetchDataUrl,
         headers: {
-          'X-WP-Nonce': appLocalizer.nonce
+          "X-WP-Nonce": appLocalizer.nonce
         },
         data: {
           page: currentPage + 1,
@@ -21316,7 +21309,7 @@ const Managestock = () => {
     if (e.target.value.length > 3) {
       setProductName(e.target.value);
     } else if (e.target.value.length <= 1) {
-      setProductName('');
+      setProductName("");
     }
   }
 
@@ -21325,7 +21318,7 @@ const Managestock = () => {
     if (e.target.value.length > 3) {
       setProductSku(e.target.value);
     } else if (e.target.value.length <= 1) {
-      setProductSku('');
+      setProductSku("");
     }
   }
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, !appLocalizer.pro_active ?
@@ -21352,39 +21345,29 @@ const Managestock = () => {
   })) :
   //If user is pro user he will shown the Inventory Manager Table
   (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "admin-subscriber-list"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "admin-container manage-stock-container"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "admin-middle-container-wrapper"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "admin-search-and-multistatus-wrap manage-stock-wrapper"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "admin-page-title"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Inventory Manager", "woocommerce-stock-manager"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "title-section"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Inventory Manager", "woocommerce-stock-manager")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "stock-reports-download"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "pull-right import"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
     class: "import-export-btn"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Link, {
     to: "?page=stock-manager#&tab=import"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "wp-menu-image dashicons-before dashicons-download"
-  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Import", "woocommerce-stock-manager")))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "pull-right export"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Import", "woocommerce-stock-manager"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
     class: "import-export-btn"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Link, {
     to: "?page=stock-manager#&tab=export"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "wp-menu-image dashicons-before dashicons-upload"
-  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Export", "woocommerce-stock-manager")))))), displayMessage && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "admin-notic-display-title"
+  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Export", "woocommerce-stock-manager")))), displayMessage && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "admin-notice-display-title"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("i", {
-    className: "icon-success-notification"
+    className: "admin-font font-icon-yes"
   }), displayMessage)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "admin-search-and-multistatus-wrap manage-stock-wrapper"
+    className: "manage-stock-wrapper"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     class: "admin-wrap-bulk-all-date"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -21439,7 +21422,7 @@ const Managestock = () => {
     setCurrentPage: setCurrentPage,
     headers: headers,
     products: data
-  })) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(LoadingTable, null)))));
+  })) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(LoadingTable, null)));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Managestock);
 
@@ -21541,6 +21524,7 @@ function Input({
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "table-row-meta-data"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", null, header.name), button ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+      onClick: editButtonOnClick,
       id: product.type === 'Variation' ? product.parent_product_id : null,
       onMouseOut: handleInputMouseOut,
       onChange: handleChange,
@@ -22310,10 +22294,6 @@ function SubscribersList() {
   })) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "admin-subscriber-list"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "admin-container"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "subscriber-container-wrapper"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "admin-page-title"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Subscriber List", "woocommerce-stock-manager")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "download-btn-subscriber-list"
@@ -22322,11 +22302,9 @@ function SubscribersList() {
     headers: appLocalizer.columns_subscriber_list,
     filename: "Subscribers.csv",
     className: "admin-btn btn-purple"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("i", {
-    className: "admin-font icon-download"
-  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Download CSV", "woocommerce-stock-manager")))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "admin-table-wrapper"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_AdminLibrary_CustomTable_CustomTable__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "wp-menu-image dashicons-before dashicons-download"
+  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Download CSV", "woocommerce-stock-manager")))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_AdminLibrary_CustomTable_CustomTable__WEBPACK_IMPORTED_MODULE_4__["default"], {
     data: data,
     columns: columns,
     selectable: true,
@@ -22339,7 +22317,7 @@ function SubscribersList() {
     perPageOption: [10, 25, 50],
     realtimeFilter: realtimeFilter,
     typeCounts: subscribersStatus
-  }))))));
+  })));
 }
 
 /***/ }),
@@ -22643,7 +22621,8 @@ __webpack_require__.r(__webpack_exports__);
     type: "text",
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('"Unsubscribe" Button Caption ', "woocommerce-stock-manager"),
     desc: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Modify the un-subscribe button text. By default we display \"Unsubscribe\".", "woocommerce-stock-manager"),
-    placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Unsubscribe", "woocommerce-stock-manager")
+    placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Unsubscribe", "woocommerce-stock-manager"),
+    classes: 'unsubcribe-button-section'
   }, {
     key: 'separator_content',
     type: 'section',
@@ -22675,6 +22654,7 @@ __webpack_require__.r(__webpack_exports__);
   }, {
     key: 'shown_interest_text',
     type: 'textarea',
+    classes: 'conditional-section',
     class: 'woo-setting-wpeditor-class',
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Subscriber count notification message", "woocommerce-stock-manager"),
     desc: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Personalize the notification text to let users know about the quantity of subscribers for out-of-stock item. Note: Use %no_of_subscribed% as number of interest/subscribed persons.", "woocommerce-stock-manager"),

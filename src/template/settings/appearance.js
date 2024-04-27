@@ -24,6 +24,7 @@ export default {
             label: __('"Unsubscribe" Button Caption ', "woocommerce-stock-manager"),
             desc: __("Modify the un-subscribe button text. By default we display \"Unsubscribe\".", "woocommerce-stock-manager"),
             placeholder: __("Unsubscribe", "woocommerce-stock-manager"),
+            classes: 'unsubcribe-button-section',
         },
         {
             key: 'separator_content',
@@ -64,6 +65,7 @@ export default {
         {
             key: 'shown_interest_text',
             type: 'textarea',
+            classes: 'conditional-section',
             class: 'woo-setting-wpeditor-class',
             label: __("Subscriber count notification message", "woocommerce-stock-manager"),
             desc: __("Personalize the notification text to let users know about the quantity of subscribers for out-of-stock item. Note: Use %no_of_subscribed% as number of interest/subscribed persons.", "woocommerce-stock-manager"),

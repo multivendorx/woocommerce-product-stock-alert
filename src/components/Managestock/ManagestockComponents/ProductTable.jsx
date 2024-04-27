@@ -243,6 +243,14 @@ const ProductTable = ( { products, headers, setData, setDisplayMessage, rowsPerP
                           <a href={ product[ header.dependent ] } target="_blank">
                           <img src={ product[ headerKey ] } class="table-image" />
                         </a>
+                        {/* <Input 
+                          handleChange={ ( e ) => {console.log(e.value); handleChange( e, product.id, 'name', product.type ) } }
+                          handleInputMouseOut={ handleInputMouseOut }
+                          editButtonOnClick={ editButtonOnClick }
+                          headerKey={ "name" } 
+                          product={ product } 
+                          header={ header }
+                      /> */}
                       </div>
                     </div>
                   </td>

@@ -1,344 +1,234 @@
-$base-color: #f2eff5;
-$border-color: #d4d1d9;
-$fill-color: #fdfdfe;
-$theme-color: #181718;
-$header-background: #f7f6f9;
-$icon-color: #9f8ab9;
+$menu-btn-color: #522c81;
+$body-background: #f9f9f9;
+$color-white: #fff;
+$menu-color: #f4f1f7;
+$color-active: #65438f;
 
-@mixin flex($direction: row, $justify: center, $align: center) {
-  display: flex;
-  flex-direction: $direction;
-  justify-content: $justify;
-  align-items: $align;
-}
+.general-wrapper {
+  nav.admin-panel-nav {
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    display: flex;
+    margin-bottom: 1.25rem;
 
-#admin-stockmanager {
-  .general-wrapper {
-    .container {
-      gap: 1.2rem;
-      padding: 2rem 1rem;
-      min-height: 54rem;
-      @include flex(column, start);
-
-      .middle-container-wrapper {
-        width: 100%;
-        min-width: 60%;
-        border: 0.115rem solid rgba(0, 0, 0, 0.125);
-        border-right: 0;
-        padding-left: 0.5rem;
-        border-radius: 0.25rem;
-
-        .tab-description-start {
-          padding: 1.25rem 2rem;
-          margin-bottom: 0.15rem;
-          background-color: $fill-color;
-          border: 0.063rem solid $border-color;
-          border-top: none;
-          position: relative;
-
-          &::after{
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: $icon-color;
-          }
-
-          .tab-name {
-            color: $theme-color;
-            font-size: 1.25rem;
-            font-weight: 400;
-            padding-bottom: 0.9rem;
-          }
-          p{
-            font-size: 13px;
-          }
-        }
-
-        .middle-child-container {
-          @include flex(row, start, start);
-          gap: 1rem;
-
-          .current-tab-lists {
-            height: auto;
-            max-width: 15.75rem;
-            width: 100%;
-            position: sticky;
-            top: 3rem;
-
-            .current-tab-lists-container {
-              .active-current-tab {
-                position: relative;
-                background-color: rgb(225 225 225);
-
-                &:hover {
-                  background-color: rgb(225 225 225);
-                }
-              }
-
-              a {
-                display: flex;
-                align-items: center;
-                transition: 0.3s;
-                padding: 0.5rem 1.2rem 0.5rem 0.5rem;
-                margin: 0.5rem 0;
-                border-bottom: 0;
-                text-decoration: none;
-                color: $theme-color;
-                position: relative;
-                box-shadow: none;
-                border-radius: 0.25rem;
-                font-weight: 400;
-                font-size: 1rem;
-
-                &:hover {
-                  background-color: $fill-color;
-                }
-
-                i {
-                  padding-right: 0.5rem;
-                  color: $icon-color;
-                  font-size: 1.5rem;
-                }
-
-                .tab-menu-dropdown-icon{
-                  margin: 0;
-                  margin-left: auto;
-                  width: 1.5rem;
-                  height: 1.5rem;
-                  display: flex;
-                  align-items: center;
-                  justify-content: center;
-                  transform: rotate(-90deg);
-                  transition: transform 0.3s linear;
-                  border-radius: 0.25rem;
-
-                  &.active{
-                   transform: rotate(0);
-                  //  transition: transform 0.3s linear;
-                  }
-
-                  i{
-                    padding-right: 0;
-                    font-size: 1.25rem;
-                  }
-                }
-              }
-
-              .tab-wrapper a{
-                margin: 0;
-              }
-
-              .subtab-wrapper {
-                padding: 0 0 0 1rem;
-                max-height: 0;
-                height: auto;
-                overflow: hidden;
-                transition: all 0.5s ease;
-                
-                &.show{
-                  padding: 0;
-                }
-                
-                &.active{
-                  margin: 0.5rem 0;
-                  transition: max-height 1.5s linear;
-                  max-height: 60rem;
-                }
-
-                a{
-                  margin: 0.25rem 0;
-                }
-              }
-            }
-
-            .brand {
-              margin: 1.25rem 0 2.5rem 0.75rem;
-              position: relative;
-
-              p{
-                font-size: 1rem;
-                margin-top: 0.25rem;
-              }
-
-              img {
-                max-width: 9.45rem;
-                width: 100%;
-              }
-
-              .menu-close {
-                display: none;
-                position: absolute;
-                width: 2.52rem;
-                top: 50%;
-                transform: translateY(-50%);
-                font-size: 1.15rem;
-                right: 0;
-                height: 2.52rem;
-                border-radius: 0.5rem;
-                background: $base-color;
-                color: $icon-color;
-                border: none;
-                outline: none;
-              }
-            }
-
-            .menu-coll-btn {
-              border: none;
-              outline: none;
-              cursor: pointer;
-              display: flex;
-              align-items: center;
-              transition: 0.3s;
-              padding: 0.5rem 1.2rem 0.5rem 0.5rem;
-              margin: 0.5rem 0;
-              border-bottom: 0;
-              text-decoration: none;
-              color: $theme-color;
-              position: relative;
-              box-shadow: none;
-              border-radius: 0.25rem;
-              font-weight: 400;
-              font-size: 1rem;
-              width: 100%;
-              background-color: transparent;
-
-              &:hover {
-                background-color: $fill-color;
-              }
-
-              i {
-                margin-right: 0.5rem;
-                color: $icon-color;
-                font-size: 0.75rem;
-                padding: 0.25rem;
-                border-radius: 50%;
-                color: $fill-color;
-                background-color: $icon-color;
-              }
-            }
-          }
-
-          .current-tab-lists.showMenu {
-            max-width: 2.52rem;
-
-            .current-tab-lists-container {
-              a {
-                padding: 0.5rem;
-
-                i {
-                  padding: 0;
-                }
-              }
-            }
-          }
-
-          .tab-content {
-            width: 100%;
-            height: auto;
-            min-height: 63rem;
-            position: relative;
-            border-radius: 0.25rem;
-          }
-        }
-      }
-
-      .admin-panel-nav {
-        width: 100%;
-        display: none;
-        align-items: center;
-        justify-content: flex-start;
-        background: #fff;
-        padding: 0.63rem;
-        gap: 0.63rem;
-        border-radius: 0.25rem;
-
-        button {
-          width: 2.52rem;
-          height: 2.52rem;
-          font-size: 1.25rem;
-          border: none;
-          outline: none;
-        }
-
-        .brand {
-          img {
-            width: 9.45rem;
-          }
-        }
-      }
+    button {
+      width: 2.25rem;
+      height: 2.25rem;
+      background: $menu-btn-color;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      border-radius: 0.25rem;
+      font-size: 1rem;
+      color: $color-white;
     }
 
-    .notic-display-title {
-      background-color: #bf6290;
-      color: $fill-color;
-      padding: 0.5rem 1rem;
-      border-radius: 0.12rem;
-      position: fixed;
-      top: 15%;
-      right: 1rem;
-      z-index: 9999;
+    .brand {
+      display: flex;
+      align-items: flex-end;
+      gap: 0.5rem;
 
-      i {
-        margin-right: 0.25rem;
+      span{
+        display: flex;
+        align-items: center;
+        img {
+          width: 100px;
+          height: 100%;
+          object-fit: contain;
+          object-position: center;
+          margin-left: 0.25rem;
+        }
+      }
+
+      p {
+        font-size: 1.75rem;
+        font-weight: 400;
+        width: fit-content;
+      }
+    }
+  }
+
+  .middle-container-wrapper {
+    border-top: 1px solid rgba($color: $color-active, $alpha: 0.3);
+    .middle-child-container {
+      position: relative;
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 0.5rem;
+      align-items: flex-start;
+      margin-top: 2rem;
+
+      &.showMenu{
+        grid-template-columns: 50px 1fr;
+      }
+
+      .current-tab-lists {
+        background-color: $color-white;
+        width: 100%;
+        height: 100%;
+        padding: 2.75rem 0;
+
+        .current-tab-lists-container {
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+          align-items: flex-start;
+          position: relative;
+
+          a,
+          .menu-coll-btn {
+            padding: 0.75rem 1rem;
+            background: transparent;
+            width: 100%;
+            font-size: 1rem;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            text-decoration: none;
+            gap: 0.5rem;
+            font-weight: 400;
+            color: rgba($color: #3f3f3f, $alpha: 0.7);
+            transition: all 0.3s linear;
+            position: relative;
+
+            &:hover{
+              background: $body-background;
+              &::before{
+                background-color: $color-active;
+              }
+            }
+
+            &::before {
+              border-bottom-right-radius: 6px;
+              border-top-right-radius: 6px;
+              content: "";
+              height: 65%;
+              top: 50%;
+              transform: translateY(-50%);
+              left: 0;
+              position: absolute;
+              width: 3px;
+              background-color: transparent;
+              transition: all 0.3s linear;
+            }
+
+            &:focus {
+              box-shadow: none;
+            }
+
+            &:hover {
+              color: $color-active;
+            }
+
+            i {
+              font-size: 1.2rem;
+            }
+          }
+
+          .menu-coll-btn {
+            i {
+              font-size: 1rem;
+            }
+          }
+
+          .active-current-tab {
+            color: $color-active;
+            background-color: $body-background;
+
+            &::before {
+              background-color: $color-active;
+            }
+          }
+
+          .menu-close{
+            display: none;
+            position: absolute;
+            width: 2.25rem;
+            height: 2.25rem;
+            top: 30px;
+            font-size: 1.15rem;
+            right: 10px;
+            border-radius: 0.5rem;
+            background-color: #f9fafb;
+            color: #65438f;
+            border: none;
+            outline: none;
+            align-items: center;
+            justify-content: center;
+          }
+        }
+      }      
+
+      .tab-content {
+        border: 0.05rem solid rgba(82, 44, 129, 0.09);
+        width: 100%;
+
+        .tab-description-start{
+            background: $menu-color;
+            padding: 1rem 2rem;
+
+            .tab-name{
+                font-size: 1.25rem;
+                font-weight: 400;
+                line-height: normal;
+                margin-bottom: 0.75rem;
+            }
+
+            p{
+              font-size: 0.938rem;
+            }
+        }
       }
     }
   }
 }
 
-@media only screen and (max-width: 48.321rem) {
-  #admin-stockmanager {
-    .general-wrapper {
-      .container {
-        .middle-container-wrapper {
-          border: none;
-          padding: 0;
-          .middle-child-container {
-            .current-tab-lists {
-              max-width: 100vw;
-              width: 0%;
-              overflow: hidden;
-              position: fixed;
-              height: 100vh;
-              z-index: 100000;
-              top: 0;
-              left: 0;
-              background: rgba($color: #000000, $alpha: 0.5);
+@media screen and (max-width: 797px) {
+  .general-wrapper {
+    nav.admin-panel-nav {
+      button {
+        display: flex;
+      }
 
-              .current-tab-lists-container {
-                height: 100%;
-                background: white;
-                padding: 2rem;
-                max-width: 22.05rem;
-              }
+      .brand {
+        span{
+          display: none;
+        }
+      }
+    }
+    .middle-container-wrapper{
+      .middle-child-container {
+        .current-tab-lists{
+          position: fixed;
+          top: 0;
+          max-width: 100%;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background-color: rgba($color: #000000, $alpha: 0.7);
+          z-index: 999999;
+          transition: all 0.3s linear;
 
-              .brand {
-                margin: 0 0 1.5rem;
+          &.active{
+            left: 0;
+          }
 
-                .menu-close {
-                  display: block;
-                }
-              }
+          .current-tab-lists-container{
+            max-width: 500px;
+            background-color: $color-white;
+            height: 100%;
+            padding-top: 60px;
+            padding-left: 5px;
 
-              .menu-coll-btn {
-                display: none;
-              }
+            .menu-close{
+              display: flex;
             }
 
-            .current-tab-lists.active {
-              width: 100%;
-            }
-
-            .tab-content {
-              width: 100%;
+            .menu-coll-btn{
+              display: none;
             }
           }
-        }
-
-        .admin-panel-nav {
-          display: flex;
         }
       }
     }

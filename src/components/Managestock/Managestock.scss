@@ -1,352 +1,110 @@
-$manageStock-base-color: #f2eff5;
-$manageStock-boder-color: #d4d1d9;
-$manageStock-border: 0.063rem solid #d4d1d9;
-$manageStock-title-color: #181718;
-$manageStock-paragraph-color: #5e5d60;
-$manageStock-border-radius: 0.25rem;
-$manageStock-button-border-radius: 0.25rem;
-$manageStock-fill-color: #fdfdfe;
-$manageStock-theme-color: #65438f;
-$manageStock-header-background: #f7f6f9;
-$manageStock-section-background: #fbfafc;
-$manageStock-code-back: #fdf9fb;
-$manageStock-code-line: #dfb1c7;
-$manageStock-purple-btn-hover: #795b9d;
-$manageStock-font-white: #f9f8fb;
-$manageStock-grey-icon: #8e8b91;
-$manageStock-rejected-vendor-font: #df5d65;
-$manageStock-rejected-vendor-back: #fefbfc;
-$manageStock-approve-font-color: #522c81;
-$manageStock-red-btn-back: #e35047;
-$manageStock-red-icon: #e26f76;
-$manageStock-code-font: #b74f82;
-$manageStock-small-code-back: #fbf5f8;
-$manageStock-blue-icon: #9f8ab9;
-$manageStock-scroll-color: #ece8f1;
-$border-color: rgba(0, 0, 0, 0.2);
-$background-color: #fff;
-$padding-small: 0.4rem;
-$padding-medium: 1rem;
-$font-color: #333;
-$background-secondary-color: #ccc;
-$even-row-color: rgb(245, 245, 245);
-$head-row-background: #e7e7e7;
-$border-color: rgba(0, 0, 0, 0.2);
-$shine-background: linear-gradient(
-  90deg,
-  #f4f4f4 0rem,
-  rgba(229, 229, 229, 0.8) 2.52rem,
-  #f4f4f4 5.04rem
-);
+$menu-btn-color: #522c81;
+$body-background: #f9f9f9;
+$color-white: #fff;
+$menu-color: #f4f1f7;
+$color-active: #65438f;
 
-$line-height-small: 1.008rem;
-$line-height-medium: 2.25rem;
 
-$border-width-small: 0.063rem;
-$border-width-medium: 0rem;
+.admin-middle-container-wrapper{
+  .title-section{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+    position: relative;
 
-$border-radius-small: 0.25rem;
-$border-radius-medium: 0.441rem;
-$border-radius-large: 0.5rem;
-
-$animation-duration: 2s;
-
-//for loader purpose-----
-.admin-middle-container-wrapper > span {
-  display: block;
-  margin: 0 auto;
-}
-
-.load-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-  border-color: $border-color;
-  width: 100%;
-
-  td {
-    padding: $padding-small;
-    border-style: solid;
-    border-width: $border-width-medium;
-    overflow: hidden;
-    word-break: normal;
-    border-color: $border-color;
-    color: $font-color;
-    background-color: $background-color;
-
-    &:first-child {
-      display: block;
-    }
-  }
-
-  tr:first-child .load-table-td {
-    font-weight: normal;
-    padding: $padding-small;
-    border-style: solid;
-    border-width: $border-width-medium;
-    overflow: hidden;
-    word-break: normal;
-    border-color: $border-color;
-    color: $font-color;
-    background-color: $head-row-background;
-  }
-}
-
-.line {
-  float: left;
-  width: 100%;
-  height: $line-height-small;
-  margin-top: $padding-small;
-  border-radius: $border-radius-medium;
-  background-image: $shine-background;
-  background-size: 37.8rem;
-  animation: shine-lines $animation-duration infinite ease-out;
-}
-
-@keyframes shine-lines {
-  0% {
-    background-position: -$line-height-small;
-  }
-  40%,
-  100% {
-    background-position: 8.82rem;
-  }
-}
-
-.manage-stock-wrapper {
-  padding: 0 !important; // Overwrite common.css file css to set padding
-  gap: 0.5rem !important; // Overwrite common.css file css to set padding
-}
-
-.admin-middle-container-wrapper {
-  .admin-backend-datatable-wrapper {
-    .rdt_TableHeadRow {
-      border: none !important; // to adjust default border on datatable
-      border-bottom: 0;
-      margin: 0 !important; // to adjust datatable margin from all side
-      border-radius: 0 !important; // to adjust datatable birder-radius
+    p{
+      font-size: 1.5rem;
     }
 
-    .sc-dmlpXa.koyZDM {
-      border-radius: 0.25rem;
-      border: 0.063rem solid rgba($color: #000000, $alpha: 0.3);
-    }
+    .stock-reports-download{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
 
-    .rdt_Table {
-      *{
-        font-size: 0.85rem;
-      }
-      .rdt_TableBody {
-        .rdt_TableRow {
-          padding: 0.625rem 0;
-          font-size: 0.95rem !important; // to adjust datatable fontsize
-          border-radius: 0;
-          margin: 0 !important; // to adjust datatable margin
-          border-left: 0;
-          border-right: 0;
+      .import-export-btn{
+        border-radius: 0.25rem;
+        background-color: $color-active;
+        padding: 0.75rem 1.25rem;
+        
+        a{
+          color: $color-white;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 0.5rem;
+          text-decoration: none;
 
-          &:nth-child(-2n + 4) {
-            border: none !important; // to adjust datatable row border
+          .dashicons-before {
+            &::before{
+              padding: 0;
+            }
           }
         }
       }
     }
-
-    .rdt_Pagination {
-      margin: 1rem 0;
-      gap: 0.625rem;
-    }
   }
 
-  .rdt_TableCell {
-    width: 100%;
-
-    .custome-toggle-default {
-      width: fit-content !important; // to adjust toggle btn width
-      min-width: 6.25rem !important; // to adjust toggle btn min-width
-      top: -0.75rem;
-    }
-  }
-}
-
-#admin-stockmanager {
-  .admin-middle-container-wrapper {
-    .admin-wrap-bulk-all-date {
-      input,
-      textarea {
-        outline: none !important;
-        border: none !important;
-        box-shadow: 0 0 0 0.025rem #2271b1 !important; // to adjust box shadow for input tag and textarea for all stockmanager
-        &:focus {
-          outline: none !important;
-          border: none !important;
-          box-shadow: 0 0 0 0.025rem #2271b1 !important; // to adjust box shadow for input tag and textarea for all stockmanager
-        }
-      }
-
-      .custom-select{
-        select{
-          box-shadow: 0 0 0 0.025rem #2271b1 !important;
-        }
-      }
-    }
-
-    input:focus,
-    textarea:focus {
-      outline: none !important; // to adjust box shadow for input tag and textarea for all stockmanager
-      box-shadow: none !important; // to adjust box shadow for input tag and textarea for all stockmanager
-    }
-
-    select {
-      .custom-select {
-        display: flex;
-        align-items: center;
-        font-weight: normal;
-        border: $manageStock-border;
-        border-radius: $manageStock-border-radius;
-        height: 2.5rem;
-        position: relative;
-        background-color: $manageStock-fill-color;
-        cursor: pointer;
-      }
-
-      &:focus {
-        color: inherit;
-        border: none !important; // Adjust border as none to overwrite default border
-        box-shadow: none;
-      }
-
-      &:hover {
-        color: inherit;
-      }
-    }
-  }
-
-  td {
-    &:hover {
-      .edit-btn-product {
-        opacity: 1;
-      }
-    }
-  }
-
-  tr.expand {
-    background-color: #f7fcff !important; // force to set background color for variable product only
-    border: 0.063rem solid rgb(172, 172, 172);
-
-    &:first-child {
-      border-bottom: none !important; // force to set border color for first variable product only
-    }
-
-    &:last-child {
-      border-top: none !important; // force to set border color for last variable product only
-    }
-  }
-}
-
-.manage-stock-container {
-  select {
-    -webkit-appearance: none;
-    border: none !important; // To overwrite default wordpress css
-    width: 100%;
-    background: #fff0 url("../../assets/images/download.svg") no-repeat right
-      0.315rem top 55%;
-      font-size: 0.85rem;
-  }
-}
-
-.import-export-btn {
-  display: flex;
-  align-items: center;
-  border: 0.063rem solid #d4d1d9;
-  background-color: #65438f;
-  color: #f9f8fb;
-  border-radius: 0.25rem;
-  padding: 0.5rem 1.25rem;
-  position: relative;
-  font-size: 0.9rem;
-  width: fit-content;
-  margin-left: auto;
-
-  .wp-menu-image::before {
-    padding: 0;
-    padding-right: 0.313rem;
-  }
-}
-
-.table-image {
-  border-radius: 0.313rem;
-  overflow: hidden;
-  border: 0.125rem solid rgba($color: #000000, $alpha: 0.3);
-  width: 4.375rem;
-  height: 4.375rem;
-  margin: 0 !important; // to adjust product image margin
-}
-
-.export,
-.import {
-  padding-bottom: 0.5rem;
-}
-
-.input-field-edit {
-  border: none !important; // to adjust input field border for stock manager
-  outline: none !important; // to adjust input field boutline for stock manager
-}
-
-.outofstock {
-  color: red !important; // to adjust stock status as there current status
-}
-
-.instock {
-  color: green !important; // to adjust stock status as there current status
-}
-
-.onbackorder {
-  color: #e0a100 !important; // to adjust stock status as there current status
-}
-
-.import-export-btn {
-  a {
-    color: $manageStock-font-white;
+  .manage-stock-wrapper{
     display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
 
-    &:hover {
-      text-decoration: none;
-    }
+    .admin-wrap-bulk-all-date{
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      max-width: 600px;
+      input,select,textarea{
+        background-color: transparent !important; // To overwrite default wordpress css
+        border: 0.115rem solid rgba(0, 0, 0, 0.125) !important;
+        border-radius: 0.25rem !important;
 
-    &:focus {
-      box-shadow: none;
-      text-decoration: none;
+        &:focus{
+          box-shadow: none;
+        }
+      }
+
+      & > div{
+        flex: 1 0 130px;
+
+        input, select{
+          width: 100%;
+          padding: 0.25rem 0.5rem;
+        }
+      }
     }
   }
-}
 
-.custome-toggle label {
-  position: absolute !important; // to adjust custome toggle btn lable position
-  cursor: pointer;
-  text-indent: -624.938rem;
-  width: 2.5rem;
-  height: 1.188rem;
-  background: grey;
-  display: block;
-  border-radius: 6.25rem;
-  position: relative;
-  background: #c0c0c0;
-  top: 0;
-  left: 0;
-}
+  .manage-stock-table{
+    width: 100%;
 
-.admin-notic-display-title {
-  background-color: #bf6290;
-  color: $manageStock-fill-color;
-  padding: 0.5rem 1rem;
-  border-radius: 0.12rem;
-  position: fixed;
-  top: 15%;
-  right: 1rem;
-  z-index: 9999;
 
-  i {
-    margin-right: 0.25rem;
+    input,select{
+      background: transparent;
+      border: none;
+      outline: none;
+      box-shadow: none;
+      padding: 0;
+      font-size: 0.938rem;
+      
+      &:focus{
+        box-shadow: none !important; // To overwrite default wordpress css
+      }
+  }
+    
+  select{
+    background: transparent url(data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2220%22%20height%3D%2220%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M5%206l5%205%205-5%202%201-7%207-7-7%202-1z%22%20fill%3D%22%23555%22%2F%3E%3C%2Fsvg%3E) no-repeat right 5px top 55%;
+    padding-right: 30px;
+    font-size: 0.85rem;
+  }
+  
   }
 }
 
@@ -429,6 +187,7 @@ $animation-duration: 2s;
   }
 }
 
+
 .table-row-meta-data {
   input {
     width: 100%;
@@ -439,12 +198,11 @@ $animation-duration: 2s;
   }
 
   input.active {
-    border: 0.063rem solid rgba(0, 0, 0, 0.2);
+    border:  0.125rem solid rgba($color: $color-active, $alpha: 0.125);
   }
 }
 
 .admin-backend-datatable-wrapper {
-  overflow-x: scroll;
 
   &::-webkit-scrollbar {
     margin: 0;
@@ -458,7 +216,8 @@ $animation-duration: 2s;
 
   table {
     border-radius: 0.25rem;
-    border: 0.063rem solid rgba(0, 0, 0, 0.24);
+    overflow: hidden;
+    box-shadow: 0 0 1rem rgba($color: #000000, $alpha: 0.125);
     width: 100%;
 
     input {
@@ -467,20 +226,19 @@ $animation-duration: 2s;
 
     thead {
       border-radius: 0.25rem;
-      background-color: rgb(236, 236, 236);
+      background-color: $color-white;
+      font-size: 0.9rem;
     }
 
     tbody {
       tr {
-        &:nth-child(even) {
-          background: rgb(247, 247, 247);
-        }
-
+        background: $color-white;
         &:nth-child(odd) {
-          background: rgb(255, 255, 255);
+          background: $body-background;
         }
 
         .table-row {
+          font-size: 0.85rem;
           &:first-child {
             min-width: 2.5rem;
             max-width: 2.5rem;
@@ -534,6 +292,7 @@ $animation-duration: 2s;
   .table-row-meta-data {
     width: 100%;
     justify-content: flex-start;
+
   }
 }
 
@@ -564,7 +323,7 @@ $animation-duration: 2s;
 }
 
 .table-head {
-  font-weight: 500;
+  font-weight: 400;
 
   .table-row {
     &:first-child {
@@ -599,12 +358,12 @@ $animation-duration: 2s;
 
 .table-row-meta-data {
   img {
-    width: 3.125rem;
-    height: 3.125rem;
-    object-fit: cover;
-    object-position: center;
-    border-radius: 0.313rem;
-    box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.1);
+    width: 50px;
+    height: 50px;
+    padding: 0.25rem;
+    border-radius: 0.25rem;
+    box-shadow: 0 0 .125rem rgba($color: #000000, $alpha: 0.125);
+  
   }
 }
 
@@ -735,7 +494,7 @@ $animation-duration: 2s;
     h1 {
       display: block;
       font-size: 0.95rem;
-      font-weight: 500;
+      font-weight: 400;
       min-width: 7.5rem;
       text-align: left;
     }
@@ -837,7 +596,6 @@ $animation-duration: 2s;
 
 .table-row.product_stock_status .table-row-meta-data p,
 .table-row.product_backorders .table-row-meta-data p {
-  padding-left: 0.625rem;
   text-align: left;
   font-size: 0.85rem;
 }
@@ -890,4 +648,37 @@ $animation-duration: 2s;
 
 .expand .table-row.product_name .table-data-container .edit-btn-product {
   display: none !important; // force to set display as none for variable product edit button
+}
+
+tr.expand {
+  background-color: #f7fcff !important; // force to set background color for variable product only
+  border: 0.063rem solid rgb(172, 172, 172);
+
+  &:first-child {
+    border-bottom: none !important; // force to set border color for first variable product only
+  }
+
+  &:last-child {
+    border-top: none !important; // force to set border color for last variable product only
+  }
+}
+
+.outofstock {
+  color: red !important; // to adjust stock status as there current status
+}
+
+.instock {
+  color: green !important; // to adjust stock status as there current status
+}
+
+.onbackorder {
+  color: #e0a100 !important; // to adjust stock status as there current status
+}
+
+.table-row{
+  &:hover{
+    .edit-btn-product{
+      opacity: 1;
+    }
+  }
 }

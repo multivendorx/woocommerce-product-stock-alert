@@ -1,5 +1,10 @@
 $manageStock-border: 0.063rem solid #d4d1d9;
 $manageStock-fill-color: #fdfdfe;
+$menu-btn-color: #522c81;
+$body-background: #f9f9f9;
+$color-white: #fff;
+$menu-color: #f4f1f7;
+$color-active: #65438f;
 
 .stock-reports-download {
   display: flex;
@@ -14,12 +19,22 @@ $manageStock-fill-color: #fdfdfe;
   padding: 1.512rem;
 }
 
-.import-page .admin-page-title {
-  margin-bottom: 0.938rem;
+.import-page, .export-page {
+  .admin-page-title {
+    margin-bottom: 0.938rem;
+    display: flex;
+    gap: 0.5rem;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+
+    p {
+      font-size: 1.5rem;
+    }
+  }
 }
 
 .import-section {
-
   th,
   td {
     text-align: center;
@@ -98,12 +113,8 @@ $manageStock-fill-color: #fdfdfe;
 
 .import-page,
 .export-page {
-  background-color: #ffffff;
-  padding: 1.5rem 1.5rem;
   display: flex;
   flex-direction: column;
-  border-radius: 0.25rem;
-  box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.12);
 }
 
 .import-table {
@@ -265,13 +276,12 @@ $manageStock-fill-color: #fdfdfe;
     margin: 0 !important; // to adjust import button section button margin
   }
 
-  &>div {
+  & > div {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 0.5rem;
   }
-
 }
 .import-btn {
   padding: 0.75rem 1.5rem;
@@ -317,5 +327,35 @@ $manageStock-fill-color: #fdfdfe;
 
   .export-feature-card {
     justify-content: space-between;
+  }
+}
+
+.import-export-btn {
+  border-radius: 0.25rem;
+  background-color: $color-active;
+  padding: 0.75rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+
+  a {
+    color: $color-white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    text-decoration: none;
+
+    .dashicons-before {
+      &::before {
+        padding: 0;
+      }
+    }
+  }
+  .dashicons-before {
+    &::before {
+      padding: 0;
+    }
   }
 }

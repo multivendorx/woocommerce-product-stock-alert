@@ -86,11 +86,11 @@ const Support = () => {
             {supportLink.map((item, index) => {
               return (
                 <>
-                  <div className="card-item">
+                  <a href={item.link} target="_blank" className="card-item">
                     <i className={`admin-font font-${item.icon}`}></i>
-                    <a href={item.link}>{item.title}</a>
+                    <a href={item.link} target="_blank">{item.title}</a>
                     <p>{item.description}</p>
-                  </div>
+                  </a>
                 </>
               );
             })}
