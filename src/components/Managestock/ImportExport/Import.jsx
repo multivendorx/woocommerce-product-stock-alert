@@ -74,9 +74,9 @@ const Import = () => {
     };
 
     return (
-        <div className="woo-container">
+        <div className="admin-container">
             <div className='import-page'>
-                <div className="woo-page-title">
+                <div className="admin-page-title">
                     <p>{ __( 'Import', 'woocommerce-stock-manager' ) }</p>
                     <button class="import-export-btn" >
                         <Link to={ '?page=stock-manager#&tab=manage-stock' }>
@@ -86,8 +86,8 @@ const Import = () => {
                     </button>
                     {
                         displayMessage &&
-                        <div className="woo-notic-display-title">
-                            <i className="icon-success-notification"></i>
+                        <div className="admin-notice-display-title">
+                            <i className="admin-font font-icon-yes"></i>
                             { displayMessage }
                         </div>
                     }

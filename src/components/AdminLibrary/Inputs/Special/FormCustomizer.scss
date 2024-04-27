@@ -10,7 +10,7 @@
                 border: none !important; // To overwrite dynamic form scss
                 font-size: 0.95rem;
                 cursor: pointer;
-                width: fit-content;
+                width: 100%;
                 &.active, &:hover{
                     box-shadow:
                     0.0rem 0.0rem 0.0rem 0.126rem rgb(255, 255, 255), 0.0rem 0.0rem 0.0rem 0.189rem rgba(33, 33, 33, 0.5)
@@ -102,7 +102,7 @@
 
                             input{
                                 &:hover, &:focus{
-                                    box-shadow: none !important; 
+                                    box-shadow: none !important; // To overwrite default wordpress css
                                 }
                             }
                         }

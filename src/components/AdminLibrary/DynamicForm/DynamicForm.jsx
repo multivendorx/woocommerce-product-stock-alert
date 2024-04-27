@@ -212,7 +212,7 @@ const DynamicForm = (props) => {
         case "number":
           input = (
             <CustomInput.BasicInput
-              wrapperClass="setting-form-input"
+              wrapperClass={`setting-form-input`}
               descClass="settings-metabox-description"
               description={inputField.desc}
               key={inputField.key}
@@ -605,6 +605,7 @@ const DynamicForm = (props) => {
               rightContent={inputField.right_content}
               options={inputField.options}
               value={value}
+              proSetting={isProSetting(inputField.proSetting)}
               onChange={(e) => {
                 if ( ! proSettingChanged( inputField.proSetting ) ) {
                   handleChange(e, inputField.key, "multiple");
@@ -728,7 +729,7 @@ const DynamicForm = (props) => {
         inputField.label === "no_label" ? (
         input
       ) : (
-        <div key={"g" + inputField.key} className="form-group">
+        <div key={"g" + inputField.key} className={ `form-group ${ inputField.classes ? inputField.classes : '' }` }>
           <label
             className="settings-form-label"
             key={"l" + inputField.key}
@@ -750,7 +751,7 @@ const DynamicForm = (props) => {
     <>
       <div className="dynamic-fields-wrapper">
         <Dialog
-          className="woo-module-popup"
+          className="admin-module-popup"
           open={modelOpen}
           onClose={handleModelClose}
           aria-labelledby="form-dialog-title"
@@ -762,7 +763,7 @@ const DynamicForm = (props) => {
           <Popoup />
         </Dialog>
         {successMsg && (
-          <div className="notic-display-title">
+          <div className="admin-notice-display-title">
             <i className="admin-font font-icon-yes"></i>
             {successMsg}
           </div>

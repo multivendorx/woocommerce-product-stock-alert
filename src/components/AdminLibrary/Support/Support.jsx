@@ -4,27 +4,6 @@ import "./support.scss";
 const Support = () => {
   const url = "https://www.youtube.com/embed/cgfeZH5z2dM?si=3zjG13RDOSiX2m1b";
 
-  const supportLink = [
-    {
-      title: "Get in touch with Support",
-      icon: "mail",
-      description: "Reach out to the support team for assistance or guidance.",
-      link: "https://multivendorx.com/contact-us/?utm_source=WordPressAdmin&utm_medium=PluginSettings&utm_campaign=productsstockmanager",
-    },
-    {
-      title: "Explore Documentation",
-      icon: "submission-message",
-      description: "Understand the plugin and its settings.",
-      link: "https://multivendorx.com/docs/knowledgebase/products-stock-manager-notifier-for-woocommerce/?utm_source=WordPressAdmin&utm_medium=PluginSettings&utm_campaign=productsstockmanager",
-    },
-    {
-      title: "Contribute Here",
-      icon: "support",
-      description: "To participation in product enhancement.",
-      link: "https://github.com/multivendorx/woocommerce-product-stock-alert/issues",
-    },
-  ];
-
   const [faqs, setFaqs] = useState([
     {
       question:
@@ -81,19 +60,6 @@ const Support = () => {
               We want to help you enjoy a wonderful experience with all of our
               products.
             </p>
-          </div>
-          <div className="support-card">
-            {supportLink.map((item, index) => {
-              return (
-                <>
-                  <div className="card-item">
-                    <i className={`admin-font font-${item.icon}`}></i>
-                    <a href={item.link}>{item.title}</a>
-                    <p>{item.description}</p>
-                  </div>
-                </>
-              );
-            })}
           </div>
           <div className="video-faq-wrapper">
             <div className="video-section">

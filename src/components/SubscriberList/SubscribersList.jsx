@@ -118,7 +118,7 @@ export default function SubscribersList() {
       name: "productNameField",
       render: (updateFilter, filterValue) => (
         <>
-          <div className="woo-header-search-section">
+          <div className="admin-header-search-section">
             <input
               name="productNameField"
               type="text"
@@ -137,7 +137,7 @@ export default function SubscribersList() {
       name: "emailField",
       render: (updateFilter, filterValue) => (
         <>
-          <div className="woo-header-search-section">
+          <div className="admin-header-search-section">
             <input
               name="emailField"
               type="text"
@@ -209,7 +209,7 @@ export default function SubscribersList() {
     },
     {
       name: __("Status", "woocommerce-stock-manager"),
-      cell: (row) => <TableCell title="status" > 
+      cell: (row) => <TableCell title="Status" > 
         <p 
          className={row.status_key === 'mailsent' ? 'sent' : (row.status_key === 'subscribed' ? 'subscribed' : 'unsubscribed')}
         >{row.status}</p>
@@ -222,7 +222,7 @@ export default function SubscribersList() {
       { ! appLocalizer.pro_active ? (
         <div>
           <Dialog
-            className="woo-module-popup"
+            className="admin-module-popup"
             open={openDialog}
             onClose={() => {
               setOpenDialog(false);
@@ -247,45 +247,39 @@ export default function SubscribersList() {
           />
         </div>
       ) : (
-        <div className="woo-subscriber-list">
-          <div className="woo-container">
-            <div className="subscriber-container-wrapper">
-              <div className="woo-page-title">
-                <p>{__("Subscriber List", "woocommerce-stock-manager")}</p>
-                <div className="download-btn-subscriber-list">
-                  <CSVLink
-                    data={filterForCSV(data || [])}
-                    headers={appLocalizer.columns_subscriber_list}
-                    filename={"Subscribers.csv"}
-                    className="woo-btn btn-purple"
-                  >
-                    <i className="woo-font icon-download"></i>
-                    {__("Download CSV", "woocommerce-stock-manager")}
-                  </CSVLink>
-                </div>
-              </div>
-
-                <div className="admin-table-wrapper">
-                {
-                    <CustomTable
-                    data={data}
-                    columns={columns}
-                    selectable = {true}
-                    handleSelect = {(selectRows) => {
-                      setSelectedRows(selectRows);
-                    }}
-                    handlePagination={requestApiForData}
-                    defaultRowsParPage={10}
-                    defaultTotalRows={totalRows}
-                    perPageOption={[10, 25, 50]}
-                    realtimeFilter={realtimeFilter}
-                    typeCounts={subscribersStatus}
-                  />
-                }
-              </div>
+        <div className="admin-subscriber-list">
+          <div className="admin-page-title">
+            <p>{__("Subscriber List", "woocommerce-stock-manager")}</p>
+            <div className="download-btn-subscriber-list">
+              <CSVLink
+                data={filterForCSV(data || [])}
+                headers={appLocalizer.columns_subscriber_list}
+                filename={"Subscribers.csv"}
+                className="admin-btn btn-purple"
+              >
+               <div className="wp-menu-image dashicons-before dashicons-download"></div>
+                {__("Download CSV", "woocommerce-stock-manager")}
+              </CSVLink>
             </div>
           </div>
-        </div>
+
+            {
+                <CustomTable
+                data={data}
+                columns={columns}
+                selectable = {true}
+                handleSelect = {(selectRows) => {
+                  setSelectedRows(selectRows);
+                }}
+                handlePagination={requestApiForData}
+                defaultRowsParPage={10}
+                defaultTotalRows={totalRows}
+                perPageOption={[10, 25, 50]}
+                realtimeFilter={realtimeFilter}
+                typeCounts={subscribersStatus}
+              />
+            }
+          </div>
       )}
     </div>
   );

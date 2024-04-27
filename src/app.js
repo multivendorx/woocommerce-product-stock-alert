@@ -17,7 +17,6 @@ const App = () => {
     });
 
     const location = new URLSearchParams(useLocation().hash);
-
     return (
         <>
             { location.get('tab') === 'settings' && <Settings initialTab='general' /> }

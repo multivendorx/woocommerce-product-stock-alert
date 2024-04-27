@@ -2,7 +2,6 @@ import React from 'react';
 import { __ } from "@wordpress/i18n";
 
 export default function Input( { headerKey, header, product, handleChange, handleInputMouseOut, editButtonOnClick } ) {
-
     //Functional component to return the edit icon
     const GetIcon = () => {
         return (
@@ -20,7 +19,7 @@ export default function Input( { headerKey, header, product, handleChange, handl
                     <h1>{ header.name }</h1>
                     {
                         button ?
-                            <input id={ product.type === 'Variation' ? product.parent_product_id : null } onMouseOut={ handleInputMouseOut } onChange={ handleChange } type={ type } value={ ( value === "" || value === null ? 0 : value ) } autofocus="false" readOnly />
+                            <input  onClick={ editButtonOnClick } id={ product.type === 'Variation' ? product.parent_product_id : null } onMouseOut={ handleInputMouseOut } onChange={ handleChange } type={ type } value={ ( value === "" || value === null ? 0 : value ) } autofocus="false" readOnly />
                         :
                             <p>{ ( value === "" || value === null ? 0 : value ) }</p>
                     }

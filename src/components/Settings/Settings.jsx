@@ -41,7 +41,7 @@ const Settings = () => {
         }, [setting]);
 
         // Reander spacial component...
-        if ( currentTab === 'support' ) {
+        if ( currentTab === 'faq' ) {
             return (
                 <Support
                     content={settingModal}

@@ -1,4 +1,4 @@
-$theme-color: #65438f;
+$theme-color: #522c81;
 .support-container {
   padding: 2rem;
 
@@ -21,53 +21,6 @@ $theme-color: #65438f;
     }
   }
 
-  .support-card {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-    flex-wrap: wrap;
-
-    .card-item {
-      padding: 1.5rem;
-      flex: 1 0 12.6rem;
-      height: 10.71rem;
-      border: 0.005rem solid $theme-color;
-      border-radius: 0.25rem;
-      background: linear-gradient(145deg, #ffffff, #e6e6e6);
-      box-shadow:
-        0.63rem 0.63rem 1.26rem #ededed,
-        -0.63rem -0.63rem 1.26rem #ffffff;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        
-        &:hover{
-          background: linear-gradient(-145deg, #ffffff, #e6e6e6);
-        }
-
-        i{
-          font-size: 2rem;
-          color: $theme-color;
-          margin-bottom: 0.75rem;
-        }
-        
-        a{
-          font-size: 1.25rem;
-          margin-bottom: 0.5rem;
-          text-align: center;
-          display: block;
-          color: $theme-color;
-        }
-
-        p{
-          font-size: 0.85rem;
-          text-align: center;
-        }
-    }
-  }
-
   .video-faq-wrapper{
     display: flex;
     justify-content: center;
@@ -75,9 +28,10 @@ $theme-color: #65438f;
     gap: 1rem;
     margin-top: 2.5rem;
     flex-wrap: wrap;
+    flex-direction: column;
     .video-section{
-      flex: 1 0 15.12rem;
-      height: 18.9rem;
+      height: 20rem;
+      width: 100%;
       
       iframe{
         width: 100%;
@@ -86,16 +40,6 @@ $theme-color: #65438f;
         object-position: center;
       }
     }
-    .faq-section{
-      flex: 1 0 17.64rem;
-    }
-  }
-}
-
-@media only screen and (max-width: 43.75rem) {
-  .video-faq-wrapper{
-
-    
   }
 }
 
@@ -115,7 +59,7 @@ $theme-color: #65438f;
   position: relative;
   padding-right: 2.52rem;
   transition: all 0.4s ease;
-  font-size: 0.9rem;
+  font-size: 1rem;
   line-height: normal;
   cursor: pointer;
   user-select: none;
@@ -137,7 +81,7 @@ $theme-color: #65438f;
   max-height: 0;
   overflow: hidden;
   transition: all 0.2s ease;
-  font-size: 0.75rem;
+  font-size: 0.85rem;
 }
 
 .faqs .faq.open .faq-question {

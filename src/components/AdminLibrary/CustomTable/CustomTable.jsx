@@ -11,14 +11,14 @@ const LoadingTable = () => {
   const rows = Array.from({ length: 10 }, (_, index) => index);
   return (
     <>
-      <table className="tg">
+      <table className="load-table">
         <tbody>
           {/* Loop to render 10 table rows */}
           {rows.map((row, rowIndex) => (
             <tr key={rowIndex}>
               {/* Loop to render 8 cells in each row */}
               {Array.from({ length: 5 }, (_, cellIndex) => (
-                <td key={cellIndex} className="tg-cly1">
+                <td key={cellIndex} className="load-table-td">
                   <div className="line" />
                 </td>
               ))}
