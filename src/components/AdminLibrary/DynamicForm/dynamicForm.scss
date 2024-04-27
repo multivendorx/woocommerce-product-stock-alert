@@ -4,11 +4,11 @@
  $menu-btn-color: #522c81;
  $body-background: #f9f9f9;
  $color-white: #fff;
- $menu-color: #f4f1f7;
+ $menu-color: #f9f8fb;
  $color-active: #65438f;
 
  .dynamic-fields-wrapper {
-   background-color: $color-white;
+   background-color: #fdfdfe;
    padding: 1.5rem 2rem;
 
    .dynamic-form {
@@ -44,15 +44,14 @@
            &::after {
             content: "";
             position: absolute;
-            top: 50%;
+            top: .55rem;
             left: 2.3rem;
-            width: 0.45rem;
-            height: 0.45rem;
+            width: .25rem;
+            height: .25rem;
+            border: .0625rem solid #65438f;
             border-radius: 8rem;
-            transition: 0.3s;
+            transition: .3s;
             z-index: 0;
-            background: #65438f;
-            transform: translateY(-50%);
            }
 
            input {
@@ -70,18 +69,19 @@
              display: block;
              border-radius: 8rem;
              position: relative;
-             border: 0.125rem solid $color-active;
+             border: 0.125rem solid #d4d1d9;
 
              &::before {
-                content: "";
-                position: absolute;
-                top: 50%;
-                transform: translateY(-50%);
-                left: 0.5rem;
-                width: 0.45rem;
-                height: 0.45rem;
-                background: #f9f9f9;
-                border-radius: 50%;
+              content: "";
+              position: absolute;
+              top: 50%;
+              transform: translateY(-50%);
+              left: .5rem;
+              width: .17rem;
+              height: .57rem;
+              background: #fdfdfe;
+              -webkit-transition: .3s;
+              transition: .3s;
              }
 
              &::after {
@@ -151,7 +151,7 @@
  }
 
 
-@media screen and (max-width: 976px) {
+@media screen and (max-width: 61.488rem) {
   .dynamic-fields-wrapper{
     .dynamic-form {
       .form-group{

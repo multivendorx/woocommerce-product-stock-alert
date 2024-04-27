@@ -1,7 +1,7 @@
 $menu-btn-color: #522c81;
 $body-background: #f9f9f9;
 $color-white: #fff;
-$menu-color: #f4f1f7;
+$menu-color: #f9f8fb;
 $color-active: #65438f;
 
 
@@ -28,7 +28,7 @@ $color-active: #65438f;
       .import-export-btn{
         border-radius: 0.25rem;
         background-color: $color-active;
-        padding: 0.75rem 1.25rem;
+        padding: 0.65rem 1.25rem;
         
         a{
           color: $color-white;
@@ -62,7 +62,7 @@ $color-active: #65438f;
       justify-content: flex-start;
       gap: 0.5rem;
       flex-wrap: wrap;
-      max-width: 600px;
+      max-width: 37.8rem;
       input,select,textarea{
         background-color: transparent !important; // To overwrite default wordpress css
         border: 0.115rem solid rgba(0, 0, 0, 0.125) !important; // To overwrite default wordpress css
@@ -74,7 +74,7 @@ $color-active: #65438f;
       }
 
       & > div{
-        flex: 1 0 130px;
+        flex: 1 0 8.19rem;
 
         input, select{
           width: 100%;
@@ -94,7 +94,7 @@ $color-active: #65438f;
       outline: none;
       box-shadow: none;
       padding: 0;
-      font-size: 0.938rem;
+      font-size: 0.85rem;
       
       &:focus{
         box-shadow: none !important; // To overwrite default wordpress css
@@ -102,8 +102,8 @@ $color-active: #65438f;
   }
     
   select{
-    background: transparent url(data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2220%22%20height%3D%2220%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M5%206l5%205%205-5%202%201-7%207-7-7%202-1z%22%20fill%3D%22%23555%22%2F%3E%3C%2Fsvg%3E) no-repeat right 5px top 55%;
-    padding-right: 30px;
+    background: transparent url(data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2220%22%20height%3D%2220%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M5%206l5%205%205-5%202%201-7%207-7-7%202-1z%22%20fill%3D%22%23555%22%2F%3E%3C%2Fsvg%3E) no-repeat right 0.315rem top 55%;
+    padding-right: 1.89rem;
     font-size: 0.85rem;
   }
   
@@ -193,7 +193,7 @@ $color-active: #65438f;
 .table-row-meta-data {
   input {
     width: 100%;
-    text-align: center;
+    text-align: left;
     background: transparent;
     outline: none;
     border: none;
@@ -230,6 +230,13 @@ $color-active: #65438f;
       border-radius: 0.25rem;
       background-color: $color-white;
       font-size: 0.9rem;
+
+      tr{
+        td.product_image{
+          text-align: center;
+          justify-content: center;
+        }
+      }
     }
 
     tbody {
@@ -254,6 +261,7 @@ $color-active: #65438f;
 .table-row.product_image {
   max-width: 5rem;
   min-width: 4.375rem;
+  padding: 0.35rem 0;
 
   .table-data-container .table-row-meta-data {
     width: 100%;
@@ -270,6 +278,10 @@ $color-active: #65438f;
   min-width: 7.5rem;
 }
 
+td.table-row.product_regular_price, td.table-row.product_sale_price{
+  max-width: 6rem;
+}
+
 .table-row.product_type {
   max-width: 6.25rem;
   min-width: 5rem;
@@ -282,6 +294,14 @@ $color-active: #65438f;
 .table-row.product_manage_stock {
   max-width: 5rem;
   min-width: 5rem;
+}
+
+tbody{
+  tr{
+    .table-row.product_manage_stock {
+      padding: 0;
+    }
+  }
 }
 
 .table-row.product_stock_quantity {
@@ -319,8 +339,8 @@ $color-active: #65438f;
 .table-row {
   min-width: 5rem;
   max-width: 9.375rem;
-  padding: 0.313rem;
-  text-align: center;
+  padding: 0.313rem 0.5rem;
+  text-align: left;
   font-size: 0.95rem;
 }
 
@@ -338,7 +358,6 @@ $color-active: #65438f;
 .table-data-container {
   display: flex;
   align-items: center;
-  justify-content: center;
   width: 100%;
 }
 
@@ -360,8 +379,8 @@ $color-active: #65438f;
 
 .table-row-meta-data {
   img {
-    width: 50px;
-    height: 50px;
+    width: 3.15rem;
+    height: 3.15rem;
     padding: 0.25rem;
     border-radius: 0.25rem;
     box-shadow: 0 0 .125rem rgba($color: #000000, $alpha: 0.125);
