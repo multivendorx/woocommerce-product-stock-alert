@@ -102,7 +102,7 @@
 
                             input{
                                 &:hover, &:focus{
-                                    box-shadow: none !important; 
+                                    box-shadow: none !important; // To overwrite default wordpress css
                                 }
                             }
                         }

@@ -605,6 +605,7 @@ const DynamicForm = (props) => {
               rightContent={inputField.right_content}
               options={inputField.options}
               value={value}
+              proSetting={isProSetting(inputField.proSetting)}
               onChange={(e) => {
                 if ( ! proSettingChanged( inputField.proSetting ) ) {
                   handleChange(e, inputField.key, "multiple");

@@ -12,6 +12,8 @@ $color-active: #65438f;
     justify-content: space-between;
     margin-bottom: 0.75rem;
     position: relative;
+    flex-wrap: wrap;
+    gap: 0.5rem;
 
     p{
       font-size: 1.5rem;
@@ -63,8 +65,8 @@ $color-active: #65438f;
       max-width: 600px;
       input,select,textarea{
         background-color: transparent !important; // To overwrite default wordpress css
-        border: 0.115rem solid rgba(0, 0, 0, 0.125) !important;
-        border-radius: 0.25rem !important;
+        border: 0.115rem solid rgba(0, 0, 0, 0.125) !important; // To overwrite default wordpress css
+        border-radius: 0.25rem !important; // To overwrite default wordpress css
 
         &:focus{
           box-shadow: none;

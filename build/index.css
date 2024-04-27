@@ -28,17 +28,23 @@
   position: relative;
   margin-bottom: 0.625rem;
 }
+.dynamic-fields-wrapper .dynamic-form .form-group .settings-input-content .toggle-checkbox-content .admin-pro-tag {
+  left: 4.25rem;
+  width: -moz-fit-content;
+  width: fit-content;
+}
 .dynamic-fields-wrapper .dynamic-form .form-group .settings-input-content .toggle-checkbox-content::after {
   content: "";
   position: absolute;
-  top: 0.55rem;
+  top: 50%;
   left: 2.3rem;
-  width: 0.25rem;
-  height: 0.25rem;
+  width: 0.45rem;
+  height: 0.45rem;
   border-radius: 8rem;
   transition: 0.3s;
   z-index: 0;
   background: #65438f;
+  transform: translateY(-50%);
 }
 .dynamic-fields-wrapper .dynamic-form .form-group .settings-input-content .toggle-checkbox-content input {
   height: 0;
@@ -62,9 +68,10 @@
   top: 50%;
   transform: translateY(-50%);
   left: 0.5rem;
-  width: 0.17rem;
-  height: 0.17rem;
+  width: 0.45rem;
+  height: 0.45rem;
   background: #f9f9f9;
+  border-radius: 50%;
 }
 .dynamic-fields-wrapper .dynamic-form .form-group .settings-input-content .toggle-checkbox-content label::after {
   content: "";
@@ -127,6 +134,15 @@
   .dynamic-fields-wrapper .dynamic-form .form-group .settings-form-label, .dynamic-fields-wrapper .dynamic-form .form-group .settings-input-content {
     width: 100%;
   }
+}
+.margin-y {
+  margin: 1rem 0;
+}
+
+input[type=radio] {
+  width: -moz-fit-content !important;
+  width: fit-content !important;
+  border-radius: 50% !important;
 }
 /*!*****************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/components/AdminLibrary/Inputs/Special/ButtonCustomizer.scss ***!
@@ -891,7 +907,7 @@ span.stock-manager-pro-tag {
   position: absolute;
   width: 2.25rem;
   height: 2.25rem;
-  top: 30px;
+  top: 20px;
   font-size: 1.15rem;
   right: 10px;
   border-radius: 0.5rem;
@@ -901,6 +917,24 @@ span.stock-manager-pro-tag {
   outline: none;
   align-items: center;
   justify-content: center;
+}
+.general-wrapper .middle-container-wrapper .middle-child-container .current-tab-lists .current-tab-lists-container .tab-wrapper {
+  width: 100%;
+}
+.general-wrapper .middle-container-wrapper .middle-child-container .current-tab-lists .current-tab-lists-container .tab-wrapper .subtab-wrapper {
+  padding-left: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: flex-start;
+  position: relative;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s linear;
+}
+.general-wrapper .middle-container-wrapper .middle-child-container .current-tab-lists .current-tab-lists-container .tab-wrapper .subtab-wrapper.active {
+  max-height: 50rem;
+  height: auto;
 }
 .general-wrapper .middle-container-wrapper .middle-child-container .tab-content {
   border: 0.05rem solid rgba(82, 44, 129, 0.09);
@@ -927,6 +961,9 @@ span.stock-manager-pro-tag {
   .general-wrapper nav.admin-panel-nav .brand span {
     display: none;
   }
+  .general-wrapper .middle-container-wrapper .middle-child-container {
+    grid-template-columns: 1fr;
+  }
   .general-wrapper .middle-container-wrapper .middle-child-container .current-tab-lists {
     position: fixed;
     top: 0;
@@ -937,6 +974,7 @@ span.stock-manager-pro-tag {
     background-color: rgba(0, 0, 0, 0.7);
     z-index: 999999;
     transition: all 0.3s linear;
+    padding: 0;
   }
   .general-wrapper .middle-container-wrapper .middle-child-container .current-tab-lists.active {
     left: 0;
@@ -954,6 +992,48 @@ span.stock-manager-pro-tag {
   .general-wrapper .middle-container-wrapper .middle-child-container .current-tab-lists .current-tab-lists-container .menu-coll-btn {
     display: none;
   }
+}
+.support-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  max-width: 1000px;
+  margin: auto;
+  margin-top: 1.5rem;
+}
+.support-card .card-item {
+  padding: 1.5rem;
+  flex: 1 0 12.6rem;
+  height: 10.71rem;
+  border: 0.005rem solid #522c81;
+  border-radius: 0.25rem;
+  background: linear-gradient(145deg, #ffffff, #e6e6e6);
+  box-shadow: 0.63rem 0.63rem 1.26rem #ededed, -0.63rem -0.63rem 1.26rem #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.support-card .card-item:hover {
+  background: linear-gradient(-145deg, #ffffff, #e6e6e6);
+}
+.support-card .card-item i {
+  font-size: 2rem;
+  color: #522c81;
+  margin-bottom: 0.75rem;
+}
+.support-card .card-item a {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+  text-align: center;
+  display: block;
+  color: #522c81;
+}
+.support-card .card-item p {
+  font-size: 0.85rem;
+  text-align: center;
 }
 /*!*************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/components/AdminLibrary/Support/support.scss ***!
@@ -977,45 +1057,6 @@ span.stock-manager-pro-tag {
   font-size: 0.85rem;
   font-weight: 400;
 }
-.support-container .support-card {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-.support-container .support-card .card-item {
-  padding: 1.5rem;
-  flex: 1 0 12.6rem;
-  height: 10.71rem;
-  border: 0.005rem solid #522c81;
-  border-radius: 0.25rem;
-  background: linear-gradient(145deg, #ffffff, #e6e6e6);
-  box-shadow: 0.63rem 0.63rem 1.26rem #ededed, -0.63rem -0.63rem 1.26rem #ffffff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-.support-container .support-card .card-item:hover {
-  background: linear-gradient(-145deg, #ffffff, #e6e6e6);
-}
-.support-container .support-card .card-item i {
-  font-size: 2rem;
-  color: #522c81;
-  margin-bottom: 0.75rem;
-}
-.support-container .support-card .card-item a {
-  font-size: 1.25rem;
-  margin-bottom: 0.5rem;
-  text-align: center;
-  display: block;
-  color: #522c81;
-}
-.support-container .support-card .card-item p {
-  font-size: 0.85rem;
-  text-align: center;
-}
 .support-container .video-faq-wrapper {
   display: flex;
   justify-content: center;
@@ -1023,10 +1064,11 @@ span.stock-manager-pro-tag {
   gap: 1rem;
   margin-top: 2.5rem;
   flex-wrap: wrap;
+  flex-direction: column;
 }
 .support-container .video-faq-wrapper .video-section {
-  flex: 1 0 15.12rem;
-  height: 18.9rem;
+  height: 20rem;
+  width: 100%;
 }
 .support-container .video-faq-wrapper .video-section iframe {
   width: 100%;
@@ -1035,9 +1077,6 @@ span.stock-manager-pro-tag {
      object-fit: cover;
   -o-object-position: center;
      object-position: center;
-}
-.support-container .video-faq-wrapper .faq-section {
-  flex: 1 0 17.64rem;
 }
 
 .faqs {
@@ -1056,7 +1095,7 @@ span.stock-manager-pro-tag {
   position: relative;
   padding-right: 2.52rem;
   transition: all 0.4s ease;
-  font-size: 0.9rem;
+  font-size: 1rem;
   line-height: normal;
   cursor: pointer;
   -webkit-user-select: none;
@@ -1080,7 +1119,7 @@ span.stock-manager-pro-tag {
   max-height: 0;
   overflow: hidden;
   transition: all 0.2s ease;
-  font-size: 0.75rem;
+  font-size: 0.85rem;
 }
 
 .faqs .faq.open .faq-question {
@@ -1100,6 +1139,7 @@ span.stock-manager-pro-tag {
   \**********************************************************************************************************************************************************************************************************************************************************/
 .custom-banner {
   width: 100%;
+  margin-bottom: 0.75rem;
 }
 .custom-banner .admin-carousel-container {
   padding: 0;
@@ -1116,6 +1156,7 @@ span.stock-manager-pro-tag {
   right: 0.625rem;
   top: 0.625rem;
   font-size: 1.25rem;
+  color: #c9c5c3;
 }
 .custom-banner .admin-carousel-container .carousel-container .why-go-pro-tag {
   cursor: pointer;
@@ -1147,7 +1188,6 @@ span.stock-manager-pro-tag {
   gap: 1rem;
   padding: 1rem 3rem;
   text-align: left;
-  background-image: url(images/banner-back-color.a9aab399.jpg);
   background-size: 100% 100%;
   background-position: center center;
   background-repeat: no-repeat, no-repeat;
@@ -1168,11 +1208,12 @@ span.stock-manager-pro-tag {
 .custom-banner .admin-carousel-container .admin-pro-txt-items h3 {
   font-size: 1.25rem;
   font-weight: 500;
-  color: #f9f8fb;
+  color: #000;
 }
 .custom-banner .admin-carousel-container .admin-pro-txt-items p {
   margin: 0.5rem 0 1.5rem;
   font-size: 1rem;
+  color: #000;
 }
 .custom-banner .admin-carousel-container .admin-pro-txt-items a.admin-btn.btn-red {
   background-color: #e35047;
@@ -1273,6 +1314,7 @@ span.stock-manager-pro-tag {
   font-size: 0.9rem;
 }
 .rdt_Table .rdt_TableHead .rdt_TableHeadRow {
+  padding: 0.313rem;
   font-weight: 400;
 }
 .rdt_Table .rdt_TableHead .rdt_TableHeadRow .rdt_TableCol:first-child {
@@ -1339,9 +1381,17 @@ span.stock-manager-pro-tag {
   box-shadow: 0 0 0.125rem rgba(0, 0, 0, 0.125);
 }
 
+.rdt_Pagination .sc-lmoLKH.lcunyj select:focus {
+  border: none;
+  color: #65438f;
+  box-shadow: none;
+}
+.rdt_Pagination .sc-lmoLKH.lcunyj svg {
+  display: none;
+}
+
 @media only screen and (max-width: 85.365rem) {
   .rdt_Table .rdt_TableHead .rdt_TableHeadRow {
-    padding: 0.313rem;
     display: flex;
   }
   .rdt_Table .rdt_TableHead .rdt_TableHeadRow .rdt_TableCol {
@@ -1387,6 +1437,9 @@ span.stock-manager-pro-tag {
   .rdt_Table .rdt_TableBody .rdt_TableRow .rdt_TableCell .table-row-custom {
     max-width: 18.75rem;
     position: relative;
+    word-wrap: unset;
+    text-wrap: nowrap;
+    overflow: hidden;
   }
   .rdt_Table .rdt_TableBody .rdt_TableRow .rdt_TableCell .table-row-custom h4 {
     display: block;
@@ -1505,6 +1558,8 @@ input.rs-picker-toggle-textbox {
   justify-content: space-between;
   margin-bottom: 0.75rem;
   position: relative;
+  gap: 0.5rem;
+  flex-wrap: wrap;
 }
 .admin-subscriber-list .admin-page-title p {
   font-size: 1.5rem;
@@ -1543,11 +1598,18 @@ input.rs-picker-toggle-textbox {
   flex-wrap: wrap;
   margin-bottom: 0.75rem;
 }
+.admin-subscriber-list .selectable-table .wrap-bulk-all-date .admin-header-search-section input {
+  padding: 0.15rem 0.5rem;
+}
 .admin-subscriber-list .selectable-table .wrap-bulk-all-date > div {
   flex: 1 0 150px;
   width: 100%;
 }
+.admin-subscriber-list .selectable-table .wrap-bulk-all-date > div div {
+  background-color: transparent;
+}
 .admin-subscriber-list .selectable-table .wrap-bulk-all-date > div input {
+  background-color: transparent;
   width: 100%;
   outline: none;
   border: 0.115rem solid rgba(0, 0, 0, 0.125);
@@ -12087,6 +12149,8 @@ textarea.rs-picker-search-input {
   justify-content: space-between;
   margin-bottom: 0.75rem;
   position: relative;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 .admin-middle-container-wrapper .title-section p {
   font-size: 1.5rem;
@@ -13130,6 +13194,11 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
+a:focus {
+  box-shadow: none;
+  outline: none;
+}
+
 .admin-notice-display-title {
   display: flex;
   align-items: center;
@@ -13163,6 +13232,33 @@ input[type=number] {
   }
   to {
     width: 0%;
+  }
+}
+
+span.admin-pro-tag {
+  font-size: 0.5rem;
+  background: #e35047;
+  padding: 0.125rem 0.5rem;
+  color: #F9F8FB;
+  font-weight: 700;
+  line-height: 1;
+  position: absolute;
+  margin-left: 0.25rem;
+  border-radius: 2rem 0;
+  right: 0.25rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@media screen and (max-width: 782px) {
+  input[type=checkbox], input[type=radio] {
+    height: 1rem;
+    width: 1rem;
+  }
+  input[type=checkbox]:checked::before {
+    margin: -0.1875rem 0 0 -0.25rem;
+    height: 1.3125rem;
+    width: 1.3125rem;
   }
 }
 

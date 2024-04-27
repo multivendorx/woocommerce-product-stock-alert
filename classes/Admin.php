@@ -36,18 +36,18 @@ class Admin {
         '<span 
             class="stock-manager-pro-tag"
             style="
+            font-size: 0.5rem;
+            background: #e35047;
+            padding: 0.125rem 0.5rem;
+            color: #F9F8FB;
+            font-weight: 700;
+            line-height: 1;
             position: absolute;
+            margin-left: 0.25rem;
+            border-radius: 2rem 0;
             right: 0.25rem;
-            background: #522c81;
-            color: #fdfdfe;
-            padding: 0.125rem 0.35rem;
             top: 50%;
             transform: translateY(-50%);
-            border-radius: 0.625rem;
-            font-size: 0.625rem;
-            text-align: center;
-            line-height: 1;
-            text-transform: capitalize;
             "
         > Pro </span>' : '';
 

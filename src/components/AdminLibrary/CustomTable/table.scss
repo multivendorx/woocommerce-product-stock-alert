@@ -104,8 +104,9 @@ $color-active: #65438f;
       border-radius: 0.25rem;
       background-color: $color-white;
       font-size: 0.9rem;
-
+      
       .rdt_TableHeadRow{
+        padding: 0.313rem;
         font-weight: 400;
         .rdt_TableCol{
           &:first-child {
@@ -142,8 +143,8 @@ $color-active: #65438f;
             right: 0.938rem;
             display: none;
             border-radius: 0.188rem;
-            width: 3rem !important;
-            height: 3rem !important;
+            width: 3rem !important; // To overwrite default table cell width / height
+            height: 3rem !important; // To overwrite default table cell width / height
 
             .table-dropdown_btn{
               button{
@@ -155,7 +156,7 @@ $color-active: #65438f;
                 align-items: center;
                 
                 i{
-                  font-size: 0.75rem !important;
+                  font-size: 0.75rem !important; // To overwrite default table font size
                 }
               }
             }
@@ -187,11 +188,26 @@ $color-active: #65438f;
     }
 }
 
+
+.rdt_Pagination{
+.sc-lmoLKH.lcunyj{
+  select{
+    &:focus{
+      border: none;
+      color: $color-active;
+      box-shadow: none;
+    }
+  }
+  svg{
+    display: none;
+  }
+}
+}
+
 @media only screen and (max-width: 85.365rem) {
   .rdt_Table{
       .rdt_TableHead{
         .rdt_TableHeadRow{
-          padding: 0.313rem;
           display: flex;
 
           .rdt_TableCol{
@@ -201,8 +217,8 @@ $color-active: #65438f;
             &:nth-child(2),
             &:nth-child(3) {
               display: inline-flex; 
-              max-width: 33%!important;
-              min-width: 5% !important;
+              max-width: 33%!important; // To overwrite default table width for only responsive device
+              min-width: 5% !important; // To overwrite default table width for only responsive device
             }
           }
         }
@@ -231,8 +247,8 @@ $color-active: #65438f;
             &:nth-child(3) {
               background: transparent;
               display: inline-flex !important; // force to set display type for laptop screen
-              max-width: 33%!important;
-              min-width: 5% !important;
+              max-width: 33%!important; // To overwrite default table cell size only responsive device
+              min-width: 5% !important; // To overwrite default table cell size only responsive device
 
               .table-row-custom{
                 h4{
@@ -243,14 +259,17 @@ $color-active: #65438f;
 
             &:last-child{
               display: flex;
-              width: 35px !important;
-              min-width: 20px !important;
-              height: 30px !important;
+              width: 35px !important; // To overwrite as a drop-down button width
+              min-width: 20px !important; // To overwrite as a drop-down button width
+              height: 30px !important; // To overwrite as a drop-down button height
             }
 
             .table-row-custom{
               max-width: 18.75rem;
               position: relative;
+              word-wrap: unset;
+              text-wrap: nowrap;
+              overflow: hidden;
               h4{
                 display: block;
               }

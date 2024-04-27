@@ -18611,6 +18611,7 @@ const DynamicForm = props => {
             rightContent: inputField.right_content,
             options: inputField.options,
             value: value,
+            proSetting: isProSetting(inputField.proSetting),
             onChange: e => {
               if (!proSettingChanged(inputField.proSetting)) {
                 handleChange(e, inputField.key, "multiple");
@@ -20428,22 +20429,6 @@ __webpack_require__.r(__webpack_exports__);
 
 const Support = () => {
   const url = "https://www.youtube.com/embed/cgfeZH5z2dM?si=3zjG13RDOSiX2m1b";
-  const supportLink = [{
-    title: "Get in touch with Support",
-    icon: "mail",
-    description: "Reach out to the support team for assistance or guidance.",
-    link: "https://multivendorx.com/contact-us/?utm_source=WordPressAdmin&utm_medium=PluginSettings&utm_campaign=productsstockmanager"
-  }, {
-    title: "Explore Documentation",
-    icon: "submission-message",
-    description: "Understand the plugin and its settings.",
-    link: "https://multivendorx.com/docs/knowledgebase/products-stock-manager-notifier-for-woocommerce/?utm_source=WordPressAdmin&utm_medium=PluginSettings&utm_campaign=productsstockmanager"
-  }, {
-    title: "Contribute Here",
-    icon: "support",
-    description: "To participation in product enhancement.",
-    link: "https://github.com/multivendorx/woocommerce-product-stock-alert/issues"
-  }];
   const [faqs, setFaqs] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([{
     question: "Why am I not receiving any emails when a customer subscribes for an out-of-stock product?",
     answer: "Please install a plugin like Email Log and perform a test subscription.",
@@ -20482,19 +20467,6 @@ const Support = () => {
   }, "Thank you for using Product Stock Manager & Notifier for WooCommerce"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "support-subheading"
   }, "We want to help you enjoy a wonderful experience with all of our products.")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "support-card"
-  }, supportLink.map((item, index) => {
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
-      href: item.link,
-      target: "_blank",
-      className: "card-item"
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("i", {
-      className: `admin-font font-${item.icon}`
-    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
-      href: item.link,
-      target: "_blank"
-    }, item.title), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, item.description)));
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "video-faq-wrapper"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "video-section"
@@ -20574,6 +20546,22 @@ const Tabs = props => {
       class: "admin-pro-tag"
     }, "Pro"));
   };
+  const supportLink = [{
+    title: "Get in touch with Support",
+    icon: "mail",
+    description: "Reach out to the support team for assistance or guidance.",
+    link: "https://multivendorx.com/contact-us/?utm_source=WordPressAdmin&utm_medium=PluginSettings&utm_campaign=productsstockmanager"
+  }, {
+    title: "Explore Documentation",
+    icon: "submission-message",
+    description: "Understand the plugin and its settings.",
+    link: "https://multivendorx.com/docs/knowledgebase/products-stock-manager-notifier-for-woocommerce/?utm_source=WordPressAdmin&utm_medium=PluginSettings&utm_campaign=productsstockmanager"
+  }, {
+    title: "Contribute Here",
+    icon: "support",
+    description: "To participation in product enhancement.",
+    link: "https://github.com/multivendorx/woocommerce-product-stock-alert/issues"
+  }];
   const showHideMenu = tab => {
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
       className: currentTab === tab.id ? "active-current-tab" : "",
@@ -20676,7 +20664,20 @@ const Tabs = props => {
     className: "admin-font font-cross"
   })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "tab-content"
-  }, getTabDescription(tabData), getForm(currentTab))))));
+  }, getTabDescription(tabData), getForm(currentTab)))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "support-card"
+  }, supportLink.map((item, index) => {
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+      href: item.link,
+      target: "_blank",
+      className: "card-item"
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("i", {
+      className: `admin-font font-${item.icon}`
+    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+      href: item.link,
+      target: "_blank"
+    }, item.title), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, item.description)));
+  }))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Tabs);
 
@@ -22050,7 +22051,7 @@ const Settings = () => {
     }, [setting]);
 
     // Reander spacial component...
-    if (currentTab === 'support') {
+    if (currentTab === 'faq') {
       return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_AdminLibrary_Support_Support__WEBPACK_IMPORTED_MODULE_3__["default"], {
         content: settingModal
       });
@@ -22707,6 +22708,7 @@ __webpack_require__.r(__webpack_exports__);
     key: 'v3_site_key',
     type: 'text',
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Site Key", "woocommerce-stock-manager-pro"),
+    classes: 'margin-y',
     dependent: {
       key: "is_recaptcha_enable",
       set: true
@@ -22929,9 +22931,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  id: 'support',
+  id: 'faq',
   priority: 10,
-  name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Support", "woocommerce-stock-manager"),
+  name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Faq's", "woocommerce-stock-manager"),
   desc: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Configure basic product manager settings.", "woocommerce-stock-manager"),
   icon: 'font-support',
   modal: []

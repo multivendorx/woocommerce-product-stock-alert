@@ -3,6 +3,7 @@ $body-background: #f9f9f9;
 $color-white: #fff;
 $menu-color: #f4f1f7;
 $color-active: #65438f;
+$theme-color: #522c81;
 
 .general-wrapper {
   nav.admin-panel-nav {
@@ -146,7 +147,7 @@ $color-active: #65438f;
             position: absolute;
             width: 2.25rem;
             height: 2.25rem;
-            top: 30px;
+            top: 20px;
             font-size: 1.15rem;
             right: 10px;
             border-radius: 0.5rem;
@@ -156,6 +157,27 @@ $color-active: #65438f;
             outline: none;
             align-items: center;
             justify-content: center;
+          }
+
+          .tab-wrapper{
+            width: 100%;
+
+            .subtab-wrapper{
+              padding-left: 1rem;
+              display: flex;
+              flex-direction: column;
+              gap: 0.5rem;
+              align-items: flex-start;
+              position: relative;
+              max-height: 0;
+              overflow: hidden;
+              transition: max-height 0.3s linear  ;
+              
+              &.active{
+                max-height: 50rem;
+                height: auto;
+              }
+            }
           }
         }
       }      
@@ -199,6 +221,7 @@ $color-active: #65438f;
     }
     .middle-container-wrapper{
       .middle-child-container {
+        grid-template-columns: 1fr;
         .current-tab-lists{
           position: fixed;
           top: 0;
@@ -209,6 +232,7 @@ $color-active: #65438f;
           background-color: rgba($color: #000000, $alpha: 0.7);
           z-index: 999999;
           transition: all 0.3s linear;
+          padding: 0;
 
           &.active{
             left: 0;
@@ -232,5 +256,55 @@ $color-active: #65438f;
         }
       }
     }
+  }
+}
+
+.support-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  max-width: 1000px;
+  margin: auto;
+  margin-top: 1.5rem;
+
+  .card-item {
+    padding: 1.5rem;
+    flex: 1 0 12.6rem;
+    height: 10.71rem;
+    border: 0.005rem solid $theme-color;
+    border-radius: 0.25rem;
+    background: linear-gradient(145deg, #ffffff, #e6e6e6);
+    box-shadow:
+      0.63rem 0.63rem 1.26rem #ededed,
+      -0.63rem -0.63rem 1.26rem #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      
+      &:hover{
+        background: linear-gradient(-145deg, #ffffff, #e6e6e6);
+      }
+
+      i{
+        font-size: 2rem;
+        color: $theme-color;
+        margin-bottom: 0.75rem;
+      }
+      
+      a{
+        font-size: 1.25rem;
+        margin-bottom: 0.5rem;
+        text-align: center;
+        display: block;
+        color: $theme-color;
+      }
+
+      p{
+        font-size: 0.85rem;
+        text-align: center;
+      }
   }
 }

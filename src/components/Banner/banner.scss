@@ -12,6 +12,7 @@ $button-padding: 0.37rem 2.5rem;
 
 .custom-banner {
   width: 100%;
+  margin-bottom: 0.75rem;
 
   .admin-carousel-container {
     padding: 0;
@@ -28,6 +29,7 @@ $button-padding: 0.37rem 2.5rem;
         right: $padding;
         top: $padding;
         font-size: 1.25rem;
+        color: #c9c5c3;
       }
 
       .why-go-pro-tag {
@@ -65,7 +67,6 @@ $button-padding: 0.37rem 2.5rem;
       gap: 1rem;
       padding: $container-padding;
       text-align: left;
-      background-image: url(../../assets/images/banner-back-color.jpg);
       background-size: 100% 100%;
       background-position: center center;
       background-repeat: no-repeat, no-repeat;
@@ -88,12 +89,13 @@ $button-padding: 0.37rem 2.5rem;
       h3 {
         font-size: 1.25rem;
         font-weight: 500;
-        color: $text-color;
+        color: #000;
       }
-
+      
       p {
         margin: 0.5rem 0 1.5rem;
         font-size: 1rem;
+        color: #000;
       }
 
       a.admin-btn.btn-red {

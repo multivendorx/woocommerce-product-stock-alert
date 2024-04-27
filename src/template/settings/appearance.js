@@ -128,6 +128,7 @@ export default {
             key: 'v3_site_key',
             type: 'text',
             label: __("Site Key", "woocommerce-stock-manager-pro"),
+            classes: 'margin-y',
             dependent: {
                 key: "is_recaptcha_enable",
                 set: true,
