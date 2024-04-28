@@ -1,7 +1,7 @@
 import React from 'react';
 import { __ } from "@wordpress/i18n";
 
-export default function Input( { headerKey, header, product, handleChange, handleInputMouseOut, editButtonOnClick } ) {
+export default function Input( { headerKey, header, product, handleChange, editButtonOnClick, inputFieldOnClick, active, type } ) {
     //Functional component to return the edit icon
     const GetIcon = () => {
         return (
@@ -15,27 +15,33 @@ export default function Input( { headerKey, header, product, handleChange, handl
     function RenderInput( button , value , type ) {
         return(
             <>
-                <div className="table-row-meta-data">
                     <h1>{ header.name }</h1>
                     {
                         button ?
-                            <input  onClick={ editButtonOnClick } id={ product.type === 'Variation' ? product.parent_product_id : null } onMouseOut={ handleInputMouseOut } onChange={ handleChange } type={ type } value={ ( value === "" || value === null ? 0 : value ) } autofocus="false" readOnly />
+                           <>
+                            <input
+                                className={ `${active ? 'active' : ''} edit-input` }
+                                onClick={inputFieldOnClick}
+                                id={product.type === 'Variation' ? product.parent_product_id : null}
+                                onChange={handleChange}
+                                type={type}
+                                value={(value === "" || value === null ? 0 : value)}
+                                autofocus="false"
+                                readOnly={ ! active }
+                            />
+                            <button onClick={ editButtonOnClick } className="edit-btn-product">
+                                { GetIcon() }
+                            </button>
+                           </>
                         :
                             <p>{ ( value === "" || value === null ? 0 : value ) }</p>
                     }
-                </div>
-                {
-                    button &&
-                    <button onClick={ editButtonOnClick } className="edit-btn-product">
-                        { GetIcon() }
-                    </button>
-                }
             </>
         )
     }
     if( header.stockStatusDependent != undefined ) {
         return RenderInput( product[ header.stockStatusDependent ] , product[ headerKey ] , header.type )
     }else{
-        return RenderInput( header.editable , product[ headerKey ] , header.type );
+        return RenderInput( header.editable , product[ headerKey ] , type || header.type );
     }
 }

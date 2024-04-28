@@ -223,7 +223,7 @@ const Managestock = () => {
               Object.keys(data).length > 0 &&
               headers &&
               Object.keys(headers).length > 0 ? (
-              <div className="admin-backend-datatable-wrapper manage-stock-table">
+              <div className="manage-stock-table">
                 <ProductTable
                   setData={setData}
                   setDisplayMessage={setDisplayMessage}

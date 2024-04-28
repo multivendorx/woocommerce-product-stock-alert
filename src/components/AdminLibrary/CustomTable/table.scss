@@ -42,6 +42,7 @@ $animation-duration: 2s;
     border-color: $border-color;
     color: $font-color;
     background-color: $background-color;
+    flex-grow: 1;
 
     &:first-child {
       display: block;
@@ -93,7 +94,7 @@ $color-active: #65438f;
   overflow: visible !important; // To overwrite default react data table css
 }
 .rdt_Table{
-  border-radius: 0.25rem;
+    border-radius: 0.25rem;
     overflow: hidden;
     box-shadow: 0 0 1rem rgba($color: #000000, $alpha: 0.125);
     width: 100%;
@@ -150,8 +151,9 @@ $color-active: #65438f;
             height: 3rem !important; // To overwrite default table cell width / height
 
             .table-dropdown_btn{
+              width: 100%;
               button{
-                width: 1.563rem;
+                width: 100%;
                 height: 1.563rem;
                 padding: 0;
                 display: flex;
@@ -254,6 +256,7 @@ $color-active: #65438f;
               min-width: 5% !important; // To overwrite default table cell size only responsive device
 
               .table-row-custom{
+                padding: 0;
                 h4{
                   display: none;
                 }
@@ -262,6 +265,7 @@ $color-active: #65438f;
 
             &:last-child{
               display: flex;
+              padding: 0;
               width: 2.205rem !important; // To overwrite as a drop-down button width
               min-width: 1.26rem !important; // To overwrite as a drop-down button width
               height: 1.89rem !important; // To overwrite as a drop-down button height
@@ -273,6 +277,7 @@ $color-active: #65438f;
               word-wrap: unset;
               text-wrap: nowrap;
               overflow: hidden;
+              padding: 0.313rem 0.625rem;
               h4{
                 display: block;
               }

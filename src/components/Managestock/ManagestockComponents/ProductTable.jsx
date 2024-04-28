@@ -1,4 +1,4 @@
-import React, { useState , useEffect } from "react";
+import React, { useState , useEffect, useRef } from "react";
 import axios from "axios";
 import { __ } from "@wordpress/i18n";
 import ReactPaginate from "react-paginate";
@@ -15,7 +15,16 @@ const ProductTable = ( { products, headers, setData, setDisplayMessage, rowsPerP
     id: "",
     name: "",
     value: "",
-  } );
+  });
+
+  const [activeInput, setActiveInput] = useState({});
+  
+  useEffect(() => {
+    document.addEventListener('click', handleDocumentClick);
+    return () => {
+      document.removeEventListener('click', handleDocumentClick);
+    };
+  });
 
   //Function to Toggle the Expandable rows for the variable products
   const toggleRow = ( productId ) => {
@@ -60,6 +69,10 @@ const ProductTable = ( { products, headers, setData, setDisplayMessage, rowsPerP
 
   // Function to ulpoad the 
   function changeData() {
+    if (!uploadData.id) {
+      return;
+    }
+
     axios( {
       method: "post",
       url: updateDataUrl,
@@ -94,31 +107,40 @@ const ProductTable = ( { products, headers, setData, setDisplayMessage, rowsPerP
   };
 
   //Function to handle edit button click
-  const editButtonOnClick = ( e ) => {
-    let editButton = e.currentTarget;
-    let inputElement = editButton.previousSibling.children[ 1 ];
-    setEvent( inputElement );
-    document.addEventListener( "click", handleDocumentClick );
-    inputElement.removeAttribute( "readonly" );
-    inputElement.classList.add( "active" );
+  const editButtonOnClick = (e, productId, headerKey) => {
+    // let editButton = e.currentTarget;
+    // let inputElement = editButton.previousSibling.children[ 1 ];
+    // setActiveInput({ id: productId, key: headerKey });
+    // setEvent(inputElement);
   };
 
-  const handleDocumentClick = ( e ) => {
-    if( event ) {
-      event.classList.remove( "active" );
-      event.setAttribute( "readonly", "readonly" );
-      document.removeEventListener( "click", handleDocumentClick );
-    }
-    if ( inputChange ) {
+  const inputFieldOnClick = (e, productId, headerKey) => {
+    if ( uploadData.id ) {
+      setActiveInput({});
       changeData();
+      updateData('', '', '');
+      setInputChange( false );
+    }
+
+    let inputElement = e.target;
+    setActiveInput({ id: productId, key: headerKey });
+    setEvent(inputElement);
+  }
+
+  const handleDocumentClick = (e) => {
+    const inputClicked = e.target.classList.contains('edit-input');
+    if ( inputClicked ) return;
+    
+    document.removeEventListener('click', handleDocumentClick);
+    
+    if (Object.keys(activeInput).length) {
+      setActiveInput({});
+      changeData();
+      updateData('', '', '');
       setInputChange( false );
     }
   };
 
-  //Function to handle input element MouseOut
-  const handleInputMouseOut = ( e ) => {
-    document.addEventListener( "click", handleDocumentClick );
-  };
   const handleChange = ( e, id, key, type ) => {
     let element = e.target;
     let updateKey = 'set_' + key;
@@ -202,7 +224,7 @@ const ProductTable = ( { products, headers, setData, setDisplayMessage, rowsPerP
       <tr className="table-head">
         {
           Object.values( headers ).map( ( header ) => {
-            return  <td className={`table-row ${ header.class }`}>{ header.name }</td>
+            return  header.type && <td className={`table-row ${ header.class }`}>{ header.name }</td>
           })
         }
       </tr>
@@ -230,36 +252,41 @@ const ProductTable = ( { products, headers, setData, setDisplayMessage, rowsPerP
                 } else {
                   return (
                     <td className={ `table-row ${ header.class }` }>
-                      <div className="table-data-container"></div>
+                      <div className="table-data-container disable">
+                        <button disabled class="setting-btn">
+                            <span class="bar bar1"></span>
+                            <span class="bar bar2"></span>
+                            <span class="bar bar1"></span>
+                        </button>
+                      </div>
                     </td>
                   )
                 }
-              case 'image':
+              case 'product':
                 return(
                   <td className={`table-row ${ header.class }`}>
                     <div className="table-data-container">
-                      <div className="table-row-meta-data">
                         <h1>{ header.name }</h1>
-                          <a href={ product[ header.dependent ] } target="_blank">
-                          <img src={ product[ headerKey ] } class="table-image" />
+                        <a href={ product[ header.dependent ] } target="_blank">
+                          <img src={ product[ "image" ] } class="table-image" />
                         </a>
-                        {/* <Input 
-                          handleChange={ ( e ) => {console.log(e.value); handleChange( e, product.id, 'name', product.type ) } }
-                          handleInputMouseOut={ handleInputMouseOut }
-                          editButtonOnClick={ editButtonOnClick }
+                        <Input 
+                          handleChange={(e) => { console.log("hello"); handleChange( e, product.id, "name", product.type ) } }
+                          editButtonOnClick={(e) => { editButtonOnClick( e, product.id, "name" ) } }
+                          inputFieldOnClick={(e) => { inputFieldOnClick( e, product.id, "name" ) } }
                           headerKey={ "name" } 
                           product={ product } 
-                          header={ header }
-                      /> */}
+                          header={header}
+                          type='text'
+                          active={activeInput.id == product.id && activeInput.key == "name" }
+                      />
                       </div>
-                    </div>
                   </td>
                 );
               case 'checkbox':
                 return (
                   <td className={ `table-row ${ header.class }` }>
                     <div className="table-data-container">
-                      <div className="table-row-meta-data">
                         <h1>{ header.name }</h1>
                         <div className="custome-toggle-default">                          
                           <input 
@@ -271,14 +298,12 @@ const ProductTable = ( { products, headers, setData, setDisplayMessage, rowsPerP
                           <label></label>
                         </div>
                       </div>
-                    </div>
                   </td>
                 );
               case 'dropdown':
                 return (
                   <td className={ `table-row ${ header.class }` }>
                     <div className="table-data-container">
-                      <div className="table-row-meta-data">
                         <h1>{ header.name }</h1>
                         <Dropdown 
                           handleChange={ ( e) => { handleChange( e, product.id, headerKey, product.type ) } } 
@@ -288,7 +313,6 @@ const ProductTable = ( { products, headers, setData, setDisplayMessage, rowsPerP
                           header={ header } 
                         />
                       </div>
-                    </div>
                   </td>
                 )
               case 'text':
@@ -298,18 +322,19 @@ const ProductTable = ( { products, headers, setData, setDisplayMessage, rowsPerP
                     <div className="table-data-container">
                       <Input 
                         handleChange={ ( e ) => { handleChange( e, product.id, headerKey, product.type ) } }
-                        handleInputMouseOut={ handleInputMouseOut }
-                        editButtonOnClick={ editButtonOnClick }
+                        editButtonOnClick={(e) => { editButtonOnClick( e, product.id, headerKey ) } }
+                        inputFieldOnClick={(e) => { inputFieldOnClick( e, product.id, headerKey ) } }
                         headerKey={ headerKey } 
                         product={ product } 
-                        header={ header }
+                        header={header}
+                        active={activeInput.id == product.id && activeInput.key == headerKey}
                       />
                     </div>
                   </td>
                 )
               case 'rowExpander':
                 return(
-                  <td className={ `${ expandElement[ productId ] ? 'active' : null } ${ header.class }` }>
+                  <td className={ `${ expandElement[ productId ] ? 'active' : null } ${ header.class } table-row` }>
                     <button onClick={ ()=> toggleActive( productId ) }>
                       <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-arrow-right-short" viewBox="0 0 16 16" >
                         <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8"/>

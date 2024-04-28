@@ -184,86 +184,6 @@ $color-active: #65438f;
   background: #fff;
 }
 
-.custome-toggle-default {
-  position: relative;
-  z-index: 1;
-  top: -0.75rem;
-  left: 50%;
-  transform: translateX(-20%);
-
-  &::after {
-    content: "";
-    position: absolute;
-    top: 0.35rem;
-    left: 2.3rem;
-    width: 0.25rem;
-    height: 0.25rem;
-    transform: translateY(50%);
-    border: 0.0625rem solid #65438f;
-    border-radius: 8rem;
-    transition: 0.3s;
-    z-index: 0;
-  }
-
-  input {
-    position: absolute;
-    width: 3.3rem;
-    height: 1.5rem;
-    top: 0.313rem;
-    z-index: 2;
-    opacity: 0;
-    left: 0;
-  }
-
-  label {
-    position: absolute;
-    cursor: pointer;
-    width: 3.3rem;
-    height: 1.5rem;
-    background: transparent;
-    display: block;
-    border-radius: 8rem;
-    border: 0.125rem solid #d4d1d9;
-
-    &::before {
-      content: "";
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      left: 0.5rem;
-      width: 0.17rem;
-      height: 0.57rem;
-      background: #fdfdfe;
-      transition: 0.3s;
-    }
-
-    &::after {
-      content: "";
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      left: 0.313rem;
-      width: 0.875rem;
-      height: 0.875rem;
-      background: #65438f;
-      border-radius: 90rem;
-      transition: 0.3s;
-      z-index: 1;
-    }
-  }
-
-  &:has(input[type="checkbox"]:checked) label {
-    background: #65438f;
-    border: 0.125rem solid #65438f;
-
-    &::after {
-      left: calc(100% - 1.313rem);
-      transform: translatey(-50%);
-      background-color: #fdfdfe;
-    }
-  }
-}
-
 .import-export-btn-section {
   margin: 0.5rem 0;
   margin-right: auto;
@@ -333,7 +253,7 @@ $color-active: #65438f;
 .import-export-btn {
   border-radius: 0.25rem;
   background-color: $color-active;
-  padding: 0.65rem 1.25rem;
+  padding: 0.5rem 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
