@@ -15,7 +15,7 @@ Elevate sales with instant stock alerts, engage customers with real-time updates
 == Description ==
 **Instant Stock Alerts and Effortless Inventory Management. Seamless stock export/import functionality.**
 
-Revolutionize your stock management with our Product Stock Manager & Notifier plugin. Users can subscribe for instant restock notifications. Admin have the capability to update and monitor product stock details, including status, quantities, prices, SKUs, and taxes. Simplify stock management by easily importing and exporting stock data in CSV format.
+Revolutionize your stock management with our Product Stock Manager & Notifier plugin. Users can subscribe for instant product re-stock notifications. Admin have the capability to update and monitor product stock details, including quantities, prices, SKUs, and taxes. Simplify stock control with the Stock Manager, facilitating CSV import and export.
 
 
 🌐 Explore our [Document](https://multivendorx.com/docs/knowledgebase/products-stock-manager-notifier-for-woocommerce/?utm_source=wordpress.org&utm_medium=freelandingpage&utm_campaign=productsstockmanager)
@@ -41,7 +41,7 @@ Revolutionize your stock management with our Product Stock Manager & Notifier pl
 * 🔄 Sync out-of-stock subscriptions with Mailchimp for effective communication and marketing.**[PRO]** 
 * 📈 Enhance marketing strategies by connecting WooCommerce out-of-stock subscribers to Mailchimp. **[PRO]** 
 * 📥Efficiently manage subscribers by exporting details like names, subscription dates, product names, and email IDs.**[PRO]** 
-* 🔄 Edit the data conveniently and import it back using a CSV file, streamlining inventory management. **[PRO]** 
+* 🔄 Edit the stock data conveniently and import it back using a CSV file, streamlining inventory management. **[PRO]** 
 * 🗂️ View and manage lists of all products easily from stock manager dashboard. **[PRO]** 
 * ✏️ Quick edit products using in-line editing, allowing updates to stock, SKU, and more. **[PRO]** 
 * 🔒 Enhance security and data integrity with ReCAPTCHA for reliable out-of-stock alerts.  **[PRO]** 
@@ -78,7 +78,7 @@ Are you tired of losing potential sales because your customers can't buy the out
 
 📧 **Mail Sent Status [PRO]**: Admins can easily track which users have received notification emails and identify users who have unsubscribed from receiving in-stock notifications, ensuring efficient communication management. 
 
-🔒 **ReCAPTCHA Central [PRO]**: ReCAPTCHA ensures only genuine subscribers, improving data accuracy and targeted notifications. ReCAPTCHA settings are essential for out-of-stock notifications to maintain data quality, prevent spam, enhance security, and ensure compliance with relevant regulations. 
+🔒 **ReCaptcha Central [PRO]**: ReCaptcha   ensures only genuine subscribers, improving data accuracy and targeted notifications. ReCAPTCHA settings are essential for out-of-stock notifications to maintain data quality, prevent spam, enhance security, and ensure compliance with relevant regulations. 
 
 📊 **Inventory Manager [PRO]**: Efficiently manage your inventory with a dedicated dashboard showcasing comprehensive product lists. Admins can perform quick in-line edits, updating stock, SKUs, and more for streamlined inventory control.
 
@@ -127,19 +127,17 @@ Manual installation method requires downloading the [Product Stock Manager & Not
 
 == Screenshots ==
 1. Stock alert plugin settings panel
-2. Stock alert form customization settings
-3. Stock alert submission message
-4. Stock alert email blocker
-5. Stock alert plugin mailchimp settings
-6. Stock alert plugin subscriber settings
-7. Shubscription Message
-8. User Unsubscription [Pro]
+2. Prompt Messages
+3. Email Restriction Policies
+4. Mailchimp Integration
+5. Stock alert plugin subscriber list
+6. Inventory manager
 
 == Changelog ==
 
-= 2.5.0 - 2024-04-17 =
+= 2.5.0 - 2024-04-30 =
 * Added - WordPress 6.5.2 compatibility.
-* Added - WooCommerce 8.7.0 compatibility.
+* Added - WooCommerce 8.8.3 compatibility.
 * Added - Revamped plugin codes for improved performance.
 * Added - Enhanced user experience.
 

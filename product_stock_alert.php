@@ -8,7 +8,7 @@
  * Requires at least: 5.4
  * Tested up to: 6.5.2
  * WC requires at least: 8.2.2
- * WC tested up to: 8.7.0
+ * WC tested up to: 8.8.3
  * Author URI: https://multivendorx.com/
  * Text Domain: woocommerce-stock-manager
  * Domain Path: /languages/
