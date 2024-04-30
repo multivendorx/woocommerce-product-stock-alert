@@ -311,7 +311,7 @@ class Install {
             }
             
             if ( version_compare( $previous_version, '2.4.2', '==' ) ) {
-                $appearance_settings = get_option( 'woo_stock_manager_appearance_tab_settings' );
+                $appearance_settings = get_option( 'woo_stock_manager_general_tab_settings' );
                 $submit_settings     = get_option( 'woo_stock_manager_form_submission_tab_settings' );
                 $email_settings      = get_option( 'woo_stock_manager_email_tab_settings' );
             }
