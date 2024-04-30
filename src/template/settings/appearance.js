@@ -4,7 +4,7 @@ export default {
     id: 'appearance',
     priority: 1,
     name: __("Appearance", "woocommerce-stock-manager"),
-    desc: __("Personalize stock alert form behavior.", "woocommerce-stock-manager"),
+    desc: __("Customize stock alert form.", "woocommerce-stock-manager"),
     icon: 'font-settings',
     submitUrl: 'save-stockmanager',
     modal: [
@@ -128,7 +128,6 @@ export default {
             key: 'v3_site_key',
             type: 'text',
             label: __("Site Key", "woocommerce-stock-manager-pro"),
-            classes: 'margin-y',
             dependent: {
                 key: "is_recaptcha_enable",
                 set: true,

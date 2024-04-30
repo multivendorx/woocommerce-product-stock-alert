@@ -9,7 +9,6 @@ import CustomTable, {
   TableCell,
 } from "../AdminLibrary/CustomTable/CustomTable";
 import "./subscribersList.scss";
-import "./rsuite-default.min.css";
 import isAfter from 'date-fns/isAfter';
 
 export default function SubscribersList() {
@@ -168,11 +167,6 @@ export default function SubscribersList() {
                   end_date: dates[1]
                     .toString()
                     .replace(/ GMT[+-]\d{4} \(.+$/, ""),
-                });
-              } else {
-                updateFilter("date", {
-                  start_date: sevenDaysAgo,
-                  end_date: currentDate,
                 });
               }
             }}

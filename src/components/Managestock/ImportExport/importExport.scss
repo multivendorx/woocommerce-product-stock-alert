@@ -91,8 +91,8 @@ $color-active: #65438f;
   }
 }
 
-.mvx-select-deselect-trigger {
-  border: 0.063rem solid #d4d1d9;
+.select-deselect-trigger {
+  border: 0.063rem solid #d4d1d9 !important; // To overwrite default common.scss scss
   color: #181718;
   border-radius: 0.25rem;
   width: fit-content;
@@ -102,7 +102,7 @@ $color-active: #65438f;
   cursor: pointer;
 
   &:hover {
-    border: 0.063rem solid #000000;
+    border: 0.063rem solid #000000 !important; // To overwrite default common.scss scss;
   }
 }
 
@@ -266,6 +266,10 @@ $color-active: #65438f;
     justify-content: center;
     gap: 0.5rem;
     text-decoration: none;
+
+    &:hover{
+      color: $color-white;
+    }
 
     .dashicons-before {
       &::before {

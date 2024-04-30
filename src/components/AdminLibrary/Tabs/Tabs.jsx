@@ -20,20 +20,28 @@ const Tabs = (props) => {
   const showTabSection = (tab) => {
     return tab.link ? (
       <a href={tab.link}>
-        {tab.icon && <i className={`admin-font ${tab.icon}`}></i>}
-        {menuCol ? null : tab.name}
+        <div>{tab.icon && <i className={`admin-font ${tab.icon}`}></i>}</div>
+        <div>
+          <p className="menu-name">{menuCol ? null : tab.name}</p>
+          <p className="menu-desc">{menuCol ? null : tab.desc}</p>
+        </div>
       </a>
     ) : (
       <Link
         className={currentTab === tab.id ? "active-current-tab" : ""}
         to={prepareUrl(tab.id)}
       >
-        {tab.icon && <i className={` admin-font ${tab.icon} `}></i>}
-        {menuCol ? null : tab.name}
-        {menuCol
-          ? null
-          : !appLocalizer.pro_active &&
-            tab.proDependent && <span class="admin-pro-tag">Pro</span>}
+        <div>
+          {tab.icon && <i className={` admin-font ${tab.icon} `}></i>}
+          {menuCol
+            ? null
+            : !appLocalizer.pro_active &&
+              tab.proDependent && <span class="admin-pro-tag">Pro</span>}
+        </div>
+        <div>
+          <p className="menu-name">{menuCol ? null : tab.name}</p>
+          <p className="menu-desc">{menuCol ? null : tab.desc}</p>
+        </div>
       </Link>
     );
   };
@@ -72,17 +80,22 @@ const Tabs = (props) => {
           }
         }}
       >
-        {tab.icon && <i className={` admin-font ${tab.icon} `}></i>}
-        {menuCol ? null : tab.name}
-        {menuCol ? null : openedSubtab == tab.id ? (
-          <p className="tab-menu-dropdown-icon active">
-            <i className="admin-font font-keyboard_arrow_down"></i>
-          </p>
-        ) : (
-          <p className="tab-menu-dropdown-icon">
-            <i className="admin-font font-keyboard_arrow_down"></i>
-          </p>
-        )}
+        <div>{tab.icon && <i className={` admin-font ${tab.icon} `}></i>}</div>
+        <div className="drop-down-section">
+          <div>
+            <p className="menu-name">{menuCol ? null : tab.name}</p>
+            <p className="menu-desc">{menuCol ? null : tab.desc}</p>
+          </div>
+          {menuCol ? null : openedSubtab == tab.id ? (
+            <p className="tab-menu-dropdown-icon active">
+              <i className="admin-font font-keyboard_arrow_down"></i>
+            </p>
+          ) : (
+            <p className="tab-menu-dropdown-icon">
+              <i className="admin-font font-keyboard_arrow_down"></i>
+            </p>
+          )}
+        </div>
       </Link>
     );
   };
@@ -95,21 +108,21 @@ const Tabs = (props) => {
           content.id === currentTab &&
           content.id !== "support" && (
             <div className="tab-description-start">
-              <div className="tab-name">{content.name}</div>
-              <p>{content.desc}</p>
+              <div className="child">
+                <p><i className={`admin-font ${content.icon}`}></i></p>
+                <div>
+                  <div className="tab-name">{content.name}</div>
+                  <div className="tab-desc">{content.desc}</div>
+                </div>
+              </div>
             </div>
           )
         );
       } else if (type === "folder") {
-        // Get tabdescription from child by recursion
+        // Get tab description from child by recursion
         return getTabDescription(content);
       }
     });
-  };
-
-  const handleMenu = () => {
-    let menudiv = document.getElementById("current-tab-lists");
-    menudiv.classList.toggle("active");
   };
 
   const handleMenuShow = () => {
@@ -122,27 +135,20 @@ const Tabs = (props) => {
         {HeaderSection && <HeaderSection />}
 
         {BannerSection && <BannerSection />}
-
-        <nav className="admin-panel-nav">
-          <div className="brand">
-            <p>Stock Manager</p>
-            <span>by<img src={Brand} alt="logo" /></span>
-          </div>
-          <button onClick={handleMenu}>
-            <i className="admin-font font-menu"></i>
-          </button>
-        </nav>
-
         <div
           className={`middle-container-wrapper ${
             props.horizontally ? "horizontal-tabs" : "vertical-tabs"
           }`}
         >
-          <div className={`${menuCol ? "showMenu" : ""} middle-child-container`}>
-            <div
-              id="current-tab-lists"
-              className="current-tab-lists"
-            >
+          <div
+            className={`${menuCol ? "showMenu" : ""} middle-child-container`}
+          >
+            <div id="current-tab-lists" className="current-tab-lists">
+              <div className="brand">
+                <img className="logo" src={menuCol ? BrandSmall : Brand} alt="Logo" />
+                <img className="logo-small" src={BrandSmall} alt="Logo" />
+                {menuCol ? null : <p>Stock Manager</p>}
+              </div>
               <div className="current-tab-lists-container">
                 {tabData.map(({ type, content }) => {
                   if (type !== "folder") {
@@ -173,7 +179,6 @@ const Tabs = (props) => {
                   </span>
                   {menuCol ? null : "Collapse"}
                 </button>
-                <button onClick={handleMenu} className="menu-close"><i className="admin-font font-cross"></i></button>
               </div>
             </div>
             <div className="tab-content">
@@ -185,20 +190,21 @@ const Tabs = (props) => {
           </div>
         </div>
 
-        
         <div className="support-card">
-            {supportLink.map((item, index) => {
-              return (
-                <>
-                  <a href={item.link} target="_blank" className="card-item">
-                    <i className={`admin-font font-${item.icon}`}></i>
-                    <a href={item.link} target="_blank">{item.title}</a>
-                    <p>{item.description}</p>
+          {supportLink.map((item, index) => {
+            return (
+              <>
+                <a href={item.link} target="_blank" className="card-item">
+                  <i className={`admin-font font-${item.icon}`}></i>
+                  <a href={item.link} target="_blank">
+                    {item.title}
                   </a>
-                </>
-              );
-            })}
-          </div>
+                  <p>{item.description}</p>
+                </a>
+              </>
+            );
+          })}
+        </div>
       </div>
     </>
   );

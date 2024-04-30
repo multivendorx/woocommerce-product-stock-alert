@@ -151,12 +151,13 @@ const ProductTable = ( { products, headers, setData, setDisplayMessage, rowsPerP
       updateData( id, updateKey, Value );
     }
     if ( updateKey === 'set_stock_quantity' && Value > 0 ) {
-      const stock_status = element.parentElement.parentElement.parentElement.parentElement.querySelector( '.product_stock_status' ).children[0].children[0].children[1];
+      const stock_status = element.parentElement.parentElement.parentElement.querySelector( '.product_stock_status' ).children[0].children[1];
+      console.log(stock_status);  
       stock_status.classList.remove( 'outofstock' );
       stock_status.classList.add( 'instock' );
       stock_status.innerHTML = 'In stock';
     }else if ( updateKey === 'set_stock_quantity' && Value <= 0 ) {
-      const stock_status = element.parentElement.parentElement.parentElement.parentElement.querySelector( '.product_stock_status' ).children[0].children[0].children[1];
+      const stock_status = element.parentElement.parentElement.parentElement.querySelector( '.product_stock_status' ).children[0].children[1];
       stock_status.classList.add( 'outofstock' );
       stock_status.classList.remove( 'instock' );
       stock_status.innerHTML = 'Out of stock';
@@ -164,7 +165,7 @@ const ProductTable = ( { products, headers, setData, setDisplayMessage, rowsPerP
 
     if ( updateKey === "set_sale_price" ) {
       const regular_price = Number(
-        element.parentElement.parentElement.parentElement.parentElement.querySelector( '.product_regular_price' ).children[0].children[0].children[1].value
+        element.parentElement.parentElement.parentElement.querySelector( '.product_regular_price' ).children[0].children[1].value
       );
       if (Value >= regular_price) {
         setDisplayMessage( "Sale price cannot be greater than regular price" );
@@ -173,7 +174,7 @@ const ProductTable = ( { products, headers, setData, setDisplayMessage, rowsPerP
       }
     }
     if ( updateKey === "set_regular_price" ) {
-      const sale_price = element.parentElement.parentElement.parentElement.parentElement.querySelector('.product_sale_price').children[0].children[0].children[1].value;
+      const sale_price = element.parentElement.parentElement.parentElement.querySelector('.product_sale_price').children[0].children[1].value;
       if ( Number( sale_price ) > Number( Value ) ) {
         setData( ( prevData ) => {
           const newData = { ...prevData };
@@ -321,7 +322,7 @@ const ProductTable = ( { products, headers, setData, setDisplayMessage, rowsPerP
                   <td className={ `table-row ${ header.class }` }>
                     <div className="table-data-container">
                       <Input 
-                        handleChange={ ( e ) => { handleChange( e, product.id, headerKey, product.type ) } }
+                        handleChange={ ( e ) => { console.log(e.target);handleChange( e, product.id, headerKey, product.type ) } }
                         editButtonOnClick={(e) => { editButtonOnClick( e, product.id, headerKey ) } }
                         inputFieldOnClick={(e) => { inputFieldOnClick( e, product.id, headerKey ) } }
                         headerKey={ headerKey } 
@@ -391,7 +392,7 @@ const ProductTable = ( { products, headers, setData, setDisplayMessage, rowsPerP
               } )
             }
             <option value={ totalProducts }>All</option>
-          </select>          
+          </select>
         </div>
         <ReactPaginate
           className="pagination"

@@ -4,7 +4,7 @@ export default {
     id: "mailchimp",
     priority: 5,
     name: __("Mailchimp Integration", "woocommerce-stock-manager"),
-    desc: __("Connect your website with Mailchimp, to transfer of user data for email marketing purposes.", "woocommerce-stock-manager"),
+    desc: __("Integrate Mailchimp for email marketing.", "woocommerce-stock-manager"),
     icon: "font-mailchimp",
     proDependent: true,
     submitUrl: "save-stockmanager",

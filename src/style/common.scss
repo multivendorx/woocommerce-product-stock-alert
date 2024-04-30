@@ -144,20 +144,30 @@ $color-white: #fff;
 $menu-color: #f9f8fb;
 $color-active: #65438f;
 
-#wpcontent{
-  padding: 0;
-  background: $body-background;
-}
-
 .notice.notice-error{
   display: none;
 }
+a{
+  color: #e35047;
 
+  &:hover{
+      color: #e35047;
+  }
+}
+h1, h2, h3, h4, h5, h6, p{
+  margin: 0;
+  padding: 0;
+}
 #admin-stockmanager{
-  padding: 1.5rem;
+  padding: 1.5rem 1rem 0 0;
 
   a{
     text-decoration: none;
+  }
+
+  button{
+    outline: none;
+    border: none;
   }
 }
 
@@ -185,14 +195,15 @@ a:focus{
   gap: 0.5rem;
   background-color: rgba(12, 216, 12, 1);
   color: #fff;
-  max-width: 8.82rem;
+  max-width: 15rem;
   width: fit-content;
-  height: 2.205rem;
+  padding: 0.5rem 0;
   padding: 0.5rem;
   font-weight: 400;
   position: fixed;
   top: 7.182rem;
   right: 1.512rem;
+  z-index: 99999;
 
   &:after{
     position: absolute;

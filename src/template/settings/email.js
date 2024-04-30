@@ -4,7 +4,7 @@ export default {
     id: "email",
     priority: 4,
     name: __("Email Restriction Policies", "woocommerce-stock-manager"),
-    desc: __("Prevent registration of subscribers from specified domains or addresses.", "woocommerce-stock-manager"),
+    desc: __("Restrict email registrations.", "woocommerce-stock-manager"),
     icon: "font-mail",
     proDependent: true,
     submitUrl: "save-stockmanager",

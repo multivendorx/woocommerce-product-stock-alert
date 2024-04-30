@@ -120,7 +120,7 @@ const Export = () => {
                     <div className='export-page-content'>
                         <div className='import-export-btn-section'>
                             <div>
-                                <button class="mvx-select-deselect-trigger" onClick={ handleSelectAll } >{ __( 'Select / Deselect All', 'woocommerce-stock-manager' ) }</button>
+                                <button class="select-deselect-trigger" onClick={ handleSelectAll } >{ __( 'Select / Deselect All', 'woocommerce-stock-manager' ) }</button>
                             </div>
                         </div>
                         <div className="export-list-section">

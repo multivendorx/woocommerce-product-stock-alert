@@ -10,22 +10,28 @@ import { useSetting } from "../../../../contexts/SettingContext";
 import "./ConnectSelect.scss";
 
 const ConnectSelect = (props) => {
-  const { key, optionKey, settingChanged } = props;
+  const { mailchimpKey, optionKey, settingChanged } = props;
 
   // State varaible for list of options
   const { setting, updateSetting } = useSetting();
   const [sellectOption, setSelectOption] = useState(setting[optionKey] || []);
-  const [loading, setLoading] = useState(false);
+  const [loadings, setLoadings] = useState(false);
   const [showOption, setShowOption] = useState(false);
-
+  const [mailchimpErrorMessage, setMailchimpErrorMessage] = useState('');
 
   const updateSelectOption = async () => {
-    const options = await getApiResponse(getApiLink(props.apiLink));
-    settingChanged.current = true;
-    updateSetting(optionKey, options);
-    setSelectOption(options);
-    setLoading(false);
-    setShowOption(true);
+    if ( ! setting[ mailchimpKey ] ) {
+      setMailchimpErrorMessage('Kindly use a proper MailChimp key.');
+    } else {
+      setLoadings(true);
+      setMailchimpErrorMessage('');
+      const options = await getApiResponse(getApiLink(props.apiLink));
+      settingChanged.current = true;
+      updateSetting(optionKey, options);
+      setSelectOption(options);
+      setLoadings(false);
+      setShowOption(true);
+    }
   };
 
   return (
@@ -34,11 +40,11 @@ const ConnectSelect = (props) => {
         wrapperClass="setting-form-input"
         descClass="settings-metabox-description"
         type={ 'text' }
-        value={setting[key]}
+        value={setting[mailchimpKey]}
         proSetting={false}
         onChange={(e) => {
           if ( ! props.proSettingChanged()) {
-            props.onChange(e, key);
+            props.onChange(e, mailchimpKey);
           }
         }}
       />
@@ -47,9 +53,8 @@ const ConnectSelect = (props) => {
         <button
           onClick={(e) => {
             e.preventDefault();
-            if ( ! props.proSettingChanged()) {
+            if ( ! props.proSettingChanged() ) {
               updateSelectOption();
-              setLoading(true);
             }
           }}
         >
@@ -57,7 +62,7 @@ const ConnectSelect = (props) => {
         </button>
 
         {
-          loading && (
+          loadings && (
           <div class="loader">
             <div class="three-body__dot"></div>
             <div class="three-body__dot"></div>

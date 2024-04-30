@@ -8,11 +8,11 @@
  $color-active: #65438f;
 
  .dynamic-fields-wrapper {
-   background-color: #fdfdfe;
-   padding: 1.5rem 2rem;
+   padding: 2rem;
 
    .dynamic-form {
      .form-group {
+      margin: 1.25rem 0;
        display: flex;
        align-items: flex-start;
        justify-content: space-between;
@@ -23,7 +23,7 @@
          word-wrap: break-word;
 
          p {
-           font-size: 0.938rem;
+           font-size: 0.875rem;
          }
        }
 
@@ -113,12 +113,11 @@
           .settings-metabox-description{
             margin-top: 0.625rem;
             font-style: italic;
-            font-size: 0.875rem;
             color: rgba(114, 114, 117, 0.6);
+            font-size: 0.813rem;
+            line-height: 1.5714285714;
 
-            a{
-              color: #e35047;
-            }
+            
           }
 
           input, textarea{
@@ -127,6 +126,8 @@
             border-radius: 0;
             padding: 0.25rem 0.5rem;
             background: transparent;
+            font-size: 0.875rem;
+            line-height: 1.5714285714;
 
             &:focus{
               box-shadow: none;
@@ -136,7 +137,7 @@
       }
 
       .setting-section-divider{
-        margin: 2.5rem 0;
+        margin: 2rem 0;
         padding: 0;
         height: 0;
         border-top: 0.05rem solid rgba(82, 44, 129, 0.09);
@@ -164,10 +165,6 @@
       }
     }
   }
-}
-
-.margin-y{
-  margin: 1rem 0;
 }
 
 input[type=radio]{
