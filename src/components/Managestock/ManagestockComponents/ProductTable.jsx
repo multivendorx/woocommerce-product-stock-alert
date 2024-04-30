@@ -1,7 +1,6 @@
 import React, { useState , useEffect, useRef } from "react";
 import axios from "axios";
 import { __ } from "@wordpress/i18n";
-import ReactPaginate from "react-paginate";
 import Dropdown from "./Dropdown";
 import Input from "./Input";
 
@@ -18,7 +17,8 @@ const ProductTable = ( { products, headers, setData, setDisplayMessage, rowsPerP
   });
 
   const [activeInput, setActiveInput] = useState({});
-  
+  const pageCount = totalProducts ? Math.ceil(totalProducts / rowsPerPage) - 1 : 0;
+
   useEffect(() => {
     document.addEventListener('click', handleDocumentClick);
     return () => {
@@ -86,15 +86,6 @@ const ProductTable = ( { products, headers, setData, setDisplayMessage, rowsPerP
       setDisplayMessage( '' );  
     }, 2000 );
   }
-
-  // Function to handle page changes in pagination
-  const handlePageChange = ( { selected } ) => {
-    setCurrentPage( selected );
-    window.scrollTo( {
-      top: 0,
-      behavior: 'smooth',
-    } );
-  };
   
   // Function to handle changes in the rows per page select input
   const handleRowsPerPageChange = ( e ) => {
@@ -104,14 +95,6 @@ const ProductTable = ( { products, headers, setData, setDisplayMessage, rowsPerP
       top: 0,
       behavior: 'smooth',
     } );
-  };
-
-  //Function to handle edit button click
-  const editButtonOnClick = (e, productId, headerKey) => {
-    // let editButton = e.currentTarget;
-    // let inputElement = editButton.previousSibling.children[ 1 ];
-    // setActiveInput({ id: productId, key: headerKey });
-    // setEvent(inputElement);
   };
 
   const inputFieldOnClick = (e, productId, headerKey) => {
@@ -152,7 +135,6 @@ const ProductTable = ( { products, headers, setData, setDisplayMessage, rowsPerP
     }
     if ( updateKey === 'set_stock_quantity' && Value > 0 ) {
       const stock_status = element.parentElement.parentElement.parentElement.querySelector( '.product_stock_status' ).children[0].children[1];
-      console.log(stock_status);  
       stock_status.classList.remove( 'outofstock' );
       stock_status.classList.add( 'instock' );
       stock_status.innerHTML = 'In stock';
@@ -272,8 +254,7 @@ const ProductTable = ( { products, headers, setData, setDisplayMessage, rowsPerP
                           <img src={ product[ "image" ] } class="table-image" />
                         </a>
                         <Input 
-                          handleChange={(e) => { console.log("hello"); handleChange( e, product.id, "name", product.type ) } }
-                          editButtonOnClick={(e) => { editButtonOnClick( e, product.id, "name" ) } }
+                          handleChange={(e) => { handleChange( e, product.id, "name", product.type ) } }
                           inputFieldOnClick={(e) => { inputFieldOnClick( e, product.id, "name" ) } }
                           headerKey={ "name" } 
                           product={ product } 
@@ -322,8 +303,7 @@ const ProductTable = ( { products, headers, setData, setDisplayMessage, rowsPerP
                   <td className={ `table-row ${ header.class }` }>
                     <div className="table-data-container">
                       <Input 
-                        handleChange={ ( e ) => { console.log(e.target);handleChange( e, product.id, headerKey, product.type ) } }
-                        editButtonOnClick={(e) => { editButtonOnClick( e, product.id, headerKey ) } }
+                        handleChange={ ( e ) => { handleChange( e, product.id, headerKey, product.type ) } }
                         inputFieldOnClick={(e) => { inputFieldOnClick( e, product.id, headerKey ) } }
                         headerKey={ headerKey } 
                         product={ product } 
@@ -386,30 +366,72 @@ const ProductTable = ( { products, headers, setData, setDisplayMessage, rowsPerP
           }
         </tbody>
       </table>
-      <div className="pagination">
-        <div>
-          <label htmlFor="rowsPerPage" > Rows per page: </label>
-          <select id="rowsPerPage" value={ rowsPerPage } onChange={ handleRowsPerPageChange } >
+      <div className="pagination-section">
+        <div className="pagecount-select-wrapper">
+          <p className="show-count-text">Rows per page:</p>
+          <select
+            className="page-count-select"
+            value={rowsPerPage}
+            onChange={handleRowsPerPageChange}
+          >
             {
-              [ 10,25,30,50 ].map( (value ) => {
-                return <option value={ value }>{ value }</option>
-              } )
+              [10, 25, 50, 100].map((rowsPerPage) => {
+                return <option value={rowsPerPage}>{rowsPerPage}</option>
+              })
             }
-            <option value={ totalProducts }>All</option>
-          </select>          
+          </select>
         </div>
-        <ReactPaginate
-          className="pagination"
-          previousLabel={ "previous" }
-          nextLabel={ "next" }
-          breakLabel={ "..." }
-          breakClassName={ "break-me" }
-          pageCount={ totalProducts ? Math.ceil( totalProducts / rowsPerPage ) : 0 }
-          marginPagesDisplayed={ 2 }
-          pageRangeDisplayed={ 2 }
-          forcePage={ currentPage }
-          onPageChange={ handlePageChange }
-        />
+        <div className="page-handle-wrapper">
+          <p className="show-page-count">
+            {(currentPage) * rowsPerPage + 1}-{Math.min((currentPage + 1) * rowsPerPage, totalProducts )} of {totalProducts}
+          </p>
+          <div className="page-handle-button">
+            {/* Set current page to 0 */}
+            <button
+              className={ currentPage === 0 ? 'deactive' : '' }
+              onClick={(e) => {
+                if (currentPage > 0) {
+                  setCurrentPage(0);
+                }
+              }}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" role="presentation"><path d="M18.41 16.59L13.82 12l4.59-4.59L17 6l-6 6 6 6zM6 6h2v12H6z"></path><path fill="none" d="M24 24H0V0h24v24z"></path></svg>
+            </button>
+            {/* Set current page to less 1 */}
+            <button
+              className={currentPage === 0 ? 'deactive' : ''}
+              onClick={(e) => {
+                if (currentPage > 0) {
+                  setCurrentPage( currentPage - 1 );
+                }
+              }}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" role="presentation"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg>
+            </button>
+            {/* Set current page to more 1 */}
+            <button
+              className={currentPage === pageCount ? 'deactive' : ''}
+              onClick={(e) => {
+                if (currentPage < pageCount) {
+                  setCurrentPage( currentPage + 1 );
+                }
+              }}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" role="presentation"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg>
+            </button>
+            {/* Set current page to maximum nuber of page */}
+            <button
+              className={currentPage === pageCount ? 'deactive' : ''}
+              onClick={(e) => {
+                if (currentPage < pageCount) {
+                  setCurrentPage( pageCount );
+                }
+              }}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" role="presentation"><path d="M5.59 7.41L10.18 12l-4.59 4.59L7 18l6-6-6-6zM16 6h2v12h-2z"></path><path fill="none" d="M0 0h24v24H0V0z"></path></svg>
+            </button>
+          </div>
+        </div>
       </div>
     </React.Fragment>
   );

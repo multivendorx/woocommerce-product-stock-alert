@@ -116,6 +116,9 @@ $color-active: #65438f;
           &:first-child {
             min-width: 2.25rem;
             max-width: 2.25rem;
+            input[type=checkbox]{
+              margin: 0;
+            }
           }
           &:last-child{
             display: none;
@@ -197,7 +200,7 @@ $color-active: #65438f;
 
 .rdt_Pagination{
   display: grid !important;
-  grid-template-columns: 100px 1fr 100px 160px;
+  grid-template-columns: 100px 1fr 130px 160px;
   place-content: center;
 .sc-lmoLKH.lcunyj{
   select{

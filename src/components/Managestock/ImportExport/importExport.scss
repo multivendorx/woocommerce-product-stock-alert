@@ -21,7 +21,7 @@ $color-active: #65438f;
 
 .import-page, .export-page {
   .admin-page-title {
-    margin-bottom: 0.938rem;
+    margin-bottom: 0.75rem;
     display: flex;
     gap: 0.5rem;
     justify-content: space-between;
@@ -47,7 +47,7 @@ $color-active: #65438f;
   }
 
   p {
-    font-size: 1rem;
+    font-size: 0.875rem;
     padding-bottom: 0.625rem;
   }
 
@@ -57,10 +57,8 @@ $color-active: #65438f;
 }
 
 .export-section {
-  margin-top: 0.938rem;
-
   p {
-    font-size: 1rem;
+    font-size: 0.875rem;
     padding-bottom: 0.625rem;
   }
 
@@ -73,6 +71,7 @@ $color-active: #65438f;
   padding: 0.625rem 0 0.938rem;
   display: flex;
   gap: 2rem;
+  justify-content: flex-end;
 
   p {
     font-weight: 600;
@@ -107,7 +106,7 @@ $color-active: #65438f;
 }
 
 .export-page-content {
-  max-width: 40.625rem;
+  max-width: 37rem;
   width: 100%;
 }
 
@@ -165,7 +164,7 @@ $color-active: #65438f;
   padding: 0.5rem 0;
 
   h1 {
-    font-size: 1rem;
+    font-size: 0.875rem;
     width: 6.875rem;
     font-weight: 400;
   }

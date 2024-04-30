@@ -53,11 +53,30 @@
   }
 }
 
-img.subscriber-img {
-  object-fit: cover;
-  object-position: center center;
-  height: 100%;
-  width: 100%;
+div.subscriber-img {
+  background-image: url("../../assets/images/subscriber-list.jpg") !important; // force to set image for ungrade with pro for desktop-screen
+  background-repeat: no-repeat;
+  background-position: top left;
+  background-size: contain;
+  height: 100vh;
+}
+
+@media only screen and (max-width: 69.3rem) {
+  div.subscriber-img {
+    background-image: url("../../assets/images/subcriber-list-tab.png") !important; // force to set image for ungrade with pro for laptop-screen
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: contain;
+  }
+}
+
+@media only screen and (max-width: 40.95rem) {
+  div.subscriber-img {
+    background-image: url("../../assets/images/subcriber-list-phone.png") !important; // force to set image for ungrade with pro for mobile-screen
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: contain;
+  }
 }
 
 span.rs-picker-toggle-placeholder {

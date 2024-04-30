@@ -394,6 +394,15 @@ $color-active: #65438f;
           min-width: 6.3rem;
           width: 100%;
 
+          &.product_image{
+            .table-data-container{
+              a{
+                display: flex;
+                align-items: center;
+              }
+            }
+          }
+
           &:first-child {
             min-width: 2.5rem;
             max-width: 2.5rem !important; // To overwrite default max-width
@@ -633,6 +642,7 @@ $color-active: #65438f;
           min-width: 100% !important; // force to set width for laptop screen
           display: flex;
           background: rgb(238, 238, 238);
+          min-height: 2rem;
 
           &:nth-child(1),
           &:nth-child(2),
@@ -650,9 +660,11 @@ $color-active: #65438f;
             }
           }
 
-          .table-row:nth-child(2) {
-            padding-top: 0.09rem;
-            padding-left: 0.09rem;
+          &:nth-child(2) {
+            .table-data-container {
+              padding-top: 0.09rem;
+              padding-left: 0.09rem;
+            }
           }
 
           &:last-child {
@@ -790,9 +802,26 @@ tr.expand {
         background-color: transparent;
         padding-top: 0.35rem;
         cursor: pointer;
+        border-radius: 50%;
+        width: 2.25rem;
+        height: 2.25rem;
+        transition: all 0.3s linear;
+
+        &:hover{
+          background-color: rgba(0, 0, 0, .12);
+        }
+
+        &.deactive{
+          &:hover{
+            background-color: transparent;
+          }
+          svg{
+            opacity: 0.3;
+          }
+        }
 
         svg {
-          opacity: 0.3;
+          opacity: 0.6;
           width: 24px;
           height: 24px;
         }

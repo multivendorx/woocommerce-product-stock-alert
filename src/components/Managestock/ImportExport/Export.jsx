@@ -6,18 +6,9 @@ import { Link } from 'react-router-dom';
 import "./importExport.scss";
 
 const Export = () => {
-    //Headers to generate the CSV
-    const headers = [
-        { label: 'Id', key: 'product_id' },
-        { label: 'Type', key: 'product_type' },
-        { label: 'SKU', key: 'product_sku' },
-        { label: 'Name', key: 'product_name' },
-        { label: 'Manage stock', key: 'product_manage_stock' },
-        { label: 'Stock status', key: 'product_stock_status' },
-        { label: 'Backorders', key: 'product_backorders' },
-        { label: 'Stock', key: 'product_stock_quantity' },
-    ];
-
+    const [ data, setData ] = useState([]);
+    const [ selectAll, setSelectAll ] = useState( true );
+    
     //Fetches the data for generating the csv
     useEffect( () => {
         if (appLocalizer.pro_active) {
@@ -25,54 +16,63 @@ const Export = () => {
                 method: "post",
                 url: `${ appLocalizer.apiUrl }/stockmanager/v1/all-products`,
                 headers: { 'X-WP-Nonce' : appLocalizer.nonce },
-            }).then( ( response ) => {
-                let parsedData = JSON.parse( response.data );
-                setData( parsedData );
+            }).then((response) => {
+                let parsedData = JSON.parse(response.data);
+                setData( Object.values(parsedData) );
             });
         }
     }, []);
-    const [ data, setData ] = useState([]);
-    const [ header, setHeader ] = useState( headers );
-    const [ selectAll, setSelectAll ] = useState( true );
 
     //Data to Generate the Checkbox
     const [ checkboxData, setCheckboxData ] = useState([
-        { Name: 'Id',           Value: 'product_id',             Checked: true },
-        { Name: 'Type',         Value: 'product_type',           Checked: true },
-        { Name: 'SKU',          Value: 'product_sku',            Checked: true },
-        { Name: 'Name',         Value: 'product_name',           Checked: true },
-        { Name: 'Manage stock', Value: 'product_manage_stock',   Checked: true },
-        { Name: 'Stock status', Value: 'product_stock_status',   Checked: true },
-        { Name: 'Backorders',   Value: 'product_backorders',     Checked: true },
-        { Name: 'Stock',        Value: 'product_stock_quantity', Checked: true }
+        { name: 'Id',           value: 'id',             checked: true },
+        { name: 'Type',         value: 'type',           checked: true },
+        { name: 'SKU',          value: 'sku',            checked: true },
+        { name: 'name',         value: 'name',           checked: true },
+        { name: 'Manage stock', value: 'manage_stock',   checked: true },
+        { name: 'Stock status', value: 'stock_status',   checked: true },
+        { name: 'Backorders',   value: 'backorders',     checked: true },
+        { name: 'Stock',        value: 'stock_quantity', checked: true },
     ]);
 
+    const getHeader = () => {
+        const header = [];
+        checkboxData.forEach(({ name, value, checked }) => {
+            if (checked) {
+                header.push({ label: name, key: value });
+            }
+        });
+        return header;
+    }
+
+    const getData = () => {
+        return data.map((row) => {
+            return {
+                ...row,
+                manage_stock: row.manage_stock ? 'Yes' : 'No',
+                stock_quantity: row.stock_quantity || '-',
+            }
+        });
+    }
+
     //Handles the selection of a csv field
-    const handleCheck = ( e, label, key ) => {
+    const handleCheck = (e, name, value) => {
+        console.log(name, value);
         setCheckboxData( ( prevCheckboxData ) =>
             prevCheckboxData.map( ( checkbox ) =>
-                checkbox.Name === label
-                    ? { ...checkbox, Checked: !checkbox.Checked }
+                checkbox.value === value
+                    ? { ...checkbox, checked: !checkbox.checked }
                     : checkbox
             )
         );
-        let str = `{"label":"${ label }","key":"${ key }"}`;
-        str = JSON.parse( str );
-        if ( e.target.checked ) {
-            setHeader( prevHeader => [ ...prevHeader, str ] );
-        } else {
-            setHeader( prevHeader => prevHeader.filter( header => header.label !== str.label || header.key !== str.key ) );
-        }
     };
 
     const handleSelectAll = () => {
         if ( !selectAll ) {
-            setCheckboxData( checkboxData.map( item => ( { ...item, Checked: true } ) ) );
-            setHeader( headers);
+            setCheckboxData( checkboxData.map( item => ( { ...item, checked: true } ) ) );
             setSelectAll( true);
         } else {
-            setCheckboxData( checkboxData.map( item => ( { ...item, Checked: false } ) ) );
-            setHeader([]);
+            setCheckboxData( checkboxData.map( item => ( { ...item, checked: false } ) ) );
             setSelectAll( false );
         }
     };
@@ -83,14 +83,14 @@ const Export = () => {
         for ( let i = 0; i < checkboxData.length; i += parts ) {
             const chunk = checkboxData.slice( i, i + parts );
             const chunkElements = chunk.map( ( checkbox ) => (
-                <div className='export-feature-card' key={ checkbox.Value }>
-                    <h1>{ checkbox.Name }</h1>
+                <div className='export-feature-card' key={ checkbox.value }>
+                    <h1>{ checkbox.name }</h1>
                     <div className="mvx-normal-checkbox-content">
                         <input
                             type="checkbox"
-                            id={ checkbox.Name }
-                            checked={ checkbox.Checked }
-                            onChange={ ( e ) => handleCheck( e, checkbox.Name, checkbox.Value ) }
+                            id={ checkbox.name }
+                            checked={ checkbox.checked }
+                            onChange={ ( e ) => handleCheck( e, checkbox.name, checkbox.value ) }
                         />
                     </div>
                 </div>
@@ -103,6 +103,7 @@ const Export = () => {
         }
         return chunks;
     }
+
     return (
         <div className="admin-container">
             <div className='export-page'>
@@ -119,12 +120,12 @@ const Export = () => {
                     <p>{ __( 'Download a CSV file containing stock data. Choose specific fields for CSV download.', 'woocommerce-stock-manager' ) }</p>
                     <div className='export-page-content'>
                         <div className='import-export-btn-section'>
+                            <p>{ __( 'Select fields for exports', 'woocommerce-stock-manager' ) }</p>
                             <div>
                                 <button class="select-deselect-trigger" onClick={ handleSelectAll } >{ __( 'Select / Deselect All', 'woocommerce-stock-manager' ) }</button>
                             </div>
                         </div>
                         <div className="export-list-section">
-                            <p>{ __( 'Select fields for exports', 'woocommerce-stock-manager' ) }</p>
                             <div className='checkbox-container'>
                                 { splitCheckBoxData( 4 ) }
                             </div>
@@ -133,7 +134,7 @@ const Export = () => {
                             <div className='wp-menu-image dashicons-before dashicons-upload'></div>
                             {
                                 data &&
-                                <CSVLink enclosingCharacter={``} data={ Object.values( data ) } headers={ header } filename={ 'Products.csv'} >{ __( 'Export CSV', 'woocommerce-stock-manager' ) }</CSVLink>
+                                <CSVLink enclosingCharacter={``} data={ getData(data) } headers={ getHeader() } filename={ 'Products.csv'} >{ __( 'Export CSV', 'woocommerce-stock-manager' ) }</CSVLink>
                             }
                         </button>
                     </div>

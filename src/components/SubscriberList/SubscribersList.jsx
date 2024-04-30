@@ -262,14 +262,12 @@ export default function SubscribersList() {
             ></span>
             <Popoup />
           </Dialog>
-          <img
-            src={appLocalizer.subscriber_list}
-            alt="subscriber-list"
+          <div
             className="subscriber-img"
             onClick={() => {
               setOpenDialog(true);
-            }}
-          />
+            }}>
+          </div>
         </div>
       ) : (
         <div className="admin-subscriber-list">
