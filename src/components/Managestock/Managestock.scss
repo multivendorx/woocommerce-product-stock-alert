@@ -364,7 +364,7 @@ $color-active: #65438f;
         justify-content: center;
         color: rgba(0, 0, 0, 0.87);
         background-color: #ffffff;
-        padding: 24px;
+        padding: 1.512rem;
       }
       tr {
         background: $color-white;
@@ -721,7 +721,7 @@ $color-active: #65438f;
 
 tr.expand {
   background-color: #f0f0f1 !important; // force to set background color for variable product only
-  border-bottom: 1px solid #ccc;
+  border-bottom: 0.063rem solid #ccc;
   &:first-child {
     border: none !important; // force to set border color for first variable product only
   }
@@ -758,7 +758,7 @@ tr.expand {
   justify-content: space-between;
   background: #fff;
   padding: 0.75rem;
-  height: 40px;
+  height: 2.52rem;
 
   .pagecount-select-wrapper {
     display: flex;
@@ -822,15 +822,15 @@ tr.expand {
 
         svg {
           opacity: 0.6;
-          width: 24px;
-          height: 24px;
+          width: 1.512rem;
+          height: 1.512rem;
         }
       }
     }
   }
 }
 
-@media screen and (max-width: 599px) {
+@media screen and (max-width: 37.737rem) {
   .pagination-section {
     position: relative;
     .pagecount-select-wrapper {

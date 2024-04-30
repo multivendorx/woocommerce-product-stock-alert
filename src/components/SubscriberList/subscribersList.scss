@@ -189,17 +189,17 @@ $color-active: #65438f;
     .rdrDateRangePickerWrapper{
       padding: 0.5rem;
       background: #fff;
-      border: 1px solid rgba(0, 0, 0, 0.3);
+      border: 0.063rem solid rgba(0, 0, 0, 0.3);
       border-radius: 0.25rem;
       position: absolute;
-      top: 40px;
+      top: 2.52rem;
       z-index: 999;
       width: 100%;
       right: 0;
       flex-wrap: wrap;
 
     .rdrDefinedRangesWrapper{
-      flex: 1 0 226px ;
+      flex: 1 0 14.238rem ;
     }
     }
   }
