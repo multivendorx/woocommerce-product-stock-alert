@@ -64,43 +64,6 @@ span.rs-picker-toggle-placeholder {
   display: none;
 }
 
-input.rs-picker-toggle-textbox {
-  background-color: transparent;
-  border: none !important; // To overwrite default wordpress css
-  width: 13.375rem;
-  line-height: 1.5rem;
-}
-
-.rs-picker-cleanable.rs-picker-daterange .rs-picker-toggle.rs-btn {
-  padding-right: 1rem;
-}
-
-.rs-stack-item {
-  svg {
-    margin: 0 !important; // To overwrite react datepicker library css
-  }
-}
-
-.rs-picker-default .rs-picker-toggle.rs-btn {
-  padding-bottom: 0.25rem !important; // To overwrite react datepicker library css
-  padding-top: 0.25rem !important; // To overwrite react datepicker library css
-}
-
-.rs-picker-toggle.rs-btn.rs-btn-default {
-  background-color: #fdfdfe;
-  padding: 0.563rem 1rem;
-  border-radius: 0.25rem;
-  border: 0.063rem solid #d4d1d9;
-
-  & svg {
-    margin-top: 0.25rem;
-  }
-
-  & span svg {
-    margin-top: 0rem;
-  }
-}
-
 .sc-evZas.dFsTSm {
   overflow: visible;
 }
@@ -176,6 +139,7 @@ $color-active: #65438f;
     max-width: 37.8rem;
     flex-wrap: wrap;
     margin-bottom: 0.75rem;
+    position: relative;
 
     .admin-header-search-section{
       input{
@@ -202,13 +166,23 @@ $color-active: #65438f;
         }
       }
     }
-    .rs-picker-default:not(.rs-picker-disabled) .rs-picker-toggle:hover{
-      border: 0.063rem solid #d4d1d9;
+
+    .rdrDateRangePickerWrapper{
+      padding: 0.5rem;
+      background: #fff;
+      border: 1px solid rgba(0, 0, 0, 0.3);
+      border-radius: 0.25rem;
+      position: absolute;
+      top: 40px;
+      z-index: 999;
+      width: 100%;
+      right: 0;
+      flex-wrap: wrap;
+
+    .rdrDefinedRangesWrapper{
+      flex: 1 0 226px ;
     }
-  }
-
-  .rdt_Table{
-
+    }
   }
 }
 }
