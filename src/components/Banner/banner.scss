@@ -122,14 +122,17 @@ $button-padding: 0.37rem 2.5rem;
       left: 50%;
 
       button {
-        color: $primary-color;
+        color: #65438f;
         background-color: #c9c5c3;
         font-size: 0.65rem;
         border-radius: 50%;
         margin: 0;
-        line-height: 0.7;
+        line-height: 0;
         height: 1.4rem;
         width: 1.4rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
     }
   }

@@ -794,12 +794,18 @@ span.stock-manager-pro-tag {
 }
 .general-wrapper .middle-container-wrapper .middle-child-container .current-tab-lists .brand {
   padding: 2.016rem 0 1.512rem;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: 0 auto;
 }
 .general-wrapper .middle-container-wrapper .middle-child-container .current-tab-lists .brand img.logo {
   width: 10.269rem;
 }
 .general-wrapper .middle-container-wrapper .middle-child-container .current-tab-lists .brand .logo-small {
   display: none;
+}
+.general-wrapper .middle-container-wrapper .middle-child-container .current-tab-lists .brand p {
+  text-align: end;
 }
 .general-wrapper .middle-container-wrapper .middle-child-container .current-tab-lists .current-tab-lists-container {
   position: relative;
@@ -1252,9 +1258,12 @@ span.stock-manager-pro-tag {
   font-size: 0.65rem;
   border-radius: 50%;
   margin: 0;
-  line-height: 0.7;
+  line-height: 0;
   height: 1.4rem;
   width: 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 /*!***************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/components/AdminLibrary/CustomTable/table.scss ***!
@@ -1361,7 +1370,7 @@ span.stock-manager-pro-tag {
 }
 .rdt_Table .rdt_TableBody .rdt_TableRow .rdt_TableCell:last-child {
   position: absolute;
-  top: 0.75rem;
+  top: 1.15rem;
   right: 0.938rem;
   display: none;
   border-radius: 0.188rem;
@@ -2547,7 +2556,7 @@ span.rs-picker-toggle-placeholder {
   width: 100%;
   box-sizing: border-box;
   font-weight: 400;
-  min-height: 4.3rem;
+  min-height: 4.5rem;
 }
 .manage-stock-table table tbody tr:nth-child(odd) {
   background: #f9f9f9;
@@ -2774,6 +2783,10 @@ span.rs-picker-toggle-placeholder {
   table tbody tr .table-row:nth-child(1) .table-data-container h1, table tbody tr .table-row:nth-child(2) .table-data-container h1, table tbody tr .table-row:nth-child(3) .table-data-container h1 {
     display: none !important;
   }
+  table tbody tr .table-row .table-row:nth-child(2) {
+    padding-top: 0.09rem;
+    padding-left: 0.09rem;
+  }
   table tbody tr .table-row:last-child {
     display: flex !important;
     padding: 0;
@@ -2819,7 +2832,7 @@ span.rs-picker-toggle-placeholder {
   }
 }
 tr.expand {
-  background-color: #f1ecf7 !important;
+  background-color: #f0f0f1 !important;
   border-bottom: 1px solid #ccc;
 }
 tr.expand:first-child {
@@ -3232,15 +3245,15 @@ p.admin-settings-metabox-description-code::before {
   height: 100%;
 }
 
-.notice.notice-error {
-  display: none;
+#footer-thankyou a {
+  color: #2271b1;
 }
 
 a {
-  color: #e35047;
+  color: #40bacb;
 }
 a:hover {
-  color: #e35047;
+  color: #40bacb;
 }
 
 h1, h2, h3, h4, h5, h6, p {
@@ -3318,7 +3331,7 @@ span.admin-pro-tag {
   padding: 0.125rem 0.5rem;
   color: #F9F8FB;
   font-weight: 700;
-  line-height: 1;
+  line-height: 1.1;
   position: absolute;
   margin-left: 0.25rem;
   border-radius: 2rem 0;

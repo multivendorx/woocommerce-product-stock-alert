@@ -375,7 +375,7 @@ $color-active: #65438f;
         width: 100%;
         box-sizing: border-box;
         font-weight: 400;
-        min-height: 4.3rem;
+        min-height: 4.5rem;
         &:nth-child(odd) {
           background: $body-background;
         }
@@ -647,6 +647,11 @@ $color-active: #65438f;
             }
           }
 
+          .table-row:nth-child(2){
+            padding-top: 0.09rem;
+            padding-left: 0.09rem;
+          }
+
           &:last-child{
             display: flex !important; // To overwrite last heading display
             padding: 0;
@@ -702,7 +707,7 @@ $color-active: #65438f;
 }
 
 tr.expand {
-  background-color: #f1ecf7 !important; // force to set background color for variable product only
+  background-color: #f0f0f1 !important; // force to set background color for variable product only
   border-bottom: 1px solid #ccc;
   &:first-child {
     border: none !important; // force to set border color for first variable product only

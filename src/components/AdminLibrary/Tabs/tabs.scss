@@ -42,6 +42,8 @@ $theme-color: #522c81;
 
         .brand{
           padding: 2.016rem 0 1.512rem;
+          width: fit-content;
+          margin: 0 auto;
 
           img.logo{
             width: 10.269rem;
@@ -49,6 +51,10 @@ $theme-color: #522c81;
 
           .logo-small{
             display: none;
+          }
+
+          p{
+            text-align: end;
           }
       }
 
