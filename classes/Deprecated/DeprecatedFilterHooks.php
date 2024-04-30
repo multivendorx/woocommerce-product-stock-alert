@@ -27,15 +27,8 @@ class DeprecatedFilterHooks extends \WC_Deprecated_Hooks {
 		'woocommerce_email_subject_stock_manager' 				=> 'woocommerce_email_subject_stock_alert', 
 		'woocommerce_email_heading_stock_manager' 				=> 'woocommerce_email_heading_stock_alert', 
 		'is_stock_manager_pro_inactive' 						=> 'is_stock_alert_pro_inactive', 
-		'woo_stock_manager_product_data' 						=> 'woo_stock_alert_product_data', 
-		'woo_stock_manager_add_vendor' 							=> 'woo_product_stock_alert_add_vendor', 
-		'woocommerce_stock_manager_form_additional_fields' 		=> 'woocommerce_product_stock_alert_form_additional_fields', 
-		'woo_stock_manager_recaptcha_enabled' 					=> 'woo_stock_alert_recaptcha_enableed', 
-		'woo_stock_manager_fileds_array' 						=> 'woo_stock_alert_fileds_array', 
-		'woo_stock_manager_do_complete_additional_task' 		=> 'woo_product_stock_alert_do_complete_additional_task', 
-		'woo_stock_manager_is_accept_email_address' 			=> 'woo_stock_alert_is_accept_email_address', 
-		'woo_stock_manager_new_subscriber_added' 				=> 'woo_product_stock_alert_new_subscriber_added', 
-		'woo_stock_manager_accept_email' 						=> 'woo_product_stock_alert_accept_email', 
+		'woo_stock_manager_product_data' 						=> 'woo_stock_alert_product_data',
+		'woocommerce_stock_manager_form_additional_fields' 		=> 'woocommerce_product_stock_alert_form_additional_fields',
 		'woo_stock_manager_subscribers_list_headers' 			=> 'woo_stock_alert_subscribers_list_headers', 
 		'woo_stock_manager_pro_settings_lists' 					=> 'woocommerce_stock_alert_pro_settings_lists', 
 		'woo_stock_manager_pro_active' 							=> 'woo_stock_alert_pro_active', 
@@ -48,7 +41,6 @@ class DeprecatedFilterHooks extends \WC_Deprecated_Hooks {
 		'stock_manager_new_subscriber_added' 					=> 'woo_stock_manager_new_subscriber_added', 
 		'stock_manager_accept_email' 							=> 'woo_stock_manager_accept_email',
 		'stock_manager_add_vendor'								=> 'woo_stock_manager_add_vendor',
-		'product_backin_stock_send_admin'						=> 'product_backin_stock_send_admin'
 	];
 
 	/**
@@ -85,7 +77,7 @@ class DeprecatedFilterHooks extends \WC_Deprecated_Hooks {
 		'woo_stock_manager_subscribers_list_headers'			=> '2.4.2', 
 		'woo_stock_manager_pro_settings_lists'					=> '2.4.2',
 		'woo_stock_manager_add_vendor'							=> '2.4.2',
-		'product_backin_stock_send_admin'					=> '2.4.2',
+		'product_backin_stock_send_admin'						=> '2.4.2',
 	 ];
 
 	/**

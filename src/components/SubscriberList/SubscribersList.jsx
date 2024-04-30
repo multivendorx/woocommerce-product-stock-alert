@@ -1,16 +1,18 @@
 import axios from "axios";
 import { CSVLink } from "react-csv";
 import { __ } from "@wordpress/i18n";
-import { DateRangePicker } from "rsuite";
 import Dialog from "@mui/material/Dialog";
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useRef } from "react";
 import Popoup from "../PopupContent/PopupContent";
 import CustomTable, {
   TableCell,
 } from "../AdminLibrary/CustomTable/CustomTable";
 import "./subscribersList.scss";
-import "./rsuite-default.min.css";
-import isAfter from 'date-fns/isAfter';
+
+import { DateRangePicker } from 'react-date-range';
+import 'react-date-range/dist/styles.css'; // main style file
+import 'react-date-range/dist/theme/default.css'; // theme css file
+
 
 export default function SubscribersList() {
   const fetchSubscribersDataUrl = `${appLocalizer.apiUrl}/stockmanager/v1/get-subscriber-list`;
@@ -21,6 +23,19 @@ export default function SubscribersList() {
   const [totalRows, setTotalRows] = useState();
   const [openDialog, setOpenDialog] = useState(false);
   const [subscribersStatus, setSubscribersStatus] = useState(null);
+  const [openDatePicker, setOpenDatePicker] = useState(false);
+
+  const handleDateOpen = ()=>{
+    setOpenDatePicker(!openDatePicker);
+  }
+
+  const [selectedRange, setSelectedRange] = useState([
+    {
+      startDate: new Date(),
+      endDate: new Date(),
+      key: 'selection'
+    }
+  ]);
 
   function requestData(
     rowsPerPage = 10,
@@ -113,6 +128,16 @@ export default function SubscribersList() {
     }
   }, []);
 
+  const dateRef = useRef();
+
+  useEffect(() => {
+    document.body.addEventListener("click", (event) => {
+        if (! dateRef?.current?.contains(event.target) ) {
+          setOpenDatePicker(false);
+        }
+    })
+}, [])
+
   const realtimeFilter = [
     {
       name: "productNameField",
@@ -152,32 +177,32 @@ export default function SubscribersList() {
     {
       name: "date",
       render: (updateFilter, value) => (
-        <>
-          <DateRangePicker
-            placeholder={__(
-              "DD-MM-YYYY ~ DD-MM-YYYY",
-              "woocommerce-stock-manager"
-            )}
-            shouldDisableDate={date => isAfter(date, new Date())}
-            onChange={(dates) => {
-              if (dates != null) {
-                updateFilter("date", {
-                  start_date: dates[0]
-                    .toString()
-                    .replace(/ GMT[+-]\d{4} \(.+$/, ""),
-                  end_date: dates[1]
-                    .toString()
-                    .replace(/ GMT[+-]\d{4} \(.+$/, ""),
-                });
-              } else {
-                updateFilter("date", {
-                  start_date: sevenDaysAgo,
-                  end_date: currentDate,
-                });
-              }
-            }}
-          />
-        </>
+        <div ref={dateRef}>
+          <div className="admin-header-search-section">
+            <input value={`${selectedRange[0].startDate.toLocaleDateString()} - ${selectedRange[0].endDate.toLocaleDateString()}`} onClick={()=>handleDateOpen()} className="date-picker-input-custom" type="text" placeholder={__("DD/MM/YYYY", "woocommerce-stock-manager")} />
+          </div>
+          {openDatePicker &&
+            <DateRangePicker
+              ranges={selectedRange}
+              months={1}
+              direction="vertical"
+              scroll={{ enabled: true }}
+              maxDate={ new Date() }
+              shouldDisableDate={date => isAfter(date, new Date())}
+              onChange={(dates) => {
+                if (dates.selection) {
+                  dates = dates.selection;
+                  dates.endDate?.setHours(23, 59, 59, 999)
+                  setSelectedRange([dates])
+                  updateFilter("date", {
+                    start_date: dates.startDate,
+                    end_date: dates.endDate,
+                  });
+                }
+              }}
+            />
+          }
+        </div>
       ),
     },
   ];
@@ -237,14 +262,12 @@ export default function SubscribersList() {
             ></span>
             <Popoup />
           </Dialog>
-          <img
-            src={appLocalizer.subscriber_list}
-            alt="subscriber-list"
+          <div
             className="subscriber-img"
             onClick={() => {
               setOpenDialog(true);
-            }}
-          />
+            }}>
+          </div>
         </div>
       ) : (
         <div className="admin-subscriber-list">

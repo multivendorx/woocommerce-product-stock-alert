@@ -19,6 +19,7 @@ if ( ! class_exists( 'Emails' ) ) :
 class Emails extends \WC_Email {
 	
 	public $product;
+	public $recipient = '';
 
 	/**
 	 * Constructor

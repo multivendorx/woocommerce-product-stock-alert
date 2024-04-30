@@ -263,8 +263,7 @@ class Subscriber {
         $cust_mail  = WC()->mailer()->emails[ 'WC_Subscriber_Confirmation_Email_Stock_Manager' ];
 
         // Get additional email from global setting.
-        $general_tab_settings = get_option( 'woo_stock_manager_general_tab_settings' );
-        $additional_email     = $general_tab_settings[ 'additional_alert_email' ] ?? '';
+        $additional_email = SM()->setting->get_setting( 'additional_alert_email' );
 
         // Add vendor's email.
         if ( function_exists( 'get_mvx_product_vendors' ) ) {

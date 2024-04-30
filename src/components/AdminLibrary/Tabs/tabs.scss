@@ -1,117 +1,109 @@
-$menu-btn-color: #522c81;
 $body-background: #f9f9f9;
 $color-white: #fff;
-$menu-color: #f4f1f7;
+$menu-color: #f9f8fb;
 $color-active: #65438f;
 $theme-color: #522c81;
 
 .general-wrapper {
-  nav.admin-panel-nav {
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    display: flex;
-    margin-bottom: 1.25rem;
 
-    button {
-      width: 2.25rem;
-      height: 2.25rem;
-      background: $menu-btn-color;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      border-radius: 0.25rem;
-      font-size: 1rem;
-      color: $color-white;
-    }
-
-    .brand {
+  .middle-container-wrapper {
+    .middle-child-container {
+      position: relative;
       display: flex;
-      align-items: flex-end;
-      gap: 0.5rem;
+      color: #121116;
+      font-size: 0.875rem;
+      line-height: 1.5;
 
-      span{
-        display: flex;
-        align-items: center;
-        img {
-          width: 100px;
-          height: 100%;
-          object-fit: contain;
-          object-position: center;
-          margin-left: 0.25rem;
+      &.showMenu{
+        .current-tab-lists {
+          max-width: 4.158rem;
+
+          .brand{
+            margin: 0 auto;
+  
+            img{
+              width: 3.15rem !important; // To overwrite img width for menu same size
+            }
+            
+          }
+          .menu-coll-btn{
+            span{
+              transform: rotate(180deg);
+            }
+          }
         }
       }
 
-      p {
-        font-size: 1.75rem;
-        font-weight: 400;
-        width: fit-content;
-      }
-    }
-  }
-
-  .middle-container-wrapper {
-    border-top: 1px solid rgba($color: $color-active, $alpha: 0.3);
-    .middle-child-container {
-      position: relative;
-      display: grid;
-      grid-template-columns: 260px 1fr;
-      gap: 0.5rem;
-      align-items: flex-start;
-      margin-top: 2rem;
-
-      &.showMenu{
-        grid-template-columns: 50px 1fr;
-      }
-
       .current-tab-lists {
-        background-color: $color-white;
+        display: flex;
+        flex-direction: column;
+        max-width: 16.065rem;
         width: 100%;
-        height: 100%;
-        padding: 2.75rem 0;
+
+        .brand{
+          padding: 2.016rem 0 1.512rem;
+          width: fit-content;
+          margin: 0 auto;
+
+          img.logo{
+            width: 10.269rem;
+          }
+
+          .logo-small{
+            display: none;
+          }
+
+          p{
+            text-align: end;
+          }
+      }
 
         .current-tab-lists-container {
-          display: flex;
-          flex-direction: column;
-          gap: 0.5rem;
-          align-items: flex-start;
           position: relative;
 
           a,
           .menu-coll-btn {
-            padding: 0.75rem 1rem;
-            background: transparent;
-            width: 100%;
-            font-size: 1rem;
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            text-decoration: none;
-            gap: 0.5rem;
-            font-weight: 400;
-            color: rgba($color: #3f3f3f, $alpha: 0.7);
-            transition: all 0.3s linear;
             position: relative;
+            padding: 1.008rem 0.63rem 1.134rem 1.26rem;
+            border-top: 0.063rem solid #e0e4e9;
+            border-left: 0.126rem solid transparent;
+            overflow: hidden;
+            transition: all 100ms ease-out;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            color: #000;
+            gap: 0.75rem;
+            background-color: transparent;
 
-            &:hover{
-              background: $body-background;
-              &::before{
-                background-color: $color-active;
-              }
+            .menu-name{
+              font-size: 0.8125rem;
+              line-height: 1.4615384615;
+              font-weight: 500;
+              color: #121116;
+              
             }
 
-            &::before {
-              border-bottom-right-radius: 6px;
-              border-top-right-radius: 6px;
-              content: "";
-              height: 65%;
-              top: 50%;
-              transform: translateY(-50%);
-              left: 0;
-              position: absolute;
-              width: 3px;
-              background-color: transparent;
-              transition: all 0.3s linear;
+            .menu-desc{
+              margin-top: 0.189rem;
+              color: #72777c;
+              font-size: 0.875rem;
+              line-height: 1.2307692308;
+              transition: all 150ms ease-out;
+              -webkit-transition: all 150ms ease-out;
+            }
+
+            .drop-down-section{
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              gap: 0.25rem;
+              width: 100%;
+            }
+
+            &:hover{
+              background: $color-white;
+              border-left: 0.126rem solid $color-active !important; // To overwrite default common.scss
             }
 
             &:focus {
@@ -123,22 +115,40 @@ $theme-color: #522c81;
             }
 
             i {
-              font-size: 1.2rem;
+              font-size: 1.75rem;
+              color: #72777c;
+              font-size: 1.4375rem;
+              line-height: 1;
+              opacity: .3;
             }
           }
 
           .menu-coll-btn {
+            opacity: 1;
+            width: 100%;
+            font-size: 0.8125rem;
+            cursor: pointer;
+            font-weight: 500;
+              line-height: 1.4615384615;
+              padding-left: 1.65rem;
             i {
-              font-size: 1rem;
+              font-size: 1.25rem;
             }
           }
 
           .active-current-tab {
             color: $color-active;
-            background-color: $body-background;
+            background: #fff;
+            border-left: 0.126rem solid $color-active;
 
-            &::before {
-              background-color: $color-active;
+            .menu-name{
+              color: $color-active;
+            }
+
+            i{
+              color: $color-active;
+              opacity: 1;
+
             }
           }
 
@@ -147,9 +157,9 @@ $theme-color: #522c81;
             position: absolute;
             width: 2.25rem;
             height: 2.25rem;
-            top: 20px;
+            top: 1.26rem;
             font-size: 1.15rem;
-            right: 10px;
+            right: 0.63rem;
             border-radius: 0.5rem;
             background-color: #f9fafb;
             color: #65438f;
@@ -166,7 +176,6 @@ $theme-color: #522c81;
               padding-left: 1rem;
               display: flex;
               flex-direction: column;
-              gap: 0.5rem;
               align-items: flex-start;
               position: relative;
               max-height: 0;
@@ -183,22 +192,62 @@ $theme-color: #522c81;
       }      
 
       .tab-content {
-        border: 0.05rem solid rgba(82, 44, 129, 0.09);
+        position: relative;
+        background: #fff;
+        max-width: 75.6rem;
         width: 100%;
 
         .tab-description-start{
-            background: $menu-color;
-            padding: 1rem 2rem;
+            padding: 1.83rem 1.83rem 0;
 
-            .tab-name{
-                font-size: 1.25rem;
-                font-weight: 400;
+            .child{
+              display: flex;
+              align-items: flex-start;
+              justify-content: flex-start;
+              gap: 1rem;
+              border-bottom: 0.063rem solid #e0e4e9;
+              font-size: 0.875rem;
+              line-height: 1.5714285714;
+              padding: 0 0 1.83rem;
+
+              .tab-name{
                 line-height: normal;
-                margin-bottom: 0.75rem;
+                font-size: 1.625rem;
+                line-height: 1;
+                font-weight: 500;
+                letter-spacing: .0.047rem;
+                // padding-bottom: 1.5rem;
+            }
+
+            .tab-desc{
+              margin-top: 0.5rem;
             }
 
             p{
-              font-size: 0.938rem;
+              position: relative;
+
+              &::after{
+                position: absolute;
+                content: "";
+                bottom: -2.4rem;
+                left: 0;
+                background: $color-active;
+                width: 100%;
+                height: 0.126rem;
+              }
+
+              i{
+                width: 3.024rem;
+                height: 3.024rem;
+                background: $menu-color;
+                color: $color-active;
+                border-radius: 0.189rem;
+                font-size: 2rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              }
+            }
             }
         }
       }
@@ -206,51 +255,46 @@ $theme-color: #522c81;
   }
 }
 
-@media screen and (max-width: 797px) {
+@media screen and (max-width: 50.211rem) {
   .general-wrapper {
-    nav.admin-panel-nav {
-      button {
-        display: flex;
-      }
-
-      .brand {
-        span{
-          display: none;
-        }
-      }
-    }
     .middle-container-wrapper{
       .middle-child-container {
-        grid-template-columns: 1fr;
         .current-tab-lists{
-          position: fixed;
-          top: 0;
-          max-width: 100%;
-          left: -100%;
-          width: 100%;
-          height: 100%;
-          background-color: rgba($color: #000000, $alpha: 0.7);
-          z-index: 999999;
-          transition: all 0.3s linear;
-          padding: 0;
+          max-width: 4.158rem;
 
-          &.active{
-            left: 0;
+          .brand{
+            margin: 0 auto;
+            img.logo{
+              display: none;
+            }
+  
+            .logo-small{
+              display: block;
+              width: 3.15rem;
+            }
+
+            p{
+              display: none;
+            }
           }
 
           .current-tab-lists-container{
-            max-width: 500px;
-            background-color: $color-white;
-            height: 100%;
-            padding-top: 60px;
-            padding-left: 5px;
-
-            .menu-close{
-              display: flex;
-            }
-
             .menu-coll-btn{
               display: none;
+            }
+
+            .tab-wrapper{
+              .subtab-wrapper{
+                padding-left: 0;
+              }
+            }
+
+            a{
+              div{
+                &:nth-child(2){
+                  display: none;
+                }
+              }
             }
           }
         }
@@ -265,7 +309,7 @@ $theme-color: #522c81;
   align-items: center;
   gap: 1rem;
   flex-wrap: wrap;
-  max-width: 1000px;
+  max-width: 63.0rem;
   margin: auto;
   margin-top: 1.5rem;
 
@@ -273,9 +317,9 @@ $theme-color: #522c81;
     padding: 1.5rem;
     flex: 1 0 12.6rem;
     height: 10.71rem;
-    border: 0.005rem solid $theme-color;
+    border: 0.005rem solid #522c817a;
     border-radius: 0.25rem;
-    background: linear-gradient(145deg, #ffffff, #e6e6e6);
+    background: #fff;
     box-shadow:
       0.63rem 0.63rem 1.26rem #ededed,
       -0.63rem -0.63rem 1.26rem #ffffff;

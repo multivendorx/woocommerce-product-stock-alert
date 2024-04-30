@@ -711,7 +711,7 @@ const DynamicForm = (props) => {
         case "api_connect":
           input = (
             <CustomInput.ConnectSelect
-              key={inputField.key}
+              mailchimpKey={inputField.key}
               selectKey={inputField.selectKey}
               optionKey={inputField.optionKey}
               onChange={handleChange}

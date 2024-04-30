@@ -1,7 +1,6 @@
-import React, { useState , useEffect } from "react";
+import React, { useState , useEffect, useRef } from "react";
 import axios from "axios";
 import { __ } from "@wordpress/i18n";
-import ReactPaginate from "react-paginate";
 import Dropdown from "./Dropdown";
 import Input from "./Input";
 
@@ -15,7 +14,17 @@ const ProductTable = ( { products, headers, setData, setDisplayMessage, rowsPerP
     id: "",
     name: "",
     value: "",
-  } );
+  });
+
+  const [activeInput, setActiveInput] = useState({});
+  const pageCount = totalProducts ? Math.ceil(totalProducts / rowsPerPage) - 1 : 0;
+
+  useEffect(() => {
+    document.addEventListener('click', handleDocumentClick);
+    return () => {
+      document.removeEventListener('click', handleDocumentClick);
+    };
+  });
 
   //Function to Toggle the Expandable rows for the variable products
   const toggleRow = ( productId ) => {
@@ -60,6 +69,10 @@ const ProductTable = ( { products, headers, setData, setDisplayMessage, rowsPerP
 
   // Function to ulpoad the 
   function changeData() {
+    if (!uploadData.id) {
+      return;
+    }
+
     axios( {
       method: "post",
       url: updateDataUrl,
@@ -73,15 +86,6 @@ const ProductTable = ( { products, headers, setData, setDisplayMessage, rowsPerP
       setDisplayMessage( '' );  
     }, 2000 );
   }
-
-  // Function to handle page changes in pagination
-  const handlePageChange = ( { selected } ) => {
-    setCurrentPage( selected );
-    window.scrollTo( {
-      top: 0,
-      behavior: 'smooth',
-    } );
-  };
   
   // Function to handle changes in the rows per page select input
   const handleRowsPerPageChange = ( e ) => {
@@ -93,32 +97,33 @@ const ProductTable = ( { products, headers, setData, setDisplayMessage, rowsPerP
     } );
   };
 
-  //Function to handle edit button click
-  const editButtonOnClick = ( e ) => {
-    let editButton = e.currentTarget;
-    let inputElement = editButton.previousSibling.children[ 1 ];
-    setEvent( inputElement );
-    document.addEventListener( "click", handleDocumentClick );
-    inputElement.removeAttribute( "readonly" );
-    inputElement.classList.add( "active" );
-  };
-
-  const handleDocumentClick = ( e ) => {
-    if( event ) {
-      event.classList.remove( "active" );
-      event.setAttribute( "readonly", "readonly" );
-      document.removeEventListener( "click", handleDocumentClick );
-    }
-    if ( inputChange ) {
+  const inputFieldOnClick = (e, productId, headerKey) => {
+    if ( uploadData.id ) {
+      setActiveInput({});
       changeData();
+      updateData('', '', '');
+      setInputChange( false );
+    }
+
+    let inputElement = e.target;
+    setActiveInput({ id: productId, key: headerKey });
+    setEvent(inputElement);
+  }
+
+  const handleDocumentClick = (e) => {
+    const inputClicked = e.target.classList.contains('edit-input');
+    if ( inputClicked ) return;
+    
+    document.removeEventListener('click', handleDocumentClick);
+    
+    if (Object.keys(activeInput).length) {
+      setActiveInput({});
+      changeData();
+      updateData('', '', '');
       setInputChange( false );
     }
   };
 
-  //Function to handle input element MouseOut
-  const handleInputMouseOut = ( e ) => {
-    document.addEventListener( "click", handleDocumentClick );
-  };
   const handleChange = ( e, id, key, type ) => {
     let element = e.target;
     let updateKey = 'set_' + key;
@@ -129,12 +134,12 @@ const ProductTable = ( { products, headers, setData, setDisplayMessage, rowsPerP
       updateData( id, updateKey, Value );
     }
     if ( updateKey === 'set_stock_quantity' && Value > 0 ) {
-      const stock_status = element.parentElement.parentElement.parentElement.parentElement.querySelector( '.product_stock_status' ).children[0].children[0].children[1];
+      const stock_status = element.parentElement.parentElement.parentElement.querySelector( '.product_stock_status' ).children[0].children[1];
       stock_status.classList.remove( 'outofstock' );
       stock_status.classList.add( 'instock' );
       stock_status.innerHTML = 'In stock';
     }else if ( updateKey === 'set_stock_quantity' && Value <= 0 ) {
-      const stock_status = element.parentElement.parentElement.parentElement.parentElement.querySelector( '.product_stock_status' ).children[0].children[0].children[1];
+      const stock_status = element.parentElement.parentElement.parentElement.querySelector( '.product_stock_status' ).children[0].children[1];
       stock_status.classList.add( 'outofstock' );
       stock_status.classList.remove( 'instock' );
       stock_status.innerHTML = 'Out of stock';
@@ -142,7 +147,7 @@ const ProductTable = ( { products, headers, setData, setDisplayMessage, rowsPerP
 
     if ( updateKey === "set_sale_price" ) {
       const regular_price = Number(
-        element.parentElement.parentElement.parentElement.parentElement.querySelector( '.product_regular_price' ).children[0].children[0].children[1].value
+        element.parentElement.parentElement.parentElement.querySelector( '.product_regular_price' ).children[0].children[1].value
       );
       if (Value >= regular_price) {
         setDisplayMessage( "Sale price cannot be greater than regular price" );
@@ -151,7 +156,7 @@ const ProductTable = ( { products, headers, setData, setDisplayMessage, rowsPerP
       }
     }
     if ( updateKey === "set_regular_price" ) {
-      const sale_price = element.parentElement.parentElement.parentElement.parentElement.querySelector('.product_sale_price').children[0].children[0].children[1].value;
+      const sale_price = element.parentElement.parentElement.parentElement.querySelector('.product_sale_price').children[0].children[1].value;
       if ( Number( sale_price ) > Number( Value ) ) {
         setData( ( prevData ) => {
           const newData = { ...prevData };
@@ -202,7 +207,7 @@ const ProductTable = ( { products, headers, setData, setDisplayMessage, rowsPerP
       <tr className="table-head">
         {
           Object.values( headers ).map( ( header ) => {
-            return  <td className={`table-row ${ header.class }`}>{ header.name }</td>
+            return  header.type && <td className={`table-row ${ header.class }`}>{ header.name }</td>
           })
         }
       </tr>
@@ -210,7 +215,7 @@ const ProductTable = ( { products, headers, setData, setDisplayMessage, rowsPerP
   }
   const renderSingleRow = ( productId, product ) => {
     return (
-      <tr className={`${ expandElement[ productId ]? 'active' : null } ${ product.type == 'Variation' ? 'expand' : null }`}>
+      <tr className={`${ expandElement[ productId ]? 'active' : "" } ${ product.type == 'Variation' ? 'expand' : "" }`}>
         {
           Object.entries( headers ).map( ( [ headerKey, header ] ) => {
             switch( header.type ) {
@@ -230,40 +235,44 @@ const ProductTable = ( { products, headers, setData, setDisplayMessage, rowsPerP
                 } else {
                   return (
                     <td className={ `table-row ${ header.class }` }>
-                      <div className="table-data-container"></div>
+                      <div className="table-data-container disable">
+                        <button disabled class="setting-btn">
+                            <span class="bar bar1"></span>
+                            <span class="bar bar2"></span>
+                            <span class="bar bar1"></span>
+                        </button>
+                      </div>
                     </td>
                   )
                 }
-              case 'image':
+              case 'product':
                 return(
                   <td className={`table-row ${ header.class }`}>
                     <div className="table-data-container">
-                      <div className="table-row-meta-data">
                         <h1>{ header.name }</h1>
-                          <a href={ product[ header.dependent ] } target="_blank">
-                          <img src={ product[ headerKey ] } class="table-image" />
+                        <a href={ product[ header.dependent ] } target="_blank">
+                          <img src={ product[ "image" ] } class="table-image" />
                         </a>
-                        {/* <Input 
-                          handleChange={ ( e ) => {console.log(e.value); handleChange( e, product.id, 'name', product.type ) } }
-                          handleInputMouseOut={ handleInputMouseOut }
-                          editButtonOnClick={ editButtonOnClick }
+                        <Input 
+                          handleChange={(e) => { handleChange( e, product.id, "name", product.type ) } }
+                          inputFieldOnClick={(e) => { inputFieldOnClick( e, product.id, "name" ) } }
                           headerKey={ "name" } 
                           product={ product } 
-                          header={ header }
-                      /> */}
+                          header={header}
+                          type='text'
+                          active={activeInput.id == product.id && activeInput.key == "name" }
+                      />
                       </div>
-                    </div>
                   </td>
                 );
               case 'checkbox':
                 return (
                   <td className={ `table-row ${ header.class }` }>
                     <div className="table-data-container">
-                      <div className="table-row-meta-data">
                         <h1>{ header.name }</h1>
                         <div className="custome-toggle-default">                          
                           <input 
-                            id={ product.type === 'Variation' ? product.parent_product_id : null } 
+                            id={ product.type === 'Variation' ? product.parent_product_id : "" } 
                             onChange={ ( e ) => { handleChange( e, product.id, headerKey, product.type ) } } 
                             checked={ product[ headerKey ] } 
                             type="checkbox" 
@@ -271,14 +280,12 @@ const ProductTable = ( { products, headers, setData, setDisplayMessage, rowsPerP
                           <label></label>
                         </div>
                       </div>
-                    </div>
                   </td>
                 );
               case 'dropdown':
                 return (
                   <td className={ `table-row ${ header.class }` }>
                     <div className="table-data-container">
-                      <div className="table-row-meta-data">
                         <h1>{ header.name }</h1>
                         <Dropdown 
                           handleChange={ ( e) => { handleChange( e, product.id, headerKey, product.type ) } } 
@@ -288,7 +295,6 @@ const ProductTable = ( { products, headers, setData, setDisplayMessage, rowsPerP
                           header={ header } 
                         />
                       </div>
-                    </div>
                   </td>
                 )
               case 'text':
@@ -298,18 +304,18 @@ const ProductTable = ( { products, headers, setData, setDisplayMessage, rowsPerP
                     <div className="table-data-container">
                       <Input 
                         handleChange={ ( e ) => { handleChange( e, product.id, headerKey, product.type ) } }
-                        handleInputMouseOut={ handleInputMouseOut }
-                        editButtonOnClick={ editButtonOnClick }
+                        inputFieldOnClick={(e) => { inputFieldOnClick( e, product.id, headerKey ) } }
                         headerKey={ headerKey } 
                         product={ product } 
-                        header={ header }
+                        header={header}
+                        active={activeInput.id == product.id && activeInput.key == headerKey}
                       />
                     </div>
                   </td>
                 )
               case 'rowExpander':
                 return(
-                  <td className={ `${ expandElement[ productId ] ? 'active' : null } ${ header.class }` }>
+                  <td className={ `${ expandElement[ productId ] ? 'active' : "" } ${ header.class } table-row` }>
                     <button onClick={ ()=> toggleActive( productId ) }>
                       <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-arrow-right-short" viewBox="0 0 16 16" >
                         <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8"/>
@@ -353,33 +359,79 @@ const ProductTable = ( { products, headers, setData, setDisplayMessage, rowsPerP
             { renderHeader() }
         </thead>
         <tbody>
-          { renderRows() }
+          {
+            Object.keys(products).length ?
+              renderRows() :
+              <p className="no-data-message">There are no records to display</p>
+          }
         </tbody>
       </table>
-      <div className="pagination">
-        <div>
-          <label htmlFor="rowsPerPage" > Rows per page: </label>
-          <select id="rowsPerPage" value={ rowsPerPage } onChange={ handleRowsPerPageChange } >
+      <div className="pagination-section">
+        <div className="pagecount-select-wrapper">
+          <p className="show-count-text">Rows per page:</p>
+          <select
+            className="page-count-select"
+            value={rowsPerPage}
+            onChange={handleRowsPerPageChange}
+          >
             {
-              [ 10,25,30,50 ].map( (value ) => {
-                return <option value={ value }>{ value }</option>
-              } )
+              [10, 25, 50, 100].map((rowsPerPage) => {
+                return <option value={rowsPerPage}>{rowsPerPage}</option>
+              })
             }
-            <option value={ totalProducts }>All</option>
-          </select>          
+          </select>
         </div>
-        <ReactPaginate
-          className="pagination"
-          previousLabel={ "previous" }
-          nextLabel={ "next" }
-          breakLabel={ "..." }
-          breakClassName={ "break-me" }
-          pageCount={ totalProducts ? Math.ceil( totalProducts / rowsPerPage ) : 0 }
-          marginPagesDisplayed={ 2 }
-          pageRangeDisplayed={ 2 }
-          forcePage={ currentPage }
-          onPageChange={ handlePageChange }
-        />
+        <div className="page-handle-wrapper">
+          <p className="show-page-count">
+            {(currentPage) * rowsPerPage + 1}-{Math.min((currentPage + 1) * rowsPerPage, totalProducts )} of {totalProducts}
+          </p>
+          <div className="page-handle-button">
+            {/* Set current page to 0 */}
+            <button
+              className={ currentPage === 0 ? 'deactive' : '' }
+              onClick={(e) => {
+                if (currentPage > 0) {
+                  setCurrentPage(0);
+                }
+              }}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" role="presentation"><path d="M18.41 16.59L13.82 12l4.59-4.59L17 6l-6 6 6 6zM6 6h2v12H6z"></path><path fill="none" d="M24 24H0V0h24v24z"></path></svg>
+            </button>
+            {/* Set current page to less 1 */}
+            <button
+              className={currentPage === 0 ? 'deactive' : ''}
+              onClick={(e) => {
+                if (currentPage > 0) {
+                  setCurrentPage( currentPage - 1 );
+                }
+              }}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" role="presentation"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg>
+            </button>
+            {/* Set current page to more 1 */}
+            <button
+              className={currentPage === pageCount ? 'deactive' : ''}
+              onClick={(e) => {
+                if (currentPage < pageCount) {
+                  setCurrentPage( currentPage + 1 );
+                }
+              }}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" role="presentation"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg>
+            </button>
+            {/* Set current page to maximum nuber of page */}
+            <button
+              className={currentPage === pageCount ? 'deactive' : ''}
+              onClick={(e) => {
+                if (currentPage < pageCount) {
+                  setCurrentPage( pageCount );
+                }
+              }}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" role="presentation"><path d="M5.59 7.41L10.18 12l-4.59 4.59L7 18l6-6-6-6zM16 6h2v12h-2z"></path><path fill="none" d="M0 0h24v24H0V0z"></path></svg>
+            </button>
+          </div>
+        </div>
       </div>
     </React.Fragment>
   );

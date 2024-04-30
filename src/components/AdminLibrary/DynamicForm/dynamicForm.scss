@@ -1,18 +1,15 @@
- /*pro tag*/
- span.admin-pro-tag {}
-
  $menu-btn-color: #522c81;
  $body-background: #f9f9f9;
  $color-white: #fff;
- $menu-color: #f4f1f7;
+ $menu-color: #f9f8fb;
  $color-active: #65438f;
 
  .dynamic-fields-wrapper {
-   background-color: $color-white;
-   padding: 1.5rem 2rem;
+   padding: 2rem;
 
    .dynamic-form {
      .form-group {
+      margin: 1.25rem 0;
        display: flex;
        align-items: flex-start;
        justify-content: space-between;
@@ -23,7 +20,7 @@
          word-wrap: break-word;
 
          p {
-           font-size: 0.938rem;
+           font-size: 0.875rem;
          }
        }
 
@@ -44,15 +41,14 @@
            &::after {
             content: "";
             position: absolute;
-            top: 50%;
+            top: .55rem;
             left: 2.3rem;
-            width: 0.45rem;
-            height: 0.45rem;
+            width: .25rem;
+            height: .25rem;
+            border: .0625rem solid #65438f;
             border-radius: 8rem;
-            transition: 0.3s;
+            transition: .3s;
             z-index: 0;
-            background: #65438f;
-            transform: translateY(-50%);
            }
 
            input {
@@ -70,18 +66,19 @@
              display: block;
              border-radius: 8rem;
              position: relative;
-             border: 0.125rem solid $color-active;
+             border: 0.125rem solid #d4d1d9;
 
              &::before {
-                content: "";
-                position: absolute;
-                top: 50%;
-                transform: translateY(-50%);
-                left: 0.5rem;
-                width: 0.45rem;
-                height: 0.45rem;
-                background: #f9f9f9;
-                border-radius: 50%;
+              content: "";
+              position: absolute;
+              top: 50%;
+              transform: translateY(-50%);
+              left: .5rem;
+              width: .17rem;
+              height: .57rem;
+              background: #fdfdfe;
+              -webkit-transition: .3s;
+              transition: .3s;
              }
 
              &::after {
@@ -113,12 +110,11 @@
           .settings-metabox-description{
             margin-top: 0.625rem;
             font-style: italic;
-            font-size: 0.875rem;
             color: rgba(114, 114, 117, 0.6);
+            font-size: 0.813rem;
+            line-height: 1.5714285714;
 
-            a{
-              color: #e35047;
-            }
+            
           }
 
           input, textarea{
@@ -127,6 +123,8 @@
             border-radius: 0;
             padding: 0.25rem 0.5rem;
             background: transparent;
+            font-size: 0.875rem;
+            line-height: 1.5714285714;
 
             &:focus{
               box-shadow: none;
@@ -136,7 +134,7 @@
       }
 
       .setting-section-divider{
-        margin: 2.5rem 0;
+        margin: 2rem 0;
         padding: 0;
         height: 0;
         border-top: 0.05rem solid rgba(82, 44, 129, 0.09);
@@ -151,7 +149,7 @@
  }
 
 
-@media screen and (max-width: 976px) {
+@media screen and (max-width: 61.488rem) {
   .dynamic-fields-wrapper{
     .dynamic-form {
       .form-group{
@@ -164,10 +162,6 @@
       }
     }
   }
-}
-
-.margin-y{
-  margin: 1rem 0;
 }
 
 input[type=radio]{

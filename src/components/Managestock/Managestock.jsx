@@ -43,7 +43,7 @@ const Managestock = () => {
     border-color: red;
   `;
 
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(null);
   const [headers, setHeaders] = useState([]);
   const [totalProducts, setTotalProducts] = useState();
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -57,6 +57,7 @@ const Managestock = () => {
 
   useEffect(() => {
     if (appLocalizer.pro_active) {
+      setData(null);
       //Fetch the data to show in the table
       axios({
         method: "post",
@@ -108,7 +109,7 @@ const Managestock = () => {
     <>
       {!appLocalizer.pro_active ? (
         //If the user is free user he will be shown a Inventory Manager image
-        <div className="subscriber-img">
+        <div className="inventory-manager-wrapper">
           <Dialog
             className="admin-module-popup"
             open={openDialog}
@@ -220,10 +221,8 @@ const Managestock = () => {
           {
             //If both the data nad the headers are set then only the Table will be shown else the <PuffLoader/> will be shown
             data &&
-              Object.keys(data).length > 0 &&
-              headers &&
-              Object.keys(headers).length > 0 ? (
-              <div className="admin-backend-datatable-wrapper manage-stock-table">
+            Object.keys(headers).length > 0 ? (
+              <div className="manage-stock-table">
                 <ProductTable
                   setData={setData}
                   setDisplayMessage={setDisplayMessage}

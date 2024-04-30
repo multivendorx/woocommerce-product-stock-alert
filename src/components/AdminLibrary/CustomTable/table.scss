@@ -42,6 +42,7 @@ $animation-duration: 2s;
     border-color: $border-color;
     color: $font-color;
     background-color: $background-color;
+    flex-grow: 1;
 
     &:first-child {
       display: block;
@@ -86,15 +87,18 @@ $animation-duration: 2s;
 $menu-btn-color: #522c81;
 $body-background: #f9f9f9;
 $color-white: #fff;
-$menu-color: #f4f1f7;
+$menu-color: #f9f8fb;
 $color-active: #65438f;
 
-
+.koyZDM{
+  overflow: visible !important; // To overwrite default react data table css
+}
 .rdt_Table{
-  border-radius: 0.25rem;
+    border-radius: 0.25rem;
     overflow: hidden;
     box-shadow: 0 0 1rem rgba($color: #000000, $alpha: 0.125);
     width: 100%;
+    z-index: 1;
 
     *{
       font-size: 0.938rem;
@@ -109,9 +113,13 @@ $color-active: #65438f;
         padding: 0.313rem;
         font-weight: 400;
         .rdt_TableCol{
+          padding: 0 0.5rem;
           &:first-child {
             min-width: 2.25rem;
             max-width: 2.25rem;
+            input[type=checkbox]{
+              margin: 0;
+            }
           }
           &:last-child{
             display: none;
@@ -124,13 +132,14 @@ $color-active: #65438f;
       .rdt_TableRow {
         background: $color-white;
         position: relative;
+        padding: 0 0.313rem;
         &:nth-child(odd) {
           background: $body-background;
         }
 
         .rdt_TableCell {
           font-size: 0.85rem;
-          padding: 0.313rem;
+          padding: 0.313rem 0.5rem;
           font-size: 0.95rem;
           &:first-child {
             min-width: 2.5rem;
@@ -139,7 +148,7 @@ $color-active: #65438f;
 
           &:last-child{
             position: absolute;
-            top: 0.75rem;
+            top: 1.15rem;
             right: 0.938rem;
             display: none;
             border-radius: 0.188rem;
@@ -147,8 +156,9 @@ $color-active: #65438f;
             height: 3rem !important; // To overwrite default table cell width / height
 
             .table-dropdown_btn{
+              width: 100%;
               button{
-                width: 1.563rem;
+                width: 100%;
                 height: 1.563rem;
                 padding: 0;
                 display: flex;
@@ -176,8 +186,8 @@ $color-active: #65438f;
           }
 
           img{
-            width: 50px;
-            height: 50px;
+            width: 3.15rem;
+            height: 3.15rem;
             padding: 0.25rem;
             border-radius: 0.25rem;
             box-shadow: 0 0 .125rem rgba($color: #000000, $alpha: 0.125);
@@ -190,6 +200,9 @@ $color-active: #65438f;
 
 
 .rdt_Pagination{
+  display: grid !important;
+  grid-template-columns: 8.19rem 1fr 8.19rem 10.08rem;
+  place-content: center;
 .sc-lmoLKH.lcunyj{
   select{
     &:focus{
@@ -227,7 +240,7 @@ $color-active: #65438f;
         .rdt_TableRow{
           display: flex;
           position: relative;
-          max-height: 60px;
+          max-height: 4.25rem;
           transition: max-height 0.4s linear;
           overflow: hidden;
           flex-wrap: wrap;
@@ -251,6 +264,7 @@ $color-active: #65438f;
               min-width: 5% !important; // To overwrite default table cell size only responsive device
 
               .table-row-custom{
+                padding: 0;
                 h4{
                   display: none;
                 }
@@ -259,9 +273,10 @@ $color-active: #65438f;
 
             &:last-child{
               display: flex;
-              width: 35px !important; // To overwrite as a drop-down button width
-              min-width: 20px !important; // To overwrite as a drop-down button width
-              height: 30px !important; // To overwrite as a drop-down button height
+              padding: 0;
+              width: 2.205rem !important; // To overwrite as a drop-down button width
+              min-width: 1.26rem !important; // To overwrite as a drop-down button width
+              height: 1.89rem !important; // To overwrite as a drop-down button height
             }
 
             .table-row-custom{
@@ -270,6 +285,7 @@ $color-active: #65438f;
               word-wrap: unset;
               text-wrap: nowrap;
               overflow: hidden;
+              padding: 0.313rem 0.625rem;
               h4{
                 display: block;
               }
@@ -277,5 +293,12 @@ $color-active: #65438f;
           }
         }
       }
+  }
+}
+
+
+@media screen and (max-width:37.737rem) {
+  .rdt_Pagination{
+    display: flex !important;
   }
 }
