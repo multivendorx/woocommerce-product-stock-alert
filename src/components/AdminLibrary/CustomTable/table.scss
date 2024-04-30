@@ -98,6 +98,7 @@ $color-active: #65438f;
     overflow: hidden;
     box-shadow: 0 0 1rem rgba($color: #000000, $alpha: 0.125);
     width: 100%;
+    z-index: 1;
 
     *{
       font-size: 0.938rem;
