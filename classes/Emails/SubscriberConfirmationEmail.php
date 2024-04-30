@@ -19,6 +19,7 @@ if ( ! class_exists( 'SubscriberConfirmationEmail' ) ) :
 class SubscriberConfirmationEmail extends \WC_Email {
 	
 	public $product;
+	public $recipient = '';
 
 	/**
 	 * Constructor

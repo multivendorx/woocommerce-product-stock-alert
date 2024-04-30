@@ -20,6 +20,7 @@ class AdminEmail extends \WC_Email {
 	
 	public $product;
 	public $customer_email;
+	public $recipient = '';
 
 	/**
 	 * Constructor

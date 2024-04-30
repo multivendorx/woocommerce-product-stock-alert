@@ -196,6 +196,9 @@ $color-active: #65438f;
 
 
 .rdt_Pagination{
+  display: grid !important;
+  grid-template-columns: 100px 1fr 100px 160px;
+  place-content: center;
 .sc-lmoLKH.lcunyj{
   select{
     &:focus{
@@ -286,5 +289,12 @@ $color-active: #65438f;
           }
         }
       }
+  }
+}
+
+
+@media screen and (max-width:599px) {
+  .rdt_Pagination{
+    display: flex !important;
   }
 }

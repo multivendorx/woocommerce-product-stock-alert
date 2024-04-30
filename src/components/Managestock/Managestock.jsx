@@ -241,6 +241,34 @@ const Managestock = () => {
           }
         </div>
       )}
+          <div className="pagination-section">
+        <div className="pagecount-select-wrapper">
+          <p className="show-count-text">Rows per page:</p>
+          <select className="page-count-select">
+            <option value="10">10</option>
+            <option value="10">20</option>
+            <option value="10">50</option>
+            <option value="10">all</option>
+          </select>
+        </div>
+        <div className="page-handle-wrapper">
+          <p className="show-page-count">1-3 of 3</p>
+          <div className="page-handle-button">
+            <button>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" role="presentation"><path d="M18.41 16.59L13.82 12l4.59-4.59L17 6l-6 6 6 6zM6 6h2v12H6z"></path><path fill="none" d="M24 24H0V0h24v24z"></path></svg>
+            </button>
+            <button>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" role="presentation"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg>
+            </button>
+            <button>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" role="presentation"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg>
+            </button>
+            <button>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" role="presentation"><path d="M5.59 7.41L10.18 12l-4.59 4.59L7 18l6-6-6-6zM16 6h2v12h-2z"></path><path fill="none" d="M0 0h24v24H0V0z"></path></svg>
+            </button>
+          </div>
+        </div>
+      </div>
     </>
   );
 };
