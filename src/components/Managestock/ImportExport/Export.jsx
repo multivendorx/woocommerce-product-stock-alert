@@ -49,7 +49,7 @@ const Export = () => {
         return data.map((row) => {
             return {
                 ...row,
-                manage_stock: row.manage_stock ? 'Yes' : 'No',
+                manage_stock: row.manage_stock ? 'yes' : 'no',
                 stock_quantity: row.stock_quantity || '-',
             }
         });

@@ -6,6 +6,11 @@ import { Link } from 'react-router-dom';
 import "./importExport.scss";
 
 const Import = () => {
+    const [ data, setData ] = useState([]);
+    const [ file, setFile ] = useState( null );
+    const [ filename, setFilename ] = useState( "" );
+    const [ displayMessage, setDisplayMessage ] = useState('');
+    
     //To fetch all the data for the sample CSV
     useEffect( () => {
         if ( appLocalizer.pro_active ) {
@@ -15,14 +20,21 @@ const Import = () => {
                 headers: { 'X-WP-Nonce' : appLocalizer.nonce },
             } ).then( ( response ) => {
                 let parsedData = JSON.parse( response.data );
-                setData( parsedData ); 
+                setData(Object.values( parsedData ) );
             } );
         }
     }, []);
-    const [ data, setData ] = useState([]);
-    const [ file, setFile ] = useState( null );
-    const [ filename, setFilename ] = useState( "" );
-    const [ displayMessage, setDisplayMessage ] = useState( '' );
+
+    const getData = () => {
+        return data.map((row) => {
+            return {
+                ...row,
+                manage_stock: row.manage_stock ? 'yes' : 'no',
+                stock_quantity: row.stock_quantity || '-',
+            }
+        });
+    }
+
     const handleFileChange = ( event ) => {
         setFile( event.target.files[0] );
         setFilename( event.target.files[0].name )
@@ -30,6 +42,7 @@ const Import = () => {
 
     //Headers to generate the Sample CSV
     const header = [
+        { label: 'ID'           , key: 'id' },
         { label: 'SKU'          , key: 'sku' },
         { label: 'Manage stock' , key: 'manage_stock' },
         { label: 'Stock status' , key: 'stock_status' },
@@ -39,8 +52,20 @@ const Import = () => {
 
     //Function that process the csv
     const processCSV = (str, delim = ',') => {
-        const headers = str.slice( 0, str.indexOf( '\n' ) ).split( delim );
-        const rows = str.slice( str.indexOf( '\n' ) + 1 ).split( '\n' );
+        // Check if '\n' is the delimiter
+        let eol = '\n';
+        if (str.indexOf('\r') !== -1) {
+            // If '\r' is found in the string, it might be the delimiter
+            // Check if '\r' splits the header and rows
+            if (str.indexOf('\r') < str.indexOf('\n')) {
+                eol = '\r\n'; // '\r\n' is the delimiter
+            } else {
+                eol = '\r'; // '\r' is the delimiter
+            }
+        }
+
+        const headers = str.slice( 0, str.indexOf( eol ) ).split( delim );
+        const rows = str.slice( str.indexOf( '\n' ) + 1 ).split( eol );
         const processedCsvData = rows.map( row => {
             const values = row.split( delim );
             const eachObject = headers.reduce( ( obj, header, i ) => {
@@ -58,7 +83,7 @@ const Import = () => {
             const reader = new FileReader();
             reader.readAsText( file  );
             reader.onload = function ( e ) {
-                let csvData = processCSV( e.target.result );
+                let csvData = processCSV(e.target.result);
                 axios({
                     method: 'post',
                     url: `${ appLocalizer.apiUrl }/stockmanager/v1/import-products`,
@@ -96,7 +121,7 @@ const Import = () => {
                     <p>{ __( 'Upload your CSV file to update stock data for existing products. The file must match the specified format a sample CSV is available for reference.', 'woocommerce-stock-manager' ) }
                     {
                         data &&
-                        <CSVLink enclosingCharacter={ `` } data={ Object.values( data ) } headers={ header } filename={ 'Sample.csv' }>{ __( 'Download Sample CSV', 'woocommerce-stock-manager' ) }</CSVLink>
+                        <CSVLink enclosingCharacter={ `` } data={ getData() } headers={ header } filename={ 'Sample.csv' }>{ __( 'Download Sample CSV', 'woocommerce-stock-manager' ) }</CSVLink>
                     }
                     </p>
                     <div className='import-table'>                        
