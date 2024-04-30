@@ -19401,7 +19401,7 @@ const Managestock = () => {
     margin: 0 auto;
     border-color: red;
   `;
-  const [data, setData] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
+  const [data, setData] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
   const [headers, setHeaders] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
   const [totalProducts, setTotalProducts] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)();
   const [rowsPerPage, setRowsPerPage] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(10);
@@ -19414,6 +19414,7 @@ const Managestock = () => {
   const [stockStatus, setStockStatus] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("");
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     if (appLocalizer.pro_active) {
+      setData(null);
       //Fetch the data to show in the table
       (0,axios__WEBPACK_IMPORTED_MODULE_6__["default"])({
         method: "post",
@@ -19544,7 +19545,7 @@ const Managestock = () => {
     value: "outofstock"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Out of stock", "woocommerce-stock-manager"))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Results Found: ", "woocommerce-stock-manager"), totalProducts)),
   //If both the data nad the headers are set then only the Table will be shown else the <PuffLoader/> will be shown
-  data && Object.keys(data).length > 0 && headers && Object.keys(headers).length > 0 ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  data && Object.keys(headers).length > 0 ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "manage-stock-table"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_ManagestockComponents_ProductTable__WEBPACK_IMPORTED_MODULE_3__["default"], {
     setData: setData,
@@ -19947,7 +19948,7 @@ const ProductTable = ({
   };
   const renderSingleRow = (productId, product) => {
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("tr", {
-      className: `${expandElement[productId] ? 'active' : null} ${product.type == 'Variation' ? 'expand' : null}`
+      className: `${expandElement[productId] ? 'active' : ""} ${product.type == 'Variation' ? 'expand' : ""}`
     }, Object.entries(headers).map(([headerKey, header]) => {
       switch (header.type) {
         case 'expander':
@@ -20018,7 +20019,7 @@ const ProductTable = ({
           }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", null, header.name), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
             className: "custome-toggle-default"
           }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
-            id: product.type === 'Variation' ? product.parent_product_id : null,
+            id: product.type === 'Variation' ? product.parent_product_id : "",
             onChange: e => {
               handleChange(e, product.id, headerKey, product.type);
             },
@@ -20063,7 +20064,7 @@ const ProductTable = ({
           })));
         case 'rowExpander':
           return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", {
-            className: `${expandElement[productId] ? 'active' : null} ${header.class} table-row`
+            className: `${expandElement[productId] ? 'active' : ""} ${header.class} table-row`
           }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
             onClick: () => toggleActive(productId)
           }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
@@ -20086,7 +20087,9 @@ const ProductTable = ({
       }, renderSingleRow(variationProductId, variationProduct))));
     }));
   };
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("table", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("thead", null, renderHeader()), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("tbody", null, renderRows())), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("table", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("thead", null, renderHeader()), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("tbody", null, Object.keys(products).length ? renderRows() : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+    className: "no-data-message"
+  }, "There are no records to display"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "pagination"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     htmlFor: "rowsPerPage"

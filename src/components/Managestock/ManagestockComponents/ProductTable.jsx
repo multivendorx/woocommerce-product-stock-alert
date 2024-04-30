@@ -233,7 +233,7 @@ const ProductTable = ( { products, headers, setData, setDisplayMessage, rowsPerP
   }
   const renderSingleRow = ( productId, product ) => {
     return (
-      <tr className={`${ expandElement[ productId ]? 'active' : null } ${ product.type == 'Variation' ? 'expand' : null }`}>
+      <tr className={`${ expandElement[ productId ]? 'active' : "" } ${ product.type == 'Variation' ? 'expand' : "" }`}>
         {
           Object.entries( headers ).map( ( [ headerKey, header ] ) => {
             switch( header.type ) {
@@ -291,7 +291,7 @@ const ProductTable = ( { products, headers, setData, setDisplayMessage, rowsPerP
                         <h1>{ header.name }</h1>
                         <div className="custome-toggle-default">                          
                           <input 
-                            id={ product.type === 'Variation' ? product.parent_product_id : null } 
+                            id={ product.type === 'Variation' ? product.parent_product_id : "" } 
                             onChange={ ( e ) => { handleChange( e, product.id, headerKey, product.type ) } } 
                             checked={ product[ headerKey ] } 
                             type="checkbox" 
@@ -335,7 +335,7 @@ const ProductTable = ( { products, headers, setData, setDisplayMessage, rowsPerP
                 )
               case 'rowExpander':
                 return(
-                  <td className={ `${ expandElement[ productId ] ? 'active' : null } ${ header.class } table-row` }>
+                  <td className={ `${ expandElement[ productId ] ? 'active' : "" } ${ header.class } table-row` }>
                     <button onClick={ ()=> toggleActive( productId ) }>
                       <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-arrow-right-short" viewBox="0 0 16 16" >
                         <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8"/>
@@ -379,7 +379,11 @@ const ProductTable = ( { products, headers, setData, setDisplayMessage, rowsPerP
             { renderHeader() }
         </thead>
         <tbody>
-          { renderRows() }
+          {
+            Object.keys(products).length ?
+              renderRows() :
+              <p className="no-data-message">There are no records to display</p>
+          }
         </tbody>
       </table>
       <div className="pagination">
@@ -392,7 +396,7 @@ const ProductTable = ( { products, headers, setData, setDisplayMessage, rowsPerP
               } )
             }
             <option value={ totalProducts }>All</option>
-          </select>
+          </select>          
         </div>
         <ReactPaginate
           className="pagination"
