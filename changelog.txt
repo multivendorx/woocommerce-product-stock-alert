@@ -1,6 +1,9 @@
 == Changelog ==
 ----------------------------------------------------------------------------------------------
 
+= 2.5.1 - 2024-05-01 =
+* Fixed - Issue with plugin activation-deactivation notice.
+
 = 2.5.0 - 2024-04-30 =
 * Added - WordPress 6.5.2 compatibility.
 * Added - WooCommerce 8.8.3 compatibility.
