@@ -31,28 +31,6 @@
   content: "\e520";
 }
 
-.rs-picker-toggle.rs-btn.rs-btn-default {
-  background-color: #fdfdfe;
-  padding: 0.563rem 1rem;
-  border-radius: 0.25rem;
-  border: 0.063rem solid #d4d1d9;
-
-  .rs-stack {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-  }
-
-  & svg {
-    margin-top: 0.25rem;
-  }
-
-  & span svg {
-    margin-top: 0rem;
-  }
-}
-
 div.subscriber-img {
   background-image: url("../../assets/images/subscriber-list.jpg") !important; // force to set image for ungrade with pro for desktop-screen
   background-repeat: no-repeat;
@@ -87,15 +65,6 @@ span.rs-picker-toggle-placeholder {
   overflow: visible;
 }
 
-// // this is for date picker -----
-.rs-calendar-table-header-cell {
-  display: table-cell;
-  width: 1%;
-  padding: 0.063rem;
-  text-align: center;
-  vertical-align: middle;
-}
-
 $menu-btn-color: #522c81;
 $body-background: #f9f9f9;
 $color-white: #fff;
@@ -119,8 +88,8 @@ $color-active: #65438f;
 
     .download-btn-subscriber-list{
       border-radius: 0.25rem;
-        background-color: $color-active;
-        padding: 0.5rem 1rem;
+      background-color: $color-active;
+      padding: 0.5rem 1rem;
         
         a{
           color: $color-white;
@@ -184,23 +153,6 @@ $color-active: #65438f;
           box-shadow: none;
         }
       }
-    }
-
-    .rdrDateRangePickerWrapper{
-      padding: 0.5rem;
-      background: #fff;
-      border: 0.063rem solid rgba(0, 0, 0, 0.3);
-      border-radius: 0.25rem;
-      position: absolute;
-      top: 2.52rem;
-      z-index: 999;
-      width: 100%;
-      right: 0;
-      flex-wrap: wrap;
-
-    .rdrDefinedRangesWrapper{
-      flex: 1 0 14.238rem ;
-    }
     }
   }
 }
