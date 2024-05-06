@@ -1,8 +1,5 @@
-enque with page id.
-bulk action for delete subscriber.
-bulk action for unsubscriber.
-
 <?php
+
 namespace StockManager;
 defined( 'ABSPATH' ) || exit;
 
