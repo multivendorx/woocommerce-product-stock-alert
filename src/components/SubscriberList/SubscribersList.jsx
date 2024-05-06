@@ -17,6 +17,7 @@ import 'react-date-range/dist/theme/default.css'; // theme css file
 export default function SubscribersList() {
   const fetchSubscribersDataUrl = `${appLocalizer.apiUrl}/stockmanager/v1/get-subscriber-list`;
   const fetchSubscribersCount = `${appLocalizer.apiUrl}/stockmanager/v1/get-table-segment`;
+  const bulkActionUrl = `${appLocalizer.apiUrl}/stockmanager/v1/bulk-action`;
   const [postStatus, setPostStatus] = useState("");
   const [data, setData] = useState(null);
   const [selectedRows, setSelectedRows] = useState([]);
@@ -85,6 +86,25 @@ export default function SubscribersList() {
     return datas.map(({date, product, email, status}) => { return {date, product, email, status} } );
   }
 
+  const handleBulkAction = (event) => {
+    if ( ! bulkSelectRef.current.value ) {
+      return window.alert( "Please select a action." );
+    }
+
+    axios({
+      method: "post",
+      url: bulkActionUrl,
+      headers: { "X-WP-Nonce": appLocalizer.nonce },
+      data: {
+        action: bulkSelectRef.current.value,
+        subscribers: selectedRows
+      },
+    }).then((response) => {
+      setData(null);
+      requestData();
+    });
+  }
+
   useEffect(() => {
     if (appLocalizer.pro_active) {
       requestData();
@@ -129,6 +149,7 @@ export default function SubscribersList() {
   }, []);
 
   const dateRef = useRef();
+  const bulkSelectRef = useRef();
 
   useEffect(() => {
     document.body.addEventListener("click", (event) => {
@@ -285,6 +306,23 @@ export default function SubscribersList() {
               </CSVLink>
             </div>
           </div>
+
+          <div className="subscriber-bulk-action">
+                <label>
+                    { __( 'Select bulk action' ) }
+                </label>
+                <select name="action" ref={bulkSelectRef} >
+                    <option value="">{ __( 'Bulk Actions' ) }</option>
+                    <option value="unsubscribe">{ __( 'Unsubscribe Users' ) }</option>
+                    <option value="delete">{ __( 'Delete Users' ) }</option>
+                </select>
+                <button
+                    name="bulk-action-apply"
+                    onClick={handleBulkAction}
+                >
+                    {__('Apply',)}
+                </button>
+            </div>
 
             {
                 <CustomTable
