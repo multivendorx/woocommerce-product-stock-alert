@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 do_action( 'woocommerce_email_header', $email_heading, $email ); ?>
 
 
-<p><?php printf( esc_html__( "Hi there. A customer has subscribed a product on your shop. Product details are shown below for your reference:", 'woocommerce-stock-manager' ) ); ?></p>
+<p><?php printf( esc_html__( "Hi there. A customer has subscribed to a product on your shop. Product details are shown below for your reference:", 'woocommerce-stock-manager' ) ); ?></p>
 <?php
 $is_prices_including_tax = get_option( 'woocommerce_prices_include_tax' );
 ?>

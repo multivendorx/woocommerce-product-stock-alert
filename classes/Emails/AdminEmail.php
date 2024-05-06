@@ -66,7 +66,7 @@ class AdminEmail extends \WC_Email {
 	 * @return string
 	 */
 	public function get_default_subject() {
-		return apply_filters( 'woocommerce_email_subject_stock_manager', __( 'A Customer has subscribed a product on {site_title} ', 'woocommerce-stock-manager' ), $this->object );
+		return apply_filters( 'woocommerce_email_subject_stock_manager', __( 'A Customer has subscribed to a product on {site_title} ', 'woocommerce-stock-manager' ), $this->object );
 	} 
 
 	/**
