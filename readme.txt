@@ -13,9 +13,9 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Elevate sales with instant stock alerts, engage customers with real-time updates, and efficiently manage inventory through a dedicated dashboard. Features stock export/import via csv format.
 
 == Description ==
-**Instant Stock Alerts and Effortless Inventory Management. Seamless stock export/import functionality.**
+**Stay informed with WooCommerce Out-of-Stock Subscription and In-Stock Notifications for seamless inventory management**
 
-Revolutionize your stock management with our Product Stock Manager & Notifier plugin. Users can subscribe for instant product re-stock notifications. Admin have the capability to update and monitor product stock details, including quantities, prices, SKUs, and taxes. Simplify stock control with the Stock Manager, facilitating CSV import and export.
+Stay ahead of demand with real-time In-Stock Email Alerts for customers and comprehensive inventory insights for admins. Never miss a sale as customers subscribe to receive alerts when products are back in stock. Admins can effortlessly track demand with visibility into the most sought-after out-of-stock products and conveniently manage subscribers with CSV export functionality.
 
 
 🌐 Explore our [Document](https://multivendorx.com/docs/knowledgebase/products-stock-manager-notifier-for-woocommerce/?utm_source=wordpress.org&utm_medium=freelandingpage&utm_campaign=productsstockmanager)
