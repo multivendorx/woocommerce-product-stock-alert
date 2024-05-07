@@ -15986,7 +15986,8 @@ const CustomTable = props => {
     // per page option array. user should always provide.
     realtimeFilter,
     // filter filds for realtime filter.
-    typeCounts
+    typeCounts,
+    bulkActionComp
   } = props;
   const [loading, setLoading] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false); // loading state varaible.
   const [totalRows, setTotalRows] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(defaultTotalRows); // total no of row in dataset.
@@ -16131,10 +16132,12 @@ const CustomTable = props => {
     },
     className: countInfo.key == typeCountActive ? 'type-count-active' : ''
   }, `${countInfo.name} (${countInfo.count})`))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "filter-wrapper"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "wrap-bulk-all-date"
   }, realtimeFilter && realtimeFilter.map(filter => {
     return filter.render(handleFilterChange, filterData[filter.name]);
-  })), loading ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(LoadingTable, null) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_data_table_component__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  })), bulkActionComp && bulkActionComp()), loading ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(LoadingTable, null) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_data_table_component__WEBPACK_IMPORTED_MODULE_1__["default"], {
     pagination: true,
     paginationServer: true,
     selectableRows: selectable,
@@ -20348,6 +20351,7 @@ __webpack_require__.r(__webpack_exports__);
 function SubscribersList() {
   const fetchSubscribersDataUrl = `${appLocalizer.apiUrl}/stockmanager/v1/get-subscriber-list`;
   const fetchSubscribersCount = `${appLocalizer.apiUrl}/stockmanager/v1/get-table-segment`;
+  const bulkActionUrl = `${appLocalizer.apiUrl}/stockmanager/v1/bulk-action`;
   const [postStatus, setPostStatus] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("");
   const [data, setData] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
   const [selectedRows, setSelectedRows] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
@@ -20355,6 +20359,8 @@ function SubscribersList() {
   const [openDialog, setOpenDialog] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
   const [subscribersStatus, setSubscribersStatus] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
   const [openDatePicker, setOpenDatePicker] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
+  const [openModal, setOpenModal] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
+  const [modalDetails, setModalDetails] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
   const handleDateOpen = () => {
     setOpenDatePicker(!openDatePicker);
   };
@@ -20406,6 +20412,30 @@ function SubscribersList() {
       };
     });
   };
+  const handleBulkAction = event => {
+    if (!bulkSelectRef.current.value) {
+      setModalDetails("Please select a action.");
+      setOpenModal(true);
+    }
+    if (!selectedRows.length) {
+      setModalDetails("Please select products.");
+      setOpenModal(true);
+    }
+    setData(null);
+    (0,axios__WEBPACK_IMPORTED_MODULE_9__["default"])({
+      method: "post",
+      url: bulkActionUrl,
+      headers: {
+        "X-WP-Nonce": appLocalizer.nonce
+      },
+      data: {
+        action: bulkSelectRef.current.value,
+        subscribers: selectedRows
+      }
+    }).then(response => {
+      requestData();
+    });
+  };
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     if (appLocalizer.pro_active) {
       requestData();
@@ -20443,6 +20473,7 @@ function SubscribersList() {
     }
   }, []);
   const dateRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
+  const bulkSelectRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     document.body.addEventListener("click", event => {
       if (!dateRef?.current?.contains(event.target)) {
@@ -20540,6 +20571,44 @@ function SubscribersList() {
       className: row.status_key === 'mailsent' ? 'sent' : row.status_key === 'subscribed' ? 'subscribed' : 'unsubscribed'
     }, row.status))
   }];
+  const BulkAction = () => {
+    console.log("Bulk Action");
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: "subscriber-bulk-action"
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Select bulk action')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
+      name: "action",
+      ref: bulkSelectRef
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
+      value: ""
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Bulk Actions')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
+      value: "unsubscribe"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Unsubscribe Users')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
+      value: "delete"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Delete Users'))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+      name: "bulk-action-apply",
+      onClick: handleBulkAction
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Apply'))), openModal && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: "error-modal"
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: "modal-wrapper"
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: "icons"
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
+      "aria-hidden": "true",
+      xmlns: "http://www.w3.org/2000/svg",
+      fill: "none",
+      viewBox: "0 0 20 20"
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+      stroke: "currentColor",
+      "stroke-linecap": "round",
+      "stroke-linejoin": "round",
+      "stroke-width": "2",
+      d: "M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+    }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, modalDetails), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+      onClick: () => setOpenModal(false),
+      className: "button-close"
+    }, "Close"))));
+  };
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, !appLocalizer.pro_active ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Dialog__WEBPACK_IMPORTED_MODULE_10__["default"], {
     className: "admin-module-popup",
     open: openDialog,
@@ -20582,7 +20651,8 @@ function SubscribersList() {
     defaultTotalRows: totalRows,
     perPageOption: [10, 25, 50],
     realtimeFilter: realtimeFilter,
-    typeCounts: subscribersStatus
+    typeCounts: subscribersStatus,
+    bulkActionComp: BulkAction
   })));
 }
 

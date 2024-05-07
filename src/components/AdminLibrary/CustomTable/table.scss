@@ -90,6 +90,51 @@ $color-white: #fff;
 $menu-color: #f9f8fb;
 $color-active: #65438f;
 
+.filter-wrapper{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+
+  .wrap-bulk-all-date{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.5rem;
+    max-width: 37.8rem;
+    flex-wrap: wrap;
+    position: relative;
+  
+    .admin-header-search-section{
+      input{
+        padding: 0.15rem 0.5rem
+      }
+    }
+  
+    & > div{
+      flex: 1 0 9.45rem;
+      width: 100%;
+  
+      div{
+        background-color: transparent;
+      }
+      
+      input{
+        background-color: transparent;
+        width: 100%;
+        outline: none;
+        border: 0.115rem solid rgba(0, 0, 0, 0.125);
+  
+        &:focus{
+          box-shadow: none;
+        }
+      }
+    }
+  }
+}
+
 .koyZDM{
   overflow: visible !important; // To overwrite default react data table css
 }

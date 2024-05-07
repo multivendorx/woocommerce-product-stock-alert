@@ -152,6 +152,7 @@ class Install {
      */
     private function start_cron_job() {
         // Migrate subscriber data from post table
+        wp_clear_scheduled_hook( 'stock_manager_start_subscriber_migration' );
         wp_schedule_single_event( time(), 'stock_manager_start_subscriber_migration' );
         update_option( 'stock_manager_migration_running', true );
 
