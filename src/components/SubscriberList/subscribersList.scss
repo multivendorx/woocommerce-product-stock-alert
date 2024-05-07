@@ -118,42 +118,42 @@ $color-active: #65438f;
       flex-wrap: wrap;
       margin-bottom:  0.75rem;
   }
+}
 
-  .wrap-bulk-all-date{
+.subscriber-bulk-action{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.5rem;
+
+  label{
+    font-size: 0.875rem;
+    width: 130px;
+  }
+
+  select{
+    max-width: 150px;
+    width: 100%;
+    padding: 0.25rem 0.5rem;
+    background-color: transparent !important;
+    border: 0.115rem solid rgba(0, 0, 0, 0.125) !important;
+    border-radius: 0.25rem !important;
+    color: rgb(44, 51, 56);
+
+    &:focus{
+      box-shadow: none;
+    }
+  }
+
+  button{
+    border-radius: 0.25rem;
+    background-color: #65438f;
+    padding: 0.65rem 1.5rem;
+    color: #fff;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    gap: 0.5rem;
-    max-width: 37.8rem;
-    flex-wrap: wrap;
-    margin-bottom: 0.75rem;
-    position: relative;
-
-    .admin-header-search-section{
-      input{
-        padding: 0.15rem 0.5rem
-      }
-    }
-
-    & > div{
-      flex: 1 0 9.45rem;
-      width: 100%;
-
-      div{
-        background-color: transparent;
-      }
-      
-      input{
-        background-color: transparent;
-        width: 100%;
-        outline: none;
-        border: 0.115rem solid rgba(0, 0, 0, 0.125);
-
-        &:focus{
-          box-shadow: none;
-        }
-      }
-    }
+    justify-content: center;
+    cursor: pointer;
   }
 }
 }
@@ -185,4 +185,90 @@ $color-active: #65438f;
 
 .unsubscribed {
   color: red;
+}
+
+.error-modal{
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: rgba($color: #000000, $alpha: 0.4);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .modal-wrapper{
+    max-width: 250px;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 0.25rem;
+    padding: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    .icons{
+      svg{
+        width: 40px;
+        color: $color-active;
+      }
+    }
+
+    p{
+      font-size: 1rem;
+    }
+
+    .button-close{
+      padding: 0.75rem 2rem;
+      background: transparent;
+      border: 2px solid $color-active !important;
+      font-size: 0.875rem;
+      color: $color-active;
+      border-radius: 6px;
+      cursor: pointer;
+      position: relative;
+      display: flex;
+      overflow: hidden;
+      transition: all 0.5s;
+      z-index: 1;
+
+      &::after, &::before{
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 100%;
+        background: $color-active;
+        top: 0;
+        transform: skewX(35deg);
+        transition: all 0.5s;
+        z-index: -1;
+      }
+
+      &::after {
+        left: -20px;
+      }
+
+      &::before {
+        right: -20px;
+      }
+
+      &:hover{
+        color: $color-white;
+        &::after {
+          width: 50%;
+          left: 0;
+        }
+
+        &::before {
+          width: 50%;
+          right: 0;
+        }
+      }
+    }
+  }
 }

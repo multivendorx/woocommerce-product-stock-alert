@@ -152,8 +152,14 @@ class Install {
      */
     private function start_cron_job() {
         // Migrate subscriber data from post table
+        wp_clear_scheduled_hook( 'stock_manager_start_subscriber_migration' );
         wp_schedule_single_event( time(), 'stock_manager_start_subscriber_migration' );
         update_option( 'stock_manager_migration_running', true );
+
+        // If corn is disabled
+        if ( defined( 'DISABLE_WP_CRON' ) && DISABLE_WP_CRON ) {
+            self::subscriber_migration();
+        }
 
         // Notify user if product is instock
         wp_clear_scheduled_hook( 'stock_manager_start_notification_cron_job' );
@@ -311,9 +317,9 @@ class Install {
             }
             
             if ( version_compare( $previous_version, '2.4.2', '==' ) ) {
-                $appearance_settings = get_option( 'woo_stock_manager_general_tab_settings' );
-                $submit_settings     = get_option( 'woo_stock_manager_form_submission_tab_settings' );
-                $email_settings      = get_option( 'woo_stock_manager_email_tab_settings' );
+                $appearance_settings = get_option( 'woo_stock_manager_general_tab_settings', null ) ?? $appearance_settings;
+                $submit_settings     = get_option( 'woo_stock_manager_form_submission_tab_settings', null ) ?? $submit_settings;
+                $email_settings      = get_option( 'woo_stock_manager_email_tab_settings', null ) ?? $email_settings;
             }
 
             // Get customization_tab_setting and merge with general setting

@@ -25,6 +25,8 @@ export default function SubscribersList() {
   const [openDialog, setOpenDialog] = useState(false);
   const [subscribersStatus, setSubscribersStatus] = useState(null);
   const [openDatePicker, setOpenDatePicker] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+  const [modalDetails, setModalDetails] = useState(false);
 
   const handleDateOpen = ()=>{
     setOpenDatePicker(!openDatePicker);
@@ -86,10 +88,20 @@ export default function SubscribersList() {
     return datas.map(({date, product, email, status}) => { return {date, product, email, status} } );
   }
 
+
+
   const handleBulkAction = (event) => {
     if ( ! bulkSelectRef.current.value ) {
-      return window.alert( "Please select a action." );
+      setModalDetails( "Please select a action." )
+      setOpenModal(true);
     }
+    
+    if( ! selectedRows.length ) {
+      setModalDetails( "Please select products." )
+      setOpenModal(true);
+    }
+
+    setData(null);
 
     axios({
       method: "post",
@@ -100,7 +112,6 @@ export default function SubscribersList() {
         subscribers: selectedRows
       },
     }).then((response) => {
-      setData(null);
       requestData();
     });
   }
@@ -263,6 +274,44 @@ export default function SubscribersList() {
     },
   ];
 
+  const BulkAction = ()=>{
+    console.log("Bulk Action");
+    return(
+      <>
+        <div className="subscriber-bulk-action">
+              <label>
+                  { __( 'Select bulk action' ) }
+              </label>
+              <select name="action" ref={bulkSelectRef} >
+                  <option value="">{ __( 'Bulk Actions' ) }</option>
+                  <option value="unsubscribe">{ __( 'Unsubscribe Users' ) }</option>
+                  <option value="delete">{ __( 'Delete Users' ) }</option>
+              </select>
+              <button
+                  name="bulk-action-apply"
+                  onClick={handleBulkAction}
+              >
+                  {__('Apply',)}
+              </button>
+          </div>
+
+          { openModal &&
+            <div className="error-modal">
+              <div className="modal-wrapper">
+                <div className="icons">
+                  <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                  </svg>
+                </div>
+                <p>{modalDetails}</p>
+                <button onClick={()=>setOpenModal(false)} className="button-close">Close</button>
+              </div>
+            </div>
+          }
+      </>
+    )
+  }
+
   return (
     <div>
       { ! appLocalizer.pro_active ? (
@@ -307,23 +356,6 @@ export default function SubscribersList() {
             </div>
           </div>
 
-          <div className="subscriber-bulk-action">
-                <label>
-                    { __( 'Select bulk action' ) }
-                </label>
-                <select name="action" ref={bulkSelectRef} >
-                    <option value="">{ __( 'Bulk Actions' ) }</option>
-                    <option value="unsubscribe">{ __( 'Unsubscribe Users' ) }</option>
-                    <option value="delete">{ __( 'Delete Users' ) }</option>
-                </select>
-                <button
-                    name="bulk-action-apply"
-                    onClick={handleBulkAction}
-                >
-                    {__('Apply',)}
-                </button>
-            </div>
-
             {
                 <CustomTable
                 data={data}
@@ -338,6 +370,7 @@ export default function SubscribersList() {
                 perPageOption={[10, 25, 50]}
                 realtimeFilter={realtimeFilter}
                 typeCounts={subscribersStatus}
+                bulkActionComp = {BulkAction}
               />
             }
           </div>
