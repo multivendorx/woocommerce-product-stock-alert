@@ -5,7 +5,7 @@ Tags: wordpress, woocommerce, e-commerce, shop, stock, out of stock, in stock, s
 Requires at least: 5.4
 Tested up to: 6.5.2
 Requires PHP: 8.0
-Stable tag: 2.5.1
+Stable tag: 2.5.2
 Donate link: https://multivendorx.com/donate/
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -134,6 +134,9 @@ Manual installation method requires downloading the [Product Stock Manager & Not
 6. Inventory manager
 
 == Changelog ==
+
+= 2.5.2 - 2024-05-07 =
+* Fixed - Issue with the Product_title.
 
 = 2.5.1 - 2024-05-01 =
 * Fixed - Issue with plugin activation-deactivation notice.

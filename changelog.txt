@@ -1,6 +1,9 @@
 == Changelog ==
 ----------------------------------------------------------------------------------------------
 
+= 2.5.2 - 2024-05-07 =
+* Fixed - Issue with the Product_title.
+
 = 2.5.1 - 2024-05-01 =
 * Fixed - Issue with plugin activation-deactivation notice.
 
