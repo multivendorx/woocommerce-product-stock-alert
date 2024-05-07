@@ -71,7 +71,6 @@ jQuery(function ($) {
      * @param {undefined}
      */
     function processForm() {
-        console.log(form);
         // Get data from form.
         let customerEmail   = form.find('.stock-manager-email').val();
         let productId       = form.find('.current-product-id').val();
@@ -91,7 +90,7 @@ jQuery(function ($) {
         let unsubButtonHtml = localizeData.unsubscribe_button;
         
         // Prepare success message
-        successMessage = successMessage.replace('%product_title%', customerEmail);
+        successMessage = successMessage.replace('%product_title%', productTitle);
         successMessage = successMessage.replace('%customer_email%', customerEmail);
         
         // Prepare email exist data

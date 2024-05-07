@@ -11,6 +11,7 @@ class Subscriber {
     public function __construct() {
         add_action( 'stock_manager_start_notification_cron_job', [ $this, 'send_instock_notification_corn' ] );
         add_action( 'woocommerce_update_product', [ $this, 'send_instock_notification' ], 10, 2 );
+        add_action( 'delete_post', [ $this, 'delete_subscriber_all' ] );
         add_action( 'stock_manager_start_subscriber_migration', [ Install::class, 'subscriber_migration' ] );
 
         if ( Install::is_migration_running() ) {
@@ -188,6 +189,39 @@ class Subscriber {
         }
 
         return false;
+    }
+
+    /**
+     * Delete subscriber on product delete.
+     * @param int $post_id
+     * @return void
+     */
+    public static function delete_subscriber_all( $post_id ) {
+        global $wpdb;
+
+        if( get_post_type( $post_id ) != 'product' ) return;
+        
+        // Delete subscriber of deleted product
+        $wpdb->delete( $wpdb->prefix . "stockalert_subscribers", [ 'product_id' => $post_id ] );
+        delete_post_meta( $post_id, 'no_of_subscribers' );
+    }
+
+    /**
+     * Delete a subscriber from database.
+     * @param mixed $product_id
+     * @param mixed $email
+     * @return void
+     */
+    public static function delete_subscriber( $product_id, $email ) {
+        global $wpdb;
+
+        // Delete subscriber of deleted product
+        $wpdb->delete( $wpdb->prefix . "stockalert_subscribers", [
+            'product_id' => $product_id,
+            'email' => $email,
+        ] );
+
+        self::update_product_subscriber_count( $product_id );
     }
 
     /**

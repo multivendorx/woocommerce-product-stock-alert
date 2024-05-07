@@ -47,7 +47,7 @@ msgid "%customer_email% is successfully unregistered."
 msgstr ""
 
 #: classes/Emails/AdminEmail.php:68
-msgid "A Customer has subscribed a product on {site_title} "
+msgid "A Customer has subscribed to a product on {site_title} "
 msgstr ""
 
 #: classes/Emails/AdminEmail.php:33
@@ -218,19 +218,19 @@ msgstr ""
 
 #: templates/emails/AdminEmail.php:14
 msgid ""
-"Hi there. A customer has subscribed a product on your shop. Product details "
+"Hi there. A customer has subscribed to a product on your shop. Product details "
 "are shown below for your reference:"
 msgstr ""
 
 #: templates/emails/Email.php:13
 msgid ""
-"Hi there. You have subscribed a product. Your subscribed product is "
+"Hi there. You have subscribed to a product. Your subscribed product is "
 "available now. Product details are shown below for your reference:"
 msgstr ""
 
 #: templates/emails/SubscriberConfirmationEmail.php:13
 msgid ""
-"Hi there. You have successfully subscribed a product. We will inform you "
+"Hi there. You have successfully subscribed to a product. We will inform you "
 "when the product becomes available. Product details are shown below for your "
 "reference:"
 msgstr ""
@@ -544,7 +544,7 @@ msgid "Unsubscribed"
 msgstr ""
 
 #: classes/Emails/SubscriberConfirmationEmail.php:66
-msgid "You have subscribed a product on {site_title} "
+msgid "You have subscribed to a product on {site_title} "
 msgstr ""
 
 #: classes/Emails/Emails.php:71
