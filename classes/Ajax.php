@@ -161,6 +161,14 @@ class Ajax {
 		$variation_id 	= isset( $_POST[ 'variation_id' ] ) ? absint( $_POST[ 'variation_id' ] ) : 0;
 		$status 		= '';
 
+		/**
+		 * Action hook before subscription
+		 * @var string $customer_email
+		 * @var int $product_id
+		 * @var int $variation_id
+		 */
+		do_action( 'stock_manager_before_subscribe', $customer_email, $product_id, $variation_id );
+
 		if ( $product_id && !empty( $product_id ) && !empty( $customer_email ) ) {
 			$product_id = ( $variation_id && $variation_id > 0 ) ? $variation_id : $product_id;
 			$do_complete_additional_task = apply_filters( 'stock_manager_do_complete_additional_task', false );
