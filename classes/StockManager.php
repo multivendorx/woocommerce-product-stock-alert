@@ -186,7 +186,14 @@ class StockManager {
     public static function database_migration_notice() {
         // check if plugin vertion in databse is not same to current stock manager version
         $plugin_version = get_option( 'woo_stock_manager_version', '' );
-        if ( $plugin_version != STOCK_MANAGER_PLUGIN_VERSION ) {
+
+        if ( Install::is_migration_running() ) {
+            ?>
+            <div id="message" class="notice notice-warning">
+                <p><?php _e( "Product Stock Manager is currently updating the database in the background. Please be patient while the process completes.", 'woocommerce-stock-manager' ) ?></p>
+            </div>
+            <?php
+        } else if ( $plugin_version != STOCK_MANAGER_PLUGIN_VERSION ) {
             ?>
             <div id="message" class="error">
                 <p><?php _e( "The Product Stock Manager & Notifier for WooCommerce is experiencing configuration issues. To ensure proper functioning, kindly deactivate and then activate the plugin.", 'woocommerce-stock-manager' ) ?></p>
