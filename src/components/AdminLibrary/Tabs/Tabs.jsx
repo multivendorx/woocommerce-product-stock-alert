@@ -51,13 +51,13 @@ const Tabs = (props) => {
       title: "Get in touch with Support",
       icon: "mail",
       description: "Reach out to the support team for assistance or guidance.",
-      link: "https://multivendorx.com/contact-us/?utm_source=WordPressAdmin&utm_medium=PluginSettings&utm_campaign=productsstockmanager",
+      link: "https://multivendorx.com/contact-us/?utm_source=wpadmin&utm_medium=pluginsettings&utm_campaign=stockmanager",
     },
     {
       title: "Explore Documentation",
       icon: "submission-message",
       description: "Understand the plugin and its settings.",
-      link: "https://multivendorx.com/docs/knowledgebase/products-stock-manager-notifier-for-woocommerce/?utm_source=WordPressAdmin&utm_medium=PluginSettings&utm_campaign=productsstockmanager",
+      link: "https://multivendorx.com/docs/knowledgebase/products-stock-manager-notifier-for-woocommerce/?utm_source=wpadmin&utm_medium=pluginsettings&utm_campaign=stockmanager",
     },
     {
       title: "Contribute Here",

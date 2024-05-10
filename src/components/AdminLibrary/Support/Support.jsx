@@ -28,7 +28,7 @@ const Support = () => {
     {
       question: "Do you support Google reCaptcha for the out-of-stock form?",
       answer:
-        'Yes, <a href="https://multivendorx.com/woocommerce-product-stock-manager-notifier-pro/?utm_source=WordPressAdmin&utm_medium=PluginSettings&utm_campaign=productsstockmanager" target="_blank">Product Stock Manager & Notifier Pro</a> has support for reCaptcha.',
+        'Yes, <a href="https://multivendorx.com/woocommerce-product-stock-manager-notifier-pro/?utm_source=wpadmin&utm_medium=pluginsettings&utm_campaign=stockmanager" target="_blank">Product Stock Manager & Notifier Pro</a> has support for reCaptcha.',
       open: false,
     },
   ]);
