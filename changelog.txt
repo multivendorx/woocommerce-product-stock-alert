@@ -1,6 +1,10 @@
 == Changelog ==
 ----------------------------------------------------------------------------------------------
 
+= 2.5.3 - 2024-05-10 =
+* Added - Ability to export all subscriber data as a CSV from the Subscriber List page.
+* Fixed - Issue where migration cron was not running for some sites.
+
 = 2.5.2 - 2024-05-07 =
 * Fixed - Issue with the Product_title.
 
