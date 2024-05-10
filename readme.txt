@@ -18,9 +18,9 @@ Elevate sales with instant stock alerts, engage customers with real-time updates
 Stay ahead of demand with real-time In-Stock Email Alerts for customers and comprehensive inventory insights for admins. Never miss a sale as customers subscribe to receive alerts when products are back in stock. Admins can effortlessly track demand with visibility into the most sought-after out-of-stock products and conveniently manage subscribers with CSV export functionality.
 
 
-🌐 Explore our [Document](https://multivendorx.com/docs/knowledgebase/products-stock-manager-notifier-for-woocommerce/?utm_source=wordpress.org&utm_medium=freelandingpage&utm_campaign=productsstockmanager)
+🌐 Explore our [Document](https://multivendorx.com/docs/knowledgebase/products-stock-manager-notifier-for-woocommerce/?utm_source=wporg&utm_medium=plugindescription&utm_campaign=stockmanagerwporg)
 
-🌟 Learn More About [Pro](https://multivendorx.com/woocommerce-product-stock-manager-notifier-pro/?utm_source=wordpress.org&utm_medium=freelandingpage&utm_campaign=productsstockmanager)
+🌟 Learn More About [Pro](https://multivendorx.com/woocommerce-product-stock-manager-notifier-pro/?utm_source=wporg&utm_medium=plugindescription&utm_campaign=stockmanagerwporg)
 
 ## 🚀 Benefits:
 * 📧 Automatically notify subscribers of restocked products.
@@ -63,7 +63,7 @@ Are you tired of losing potential sales because your customers can't buy the out
 **🆕 Instant Updates**: Get real-time updates on your subscribers and their preferences. 
 
 
-👉 UPGRADE TO [**WOOCOMMERCE PRODUCT STOCK MANAGER & NOTIFIER PRO**](https://multivendorx.com/woocommerce-product-stock-manager-notifier-pro/?utm_source=wordpress.org&utm_medium=freelandingpage&utm_campaign=productsstockmanager)  
+👉 UPGRADE TO [**WOOCOMMERCE PRODUCT STOCK MANAGER & NOTIFIER PRO**](https://multivendorx.com/woocommerce-product-stock-manager-notifier-pro/?utm_source=wporg&utm_medium=plugindescription&utm_campaign=stockmanagerwporg)  
 
 ✔️ **Double Opt In [PRO]**: Double opt-in for stock alert subscription is a two-step confirmation process that ensures subscribers genuinely want to receive notifications about product availability. 
 
@@ -86,7 +86,7 @@ Are you tired of losing potential sales because your customers can't buy the out
 
 
 ## 👩‍🏫 Learn More About Pro
-[WooCommerce Product Stock Manager & Notifier Pro](https://multivendorx.com/woocommerce-product-stock-manager-notifier-pro/?utm_source=wordpress.org&utm_medium=freelandingpage&utm_campaign=productsstockmanager)
+[WooCommerce Product Stock Manager & Notifier Pro](https://multivendorx.com/woocommerce-product-stock-manager-notifier-pro/?utm_source=wporg&utm_medium=plugindescription&utm_campaign=stockmanagerwporg)
 
 ## Shortcodes
 - **[display_stock_manager_form]**: You can display stock alert form anywhere using this shortcode.
