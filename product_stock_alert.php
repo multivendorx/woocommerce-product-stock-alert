@@ -11,6 +11,7 @@
  * WC tested up to: 8.8.3
  * Author URI: https://multivendorx.com/
  * Text Domain: woocommerce-stock-manager
+ * Requires Plugins: woocommerce
  * Domain Path: /languages/
  */
 
