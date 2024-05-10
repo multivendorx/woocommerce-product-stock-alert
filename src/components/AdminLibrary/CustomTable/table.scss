@@ -120,6 +120,57 @@ $color-active: #65438f;
       div{
         background-color: transparent;
       }
+
+
+      .date-picker-section-wrapper{
+        position: absolute;
+        left: 0;
+        top: 105%;
+        background: #fff !important;
+        z-index: 5;
+        padding: 1rem;
+
+        .rdrDateRangePickerWrapper{
+          // flex-wrap: wrap;
+
+          .rdrDefinedRangesWrapper{
+            .rdrInputRanges{
+              .rdrInputRange{
+                input{
+                  width: 3.15rem;
+                }
+              }
+            }
+          }
+
+
+          & > div{
+            // flex: 1;
+
+            input{
+              width: fit-content;
+            }
+
+            .rdrDateDisplay{
+              span{
+                border-radius: 0;
+                box-shadow: none;
+                border: none;
+              }
+            }
+          }
+        }
+
+        @media screen and (max-width: 41.58rem) {
+          .rdrDateRangePickerWrapper{
+            flex-direction: column;
+
+            & > div{
+              width: 100%;
+            }
+          }
+        }
+      }
       
       input{
         background-color: transparent;

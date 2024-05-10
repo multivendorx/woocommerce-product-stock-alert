@@ -214,25 +214,27 @@ export default function SubscribersList() {
             <input value={`${selectedRange[0].startDate.toLocaleDateString()} - ${selectedRange[0].endDate.toLocaleDateString()}`} onClick={()=>handleDateOpen()} className="date-picker-input-custom" type="text" placeholder={__("DD/MM/YYYY", "woocommerce-stock-manager")} />
           </div>
           {openDatePicker &&
-            <DateRangePicker
-              ranges={selectedRange}
-              months={1}
-              direction="vertical"
-              scroll={{ enabled: true }}
-              maxDate={ new Date() }
-              shouldDisableDate={date => isAfter(date, new Date())}
-              onChange={(dates) => {
-                if (dates.selection) {
-                  dates = dates.selection;
-                  dates.endDate?.setHours(23, 59, 59, 999)
-                  setSelectedRange([dates])
-                  updateFilter("date", {
-                    start_date: dates.startDate,
-                    end_date: dates.endDate,
-                  });
-                }
-              }}
-            />
+            <div className="date-picker-section-wrapper">
+              <DateRangePicker
+                ranges={selectedRange}
+                months={1}
+                direction="vertical"
+                scroll={{ enabled: true }}
+                maxDate={ new Date() }
+                shouldDisableDate={date => isAfter(date, new Date())}
+                onChange={(dates) => {
+                  if (dates.selection) {
+                    dates = dates.selection;
+                    dates.endDate?.setHours(23, 59, 59, 999)
+                    setSelectedRange([dates])
+                    updateFilter("date", {
+                      start_date: dates.startDate,
+                      end_date: dates.endDate,
+                    });
+                  }
+                }}
+              />
+            </div>
           }
         </div>
       ),
@@ -313,9 +315,16 @@ export default function SubscribersList() {
   }
 
   return (
-    <div>
+    <>
       { ! appLocalizer.pro_active ? (
         <div>
+          <div className="free-reports-download-section">
+            <h2 className="section-heading">{__("Download product wise subscriber data.", "woocommerce-stock-manager")}</h2>
+            <button>
+            <a href={appLocalizer.export_button}>{__("Download CSV", "woocommerce-stock-manager")}</a>
+            </button>
+            <p className="description" dangerouslySetInnerHTML={{ __html: "This CSV file contains all subscriber data from your site. Upgrade to <a href='https://multivendorx.com/woocommerce-product-stock-manager-notifier-pro/?utm_source=wpadmin&utm_medium=pluginsettings&utm_campaign=stockmanager' target='_blank'>WooCommerce Product Stock Manager & Notifier Pro</a> to generate CSV files based on specific products or users." }}></p>
+          </div>
           <Dialog
             className="admin-module-popup"
             open={openDialog}
@@ -375,6 +384,6 @@ export default function SubscribersList() {
             }
           </div>
       )}
-    </div>
+    </>
   );
 }
