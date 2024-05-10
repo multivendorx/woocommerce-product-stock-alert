@@ -90,15 +90,6 @@ class Admin {
             '__return_null' 
         );
 
-        add_submenu_page( 
-            'tools.php', 
-            __( 'WC Stock Manager Export', 'woocommerce-stock-manager' ),
-            __( 'WC Stock Manager Export', 'woocommerce-stock-manager' ),
-            'manage_options', 
-            'product-stock-manager-export-admin',
-            [ $this, 'create_csv_export_page' ]
-        );
-
         remove_submenu_page( 'stock-manager', 'stock-manager' );
     } 
 
@@ -109,23 +100,6 @@ class Admin {
     public function create_setting_page() {
         echo '<div id="admin-stockmanager"></div>';
     }
-
-    /**
-     * Create Stock Manager Export ( CSV ) option to 'Tool' menu.
-     * @return void
-     */
-    public function create_csv_export_page() {
-        ?>
-            <div class="wrap">
-            <h1><?php __( 'Stock Manager Export', 'woocommerce-stock-manager' ) ?></h1>
-            <p><?php __( 'When you click the button below, this will export all out of stock products with subscribers email.', 'woocommerce-stock-manager' ) ?></p>
-            <form class="alert-export-data" id="alert-export-data" method="post" action="<?php echo esc_html( admin_url( 'admin-ajax.php?action=export_subscribers' ) ) ?>">
-                <input type="hidden" name="export_csv" value="1">
-                <input type="submit" class="button-primary" value="<?php __( 'Export CSV', 'woocommerce-stock-manager' )  ?>">
-            </form>
-            </div>
-        <?php
-    } 
 
     /**
      * Register bulk action in 'all product' table.
@@ -219,6 +193,7 @@ class Admin {
                 'apiUrl'                    => untrailingslashit( get_rest_url() ), 
                 'nonce'                     => wp_create_nonce( 'wp_rest' ),
                 'subscriber_list'           => SM()->plugin_url . 'src/assets/images/subscriber-list.jpg',
+                'export_button'             => admin_url( 'admin-ajax.php?action=export_subscribers' ),
                 'pro_active'                => Utill::is_pro_active(),
                 'settings_databases_value'  => $settings_databases_value,
                 'pro_url'                   => esc_url( STOCK_MANAGER_PRO_SHOP_URL ),

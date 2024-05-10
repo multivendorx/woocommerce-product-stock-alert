@@ -203,8 +203,8 @@ class StockManager {
     public static function stock_manager_settings( $links ) {
         $plugin_links = [ 
             '<a href="' . admin_url( 'admin.php?page=stock-manager#&tab=settings&subtab=general' ) . '">' . __( 'Settings', 'woocommerce-stock-manager' ) . '</a>', 
-            '<a href="https://multivendorx.com/support-forum/forum/product-stock-manager-notifier-for-woocommerce/?utm_source=WordPressAdmin&utm_medium=PluginSettings&utm_campaign=products-stock-manager" target="_blank">' . __( 'Support', 'woocommerce-stock-manager' ) . '</a>', 
-            '<a href="https://multivendorx.com/docs/knowledgebase/products-stock-manager-notifier-for-woocommerce/?utm_source=WordPressAdmin&utm_medium=PluginSettings&utm_campaign=products-stock-manager" target="_blank">' . __( 'Docs', 'woocommerce-stock-manager' ) . '</a>'
+            '<a href="https://multivendorx.com/support-forum/forum/product-stock-manager-notifier-for-woocommerce/?utm_source=wpadmin&utm_medium=pluginsettings&utm_campaign=stockmanager" target="_blank">' . __( 'Support', 'woocommerce-stock-manager' ) . '</a>', 
+            '<a href="https://multivendorx.com/docs/knowledgebase/products-stock-manager-notifier-for-woocommerce/?utm_source=wpadmin&utm_medium=pluginsettings&utm_campaign=stockmanager" target="_blank">' . __( 'Docs', 'woocommerce-stock-manager' ) . '</a>'
         ];
         if ( apply_filters( 'is_stock_manager_pro_inactive', true ) ) {
             $links[ 'go_pro' ] = '<a href="' . STOCK_MANAGER_PRO_SHOP_URL . '" class="stock-manager-pro-plugin" target="_blank">' . __( 'Get Pro', 'woocommerce-stock-manager' ) . '</a>';
