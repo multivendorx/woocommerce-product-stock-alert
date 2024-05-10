@@ -89,7 +89,7 @@ class Ajax {
 		];
 		
 		foreach ( $csv_headings as $heading ) { 
-			$csv_headers_array[] = '"' . $heading . '"';
+			$csv_headers_array[] = $heading;
 		} 
 		$csv_header_string = implode( ', ', $csv_headers_array );
 
@@ -98,21 +98,21 @@ class Ajax {
 				foreach ( $subscribers as $subscriber ) {
 					$product = wc_get_product( $product_id );
 					$csv_body_arrays[] = [ 
-						'"'.$product_id.'"', 
-						'"'.$product->get_name().'"', 
-						'"'.$product->get_sku().'"', 
-						'"'.$product->get_type().'"', 
-						'"'.$subscriber.'"'
+						 $product_id , 
+						 $product->get_name() , 
+						 $product->get_sku() , 
+						 $product->get_type() , 
+						 $subscriber 
 					 ];
 				} 
 			} 
 		} 
 		
-		echo esc_html( $csv_header_string );
+		echo $csv_header_string;
 		if ( isset( $csv_body_arrays ) && !empty( $csv_body_arrays ) ) {
 			foreach ( $csv_body_arrays as $csv_body_array ) {
 				echo "\r\n";
-				echo esc_html( implode( ", ", $csv_body_array ) );
+				echo implode( ", ", $csv_body_array );
 			} 
 		} 
 		exit();
