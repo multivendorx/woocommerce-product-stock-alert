@@ -1,0 +1,622 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Product Stock Manager & Notifier for WooCommerce\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-04-09 20:23+0000\n"
+"PO-Revision-Date: 2024-06-04 19:53+0200\n"
+"Last-Translator: Solutions Céramiques\n"
+"Language-Team: Français\n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Poedit 3.4.4\n"
+"X-Loco-Version: 2.6.7; wp-6.5.2\n"
+"X-Domain: woocommerce-stock-manager\n"
+
+#: src/template/settings/email.js:23
+msgid ""
+" Create an alert message for users attempting to subscribe from blocked "
+"domains."
+msgstr ""
+" Message à l'attention des utilisateurs qui souscrivent avec un nom de "
+"domaine bloqué."
+
+#: classes/Admin.php:252
+msgid ""
+"\" target=\"_blank\"><span class=\"pro-strong\">Pro</span></a> for unlocking "
+"reCAPTCHA for out-of-stock form subscriptions."
+msgstr ""
+"\" target=\"_blank\"><span class=\"pro-strong\">Pro</span></a> pour accéder "
+"à \"reCAPTCHA\" sur les formulaires d'abonnement."
+
+#: classes/Admin.php:250
+msgid ""
+"\" target=\"_blank\"><span class=\"pro-strong\">Pro</span></a> to enable "
+"Double Opt-in flow for subscription confirmation."
+msgstr ""
+"\" target=\"_blank\"><span class=\"pro-strong\">Pro</span></a> pour "
+"autoriser la confirmation d'abonnement Double Opt-in."
+
+#. This message display already registered user to display already registered message
+#: classes/Install.php:207
+msgid ""
+"%customer_email% is already registered for %product_title%. Please attempt a "
+"different email address."
+msgstr ""
+"%customer_email% est déjà enregistré pour %product_title%. Veuillez fournir "
+"une autre adresse e-mail."
+
+#. This message display user sucessfully unregistered
+#: classes/Install.php:210
+msgid "%customer_email% is successfully unregistered."
+msgstr "%customer_email% retiré de la liste avec succès."
+
+#: classes/Emails/AdminEmail.php:68
+msgid "A Customer has subscribed a product on {site_title} "
+msgstr "Un client a souscrit à un produit sur {site_title} "
+
+#: classes/Emails/AdminEmail.php:33
+msgid ""
+"Admin will get an alert when customer subscribe any out of stock product"
+msgstr ""
+"L'administrateur recevra une alerte lorsqu'un client s'abonnera à un produit "
+"indisponible"
+
+#: classes/Emails/AdminEmail.php:32
+msgid "Alert admin"
+msgstr "Alerte"
+
+#: src/template/settings/formCustomization.js:49
+msgid "Alert Box Customizer"
+msgstr "Personnalisation de la boite d'alerte"
+
+#: classes/Emails/Emails.php:33
+msgid "Alert customer when their subscribed product becomes in stock"
+msgstr "Avertir les clients quand les articles sont à nouveau disponibles"
+
+#: classes/Emails/Emails.php:32
+msgid "Alert Subscriber"
+msgstr "Avertir l'abonné"
+
+#: src/template/settings/general.js:40
+msgid "Allow Subscriptions with Active Backorders"
+msgstr "Autoriser les abonnement sur les produits en commande"
+
+#: src/template/settings/email.js:7
+msgid "Ban Email Control Center."
+msgstr "Centre de contrôle des e-mails bannis."
+
+#: src/template/settings/email.js:22
+msgid "Blocked Domain Alert Message"
+msgstr "Message d'alerte de domaine bloqué"
+
+#: src/template/settings/email.js:30
+msgid "Blocked Email Addresses"
+msgstr "Adresse de messagerie bloquée"
+
+#: src/template/settings/email.js:35
+msgid "Blocked Email Alert Message"
+msgstr "Message d'alerte de messagerie bloquée"
+
+#: src/template/settings/email.js:17
+msgid "Blocked Email Domains"
+msgstr "Domaines de messagerie bloqués"
+
+#. Description of the plugin
+msgid ""
+"Boost sales with real-time stock alerts! Notify customers instantly when "
+"products are back in stock. Simplify data management by exporting and "
+"importing stock data with ease."
+msgstr ""
+"Boostez vos ventes avec des alertes de stock en temps réel ! Avertissez "
+"instantanément les clients lorsque les produits sont de nouveau en stock. "
+"Simplifiez la gestion des données en exportant et en important facilement "
+"les données de stock."
+
+#: src/template/settings/general.js:7 src/template/settings/support.js:7
+msgid "Configure basic product manager settings."
+msgstr "Configuration des réglages de bases."
+
+#: src/template/settings/formCustomization.js:6
+msgid "Configure form settings."
+msgstr "Configuration des champs de saisie."
+
+#: src/template/settings/mailchimp.js:7
+msgid "Configure mailChimp settings. "
+msgstr "Configuration des réglages MailChimp. "
+
+#: classes/Emails/SubscriberConfirmationEmail.php:32
+msgid "Confirm customer when they subscribe a product"
+msgstr "Confirmer au client lorsqu'il souscrit à un produit"
+
+#: classes/Emails/SubscriberConfirmationEmail.php:31
+msgid "Confirm subscriber"
+msgstr "Confirmation d'abonné"
+
+#: src/template/settings/email.js:36
+msgid ""
+"Create an alert message for users attempting to subscribe from blocked Email "
+"ID."
+msgstr ""
+"Créez un message d'alerte pour les utilisateurs qui tentent de s'abonner à "
+"partir d'un identifiant de messagerie bloqué."
+
+#: templates/emails/AdminEmail.php:43 templates/emails/Email.php:42
+#: templates/emails/SubscriberConfirmationEmail.php:42
+msgid "Customer Details"
+msgstr "Détails du client"
+
+#: src/template/settings/formCustomization.js:53
+msgid "Customize Button"
+msgstr "Paramétrer le bouton"
+
+#: src/template/settings/formSubmission.js:7
+msgid "Customize message that appears after user submits the form."
+msgstr ""
+"Personnaliser le message qui apparait quand un utilisateur soumet le "
+"formulaire."
+
+#: src/template/settings/formCustomization.js:27
+msgid ""
+"Descriptive text guiding users on the purpose of providing their email "
+"address above the email entry field."
+msgstr ""
+"Texte descriptif, au-dessus du champ de saisie de l'e-mail, guidant les "
+"utilisateurs dans le but de fournir leur adresse e-mail."
+
+#: src/template/settings/general.js:58
+msgid "Display Subscriber Count for Out of Stock Items"
+msgstr "Afficher le nombre des abonnés pour les produits indisponibles"
+
+#: classes/StockManager.php:184
+msgid "Docs"
+msgstr "Documents"
+
+#: templates/emails/AdminEmail.php:45 templates/emails/Email.php:44
+#: templates/emails/SubscriberConfirmationEmail.php:44
+msgid "Email"
+msgstr "E-mail"
+
+#: src/template/settings/email.js:6
+msgid "Email Blocker"
+msgstr "Bloqueur d'e-mail"
+
+#: src/template/settings/formCustomization.js:19
+msgid "Email Field Placeholder"
+msgstr "Champ pour l'e-mail"
+
+#: src/template/settings/formSubmission.js:32
+msgid "Email Validation Error"
+msgstr "Erreur de validation de l'e-mail"
+
+#: src/template/settings/mailchimp.js:16
+msgid "Enable Mailchimp"
+msgstr "Activer MailChimp"
+
+#: src/template/settings/mailchimp.js:20
+msgid "Enable this to activate Mailchimp."
+msgstr "Activation MailChimp."
+
+#: src/template/settings/general.js:45
+msgid ""
+"Enabling this setting allows users to subscribe to out-of-stock products, "
+"even when the backorder option is enabled."
+msgstr ""
+"L'activation de ce paramètre permet aux utilisateurs de s'abonner à des "
+"produits en rupture de stock, même lorsque l'option de pré-commande est "
+"activée."
+
+#: src/template/settings/general.js:63
+msgid ""
+"Enabling this setting shows the subscriber count on the single product page."
+msgstr ""
+"L'activation de ce paramètre affiche le nombre d'abonnés sur la page du "
+"produit."
+
+#: classes/Install.php:189 src/template/settings/formCustomization.js:21
+msgid "Enter your email"
+msgstr "Entrez votre e-mail"
+
+#: classes/Admin.php:124
+msgid "Export CSV"
+msgstr "Exporter le CSV"
+
+#: templates/emails/AdminEmail.php:41 templates/emails/Email.php:40
+#: templates/emails/SubscriberConfirmationEmail.php:40
+msgid "Following is the product link : "
+msgstr "Voici le lien produit : "
+
+#: src/template/settings/formCustomization.js:5
+msgid "Form Customization"
+msgstr "Personnalisation du formulaire"
+
+#: src/template/settings/general.js:6
+msgid "General"
+msgstr "Général"
+
+#: classes/StockManager.php:187
+msgid "Get Pro"
+msgstr "Passez à la version Pro"
+
+#: templates/emails/AdminEmail.php:14
+msgid ""
+"Hi there. A customer has subscribed a product on your shop. Product details "
+"are shown below for your reference:"
+msgstr ""
+"Bonjour, \n"
+"\n"
+"un client a souscrit à un produit dans votre boutique. Pour référence, voici "
+"les détails :"
+
+#: templates/emails/Email.php:13
+msgid ""
+"Hi there. You have subscribed a product. Your subscribed product is "
+"available now. Product details are shown below for your reference:"
+msgstr ""
+"Bonjour,  \n"
+"\n"
+"Vous avez souscrit à un produit. \n"
+"Le produit auquel vous avez souscrit est maintenant disponible. \n"
+"Pour référence, voici les détails :"
+
+#: templates/emails/SubscriberConfirmationEmail.php:13
+msgid ""
+"Hi there. You have successfully subscribed a product. We will inform you "
+"when the product becomes available. Product details are shown below for your "
+"reference:"
+msgstr ""
+"Bonjour,\n"
+"\n"
+"vous avez souscrit à un produit sur notre site. \n"
+"Nous vous informerons dès qu'il sera à nouveau disponible.\n"
+"Voici les détails du produit pour lequel vous avez souscrit : "
+
+#. URI of the plugin
+#. Author URI of the plugin
+msgid "https://multivendorx.com/"
+msgstr "https://multivendorx.com/"
+
+#: classes/Admin.php:268
+msgid "Interested Person( s )"
+msgstr "Personne(s) intéressée(s) "
+
+#. Inventory Manager list with a pro sticker.Variable $pro_sticker contains the sticker text.
+#: classes/Admin.php:85 classes/Admin.php:87
+msgid "Inventory Manager"
+msgstr "Gestionnaire de stock"
+
+#: src/template/settings/formCustomization.js:20
+msgid "It will represent email field placeholder text."
+msgstr "Texte du champ de courrier électronique."
+
+#: classes/Install.php:184 classes/Install.php:185
+msgid "Kindly check your inbox to confirm the subscription."
+msgstr "Veuillez vérifier votre émail pour confirmer votre abonnement."
+
+#. %s: count
+#: classes/Subscriber.php:32
+#, php-format
+msgid "Mail Sent <span class=\"count\">( %s )</span>"
+msgid_plural "Mail Sent <span class=\"count\">( %s )</span>"
+msgstr[0] "E-mail envoyé <span class=\"count\">( %s )</span>"
+msgstr[1] "E-mails envoyés <span class=\"count\">( %s )</span>"
+
+#: src/template/settings/mailchimp.js:28
+msgid "Mailchimp API"
+msgstr "API MailChimp"
+
+#: src/template/settings/mailchimp.js:6
+msgid "Mailchimp Integration"
+msgstr "Intégration MailChimp"
+
+#: src/template/settings/mailchimp.js:36
+msgid "Mailchimp List"
+msgstr "Liste MailChimp"
+
+#: src/template/settings/formCustomization.js:35
+msgid "Modify the subscribe button text. By default we display Notify Me."
+msgstr ""
+"Modifier le texte du bouton abonnement. Par défaut, nous affichons M'alerter."
+
+#: src/template/settings/formSubmission.js:38
+msgid ""
+"Modify the text that confirms user that they have successful unsubscribe."
+msgstr "Modifier le texte qui confirme à l'utilisateur son désabonnement."
+
+#: src/template/settings/formCustomization.js:42
+msgid "Modify the un-subscribe button text. By default we display Unsubscribe."
+msgstr ""
+"Modifier le texte du bouton de désabonnement. Par défaut, nous affichons Se "
+"désabonner."
+
+#. Author of the plugin
+msgid "MultiVendorX"
+msgstr "MultiVendorX"
+
+#: src/template/settings/formCustomization.js:13
+#: src/template/settings/formCustomization.js:48
+msgid "no_label"
+msgstr "no_label"
+
+#: src/template/settings/formCustomization.js:36
+msgid "Notify Me"
+msgstr "M'avertir"
+
+#: classes/Install.php:191
+msgid "Notify me"
+msgstr "M'avertir"
+
+#: classes/Admin.php:291
+msgid "Number of Interested Person( s )"
+msgstr "Nombre de personne(s) intéressée(s) "
+
+#: classes/Admin.php:306
+msgid "Number of Interested Person( s ) : "
+msgstr "Nombre de personne(s) intéressée(s) : "
+
+#: src/template/settings/formSubmission.js:31
+msgid ""
+"Personalize the message shown to users when they try to subscribe with an "
+"invalid email address."
+msgstr ""
+"Personnalisation du message indiquant à l'utilisateur qu'il a entré une "
+"adresse émail non valide."
+
+#: src/template/settings/general.js:73
+msgid ""
+"Personalize the notification text to let users know about the quantity of "
+"subscribers for out-of-stock item. Note: Use %no_of_subscribed% as number of "
+"interest/subscribed persons."
+msgstr ""
+"Personnalisez le texte de notification pour informer les utilisateurs du "
+"nombre d'abonnés pour un article en rupture de stock. Remarque : Utilisez "
+"%no_of_subscribed% comme nombre de personnes abonnées."
+
+#: classes/Install.php:208
+msgid "Please enter a valid email ID and try again."
+msgstr "Veuillez entrer une adresse e-mail valide et recommencer."
+
+#: classes/FrontEnd.php:70
+msgid "Please try again."
+msgstr "Veuillez recommencer."
+
+#: templates/emails/AdminEmail.php:23 templates/emails/Email.php:22
+#: templates/emails/SubscriberConfirmationEmail.php:22
+msgid "Price"
+msgstr "Prix"
+
+#: classes/FrontEnd.php:68
+msgid "Processing..."
+msgstr "Traitement ..."
+
+#: templates/emails/AdminEmail.php:22 templates/emails/Email.php:21
+#: templates/emails/SubscriberConfirmationEmail.php:21
+msgid "Product"
+msgstr "Produit"
+
+#: templates/emails/AdminEmail.php:18 templates/emails/Email.php:17
+#: templates/emails/SubscriberConfirmationEmail.php:17
+msgid "Product Details"
+msgstr "Détail du produit"
+
+#. Name of the plugin
+msgid "Product Stock Manager & Notifier for WooCommerce"
+msgstr "Product Stock Manager & Notifier for WooCommerce"
+
+#: src/template/settings/formCustomization.js:28
+msgid "Receive in-stock notifications for this product."
+msgstr "Recevez des notifications de retour en stock pour ce produit."
+
+#: classes/Install.php:190
+msgid "Receive in-stock notifications for this."
+msgstr "Recevez des notifications de retour en stock pour ce produit."
+
+#: src/template/settings/general.js:116
+msgid "Recipient Email for New Subscriber"
+msgstr "Adresse émail pour les nouveaux inscrits"
+
+#: classes/Admin.php:136
+msgid "Remove Subscribers"
+msgstr "Retirer les abonnés"
+
+#. This message is to display removed subscribers count for the product
+#: classes/Admin.php:173
+#, php-format
+msgid "Removed subscribers from %s product."
+msgid_plural "Removed subscribers from %s products."
+msgstr[0] "Retirer les abonnés de %s produit."
+msgstr[1] "Retirer les abonnés de %s produits."
+
+#: src/template/settings/formSubmission.js:25
+msgid "Repeated Subscription Alert"
+msgstr "Alerte d'abonnement multiple"
+
+#: src/template/settings/mailchimp.js:37
+msgid "Select a Mailchimp list."
+msgstr "Choisir une liste MailChimp."
+
+#: src/template/settings/general.js:115
+msgid ""
+"Set the email address to receive notifications when a user subscribes to an "
+"out-of-stock product. You can add multiple comma-separated emails.<br/> "
+"Default: The admin's email is set as the receiver. Exclude the admin's email "
+"from the list to exclude admin from receiving these notifications."
+msgstr ""
+"Définissez l'adresse e-mail pour recevoir des notifications lorsqu'un "
+"utilisateur s'abonne à un produit en rupture de stock. Vous pouvez ajouter "
+"plusieurs e-mails séparés par des virgules.<br/> Par défaut : l'e-mail de "
+"l'administrateur est défini comme destinataire. Retirez l'adresse e-mail de "
+"l'administrateur de la liste pour empêcher l'administrateur de recevoir ces "
+"notifications."
+
+#: classes/Admin.php:66 classes/Admin.php:67 classes/StockManager.php:182
+msgid "Settings"
+msgstr "Réglages"
+
+#: classes/RestAPI.php:52
+msgid "Settings Saved"
+msgstr "Réglages sauvegardés"
+
+#: classes/FrontEnd.php:69
+msgid "Some error occurs"
+msgstr "Une erreur c'est produite"
+
+#: src/template/settings/email.js:29
+msgid ""
+"Specify email addresses that are restricted from subscribing. You can add "
+"multiple commma seperated emails."
+msgstr ""
+"Spécifiez les adresses e-mail dont l'abonnement est restreint. Vous pouvez "
+"ajouter plusieurs e-mails séparés par des virgules."
+
+#: src/template/settings/email.js:16
+msgid ""
+"Specify email domains that are restricted from subscribing. You can add "
+"multiple commma seperated emails."
+msgstr ""
+"Spécifiez les adresses e-mail dont l'abonnement est restreint. Vous pouvez "
+"ajouter plusieurs e-mails séparés par des virgules."
+
+#: classes/Admin.php:55 classes/Admin.php:56
+msgid "Stock Manager"
+msgstr "Gestionnaire de stock"
+
+#: classes/Admin.php:120
+msgid "Stock Manager Export"
+msgstr "Export du gestionnaire de stock"
+
+#: src/template/settings/formSubmission.js:6
+msgid "Submission Messages"
+msgstr "Message d'abonnement"
+
+#: src/template/settings/formCustomization.js:34
+msgid "Subscribe Button"
+msgstr "Bouton d'abonnement"
+
+#: src/template/settings/general.js:72
+msgid "Subscriber Count Notification Message"
+msgstr "Message du nombre d'abonnement"
+
+#: src/template/settings/general.js:15
+msgid "Subscriber Double Opt-in"
+msgstr "Abonnement Double Opt-in"
+
+#: classes/Admin.php:75
+msgid "Subscriber List"
+msgstr "Liste d'abonnés"
+
+#. Subscriber list with a pro sticker.Variable $pro_sticker contains the sticker text.
+#: classes/Admin.php:77
+msgid "Subscriber List "
+msgstr "Liste d'abonnés "
+
+#: src/template/settings/formCustomization.js:29
+msgid "Subscription Purpose Description"
+msgstr "Description de l'abonnement"
+
+#: src/template/settings/formSubmission.js:17
+msgid "Successful Form Submission"
+msgstr "Soumission du formulaire réussie"
+
+#: classes/StockManager.php:183 src/template/settings/support.js:6
+msgid "Support"
+msgstr "Support"
+
+#: src/template/settings/formCustomization.js:14
+msgid "Text Customization"
+msgstr "Personnalisation du texte"
+
+#: classes/Install.php:205
+msgid ""
+"Thank you for expressing interest in %product_title%. We will notify you via "
+"email once it is back in stock."
+msgstr ""
+"Merci de l'intérêt que vous portez à notre produit %product_title%. Nous "
+"vous informerons par émail dès qu'il sera à nouveau en stock."
+
+#: classes/Install.php:214
+msgid ""
+"This email address is ban in our site, kindly use another email address."
+msgstr ""
+"Cette adresse e-mail est interdite sur notre site, merci d'utiliser une "
+"autre adresse e-mail."
+
+#: classes/Install.php:213
+msgid "This email domain is ban in our site, kindly use another email domain."
+msgstr ""
+"Ce domaine de messagerie est interdit sur notre site, veuillez utiliser un "
+"autre domaine."
+
+#. This message display dynamic product title and emails.
+#: src/template/settings/formSubmission.js:24
+msgid ""
+"Tip: Enhance personalization by incorporating %product_title% for dynamic "
+"product titles and %customer_email% for individual customer emails."
+msgstr ""
+"Astuce : améliorez la personnalisation en incorporant %product_title% pour "
+"les titres de produits et %customer_email% pour les e-mails de clients."
+
+#. This message display dynamic product title and emails.
+#: src/template/settings/formSubmission.js:16
+msgid ""
+"Tip: Utilize %product_title% for dynamic product titles and %customer_email% "
+"for personalized customer email addresses in your messages."
+msgstr ""
+"Rem. : Utiliser %product_title% pour inserer le titre du produit et "
+"%customer_email% pour insérer l'adresse émail dans votre message."
+
+#: classes/Install.php:192 src/template/settings/formCustomization.js:43
+msgid "Unsubscribe"
+msgstr "Désabonnement"
+
+#: src/template/settings/formCustomization.js:41
+msgid "Unsubscribe Button"
+msgstr "Bouton de désabonnement"
+
+#: src/template/settings/formSubmission.js:39
+msgid "Unsubscribe Confirmation"
+msgstr "Confirmation de désabonnement"
+
+#: classes/Admin.php:95 classes/Admin.php:96
+msgid "WC Stock Manager Export"
+msgstr "Export du gestionnaire de stock WC"
+
+#: classes/Emails/AdminEmail.php:78 classes/Emails/Emails.php:81
+#: classes/Emails/SubscriberConfirmationEmail.php:76
+msgid "Welcome to {site_title} "
+msgstr "Bienvenu sur {site_title} "
+
+#: classes/Admin.php:121
+msgid ""
+"When you click the button below, this will export all out of stock products "
+"with subscribers email."
+msgstr ""
+"Lorsque vous cliquez sur le bouton ci-dessous, tous les produits en rupture "
+"de stock seront exportés avec l'e-mail des abonnés."
+
+#: classes/Subscriber.php:27
+msgctxt "woostockalert"
+msgid "Mail Sent"
+msgstr "Émail envoyé"
+
+#: classes/Subscriber.php:36
+msgctxt "woostockalert"
+msgid "Subscribed"
+msgstr "Abonné"
+
+#: classes/Subscriber.php:45
+msgctxt "woostockalert"
+msgid "Unsubscribed"
+msgstr "Désabonner"
+
+#: classes/Emails/SubscriberConfirmationEmail.php:66
+msgid "You have subscribed a product on {site_title} "
+msgstr "Vous êtes abonnés à un produit sur {site_title} "
+
+#: classes/Emails/Emails.php:71
+msgid "Your Subscribed product on {site_title} is available now"
+msgstr ""
+"Le produit pour lequel vous avez souscrit sur {site_title} est maintenant "
+"disponible"
