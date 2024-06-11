@@ -125,6 +125,12 @@ class FrontEnd {
         if ( empty( $product ) )
             return;
 
+        $general_tab_settings = get_option( 'woo_stock_manager_appearance_tab_settings' );
+        $is_enable_backorders = isset( $general_tab_settings[ 'is_enable_backorders' ] ) ? $general_tab_settings[ 'is_enable_backorders' ] : false;
+        $stock_status   = $product->get_stock_status();
+        if ( $stock_status == 'onbackorder' && $is_enable_backorders == false )
+            return;
+
         if ( $product->is_type( 'variable' ) ) {
             $get_variations = count( $product->get_children() ) <= apply_filters( 'woocommerce_ajax_variation_threshold', 30, $product );
             $get_variations = $get_variations ? $product->get_available_variations() : false;
