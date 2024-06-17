@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: Product Stock Manager & Notifier for WooCommerce
+ * Plugin Name: Product Stock Waitlist Manager for WooCommerce
  * Plugin URI: https://multivendorx.com/
  * Description: Boost sales with real-time stock alerts! Notify customers instantly when products are back in stock. Simplify data management by exporting and importing stock data with ease.
  * Author: MultiVendorX
