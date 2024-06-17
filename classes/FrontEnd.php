@@ -256,8 +256,8 @@ class FrontEnd {
 
         $shown_interest_html = '';
         $shown_interest_text = esc_html( $settings_array[ 'shown_interest_text' ] );
-        $general_tab_settings = get_option( 'woo_stock_manager_appearance_tab_settings' );
-        $is_enable_no_interest = ( isset( $general_tab_settings[ 'is_enable_no_interest' ] ) ) ? $general_tab_settings[ 'is_enable_no_interest' ] : false;
+        $appearance_tab_settings = get_option( 'woo_stock_manager_appearance_tab_settings' );
+        $is_enable_no_interest = ( isset( $appearance_tab_settings[ 'is_enable_no_interest' ] ) ) ? $appearance_tab_settings[ 'is_enable_no_interest' ] : false;
         if ( $is_enable_no_interest && $interested_person != 0 && $shown_interest_text ) {
             $shown_interest_text = str_replace( "%no_of_subscribed%", $interested_person, $shown_interest_text );
             $shown_interest_html = '<p>' . $shown_interest_text . '</p>';
