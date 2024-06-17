@@ -189,6 +189,10 @@ $color-active: #65438f;
   .search-section {
     margin-left: auto;
     max-width: 12.6rem;
+
+    @media screen and (max-width: 31rem) {
+      margin-left: 0 !important;
+    }
   }
 
   .subscriber-bulk-action {

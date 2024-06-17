@@ -43,8 +43,8 @@ export default function SubscribersList() {
   function requestData(
     rowsPerPage = 10,
     currentPage = 1,
-    productNameField = "",
-    emailField = "",
+    searchField = "",
+    searchAction = "",
     start_date = new Date(0),
     end_date = new Date(),
     postStatus
@@ -58,8 +58,8 @@ export default function SubscribersList() {
         page: currentPage,
         row: rowsPerPage,
         postStatus: postStatus,
-        product_name: productNameField,
-        email: emailField,
+        search_field: searchField,
+        search_action: searchAction,
         start_date: start_date,
         end_date: end_date,
       },
@@ -70,11 +70,17 @@ export default function SubscribersList() {
   }
 
   const requestApiForData = (rowsPerPage, currentPage, filterData = {}) => {
+    // If serch action or search text fields any one of is missing then do nothing 
+    if (Boolean(filterData?.searchAction) ^ Boolean(filterData?.searchField)) {
+      return;
+    }
+
+    setData(null);
     requestData(
       rowsPerPage,
       currentPage,
-      filterData?.productNameField,
-      filterData?.emailField,
+      filterData?.searchField,
+      filterData?.searchAction,
       filterData?.date?.start_date,
       filterData?.date?.end_date,
       filterData.typeCount
@@ -242,12 +248,12 @@ export default function SubscribersList() {
       ),
     },
     {
-      name: "productNameField",
+      name: "searchField",
       render: (updateFilter, filterValue) => (
         <>
           <div className="admin-header-search-section search-section">
             <input
-              name="searchCourseField"
+              name="searchField"
               type="text"
               placeholder={__("Search...", "moowoodle")}
               onChange={(e) => updateFilter(e.target.name, e.target.value)}
@@ -268,7 +274,7 @@ export default function SubscribersList() {
               value={filterValue || ""}
             >
               <option value="">All</option>
-              <option value="productNameField">Product Name</option>
+              <option value="productField">Product Name</option>
               <option value="emailField">Email</option>
             </select>
           </div>
@@ -386,6 +392,7 @@ export default function SubscribersList() {
               perPageOption={[10, 25, 50]}
               realtimeFilter={realtimeFilter}
               typeCounts={subscribersStatus}
+              autoLoading={false}
             />
           }
         </div>
