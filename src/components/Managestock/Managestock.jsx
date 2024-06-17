@@ -159,22 +159,30 @@ const Managestock = () => {
               </div>
             )}
           </div>
+          <div className="admin-table-wrapper-filter">
+            <div className={stockStatus === '' ? 'type-count-active' : ''} onClick={(e) => {
+              setStockStatus('');
+            }}>
+              All (25)
+            </div>
+            <div className={stockStatus === 'instock' ? 'type-count-active' : ''} onClick={(e) => {
+              setStockStatus('instock');
+            }}>
+              In stock (25)
+            </div>
+            <div className={stockStatus === 'onbackorder' ? 'type-count-active' : ''} onClick={(e) => {
+              setStockStatus('onbackorder');
+            }}>
+              On backorder (25)
+            </div>
+            <div className={stockStatus === 'outofstock' ? 'type-count-active' : ''} onClick={(e) => {
+              setStockStatus('outofstock');
+            }}>
+              Out of stock (25)
+            </div>
+          </div>
           <div className="manage-stock-wrapper">
             <div class="admin-wrap-bulk-all-date">
-              <div class="admin-header-search-section">
-                <input
-                  type="text"
-                  placeholder="Search by Name..."
-                  onChange={handleInputName}
-                />
-              </div>
-              <div class="admin-header-search-section">
-                <input
-                  type="text"
-                  placeholder="Search by SKU..."
-                  onChange={handleInputSku}
-                />
-              </div>
               <div class="custom-select">
                 <select
                   onChange={(e) => {
@@ -192,36 +200,26 @@ const Managestock = () => {
                   </option>
                 </select>
               </div>
-              <div class="custom-select">
-                <select
-                  onChange={(e) => {
-                    setStockStatus(e.target.value);
-                  }}
-                >
-                  <option value="">
-                    {__("Stock Status", "woocommerce-stock-manager")}
-                  </option>
-                  <option value="instock">
-                    {__("In stock", "woocommerce-stock-manager")}
-                  </option>
-                  <option value="onbackorder">
-                    {__("On backorder", "woocommerce-stock-manager")}
-                  </option>
-                  <option value="outofstock">
-                    {__("Out of stock", "woocommerce-stock-manager")}
-                  </option>
-                </select>
+              <div class="admin-header-search-section product-search">
+                <input
+                  type="text"
+                  placeholder="Search by Name..."
+                  onChange={handleInputName}
+                />
               </div>
-            </div>
-            <div>
-              {__("Results Found: ", "woocommerce-stock-manager")}
-              {totalProducts}
+              <div class="admin-header-search-section">
+                <input
+                  type="text"
+                  placeholder="Search by SKU..."
+                  onChange={handleInputSku}
+                />
+              </div>
             </div>
           </div>
           {
             //If both the data nad the headers are set then only the Table will be shown else the <PuffLoader/> will be shown
             data &&
-            Object.keys(headers).length > 0 ? (
+              Object.keys(headers).length > 0 ? (
               <div className="manage-stock-table">
                 <ProductTable
                   setData={setData}

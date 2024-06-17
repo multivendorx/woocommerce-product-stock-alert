@@ -61,7 +61,8 @@ $color-active: #65438f;
       justify-content: flex-start;
       gap: 0.5rem;
       flex-wrap: wrap;
-      max-width: 37.8rem;
+      width: 100%;
+
       input,
       select,
       textarea {
@@ -74,8 +75,9 @@ $color-active: #65438f;
         }
       }
 
-      & > div {
+      &>div {
         flex: 1 0 8.19rem;
+        max-width: 10rem;
 
         input,
         select {
@@ -104,9 +106,7 @@ $color-active: #65438f;
     }
 
     select {
-      background: transparent
-        url(data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2220%22%20height%3D%2220%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M5%206l5%205%205-5%202%201-7%207-7-7%202-1z%22%20fill%3D%22%23555%22%2F%3E%3C%2Fsvg%3E)
-        no-repeat right 0.315rem top 55%;
+      background: transparent url(data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2220%22%20height%3D%2220%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M5%206l5%205%205-5%202%201-7%207-7-7%202-1z%22%20fill%3D%22%23555%22%2F%3E%3C%2Fsvg%3E) no-repeat right 0.315rem top 55%;
       padding-right: 1.25rem;
       font-size: 0.875rem;
       background-size: 0.875rem;
@@ -341,10 +341,12 @@ $color-active: #65438f;
           min-width: 6.3rem;
           width: 100%;
           align-items: center;
+
           &:first-child {
             min-width: 2.5rem;
             max-width: 2.5rem !important; // To overwrite default max-width
           }
+
           &:last-child {
             display: none;
           }
@@ -366,6 +368,7 @@ $color-active: #65438f;
         background-color: #ffffff;
         padding: 1.512rem;
       }
+
       tr {
         background: $color-white;
         position: relative;
@@ -377,6 +380,7 @@ $color-active: #65438f;
         box-sizing: border-box;
         font-weight: 400;
         min-height: 4.5rem;
+
         &:nth-child(odd) {
           background: $body-background;
         }
@@ -394,9 +398,9 @@ $color-active: #65438f;
           min-width: 6.3rem;
           width: 100%;
 
-          &.product_image{
-            .table-data-container{
-              a{
+          &.product_image {
+            .table-data-container {
+              a {
                 display: flex;
                 align-items: center;
               }
@@ -454,12 +458,14 @@ $color-active: #65438f;
 
             &.disable {
               cursor: not-allowed;
+
               .setting-btn {
                 cursor: not-allowed;
                 opacity: 0.3;
 
                 &:hover {
                   cursor: not-allowed;
+
                   .bar1 {
                     &::before {
                       transform: translateX(-0.25rem);
@@ -494,9 +500,9 @@ $color-active: #65438f;
             input {
               padding-left: 0.35rem;
               padding-right: 0.35rem;
+
               &.active {
-                border: 0.125rem solid
-                  rgba($color: $color-active, $alpha: 0.125);
+                border: 0.125rem solid rgba($color: $color-active, $alpha: 0.125);
               }
             }
           }
@@ -505,7 +511,7 @@ $color-active: #65438f;
     }
   }
 
-  & > .pagination {
+  &>.pagination {
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -552,23 +558,29 @@ $color-active: #65438f;
           text-decoration: none;
         }
       }
+
       li.selected {
         border: 0.063rem solid #522c81;
         background-color: #fff;
+
         a {
           color: $color-active;
         }
       }
+
       li.disabled {
         border: 0.063rem solid #4949495b;
         background: #4949495b;
+
         a {
           cursor: not-allowed;
         }
       }
+
       li {
         border: 0.063rem solid #522c81;
         background: $color-active;
+
         a {
           color: white;
         }
@@ -590,6 +602,7 @@ $color-active: #65438f;
 .product_backorders {
   min-width: 5rem !important; // To overwrite default min-width
 }
+
 .product_stock_status {
   min-width: 6rem !important; // To overwrite default min-width
 }
@@ -624,6 +637,7 @@ $color-active: #65438f;
         }
       }
     }
+
     tbody {
       tr {
         display: flex;
@@ -654,6 +668,7 @@ $color-active: #65438f;
 
             .table-data-container {
               padding: 0;
+
               h1 {
                 display: none !important; // To overwrite first 3 heading display
               }
@@ -683,6 +698,7 @@ $color-active: #65438f;
             text-wrap: nowrap;
             overflow: hidden;
             padding: 0.313rem 0.625rem;
+
             h1 {
               display: block !important; // To overwrite all heading display
             }
@@ -722,6 +738,7 @@ $color-active: #65438f;
 tr.expand {
   background-color: #f0f0f1 !important; // force to set background color for variable product only
   border-bottom: 0.063rem solid #ccc;
+
   &:first-child {
     border: none !important; // force to set border color for first variable product only
   }
@@ -734,6 +751,7 @@ tr.expand {
     .setting-btn {
       display: none;
     }
+
     .disable {
       cursor: auto !important;
     }
@@ -807,15 +825,16 @@ tr.expand {
         height: 2.25rem;
         transition: all 0.3s linear;
 
-        &:hover{
+        &:hover {
           background-color: rgba(0, 0, 0, .12);
         }
 
-        &.deactive{
-          &:hover{
+        &.deactive {
+          &:hover {
             background-color: transparent;
           }
-          svg{
+
+          svg {
             opacity: 0.3;
           }
         }
@@ -833,16 +852,19 @@ tr.expand {
 @media screen and (max-width: 37.737rem) {
   .pagination-section {
     position: relative;
+
     .pagecount-select-wrapper {
       position: absolute;
       left: 50%;
       top: 50%;
       transform: translate(-50%, -50%);
       z-index: 1;
+
       p {
         display: none;
       }
     }
+
     .page-handle-wrapper {
       position: absolute;
       left: 50%;
@@ -853,9 +875,32 @@ tr.expand {
       p {
         display: none;
       }
-      .page-handle-button{
+
+      .page-handle-button {
         width: 100%;
       }
     }
   }
+}
+
+.admin-table-wrapper-filter {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: .875rem;
+  gap: .5rem;
+  justify-content: flex-start;
+  margin-bottom: .75rem;
+
+  &>div {
+    cursor: pointer;
+  }
+
+  .type-count-active {
+    color: #522c81;
+  }
+}
+
+.product-search {
+  margin-left: auto !important; // To overwrite default css
 }

@@ -34,8 +34,8 @@ export const TableCell = (props) => {
   return (
     <>
       <div title={props.value} className="table-row-custom">
-          <h4>{props.title}</h4>
-          { props.children }
+        <h4>{props.title}</h4>
+        {props.children}
       </div>
     </>
   );
@@ -173,7 +173,7 @@ const CustomTable = (props) => {
     selectedCount,
     allSelected,
   }) => {
-      handleSelect?.(selectedRows, selectedCount, allSelected);
+    handleSelect?.(selectedRows, selectedCount, allSelected);
   };
 
   // Function that handle filter change.
@@ -195,17 +195,17 @@ const CustomTable = (props) => {
       <div className="admin-table-wrapper-filter">
         {
           typeCounts &&
-          typeCounts.map( (countInfo) => (
+          typeCounts.map((countInfo) => (
             <div
               onClick={(e) => { setFilterData({ typeCount: countInfo.key }) }}
               className={countInfo.key == typeCountActive ? 'type-count-active' : ''}
             >
-              { `${countInfo.name} (${countInfo.count})` }
+              {`${countInfo.name} (${countInfo.count})`}
             </div>
           ))
         }
       </div>
-      
+
       <div className="filter-wrapper">
         <div className="wrap-bulk-all-date">
           {/* Render realtime filter */}
@@ -214,7 +214,7 @@ const CustomTable = (props) => {
               return filter.render(handleFilterChange, filterData[filter.name]);
             })}
         </div>
-        { bulkActionComp && bulkActionComp() }
+        {bulkActionComp && bulkActionComp()}
       </div>
       {loading ? (
         <LoadingTable />
