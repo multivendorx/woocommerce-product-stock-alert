@@ -1,4 +1,4 @@
-=== Product Stock Manager & Notifier for WooCommerce ===
+=== Product Stock Waitlist Manager for WooCommerce - Back In Stock Notifier, Sync, bulk edit ===
 
 Contributors: wcmp
 Tags: wordpress, woocommerce, e-commerce, shop, stock, out of stock, in stock, stock alert, alert email, stock alert email
@@ -15,14 +15,22 @@ Elevate sales with instant stock alerts, engage customers with real-time updates
 == Description ==
 **Stay informed with WooCommerce Out-of-Stock Subscription and In-Stock Notifications for seamless inventory management**
 
-Stay ahead of demand with real-time In-Stock Email Alerts for customers and comprehensive inventory insights for admins. Never miss a sale as customers subscribe to receive alerts when products are back in stock. Admins can effortlessly track demand with visibility into the most sought-after out-of-stock products and conveniently manage subscribers with CSV export functionality.
-
+The ultimate solution to keep your customers engaged and informed when products are out of stock. Automatically notify subscribers when products are back in stock. Elevate sales with instant stock alerts, engage customers with real-time updates. Track demand and convert subscribers into loyal customers. 
 
 🌐 Explore our [Document](https://multivendorx.com/docs/knowledgebase/products-stock-manager-notifier-for-woocommerce/?utm_source=wporg&utm_medium=plugindescription&utm_campaign=stockmanagerwporg)
 
 🌟 Learn More About [Pro](https://multivendorx.com/woocommerce-product-stock-manager-notifier-pro/?utm_source=wporg&utm_medium=plugindescription&utm_campaign=stockmanagerwporg)
 
-## 🚀 Benefits:
+=📦Supported Product Types of WooCommerce =
+👉Simple
+👉Variable
+👉Grouped
+👉Simple Subscription (From WooCommerce)
+👉Variable Subscription (From WooCommerce)
+👉Product Bundle (From WooCommerce)
+
+## 🚀 Features:
+* 📋Waitlist Plugin for WooCommerce.
 * 📧 Automatically notify subscribers of restocked products.
 * 📩 Get admin email alerts for customer product sign-ups.
 * 🚫 Avoid duplicate email entries for better notification lists.
