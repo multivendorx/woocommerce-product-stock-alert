@@ -3,9 +3,9 @@
 Contributors: wcmp
 Tags: wordpress, woocommerce, e-commerce, shop, stock, out of stock, in stock, stock alert, alert email, stock alert email
 Requires at least: 5.4
-Tested up to: 6.5.2
+Tested up to: 6.5.4
 Requires PHP: 8.0
-Stable tag: 2.5.3
+Stable tag: 2.5.4
 Donate link: https://multivendorx.com/donate/
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -142,6 +142,13 @@ Manual installation method requires downloading the [Product Stock Manager & Not
 6. Inventory manager
 
 == Changelog ==
+
+= 2.5.4 - 2024-06-18 =
+* Added - WordPress 6.5.4 compatibility.
+* Added - WooCommerce 8.9.3 compatibility.
+* Fixed - Display subscriber count for out-of-stock items not showing up on the frontend site.
+* Fixed - Allow backorder subscription was not working.
+* Fixed - HTML display in admin mail.
 
 = 2.5.3 - 2024-05-10 =
 * Added - Ability to export all subscriber data as a CSV from the Subscriber List page.
