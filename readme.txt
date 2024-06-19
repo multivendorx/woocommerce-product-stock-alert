@@ -143,9 +143,9 @@ Manual installation method requires downloading the [Product Stock Manager & Not
 
 == Changelog ==
 
-= 2.5.4 - 2024-06-18 =
+= 2.5.4 - 2024-06-19 =
 * Added - WordPress 6.5.4 compatibility.
-* Added - WooCommerce 8.9.3 compatibility.
+* Added - WooCommerce 9.0.0 compatibility.
 * Fixed - Display subscriber count for out-of-stock items not showing up on the frontend site.
 * Fixed - Allow backorder subscription was not working.
 * Fixed - HTML display in admin mail.
