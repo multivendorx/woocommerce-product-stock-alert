@@ -15,8 +15,6 @@ class FrontEnd {
         add_action( 'woocommerce_subscription_add_to_cart', [ $this, 'display_product_subscription_form' ], 31 );
         add_action( 'woocommerce_woosb_add_to_cart', [ $this, 'display_product_subscription_form' ], 31 );
         add_action( 'woocommerce_after_variations_form', [ $this, 'display_product_subscription_form' ], 31 );
-        // Some theme variation disabled by default if it is out of stock so for that workaround solution.
-        add_filter( 'woocommerce_variation_is_active', [ $this, 'enable_disabled_variation_dropdown' ], 100, 2 );
         //support for grouped products
         add_filter( 'woocommerce_grouped_product_list_column_price', [ $this, 'display_in_grouped_product' ], 10, 2 );
         // Hover style
@@ -124,11 +122,12 @@ class FrontEnd {
 
         if ( empty( $product ) )
             return;
+        
+        $backorders_enabled = SM()->setting->get_setting( 'is_enable_backorders' );
+        $backorders_enabled = is_array( $backorders_enabled ) ? reset( $backorders_enabled ) : false;
 
-        $appearance_tab_settings = get_option( 'woo_stock_manager_appearance_tab_settings' );
-        $is_enable_backorders = isset( $appearance_tab_settings[ 'is_enable_backorders' ] ) ? $appearance_tab_settings[ 'is_enable_backorders' ] : false;
         $stock_status   = $product->get_stock_status();
-        if ( $stock_status == 'onbackorder' && $is_enable_backorders == false )
+        if ( $stock_status == 'onbackorder' && $backorders_enabled )
             return;
 
         if ( $product->is_type( 'variable' ) ) {
@@ -142,7 +141,7 @@ class FrontEnd {
         } else {
             echo ( $this->get_subscribe_form( $product ) );
         } 
-    } 
+    }
 
     /**
      * Display Request Stock Form for grouped product
@@ -155,23 +154,7 @@ class FrontEnd {
     public function display_in_grouped_product( $value, $child ) {
         $value = $value . $this->get_subscribe_form( $child );
         return $value;
-    } 
-
-    /**
-     * Enable disabled variation dropdown
-     * @param int $active default 0.
-     * @param array $variation variation product.
-     *
-     * @version 1.0.0
-     */
-    public function enable_disabled_variation_dropdown( $active, $variation ) {
-        $get_disabled_variation    = get_option( 'stock_notifier_ignore_disabled_variation' );
-        $ignore_disabled_variation = isset( $get_disabled_variation ) && '1' == $get_disabled_variation ? true : false;
-        if ( !$ignore_disabled_variation ) {
-            $active = true;
-        } 
-        return $active;
-    } 
+    }
     
     /**
      * Get subscribe from's HTML content for a particular product.
@@ -262,8 +245,10 @@ class FrontEnd {
 
         $shown_interest_html = '';
         $shown_interest_text = esc_html( $settings_array[ 'shown_interest_text' ] );
-        $appearance_tab_settings = get_option( 'woo_stock_manager_appearance_tab_settings' );
-        $is_enable_no_interest = ( isset( $appearance_tab_settings[ 'is_enable_no_interest' ] ) ) ? $appearance_tab_settings[ 'is_enable_no_interest' ] : false;
+
+        $is_enable_no_interest = SM()->setting->get_setting( 'is_enable_no_interest' );
+        $is_enable_no_interest = is_array( $is_enable_no_interest ) ? reset( $is_enable_no_interest ) : false;
+        
         if ( $is_enable_no_interest && $interested_person != 0 && $shown_interest_text ) {
             $shown_interest_text = str_replace( "%no_of_subscribed%", $interested_person, $shown_interest_text );
             $shown_interest_html = '<p>' . $shown_interest_text . '</p>';
@@ -280,4 +265,4 @@ class FrontEnd {
             ' . $shown_interest_html . '
         </div>';
     } 
-} 
+}
