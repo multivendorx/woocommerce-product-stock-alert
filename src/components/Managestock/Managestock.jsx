@@ -2,13 +2,11 @@ import axios from "axios";
 import { __ } from "@wordpress/i18n";
 import Dialog from "@mui/material/Dialog";
 import React, { useEffect, useState } from "react";
-import PuffLoader from "react-spinners/PuffLoader";
-import { css } from "@emotion/react";
 import Popoup from "../PopupContent/PopupContent";
 import { Link } from "react-router-dom";
 import ProductTable from "./ManagestockComponents/ProductTable";
 import "./Managestock.scss";
-
+import { useRef } from "react";
 const Managestock = () => {
   // Loading table component.
   const LoadingTable = () => {
@@ -34,15 +32,8 @@ const Managestock = () => {
       </>
     );
   };
-
-  const fetchDataUrl = `${appLocalizer.apiUrl}/stockmanager/v1/get-products`;
-
-  const override = css`
-    display: block;
-    margin: 0 auto;
-    border-color: red;
-  `;
-
+  const fetchDataUrl   = `${appLocalizer.apiUrl}/stockmanager/v1/get-products`;
+  const segmentDataUrl = `${appLocalizer.apiUrl}/stockmanager/v1/all-products`;
   const [data, setData] = useState(null);
   const [headers, setHeaders] = useState([]);
   const [totalProducts, setTotalProducts] = useState();
@@ -50,61 +41,57 @@ const Managestock = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [displayMessage, setDisplayMessage] = useState("");
   const [openDialog, setOpenDialog] = useState(false);
-  const [productName, setProductName] = useState("");
-  const [productSku, setProductSku] = useState("");
+  const [searchValue, setSearchValue] = useState("");
+  const [searchType, setSearchType] = useState("");
   const [productType, setProductType] = useState("");
   const [stockStatus, setStockStatus] = useState("");
-
+  const [segments, setSegments] = useState(null);
+  const filterChanged = useRef(false);
   useEffect(() => {
-    if (appLocalizer.pro_active) {
-      setData(null);
-      //Fetch the data to show in the table
-      axios({
-        method: "post",
-        url: fetchDataUrl,
-        headers: { "X-WP-Nonce": appLocalizer.nonce },
-        data: {
-          page: currentPage + 1,
-          row: rowsPerPage,
-          product_name: productName,
-          product_sku: productSku,
-          product_type: productType,
-          stock_status: stockStatus,
-        },
-      }).then((response) => {
-        let parsedData = JSON.parse(response.data);
-        setData(parsedData.products);
-        setHeaders(parsedData.headers);
-        setTotalProducts(parsedData.total_products);
-      });
+    if (!appLocalizer.pro_active) return;
+    axios({
+      method: "post",
+      url: segmentDataUrl,
+      headers: { "X-WP-Nonce": appLocalizer.nonce },
+      data: { segment: true },
+    }).then((response) => {
+      setSegments(response.data);
+    });
+  }, []);
+  useEffect(() => {
+    if (!appLocalizer.pro_active) return;
+    if (filterChanged.current && (Boolean(searchType) ^ Boolean(searchValue))) {
+      filterChanged.current = false;
+      return;
     }
+    setData(null);
+    //Fetch the data to show in the table
+    axios({
+      method: "post",
+      url: fetchDataUrl,
+      headers: { "X-WP-Nonce": appLocalizer.nonce },
+      data: {
+        page: currentPage + 1,
+        row: rowsPerPage,
+        product_name: searchType == 'productName' ? searchValue: null,
+        product_sku: searchType == 'productSku' ? searchValue: null,
+        product_type: productType,
+        stock_status: stockStatus,
+      },
+    }).then((response) => {
+      let parsedData = JSON.parse(response.data);
+      setData(parsedData.products);
+      setHeaders(parsedData.headers);
+      setTotalProducts(parsedData.total_products);
+    });
   }, [
     rowsPerPage,
     currentPage,
-    productName,
-    productSku,
+    searchValue,
+    searchType,
     productType,
     stockStatus,
   ]);
-
-  //Function to handle the the Name Search
-  function handleInputName(e) {
-    if (e.target.value.length > 3) {
-      setProductName(e.target.value);
-    } else if (e.target.value.length <= 1) {
-      setProductName("");
-    }
-  }
-
-  //Function to handle the SKU Search
-  function handleInputSku(e) {
-    if (e.target.value.length > 3) {
-      setProductSku(e.target.value);
-    } else if (e.target.value.length <= 1) {
-      setProductSku("");
-    }
-  }
-
   return (
     <>
       {!appLocalizer.pro_active ? (
@@ -159,22 +146,31 @@ const Managestock = () => {
               </div>
             )}
           </div>
+          {/* Table segments */}
+          <div className="admin-table-wrapper-filter">
+            <div className={stockStatus === '' ? 'type-count-active' : ''} onClick={(e) => {
+              setStockStatus('');
+            }}>
+              All ({segments?.all || 0})
+            </div>
+            <div className={stockStatus === 'instock' ? 'type-count-active' : ''} onClick={(e) => {
+              setStockStatus('instock');
+            }}>
+              In stock ({segments?.instock || 0})
+            </div>
+            <div className={stockStatus === 'onbackorder' ? 'type-count-active' : ''} onClick={(e) => {
+              setStockStatus('onbackorder');
+            }}>
+              On backorder ({segments?.onbackorder || 0})
+            </div>
+            <div className={stockStatus === 'outofstock' ? 'type-count-active' : ''} onClick={(e) => {
+              setStockStatus('outofstock');
+            }}>
+              Out of stock ({segments?.outofstock || 0})
+            </div>
+          </div>
           <div className="manage-stock-wrapper">
             <div class="admin-wrap-bulk-all-date">
-              <div class="admin-header-search-section">
-                <input
-                  type="text"
-                  placeholder="Search by Name..."
-                  onChange={handleInputName}
-                />
-              </div>
-              <div class="admin-header-search-section">
-                <input
-                  type="text"
-                  placeholder="Search by SKU..."
-                  onChange={handleInputSku}
-                />
-              </div>
               <div class="custom-select">
                 <select
                   onChange={(e) => {
@@ -192,36 +188,39 @@ const Managestock = () => {
                   </option>
                 </select>
               </div>
-              <div class="custom-select">
+              <div class="admin-header-search-section product-search">
+                  <input
+                    type="text"
+                    placeholder="Search..."
+                    onChange={(e) => {
+                      e.preventDefault();
+                      filterChanged.current = true;
+                      setSearchValue(e.target.value);
+                    }}
+                />
+              </div>
+              <div class="admin-header-search-section">
                 <select
+                  name="searchAction"
                   onChange={(e) => {
-                    setStockStatus(e.target.value);
+                    e.preventDefault();
+                    filterChanged.current = true;
+                    setSearchType(e.target.value);
                   }}
+                  value={searchType}
                 >
-                  <option value="">
-                    {__("Stock Status", "woocommerce-stock-manager")}
-                  </option>
-                  <option value="instock">
-                    {__("In stock", "woocommerce-stock-manager")}
-                  </option>
-                  <option value="onbackorder">
-                    {__("On backorder", "woocommerce-stock-manager")}
-                  </option>
-                  <option value="outofstock">
-                    {__("Out of stock", "woocommerce-stock-manager")}
-                  </option>
+                  {/* <option value="">All</option> */}
+                  <option value="">--Select--</option>
+                  <option value="productName">Product Name</option>
+                  <option value="productSku">Sku</option>
                 </select>
               </div>
-            </div>
-            <div>
-              {__("Results Found: ", "woocommerce-stock-manager")}
-              {totalProducts}
             </div>
           </div>
           {
             //If both the data nad the headers are set then only the Table will be shown else the <PuffLoader/> will be shown
             data &&
-            Object.keys(headers).length > 0 ? (
+              Object.keys(headers).length > 0 ? (
               <div className="manage-stock-table">
                 <ProductTable
                   setData={setData}

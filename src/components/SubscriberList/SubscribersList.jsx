@@ -28,13 +28,13 @@ export default function SubscribersList() {
   const [openModal, setOpenModal] = useState(false);
   const [modalDetails, setModalDetails] = useState(false);
 
-  const handleDateOpen = ()=>{
+  const handleDateOpen = () => {
     setOpenDatePicker(!openDatePicker);
   }
 
   const [selectedRange, setSelectedRange] = useState([
     {
-      startDate: new Date(),
+      startDate:  new Date(new Date().getTime() - 30 * 24 * 60 * 60 * 1000),
       endDate: new Date(),
       key: 'selection'
     }
@@ -43,8 +43,8 @@ export default function SubscribersList() {
   function requestData(
     rowsPerPage = 10,
     currentPage = 1,
-    productNameField = "",
-    emailField = "",
+    searchField = "",
+    searchAction = "",
     start_date = new Date(0),
     end_date = new Date(),
     postStatus
@@ -58,8 +58,8 @@ export default function SubscribersList() {
         page: currentPage,
         row: rowsPerPage,
         postStatus: postStatus,
-        product_name: productNameField,
-        email: emailField,
+        search_field: searchField,
+        search_action: searchAction,
         start_date: start_date,
         end_date: end_date,
       },
@@ -70,34 +70,40 @@ export default function SubscribersList() {
   }
 
   const requestApiForData = (rowsPerPage, currentPage, filterData = {}) => {
+    // If serch action or search text fields any one of is missing then do nothing 
+    if (Boolean(filterData?.searchAction) ^ Boolean(filterData?.searchField)) {
+      return;
+    }
+
+    setData(null);
     requestData(
       rowsPerPage,
       currentPage,
-      filterData?.productNameField,
-      filterData?.emailField,
+      filterData?.searchField,
+      filterData?.searchAction,
       filterData?.date?.start_date,
       filterData?.date?.end_date,
       filterData.typeCount
     );
   };
 
-  const filterForCSV = ( datas ) => {
-    if ( selectedRows.length ) {
+  const filterForCSV = (datas) => {
+    if (selectedRows.length) {
       datas = selectedRows;
-    } 
-    return datas.map(({date, product, email, status}) => { return {date, product, email, status} } );
+    }
+    return datas.map(({ date, product, email, status }) => { return { date, product, email, status } });
   }
 
 
 
   const handleBulkAction = (event) => {
-    if ( ! bulkSelectRef.current.value ) {
-      setModalDetails( "Please select a action." )
+    if (!bulkSelectRef.current.value) {
+      setModalDetails("Please select a action.")
       setOpenModal(true);
     }
-    
-    if( ! selectedRows.length ) {
-      setModalDetails( "Please select products." )
+
+    if (!selectedRows.length) {
+      setModalDetails("Please select products.")
       setOpenModal(true);
     }
 
@@ -164,63 +170,65 @@ export default function SubscribersList() {
 
   useEffect(() => {
     document.body.addEventListener("click", (event) => {
-        if (! dateRef?.current?.contains(event.target) ) {
-          setOpenDatePicker(false);
-        }
+      if (!dateRef?.current?.contains(event.target)) {
+        setOpenDatePicker(false);
+      }
     })
-}, [])
+  }, [])
 
   const realtimeFilter = [
+
     {
-      name: "productNameField",
-      render: (updateFilter, filterValue) => (
-        <>
-          <div className="admin-header-search-section">
-            <input
-              name="productNameField"
-              type="text"
-              placeholder={__(
-                "Search by Product Name",
-                "woocommerce-stock-manager"
-              )}
-              onChange={(e) => updateFilter(e.target.name, e.target.value)}
-              value={filterValue || ""}
-            />
-          </div>
-        </>
-      ),
-    },
-    {
-      name: "emailField",
-      render: (updateFilter, filterValue) => (
-        <>
-          <div className="admin-header-search-section">
-            <input
-              name="emailField"
-              type="text"
-              placeholder={__("Search by Email", "woocommerce-stock-manager")}
-              onChange={(e) => updateFilter(e.target.name, e.target.value)}
-              value={filterValue || ""}
-            />
-          </div>
-        </>
-      ),
+      name: "bulk-action",
+      render: () => {
+        return (
+          <>
+            <div className="subscriber-bulk-action bulk-action">
+              <select name="action" ref={bulkSelectRef} >
+                <option value="">{__('Bulk Actions')}</option>
+                <option value="unsubscribe">{__('Unsubscribe Users')}</option>
+                <option value="delete">{__('Delete Users')}</option>
+              </select>
+              <button
+                name="bulk-action-apply"
+                onClick={handleBulkAction}
+              >
+                {__('Apply',)}
+              </button>
+            </div>
+
+            {openModal &&
+              <div className="error-modal">
+                <div className="modal-wrapper">
+                  <div className="icons">
+                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                    </svg>
+                  </div>
+                  <p>{modalDetails}</p>
+                  <button onClick={() => setOpenModal(false)} className="button-close">Close</button>
+                </div>
+              </div>
+            }
+          </>
+        );
+      },
     },
     {
       name: "date",
       render: (updateFilter, value) => (
         <div ref={dateRef}>
           <div className="admin-header-search-section">
-            <input value={`${selectedRange[0].startDate.toLocaleDateString()} - ${selectedRange[0].endDate.toLocaleDateString()}`} onClick={()=>handleDateOpen()} className="date-picker-input-custom" type="text" placeholder={__("DD/MM/YYYY", "woocommerce-stock-manager")} />
+            <input value={`${selectedRange[0].startDate.toLocaleDateString()} - ${selectedRange[0].endDate.toLocaleDateString()}`} onClick={() => handleDateOpen()} className="date-picker-input-custom" type="text" placeholder={__("DD/MM/YYYY", "woocommerce-stock-manager")} />
           </div>
           {openDatePicker &&
-            <div className="date-picker-section-wrapper">
+            <div className="date-picker-section-wrapper" id="date-picker-wrapper">
               <DateRangePicker
                 ranges={selectedRange}
                 months={1}
                 direction="vertical"
                 scroll={{ enabled: true }}
-                maxDate={ new Date() }
+                maxDate={new Date()}
                 shouldDisableDate={date => isAfter(date, new Date())}
                 onChange={(dates) => {
                   if (dates.selection) {
@@ -239,16 +247,50 @@ export default function SubscribersList() {
         </div>
       ),
     },
+    {
+      name: "searchField",
+      render: (updateFilter, filterValue) => (
+        <>
+          <div className="admin-header-search-section search-section">
+            <input
+              name="searchField"
+              type="text"
+              placeholder={__("Search...", "moowoodle")}
+              onChange={(e) => updateFilter(e.target.name, e.target.value)}
+              value={filterValue || ""}
+            />
+          </div>
+        </>
+      ),
+    },
+    {
+      name: "searchAction",
+      render: (updateFilter, filterValue) => (
+        <>
+          <div className="admin-header-search-section searchAction">
+            <select
+              name="searchAction"
+              onChange={(e) => updateFilter(e.target.name, e.target.value)}
+              value={filterValue || ""}
+            >
+              <option value="">All</option>
+              <option value="productField">Product Name</option>
+              <option value="emailField">Email</option>
+            </select>
+          </div>
+        </>
+      ),
+    },
   ];
 
   //columns for the data table
   const columns = [
     {
       name: __("Product", "woocommerce-stock-manager"),
-      cell: (row) => 
+      cell: (row) =>
         <TableCell title="Product" >
           <img src={row.image} alt="product_image" />
-          <p>{ row.product }</p> 
+          <p>{row.product}</p>
         </TableCell>,
     },
     {
@@ -258,7 +300,7 @@ export default function SubscribersList() {
           {row.email}
           {
             row.user_link &&
-            <a className="user-profile" href={ row.user_link } target="_blank"><i className="admin-font font-person"></i></a>
+            <a className="user-profile" href={row.user_link} target="_blank"><i className="admin-font font-person"></i></a>
           }
         </TableCell>,
     },
@@ -268,60 +310,22 @@ export default function SubscribersList() {
     },
     {
       name: __("Status", "woocommerce-stock-manager"),
-      cell: (row) => <TableCell title="Status" > 
-        <p 
-         className={row.status_key === 'mailsent' ? 'sent' : (row.status_key === 'subscribed' ? 'subscribed' : 'unsubscribed')}
+      cell: (row) => <TableCell title="Status" >
+        <p
+          className={row.status_key === 'mailsent' ? 'sent' : (row.status_key === 'subscribed' ? 'subscribed' : 'unsubscribed')}
         >{row.status}</p>
       </TableCell>,
     },
   ];
 
-  const BulkAction = ()=>{
-    console.log("Bulk Action");
-    return(
-      <>
-        <div className="subscriber-bulk-action">
-              <label>
-                  { __( 'Select bulk action' ) }
-              </label>
-              <select name="action" ref={bulkSelectRef} >
-                  <option value="">{ __( 'Bulk Actions' ) }</option>
-                  <option value="unsubscribe">{ __( 'Unsubscribe Users' ) }</option>
-                  <option value="delete">{ __( 'Delete Users' ) }</option>
-              </select>
-              <button
-                  name="bulk-action-apply"
-                  onClick={handleBulkAction}
-              >
-                  {__('Apply',)}
-              </button>
-          </div>
-
-          { openModal &&
-            <div className="error-modal">
-              <div className="modal-wrapper">
-                <div className="icons">
-                  <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                  </svg>
-                </div>
-                <p>{modalDetails}</p>
-                <button onClick={()=>setOpenModal(false)} className="button-close">Close</button>
-              </div>
-            </div>
-          }
-      </>
-    )
-  }
-
   return (
     <>
-      { ! appLocalizer.pro_active ? (
+      {!appLocalizer.pro_active ? (
         <div>
           <div className="free-reports-download-section">
             <h2 className="section-heading">{__("Download product wise subscriber data.", "woocommerce-stock-manager")}</h2>
             <button>
-            <a href={appLocalizer.export_button}>{__("Download CSV", "woocommerce-stock-manager")}</a>
+              <a href={appLocalizer.export_button}>{__("Download CSV", "woocommerce-stock-manager")}</a>
             </button>
             <p className="description" dangerouslySetInnerHTML={{ __html: "This CSV file contains all subscriber data from your site. Upgrade to <a href='https://multivendorx.com/woocommerce-product-stock-manager-notifier-pro/?utm_source=wpadmin&utm_medium=pluginsettings&utm_campaign=stockmanager' target='_blank'>WooCommerce Product Stock Manager & Notifier Pro</a> to generate CSV files based on specific products or users." }}></p>
           </div>
@@ -359,30 +363,30 @@ export default function SubscribersList() {
                 filename={"Subscribers.csv"}
                 className="admin-btn btn-purple"
               >
-               <div className="wp-menu-image dashicons-before dashicons-download"></div>
+                <div className="wp-menu-image dashicons-before dashicons-download"></div>
                 {__("Download CSV", "woocommerce-stock-manager")}
               </CSVLink>
             </div>
           </div>
 
-            {
-                <CustomTable
-                data={data}
-                columns={columns}
-                selectable = {true}
-                handleSelect = {(selectRows) => {
-                  setSelectedRows(selectRows);
-                }}
-                handlePagination={requestApiForData}
-                defaultRowsParPage={10}
-                defaultTotalRows={totalRows}
-                perPageOption={[10, 25, 50]}
-                realtimeFilter={realtimeFilter}
-                typeCounts={subscribersStatus}
-                bulkActionComp = {BulkAction}
-              />
-            }
-          </div>
+          {
+            <CustomTable
+              data={data}
+              columns={columns}
+              selectable={true}
+              handleSelect={(selectRows) => {
+                setSelectedRows(selectRows);
+              }}
+              handlePagination={requestApiForData}
+              defaultRowsParPage={10}
+              defaultTotalRows={totalRows}
+              perPageOption={[10, 25, 50]}
+              realtimeFilter={realtimeFilter}
+              typeCounts={subscribersStatus}
+              autoLoading={false}
+            />
+          }
+        </div>
       )}
     </>
   );
