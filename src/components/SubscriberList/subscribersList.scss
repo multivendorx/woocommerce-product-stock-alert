@@ -201,7 +201,7 @@ $color-active: #65438f;
     justify-content: flex-start;
     gap: 0.5rem;
     flex-wrap: nowrap !important;
-    max-width: 12.6rem !important;
+    min-width: 14rem !important;
     position: relative;
 
     label {
@@ -212,7 +212,8 @@ $color-active: #65438f;
     select {
       max-width: 9.45rem;
       width: 100%;
-      padding: 0.25rem 0.5rem;
+      line-height: 1;
+      padding: 0.05rem 0.5rem;
       background-color: transparent !important;
       border: 0.115rem solid rgba(0, 0, 0, 0.125) !important;
       border-radius: 0.25rem !important;
@@ -348,5 +349,11 @@ $color-active: #65438f;
         }
       }
     }
+  }
+}
+
+@media screen and (max-width: 46.0625rem) {
+  .filter-wrapper .wrap-bulk-all-date > div{
+    max-width: 100% !important; // To overwrite default css
   }
 }

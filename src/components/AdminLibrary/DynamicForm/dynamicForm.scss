@@ -119,8 +119,8 @@ $color-active: #65438f;
           .parameter {
             position: absolute;
             top: .35rem;
-            right: 5px;
-            border-left: 1px solid rgba(0, 0, 0, 0.45);
+            right: 0.315rem;
+            border-left: 0.063rem solid rgba(0, 0, 0, 0.45);
             padding: 0 0.75rem;
           }
         }
@@ -175,7 +175,7 @@ $color-active: #65438f;
 
       span {
         position: absolute;
-        top: -1px;
+        top: -0.063rem;
         left: 50%;
         transform: translate(-50%, -50%);
         padding: 0 1rem;

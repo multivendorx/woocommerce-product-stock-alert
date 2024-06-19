@@ -127,7 +127,7 @@ class FrontEnd {
         $backorders_enabled = is_array( $backorders_enabled ) ? reset( $backorders_enabled ) : false;
 
         $stock_status   = $product->get_stock_status();
-        if ( $stock_status == 'onbackorder' && $backorders_enabled )
+        if ( $stock_status == 'onbackorder' && !$backorders_enabled )
             return;
 
         if ( $product->is_type( 'variable' ) ) {

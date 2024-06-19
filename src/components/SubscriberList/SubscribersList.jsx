@@ -34,7 +34,7 @@ export default function SubscribersList() {
 
   const [selectedRange, setSelectedRange] = useState([
     {
-      startDate: new Date(),
+      startDate:  new Date(new Date().getTime() - 30 * 24 * 60 * 60 * 1000),
       endDate: new Date(),
       key: 'selection'
     }
@@ -317,15 +317,6 @@ export default function SubscribersList() {
       </TableCell>,
     },
   ];
-
-  // const BulkAction = () => {
-  //   console.log("Bulk Action");
-  //   return (
-  //     <>
-
-  //     </>
-  //   )
-  // }
 
   return (
     <>

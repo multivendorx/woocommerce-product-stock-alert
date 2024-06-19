@@ -904,3 +904,9 @@ tr.expand {
 .product-search {
   margin-left: auto !important; // To overwrite default css
 }
+
+@media screen and (max-width: 28.4375rem) {
+  .admin-middle-container-wrapper .manage-stock-wrapper .admin-wrap-bulk-all-date > div{
+    max-width: 100%;
+  }
+}
