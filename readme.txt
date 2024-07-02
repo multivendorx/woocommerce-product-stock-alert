@@ -3,9 +3,9 @@
 Contributors: wcmp
 Tags: wordpress, woocommerce, e-commerce, shop, stock, out of stock, in stock, stock alert, alert email, stock alert email
 Requires at least: 5.4
-Tested up to: 6.5.4
+Tested up to: 6.5.5
 Requires PHP: 8.0
-Stable tag: 2.5.4
+Stable tag: 2.5.5
 Donate link: https://multivendorx.com/donate/
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -142,6 +142,11 @@ Manual installation method requires downloading the [Product Stock Manager & Not
 6. Inventory manager
 
 == Changelog ==
+
+= 2.5.5 - 2024-07-02 =
+* Added - WordPress 6.5.5 compatibility.
+* Added - WooCommerce 9.0.2 compatibility.
+* Added -  Settings to restrict guest users from subscribing.
 
 = 2.5.4 - 2024-06-19 =
 * Added - WordPress 6.5.4 compatibility.
