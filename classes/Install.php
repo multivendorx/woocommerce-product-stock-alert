@@ -176,11 +176,6 @@ class Install {
         $current_version = SM()->version;
         $previous_version = get_option( "woo_stock_manager_version", "" );
 
-        // Used to check the plugin version before 2.1.0
-        $dc_was_installed = get_option( 'dc_product_stock_alert_activate' );
-        // Used to check the plugin version before 2.3.0
-        $woo_was_installed = get_option( 'woo_product_stock_alert_activate' );
-
         // Default messages for settings array.
         // Those will modify if previous settings was set.
         $appearance_settings = [
@@ -223,6 +218,10 @@ class Install {
         ];
 
         if ( version_compare( $previous_version, '2.5.0', '<' ) ) {
+            // Used to check the plugin version before 2.1.0
+            $dc_was_installed = get_option( 'dc_product_stock_alert_activate' );
+            // Used to check the plugin version before 2.3.0
+            $woo_was_installed = get_option( 'woo_product_stock_alert_activate' );
 
             // Equevelent to check plugin version <= 2.3.0
             if ( $dc_was_installed || $woo_was_installed ) {
@@ -324,23 +323,24 @@ class Install {
                 $submit_settings     = get_option( 'woo_stock_manager_form_submission_tab_settings', null ) ?? $submit_settings;
                 $email_settings      = get_option( 'woo_stock_manager_email_tab_settings', null ) ?? $email_settings;
             }
+
+            // Get customization_tab_setting and merge with general setting
+            $customization_tab_setting = get_option( 'woo_stock_manager_form_customization_tab_settings', [] );
+            $appearance_settings = array_merge( $appearance_settings, $customization_tab_setting );
+            delete_option( 'woo_stock_manager_form_customization_tab_settings' );
         }
          
         if ( version_compare( $previous_version, '2.5.5', '<=' ) ) {
-            $appearance_settings = [
-                'is_guest_subscriptions_enable' => ['is_guest_subscriptions_enable'],
-            ];
+            $appearance_settings['is_guest_subscriptions_enable'] = ['is_guest_subscriptions_enable'];
         }
 
-        // Get customization_tab_setting and merge with general setting
-        $customization_tab_setting = get_option( 'woo_stock_manager_form_customization_tab_settings', [] );
-        delete_option( 'woo_stock_manager_form_customization_tab_settings' );
-        update_option(
-            'woo_stock_manager_appearance_tab_settings',
-            array_merge( $appearance_settings, $customization_tab_setting )
-        );
-        update_option( 'woo_stock_manager_form_submission_tab_settings', $submit_settings );
-        update_option( 'woo_stock_manager_email_tab_settings', $email_settings );
+        $previous_appearance_settings   = get_option( 'woo_stock_manager_appearance_tab_settings', [] );
+        $previous_submit_settings       = get_option( 'woo_stock_manager_form_submission_tab_settings', [] );
+        $previous_email_settings        = get_option( 'woo_stock_manager_email_tab_settings', [] );
+        
+        update_option( 'woo_stock_manager_appearance_tab_settings', array_merge($appearance_settings, $previous_appearance_settings) );
+        update_option( 'woo_stock_manager_form_submission_tab_settings', array_merge($submit_settings, $previous_submit_settings) );
+        update_option( 'woo_stock_manager_email_tab_settings', array_merge($email_settings, $previous_email_settings) );
        
         update_option( 'woo_stock_manager_version', $current_version );
     }
