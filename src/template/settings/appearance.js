@@ -63,6 +63,19 @@ export default {
             ]
         },
         {
+            key: 'is_guest_subscriptions_enable',
+            type: 'checkbox',
+            label: __("Guest Subscriptions", "woocommerce-stock-manager-pro"),
+            class: 'woo-toggle-checkbox',
+            options: [
+                {
+                    key: "is_guest_subscriptions_enable",
+                    label: __("Allow guests (non-logged-in users) to subscribe to notifications for out-of-stock products.", "woocommerce-stock-manager"),
+                    value: "is_guest_subscriptions_enable"
+                }
+            ],
+        },
+        {
             key: 'shown_interest_text',
             type: 'textarea',
             classes: 'conditional-section',
