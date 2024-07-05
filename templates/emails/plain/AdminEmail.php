@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 echo esc_html( $email_heading ) . "\n\n";
 
-echo sprintf( esc_html( "Hi there. A customer has subscribed to a product on your shop. Product details are shown below for your reference:", 'woocommerce-stock-manager' ) ) . "\n\n";
+echo sprintf( esc_html__( "Hi there. A customer has subscribed to a product on your shop. Product details are shown below for your reference:", 'woocommerce-stock-manager' ) ) . "\n\n";
 
 echo "\n****************************************************\n\n";
 
