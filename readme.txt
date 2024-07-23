@@ -5,7 +5,7 @@ Tags: woocommerce stock, out of stock, in stock, stock alert, alert email
 Requires at least: 5.4
 Tested up to: 6.5.5
 Requires PHP: 8.0
-Stable tag: 2.5.5
+Stable tag: 2.5.6
 Donate link: https://multivendorx.com/donate/
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -142,6 +142,11 @@ Manual installation method requires downloading the [Product Stock Manager & Not
 6. Inventory manager
 
 == Changelog ==
+
+= 2.5.6 - 2024-07-23 =
+* Added - WooCommerce 9.1.2 compatibility.
+* Added - Support for translations of some strings.
+* Fixed - The subscription form was not appearing for products with the stock status "On backorder", even when the "Allow Backorder Subscriptions" setting was enabled #213.
 
 = 2.5.5 - 2024-07-02 =
 * Added - WordPress 6.5.5 compatibility.
