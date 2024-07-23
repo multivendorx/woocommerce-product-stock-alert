@@ -398,8 +398,8 @@ class Subscriber {
             $stock_status   = $product->get_stock_status();
         } 
 
-        $general_tab_settings = get_option( 'woo_stock_manager_general_tab_settings' );
-        $is_enable_backorders = isset( $general_tab_settings[ 'is_enable_backorders' ] ) ? $general_tab_settings[ 'is_enable_backorders' ] : false;
+        $is_enable_backorders = SM()->setting->get_setting( 'is_enable_backorders' );
+        $is_enable_backorders = is_array( $is_enable_backorders ) ? reset( $is_enable_backorders ) : false;
         
         if ( $manage_stock ) {
             if ( $stock_quantity <= ( int ) get_option( 'woocommerce_notify_no_stock_amount' ) ) {
