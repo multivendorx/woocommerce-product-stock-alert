@@ -19,16 +19,16 @@ const CheckBox = (props) => {
                     props.label &&
                     <label htmlFor={`admin-toggle-switch-${props.label}`} ></label>
                 }
-                 {
+                {
                     props.proSetting && <span className="admin-pro-tag">pro</span>
                 }
             </div>
-                {
-                    props.description &&
-                    <p className={props.descClass} 
-                       dangerouslySetInnerHTML={{ __html: props.description }}>
-                    </p>
-                }
+            {
+                props.description &&
+                <p className={props.descClass} 
+                    dangerouslySetInnerHTML={{ __html: props.description }}>
+                </p>
+            }
         </>
     );
 }
