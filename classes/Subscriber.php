@@ -17,8 +17,6 @@ class Subscriber {
         if ( Install::is_migration_running() ) {
             $this->registers_post_status();
         }
-
-        
     }
 
     /**
