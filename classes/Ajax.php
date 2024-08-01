@@ -52,10 +52,9 @@ class Ajax {
 	function export_CSV_data( $argument = [] ) {
 		$get_subscribed_user = [];
 
-
-		if ( is_array( $argument ) && count( $argument ) > 0 ) {
-			$argument = array_merge( [], $argument );
-		}
+		// Merge the arguments with default arguments.
+		if ( ! is_array( $argument ) ) $argument = [];
+		$argument = array_merge( [ 'limit' => -1, 'return' => 'ids' ], $argument );
 
         $products = wc_get_products( $argument );
 
