@@ -172,54 +172,56 @@ class Install {
      * @return void
      */
     private static function stock_manager_data_migrate() {
+
         $current_version = SM()->version;
         $previous_version = get_option( "woo_stock_manager_version", "" );
 
-        // Used to check the plugin version before 2.1.0
-        $dc_was_installed = get_option( 'dc_product_stock_alert_activate' );
-        // Used to check the plugin version before 2.3.0
-        $woo_was_installed = get_option( 'woo_product_stock_alert_activate' );
+        // Default messages for settings array.
+        // Those will modify if previous settings was set.
+        $appearance_settings = [
+            'is_enable_backorders' => false, 
+            'is_enable_no_interest' => false, 
+            'is_double_optin' => false, 
+            'is_remove_admin_email' => false, 
+            'double_opt_in_success' => __( 'Kindly check your inbox to confirm the subscription.', 'woocommerce-stock-manager' ), 
+            'shown_interest_text' => __( 'Kindly check your inbox to confirm the subscription.', 'woocommerce-stock-manager' ), 
+            'additional_alert_email' => get_option( 'admin_email' ),
+            'is_guest_subscriptions_enable' => ['is_guest_subscriptions_enable'],
+            
+            // Form customization settings
+            'email_placeholder_text' => __( 'Enter your email', 'woocommerce-stock-manager' ), 
+            'alert_text' => __( 'Receive in-stock notifications for this.', 'woocommerce-stock-manager' ), 
+            'button_text' => __( 'Notify me', 'woocommerce-stock-manager' ), 
+            'unsubscribe_button_text' => __( 'Unsubscribe', 'woocommerce-stock-manager' ), 
+            'alert_text_color' => '', 
+            'button_background_color' => '', 
+            'button_border_color' => '', 
+            'button_text_color' => '', 
+            'button_background_color_onhover' => '', 
+            'button_text_color_onhover' => '', 
+            'button_border_color_onhover' => '', 
+            'button_font_size' => '', 
+            'button_border_radious' => '', 
+            'button_border_size' => ''
+        ];
+        $submit_settings = [
+            'alert_success'  => __( 'Thank you for expressing interest in %product_title%. We will notify you via email once it is back in stock.', 'woocommerce-stock-manager' ), 
+            // Translators: This message display already registered user to display already registered message
+            'alert_email_exist' => __( '%customer_email% is already registered for %product_title%. Please attempt a different email address.', 'woocommerce-stock-manager' ), 
+            'valid_email' => __( 'Please enter a valid email ID and try again.', 'woocommerce-stock-manager' ), 
+            // Translators: This message display user sucessfully unregistered
+            'alert_unsubscribe_message' => __( '%customer_email% is successfully unregistered.', 'woocommerce-stock-manager' ), 
+        ];
+        $email_settings = [
+            'ban_email_domain_text' => __( 'This email domain is ban in our site, kindly use another email domain.', 'woocommerce-stock-manager' ), 
+            'ban_email_address_text' => __( 'This email address is ban in our site, kindly use another email address.', 'woocommerce-stock-manager' )
+        ];
 
         if ( version_compare( $previous_version, '2.5.0', '<' ) ) {
-            // Default messages for settings array.
-            // Those will modify if previous settings was set.
-            $appearance_settings = [
-                'is_enable_backorders' => false, 
-                'is_enable_no_interest' => false, 
-                'is_double_optin' => false, 
-                'is_remove_admin_email' => false, 
-                'double_opt_in_success' => __( 'Kindly check your inbox to confirm the subscription.', 'woocommerce-stock-manager' ), 
-                'shown_interest_text' => __( 'Kindly check your inbox to confirm the subscription.', 'woocommerce-stock-manager' ), 
-                'additional_alert_email' => get_option( 'admin_email' ),
-                
-                // Form customization settings
-                'email_placeholder_text' => __( 'Enter your email', 'woocommerce-stock-manager' ), 
-                'alert_text' => __( 'Receive in-stock notifications for this.', 'woocommerce-stock-manager' ), 
-                'button_text' => __( 'Notify me', 'woocommerce-stock-manager' ), 
-                'unsubscribe_button_text' => __( 'Unsubscribe', 'woocommerce-stock-manager' ), 
-                'alert_text_color' => '', 
-                'button_background_color' => '', 
-                'button_border_color' => '', 
-                'button_text_color' => '', 
-                'button_background_color_onhover' => '', 
-                'button_text_color_onhover' => '', 
-                'button_border_color_onhover' => '', 
-                'button_font_size' => '', 
-                'button_border_radious' => '', 
-                'button_border_size' => ''
-            ];
-            $submit_settings = [
-                'alert_success'  => __( 'Thank you for expressing interest in %product_title%. We will notify you via email once it is back in stock.', 'woocommerce-stock-manager' ), 
-                // Translators: This message display already registered user to display already registered message
-                'alert_email_exist' => __( '%customer_email% is already registered for %product_title%. Please attempt a different email address.', 'woocommerce-stock-manager' ), 
-                'valid_email' => __( 'Please enter a valid email ID and try again.', 'woocommerce-stock-manager' ), 
-                // Translators: This message display user sucessfully unregistered
-                'alert_unsubscribe_message' => __( '%customer_email% is successfully unregistered.', 'woocommerce-stock-manager' ), 
-            ];
-            $email_settings = [
-                'ban_email_domain_text' => __( 'This email domain is ban in our site, kindly use another email domain.', 'woocommerce-stock-manager' ), 
-                'ban_email_address_text' => __( 'This email address is ban in our site, kindly use another email address.', 'woocommerce-stock-manager' )
-            ];
+            // Used to check the plugin version before 2.1.0
+            $dc_was_installed = get_option( 'dc_product_stock_alert_activate' );
+            // Used to check the plugin version before 2.3.0
+            $woo_was_installed = get_option( 'woo_product_stock_alert_activate' );
 
             // Equevelent to check plugin version <= 2.3.0
             if ( $dc_was_installed || $woo_was_installed ) {
@@ -324,15 +326,22 @@ class Install {
 
             // Get customization_tab_setting and merge with general setting
             $customization_tab_setting = get_option( 'woo_stock_manager_form_customization_tab_settings', [] );
+            $appearance_settings = array_merge( $appearance_settings, $customization_tab_setting );
             delete_option( 'woo_stock_manager_form_customization_tab_settings' );
-            update_option(
-                'woo_stock_manager_appearance_tab_settings',
-                array_merge( $appearance_settings, $customization_tab_setting )
-            );
-            update_option( 'woo_stock_manager_form_submission_tab_settings', $submit_settings );
-            update_option( 'woo_stock_manager_email_tab_settings', $email_settings );
+        }
+         
+        if ( version_compare( $previous_version, '2.5.5', '<=' ) ) {
+            $appearance_settings['is_guest_subscriptions_enable'] = ['is_guest_subscriptions_enable'];
         }
 
+        $previous_appearance_settings   = get_option( 'woo_stock_manager_appearance_tab_settings', [] );
+        $previous_submit_settings       = get_option( 'woo_stock_manager_form_submission_tab_settings', [] );
+        $previous_email_settings        = get_option( 'woo_stock_manager_email_tab_settings', [] );
+        
+        update_option( 'woo_stock_manager_appearance_tab_settings', array_merge($appearance_settings, $previous_appearance_settings) );
+        update_option( 'woo_stock_manager_form_submission_tab_settings', array_merge($submit_settings, $previous_submit_settings) );
+        update_option( 'woo_stock_manager_email_tab_settings', array_merge($email_settings, $previous_email_settings) );
+       
         update_option( 'woo_stock_manager_version', $current_version );
     }
 }

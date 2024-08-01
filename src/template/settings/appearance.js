@@ -1,5 +1,4 @@
 import { __ } from '@wordpress/i18n';
-
 export default {
     id: 'appearance',
     priority: 1,
@@ -30,6 +29,19 @@ export default {
             key: 'separator_content',
             type: 'section',
             label: "",
+        },
+        {
+            key: 'is_guest_subscriptions_enable',
+            type: 'checkbox',
+            label: __("Guest Subscriptions", "woocommerce-stock-manager-pro"),
+            class: 'woo-toggle-checkbox',
+            options: [
+                {
+                    key: "is_guest_subscriptions_enable",
+                    label: __("Allow guests (non-logged-in users) to subscribe to notifications for out-of-stock products.", "woocommerce-stock-manager"),
+                    value: "is_guest_subscriptions_enable"
+                }
+            ],
         },
         {
             key: 'is_enable_backorders',
@@ -84,10 +96,10 @@ export default {
             type: 'checkbox',
             class: 'woo-toggle-checkbox',
             label: __("Subscriber double opt-in", "woocommerce-stock-manager"),
+            desc : ! appLocalizer.pro_active ? appLocalizer.is_double_optin_free : appLocalizer.is_double_optin_pro,
             options: [
                 {
                     key: "is_double_optin",
-                    label: ! appLocalizer.pro_active ? appLocalizer.is_double_optin_free : appLocalizer.is_double_optin_pro ,
                     value: "is_double_optin"
                 }
             ],
@@ -115,10 +127,10 @@ export default {
             type: 'checkbox',
             label: __("Enable  reCaptcha", "woocommerce-stock-manager-pro"),
             class: 'woo-toggle-checkbox',
+            desc : ! appLocalizer.pro_active ? appLocalizer.is_recaptcha_enable_free : appLocalizer.is_recaptcha_enable_pro,
             options: [
                 {
                     key: "is_recaptcha_enable",
-                    label: ! appLocalizer.pro_active ? appLocalizer.is_recaptcha_enable_free : appLocalizer.is_recaptcha_enable_pro ,
                     value: "is_recaptcha_enable"
                 }
             ],
