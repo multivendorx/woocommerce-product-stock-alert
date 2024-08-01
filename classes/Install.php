@@ -48,21 +48,19 @@ class Install {
      */
     public static function subscriber_migration() {
         global $wpdb;
-        
-        self::stock_manager_data_migrate();
 
         try {
             // Get woosubscribe post and post meta
             $subscribe_datas = $wpdb->get_results(
-                "SELECT wp_posts.ID as id,
-                    wp_posts.post_date as date,
-                    wp_posts.post_title as email,
-                    wp_posts.post_status as status,
-                    wp_posts.post_author as user_id,
+                "SELECT posts.ID as id,
+                    posts.post_date as date,
+                    posts.post_title as email,
+                    posts.post_status as status,
+                    posts.post_author as user_id,
                     pm.meta_value as product_id
-                FROM wp_posts, wp_postmeta as pm
-                WHERE wp_posts.post_type = 'woostockalert'
-                AND pm.post_id = wp_posts.ID
+                FROM {$wpdb->prefix}posts as posts, {$wpdb->prefix}postmeta as pm
+                WHERE posts.post_type = 'woostockalert'
+                AND pm.post_id = posts.ID
                 AND pm.meta_key = 'wooinstock_product_id'
                 ", ARRAY_A
             );
