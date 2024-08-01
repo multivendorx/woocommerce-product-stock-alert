@@ -122,7 +122,12 @@ class FrontEnd {
 
         if ( empty( $product ) )
             return;
-        
+        $guest_subscription_enabled = SM()->setting->get_setting( 'is_guest_subscriptions_enable' );
+        $guest_subscription_enabled = is_array( $guest_subscription_enabled ) ? reset( $guest_subscription_enabled ) : false;
+        if (!$guest_subscription_enabled && ! is_user_logged_in()) {
+            return;
+        }
+
         $backorders_enabled = SM()->setting->get_setting( 'is_enable_backorders' );
         $backorders_enabled = is_array( $backorders_enabled ) ? reset( $backorders_enabled ) : false;
 
