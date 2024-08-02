@@ -13,7 +13,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Boost sales with instant stock alerts, engage customers with real-time in-stock product updates, and manage inventory via a dedicated dashboard.
 
 == Description ==
-**Stay informed with WooCommerce Out-of-Stock Subscription and In-Stock Notifications for seamless inventory management**
+**Empower your WooCommerce store with automatic out-of-stock subscriptions and in-stock alerts, ensuring customers never miss their desired products.**
 
 The ultimate solution to keep your customers engaged and informed when products are out of stock. Automatically notify subscribers when products are back in stock. Elevate sales with instant stock alerts, engage customers with real-time updates. Track demand and convert subscribers into loyal customers. 
 
