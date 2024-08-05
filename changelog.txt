@@ -1,5 +1,10 @@
 == Changelog ==
 ----------------------------------------------------------------------------------------------
+= 2.5.7 - 2024-08-06 =
+* Added - WordPress 6.6.1 compatibility.
+* Added - WooCommerce 9.1.4 compatibility.
+* Fixed - Issue where subscribers were not included in the downloaded CSV file for the Subscriber list.
+
 = 2.5.6 - 2024-07-23 =
 * Added - WooCommerce 9.1.2 compatibility.
 * Added - Support for translations of some strings.
