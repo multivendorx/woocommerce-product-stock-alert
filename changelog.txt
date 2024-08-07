@@ -1,5 +1,8 @@
 == Changelog ==
 ----------------------------------------------------------------------------------------------
+= 2.5.8 - 2024-08-08 =
+* Fixed - Resolved activation/deactivation notice.
+
 = 2.5.7 - 2024-08-06 =
 * Added - WordPress 6.6.1 compatibility.
 * Added - WooCommerce 9.1.4 compatibility.
