@@ -48,6 +48,7 @@ class Install {
      */
     public static function subscriber_migration() {
         global $wpdb;
+        self::stock_manager_data_migrate();
 
         try {
             // Get woosubscribe post and post meta
