@@ -16,10 +16,12 @@ import 'react-date-range/dist/theme/default.css'; // theme css file
 
 export default function SubscribersList() {
   const fetchSubscribersDataUrl = `${appLocalizer.apiUrl}/stockmanager/v1/get-subscriber-list`;
+  const fetchAllSubscribersDataUrl = `${appLocalizer.apiUrl}/stockmanager/v1/get-all-subscriber-list`;
   const fetchSubscribersCount = `${appLocalizer.apiUrl}/stockmanager/v1/get-table-segment`;
   const bulkActionUrl = `${appLocalizer.apiUrl}/stockmanager/v1/bulk-action`;
   const [postStatus, setPostStatus] = useState("");
   const [data, setData] = useState(null);
+  const [allData, setAllData] = useState(null);
   const [selectedRows, setSelectedRows] = useState([]);
   const [totalRows, setTotalRows] = useState();
   const [openDialog, setOpenDialog] = useState(false);
@@ -39,6 +41,18 @@ export default function SubscribersList() {
       key: 'selection'
     }
   ]);
+
+  useEffect(() => {
+    if (appLocalizer.pro_active) {
+      axios({
+        method: "post",
+        url: fetchAllSubscribersDataUrl,
+        headers: { "X-WP-Nonce": appLocalizer.nonce },
+      }).then((response) => {
+        setAllData(response.data);
+      });
+    }
+  }, []);
 
   function requestData(
     rowsPerPage = 10,
@@ -93,8 +107,6 @@ export default function SubscribersList() {
     }
     return datas.map(({ date, product, email, status }) => { return { date, product, email, status } });
   }
-
-
 
   const handleBulkAction = (event) => {
     if (!bulkSelectRef.current.value) {
@@ -358,7 +370,7 @@ export default function SubscribersList() {
             <p>{__("Subscriber List", "woocommerce-stock-manager")}</p>
             <div className="download-btn-subscriber-list">
               <CSVLink
-                data={filterForCSV(data || [])}
+                data={(allData || []).map(({ date, product, email, status }) => ({ date, product, email, status }))}
                 headers={appLocalizer.columns_subscriber_list}
                 filename={"Subscribers.csv"}
                 className="admin-btn btn-purple"
