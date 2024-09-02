@@ -48,6 +48,13 @@ export default function SubscribersList() {
         method: "post",
         url: fetchSubscribersDataUrl,
         headers: { "X-WP-Nonce": appLocalizer.nonce },
+        data: {
+          postStatus: postStatus,
+          search_field: searchField,
+          search_action: searchAction,
+          start_date: start_date,
+          end_date: end_date,
+        },
       }).then((response) => {
         const data = JSON.parse(response.data);
         setAllData(data);
