@@ -20,6 +20,7 @@ export default function SubscribersList() {
   const bulkActionUrl = `${appLocalizer.apiUrl}/stockmanager/v1/bulk-action`;
   const [postStatus, setPostStatus] = useState("");
   const [data, setData] = useState(null);
+  const [allData, setAllData] = useState([]);
   const [selectedRows, setSelectedRows] = useState([]);
   const [totalRows, setTotalRows] = useState();
   const [openDialog, setOpenDialog] = useState(false);
@@ -27,6 +28,8 @@ export default function SubscribersList() {
   const [openDatePicker, setOpenDatePicker] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [modalDetails, setModalDetails] = useState(false);
+  const [filters, setFilters] = useState({});
+  const csvLink = useRef();
 
   const handleDateOpen = () => {
     setOpenDatePicker(!openDatePicker);
@@ -34,11 +37,32 @@ export default function SubscribersList() {
 
   const [selectedRange, setSelectedRange] = useState([
     {
-      startDate:  new Date(new Date().getTime() - 30 * 24 * 60 * 60 * 1000),
+      startDate: new Date(new Date().getTime() - 30 * 24 * 60 * 60 * 1000),
       endDate: new Date(),
       key: 'selection'
     }
   ]);
+
+  const handleClick = () => {
+    if (appLocalizer.pro_active) {
+      axios({
+        method: "post",
+        url: fetchSubscribersDataUrl,
+        headers: { "X-WP-Nonce": appLocalizer.nonce },
+        data: {
+          postStatus: postStatus,
+          search_field: filters.searchField,
+          search_action: filters.searchAction,
+          start_date: filters.date?.start_date,
+          end_date: filters.date?.end_date,
+        },
+      }).then((response) => {
+        const data = JSON.parse(response.data);
+        setAllData(data);
+        csvLink.current.link.click()
+      });
+    }
+  }
 
   function requestData(
     rowsPerPage = 10,
@@ -86,15 +110,6 @@ export default function SubscribersList() {
       filterData.typeCount
     );
   };
-
-  const filterForCSV = (datas) => {
-    if (selectedRows.length) {
-      datas = selectedRows;
-    }
-    return datas.map(({ date, product, email, status }) => { return { date, product, email, status } });
-  }
-
-
 
   const handleBulkAction = (event) => {
     if (!bulkSelectRef.current.value) {
@@ -239,6 +254,16 @@ export default function SubscribersList() {
                       start_date: dates.startDate,
                       end_date: dates.endDate,
                     });
+                    setFilters((previousfilters) => {
+                      return {
+                        ...previousfilters, 
+                        date : {
+                          start_date: dates.startDate,
+                          end_date: dates.endDate,
+                        }
+                      }
+                    }
+                  );
                   }
                 }}
               />
@@ -256,7 +281,15 @@ export default function SubscribersList() {
               name="searchField"
               type="text"
               placeholder={__("Search...", "moowoodle")}
-              onChange={(e) => updateFilter(e.target.name, e.target.value)}
+              onChange={(e) => {
+                updateFilter(e.target.name, e.target.value)
+                setFilters((previousfilters) => {
+                  return {
+                    ...previousfilters, 
+                    searchField : e.target.value
+                  }
+                })
+              }}
               value={filterValue || ""}
             />
           </div>
@@ -270,7 +303,15 @@ export default function SubscribersList() {
           <div className="admin-header-search-section searchAction">
             <select
               name="searchAction"
-              onChange={(e) => updateFilter(e.target.name, e.target.value)}
+              onChange={(e) => {
+                updateFilter(e.target.name, e.target.value)
+                setFilters((previousfilters) => {
+                  return {
+                    ...previousfilters, 
+                    searchAction : e.target.value
+                  }
+                })
+              }}
               value={filterValue || ""}
             >
               <option value="">All</option>
@@ -357,15 +398,16 @@ export default function SubscribersList() {
           <div className="admin-page-title">
             <p>{__("Subscriber List", "woocommerce-stock-manager")}</p>
             <div className="download-btn-subscriber-list">
-              <CSVLink
-                data={filterForCSV(data || [])}
-                headers={appLocalizer.columns_subscriber_list}
-                filename={"Subscribers.csv"}
-                className="admin-btn btn-purple"
-              >
+              <button onClick={handleClick} className="admin-btn btn-purple">
                 <div className="wp-menu-image dashicons-before dashicons-download"></div>
                 {__("Download CSV", "woocommerce-stock-manager")}
-              </CSVLink>
+              </button>
+              <CSVLink
+                data={allData.map(({ date, product, email, status }) => ({ date, product, email, status }))}
+                filename={"Subscribers.csv"}
+                className='hidden'
+                ref={csvLink}
+              />
             </div>
           </div>
 
