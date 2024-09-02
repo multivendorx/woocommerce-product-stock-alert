@@ -149,18 +149,21 @@ $color-active: #65438f;
       background-color: $color-active;
       padding: 0.5rem 1rem;
 
-      a {
+      .admin-btn {
+        &.btn-purple {
         color: $color-white;
         display: flex;
         align-items: center;
         justify-content: center;
         gap: 0.5rem;
         text-decoration: none;
+        background-color: $color-active;
 
         .dashicons-before {
           &::before {
             padding: 0;
           }
+        }
         }
       }
     }

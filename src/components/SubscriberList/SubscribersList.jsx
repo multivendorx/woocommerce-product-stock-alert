@@ -16,12 +16,11 @@ import 'react-date-range/dist/theme/default.css'; // theme css file
 
 export default function SubscribersList() {
   const fetchSubscribersDataUrl = `${appLocalizer.apiUrl}/stockmanager/v1/get-subscriber-list`;
-  const fetchAllSubscribersDataUrl = `${appLocalizer.apiUrl}/stockmanager/v1/get-all-subscriber-list`;
   const fetchSubscribersCount = `${appLocalizer.apiUrl}/stockmanager/v1/get-table-segment`;
   const bulkActionUrl = `${appLocalizer.apiUrl}/stockmanager/v1/bulk-action`;
   const [postStatus, setPostStatus] = useState("");
   const [data, setData] = useState(null);
-  const [allData, setAllData] = useState(null);
+  const [allData, setAllData] = useState([]);
   const [selectedRows, setSelectedRows] = useState([]);
   const [totalRows, setTotalRows] = useState();
   const [openDialog, setOpenDialog] = useState(false);
@@ -29,6 +28,7 @@ export default function SubscribersList() {
   const [openDatePicker, setOpenDatePicker] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [modalDetails, setModalDetails] = useState(false);
+  const csvLink = useRef();
 
   const handleDateOpen = () => {
     setOpenDatePicker(!openDatePicker);
@@ -36,23 +36,25 @@ export default function SubscribersList() {
 
   const [selectedRange, setSelectedRange] = useState([
     {
-      startDate:  new Date(new Date().getTime() - 30 * 24 * 60 * 60 * 1000),
+      startDate: new Date(new Date().getTime() - 30 * 24 * 60 * 60 * 1000),
       endDate: new Date(),
       key: 'selection'
     }
   ]);
 
-  useEffect(() => {
+  const handleClick = () => {
     if (appLocalizer.pro_active) {
       axios({
         method: "post",
-        url: fetchAllSubscribersDataUrl,
+        url: fetchSubscribersDataUrl,
         headers: { "X-WP-Nonce": appLocalizer.nonce },
       }).then((response) => {
-        setAllData(response.data);
+        const data = JSON.parse(response.data);
+        setAllData(data);
+        csvLink.current.link.click()
       });
     }
-  }, []);
+  }
 
   function requestData(
     rowsPerPage = 10,
@@ -101,12 +103,12 @@ export default function SubscribersList() {
     );
   };
 
-  const filterForCSV = (datas) => {
-    if (selectedRows.length) {
-      datas = selectedRows;
-    }
-    return datas.map(({ date, product, email, status }) => { return { date, product, email, status } });
-  }
+  // const filterForCSV = (datas) => {
+  //   if (selectedRows.length) {
+  //     datas = selectedRows;
+  //   }
+  //   return datas.map(({ date, product, email, status }) => { return { date, product, email, status } });
+  // }
 
   const handleBulkAction = (event) => {
     if (!bulkSelectRef.current.value) {
@@ -369,15 +371,16 @@ export default function SubscribersList() {
           <div className="admin-page-title">
             <p>{__("Subscriber List", "woocommerce-stock-manager")}</p>
             <div className="download-btn-subscriber-list">
-              <CSVLink
-                data={(allData || []).map(({ date, product, email, status }) => ({ date, product, email, status }))}
-                headers={appLocalizer.columns_subscriber_list}
-                filename={"Subscribers.csv"}
-                className="admin-btn btn-purple"
-              >
+              <button onClick={handleClick} className="admin-btn btn-purple">
                 <div className="wp-menu-image dashicons-before dashicons-download"></div>
                 {__("Download CSV", "woocommerce-stock-manager")}
-              </CSVLink>
+              </button>
+              <CSVLink
+                data={allData.map(({ date, product, email, status }) => ({ date, product, email, status }))}
+                filename={"Subscribers.csv"}
+                className='hidden'
+                ref={csvLink}
+              />
             </div>
           </div>
 
