@@ -1,5 +1,8 @@
 == Changelog ==
 ----------------------------------------------------------------------------------------------
+= 2.5.9 - 2024-09-03 =
+* Added - WooCommerce 9.2.3 compatibility.
+
 = 2.5.8 - 2024-08-08 =
 * Fixed - Resolved activation/deactivation notice.
 

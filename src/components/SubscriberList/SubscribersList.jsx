@@ -103,13 +103,6 @@ export default function SubscribersList() {
     );
   };
 
-  // const filterForCSV = (datas) => {
-  //   if (selectedRows.length) {
-  //     datas = selectedRows;
-  //   }
-  //   return datas.map(({ date, product, email, status }) => { return { date, product, email, status } });
-  // }
-
   const handleBulkAction = (event) => {
     if (!bulkSelectRef.current.value) {
       setModalDetails("Please select a action.")
