@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/multivendorx/woocommerce-product-stock-alert#readme",
   "devDependencies": {
-    "@wordpress/scripts": "^26.10.0"
+    "@wordpress/scripts": "^26.19.0"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
@@ -29,7 +29,7 @@
     "@mui/material": "^5.14.4",
     "@tinymce/tinymce-react": "^5.0.1",
     "@wordpress/react-i18n": "^3.50.0",
-    "axios": "^1.6.8",
+    "axios": "^1.7.7",
     "google-map-react": "^2.2.1",
     "react": "^18.2.0",
     "react-csv": "^2.2.2",
