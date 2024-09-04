@@ -219,7 +219,7 @@ class FrontEnd {
                         $stock_manager_fields_array[] = $recaptchaScript . $recaptchaResponseInput . $recaptchaSiteKeyInput . $recaptchaSecretKeyInput;
                         break;
                     default:
-                        $stock_manager_fields_array[] = '<input id="stock_manager_' . $key . '" type="' . $type . '" name="' . $key . '" class="' . $class . '" value="' . $value . '" placeholder="' . $placeholder . '" >';
+                        $stock_manager_fields_array[] = '<input id="stock_manager_' . $key . $product->get_id() . '" type="' . $type . '" name="' . $key . '" class="' . $class . '" value="' . $value . '" placeholder="' . $placeholder . '" >';
                         break;
                 } 
             } 
@@ -243,7 +243,7 @@ class FrontEnd {
         if ( !empty( $settings_array[ 'button_border_radious' ] ) )
             $button_css .= "border-radius:" . esc_html( $settings_array[ 'button_border_radious' ] ) . "px;";
 
-        $button_html = '<button style="' . $button_css .'" class="stock-manager-button alert_button_hover" name="alert_button">' . esc_html( $settings_array[ 'button_text' ] ) . '</button>';
+        $button_html = '<button style="' . $button_css . '" id="stock_manager_btn_' .$product->get_id(). '" data-product-id="'. $product->get_id() . '" class="stock-manager-button alert_button_hover" name="alert_button">' . esc_html( $settings_array[ 'button_text' ] ) . '</button>';
 
         $interested_person = get_post_meta( $variation ? $variation->get_id() : $product->get_id(), 'no_of_subscribers', true );
         $interested_person = ( isset( $interested_person ) && $interested_person > 0 ) ? $interested_person : 0;
@@ -260,7 +260,7 @@ class FrontEnd {
         } 
 
         return
-        '<div id="stock_notifier_main_form" class="stock-notifier-subscribe-form" style="border-radius:10px;">
+        '<div id="stock_notifier_main_form_' .$product->get_id(). '" class="stock-notifier-subscribe-form" style="border-radius:10px;">
             ' . $alert_text_html . '
             <div class="fields_wrap"> ' . $stock_manager_fields_html . '' . $button_html . '
             </div>
