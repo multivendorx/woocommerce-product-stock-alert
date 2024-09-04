@@ -11,7 +11,7 @@ class Admin {
         add_action( 'admin_menu', [ $this, 'add_settings_page' ], 100 );
         //admin script and style
         add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_admin_script' ] );
-        add_action( 'enqueue_block_assets', [$this,'stock_manager_enqueue_block_assets'] );
+       
         // create custom column
         add_action( 'manage_edit-product_columns', [ $this, 'set_custom_column_header' ] );
         // manage stock manager column
@@ -257,14 +257,5 @@ class Admin {
             <?php
         } 
     }
-    public function stock_manager_enqueue_block_assets()
-{
-    wp_enqueue_script(
-        'stock_manager_block',
-        SM()->plugin_url . 'build/block/index.js',
-        ['wp-blocks', 'wp-element', 'wp-editor', 'wp-components', 'wp-i18n'],
-        SM()->version,
-        true // Load in the footer
-    );
-}
+   
 }
