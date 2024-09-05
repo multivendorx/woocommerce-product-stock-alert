@@ -26,7 +26,7 @@ jQuery(function ($) {
          * Subscriber form dom objects
          * @var {object} dom objects
          */
-        let form = $(this).parent().parent();
+        let form = $(this).closest( '.stock-notifier-subscribe-form' );
 
         // Set button as processing and disable click event.
         $(this).text(localizeData.processing);
@@ -42,10 +42,10 @@ jQuery(function ($) {
 
             // Prepare recaptcha request data.
             const recaptcha_request = {
-                action:            'recaptcha_validate_ajax',
-                nonce:             localizeData.nonce,
-                captcha_secret:    recaptcha_secret,
-                captcha_response:  recaptcha_response
+                action:           'recaptcha_validate_ajax',
+                nonce:            localizeData.nonce,
+                captcha_secret:   recaptcha_secret,
+                captcha_response: recaptcha_response
             }
 
             // Request for recaptcha validation
@@ -103,7 +103,7 @@ jQuery(function ($) {
 
             // Request data for subscription
             let requestData = {
-                action:       'alert_ajax',
+                action:      'alert_ajax',
                 nonce:        localizeData.nonce,
                 email:        customerEmail,
                 product_id:   productId,
@@ -131,11 +131,11 @@ jQuery(function ($) {
                 } else {
                     form.html(`<div class="registered-message">${successMessage}</div>`);
                 }
-                form.find(".stock-manager-button").replaceWith(buttonHtml);
+                form.find('.stock-manager-button').replaceWith(buttonHtml);
             });
         } else {
             form.find('.responsedata-error-message').remove() && form.append($(`<p style="color:#e2401c;" class="responsedata-error-message">${validEmail}</p>`));
-            form.find(".stock-manager-button").replaceWith(buttonHtml);
+            form.find('.stock-manager-button').replaceWith(buttonHtml);
         }
     }
 
@@ -177,9 +177,9 @@ jQuery(function ($) {
         $.post(localizeData.ajax_url, unsubscribe_request, function (response) {
             // unsubscribe success
             if (response) {
-                form.html(`<div class="registered-message"> ${success_message}</div>`);
+                form.html(`<div class="registered-message"> ${ success_message }</div>`);
             } else {
-                form.html(`<div class="registered-message"> ${error_message}<a href="${window.location}"> ${localizeData.try_again}</a></div>`);
+                form.html(`<div class="registered-message"> ${ error_message }<a href="${window.location}"> ${ localizeData.try_again }</a></div>`);
             }
 
             // Enable submit button.
@@ -207,10 +207,10 @@ jQuery(function ($) {
             };
 
             // Request for subscription form
-            $.post(localizeData.ajax_url, subscriptionFormRequest, function (response) {
+            $.post( localizeData.ajax_url, subscriptionFormRequest, function ( response ) {
 
                 // Set subscription form as inner-html
-                $('.stock-notifier-shortcode-subscribe-form').html(response);
+                $('.stock-notifier-shortcode-subscribe-form').html( response );
             });
         }
         else {
@@ -225,12 +225,12 @@ jQuery(function ($) {
      * @returns {boolean} if the email is valid return true otherwise false
      */
     function isEmail(email) {
-        if (!email) return false;
+        if ( ! email ) return false;
 
         // Regular expressing for email check
         const regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 
-        return regex.test(email);
+        return regex.test( email );
     }
 
     // Call init function
