@@ -187,7 +187,7 @@ class Admin {
         }
         
         if ( get_current_screen()->id == 'toplevel_page_stock-manager' ) {
-            wp_enqueue_script( 'stockmanager-script', SM()->plugin_url . 'build/index.js', [ 'wp-element', 'wp-i18n' ], SM()->version, true );
+            wp_enqueue_script( 'stockmanager-script', SM()->plugin_url . 'build/index.js', [ 'wp-element', 'wp-i18n', 'react-jsx-runtime' ], SM()->version, true );
             wp_set_script_translations( 'stockmanager-script', 'woocommerce-stock-manager' );
             wp_localize_script( 'stockmanager-script', 'appLocalizer', apply_filters( 'stock_manager_settings', [ 
                 'apiUrl'                    => untrailingslashit( get_rest_url() ), 
