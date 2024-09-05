@@ -11,7 +11,7 @@ class Admin {
         add_action( 'admin_menu', [ $this, 'add_settings_page' ], 100 );
         //admin script and style
         add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_admin_script' ] );
-
+       
         // create custom column
         add_action( 'manage_edit-product_columns', [ $this, 'set_custom_column_header' ] );
         // manage stock manager column
@@ -257,4 +257,5 @@ class Admin {
             <?php
         } 
     }
+   
 }
