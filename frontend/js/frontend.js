@@ -26,7 +26,7 @@ jQuery(function ($) {
          * Subscriber form dom objects
          * @var {object} dom objects
          */
-        let form = $(this).closest('.stock-notifier-subscribe-form');
+        let form = $(this).parent().parent();
 
         // Set button as processing and disable click event.
         $(this).text(localizeData.processing);
@@ -153,7 +153,7 @@ jQuery(function ($) {
          * Subscriber form dom objects
          * @var {object} dom objects
          */
-        let form = $(this).closest('.stock-notifier-subscribe-form');
+        let form = $(this).parent().parent();
 
         // Set button as processing and disable click event.
         $(this).text(localizeData.processing);

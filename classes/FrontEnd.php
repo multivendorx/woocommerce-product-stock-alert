@@ -260,7 +260,7 @@ class FrontEnd {
         } 
 
         return
-        '<div id="stock_notifier_main_form" class="stock-notifier-subscribe-form" style="border-radius:10px;">
+        '<div class="stock-notifier-subscribe-form" style="border-radius:10px;">
             ' . $alert_text_html . '
             <div class="fields_wrap"> ' . $stock_manager_fields_html . '' . $button_html . '
             </div>
