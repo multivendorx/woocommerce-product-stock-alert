@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/multivendorx/woocommerce-product-stock-alert#readme",
   "devDependencies": {
-    "ws": ">=8.17.1"
+    "ws": ">=8.18.0"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
