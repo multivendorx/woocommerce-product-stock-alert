@@ -242,4 +242,5 @@ class StockManager {
             SM()->version,
             true 
         );
+    }
 } 
