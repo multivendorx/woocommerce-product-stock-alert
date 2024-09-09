@@ -1,7 +1,7 @@
 import { registerBlockType } from '@wordpress/blocks';
 import { useBlockProps } from '@wordpress/block-editor';
 
-registerBlockType('woocommerce-stock-manager/stock-manager-form', {
+registerBlockType('stock-manager-form-block', {
     title: 'Stock Manager Form',
     description: 'A block to display the Stock Manager form.',
     category: 'widgets',
