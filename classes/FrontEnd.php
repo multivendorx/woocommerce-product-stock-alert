@@ -120,9 +120,7 @@ class FrontEnd {
     public function display_product_subscription_form($productObj = null) {
         global $product;
 
-        if( $productObj == null){
-            $productObj = $product;
-        }
+        $productObj = is_int($productObj) ? wc_get_product($productObj) : ($productObj ?: $product);
 
         if ( empty( $productObj ) )
             return;
