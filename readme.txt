@@ -143,7 +143,7 @@ Manual installation method requires downloading the [Product Stock Manager & Not
 
 == Changelog ==
 
-= 2.6.0 - 2024-09-10 =
+= 2.5.10 - 2024-09-10 =
 * Added - Block support for the subscription form.
 * Added - WPML translation support.
 
