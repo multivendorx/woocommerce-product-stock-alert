@@ -10,7 +10,7 @@ Donate link: https://multivendorx.com/donate/
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Boost sales with a powerful back-in-stock notifier, engage subscribers with real-time updates, and efficiently manage inventory through a dedicated dashboard.
+Boost sales with a powerful back-in-stock notifier, engage subscribers with real-time updates, and manage inventory through a dedicated dashboard.
 
 == Description ==
 **Empower your WooCommerce store with automatic out-of-stock subscriptions and in-stock alerts, ensuring customers never miss their desired products.**
