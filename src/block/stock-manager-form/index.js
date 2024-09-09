@@ -1,9 +1,10 @@
 import { registerBlockType } from '@wordpress/blocks';
 import { useBlockProps } from '@wordpress/block-editor';
+import { __ } from '@wordpress/i18n';  
 
 registerBlockType('stock-manager-form-block', {
-    title: 'Stock Manager Form',
-    description: 'A block to display the Stock Manager form.',
+    title: __('Stock Manager Form', 'woocommerce-stock-manager'),
+    description: __('A block to display the Stock Manager form.', 'woocommerce-stock-manager'),
     category: 'widgets',
     icon: 'clipboard',
     supports: {
@@ -13,7 +14,7 @@ registerBlockType('stock-manager-form-block', {
     edit: () => {
         return (
             <div {...useBlockProps()}>
-                <p>Stock Manager Form Block</p>
+                <p>{ __('Stock Manager Form Block', 'woocommerce-stock-manager') }</p>
             </div>
         );
     },
@@ -21,7 +22,7 @@ registerBlockType('stock-manager-form-block', {
     save: () => {
         return (
             <div {...useBlockProps.save()}>
-                <p>[display_stock_manager_form]</p>
+                <p>{ __('[display_stock_manager_form]', 'woocommerce-stock-manager') }</p>
             </div>
         );
     },
