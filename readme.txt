@@ -5,7 +5,7 @@ Tags: woocommerce stock, out of stock, in stock, stock alert, alert email
 Requires at least: 5.4
 Tested up to: 6.6.1
 Requires PHP: 8.0
-Stable tag: 2.5.9
+Stable tag: 2.6.0
 Donate link: https://multivendorx.com/donate/
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -142,6 +142,10 @@ Manual installation method requires downloading the [Product Stock Manager & Not
 6. Inventory manager
 
 == Changelog ==
+
+= 2.6.0 - 2024-09-10 =
+* Added - Block support for the subscription form.
+* Added - WPML translation support.
 
 = 2.5.9 - 2024-09-03 =
 * Added - WooCommerce 9.2.3 compatibility.

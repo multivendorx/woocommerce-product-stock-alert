@@ -1,5 +1,9 @@
 == Changelog ==
 ----------------------------------------------------------------------------------------------
+= 2.6.0 - 2024-09-10 =
+* Added - Block support for the subscription form.
+* Added - WPML translation support.
+
 = 2.5.9 - 2024-09-03 =
 * Added - WooCommerce 9.2.3 compatibility.
 
