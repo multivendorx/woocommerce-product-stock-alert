@@ -1,0 +1,9 @@
+{
+    "apiVersion": 2,
+    "name": "woocommerce-stock-manager/stock-manager-form",
+    "title": "Stock Manager Form",
+    "category": "widgets",
+    "icon": "clipboard",
+    "textdomain": "woocommerce-stock-manager",
+    "editorScript": "file:./index.js"
+}
