@@ -2,7 +2,7 @@ import { registerBlockType } from '@wordpress/blocks';
 import { useBlockProps } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
 
-registerBlockType('woocommerce-product-stock-alert/stock-manager-form', {
+registerBlockType('woocommerce-stock-manager/stock-manager-form', {
     title: __('Stock Manager Form', 'woocommerce-stock-manager'),
     description: __('A block to display the Stock Manager form.', 'woocommerce-stock-manager'),
     category: 'widgets',

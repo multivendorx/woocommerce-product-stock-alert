@@ -1,6 +1,6 @@
 {
     "apiVersion": 2,
-    "name": "woocommerce-product-stock-alert/stock-manager-form",
+    "name": "woocommerce-stock-manager/stock-manager-form",
     "title": "Stock Manager Form",
     "category": "widgets",
     "icon": "clipboard",
