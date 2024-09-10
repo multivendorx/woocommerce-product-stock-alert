@@ -146,6 +146,7 @@ Manual installation method requires downloading the [Product Stock Manager & Not
 = 2.5.10 - 2024-09-10 =
 * Added - Block support for the subscription form.
 * Added - WPML translation support.
+* Updated - Language files.
 
 = 2.5.9 - 2024-09-03 =
 * Added - WooCommerce 9.2.3 compatibility.
