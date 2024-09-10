@@ -117,10 +117,12 @@ class FrontEnd {
      *
      * @version 1.0.0
      */
-    public function display_product_subscription_form() {
+    public function display_product_subscription_form($productObj = null) {
         global $product;
 
-        if ( empty( $product ) )
+        $productObj = is_int($productObj) ? wc_get_product($productObj) : ($productObj ?: $product);
+
+        if ( empty( $productObj ) )
             return;
         $guest_subscription_enabled = SM()->setting->get_setting( 'is_guest_subscriptions_enable' );
         $guest_subscription_enabled = is_array( $guest_subscription_enabled ) ? reset( $guest_subscription_enabled ) : false;
@@ -131,20 +133,20 @@ class FrontEnd {
         $backorders_enabled = SM()->setting->get_setting( 'is_enable_backorders' );
         $backorders_enabled = is_array( $backorders_enabled ) ? reset( $backorders_enabled ) : false;
 
-        $stock_status   = $product->get_stock_status();
+        $stock_status   = $productObj->get_stock_status();
         if ( $stock_status == 'onbackorder' && !$backorders_enabled )
             return;
 
-        if ( $product->is_type( 'variable' ) ) {
-            $get_variations = count( $product->get_children() ) <= apply_filters( 'woocommerce_ajax_variation_threshold', 30, $product );
-            $get_variations = $get_variations ? $product->get_available_variations() : false;
+        if ( $productObj->is_type( 'variable' ) ) {
+            $get_variations = count( $productObj->get_children() ) <= apply_filters( 'woocommerce_ajax_variation_threshold', 30, $productObj );
+            $get_variations = $get_variations ? $productObj->get_available_variations() : false;
             if ( $get_variations ) {
-                echo '<div class="stock-notifier-shortcode-subscribe-form" data-product-id="' . esc_attr( $product->get_id() ) . '"></div>';
+                echo '<div class="stock-notifier-shortcode-subscribe-form" data-product-id="' . esc_attr( $productObj->get_id() ) . '"></div>';
             } else {
-                echo ( $this->get_subscribe_form( $product ) );
+                echo ( $this->get_subscribe_form( $productObj ) );
             } 
         } else {
-            echo ( $this->get_subscribe_form( $product ) );
+            echo ( $this->get_subscribe_form( $productObj ) );
         } 
     }
 
@@ -260,7 +262,7 @@ class FrontEnd {
         } 
 
         return
-        '<div id="stock_notifier_main_form" class="stock-notifier-subscribe-form" style="border-radius:10px;">
+        '<div class="stock-notifier-subscribe-form" style="border-radius:10px;">
             ' . $alert_text_html . '
             <div class="fields_wrap"> ' . $stock_manager_fields_html . '' . $button_html . '
             </div>
