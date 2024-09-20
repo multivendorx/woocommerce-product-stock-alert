@@ -69,14 +69,16 @@ class Utill {
         foreach ( $setting_keys as $setting_key => $default_value ) {
             // Overwrite with actual settings from the database first
             $form_settings[ $setting_key ] = SM()->setting->get_setting( $setting_key, $default_value );
+            
             // Register string using WPML's icl_register_string function if available
             if ( function_exists( 'icl_register_string' ) ) {
-               icl_register_string( 'woocommerce-stock-manager', $setting_key, $form_settings[ $setting_key ] );
+                icl_register_string( 'woocommerce-stock-manager', $setting_key, $form_settings[ $setting_key ] );
             }
+            
             // Store registered or default value in settings array
-            $form_settings[ $setting_key ] = function_exists( 'icl_t' ) 
-            ? icl_t( 'woocommerce-stock-manager', $setting_key, $form_settings[ $setting_key ] ) 
-            : $form_settings[ $setting_key ];
+            if ( function_exists( 'icl_t' ) ) {
+                $form_settings[ $setting_key ] = icl_t( 'woocommerce-stock-manager', $setting_key, $form_settings[ $setting_key ] ) ;
+            }
         }
         return $form_settings;
     }
