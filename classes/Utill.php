@@ -76,14 +76,11 @@ class Utill {
             $form_settings[ $key ] = function_exists( 'icl_t' ) 
                 ? icl_t( 'woocommerce-stock-manager', $key, $default_value ) 
                 : $default_value;
-        }
-    
-       // Overwrite with actual settings from the database
-       foreach ( array_keys( $setting_keys ) as $setting_key ) {
-          $form_settings[ $setting_key ] = SM()->setting->get_setting( $setting_key, $form_settings[ $setting_key ] );
-        }
-
-    return $form_settings;
+           
+             // Overwrite with actual settings from the database
+            $form_settings[ $key ] = SM()->setting->get_setting( $key, $form_settings[ $key ] );
+       }
+        return $form_settings;
     }
     /**
      * Check pro plugin is acrive or not
