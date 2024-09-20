@@ -78,7 +78,12 @@ class Utill {
                 : $default_value;
         }
     
-        return $form_settings;
+       // Overwrite with actual settings from the database
+       foreach ( array_keys( $setting_keys ) as $setting_key ) {
+          $form_settings[ $setting_key ] = SM()->setting->get_setting( $setting_key, $form_settings[ $setting_key ] );
+        }
+
+    return $form_settings;
     }
     /**
      * Check pro plugin is acrive or not
