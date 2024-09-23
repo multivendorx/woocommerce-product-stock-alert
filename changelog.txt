@@ -1,5 +1,10 @@
 == Changelog ==
 ----------------------------------------------------------------------------------------------
+= 2.5.11 - 2024-09-24 =
+* Added - WordPress 6.6.2 compatibility.
+* Added - WooCommerce 9.3.2 compatibility.
+* Fixed - Issue where modifications made in the Personalize Layout settings were not displaying correctly.
+
 = 2.5.10 - 2024-09-10 =
 * Added - Block support for the subscription form.
 * Added - WPML translation support.

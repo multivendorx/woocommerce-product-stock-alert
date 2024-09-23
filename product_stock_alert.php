@@ -4,11 +4,11 @@
  * Plugin URI: https://multivendorx.com/
  * Description: Boost sales with real-time stock alerts! Notify customers instantly when products are back in stock. Simplify data management by exporting and importing stock data with ease.
  * Author: MultiVendorX
- * Version: 2.5.10
+ * Version: 2.5.11
  * Requires at least: 5.4
- * Tested up to: 6.6.1
+ * Tested up to: 6.6.2
  * WC requires at least: 8.2.2
- * WC tested up to: 9.2.3
+ * WC tested up to: 9.3.2
  * Author URI: https://multivendorx.com/
  * Text Domain: woocommerce-stock-manager
  * Requires Plugins: woocommerce
