@@ -1,4 +1,4 @@
-=== Product Stock Waitlist Manager for WooCommerce - Back In Stock Notifier, Sync, bulk edit ===
+=== Back In Stock Notifier for WooCommerce | Manage Inventory and Waitlist Product for WooCommerce ===
 
 Contributors: wcmp
 Tags: woocommerce stock, out of stock, in stock, stock alert, alert email
@@ -21,7 +21,7 @@ The ultimate solution to keep your customers engaged and informed when products 
 
 🌟 Learn More About [Pro](https://multivendorx.com/woocommerce-product-stock-manager-notifier-pro/?utm_source=wporg&utm_medium=plugindescription&utm_campaign=stockmanagerwporg)
 
-=📦Supported Product Types of WooCommerce =
+==📦Supported Product Types of WooCommerce ==
 👉Simple
 👉Variable
 👉Grouped
