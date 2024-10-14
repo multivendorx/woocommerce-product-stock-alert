@@ -259,9 +259,16 @@ class FrontEnd {
         if ( $is_enable_no_interest && $interested_person != 0 && $shown_interest_text ) {
             $shown_interest_text = str_replace( "%no_of_subscribed%", $interested_person, $shown_interest_text );
             $shown_interest_html = '<p>' . $shown_interest_text . '</p>';
-        } 
+        }
+
+        if ( $variation ) {
+            $lead_text_html = $this->display_product_lead_time( $variation );
+        } else {
+            $lead_text_html = $this->display_product_lead_time( $product );
+        }
 
         return
+        $lead_text_html.
         '<div class="stock-notifier-subscribe-form" style="border-radius:10px;">
             ' . $alert_text_html . '
             <div class="fields_wrap"> ' . $stock_manager_fields_html . '' . $button_html . '
@@ -272,4 +279,49 @@ class FrontEnd {
             ' . $shown_interest_html . '
         </div>';
     } 
+
+    /**
+     * Display lead time for a product
+     *
+     * @version 1.0.0
+     */
+    public function display_product_lead_time( $product ){
+        if ( empty( $product ) )
+            return;
+
+        $stock_status = $product->get_stock_status();
+
+        $appearance_settings = get_option( 'woo_stock_manager_appearance_tab_settings', null );
+        if ( isset($appearance_settings['display_lead_times']) ) {
+            $display_lead_time = $appearance_settings['display_lead_times'];
+        } else {
+            $display_lead_time = '';
+        }
+
+        if ( isset($appearance_settings['lead_time_format']) ) {
+            $lead_time_format = $appearance_settings['lead_time_format'];
+        } else {
+            $lead_time_format = '';
+        }
+
+        if ( in_array( 'out_of_stock_lead', $display_lead_time )  && $stock_status === 'outofstock' )  {
+            return $this->get_lead_time_message( $lead_time_format, $product, $appearance_settings );
+        } elseif ( in_array( 'on_backorder_lead', $display_lead_time )  && $stock_status === 'onbackorder' )  {
+            return $this->get_lead_time_message( $lead_time_format, $product, $appearance_settings );
+        }
+    }
+
+    function get_lead_time_message( $lead_time_format, $product, $appearance_settings ) {
+        if ( $lead_time_format === 'static' && $appearance_settings['lead_time_static_text'] !== '' ) {
+            return '<p>' . esc_html( $appearance_settings['lead_time_static_text'] ) . '</p>';
+        } 
+        if ( $lead_time_format === 'dynamic' ) {
+            $current_date = date('Y-m-d');
+            $dynamic_lead_time = get_post_meta( $product->get_id(), 'dynamic_lead_time', true );
+            if ( $dynamic_lead_time !== '' && ( strtotime($dynamic_lead_time) > strtotime($current_date) ) ) {
+                return '<p>New Stock Expected by ' . esc_html( $dynamic_lead_time ) . '</p>';
+            }
+        }
+        return '';
+    }
 }
