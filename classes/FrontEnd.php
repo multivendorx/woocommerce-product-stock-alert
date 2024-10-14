@@ -261,11 +261,7 @@ class FrontEnd {
             $shown_interest_html = '<p>' . $shown_interest_text . '</p>';
         }
 
-        if ( $variation ) {
-            $lead_text_html = $this->display_product_lead_time( $variation );
-        } else {
-            $lead_text_html = $this->display_product_lead_time( $product );
-        }
+        $lead_text_html = $this->display_product_lead_time( $variation ? $variation : $product );
 
         return
         $lead_text_html.
@@ -291,29 +287,20 @@ class FrontEnd {
 
         $stock_status = $product->get_stock_status();
 
-        $appearance_settings = get_option( 'woo_stock_manager_appearance_tab_settings', null );
-        if ( isset($appearance_settings['display_lead_times']) ) {
-            $display_lead_time = $appearance_settings['display_lead_times'];
-        } else {
-            $display_lead_time = '';
-        }
-
-        if ( isset($appearance_settings['lead_time_format']) ) {
-            $lead_time_format = $appearance_settings['lead_time_format'];
-        } else {
-            $lead_time_format = '';
-        }
+        $display_lead_time = SM()->setting->get_setting( 'display_lead_times' );
+        $lead_time_format  = SM()->setting->get_setting( 'lead_time_format' );
+        $lead_time_static_text = SM()->setting->get_setting( 'lead_time_static_text' );
 
         if ( in_array( 'out_of_stock_lead', $display_lead_time )  && $stock_status === 'outofstock' )  {
-            return $this->get_lead_time_message( $lead_time_format, $product, $appearance_settings );
+            return $this->get_lead_time_message( $lead_time_format, $product, $lead_time_static_text );
         } elseif ( in_array( 'on_backorder_lead', $display_lead_time )  && $stock_status === 'onbackorder' )  {
-            return $this->get_lead_time_message( $lead_time_format, $product, $appearance_settings );
+            return $this->get_lead_time_message( $lead_time_format, $product, $lead_time_static_text );
         }
     }
 
-    function get_lead_time_message( $lead_time_format, $product, $appearance_settings ) {
-        if ( $lead_time_format === 'static' && $appearance_settings['lead_time_static_text'] !== '' ) {
-            return '<p>' . esc_html( $appearance_settings['lead_time_static_text'] ) . '</p>';
+    function get_lead_time_message( $lead_time_format, $product, $lead_time_static_text ) {
+        if ( $lead_time_format === 'static' && $lead_time_static_text !== '' ) {
+            return '<p>' . esc_html( $lead_time_static_text ) . '</p>';
         } 
         if ( $lead_time_format === 'dynamic' ) {
             $current_date = date('Y-m-d');
