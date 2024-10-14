@@ -1,16 +1,16 @@
-=== Product Stock Waitlist Manager for WooCommerce - Back In Stock Notifier, Sync, bulk edit ===
+=== Back In Stock Notifier for WooCommerce | Manage Inventory and Waitlist Product for WooCommerce ===
 
 Contributors: wcmp
 Tags: woocommerce stock, out of stock, in stock, stock alert, alert email
 Requires at least: 5.4
-Tested up to: 6.6.1
+Tested up to: 6.6.2
 Requires PHP: 8.0
-Stable tag: 2.5.9
+Stable tag: 2.5.11
 Donate link: https://multivendorx.com/donate/
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Boost sales with instant stock alerts, engage customers with real-time in-stock product updates, and manage inventory via a dedicated dashboard.
+Boost sales with a powerful back-in-stock notifier, engage subscribers with real-time updates, and manage inventory through a dedicated dashboard.
 
 == Description ==
 **Empower your WooCommerce store with automatic out-of-stock subscriptions and in-stock alerts, ensuring customers never miss their desired products.**
@@ -21,7 +21,7 @@ The ultimate solution to keep your customers engaged and informed when products 
 
 🌟 Learn More About [Pro](https://multivendorx.com/woocommerce-product-stock-manager-notifier-pro/?utm_source=wporg&utm_medium=plugindescription&utm_campaign=stockmanagerwporg)
 
-=📦Supported Product Types of WooCommerce =
+==📦Supported Product Types of WooCommerce ==
 👉Simple
 👉Variable
 👉Grouped
@@ -142,6 +142,16 @@ Manual installation method requires downloading the [Product Stock Manager & Not
 6. Inventory manager
 
 == Changelog ==
+
+= 2.5.11 - 2024-09-24 =
+* Added - WordPress 6.6.2 compatibility.
+* Added - WooCommerce 9.3.2 compatibility.
+* Fixed - Issue where modifications made in the Personalize Layout settings were not displaying correctly.
+
+= 2.5.10 - 2024-09-10 =
+* Added - Block support for the subscription form.
+* Added - WPML translation support.
+* Updated - Language files.
 
 = 2.5.9 - 2024-09-03 =
 * Added - WooCommerce 9.2.3 compatibility.

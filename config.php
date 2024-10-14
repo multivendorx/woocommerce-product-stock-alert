@@ -11,6 +11,6 @@ define( 'STOCK_MANAGER_DOC_URL', 'https://multivendorx.com/docs/knowledgebase/pr
 
 define( 'STOCK_MANAGER_SUPPORT_URL', ' https://wordpress.org/support/plugin/woocommerce-product-stock-alert/?utm_source=wpadmin&utm_medium=pluginsettings&utm_campaign=stockmanager' );
 
-define( 'STOCK_MANAGER_PLUGIN_VERSION', '2.5.9' );
+define( 'STOCK_MANAGER_PLUGIN_VERSION', '2.5.11' );
 
 define( 'STOCK_MANAGER_REST_NAMESPACE', 'stockmanager/v1');
