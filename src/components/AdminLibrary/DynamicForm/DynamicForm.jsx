@@ -618,6 +618,40 @@ const DynamicForm = (props) => {
           );
           break;
 
+        case "checkbox-default":
+          input = (
+            <CustomInput.MultiCheckBox
+              wrapperClass="checkbox-list-side-by-side"
+              descClass="settings-metabox-description"
+              description={inputField.desc}
+              selectDeselectClass="select-deselect-trigger"
+              inputWrapperClass="toggle-checkbox-header"
+              inputInnerWrapperClass="default-checkbox"
+              inputClass={inputField.class}
+              hintOuterClass="checkbox-description"
+              hintInnerClass="hover-tooltip"
+              idPrefix="toggle-switch"
+              selectDeselect={inputField.select_deselect}
+              selectDeselectValue="Select / Deselect All"
+              rightContentClass="settings-metabox-description"
+              rightContent={inputField.right_content}
+              options={inputField.options}
+              value={value}
+              proSetting={isProSetting(inputField.proSetting)}
+              onChange={(e) => {
+                if (!proSettingChanged(inputField.proSetting)) {
+                  handleChange(e, inputField.key, "multiple");
+                }
+              }}
+              onMultiSelectDeselectChange={(e) => {
+                if (!proSettingChanged(inputField.proSetting)) {
+                  handlMultiSelectDeselectChange(inputField.key, inputField.options)
+                }
+              }}
+              proChanged={() => setModelOpen(true)}
+            />
+          );
+          break;
         case "table":
           input = (
             <CustomInput.Table
