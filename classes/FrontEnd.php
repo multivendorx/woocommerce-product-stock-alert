@@ -19,9 +19,8 @@ class FrontEnd {
         add_filter( 'woocommerce_grouped_product_list_column_price', [ $this, 'display_in_grouped_product' ], 10, 2 );
         // Hover style
         add_action( 'wp_head', [ $this, 'frontend_hover_styles' ] );
-        if ( ! Utill::is_pro_active() ) {
-            add_filter( 'stock_manager_display_product_lead_time', [ $this, 'display_product_lead_time' ], 10 );
-        }
+        
+        add_filter( 'stock_manager_display_product_lead_time', [ $this, 'display_product_lead_time' ], 10 );
     } 
 
     /**
