@@ -286,11 +286,14 @@ class FrontEnd {
     public function display_product_lead_time( $product ){
         if ( empty( $product ) )
             return;
-        $lead_time_format  = SM()->setting->get_setting( 'lead_time_format' );
-        $lead_time_static_text = SM()->setting->get_setting( 'lead_time_static_text' );
-        
-        if ( $lead_time_format === 'static' && $lead_time_static_text !== '' ) {
-            return '<p>' . esc_html( $lead_time_static_text ) . '</p>';
+        $display_lead_times  = SM()->setting->get_setting( 'display_lead_times' );
+        if ( !empty($display_lead_times) ) {
+            $lead_time_format  = SM()->setting->get_setting( 'lead_time_format' );
+            $lead_time_static_text = SM()->setting->get_setting( 'lead_time_static_text' );
+            if ( $lead_time_format === 'static' && $lead_time_static_text !== '' ) {
+                return '<p>' . esc_html( $lead_time_static_text ) . '</p>';
+            }
         }
+        
     }
 }

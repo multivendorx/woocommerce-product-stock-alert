@@ -86,13 +86,14 @@ export default {
         },
         {
             key: 'lead_time_format',
-            type: 'checkbox-default',
+            type: 'settingToggle',
             label: __("Lead Format", "woocommerce-stock-manager"),
             desc: __("Choose the lead time format: Either dynamic (set unique lead time text for all out of stock product) or static (apply a default lead time text for out of stock products).", "woocommerce-stock-manager"),
             dependent: {
                 key: "display_lead_times",
                 set: true
             },
+            defaultValue: 'static',
             options: [
                 {
                     key: "static",
@@ -103,19 +104,25 @@ export default {
                     key: "dynamic",
                     label: __("Dynamic", "woocommerce-stock-manager"),
                     value: "dynamic",
-                    proSetting: true,
                 }
             ],
+            proSetting: true,
         },
         {
             key: 'lead_time_static_text',
             type: 'text',
             label: __("Lead time static text", "woocommerce-stock-manager"),
             desc:  __("This will be the standard message displayed for all out-of-stock products unless a custom lead time is specified.", "woocommerce-stock-manager"),
-            dependent: {
-                key: "display_lead_times",
-                set: true
-            },
+            dependent: [
+                {
+                    key: "lead_time_format",
+                    value: "static"
+                },
+                {
+                    key: "display_lead_times",
+                    set: true
+                },
+            ]
         },
         {
             key: 'separator_content',

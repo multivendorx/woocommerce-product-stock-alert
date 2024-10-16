@@ -10,6 +10,7 @@ import { getApiLink, sendApiResponse } from "../../../services/apiService";
 import Dialog from "@mui/material/Dialog";
 import Popoup from "../../PopupContent/PopupContent";
 import FormCustomizer from "../Inputs/Special/FormCustomizer";
+import ToggleSetting from "../../ToggleSetting/ToggleSetting";
 
 // Variable for controll coldown effect submit time
 const PENALTY  = 10;
@@ -185,20 +186,33 @@ const DynamicForm = (props) => {
     return settingValue === value;
   }
 
+  const shouldRender = (dependent) => {
+    if ( dependent.set === true && ! isContain( dependent.key) ) {
+      return false;
+    }
+    if ( dependent.set === false && isContain( dependent.key) ) {
+      return false;
+    }
+    if ( dependent.value && ! isContain( dependent.key, dependent.value ) ) {
+      return false;
+    }
+    return true;
+  }
+
   const renderForm = () => {
     return modal.map((inputField, index) => {
       let value = setting[inputField.key] || "";
       let input = "";
 
       // Filter dependent 
-      if ( inputField.dependent ) {
-        if ( inputField.dependent.set === true && ! isContain( inputField.dependent.key) ) {
-          return;
+      if ( Array.isArray(inputField.dependent) ) {
+        for ( let dependent of inputField.dependent ) {
+          if ( ! shouldRender(dependent) ) {
+            return;
+          }
         }
-        if ( inputField.dependent.set === false && isContain( inputField.dependent.key) ) {
-          return;
-        }
-        if ( inputField.dependent.value && isContain( inputField.dependent.key, inputField.dependent.value ) ) {
+      } else if ( inputField.dependent ) {
+        if ( ! shouldRender(inputField.dependent) ) {
           return;
         }
       }
@@ -649,6 +663,25 @@ const DynamicForm = (props) => {
                 }
               }}
               proChanged={() => setModelOpen(true)}
+            />
+          );
+          break;
+        case "settingToggle":
+          input =(
+            <ToggleSetting 
+              wrapperClass={`setting-form-input`}
+              descClass="settings-metabox-description"
+              description={inputField.desc}
+              key={inputField.key}
+              options={inputField.options}
+              value={value || inputField.defaultValue}
+              proSetting={isProSetting(inputField.proSetting)}
+              onChange={(data) => {
+                if (!proSettingChanged(inputField.proSetting)) {
+                  settingChanged.current = true;
+                  updateSetting(inputField.key, data)
+                }
+              }}
             />
           );
           break;
