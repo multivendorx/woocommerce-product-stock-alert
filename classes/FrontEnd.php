@@ -288,9 +288,7 @@ class FrontEnd {
         $display_lead_times  = SM()->setting->get_setting( 'display_lead_times' );
         if ( !empty($display_lead_times) && in_array($product->get_stock_status(), $display_lead_times) ) {
             $lead_time_static_text = SM()->setting->get_setting( 'lead_time_static_text' );
-            if ( $lead_time_static_text !== '' ) {
-                return '<p>' . esc_html( $lead_time_static_text ) . '</p>';
-            }
+            return '<p>' . esc_html( $lead_time_static_text ) . '</p>';
         }
     }
 }
