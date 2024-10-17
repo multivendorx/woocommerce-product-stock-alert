@@ -10,7 +10,12 @@ import { getApiLink, sendApiResponse } from "../../../services/apiService";
 import Dialog from "@mui/material/Dialog";
 import Popoup from "../../PopupContent/PopupContent";
 import FormCustomizer from "../Inputs/Special/FormCustomizer";
-import ToggleSetting from "../../ToggleSetting/ToggleSetting";
+import ToggleSetting from "../Inputs/Special/ToggleSetting";
+import CatalogCustomizer from "../Inputs/Special/CatalogCustomizer/CatalogCustomizer";
+import GridTable from "../Inputs/Special/GridTable/GridTable";
+import MergeComponent from "../Inputs/Special/MergeComponent/MergeComponent";
+import ShortCodeTable from "../Inputs/Special/ShortCodeTable/ShortCodeTable";
+import FromBuilder from "../Inputs/Special/RegistrationForm/RegistrationForm";
 
 // Variable for controll coldown effect submit time
 const PENALTY  = 10;
@@ -760,20 +765,99 @@ const DynamicForm = (props) => {
           );
           break;
 
-          case "form_customizer":
-            input = (
-              <FormCustomizer
-                value={value}
-                buttonText={setting.button_text}
-                proSetting={isProSetting(inputField.proSetting)}
-                onChange={(e, key) => {
-                  if ( ! proSettingChanged( inputField.proSetting ) ) {
-                    handleChange(e, key);
-                  }
-                }}
-              />
-            );
-            break;
+        case "form_customizer":
+          input = (
+            <FormCustomizer
+              value={value}
+              buttonText={setting.button_text}
+              proSetting={isProSetting(inputField.proSetting)}
+              onChange={(e, key) => {
+                if ( ! proSettingChanged( inputField.proSetting ) ) {
+                  handleChange(e, key);
+                }
+              }}
+            />
+          );
+          break;
+
+        case "catalog_customizer":
+          input = (
+            <CatalogCustomizer
+              setting={setting}
+              proSetting={appLocalizer.pro_active}
+              onChange={(key, value) => {
+                if (!proSettingChanged(inputField.proSetting)) {
+                  settingChanged.current = true;
+                  updateSetting(key, value);
+                }
+              }}
+            />
+          );
+          break;
+
+        case "grid_table":
+          input = (
+            <GridTable
+              rows={inputField.rows}
+              columns={inputField.columns}
+              description={inputField.desc}
+              setting={setting}
+              onChange={(key, value) => {
+                if (!proSettingChanged(inputField.proSetting)) {
+                  settingChanged.current = true;
+                  updateSetting(key, value);
+                }
+              }}
+            />
+          );
+          break;
+
+        case "from_builder":
+          input = (
+            <FromBuilder
+              name={inputField.key}
+              proSetting={isProSetting(inputField.proSetting)}
+              proSettingChange={()=> proSettingChanged(inputField.proSetting)}
+              onChange={(value) => {
+                // if (!proSettingChanged(inputField.proSetting)) {
+                  settingChanged.current = true;
+                  updateSetting(inputField.key, value);
+                // }
+              }}
+            />
+          );
+          break;
+
+        case "mergeComponent":
+          input =(
+            <MergeComponent 
+              wrapperClass={`setting-form-input`}
+              descClass="settings-metabox-description"
+              description={inputField.desc}
+              value={value}
+              proSetting={isProSetting(inputField.proSetting)}
+              onChange={(data) => {
+                if (!proSettingChanged(inputField.proSetting)) {
+                  settingChanged.current = true;
+                  updateSetting(inputField.key, data)
+                }
+              }}
+            />
+          );
+          break;
+
+        case "shortCode_table":
+          input =(
+            <ShortCodeTable 
+              wrapperClass={`setting-form-input`}
+              descClass="settings-metabox-description"
+              description={inputField.desc}
+              key={inputField.key}
+              options={inputField.option}
+              optionLabel={inputField.optionLabel}
+            />
+          );
+          break;
 
         case "api_connect":
           input = (

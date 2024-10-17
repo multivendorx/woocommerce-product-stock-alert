@@ -69,18 +69,14 @@ export default {
             desc:  __("Lead time informs customers when a product will be available again. This setting lets you choose which stock statuses will display the restock estimate.", "woocommerce-stock-manager"),
             options: [
                 {
-                    key: "out_of_stock_lead",
+                    key: "outofstock",
                     label: __("Out of stock", "woocommerce-stock-manager"),
-                    value: "out_of_stock_lead"
+                    value: "outofstock"
                 },
                 {
-                    key: "on_backorder_lead",
+                    key: "onbackorder",
                     label: __("On backorder", "woocommerce-stock-manager"),
-                    value: "on_backorder_lead",
-                    dependent: {
-                        key: "is_enable_backorders",
-                        set: true
-                    },
+                    value: "onbackorder",
                 }
             ]
         },
