@@ -16,6 +16,10 @@ import GridTable from "../Inputs/Special/GridTable/GridTable";
 import MergeComponent from "../Inputs/Special/MergeComponent/MergeComponent";
 import ShortCodeTable from "../Inputs/Special/ShortCodeTable/ShortCodeTable";
 import FromBuilder from "../Inputs/Special/RegistrationForm/RegistrationForm";
+import SyncNow from "../Inputs/Special/SyncNow/SyncNow";
+import SyncMap from "../Inputs/Special/SyncMap/SyncMap";
+import ScheduleInterval from "../Inputs/Special/ScheduleInterval/ScheduleInterval";
+import SSOKey from "../Inputs/Special/SSOKey/SSOKey";
 
 // Variable for controll coldown effect submit time
 const PENALTY  = 10;
@@ -857,6 +861,67 @@ const DynamicForm = (props) => {
               optionLabel={inputField.optionLabel}
             />
           );
+          break;
+
+        case "syncbutton":
+          input = <SyncNow
+            buttonKey={inputField.key}
+            apilink={inputField.apilink}
+            value={inputField.value}
+            description={inputField.desc}
+            proSetting={isProSetting(inputField.proSetting)}
+            proSettingChanged={() => proSettingChanged(inputField.proSetting)}
+            interval={inputField.interval}
+            statusApiLink={inputField.statusApiLink}
+          />
+          break;
+
+        case "sync_map":
+          input = <SyncMap
+            description={inputField.desc}
+            proSetting={isProSetting(inputField.proSetting)}
+            proSettingChanged={() => proSettingChanged(inputField.proSetting)}
+            value={value}
+            onChange={(value) => {
+              if (!proSettingChanged(inputField.proSetting) && true) {
+                settingChanged.current = true;
+                updateSetting(inputField.key, value)
+              }
+            }}
+          />
+          break;
+
+        case "select-custom-radio":
+          let option = inputField.options;
+          input = <ScheduleInterval
+            wrapperClass="form-select-field-wrapper"
+            descClass="settings-metabox-description"
+            description={inputField.desc}
+            inputClass={inputField.key}
+            options={option}
+            value={value}
+            proSetting={isProSetting(inputField.proSetting)}
+            onChange={(data) => {
+              if (!proSettingChanged(inputField.proSetting)) {
+                settingChanged.current = true;
+                updateSetting(inputField.key, data.value)
+              }
+            }}
+          />
+          break;
+
+        case "sso_key":
+          input = <SSOKey
+            value={value}
+            description={inputField.desc}
+            proSetting={isProSetting(inputField.proSetting)}
+            onChange={(value) => {
+              if (!proSettingChanged(inputField.proSetting) && true) {
+                settingChanged.current = true;
+                updateSetting(inputField.key, value)
+              }
+            }}
+          />
           break;
 
         case "api_connect":
