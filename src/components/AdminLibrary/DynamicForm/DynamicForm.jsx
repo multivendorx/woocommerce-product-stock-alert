@@ -20,6 +20,9 @@ import SyncNow from "../Inputs/Special/SyncNow/SyncNow";
 import SyncMap from "../Inputs/Special/SyncMap/SyncMap";
 import ScheduleInterval from "../Inputs/Special/ScheduleInterval/ScheduleInterval";
 import SSOKey from "../Inputs/Special/SSOKey/SSOKey";
+import ConnectButton from "../Inputs/Special/ConnectButton/ConnectButton";
+import Log from "../Inputs/Special/Log/Log";
+import CheckboxCustomImg from "../Inputs/Special/CheckboxCustomImg/CheckboxCustomImg";
 
 // Variable for controll coldown effect submit time
 const PENALTY  = 10;
@@ -919,6 +922,34 @@ const DynamicForm = (props) => {
               if (!proSettingChanged(inputField.proSetting) && true) {
                 settingChanged.current = true;
                 updateSetting(inputField.key, value)
+              }
+            }}
+          />
+          break;
+
+        case "testconnection":
+          input = <ConnectButton 
+            apiLink={inputField.apiLink}
+            tasks={inputField.tasks}/>
+          break;
+
+        case "log":
+          input = <Log 
+            fetchApiLink={inputField.fetchApiLink}
+            downloadApiLink={inputField.downloadApiLink}/>
+          break;
+
+        case "checkbox-custom-img":
+          input = <CheckboxCustomImg
+            proSetting={isProSetting(inputField.proSetting)}
+            description={inputField.desc}
+            value={value}
+            image1={inputField.image1}
+            image2={inputField.image2}
+            onChange={(data) => {
+              if (!proSettingChanged(inputField.proSetting)) {
+                settingChanged.current = true;
+                updateSetting(inputField.key, data)
               }
             }}
           />
