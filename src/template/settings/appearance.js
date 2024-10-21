@@ -62,6 +62,70 @@ export default {
             label: "",
         },
         {
+            key: 'display_lead_times',
+            type: 'checkbox-default',
+            label: __("Stock Status for Lead Time", "woocommerce-stock-manager"),
+            class: 'woo-toggle-checkbox',
+            desc:  __("Lead time informs customers when a product will be available again. This setting lets you choose which stock statuses will display the restock estimate.", "woocommerce-stock-manager"),
+            options: [
+                {
+                    key: "outofstock",
+                    label: __("Out of stock", "woocommerce-stock-manager"),
+                    value: "outofstock"
+                },
+                {
+                    key: "onbackorder",
+                    label: __("On backorder", "woocommerce-stock-manager"),
+                    value: "onbackorder",
+                }
+            ]
+        },
+        {
+            key: 'lead_time_format',
+            type: 'settingToggle',
+            label: __("Lead Format", "woocommerce-stock-manager"),
+            desc: __("Choose the lead time format: Either dynamic (set unique lead time text for all out of stock product) or static (apply a default lead time text for out of stock products).", "woocommerce-stock-manager"),
+            dependent: {
+                key: "display_lead_times",
+                set: true
+            },
+            // defaultValue: 'static',
+            options: [
+                {
+                    key: "static",
+                    label: __("Static", "woocommerce-stock-manager"),
+                    value: "static"
+                },
+                {
+                    key: "dynamic",
+                    label: __("Dynamic", "woocommerce-stock-manager"),
+                    value: "dynamic",
+                }
+            ],
+            proSetting: true,
+        },
+        {
+            key: 'lead_time_static_text',
+            type: 'text',
+            label: __("Lead time static text", "woocommerce-stock-manager"),
+            desc:  __("This will be the standard message displayed for all out-of-stock products unless a custom lead time is specified.", "woocommerce-stock-manager"),
+            dependent: [
+                {
+                    key: "lead_time_format",
+                    value: "static"
+                },
+                {
+                    key: "display_lead_times",
+                    set: true
+                },
+            ]
+        },
+        {
+            key: 'separator_content',
+            type: 'section',
+            label: "",
+        },
+        {
             key: 'is_enable_no_interest',
             type: 'checkbox',
             label: __("Display subscriber count for out of stock", "woocommerce-stock-manager"),

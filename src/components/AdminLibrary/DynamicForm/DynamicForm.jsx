@@ -10,6 +10,30 @@ import { getApiLink, sendApiResponse } from "../../../services/apiService";
 import Dialog from "@mui/material/Dialog";
 import Popoup from "../../PopupContent/PopupContent";
 import FormCustomizer from "../Inputs/Special/FormCustomizer";
+import ToggleSetting from "../Inputs/Special/ToggleSetting";
+//Product page builder
+import CatalogCustomizer from "../Inputs/Special/CatalogCustomizer/CatalogCustomizer";
+//Table component in settings
+import GridTable from "../Inputs/Special/GridTable/GridTable";
+//Merge select box and text box component
+import MergeComponent from "../Inputs/Special/MergeComponent/MergeComponent";
+//Shortcode list table
+import ShortCodeTable from "../Inputs/Special/ShortCodeTable/ShortCodeTable";
+//customize form builder
+import FromBuilder from "../Inputs/Special/RegistrationForm/RegistrationForm";
+//Merge SyncNow and ConnectButton component later
+import SyncNow from "../Inputs/Special/SyncNow/SyncNow";
+import ConnectButton from "../Inputs/Special/ConnectButton/ConnectButton";
+//Attribute mapping component
+import SyncMap from "../Inputs/Special/SyncMap/SyncMap";
+//Radio button with custom image (change this later)
+import ScheduleInterval from "../Inputs/Special/ScheduleInterval/ScheduleInterval";
+//Generate SSO key 
+import SSOKey from "../Inputs/Special/SSOKey/SSOKey";
+//Show Log file in settings
+import Log from "../Inputs/Special/Log/Log";
+//Checkbox with custom image (change this later)
+import CheckboxCustomImg from "../Inputs/Special/CheckboxCustomImg/CheckboxCustomImg";
 
 // Variable for controll coldown effect submit time
 const PENALTY  = 10;
@@ -185,20 +209,33 @@ const DynamicForm = (props) => {
     return settingValue === value;
   }
 
+  const shouldRender = (dependent) => {
+    if ( dependent.set === true && ! isContain( dependent.key) ) {
+      return false;
+    }
+    if ( dependent.set === false && isContain( dependent.key) ) {
+      return false;
+    }
+    if ( dependent.value && ! isContain( dependent.key, dependent.value ) ) {
+      return false;
+    }
+    return true;
+  }
+
   const renderForm = () => {
     return modal.map((inputField, index) => {
       let value = setting[inputField.key] || "";
       let input = "";
 
       // Filter dependent 
-      if ( inputField.dependent ) {
-        if ( inputField.dependent.set === true && ! isContain( inputField.dependent.key) ) {
-          return;
+      if ( Array.isArray(inputField.dependent) ) {
+        for ( let dependent of inputField.dependent ) {
+          if ( ! shouldRender(dependent) ) {
+            return;
+          }
         }
-        if ( inputField.dependent.set === false && isContain( inputField.dependent.key) ) {
-          return;
-        }
-        if ( inputField.dependent.value && isContain( inputField.dependent.key, inputField.dependent.value ) ) {
+      } else if ( inputField.dependent ) {
+        if ( ! shouldRender(inputField.dependent) ) {
           return;
         }
       }
@@ -618,6 +655,59 @@ const DynamicForm = (props) => {
           );
           break;
 
+        case "checkbox-default":
+          input = (
+            <CustomInput.MultiCheckBox
+              wrapperClass="checkbox-list-side-by-side"
+              descClass="settings-metabox-description"
+              description={inputField.desc}
+              selectDeselectClass="select-deselect-trigger"
+              inputWrapperClass="toggle-checkbox-header"
+              inputInnerWrapperClass="default-checkbox"
+              inputClass={inputField.class}
+              hintOuterClass="checkbox-description"
+              hintInnerClass="hover-tooltip"
+              idPrefix="toggle-switch"
+              selectDeselect={inputField.select_deselect}
+              selectDeselectValue="Select / Deselect All"
+              rightContentClass="settings-metabox-description"
+              rightContent={inputField.right_content}
+              options={inputField.options}
+              value={value}
+              proSetting={isProSetting(inputField.proSetting)}
+              onChange={(e) => {
+                if (!proSettingChanged(inputField.proSetting)) {
+                  handleChange(e, inputField.key, "multiple");
+                }
+              }}
+              onMultiSelectDeselectChange={(e) => {
+                if (!proSettingChanged(inputField.proSetting)) {
+                  handlMultiSelectDeselectChange(inputField.key, inputField.options)
+                }
+              }}
+              proChanged={() => setModelOpen(true)}
+            />
+          );
+          break;
+        case "settingToggle":
+          input =(
+            <ToggleSetting 
+              wrapperClass={`setting-form-input`}
+              descClass="settings-metabox-description"
+              description={inputField.desc}
+              key={inputField.key}
+              options={inputField.options}
+              value={value || inputField.defaultValue}
+              proSetting={isProSetting(inputField.proSetting)}
+              onChange={(data) => {
+                if (!proSettingChanged(inputField.proSetting)) {
+                  settingChanged.current = true;
+                  updateSetting(inputField.key, data)
+                }
+              }}
+            />
+          );
+          break;
         case "table":
           input = (
             <CustomInput.Table
@@ -693,20 +783,188 @@ const DynamicForm = (props) => {
           );
           break;
 
-          case "form_customizer":
-            input = (
-              <FormCustomizer
-                value={value}
-                buttonText={setting.button_text}
-                proSetting={isProSetting(inputField.proSetting)}
-                onChange={(e, key) => {
-                  if ( ! proSettingChanged( inputField.proSetting ) ) {
-                    handleChange(e, key);
-                  }
-                }}
-              />
-            );
-            break;
+        case "form_customizer":
+          input = (
+            <FormCustomizer
+              value={value}
+              buttonText={setting.button_text}
+              proSetting={isProSetting(inputField.proSetting)}
+              onChange={(e, key) => {
+                if ( ! proSettingChanged( inputField.proSetting ) ) {
+                  handleChange(e, key);
+                }
+              }}
+            />
+          );
+          break;
+
+        case "catalog_customizer":
+          input = (
+            <CatalogCustomizer
+              setting={setting}
+              proSetting={appLocalizer.pro_active}
+              onChange={(key, value) => {
+                if (!proSettingChanged(inputField.proSetting)) {
+                  settingChanged.current = true;
+                  updateSetting(key, value);
+                }
+              }}
+            />
+          );
+          break;
+
+        case "grid_table":
+          input = (
+            <GridTable
+              rows={inputField.rows}
+              columns={inputField.columns}
+              description={inputField.desc}
+              setting={setting}
+              onChange={(key, value) => {
+                if (!proSettingChanged(inputField.proSetting)) {
+                  settingChanged.current = true;
+                  updateSetting(key, value);
+                }
+              }}
+            />
+          );
+          break;
+
+        case "from_builder":
+          input = (
+            <FromBuilder
+              name={inputField.key}
+              proSetting={isProSetting(inputField.proSetting)}
+              proSettingChange={()=> proSettingChanged(inputField.proSetting)}
+              onChange={(value) => {
+                // if (!proSettingChanged(inputField.proSetting)) {
+                  settingChanged.current = true;
+                  updateSetting(inputField.key, value);
+                // }
+              }}
+            />
+          );
+          break;
+
+        case "mergeComponent":
+          input =(
+            <MergeComponent 
+              wrapperClass={`setting-form-input`}
+              descClass="settings-metabox-description"
+              description={inputField.desc}
+              value={value}
+              proSetting={isProSetting(inputField.proSetting)}
+              onChange={(data) => {
+                if (!proSettingChanged(inputField.proSetting)) {
+                  settingChanged.current = true;
+                  updateSetting(inputField.key, data)
+                }
+              }}
+            />
+          );
+          break;
+
+        case "shortCode_table":
+          input =(
+            <ShortCodeTable 
+              wrapperClass={`setting-form-input`}
+              descClass="settings-metabox-description"
+              description={inputField.desc}
+              key={inputField.key}
+              options={inputField.option}
+              optionLabel={inputField.optionLabel}
+            />
+          );
+          break;
+
+        case "syncbutton":
+          input = <SyncNow
+            buttonKey={inputField.key}
+            apilink={inputField.apilink}
+            value={inputField.value}
+            description={inputField.desc}
+            proSetting={isProSetting(inputField.proSetting)}
+            proSettingChanged={() => proSettingChanged(inputField.proSetting)}
+            interval={inputField.interval}
+            statusApiLink={inputField.statusApiLink}
+          />
+          break;
+
+        case "sync_map":
+          input = <SyncMap
+            description={inputField.desc}
+            proSetting={isProSetting(inputField.proSetting)}
+            proSettingChanged={() => proSettingChanged(inputField.proSetting)}
+            value={value}
+            onChange={(value) => {
+              if (!proSettingChanged(inputField.proSetting) && true) {
+                settingChanged.current = true;
+                updateSetting(inputField.key, value)
+              }
+            }}
+          />
+          break;
+
+        case "select-custom-radio":
+          let option = inputField.options;
+          input = <ScheduleInterval
+            wrapperClass="form-select-field-wrapper"
+            descClass="settings-metabox-description"
+            description={inputField.desc}
+            inputClass={inputField.key}
+            options={option}
+            value={value}
+            proSetting={isProSetting(inputField.proSetting)}
+            onChange={(data) => {
+              if (!proSettingChanged(inputField.proSetting)) {
+                settingChanged.current = true;
+                updateSetting(inputField.key, data.value)
+              }
+            }}
+          />
+          break;
+
+        case "sso_key":
+          input = <SSOKey
+            value={value}
+            description={inputField.desc}
+            proSetting={isProSetting(inputField.proSetting)}
+            onChange={(value) => {
+              if (!proSettingChanged(inputField.proSetting) && true) {
+                settingChanged.current = true;
+                updateSetting(inputField.key, value)
+              }
+            }}
+          />
+          break;
+
+        case "testconnection":
+          input = <ConnectButton 
+            apiLink={inputField.apiLink}
+            tasks={inputField.tasks}/>
+          break;
+
+        case "log":
+          input = <Log 
+            fetchApiLink={inputField.fetchApiLink}
+            downloadApiLink={inputField.downloadApiLink}/>
+          break;
+
+        case "checkbox-custom-img":
+          input = <CheckboxCustomImg
+            proSetting={isProSetting(inputField.proSetting)}
+            description={inputField.desc}
+            value={value}
+            image1={inputField.image1}
+            image2={inputField.image2}
+            onChange={(data) => {
+              if (!proSettingChanged(inputField.proSetting)) {
+                settingChanged.current = true;
+                updateSetting(inputField.key, data)
+              }
+            }}
+          />
+          break;
 
         case "api_connect":
           input = (

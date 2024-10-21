@@ -19,6 +19,8 @@ class FrontEnd {
         add_filter( 'woocommerce_grouped_product_list_column_price', [ $this, 'display_in_grouped_product' ], 10, 2 );
         // Hover style
         add_action( 'wp_head', [ $this, 'frontend_hover_styles' ] );
+        
+        add_filter( 'stock_manager_display_product_lead_time', [ $this, 'display_product_lead_time' ], 10 );
     } 
 
     /**
@@ -261,7 +263,9 @@ class FrontEnd {
             $shown_interest_html = '<p>' . $shown_interest_text . '</p>';
         } 
 
+        $lead_text_html = apply_filters( 'stock_manager_display_product_lead_time', $variation ? $variation : $product );
         return
+        $lead_text_html .
         '<div class="stock-notifier-subscribe-form" style="border-radius:10px;">
             ' . $alert_text_html . '
             <div class="fields_wrap"> ' . $stock_manager_fields_html . '' . $button_html . '
@@ -271,5 +275,21 @@ class FrontEnd {
             <input type="hidden" class="current-product-name" value="' . esc_attr( $product->get_title() ) . '" />
             ' . $shown_interest_html . '
         </div>';
-    } 
+    }
+
+    /**
+     * Display lead time for a product
+     *
+     * @version 2.5.12
+     */
+    public function display_product_lead_time( $product ){
+        if ( empty( $product ) )
+            return;
+        $display_lead_times  = SM()->setting->get_setting( 'display_lead_times' );
+        if ( !empty($display_lead_times) && in_array($product->get_stock_status(), $display_lead_times) ) {
+            $lead_time_static_text = SM()->setting->get_setting( 'lead_time_static_text' );
+            return '<p>' . esc_html( $lead_time_static_text ) . '</p>';
+        }
+        return '';
+    }
 }

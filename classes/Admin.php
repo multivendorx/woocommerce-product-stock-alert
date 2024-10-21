@@ -195,6 +195,7 @@ class Admin {
                 'subscriber_list'           => SM()->plugin_url . 'src/assets/images/subscriber-list.jpg',
                 'export_button'             => admin_url( 'admin-ajax.php?action=export_subscribers' ),
                 'pro_active'                => Utill::is_pro_active(),
+                'tab_name'                  => __("Stock Manager", "woocommerce-stock-manager"),
                 'settings_databases_value'  => $settings_databases_value,
                 'pro_url'                   => esc_url( STOCK_MANAGER_PRO_SHOP_URL ),
                 'is_double_optin_free'      => __("Upgrade to <a href=\"" . STOCK_MANAGER_PRO_SHOP_URL . "\" target=\"_blank\"><span class=\"pro-strong\">Pro</span></a> to enable Double Opt-in flow for subscription confirmation.", "woocommerce-stock-manager"),
