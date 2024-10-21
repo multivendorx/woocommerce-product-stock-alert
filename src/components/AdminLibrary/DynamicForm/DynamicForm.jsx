@@ -11,17 +11,28 @@ import Dialog from "@mui/material/Dialog";
 import Popoup from "../../PopupContent/PopupContent";
 import FormCustomizer from "../Inputs/Special/FormCustomizer";
 import ToggleSetting from "../Inputs/Special/ToggleSetting";
+//Product page builder
 import CatalogCustomizer from "../Inputs/Special/CatalogCustomizer/CatalogCustomizer";
+//Table component in settings
 import GridTable from "../Inputs/Special/GridTable/GridTable";
+//Merge select box and text box component
 import MergeComponent from "../Inputs/Special/MergeComponent/MergeComponent";
+//Shortcode list table
 import ShortCodeTable from "../Inputs/Special/ShortCodeTable/ShortCodeTable";
+//customize form builder
 import FromBuilder from "../Inputs/Special/RegistrationForm/RegistrationForm";
+//Merge SyncNow and ConnectButton component later
 import SyncNow from "../Inputs/Special/SyncNow/SyncNow";
-import SyncMap from "../Inputs/Special/SyncMap/SyncMap";
-import ScheduleInterval from "../Inputs/Special/ScheduleInterval/ScheduleInterval";
-import SSOKey from "../Inputs/Special/SSOKey/SSOKey";
 import ConnectButton from "../Inputs/Special/ConnectButton/ConnectButton";
+//Attribute mapping component
+import SyncMap from "../Inputs/Special/SyncMap/SyncMap";
+//Radio button with custom image (change this later)
+import ScheduleInterval from "../Inputs/Special/ScheduleInterval/ScheduleInterval";
+//Generate SSO key 
+import SSOKey from "../Inputs/Special/SSOKey/SSOKey";
+//Show Log file in settings
 import Log from "../Inputs/Special/Log/Log";
+//Checkbox with custom image (change this later)
 import CheckboxCustomImg from "../Inputs/Special/CheckboxCustomImg/CheckboxCustomImg";
 
 // Variable for controll coldown effect submit time
