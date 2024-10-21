@@ -265,7 +265,7 @@ class FrontEnd {
 
         $lead_text_html = apply_filters( 'stock_manager_display_product_lead_time', $variation ? $variation : $product );
         return
-        $lead_text_html.
+        $lead_text_html .
         '<div class="stock-notifier-subscribe-form" style="border-radius:10px;">
             ' . $alert_text_html . '
             <div class="fields_wrap"> ' . $stock_manager_fields_html . '' . $button_html . '
@@ -290,5 +290,6 @@ class FrontEnd {
             $lead_time_static_text = SM()->setting->get_setting( 'lead_time_static_text' );
             return '<p>' . esc_html( $lead_time_static_text ) . '</p>';
         }
+        return '';
     }
 }
