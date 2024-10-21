@@ -186,6 +186,7 @@ class Install {
             'shown_interest_text' => __( 'Kindly check your inbox to confirm the subscription.', 'woocommerce-stock-manager' ), 
             'additional_alert_email' => get_option( 'admin_email' ),
             'is_guest_subscriptions_enable' => ['is_guest_subscriptions_enable'],
+            'lead_time_format'  => 'static',
             
             // Form customization settings
             'email_placeholder_text' => __( 'Enter your email', 'woocommerce-stock-manager' ), 
@@ -331,6 +332,10 @@ class Install {
          
         if ( version_compare( $previous_version, '2.5.5', '<=' ) ) {
             $appearance_settings['is_guest_subscriptions_enable'] = ['is_guest_subscriptions_enable'];
+        }
+
+        if ( version_compare( $previous_version, '2.5.12', '<=' ) ) {
+            $appearance_settings['lead_time_format'] = 'static';
         }
 
         $previous_appearance_settings   = get_option( 'woo_stock_manager_appearance_tab_settings', [] );

@@ -89,7 +89,7 @@ export default {
                 key: "display_lead_times",
                 set: true
             },
-            defaultValue: 'static',
+            // defaultValue: 'static',
             options: [
                 {
                     key: "static",
