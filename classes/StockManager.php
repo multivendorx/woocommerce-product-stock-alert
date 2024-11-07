@@ -234,12 +234,14 @@ class StockManager {
         return self::$instance;
     }
     public function enqueue_block_assets() {
-        wp_enqueue_script(
-            'stock_manager_form',
-            SM()->plugin_url . 'build/block/stock-manager-form/index.js',
-            ['wp-blocks', 'wp-element', 'wp-editor', 'wp-components', 'wp-i18n'],
-            SM()->version,
-            true
-        );
+        if (is_admin()){
+            wp_enqueue_script(
+                'stock_manager_form',
+                SM()->plugin_url . 'build/block/stock-manager-form/index.js',
+                ['wp-blocks', 'wp-element', 'wp-editor', 'wp-components', 'wp-i18n'],
+                SM()->version,
+                true
+            );
+        }
     } 
 }     
