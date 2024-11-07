@@ -234,7 +234,7 @@ class StockManager {
         return self::$instance;
     }
     public function enqueue_block_assets() {
-        if (is_admin()){
+        if ( is_admin() ) {
             wp_enqueue_script(
                 'stock_manager_form',
                 SM()->plugin_url . 'build/block/stock-manager-form/index.js',
