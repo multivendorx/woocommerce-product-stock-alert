@@ -12,7 +12,7 @@ class Shortcode {
         add_shortcode( 'display_stock_alert_form', [ $this, 'display_stock_manager_form' ] );
 
         // Hook to ensure actions are removed at the right time
-        add_action( 'init', [ $this, 'conditionally_remove_actions' ] );
+        add_action( 'wp', [ $this, 'conditionally_remove_actions' ] );
 	} 
 
     /**
