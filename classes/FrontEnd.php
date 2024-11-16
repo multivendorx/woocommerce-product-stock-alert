@@ -28,6 +28,7 @@ class FrontEnd {
      * @return void
      */
     function frontend_scripts() {
+        global $post;
         $frontend_script_path = SM()->plugin_url . 'frontend/js/';
         $suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
         $suffix = ''; /// Should be removed.
@@ -50,7 +51,7 @@ class FrontEnd {
         $subscribe_button_html = '<button style="' . $button_css .'" class="stock-manager-button alert_button_hover" name="alert_button">' . $settings_array[ 'button_text' ] . '</button>';
         $unsubscribe_button_html = '<button class="unsubscribe-button" style="' . $button_css .'">' . $settings_array[ 'unsubscribe_button_text' ] . '</button>';
 
-        if ( is_product() || is_shop() || is_product_category() ) {
+        if ( is_product() || is_shop() || is_product_category() || isset( $post->post_content ) && has_shortcode( $post->post_content, 'display_stock_manager_form' ) ) {
             // Enqueue your frontend javascript from here
             wp_enqueue_script( 'stock_manager_frontend_js', $frontend_script_path . 'frontend' . $suffix . '.js', [ 'jquery' ], SM()->version, true );
         
@@ -121,7 +122,6 @@ class FrontEnd {
      */
     public function display_product_subscription_form($productObj = null) {
         global $product;
-
         $productObj = is_int($productObj) ? wc_get_product($productObj) : ($productObj ?: $product);
 
         if ( empty( $productObj ) )
