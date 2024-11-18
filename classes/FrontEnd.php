@@ -51,7 +51,7 @@ class FrontEnd {
         $subscribe_button_html = '<button style="' . $button_css .'" class="stock-manager-button alert_button_hover" name="alert_button">' . $settings_array[ 'button_text' ] . '</button>';
         $unsubscribe_button_html = '<button class="unsubscribe-button" style="' . $button_css .'">' . $settings_array[ 'unsubscribe_button_text' ] . '</button>';
 
-        if ( is_product() || is_shop() || is_product_category() || isset( $post->post_content ) && has_shortcode( $post->post_content, 'display_stock_manager_form' ) ) {
+        if ( is_product() || is_shop() || is_product_category() || is_page() || ( is_single() && has_shortcode( $post->post_content, 'display_stock_manager_form' ) ) ) {
             // Enqueue your frontend javascript from here
             wp_enqueue_script( 'stock_manager_frontend_js', $frontend_script_path . 'frontend' . $suffix . '.js', [ 'jquery' ], SM()->version, true );
         

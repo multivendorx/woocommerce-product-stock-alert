@@ -42,7 +42,7 @@ class Shortcode {
     public function conditionally_remove_actions() {
         global $post;
 
-        if ( isset( $post->post_content ) && has_shortcode( $post->post_content, 'display_stock_manager_form' ) ) {
+        if ( is_page() || (is_single() && has_shortcode($post->post_content, 'display_stock_manager_form') ) ) {
             // remove default stock manager position
             remove_action( 'woocommerce_simple_add_to_cart',    [ SM()->frontend, 'display_product_subscription_form' ], 31 );
             remove_action( 'woocommerce_bundle_add_to_cart',    [ SM()->frontend, 'display_product_subscription_form' ], 31 );

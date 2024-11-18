@@ -22,6 +22,12 @@ class RestAPI
             'callback' => [ $this, 'save_stockmanager_setting' ],
             'permission_callback' => [ $this, 'stockmanager_permission' ],
         ] );
+
+        register_rest_route( SM()->rest_namespace, '/render-form', [
+            'methods' => 'GET',
+            'callback' => [ $this, 'render_subscription_form' ],
+            'permission_callback' => [ $this, 'stockmanager_permission' ],
+        ] );
     }
 
     /**
@@ -53,5 +59,17 @@ class RestAPI
         $all_details[ 'error' ] = __( 'Settings Saved', 'woocommerce-stock-manager' );
 
         return $all_details;
+    }
+
+    public function render_subscription_form($request) {
+        $product_id = $request->get_param('product_id');
+
+        // Start output buffering
+        ob_start();
+
+        SM()->frontend->display_product_subscription_form(intval($product_id));
+        
+        // Return the output
+        return rest_ensure_response(['html' => ob_get_clean()]);
     }
 }

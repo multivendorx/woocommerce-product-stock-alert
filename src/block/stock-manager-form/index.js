@@ -1,13 +1,14 @@
 import { registerBlockType } from '@wordpress/blocks';
 import { useBlockProps } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
-import { useEffect } from '@wordpress/element';
+import { useState, useEffect } from '@wordpress/element';
 import { useSelect } from '@wordpress/data';
+import axios from 'axios'; // Import axios
 
 registerBlockType('woocommerce-stock-manager/stock-manager-form', {
     title: __('Stock Manager Form', 'woocommerce-stock-manager'),
     description: __('A block to display the Stock Manager form.', 'woocommerce-stock-manager'),
-    category: 'widgets',
+    category: 'woocommerce',
     icon: 'clipboard',
     supports: {
         html: false,
@@ -21,6 +22,7 @@ registerBlockType('woocommerce-stock-manager/stock-manager-form', {
 
     edit: ({ attributes, setAttributes }) => {
         const blockProps = useBlockProps();
+        const [formHtml, setFormHtml] = useState(__('Loading form...', 'woocommerce-stock-manager'));
 
         // Select the product ID from the WooCommerce Single Product Block
         const productId = useSelect((select) => {
@@ -38,25 +40,27 @@ registerBlockType('woocommerce-stock-manager/stock-manager-form', {
             }
         }, [productId]);
 
+        // Fetch the rendered form from the REST API
+        useEffect(() => {
+            if (productId) {
+                axios.get(`${stockManagerForm.apiUrl}/stockmanager/v1/render-form?product_id=${productId}`)
+                    .then((response) => {
+                        setFormHtml(response.data.html || __('Failed to load form.', 'woocommerce-stock-manager'));
+                    });
+            } else {
+                setFormHtml(__('No product selected.', 'woocommerce-stock-manager'));
+            }
+        }, [productId]);
+
         return (
             <div {...blockProps}>
-                <p>{__('Stock Manager Form Block', 'woocommerce-stock-manager')}</p>
+                <div dangerouslySetInnerHTML={{ __html: formHtml }} />
             </div>
         );
     },
 
-    save: ({ attributes }) => {
-        const blockProps = useBlockProps.save();
-
-        // Render the shortcode dynamically with the saved productId
-        return (
-            <div {...blockProps}>
-                {attributes.productId ? (
-                    <p>[display_stock_manager_form product_id="{attributes.productId}"]</p>
-                ) : (
-                    <p>[display_stock_manager_form]</p>
-                )}
-            </div>
-        );
+    save: () => {
+        // Save function remains empty since rendering is handled by the PHP render callback
+        return null;
     },
 });

@@ -39,6 +39,7 @@ class StockManager {
         add_action( 'plugins_loaded', [ $this, 'is_woocommerce_loaded' ] );
         add_filter( 'plugin_row_meta', [ $this, 'plugin_row_meta' ], 10, 2 );
         add_action( 'enqueue_block_assets', [ $this,'enqueue_block_assets'] );
+        add_action( 'init', [$this, 'register_block'] );
     } 
 
     /**
@@ -241,5 +242,31 @@ class StockManager {
             SM()->version,
             true
         );
-    } 
+
+        wp_localize_script( 'stock_manager_form', 'stockManagerForm', [ 
+            'apiUrl'  => untrailingslashit( get_rest_url() ), 
+            'nonce'   => wp_create_nonce( 'wp_rest' ),
+        ]);
+    }
+
+    public function render_stock_manager_form_block($attributes) {
+        // Extract the productId from attributes
+        $product_id = isset($attributes['productId']) ? intval($attributes['productId']) : null;
+    
+        // Start output buffering
+        ob_start();
+    
+        SM()->frontend->display_product_subscription_form($product_id);
+    
+        return ob_get_clean();
+    }
+    
+    public function register_block() {
+        // Register the block type with the render callback
+        register_block_type('woocommerce-stock-manager/stock-manager-form', [
+            'render_callback' => [$this, 'render_stock_manager_form_block'], 
+        ]);
+    }
+    
+    
 }     
