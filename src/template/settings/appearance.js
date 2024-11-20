@@ -4,12 +4,12 @@ export default {
     priority: 1,
     name: __("Appearance", "woocommerce-stock-manager"),
     desc: __("Customize stock alert form.", "woocommerce-stock-manager"),
-    icon: 'font-settings',
+    icon: 'adminLib-settings',
     submitUrl: 'save-stockmanager',
     modal: [
         {
             key: "subscribe_form",
-            type: "form_customizer",
+            type: "stock-alert-form-customizer",
             label: __("Personalize Layout", "woocommerce-stock-manager")
         },
         {

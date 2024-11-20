@@ -34,7 +34,7 @@ export const TableCell = (props) => {
   return (
     <>
       <div title={props.value} className="table-row-custom">
-        <h4>{props.title}</h4>
+        {/* <h4>{props.title}</h4> */}
         {props.children}
       </div>
     </>
@@ -79,7 +79,7 @@ const CustomTable = (props) => {
       cell: (row) => (
         <div className="table-dropdown_btn">
           <button onClick={(e) => handleTableExpand(e.currentTarget)}>
-            <i class="admin-font font-arrow-right"></i>
+            <i class="admin-font adminLib-arrow-right"></i>
           </button>
         </div>
       ),
@@ -89,8 +89,8 @@ const CustomTable = (props) => {
 
   // Function that handle table expand.
   const handleTableExpand = (e) => {
-    e.children[0].classList.toggle('font-arrow-down');
-    e.children[0].classList.toggle('font-arrow-right');
+    e.children[0].classList.toggle('adminLib-arrow-down');
+    e.children[0].classList.toggle('adminLib-arrow-right');
     const row = e.parentElement.parentElement.parentElement;
     row.classList.toggle("active");
   }

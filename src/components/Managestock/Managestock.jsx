@@ -106,7 +106,7 @@ const Managestock = () => {
             aria-labelledby="form-dialog-title"
           >
             <span
-              className="admin-font font-cross stock-manager-popup-cross"
+              className="admin-font adminLib-cross stock-manager-popup-cross"
               onClick={() => {
                 setOpenDialog(false);
               }}
@@ -141,7 +141,7 @@ const Managestock = () => {
             </div>
             {displayMessage && (
               <div className="admin-notice-display-title">
-                <i className="admin-font font-icon-yes"></i>
+                <i className="admin-font adminLib-icon-yes"></i>
                 {displayMessage}
               </div>
             )}
