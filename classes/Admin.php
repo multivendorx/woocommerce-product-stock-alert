@@ -186,7 +186,7 @@ class Admin {
             $settings_databases_value[ $tab_name ] = SM()->setting->get_option( 'woo_stock_manager_' . $tab_name . '_tab_settings' );
         }
         
-        if ( get_current_screen()->id == 'toplevel_page_stock-manager' ) {
+        if ( get_current_screen()->id == 'toplevel-page-stock-manager' ) {
             wp_enqueue_script( 'stockmanager-script', SM()->plugin_url . 'build/index.js', [ 'wp-element', 'wp-i18n', 'react-jsx-runtime' ], SM()->version, true );
             wp_set_script_translations( 'stockmanager-script', 'woocommerce-stock-manager' );
             wp_localize_script( 'stockmanager-script', 'appLocalizer', apply_filters( 'stock_manager_settings', [ 
