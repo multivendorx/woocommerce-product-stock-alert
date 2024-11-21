@@ -38,7 +38,6 @@ class FrontEnd {
      * @return void
      */
     function frontend_scripts() {
-        global $post;
         $frontend_script_path = SM()->plugin_url . 'frontend/js/';
         $suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
         $suffix = ''; /// Should be removed.
