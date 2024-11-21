@@ -5,9 +5,9 @@ import { useState, useEffect } from '@wordpress/element';
 import { useSelect } from '@wordpress/data';
 import axios from 'axios'; // Import axios
 
-registerBlockType('woocommerce-stock-manager/stock-manager-form', {
-    title: __('Stock Manager Form', 'woocommerce-stock-manager'),
-    description: __('A block to display the Stock Manager form.', 'woocommerce-stock-manager'),
+registerBlockType('woocommerce-stock-manager/stock-notification-block', {
+    title: __('Stock Notification Block', 'woocommerce-stock-manager'),
+    description: __('This block can be connected to WooCommerce Out-of-Stock and Backorder products to provide a stock notification form for users.', 'woocommerce-stock-manager'),
     category: 'woocommerce',
     icon: 'clipboard',
     supports: {
