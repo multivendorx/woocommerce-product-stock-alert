@@ -10,18 +10,28 @@ class FrontEnd {
         //enqueue styles
         add_action( 'wp_enqueue_scripts', [ &$this, 'frontend_styles' ] );
 
-        add_action( 'woocommerce_simple_add_to_cart', [ $this, 'display_product_subscription_form' ], 31 );
-        add_action( 'woocommerce_bundle_add_to_cart', [ $this, 'display_product_subscription_form' ], 31 );
-        add_action( 'woocommerce_subscription_add_to_cart', [ $this, 'display_product_subscription_form' ], 31 );
-        add_action( 'woocommerce_woosb_add_to_cart', [ $this, 'display_product_subscription_form' ], 31 );
-        add_action( 'woocommerce_after_variations_form', [ $this, 'display_product_subscription_form' ], 31 );
-        //support for grouped products
-        add_filter( 'woocommerce_grouped_product_list_column_price', [ $this, 'display_in_grouped_product' ], 10, 2 );
+        add_action ( 'wp', [ $this, 'load_subscription_form' ] );
+        
         // Hover style
         add_action( 'wp_head', [ $this, 'frontend_hover_styles' ] );
         
         add_filter( 'stock_manager_display_product_lead_time', [ $this, 'display_product_lead_time' ], 10 );
-    } 
+    }
+
+    /**
+     * Add the product subscription form in single product page 
+     */
+    function load_subscription_form() {
+        if (is_product()) {
+            add_action( 'woocommerce_simple_add_to_cart', [ $this, 'display_product_subscription_form' ], 31 );
+            add_action( 'woocommerce_bundle_add_to_cart', [ $this, 'display_product_subscription_form' ], 31 );
+            add_action( 'woocommerce_subscription_add_to_cart', [ $this, 'display_product_subscription_form' ], 31 );
+            add_action( 'woocommerce_woosb_add_to_cart', [ $this, 'display_product_subscription_form' ], 31 );
+            add_action( 'woocommerce_after_variations_form', [ $this, 'display_product_subscription_form' ], 31 );
+            //support for grouped products
+            add_filter( 'woocommerce_grouped_product_list_column_price', [ $this, 'display_in_grouped_product' ], 10, 2 );  
+        }
+    }
 
     /**
      * Enque Frontend's JavaScript. And Send Localize data.
@@ -50,29 +60,32 @@ class FrontEnd {
 
         $subscribe_button_html = '<button style="' . $button_css .'" class="stock-manager-button alert_button_hover" name="alert_button">' . $settings_array[ 'button_text' ] . '</button>';
         $unsubscribe_button_html = '<button class="unsubscribe-button" style="' . $button_css .'">' . $settings_array[ 'unsubscribe_button_text' ] . '</button>';
-
-        if ( is_product() || is_shop() || is_product_category() || is_page() || ( is_single() && has_shortcode( $post->post_content, 'display_stock_manager_form' ) ) ) {
-            // Enqueue your frontend javascript from here
-            wp_enqueue_script( 'stock_manager_frontend_js', $frontend_script_path . 'frontend' . $suffix . '.js', [ 'jquery' ], SM()->version, true );
         
-            wp_localize_script( 'stock_manager_frontend_js', 'localizeData', [
-                'ajax_url' => admin_url( 'admin-ajax.php', 'relative' ), 
-                'nonce'  => wp_create_nonce( 'stock-manager-security-nonce' ), 
-                'additional_fields' => apply_filters( 'woocommerce_stock_manager_form_additional_fields', [] ), 
-                'button_html' => $subscribe_button_html, 
-                'alert_success' => $settings_array[ 'alert_success' ], 
-                'alert_email_exist' => $settings_array[ 'alert_email_exist' ], 
-                'valid_email' => $settings_array[ 'valid_email' ], 
-                'ban_email_domain_text' => $settings_array[ 'ban_email_domain_text' ], 
-                'ban_email_address_text' => $settings_array[ 'ban_email_address_text' ], 
-                'double_opt_in_success' => $settings_array[ 'double_opt_in_success' ], 
-                'processing' => __( 'Processing...', 'woocommerce-stock-manager' ), 
-                'error_occurs' => __( 'Some error occurs', 'woocommerce-stock-manager' ), 
-                'try_again' => __( 'Please try again.', 'woocommerce-stock-manager' ), 
-                'unsubscribe_button' => $unsubscribe_button_html, 
-                'alert_unsubscribe_message' => $settings_array[ 'alert_unsubscribe_message' ], 
-                'recaptcha_enabled' => apply_filters( 'stock_manager_recaptcha_enabled', false )
-            ]);
+        wp_register_script( 'stock_manager_frontend_js', $frontend_script_path . 'frontend' . $suffix . '.js', [ 'jquery', 'wp-element', 'wp-components' ], SM()->version, true );
+        
+        wp_localize_script( 'stock_manager_frontend_js', 'localizeData', [
+            'ajax_url' => admin_url( 'admin-ajax.php', 'relative' ), 
+            'nonce'  => wp_create_nonce( 'stock-manager-security-nonce' ), 
+            'additional_fields' => apply_filters( 'woocommerce_stock_manager_form_additional_fields', [] ), 
+            'button_html' => $subscribe_button_html, 
+            'alert_success' => $settings_array[ 'alert_success' ], 
+            'alert_email_exist' => $settings_array[ 'alert_email_exist' ], 
+            'valid_email' => $settings_array[ 'valid_email' ], 
+            'ban_email_domain_text' => $settings_array[ 'ban_email_domain_text' ], 
+            'ban_email_address_text' => $settings_array[ 'ban_email_address_text' ], 
+            'double_opt_in_success' => $settings_array[ 'double_opt_in_success' ], 
+            'processing' => __( 'Processing...', 'woocommerce-stock-manager' ), 
+            'error_occurs' => __( 'Some error occurs', 'woocommerce-stock-manager' ), 
+            'try_again' => __( 'Please try again.', 'woocommerce-stock-manager' ), 
+            'unsubscribe_button' => $unsubscribe_button_html, 
+            'alert_unsubscribe_message' => $settings_array[ 'alert_unsubscribe_message' ], 
+            'recaptcha_enabled' => apply_filters( 'stock_manager_recaptcha_enabled', false )
+        ]);
+        
+        if ( is_product() || is_shop() || is_product_category() ) {
+            // Enqueue your frontend javascript from here
+            wp_enqueue_script( 'stock_manager_frontend_js' );
+            
         }
     }
 
