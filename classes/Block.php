@@ -13,15 +13,16 @@ class Block {
 
     public function enqueue_block_assets() {
         wp_enqueue_script(
-            'stock_manager_form',
+            'stock_notification_form',
             SM()->plugin_url . 'build/block/stock-notification-form/index.js',
             ['wp-blocks', 'wp-element', 'wp-editor', 'wp-components', 'wp-i18n'],
             SM()->version,
             true
         );
 
-        wp_localize_script( 'stock_manager_form', 'stockManagerForm', [ 
-            'apiUrl'  => untrailingslashit( get_rest_url() ), 
+        wp_localize_script( 'stock_notification_form', 'stockNotificationForm', [ 
+            'apiUrl'  => untrailingslashit( get_rest_url() ),
+            'restUrl'                  => 'stockmanager/v1',
             'nonce'   => wp_create_nonce( 'stock-manager-security-nonce' ),
         ]);
         
