@@ -1,35 +1,4 @@
-@font-face {
-  font-family: "admin-font";
-  src: url("fonts/admin-font.eot?uvhhhx");
-  src:
-    url("fonts/admin-font.eot?uvhhhx#iefix") format("embedded-opentype"),
-    url("fonts/admin-font.ttf?uvhhhx") format("truetype"),
-    url("fonts/admin-font.woff?uvhhhx") format("woff"),
-    url("fonts/admin-font.svg?uvhhhx#admin-font") format("svg");
-  font-weight: normal;
-  font-style: normal;
-  font-display: block;
-}
-
-[class^="font"],
-[class*=" font"] {
-  /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: "admin-font" !important;
-  speak: never;
-  font-style: normal;
-  font-weight: normal;
-  font-variant: normal;
-  text-transform: none;
-  line-height: 1;
-
-  /* Better Font Rendering =========== */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-.font-person:before {
-  content: "\e520";
-}
+@import '/src/components/config.scss';
 
 div.subscriber-img {
   background-image: url("../../assets/images/subscriber-list.jpg") !important; // force to set image for ungrade with pro for desktop-screen
@@ -57,20 +26,9 @@ div.subscriber-img {
   }
 }
 
-span.rs-picker-toggle-placeholder {
-  display: none;
-}
-
 .sc-evZas.dFsTSm {
   overflow: visible;
 }
-
-$menu-btn-color: #522c81;
-$body-background: #f9f9f9;
-$color-white: #fff;
-$menu-color: #f9f8fb;
-$color-active: #65438f;
-
 
 .free-reports-download-section {
   display: flex;
@@ -91,16 +49,13 @@ $color-active: #65438f;
     margin-right: 1rem;
     padding: 0.504rem 1.26rem 0.63rem;
     font-size: 1.008rem;
-    text-align: center;
-    text-decoration: none;
-    cursor: pointer;
     background-color: $color-active;
     border-radius: 0.315rem;
     position: relative;
     overflow: hidden;
 
     a {
-      color: #fff;
+      color: $color-white;
     }
 
     &:hover {
@@ -145,19 +100,9 @@ $color-active: #65438f;
     }
 
     .download-btn-subscriber-list {
-      border-radius: 0.25rem;
-      background-color: $color-active;
-      padding: 0.5rem 1rem;
-
       .admin-btn {
         &.btn-purple {
-        color: $color-white;
-        display: flex;
-        align-items: center;
-        justify-content: center;
         gap: 0.5rem;
-        text-decoration: none;
-        background-color: $color-active;
 
         .dashicons-before {
           &::before {
@@ -194,7 +139,7 @@ $color-active: #65438f;
     max-width: 12.6rem;
 
     @media screen and (max-width: 31rem) {
-      margin-left: 0 !important;
+      margin-left: 0 !important; // For responsive design
     }
   }
 
@@ -203,8 +148,6 @@ $color-active: #65438f;
     align-items: center;
     justify-content: flex-start;
     gap: 0.5rem;
-    flex-wrap: nowrap !important;
-    min-width: 14rem !important;
     position: relative;
 
     label {
@@ -212,148 +155,27 @@ $color-active: #65438f;
       width: 8.19rem;
     }
 
-    select {
-      max-width: 9.45rem;
-      width: 100%;
-      line-height: 1;
-      padding: 0.05rem 0.5rem;
-      background-color: transparent !important;
-      border: 0.115rem solid rgba(0, 0, 0, 0.125) !important;
-      border-radius: 0.25rem !important;
-      color: rgb(44, 51, 56);
-
-      &:focus {
-        box-shadow: none;
-      }
-    }
-
     button {
-      border-radius: 0.25rem;
-      background-color: #65438f;
+      border-radius: $border-radius-small;
+      background-color: $color-active;
       padding: 0.5rem 1.5rem;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
+      color: $color-white;
     }
   }
 }
-
-@media only screen and (max-width: 85.365rem) {
-  .rdt_Table {
-    .rdt_TableBody {
-      .rdt_TableRow {
-        .rdt_TableCell {
-          .table-row-custom {
-            &:nth-child(2) {}
-          }
-        }
-      }
-    }
-  }
-}
-
 
 .sent {
   color: green;
 }
 
 .subscribed {
-  color: #65438f;
+  color: $color-active;
 }
 
 .unsubscribed {
   color: red;
 }
 
-.error-modal {
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-  background-color: rgba($color: #000000, $alpha: 0.4);
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  .modal-wrapper {
-    max-width: 15.75rem;
-    width: 100%;
-    background-color: #fff;
-    border-radius: 0.25rem;
-    padding: 1.5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap: 0.5rem;
-
-    .icons {
-      svg {
-        width: 2.52rem;
-        color: $color-active;
-      }
-    }
-
-    p {
-      font-size: 1rem;
-    }
-
-    .button-close {
-      padding: 0.75rem 2rem;
-      background: transparent;
-      border: 0.126rem solid $color-active !important;
-      font-size: 0.875rem;
-      color: $color-active;
-      border-radius: 0.378rem;
-      cursor: pointer;
-      position: relative;
-      display: flex;
-      overflow: hidden;
-      transition: all 0.5s;
-      z-index: 1;
-
-      &::after,
-      &::before {
-        content: "";
-        position: absolute;
-        width: 0;
-        height: 100%;
-        background: $color-active;
-        top: 0;
-        transform: skewX(35deg);
-        transition: all 0.5s;
-        z-index: -1;
-      }
-
-      &::after {
-        left: -1.26rem;
-      }
-
-      &::before {
-        right: -1.26rem;
-      }
-
-      &:hover {
-        color: $color-white;
-
-        &::after {
-          width: 50%;
-          left: 0;
-        }
-
-        &::before {
-          width: 50%;
-          right: 0;
-        }
-      }
-    }
-  }
-}
 
 @media screen and (max-width: 46.0625rem) {
   .filter-wrapper .wrap-bulk-all-date > div{

@@ -45,10 +45,10 @@ const MultiCheckBox = (props) => {
                                         }}
                                     />
                                     <label htmlFor={`${props.idPrefix}-${option.key}`}></label>
-                                    {
-                                        props.proSetting && <span className="admin-pro-tag">pro</span>
-                                    }
                                 </div>
+                                {
+                                    props.proSetting && <span className="admin-pro-tag">pro</span>
+                                }
                                 {
                                     !props.rightContent &&
                                     <p className={props.rightContentClass} dangerouslySetInnerHTML={{ __html: option.label }} ></p>
