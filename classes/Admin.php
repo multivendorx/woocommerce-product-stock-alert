@@ -185,12 +185,13 @@ class Admin {
         foreach( $tabs_names as $tab_name ) {
             $settings_databases_value[ $tab_name ] = SM()->setting->get_option( 'woo_stock_manager_' . $tab_name . '_tab_settings' );
         }
-        
+
         if ( get_current_screen()->id == 'toplevel_page_stock-manager' ) {
             wp_enqueue_script( 'stockmanager-script', SM()->plugin_url . 'build/index.js', [ 'wp-element', 'wp-i18n', 'react-jsx-runtime' ], SM()->version, true );
             wp_set_script_translations( 'stockmanager-script', 'woocommerce-stock-manager' );
             wp_localize_script( 'stockmanager-script', 'appLocalizer', apply_filters( 'stock_manager_settings', [ 
-                'apiUrl'                    => untrailingslashit( get_rest_url() ), 
+                'apiUrl'                    => untrailingslashit( get_rest_url() ),
+                'restUrl'                  => 'stockmanager/v1',
                 'nonce'                     => wp_create_nonce( 'wp_rest' ),
                 'subscriber_list'           => SM()->plugin_url . 'src/assets/images/subscriber-list.jpg',
                 'export_button'             => admin_url( 'admin-ajax.php?action=export_subscribers' ),

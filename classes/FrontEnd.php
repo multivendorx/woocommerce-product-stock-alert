@@ -49,29 +49,32 @@ class FrontEnd {
 
         $subscribe_button_html = '<button style="' . $button_css .'" class="stock-manager-button alert_button_hover" name="alert_button">' . $settings_array[ 'button_text' ] . '</button>';
         $unsubscribe_button_html = '<button class="unsubscribe-button" style="' . $button_css .'">' . $settings_array[ 'unsubscribe_button_text' ] . '</button>';
-
+        
+        wp_register_script( 'stock_manager_frontend_js', $frontend_script_path . 'frontend' . $suffix . '.js', [ 'jquery', 'wp-element', 'wp-components' ], SM()->version, true );
+        
+        wp_localize_script( 'stock_manager_frontend_js', 'localizeData', [
+            'ajax_url' => admin_url( 'admin-ajax.php', 'relative' ), 
+            'nonce'  => wp_create_nonce( 'stock-manager-security-nonce' ), 
+            'additional_fields' => apply_filters( 'woocommerce_stock_manager_form_additional_fields', [] ), 
+            'button_html' => $subscribe_button_html, 
+            'alert_success' => $settings_array[ 'alert_success' ], 
+            'alert_email_exist' => $settings_array[ 'alert_email_exist' ], 
+            'valid_email' => $settings_array[ 'valid_email' ], 
+            'ban_email_domain_text' => $settings_array[ 'ban_email_domain_text' ], 
+            'ban_email_address_text' => $settings_array[ 'ban_email_address_text' ], 
+            'double_opt_in_success' => $settings_array[ 'double_opt_in_success' ], 
+            'processing' => __( 'Processing...', 'woocommerce-stock-manager' ), 
+            'error_occurs' => __( 'Some error occurs', 'woocommerce-stock-manager' ), 
+            'try_again' => __( 'Please try again.', 'woocommerce-stock-manager' ), 
+            'unsubscribe_button' => $unsubscribe_button_html, 
+            'alert_unsubscribe_message' => $settings_array[ 'alert_unsubscribe_message' ], 
+            'recaptcha_enabled' => apply_filters( 'stock_manager_recaptcha_enabled', false )
+        ]);
+        
         if ( is_product() || is_shop() || is_product_category() ) {
             // Enqueue your frontend javascript from here
-            wp_enqueue_script( 'stock_manager_frontend_js', $frontend_script_path . 'frontend' . $suffix . '.js', [ 'jquery' ], SM()->version, true );
-        
-            wp_localize_script( 'stock_manager_frontend_js', 'localizeData', [
-                'ajax_url' => admin_url( 'admin-ajax.php', 'relative' ), 
-                'nonce'  => wp_create_nonce( 'stock-manager-security-nonce' ), 
-                'additional_fields' => apply_filters( 'woocommerce_stock_manager_form_additional_fields', [] ), 
-                'button_html' => $subscribe_button_html, 
-                'alert_success' => $settings_array[ 'alert_success' ], 
-                'alert_email_exist' => $settings_array[ 'alert_email_exist' ], 
-                'valid_email' => $settings_array[ 'valid_email' ], 
-                'ban_email_domain_text' => $settings_array[ 'ban_email_domain_text' ], 
-                'ban_email_address_text' => $settings_array[ 'ban_email_address_text' ], 
-                'double_opt_in_success' => $settings_array[ 'double_opt_in_success' ], 
-                'processing' => __( 'Processing...', 'woocommerce-stock-manager' ), 
-                'error_occurs' => __( 'Some error occurs', 'woocommerce-stock-manager' ), 
-                'try_again' => __( 'Please try again.', 'woocommerce-stock-manager' ), 
-                'unsubscribe_button' => $unsubscribe_button_html, 
-                'alert_unsubscribe_message' => $settings_array[ 'alert_unsubscribe_message' ], 
-                'recaptcha_enabled' => apply_filters( 'stock_manager_recaptcha_enabled', false )
-            ]);
+            wp_enqueue_script( 'stock_manager_frontend_js' );
+            
         }
     }
 
@@ -121,7 +124,6 @@ class FrontEnd {
      */
     public function display_product_subscription_form($productObj = null) {
         global $product;
-
         $productObj = is_int($productObj) ? wc_get_product($productObj) : ($productObj ?: $product);
 
         if ( empty( $productObj ) )
