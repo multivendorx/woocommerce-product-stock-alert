@@ -6,7 +6,7 @@ defined( 'ABSPATH' ) || exit;
 class Block {
     public function __construct() {
         // Register the block
-        add_action( 'init', [$this, 'register_block'] );
+        add_action( 'init', [$this, 'register_blocks'] );
         // Enqueue the script and style for block editor
         add_action( 'enqueue_block_editor_assets', [ $this,'enqueue_block_assets'] );
     }
@@ -14,7 +14,7 @@ class Block {
     public function enqueue_block_assets() {
         wp_enqueue_script(
             'stock_manager_form',
-            SM()->plugin_url . 'build/block/stock-manager-form/index.js',
+            SM()->plugin_url . 'build/block/stock-notification-form/index.js',
             ['wp-blocks', 'wp-element', 'wp-editor', 'wp-components', 'wp-i18n'],
             SM()->version,
             true
@@ -27,15 +27,24 @@ class Block {
         
     }
     
-    public function register_block() {
-        // Register the block type with the render callback
-        register_block_type('woocommerce-stock-manager/stock-manager-form', [
-            'render_callback' => [$this, 'render_stock_manager_form_block'],
-            'script'          => 'stock_manager_frontend_js'
-        ]);
+    public function register_blocks() {
+        $blocks = [
+            [
+                'name' => 'woocommerce-stock-manager/stock-notification-block',
+                'render_callback' => [$this, 'render_stock_notification_form_block'],
+                'script' => 'stock_manager_frontend_js',
+            ]
+        ];
+    
+        foreach ($blocks as $block) {
+            register_block_type($block['name'], [
+                'render_callback' => $block['render_callback'],
+                'script'          => $block['script'],
+            ]);
+        }
     }
 
-    public function render_stock_manager_form_block($attributes) {
+    public function render_stock_notification_form_block($attributes) {
         ob_start();
         // Extract the productId from attributes
         $product_id = isset($attributes['productId']) ? intval($attributes['productId']) : null;
