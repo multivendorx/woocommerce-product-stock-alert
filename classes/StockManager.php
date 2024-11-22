@@ -24,6 +24,7 @@ class StockManager {
 
         $this->container[ 'version' ]        = STOCK_MANAGER_PLUGIN_VERSION;
         $this->container[ 'rest_namespace' ] = STOCK_MANAGER_REST_NAMESPACE;
+        $this->container[ 'text_domain' ]    = STOCK_MANAGER_TEXT_DOMAIN;
         
         // Activation Hooks
         register_activation_hook( $file, [ $this, 'activate' ] );
@@ -38,7 +39,6 @@ class StockManager {
         add_action( 'woocommerce_loaded', [ $this, 'init_plugin' ] );
         add_action( 'plugins_loaded', [ $this, 'is_woocommerce_loaded' ] );
         add_filter( 'plugin_row_meta', [ $this, 'plugin_row_meta' ], 10, 2 );
-        add_action( 'enqueue_block_assets', [ $this,'enqueue_block_assets'] );
     } 
 
     /**
@@ -117,6 +117,7 @@ class StockManager {
         $this->container[ 'actions' ]     = new Deprecated\DeprecatedActionHooks();
         $this->container[ 'admin' ]       = new Admin();
         $this->container[ 'restapi' ]     = new RestAPI();
+        $this->container[ 'block' ]       = new Block();
     } 
 
     /**
@@ -233,13 +234,5 @@ class StockManager {
         } 
         return self::$instance;
     }
-    public function enqueue_block_assets() {
-        wp_enqueue_script(
-            'stock_manager_form',
-            SM()->plugin_url . 'build/block/stock-manager-form/index.js',
-            ['wp-blocks', 'wp-element', 'wp-editor', 'wp-components', 'wp-i18n'],
-            SM()->version,
-            true
-        );
-    } 
+    
 }     

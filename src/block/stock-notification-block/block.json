@@ -1,0 +1,9 @@
+{
+    "apiVersion": 2,
+    "name": "woocommerce-stock-manager/stock-notification-block",
+    "title": "Stock Notification Block",
+    "category": "woocommerce",
+    "icon": "clipboard",
+    "textdomain": "woocommerce-stock-manager",
+    "editorScript": "file:./index.js"
+}
