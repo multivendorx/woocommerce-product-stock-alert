@@ -23,7 +23,7 @@ class RestAPI
             'permission_callback' => [ $this, 'stockmanager_permission' ],
         ] );
 
-        register_rest_route( SM()->rest_namespace, '/render-form', [
+        register_rest_route( SM()->rest_namespace, '/stock-notification-form', [
             'methods' => 'GET',
             'callback' => [ $this, 'render_stock_notification_form' ],
             'permission_callback' => [ $this, 'stockmanager_permission' ],
