@@ -1,4 +1,4 @@
-$theme-color: #522c81;
+@import '/src/components/config.scss';
 
 .support-card {
     display: flex;
@@ -6,27 +6,27 @@ $theme-color: #522c81;
     align-items: center;
     gap: 1rem;
     flex-wrap: wrap;
-    max-width: 63.0rem;
+    max-width: 63rem;
     margin: auto;
     margin-top: 1.5rem;
   
     .card-item {
       padding: 1.5rem;
-      flex: 1 0 12.6rem;
-      height: 10.71rem;
-      border: 0.005rem solid #522c817a;
-      border-radius: 0.25rem;
-      background: #fff;
+      flex: 1 0 12.5rem;
+      height: 13.71rem;
+      border: $border-theme-small;
+      border-radius: $border-radius-small;
+      background: $color-white;
       box-shadow:
-        0.63rem 0.63rem 1.26rem #ededed,
-        -0.63rem -0.63rem 1.26rem #ffffff;
+        0.63rem 0.63rem 1.25rem #ededed,
+        -0.63rem -0.63rem 1.25rem $color-white;
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column;
   
       &:hover {
-        background: linear-gradient(-145deg, #ffffff, #e6e6e6);
+        background: linear-gradient(-145deg, $color-white, #e6e6e6);
       }
   
       i {
@@ -44,8 +44,8 @@ $theme-color: #522c81;
       }
   
       p {
-        font-size: 0.85rem;
         text-align: center;
+        color: $color-black
       }
     }
   }
