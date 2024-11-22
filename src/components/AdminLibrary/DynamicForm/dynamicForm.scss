@@ -131,7 +131,7 @@
           width: 100%;
           font-style: italic;
           color: #72727599;
-          font-size: 0.813rem;
+          font-size: 0.813rem;          
         }
 
         input,
@@ -575,8 +575,7 @@
       margin-right: 0.945rem;
       position: relative;
       flex-wrap: wrap;
-      padding-bottom: 0.8rem;
-      z-index: 0;
+      padding-top: 0.8rem;
 
       .settings-checkbox-description {
         margin-right: 0.5rem;
@@ -585,7 +584,6 @@
 
       .default-checkbox {
         margin-right: 0.5rem;
-
       }
       .admin-pro-tag{
         position: relative; 
