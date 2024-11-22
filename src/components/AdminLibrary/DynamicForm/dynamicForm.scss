@@ -27,6 +27,7 @@
 
         .toggle-checkbox-content {
           position: relative;
+          margin-right: 0.5rem;
 
           .admin-pro-tag {
             left: 4.25rem;
@@ -574,6 +575,8 @@
       margin-right: 0.945rem;
       position: relative;
       flex-wrap: wrap;
+      padding-bottom: 0.8rem;
+      z-index: 0;
 
       .settings-checkbox-description {
         margin-right: 0.5rem;
@@ -585,7 +588,7 @@
 
       }
       .admin-pro-tag{
-        position: relative!important; // To overwrite common tag style
+        position: relative; 
         height: fit-content;
       }
     }

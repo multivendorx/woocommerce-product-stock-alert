@@ -98,7 +98,7 @@ class Admin {
      * @return void
      */
     public function create_setting_page() {
-        echo '<div id="admin-stockmanager"></div>';
+        echo '<div id="admin-main-wrapper"></div>';
     }
 
     /**
