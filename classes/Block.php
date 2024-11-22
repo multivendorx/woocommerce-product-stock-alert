@@ -4,43 +4,53 @@ namespace StockManager;
 defined( 'ABSPATH' ) || exit;
 
 class Block {
+    private $blocks;
+
     public function __construct() {
         // Register the block
         add_action( 'init', [$this, 'register_blocks'] );
         // Enqueue the script and style for block editor
         add_action( 'enqueue_block_editor_assets', [ $this,'enqueue_block_assets'] );
+
+
+        $this->blocks = [
+            [
+                'name' => 'stock-notification-block', // block name
+                'render_php_callback_function' => [$this, 'render_stock_notification_form_block'], // php render calback function
+                'required_script' => 'stock_manager_frontend_js', // the script which is required in the frontend of the block
+                'required_style'   => '', // the style which is required in the frontend of the block
+                // src link is generated (which is append from block name) within the function
+				'react_dependencies'   => ['wp-blocks', 'wp-element', 'wp-editor', 'wp-components', 'wp-i18n'], // the react dependencies which required in js
+                'localize' => [
+					'object_name' => 'stockNotificationBlock', // the localized variable name
+                    // all the data that is required in index.js
+					'data' => [
+                        'apiUrl'  => '', // this set blank because in scope the get_rest_url() is not defined
+                        'restUrl' => SM()->rest_namespace,
+                        'nonce'   => wp_create_nonce( 'stock-manager-security-nonce' )
+					],
+				],
+            ]
+        ];
     }
 
     public function enqueue_block_assets() {
-        wp_enqueue_script(
-            'stock_notification_form',
-            SM()->plugin_url . 'build/block/stock-notification-form/index.js',
-            ['wp-blocks', 'wp-element', 'wp-editor', 'wp-components', 'wp-i18n'],
-            SM()->version,
-            true
-        );
 
-        wp_localize_script( 'stock_notification_form', 'stockNotificationForm', [ 
-            'apiUrl'  => untrailingslashit( get_rest_url() ),
-            'restUrl'                  => 'stockmanager/v1',
-            'nonce'   => wp_create_nonce( 'stock-manager-security-nonce' ),
-        ]);
-        
+        foreach ($this->blocks as $block_script) {
+			wp_enqueue_script($block_script['name'], SM()->plugin_url . 'build/block/' . $block_script['name'] . '/index.js', $block_script['react_dependencies'], SM()->version, true);
+			if (isset($block_script['localize'])) {
+                $block_script['localize']['data']['apiUrl'] = untrailingslashit( get_rest_url() );
+				wp_localize_script($block_script['name'], $block_script['localize']['object_name'], $block_script['localize']['data']);
+			}
+		}
     }
     
     public function register_blocks() {
-        $blocks = [
-            [
-                'name' => 'woocommerce-stock-manager/stock-notification-block',
-                'render_callback' => [$this, 'render_stock_notification_form_block'],
-                'script' => 'stock_manager_frontend_js',
-            ]
-        ];
     
-        foreach ($blocks as $block) {
-            register_block_type($block['name'], [
-                'render_callback' => $block['render_callback'],
-                'script'          => $block['script'],
+        foreach ($this->blocks as $block) {
+            register_block_type(SM()->text_domain . '/' . $block['name'], [
+                'render_callback' => $block['render_php_callback_function'],
+                'script'          => $block['required_script'],
             ]);
         }
     }

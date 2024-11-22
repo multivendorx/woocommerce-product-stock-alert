@@ -43,7 +43,7 @@ registerBlockType('woocommerce-stock-manager/stock-notification-block', {
         // Fetch the rendered form from the REST API
         useEffect(() => {
             if (productId) {
-                axios.get(`${stockNotificationForm.apiUrl}/${stockNotificationForm.restUrl}/render-form?product_id=${productId}`)
+                axios.get(`${stockNotificationBlock.apiUrl}/${stockNotificationBlock.restUrl}/render-form?product_id=${productId}`)
                     .then((response) => {
                         setFormHtml(response.data.html || __('Failed to load form.', 'woocommerce-stock-manager'));
                     });

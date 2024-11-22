@@ -24,6 +24,7 @@ class StockManager {
 
         $this->container[ 'version' ]        = STOCK_MANAGER_PLUGIN_VERSION;
         $this->container[ 'rest_namespace' ] = STOCK_MANAGER_REST_NAMESPACE;
+        $this->container[ 'text_domain' ]    = STOCK_MANAGER_TEXT_DOMAIN;
         
         // Activation Hooks
         register_activation_hook( $file, [ $this, 'activate' ] );
