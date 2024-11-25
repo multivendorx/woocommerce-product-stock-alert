@@ -8,16 +8,18 @@ import Import from './components/Managestock/ImportExport/Import.jsx';
 import Export from './components/Managestock/ImportExport/Export.jsx';
 
 const App = () => {
-    const currentUrl = window.location.href;
-    const getBaseUrl = (url) => url.split('&subtab=')[0];
+    const location = new URLSearchParams( useLocation().hash );
+
     document.querySelectorAll('#toplevel_page_stock-manager>ul>li>a').forEach((element) => {
+        const urlObject = new URL(element.href);
+        const hashParams = new URLSearchParams(urlObject.hash.substring(1));
+
         element.parentNode.classList.remove('current');
-        if (getBaseUrl(element.href) === getBaseUrl(currentUrl)) {
+        if ( hashParams.get('tab') === location.get('tab')) {
             element.parentNode.classList.add('current');
         }
     });
 
-    const location = new URLSearchParams(useLocation().hash);
     return (
         <>
             { location.get('tab') === 'settings' && <Settings initialTab='general' /> }
