@@ -210,7 +210,7 @@ const Managestock = () => {
                   value={searchType}
                 >
                   {/* <option value="">All</option> */}
-                  <option value="">--Select--</option>
+                  <option value="">Select</option>
                   <option value="productName">Product Name</option>
                   <option value="productSku">Sku</option>
                 </select>

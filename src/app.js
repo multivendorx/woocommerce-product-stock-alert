@@ -9,9 +9,10 @@ import Export from './components/Managestock/ImportExport/Export.jsx';
 
 const App = () => {
     const currentUrl = window.location.href;
+    const getBaseUrl = (url) => url.split('&subtab=')[0];
     document.querySelectorAll('#toplevel_page_stock-manager>ul>li>a').forEach((element) => {
         element.parentNode.classList.remove('current');
-        if (element.href === currentUrl) {
+        if (getBaseUrl(element.href) === getBaseUrl(currentUrl)) {
             element.parentNode.classList.add('current');
         }
     });
