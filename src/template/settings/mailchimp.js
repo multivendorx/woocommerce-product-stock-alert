@@ -22,6 +22,7 @@ export default {
                 }
             ],
             proSetting: true,
+            look: 'toggle'
         },
         {
             // Spacial input field

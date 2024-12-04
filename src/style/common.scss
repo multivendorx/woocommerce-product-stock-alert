@@ -404,9 +404,6 @@
   margin: 0;
   box-sizing: border-box;
 }
-select {
-  -webkit-appearance: listbox;
-}
 #admin-main-wrapper{
   padding: 1.5rem 1rem 0 0;
 } 
@@ -426,6 +423,8 @@ a{
     outline: none;
   }
 }
+
+// Common button style
 button,
 .main-btn{
   outline: none;
@@ -440,6 +439,10 @@ button,
   border-radius: $border-radius-small;
   font-size: 0.875rem;
   transition: all 0.3s linear;
+
+  &.btn-preview{
+    padding: 0;
+  }
 }
 .btn-purple{ 
   background: $theme-color;
@@ -447,7 +450,35 @@ button,
   color: $color-white;
 
   &:hover{
-    color: $color-white;
+    color: $color-white; 
+  }
+}
+
+// Button hover effect style
+.btn-effect{
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: perspective(0.315rem) rotateX(2deg) rotateY(2deg);
+    transition: transform 0.3s;
+    pointer-events: none;
+  }
+  &.disable {
+    cursor: not-allowed;
+    background-color: rgba($color: $color-active, $alpha: 0.5);
+  }
+  &:hover {
+    &::before {
+      transform: perspective(0.315rem) rotateX(0) rotateY(0);
+    }
   }
 }
 
@@ -460,7 +491,7 @@ html {
   color: $color-white;
   font-size: 0.813rem;
   background-color: $color-active;
-  border-radius: 0.25rem;
+  border-radius: $border-radius-small;
   font-family: "AdminLibrary";
   width: 1rem;
   height: 1rem;
@@ -531,6 +562,7 @@ span.admin-pro-tag{
   right: 0.25rem;
   top: 0;
   transform: translateY(-50%);
+  width: fit-content;
 }
 
 // admin page title common style
@@ -545,6 +577,143 @@ span.admin-pro-tag{
 
   p {
     font-size: 1.5rem;
+  }
+}
+
+// Commone loader style
+.loader-wrapper{
+    display: flex;
+    gap: 1rem;
+
+  .loader {
+    --uib-size: 2.205rem;
+    --uib-speed: 0.8s;
+    --uib-color: $color-active;
+    position: relative;
+    display: inline-block;
+    height: var(--uib-size);
+    width: var(--uib-size);
+    animation: spin78236 calc(var(--uib-speed) * 2.5) infinite linear;
+
+    .three-body__dot {
+      position: absolute;
+      height: 100%;
+      width: 30%;
+
+      &:after {
+        content: "";
+        position: absolute;
+        height: 0%;
+        width: 100%;
+        padding-bottom: 100%;
+        background-color: var(--uib-color);
+        border-radius: 50%;
+      }
+
+      &:nth-child(1) {
+        bottom: 5%;
+        left: 0;
+        transform: rotate(60deg);
+        transform-origin: 50% 85%;
+
+        &::after {
+          bottom: 0;
+          left: 0;
+          animation: wobble1 var(--uib-speed) infinite ease-in-out;
+          animation-delay: calc(var(--uib-speed) * -0.3);
+        }
+      }
+
+      &:nth-child(2) {
+        bottom: 5%;
+        right: 0;
+        transform: rotate(-60deg);
+        transform-origin: 50% 85%;
+
+        &::after {
+          bottom: 0;
+          left: 0;
+          animation: wobble1 var(--uib-speed) infinite calc(var(--uib-speed) * -0.15) ease-in-out;
+        }
+      }
+
+      &:nth-child(3) {
+        bottom: -5%;
+        left: 0;
+        transform: translateX(116.666%);
+
+        &::after {
+          top: 0;
+          left: 0;
+          animation: wobble2 var(--uib-speed) infinite ease-in-out;
+        }
+      }
+    }
+
+    @keyframes spin78236 {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes wobble1 {
+
+      0%,
+      100% {
+        transform: translateY(0%) scale(1);
+        opacity: 1;
+      }
+
+      50% {
+        transform: translateY(-66%) scale(0.65);
+        opacity: 0.8;
+      }
+    }
+
+    @keyframes wobble2 {
+
+      0%,
+      100% {
+        transform: translateY(0%) scale(1);
+        opacity: 1;
+      }
+
+      50% {
+        transform: translateY(66%) scale(0.65);
+        opacity: 0.8;
+      }
+    }
+  }
+}
+.details-status-row {
+  padding: 0.5rem 0.5rem 0.75rem;  
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  color: #007400;
+}
+.fetch-display-output{
+  margin:0.5rem 0;
+  padding: 0.5rem 0.5rem;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &.failed{
+    color: red;
+    background: rgba(227, 79, 71, 0.1254901961);
+  }
+  
+  &.success{
+    color: green;
+    background-color: #00800036;
   }
 }
 

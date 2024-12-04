@@ -42,22 +42,23 @@ class FrontEnd {
         $suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
         $suffix = ''; /// Should be removed.
         $settings_array = Utill::get_form_settings_array();
+        $button_settings = $settings_array[ 'customize_btn' ];
 
-        $border_size = ( !empty( $settings_array[ 'button_border_size' ] ) ) ? $settings_array[ 'button_border_size' ].'px' : '1px';
+        $border_size = ( !empty( $button_settings[ 'button_border_size' ] ) ) ? $button_settings[ 'button_border_size' ].'px' : '1px';
 
         $button_css = '';
-        if ( !empty( $settings_array[ 'button_background_color' ] ) )
-            $button_css .= "background:" . $settings_array[ 'button_background_color' ] . "; ";
-        if ( !empty( $settings_array[ 'button_text_color' ] ) )
-            $button_css .= "color:" . $settings_array[ 'button_text_color' ] . "; ";
-        if ( !empty( $settings_array[ 'button_border_color' ] ) )
-            $button_css .= "border: " . $border_size . " solid " . $settings_array[ 'button_border_color' ] . "; ";
-        if ( !empty( $settings_array[ 'button_font_size' ] ) )
-            $button_css .= "font-size:" . $settings_array[ 'button_font_size' ] . "px; ";
-        if ( !empty( $settings_array[ 'button_border_redious' ] ) )
-            $button_css .= "border-radius:" . $settings_array[ 'button_border_redious' ] . "px;";
+        if ( !empty( $button_settings[ 'button_background_color' ] ) )
+            $button_css .= "background:" . $button_settings[ 'button_background_color' ] . "; ";
+        if ( !empty( $button_settings[ 'button_text_color' ] ) )
+            $button_css .= "color:" . $button_settings[ 'button_text_color' ] . "; ";
+        if ( !empty( $button_settings[ 'button_border_color' ] ) )
+            $button_css .= "border: " . $border_size . " solid " . $button_settings[ 'button_border_color' ] . "; ";
+        if ( !empty( $button_settings[ 'button_font_size' ] ) )
+            $button_css .= "font-size:" . $button_settings[ 'button_font_size' ] . "px; ";
+        if ( !empty( $button_settings[ 'button_border_redious' ] ) )
+            $button_css .= "border-radius:" . $button_settings[ 'button_border_redious' ] . "px;";
 
-        $subscribe_button_html = '<button style="' . $button_css .'" class="stock-manager-button alert_button_hover" name="alert_button">' . $settings_array[ 'button_text' ] . '</button>';
+        $subscribe_button_html = '<button style="' . $button_css .'" class="stock-manager-button alert_button_hover" name="alert_button">' . $button_settings[ 'button_text' ] . '</button>';
         $unsubscribe_button_html = '<button class="unsubscribe-button" style="' . $button_css .'">' . $settings_array[ 'unsubscribe_button_text' ] . '</button>';
 
         wp_register_script( 'stock_manager_frontend_js', $frontend_script_path . 'frontend' . $suffix . '.js', [ 'jquery', 'wp-element', 'wp-components' ], SM()->version, true );
@@ -108,15 +109,16 @@ class FrontEnd {
      */
     function frontend_hover_styles() {
         $settings_array = Utill::get_form_settings_array();
+        $button_settings = $settings_array[ 'customize_btn' ];
         $button_onhover_style = $border_size = '';
-        $border_size = ( !empty( $settings_array[ 'button_border_size' ] ) ) ? $settings_array[ 'button_border_size' ].'px' : '1px';
+        $border_size = ( !empty( $button_settings[ 'button_border_size' ] ) ) ? $button_settings[ 'button_border_size' ].'px' : '1px';
 
-        if ( isset( $settings_array[ 'button_background_color_onhover' ] ) )
-            $button_onhover_style .= !empty( $settings_array[ 'button_background_color_onhover' ] ) ? 'background: ' . $settings_array[ 'button_background_color_onhover' ] . ' !important;' : '';
-        if ( isset( $settings_array[ 'button_text_color_onhover' ] ) )
-            $button_onhover_style .= !empty( $settings_array[ 'button_text_color_onhover' ] ) ? ' color: ' . $settings_array[ 'button_text_color_onhover' ] . ' !important;' : '';
-        if ( isset( $settings_array[ 'button_border_color_onhover' ] ) )
-            $button_onhover_style .= !empty( $settings_array[ 'button_border_color_onhover' ] ) ? 'border: ' . $border_size . ' solid' . $settings_array[ 'button_border_color_onhover' ] . ' !important;' : '';
+        if ( isset( $button_settings[ 'button_background_color_onhover' ] ) )
+            $button_onhover_style .= !empty( $button_settings[ 'button_background_color_onhover' ] ) ? 'background: ' . $button_settings[ 'button_background_color_onhover' ] . ' !important;' : '';
+        if ( isset( $button_settings[ 'button_text_color_onhover' ] ) )
+            $button_onhover_style .= !empty( $button_settings[ 'button_text_color_onhover' ] ) ? ' color: ' . $button_settings[ 'button_text_color_onhover' ] . ' !important;' : '';
+        if ( isset( $button_settings[ 'button_border_color_onhover' ] ) )
+            $button_onhover_style .= !empty( $button_settings[ 'button_border_color_onhover' ] ) ? 'border: ' . $border_size . ' solid' . $button_settings[ 'button_border_color_onhover' ] . ' !important;' : '';
         if ( $button_onhover_style ) {
             echo '<style>
                 button.alert_button_hover:hover, button.unsubscribe_button:hover {
@@ -193,6 +195,8 @@ class FrontEnd {
         $stock_manager_fields_html = $user_email = '';
         $separator = apply_filters( 'stock_manager_form_fileds_separator', '<br>' );
         $settings_array = Utill::get_form_settings_array();
+        $button_settings = $settings_array[ 'customize_btn' ];
+
         if ( is_user_logged_in() ) {
             $current_user = wp_get_current_user();
             $user_email = $current_user->data->user_email;
@@ -247,19 +251,19 @@ class FrontEnd {
         $alert_text_html = '<h5 style="color:' . esc_html( $settings_array[ 'alert_text_color' ] ) . '" class="subscribe_for_interest_text">' . esc_html( $settings_array[ 'alert_text' ] ) . '</h5>';
 
         $button_css = "";
-        $border_size = ( !empty( $settings_array[ 'button_border_size' ] ) ) ? esc_html( $settings_array[ 'button_border_size' ] ).'px' : '1px';
-        if ( !empty( $settings_array[ 'button_background_color' ] ) )
-            $button_css .= "background:" . esc_html( $settings_array[ 'button_background_color' ] ) . ";";
-        if ( !empty( $settings_array[ 'button_text_color' ] ) )
-            $button_css .= "color:" . esc_html( $settings_array[ 'button_text_color' ] ) . ";";
-        if ( !empty( $settings_array[ 'button_border_color' ] ) )
-            $button_css .= "border: " . $border_size . " solid " . esc_html( $settings_array[ 'button_border_color' ] ) . ";";
-        if ( !empty( $settings_array[ 'button_font_size' ] ) )
-            $button_css .= "font-size:" . esc_html( $settings_array[ 'button_font_size' ] ) . "px;";
-        if ( !empty( $settings_array[ 'button_border_radious' ] ) )
-            $button_css .= "border-radius:" . esc_html( $settings_array[ 'button_border_radious' ] ) . "px;";
+        $border_size = ( !empty( $button_settings[ 'button_border_size' ] ) ) ? esc_html( $button_settings[ 'button_border_size' ] ).'px' : '1px';
+        if ( !empty( $button_settings[ 'button_background_color' ] ) )
+            $button_css .= "background:" . esc_html( $button_settings[ 'button_background_color' ] ) . ";";
+        if ( !empty( $button_settings[ 'button_text_color' ] ) )
+            $button_css .= "color:" . esc_html( $button_settings[ 'button_text_color' ] ) . ";";
+        if ( !empty( $button_settings[ 'button_border_color' ] ) )
+            $button_css .= "border: " . $border_size . " solid " . esc_html( $button_settings[ 'button_border_color' ] ) . ";";
+        if ( !empty( $button_settings[ 'button_font_size' ] ) )
+            $button_css .= "font-size:" . esc_html( $button_settings[ 'button_font_size' ] ) . "px;";
+        if ( !empty( $button_settings[ 'button_border_radious' ] ) )
+            $button_css .= "border-radius:" . esc_html( $button_settings[ 'button_border_radious' ] ) . "px;";
 
-        $button_html = '<button style="' . $button_css .'" class="stock-manager-button alert_button_hover" name="alert_button">' . esc_html( $settings_array[ 'button_text' ] ) . '</button>';
+        $button_html = '<button style="' . $button_css .'" class="stock-manager-button alert_button_hover" name="alert_button">' . esc_html( $button_settings[ 'button_text' ] ) . '</button>';
 
         $interested_person = get_post_meta( $variation ? $variation->get_id() : $product->get_id(), 'no_of_subscribers', true );
         $interested_person = ( isset( $interested_person ) && $interested_person > 0 ) ? $interested_person : 0;

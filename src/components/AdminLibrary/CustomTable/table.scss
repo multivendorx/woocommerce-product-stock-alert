@@ -166,7 +166,8 @@
       select {
         background-color: transparent !important;
         border: 0.115rem solid rgba(0, 0, 0, 0.125) !important;
-        border-radius: 0.25rem !important;
+        border-radius: $border-radius-small !important;
+        padding: 0.125rem 1.5rem 0.15rem 0.5rem;
         width: 100%;
 
         &:hover,
@@ -306,7 +307,6 @@
                   font-weight: 500;
                   color: $theme-color;
                   background: transparent;
-                  text-align: left;
                   padding: 0;
                 }
               }
@@ -326,7 +326,7 @@
 
   .bpcekY{
     svg{
-      display: none;
+      display: none; // For hide svg icon
     }
   }
   .sc-lmoLKH.lcunyj {
@@ -420,6 +420,6 @@
 
 @media screen and (max-width:37.737rem) {
   .rdt_Pagination {
-    display: flex !important; 
+    display: flex !important; // For responsive design only
   }
 }
