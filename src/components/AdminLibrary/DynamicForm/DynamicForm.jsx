@@ -822,7 +822,7 @@ const DynamicForm = (props) => {
           input = (
             <FormCustomizer
               value={value}
-              buttonText={setting.customize_btn.button_text}
+              buttonText={setting.customize_btn.button_text || 'Submit'}
               proSetting={isProSetting(inputField.proSetting)}
               onChange={(e, key) => {
                 if ( ! proSettingChanged( inputField.proSetting ) ) {
