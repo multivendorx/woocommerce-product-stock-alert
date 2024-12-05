@@ -153,7 +153,7 @@ class StockManager {
         $locale = is_admin() && function_exists( 'get_user_locale' ) ? get_user_locale() : get_locale();
         $locale = apply_filters( 'plugin_locale', $locale, 'woocommerce-stock-manager' );
         unload_textdomain( 'woocommerce-stock-manager' );
-        load_textdomain( 'woocommerce-stock-manager', WP_LANG_DIR . '/woocommerce-product-stock-alert/woocommerce-product-stock-alert-' . $locale . '.mo' );
+        load_textdomain( 'woocommerce-stock-manager', WP_LANG_DIR . '/plugins/woocommerce-product-stock-alert-' . $locale . '.mo' );
         load_plugin_textdomain( 'woocommerce-stock-manager', false, plugin_basename( dirname( dirname( __FILE__ ) ) ) . '/languages' );
     } 
 
