@@ -1,5 +1,10 @@
 == Changelog ==
 ----------------------------------------------------------------------------------------------
+= 2.5.13 - 2024-11-26 =
+* Added - WordPress 6.7.1 compatibility.
+* Added - WooCommerce 9.4.2 compatibility.
+* Fixed - Issue with the block for the "Stock Manager Form".
+
 = 2.5.12 - 2024-10-22 =
 * Added - A new setting to specify lead times for out-of-stock and back-ordered products, allowing sellers to inform customers when items are expected to be available again.
 * Added - WooCommerce 9.3.3 compatibility.

@@ -341,7 +341,7 @@ export default function SubscribersList() {
           {row.email}
           {
             row.user_link &&
-            <a className="user-profile" href={row.user_link} target="_blank"><i className="admin-font font-person"></i></a>
+            <a className="user-profile" href={row.user_link} target="_blank"><i className="admin-font adminLib-person"></i></a>
           }
         </TableCell>,
     },
@@ -379,7 +379,7 @@ export default function SubscribersList() {
             aria-labelledby="form-dialog-title"
           >
             <span
-              className="admin-font font-cross stock-manager-popup-cross"
+              className="admin-font adminLib-cross stock-manager-popup-cross"
               onClick={() => {
                 setOpenDialog(false);
               }}

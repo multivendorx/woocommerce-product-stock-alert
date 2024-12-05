@@ -191,18 +191,20 @@ class Install {
             // Form customization settings
             'email_placeholder_text' => __( 'Enter your email', 'woocommerce-stock-manager' ), 
             'alert_text' => __( 'Receive in-stock notifications for this.', 'woocommerce-stock-manager' ), 
-            'button_text' => __( 'Notify me', 'woocommerce-stock-manager' ), 
             'unsubscribe_button_text' => __( 'Unsubscribe', 'woocommerce-stock-manager' ), 
             'alert_text_color' => '', 
-            'button_background_color' => '', 
-            'button_border_color' => '', 
-            'button_text_color' => '', 
-            'button_background_color_onhover' => '', 
-            'button_text_color_onhover' => '', 
-            'button_border_color_onhover' => '', 
-            'button_font_size' => '', 
-            'button_border_radious' => '', 
-            'button_border_size' => ''
+            'customize_btn' => [
+                'button_text' => __( 'Notify me', 'woocommerce-stock-manager' ), 
+                'button_background_color' => '', 
+                'button_border_color' => '', 
+                'button_text_color' => '', 
+                'button_background_color_onhover' => '', 
+                'button_text_color_onhover' => '', 
+                'button_border_color_onhover' => '', 
+                'button_font_size' => '', 
+                'button_border_radious' => '', 
+                'button_border_size' => ''
+            ]
         ];
         $submit_settings = [
             'alert_success'  => __( 'Thank you for expressing interest in %product_title%. We will notify you via email once it is back in stock.', 'woocommerce-stock-manager' ), 
@@ -338,10 +340,46 @@ class Install {
             $appearance_settings['lead_time_format'] = 'static';
         }
 
+        
         $previous_appearance_settings   = get_option( 'woo_stock_manager_appearance_tab_settings', [] );
         $previous_submit_settings       = get_option( 'woo_stock_manager_form_submission_tab_settings', [] );
         $previous_email_settings        = get_option( 'woo_stock_manager_email_tab_settings', [] );
         
+        if ( version_compare( $previous_version, '2.5.14', '<=' ) ) {
+            $appearance_settings['customize_btn'] = [
+                'button_background_color'           => $previous_appearance_settings['button_background_color'] ?? '',
+                'button_text_color'                 => $previous_appearance_settings['button_text_color'] ?? '',
+                'button_border_color'               => $previous_appearance_settings['button_border_color'] ?? '',
+                'button_border_size'                => $previous_appearance_settings['button_border_size'] ?? '',
+                'button_border_radious'             => $previous_appearance_settings['button_border_radious'] ?? '',
+                'button_font_size'                  => $previous_appearance_settings['button_font_size'] ?? '',
+                'button_padding'                    => $previous_appearance_settings['button_padding'] ?? '', 
+                'button_margin'                     => $previous_appearance_settings['button_margin'] ?? '',
+                'button_background_color_onhover'   => $previous_appearance_settings['button_background_color_onhover'] ?? '',
+                'button_text_color_onhover'         => $previous_appearance_settings['button_text_color_onhover'] ?? '',
+                'button_border_color_onhover'       => $previous_appearance_settings['button_border_color_onhover'] ?? '',
+                'button_text'                       => $previous_appearance_settings['button_text'] ?? 'Notify me',
+                'button_font_width'                 => $previous_appearance_settings['button_font_width'] ?? '',
+            ];
+
+            unset(
+                $previous_appearance_settings['button_background_color'],
+                $previous_appearance_settings['button_text_color'],
+                $previous_appearance_settings['button_border_color'],
+                $previous_appearance_settings['button_border_size'],
+                $previous_appearance_settings['button_border_radious'],
+                $previous_appearance_settings['button_font_size'],
+                $previous_appearance_settings['button_padding'],
+                $previous_appearance_settings['button_margin'],
+                $previous_appearance_settings['button_background_color_onhover'],
+                $previous_appearance_settings['button_text_color_onhover'],
+                $previous_appearance_settings['button_border_color_onhover'],
+                $previous_appearance_settings['button_text'],
+                $previous_appearance_settings['button_font_width'],
+            );
+
+        }
+
         update_option( 'woo_stock_manager_appearance_tab_settings', array_merge($appearance_settings, $previous_appearance_settings) );
         update_option( 'woo_stock_manager_form_submission_tab_settings', array_merge($submit_settings, $previous_submit_settings) );
         update_option( 'woo_stock_manager_email_tab_settings', array_merge($email_settings, $previous_email_settings) );

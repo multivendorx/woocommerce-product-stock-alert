@@ -3,9 +3,9 @@
 Contributors: wcmp
 Tags: woocommerce stock, out of stock, in stock, stock alert, alert email
 Requires at least: 5.4
-Tested up to: 6.6.2
+Tested up to: 6.7.1
 Requires PHP: 8.0
-Stable tag: 2.5.12
+Stable tag: 2.5.13
 Donate link: https://multivendorx.com/donate/
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -142,6 +142,11 @@ Manual installation method requires downloading the [Product Stock Manager & Not
 6. Inventory manager
 
 == Changelog ==
+
+= 2.5.13 - 2024-11-26 =
+* Added - WordPress 6.7.1 compatibility.
+* Added - WooCommerce 9.4.2 compatibility.
+* Fixed - Issue with the block for the "Stock Manager Form".
 
 = 2.5.12 - 2024-10-22 =
 * Added - A new setting to specify lead times for out-of-stock and back-ordered products, allowing sellers to inform customers when items are expected to be available again.

@@ -22,48 +22,6 @@ const ConnectButton = (props) => {
         });
     }
 
-    // Sequence task
-    // const tasks = [
-    //     {
-    //         'action': 'get_site_info',
-    //         'message': __('Connecting to Moodle', 'moowoodle'),
-    //     },
-    //     {
-    //         'action': 'get_course',
-    //         'message': __('Courses Fetch', 'moowoodle'),
-    //         'cache': 'course_id',
-    //     },
-    //     {
-    //         'action': 'get_catagory',
-    //         'message': __('Catagory Fetch', 'moowoodle'),
-    //     },
-    //     {
-    //         'action': 'create_user',
-    //         'message': __('User Creation', 'moowoodle'),
-    //     },
-    //     {
-    //         'action': 'get_user',
-    //         'message': __('User Fetch', 'moowoodle'),
-    //         'cache': 'user_id',
-    //     },
-    //     {
-    //         'action': 'update_user',
-    //         'message': __('User Update', 'moowoodle'),
-    //     },
-    //     {
-    //         'action': 'enroll_user',
-    //         'message': __('User Enroll', 'moowoodle'),
-    //     },
-    //     {
-    //         'action': 'unenroll_user',
-    //         'message': __('User Unenroll', 'moowoodle'),
-    //     },
-    //     {
-    //         'action': 'delete_user',
-    //         'message': __('User Remove', 'moowoodle'),
-    //     }
-    // ];
-
     const startConnectionTask = async () => {
         // Connection task is already running
         if (connectTaskStarted.current) {
@@ -161,15 +119,15 @@ const ConnectButton = (props) => {
 
     return (
         <div className="connection-test-wrapper">
-            <div className="section-connection-test">
+            <div className="loader-wrapper">
                 <button
-                    // className="disable"
+                    className="btn-purple btn-effect"
                     onClick={(e) => {
                         e.preventDefault();
                         startConnectionTask();
                     }}
                 >
-                    {__('Start test', 'moowoodle')}
+                    {'Start test'}
                 </button>
                 {
                     loading &&
@@ -183,12 +141,12 @@ const ConnectButton = (props) => {
             <div className="fetch-details-wrapper">
                 {taskSequence.map((task) => {
                     return (
-                        <div className={`${task.status} details-status-row`}>{task.message} {task.status !== "running" && <i className={`admin-font ${task.status === "failed" ? "font-cross" : "font-icon-yes"}`}></i>}</div>
+                        <div className={`${task.status} details-status-row`}>{task.message} {task.status !== "running" && <i className={`admin-font ${task.status === "failed" ? "adminLib-cross" : "adminLib-icon-yes"}`}></i>}</div>
                     );
                 })}
                 {/* {
                 testStatus &&
-                <div className={`fetch-display-output ${testStatus == 'Failed' ? 'failed': 'success' }`}> {testStatus} {testStatus == 'Failed' ? <i className="admin-font font-cross"></i> : <i className="admin-font font-icon-yes"></i> }</div>
+                <div className={`fetch-display-output ${testStatus == 'Failed' ? 'failed': 'success' }`}> {testStatus} {testStatus == 'Failed' ? <i className="admin-font adminLib-cross"></i> : <i className="admin-font adminLib-icon-yes"></i> }</div>
             } */}
             </div>
             {
@@ -197,7 +155,7 @@ const ConnectButton = (props) => {
                     {testStatus === 'Failed'
                         ? (
                             <p>
-                                Test connection failed. Check further details in <Link className="errorlog-link" to={'?page=moowoodle#&tab=settings&sub-tab=log'}>error log</Link>.
+                                Test connection failed. Check further details in <Link className="errorlog-link" to={'?page=moowoodle#&tab=settings&subtab=log'}>error log</Link>.
                             </p>
                         )
                         : 'Test connection successful'}

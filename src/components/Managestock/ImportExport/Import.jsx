@@ -112,7 +112,7 @@ const Import = () => {
                     {
                         displayMessage &&
                         <div className="admin-notice-display-title">
-                            <i className="admin-font font-icon-yes"></i>
+                            <i className="admin-font adminLib-icon-yes"></i>
                             { displayMessage }
                         </div>
                     }
