@@ -89,6 +89,8 @@ class Utill {
      * @return bool
      */
     public static function is_pro_active() {
-        return defined( 'STOCK_MANAGER_PRO_PLUGIN_VERSION' );
+        if ( defined( 'STOCK_MANAGER_PRO_PLUGIN_VERSION' ) ) {
+			return SM_PRO()->license->is_active();
+		}
     }
 }
