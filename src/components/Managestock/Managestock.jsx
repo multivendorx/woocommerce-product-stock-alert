@@ -48,7 +48,7 @@ const Managestock = () => {
   const [segments, setSegments] = useState(null);
   const filterChanged = useRef(false);
   useEffect(() => {
-    if (!appLocalizer.pro_active) return;
+    if (!appLocalizer.khali_dabba) return;
     axios({
       method: "post",
       url: segmentDataUrl,
@@ -59,7 +59,7 @@ const Managestock = () => {
     });
   }, []);
   useEffect(() => {
-    if (!appLocalizer.pro_active) return;
+    if (!appLocalizer.khali_dabba) return;
     if (filterChanged.current && (Boolean(searchType) ^ Boolean(searchValue))) {
       filterChanged.current = false;
       return;
@@ -94,7 +94,7 @@ const Managestock = () => {
   ]);
   return (
     <>
-      {!appLocalizer.pro_active ? (
+      {!appLocalizer.khali_dabba ? (
         //If the user is free user he will be shown a Inventory Manager image
         <div className="inventory-manager-wrapper">
           <Dialog

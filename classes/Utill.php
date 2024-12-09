@@ -88,7 +88,7 @@ class Utill {
      * Check pro plugin is acrive or not
      * @return bool
      */
-    public static function is_pro_active() {
+    public static function is_khali_dabba() {
         if ( defined( 'STOCK_MANAGER_PRO_PLUGIN_VERSION' ) ) {
 			return SM_PRO()->license->is_active();
 		}

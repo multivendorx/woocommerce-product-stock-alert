@@ -11,7 +11,7 @@ const Export = () => {
     
     //Fetches the data for generating the csv
     useEffect( () => {
-        if (appLocalizer.pro_active) {
+        if (appLocalizer.khali_dabba) {
             axios({
                 method: "post",
                 url: `${ appLocalizer.apiUrl }/stockmanager/v1/all-products`,

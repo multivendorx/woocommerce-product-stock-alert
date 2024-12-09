@@ -44,7 +44,7 @@ export default function SubscribersList() {
   ]);
 
   const handleClick = () => {
-    if (appLocalizer.pro_active) {
+    if (appLocalizer.khali_dabba) {
       axios({
         method: "post",
         url: fetchSubscribersDataUrl,
@@ -138,13 +138,13 @@ export default function SubscribersList() {
   }
 
   useEffect(() => {
-    if (appLocalizer.pro_active) {
+    if (appLocalizer.khali_dabba) {
       requestData();
     }
   }, [postStatus]);
 
   useEffect(() => {
-    if (appLocalizer.pro_active) {
+    if (appLocalizer.khali_dabba) {
       axios({
         method: "post",
         url: fetchSubscribersCount,
@@ -361,7 +361,7 @@ export default function SubscribersList() {
 
   return (
     <>
-      {!appLocalizer.pro_active ? (
+      {!appLocalizer.khali_dabba ? (
         <div>
           <div className="free-reports-download-section">
             <h2 className="section-heading">{__("Download product wise subscriber data.", "woocommerce-stock-manager")}</h2>

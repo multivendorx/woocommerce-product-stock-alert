@@ -163,7 +163,7 @@ export default {
             type: 'checkbox',
             class: 'woo-toggle-checkbox',
             label: __("Subscriber double opt-in", "woocommerce-stock-manager"),
-            desc : ! appLocalizer.pro_active ? appLocalizer.is_double_optin_free : appLocalizer.is_double_optin_pro,
+            desc : ! appLocalizer.khali_dabba ? appLocalizer.is_double_optin_free : appLocalizer.is_double_optin_pro,
             options: [
                 {
                     key: "is_double_optin",
@@ -195,7 +195,7 @@ export default {
             type: 'checkbox',
             label: __("Enable  reCaptcha", "woocommerce-stock-manager-pro"),
             class: 'woo-toggle-checkbox',
-            desc : ! appLocalizer.pro_active ? appLocalizer.is_recaptcha_enable_free : appLocalizer.is_recaptcha_enable_pro,
+            desc : ! appLocalizer.khali_dabba ? appLocalizer.is_recaptcha_enable_free : appLocalizer.is_recaptcha_enable_pro,
             options: [
                 {
                     key: "is_recaptcha_enable",

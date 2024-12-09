@@ -13,7 +13,7 @@ const Import = () => {
     
     //To fetch all the data for the sample CSV
     useEffect( () => {
-        if ( appLocalizer.pro_active ) {
+        if ( appLocalizer.khali_dabba ) {
             axios({
                 method: "post",
                 url: `${ appLocalizer.apiUrl }/stockmanager/v1/all-products`,

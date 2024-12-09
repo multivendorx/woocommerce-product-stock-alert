@@ -195,7 +195,7 @@ class Admin {
                 'nonce'                     => wp_create_nonce( 'wp_rest' ),
                 'subscriber_list'           => SM()->plugin_url . 'src/assets/images/subscriber-list.jpg',
                 'export_button'             => admin_url( 'admin-ajax.php?action=export_subscribers' ),
-                'pro_active'                => Utill::is_pro_active(),
+                'khali_dabba'                => Utill::is_khali_dabba(),
                 'tab_name'                  => __("Stock Manager", "woocommerce-stock-manager"),
                 'settings_databases_value'  => $settings_databases_value,
                 'pro_url'                   => esc_url( STOCK_MANAGER_PRO_SHOP_URL ),
