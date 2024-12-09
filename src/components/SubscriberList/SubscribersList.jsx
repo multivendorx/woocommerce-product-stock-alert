@@ -44,7 +44,7 @@ export default function SubscribersList() {
   ]);
 
   const handleClick = () => {
-    if (appLocalizer.pro_active) {
+    if (appLocalizer.khali_dabba) {
       axios({
         method: "post",
         url: fetchSubscribersDataUrl,
@@ -138,13 +138,13 @@ export default function SubscribersList() {
   }
 
   useEffect(() => {
-    if (appLocalizer.pro_active) {
+    if (appLocalizer.khali_dabba) {
       requestData();
     }
   }, [postStatus]);
 
   useEffect(() => {
-    if (appLocalizer.pro_active) {
+    if (appLocalizer.khali_dabba) {
       axios({
         method: "post",
         url: fetchSubscribersCount,
@@ -341,7 +341,7 @@ export default function SubscribersList() {
           {row.email}
           {
             row.user_link &&
-            <a className="user-profile" href={row.user_link} target="_blank"><i className="admin-font font-person"></i></a>
+            <a className="user-profile" href={row.user_link} target="_blank"><i className="admin-font adminLib-person"></i></a>
           }
         </TableCell>,
     },
@@ -361,7 +361,7 @@ export default function SubscribersList() {
 
   return (
     <>
-      {!appLocalizer.pro_active ? (
+      {!appLocalizer.khali_dabba ? (
         <div>
           <div className="free-reports-download-section">
             <h2 className="section-heading">{__("Download product wise subscriber data.", "woocommerce-stock-manager")}</h2>
@@ -379,7 +379,7 @@ export default function SubscribersList() {
             aria-labelledby="form-dialog-title"
           >
             <span
-              className="admin-font font-cross stock-manager-popup-cross"
+              className="admin-font adminLib-cross stock-manager-popup-cross"
               onClick={() => {
                 setOpenDialog(false);
               }}

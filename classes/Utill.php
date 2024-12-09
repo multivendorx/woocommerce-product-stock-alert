@@ -48,18 +48,20 @@ class Utill {
             'alert_unsubscribe_message' => __( '%customer_email% is successfully unsubscribed.', 'woocommerce-stock-manager' ),
             'email_placeholder_text' => __( 'Enter your email', 'woocommerce-stock-manager' ),
             'alert_text' => __( 'Receive notifications when back in stock.', 'woocommerce-stock-manager' ),
-            'button_text' => __( 'Notify me', 'woocommerce-stock-manager' ),
             'unsubscribe_button_text' => __( 'Unsubscribe', 'woocommerce-stock-manager' ),
             'alert_text_color' => '', // Default value
-            'button_background_color' => '', // Default value
-            'button_border_color' => '', // Default value
-            'button_text_color' => '', // Default value
-            'button_background_color_onhover' => '', // Default value
-            'button_text_color_onhover' => '', // Default value
-            'button_border_color_onhover' => '', // Default value
-            'button_font_size' => '', // Default value
-            'button_border_size' => '', // Default value
-            'button_border_radious' => '', // Default value
+            'customize_btn' => [
+                'button_text' => __( 'Notify me', 'woocommerce-stock-manager' ),
+                'button_background_color' => '', // Default value
+                'button_border_color' => '', // Default value
+                'button_text_color' => '', // Default value
+                'button_background_color_onhover' => '', // Default value
+                'button_text_color_onhover' => '', // Default value
+                'button_border_color_onhover' => '', // Default value
+                'button_font_size' => '', // Default value
+                'button_border_size' => '', // Default value
+                'button_border_radious' => '', // Default value
+            ],
             'ban_email_domain_text' => __( 'This email domain is not allowed.', 'woocommerce-stock-manager' ),
             'ban_email_address_text' => __( 'This email address is banned.', 'woocommerce-stock-manager' ),
         ];
@@ -86,7 +88,9 @@ class Utill {
      * Check pro plugin is acrive or not
      * @return bool
      */
-    public static function is_pro_active() {
-        return defined( 'STOCK_MANAGER_PRO_PLUGIN_VERSION' );
+    public static function is_khali_dabba() {
+        if ( defined( 'STOCK_MANAGER_PRO_PLUGIN_VERSION' ) ) {
+			return SM_PRO()->license->is_active();
+		}
     }
 }

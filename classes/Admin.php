@@ -98,7 +98,7 @@ class Admin {
      * @return void
      */
     public function create_setting_page() {
-        echo '<div id="admin-stockmanager"></div>';
+        echo '<div id="admin-main-wrapper"></div>';
     }
 
     /**
@@ -190,11 +190,12 @@ class Admin {
             wp_enqueue_script( 'stockmanager-script', SM()->plugin_url . 'build/index.js', [ 'wp-element', 'wp-i18n', 'react-jsx-runtime' ], SM()->version, true );
             wp_set_script_translations( 'stockmanager-script', 'woocommerce-stock-manager' );
             wp_localize_script( 'stockmanager-script', 'appLocalizer', apply_filters( 'stock_manager_settings', [ 
-                'apiUrl'                    => untrailingslashit( get_rest_url() ), 
+                'apiUrl'                    => untrailingslashit( get_rest_url() ),
+                'restUrl'                   => 'stockmanager/v1',
                 'nonce'                     => wp_create_nonce( 'wp_rest' ),
                 'subscriber_list'           => SM()->plugin_url . 'src/assets/images/subscriber-list.jpg',
                 'export_button'             => admin_url( 'admin-ajax.php?action=export_subscribers' ),
-                'pro_active'                => Utill::is_pro_active(),
+                'khali_dabba'                => Utill::is_khali_dabba(),
                 'tab_name'                  => __("Stock Manager", "woocommerce-stock-manager"),
                 'settings_databases_value'  => $settings_databases_value,
                 'pro_url'                   => esc_url( STOCK_MANAGER_PRO_SHOP_URL ),

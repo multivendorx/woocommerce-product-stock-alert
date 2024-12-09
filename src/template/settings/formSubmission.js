@@ -5,7 +5,7 @@ export default {
     priority: 3,
     name: __("Prompt Messages", "woocommerce-stock-manager"),
     desc: __("Manage post-form submission messages.", "woocommerce-stock-manager"),
-    icon: "font-submission-message",
+    icon: "adminLib-submission-message",
     submitUrl: "save-stockmanager",
     modal: [
         {

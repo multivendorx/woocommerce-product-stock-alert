@@ -48,7 +48,7 @@ const Managestock = () => {
   const [segments, setSegments] = useState(null);
   const filterChanged = useRef(false);
   useEffect(() => {
-    if (!appLocalizer.pro_active) return;
+    if (!appLocalizer.khali_dabba) return;
     axios({
       method: "post",
       url: segmentDataUrl,
@@ -59,7 +59,7 @@ const Managestock = () => {
     });
   }, []);
   useEffect(() => {
-    if (!appLocalizer.pro_active) return;
+    if (!appLocalizer.khali_dabba) return;
     if (filterChanged.current && (Boolean(searchType) ^ Boolean(searchValue))) {
       filterChanged.current = false;
       return;
@@ -94,7 +94,7 @@ const Managestock = () => {
   ]);
   return (
     <>
-      {!appLocalizer.pro_active ? (
+      {!appLocalizer.khali_dabba ? (
         //If the user is free user he will be shown a Inventory Manager image
         <div className="inventory-manager-wrapper">
           <Dialog
@@ -106,7 +106,7 @@ const Managestock = () => {
             aria-labelledby="form-dialog-title"
           >
             <span
-              className="admin-font font-cross stock-manager-popup-cross"
+              className="admin-font adminLib-cross stock-manager-popup-cross"
               onClick={() => {
                 setOpenDialog(false);
               }}
@@ -141,7 +141,7 @@ const Managestock = () => {
             </div>
             {displayMessage && (
               <div className="admin-notice-display-title">
-                <i className="admin-font font-icon-yes"></i>
+                <i className="admin-font adminLib-icon-yes"></i>
                 {displayMessage}
               </div>
             )}
@@ -210,7 +210,7 @@ const Managestock = () => {
                   value={searchType}
                 >
                   {/* <option value="">All</option> */}
-                  <option value="">--Select--</option>
+                  <option value="">Select</option>
                   <option value="productName">Product Name</option>
                   <option value="productSku">Sku</option>
                 </select>

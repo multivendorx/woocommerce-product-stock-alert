@@ -13,7 +13,7 @@ const Import = () => {
     
     //To fetch all the data for the sample CSV
     useEffect( () => {
-        if ( appLocalizer.pro_active ) {
+        if ( appLocalizer.khali_dabba ) {
             axios({
                 method: "post",
                 url: `${ appLocalizer.apiUrl }/stockmanager/v1/all-products`,
@@ -112,7 +112,7 @@ const Import = () => {
                     {
                         displayMessage &&
                         <div className="admin-notice-display-title">
-                            <i className="admin-font font-icon-yes"></i>
+                            <i className="admin-font adminLib-icon-yes"></i>
                             { displayMessage }
                         </div>
                     }

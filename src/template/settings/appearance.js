@@ -4,12 +4,12 @@ export default {
     priority: 1,
     name: __("Appearance", "woocommerce-stock-manager"),
     desc: __("Customize stock alert form.", "woocommerce-stock-manager"),
-    icon: 'font-settings',
+    icon: 'adminLib-settings',
     submitUrl: 'save-stockmanager',
     modal: [
         {
             key: "subscribe_form",
-            type: "form_customizer",
+            type: "stock-alert-form-customizer",
             label: __("Personalize Layout", "woocommerce-stock-manager")
         },
         {
@@ -34,27 +34,29 @@ export default {
             key: 'is_guest_subscriptions_enable',
             type: 'checkbox',
             label: __("Guest Subscriptions", "woocommerce-stock-manager-pro"),
+            desc: __("Allow guests (non-logged-in users) to subscribe to notifications for out-of-stock products.", "woocommerce-stock-manager"),
             class: 'woo-toggle-checkbox',
             options: [
                 {
                     key: "is_guest_subscriptions_enable",
-                    label: __("Allow guests (non-logged-in users) to subscribe to notifications for out-of-stock products.", "woocommerce-stock-manager"),
                     value: "is_guest_subscriptions_enable"
                 }
             ],
+            look: 'toggle'
         },
         {
             key: 'is_enable_backorders',
             type: 'checkbox',
             label: __("Allow Backorder Subscriptions", "woocommerce-stock-manager"),
+            desc: __("Enabling this setting allows users to subscribe to out-of-stock products, even when the backorder option is enabled.", "woocommerce-stock-manager"),
             class: 'woo-toggle-checkbox',
             options: [
                 {
                     key: "is_enable_backorders",
-                    label: __("Enabling this setting allows users to subscribe to out-of-stock products, even when the backorder option is enabled.", "woocommerce-stock-manager"),
                     value: "is_enable_backorders"
                 }
-            ]
+            ],
+            look: 'toggle'
         },
         {
             key: 'separator_content',
@@ -63,7 +65,7 @@ export default {
         },
         {
             key: 'display_lead_times',
-            type: 'checkbox-default',
+            type: 'checkbox',
             label: __("Stock Status for Lead Time", "woocommerce-stock-manager"),
             class: 'woo-toggle-checkbox',
             desc:  __("Lead time informs customers when a product will be available again. This setting lets you choose which stock statuses will display the restock estimate.", "woocommerce-stock-manager"),
@@ -129,14 +131,15 @@ export default {
             key: 'is_enable_no_interest',
             type: 'checkbox',
             label: __("Display subscriber count for out of stock", "woocommerce-stock-manager"),
+            desc: __("Enabling this setting shows the subscriber count on the single product page.", "woocommerce-stock-manager"),
             class: 'woo-toggle-checkbox',
             options: [
                 {
                     key: "is_enable_no_interest",
-                    label: __("Enabling this setting shows the subscriber count on the single product page.", "woocommerce-stock-manager"),
                     value: "is_enable_no_interest"
                 }
-            ]
+            ],
+            look: 'toggle'
         },
         {
             key: 'shown_interest_text',
@@ -160,7 +163,7 @@ export default {
             type: 'checkbox',
             class: 'woo-toggle-checkbox',
             label: __("Subscriber double opt-in", "woocommerce-stock-manager"),
-            desc : ! appLocalizer.pro_active ? appLocalizer.is_double_optin_free : appLocalizer.is_double_optin_pro,
+            desc : ! appLocalizer.khali_dabba ? appLocalizer.is_double_optin_free : appLocalizer.is_double_optin_pro,
             options: [
                 {
                     key: "is_double_optin",
@@ -168,6 +171,7 @@ export default {
                 }
             ],
             proSetting: true,
+            look: 'toggle'
         },
         {
             key: 'double_opt_in_success',
@@ -191,7 +195,7 @@ export default {
             type: 'checkbox',
             label: __("Enable  reCaptcha", "woocommerce-stock-manager-pro"),
             class: 'woo-toggle-checkbox',
-            desc : ! appLocalizer.pro_active ? appLocalizer.is_recaptcha_enable_free : appLocalizer.is_recaptcha_enable_pro,
+            desc : ! appLocalizer.khali_dabba ? appLocalizer.is_recaptcha_enable_free : appLocalizer.is_recaptcha_enable_pro,
             options: [
                 {
                     key: "is_recaptcha_enable",
@@ -199,6 +203,7 @@ export default {
                 }
             ],
             proSetting: true,
+            look: 'toggle'
         },
         {
             key: 'v3_site_key',
