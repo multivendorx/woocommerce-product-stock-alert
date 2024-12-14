@@ -111,7 +111,7 @@ class Install {
             }
 
             delete_option( 'stock_manager_migration_running' );
-            self::$migration_running = false;
+            self::$migration_running = null;
 
         } catch ( \Exception $e ) {
             Utill::log( $e->getMessage() );
