@@ -154,7 +154,6 @@ class Ajax {
 			wp_send_json_error( 'Invalid security token sent.' );
 			wp_die();
 		}
-
 		$customer_email = isset( $_POST[ 'email' ] ) ? sanitize_email( $_POST[ 'email' ] ) : '';
 		$product_id 	= isset( $_POST[ 'product_id' ] ) ? absint( $_POST[ 'product_id' ] ) : '';
 		$variation_id 	= isset( $_POST[ 'variation_id' ] ) ? absint( $_POST[ 'variation_id' ] ) : 0;
@@ -172,7 +171,6 @@ class Ajax {
 			$product_id = ( $variation_id && $variation_id > 0 ) ? $variation_id : $product_id;
 			$do_complete_additional_task = apply_filters( 'stock_manager_do_complete_additional_task', false );
         	$is_accept_email_address = apply_filters( 'stock_manager_is_accept_email_address', false );
-
 			if ( Subscriber::is_already_subscribed( $customer_email, $product_id ) ) {
 				$status = '/*?%already_registered%?*/';
 			} else if ( $do_complete_additional_task ) {

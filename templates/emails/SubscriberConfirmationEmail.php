@@ -8,11 +8,16 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
+$encoded_email = base64_encode( $customer_email );
+$confirm_page_id = get_option( 'stock_manager_confirmation' );
+
+
 do_action( 'woocommerce_email_header', $email_heading, $email ); ?>
 
 <p><?php printf( esc_html__( "Hi there. You have successfully subscribed to a product. We will inform you when the product becomes available. Product details are shown below for your reference:", 'woocommerce-stock-manager' ) );
 
 $is_prices_including_tax = get_option( 'woocommerce_prices_include_tax' );
+
 ?>
 <h3><?php esc_html_e( 'Product Details', 'woocommerce-stock-manager' ); ?></h3>
 <table cellspacing="0" cellpadding="6" style="width: 100%; border: 1px solid #eee;" border="1" bordercolor="#eee">
@@ -24,9 +29,7 @@ $is_prices_including_tax = get_option( 'woocommerce_prices_include_tax' );
 	</thead>
 	<tbody>
 		<tr>
-			<th scope="col" style="text-align:left; border: 1px solid #eee;"><?php echo esc_html( $product->get_name() ); ?>
-			
-			</th>
+			<th scope="col" style="text-align:left; border: 1px solid #eee;"><?php echo esc_html( $product->get_name() ); ?></th>
 			<th scope="col" style="text-align:left; border: 1px solid #eee;">
 				<?php 
 					echo wp_kses_post( wc_price( wc_get_price_to_display( $product ) ) );
@@ -45,5 +48,6 @@ $is_prices_including_tax = get_option( 'woocommerce_prices_include_tax' );
 	<a target="_blank" href="mailto:<?php echo esc_html( $customer_email ); ?>"><?php echo esc_html( $customer_email ); ?></a>
 </p>
 
-</p>
+<?php do_action('send_unsubscribe_confirmation', $confirm_page_id,$product->get_id(),$encoded_email); ?>
+
 <?php do_action( 'woocommerce_email_footer' ); ?>

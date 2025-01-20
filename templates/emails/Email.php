@@ -7,6 +7,9 @@
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+$encoded_email = base64_encode( $customer_email );
+$confirm_page_id = get_option( 'stock_manager_confirmation' );
+
 
 do_action( 'woocommerce_email_header', $email_heading, $email ); ?>
 
@@ -46,4 +49,8 @@ $is_prices_including_tax = esc_html( get_option( 'woocommerce_prices_include_tax
 </p>
 
 </p>
+
+<?php do_action('send_unsubscribe_confirmation', $confirm_page_id,$product->get_id(),$encoded_email); ?>
+
+
 <?php do_action( 'woocommerce_email_footer' );

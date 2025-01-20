@@ -39,6 +39,10 @@ class StockManager {
         add_action( 'woocommerce_loaded', [ $this, 'init_plugin' ] );
         add_action( 'plugins_loaded', [ $this, 'is_woocommerce_loaded' ] );
         add_filter( 'plugin_row_meta', [ $this, 'plugin_row_meta' ], 10, 2 );
+
+        //unsubscribe link hook
+        add_action( 'send_unsubscribe_confirmation', [ $this, 'add_unsubscribe_message_with_confirmation' ],10,3 );
+
     } 
 
     /**
@@ -220,6 +224,23 @@ class StockManager {
         }
         return array_merge( $plugin_links, $links );
     }
+    /**
+     * Set unsubscribe link
+     * @return void
+     */
+    public static function add_unsubscribe_message_with_confirmation( $confirm_page_id,$product_id,$encoded_email ) {
+        // Construct the URL with the unsubscribe parameter
+        $confirmation = get_permalink( $confirm_page_id ) . '?product_id=' . $product_id . '&customer=' . urlencode( $encoded_email ) . '&unsubscribe=true';
+        $pro_user = get_option('stock_manager_pro_installed');
+        if ( !empty($pro_user) ) {
+            // Display a simple content message followed by the unsubscribe link
+            printf( 
+                '<p>' . __( 'If you want to unsubscribe, click <a href="%s"> here </a>.', 'woocommerce-stock-manager-pro' ) . '</p>', 
+                esc_url( $confirmation )
+            );
+        }
+    }
+    
 
     /**
      * Initializes the MultiVendorX class.

@@ -175,7 +175,8 @@ class Subscriber {
      */
     static function remove_subscriber( $product_id, $customer_email ) {
         // Check the user is already subscribed or not
-        $unsubscribe_post = self::is_already_subscribed( $customer_email, $product_id );
+        $unsubscribe_post = self::is_already_subscribed( $customer_email, $product_id, ['subscribed', 'mailsent'] );
+
 
         if ( $unsubscribe_post ) {
             if ( is_array( $unsubscribe_post ) ) {
@@ -231,20 +232,29 @@ class Subscriber {
      * @param mixed $product_id
      * @return array | string Subscription ID | null
      */
-    static function is_already_subscribed( $subscriber_email, $product_id ) {
+    static function is_already_subscribed( $subscriber_email, $product_id, $subscribed = null ) {
         global $wpdb;
-			
-        // Get the result from custom subscribers table. 
+        
+        if ( !is_array( $subscribed ) ) {
+            $subscribed = array('subscribed');
+        }
+        
+        // convert array to string
+        $status = implode("','", $subscribed);
+    
+        // Get the result from the custom subscribers table
         return $wpdb->get_var(
             $wpdb->prepare(
                 "SELECT id FROM {$wpdb->prefix}stockalert_subscribers
                 WHERE product_id = %d
                 AND email = %s
-                AND status = %s",
-                [ $product_id, $subscriber_email, 'subscribed' ]
+                AND status IN('$status')",
+                $product_id, $subscriber_email
             )
         );
     }
+    
+
 
     /**
      * Update the subscriber count for a product
