@@ -236,9 +236,9 @@ class Subscriber {
 
         $unsubscribe_flag = get_option('stock_manager_pro_unsubscribe_flag');
 
-        if(empty( $unsubscribe_flag )){
+        if( empty( $unsubscribe_flag )){
             $subscribed=array('subscribed');
-        }else{
+        } else {
             $subscribed = array('subscribed', 'mailsent');
         }
         //convert array to string
