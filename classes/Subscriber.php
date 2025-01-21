@@ -231,17 +231,27 @@ class Subscriber {
      * @param mixed $product_id
      * @return array | string Subscription ID | null
      */
-    static function is_already_subscribed( $subscriber_email, $product_id ) {
+    static function is_already_subscribed( $subscriber_email , $product_id  ) {
         global $wpdb;
-			
+
+        $unsubscribe_flag = get_option('stock_manager_pro_unsubscribe_flag');
+
+        if(empty( $unsubscribe_flag )){
+            $subscribed=array('subscribed');
+        }else{
+            $subscribed = array('subscribed', 'mailsent');
+        }
+        //convert array to string
+        $subscribed_str = implode("','" , esc_sql( $subscribed ));
+
         // Get the result from custom subscribers table. 
         return $wpdb->get_var(
             $wpdb->prepare(
                 "SELECT id FROM {$wpdb->prefix}stockalert_subscribers
                 WHERE product_id = %d
                 AND email = %s
-                AND status = %s",
-                [ $product_id, $subscriber_email, 'subscribed' ]
+                AND status IN('$subscribed_str')",
+                [ $product_id, $subscriber_email ]
             )
         );
     }
