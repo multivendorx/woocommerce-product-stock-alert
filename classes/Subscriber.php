@@ -231,7 +231,7 @@ class Subscriber {
      * @param mixed $product_id
      * @return array | string Subscription ID | null
      */
-    static function is_already_subscribed( $subscriber_email , $product_id ) {
+    static function is_already_subscribed( $subscriber_email, $product_id ) {
         global $wpdb;
 
         // Get the result from custom subscribers table. 

@@ -7,6 +7,7 @@
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
 $encoded_email = base64_encode( $customer_email );
 $confirm_page_id = get_option( 'stock_manager_confirmation' );
 
