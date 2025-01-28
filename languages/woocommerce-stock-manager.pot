@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Product Stock Waitlist Manager for WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-28 05:29+0000\n"
+"POT-Creation-Date: 2025-01-28 06:50+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -30,18 +30,6 @@ msgstr ""
 
 #: classes/Utill.php:46
 msgid "%customer_email% is already registered for %product_title%."
-msgstr ""
-
-#. This message display already registered user to display already registered message
-#: classes/Install.php:212
-msgid ""
-"%customer_email% is already registered for %product_title%. Please attempt a "
-"different email address."
-msgstr ""
-
-#. This message display user sucessfully unregistered
-#: classes/Install.php:215
-msgid "%customer_email% is successfully unregistered."
 msgstr ""
 
 #: classes/Utill.php:48
@@ -92,7 +80,7 @@ msgstr ""
 msgid "Confirm subscriber"
 msgstr ""
 
-#: templates/emails/SubscriberConfirmationEmail.php:45
+#: templates/emails/SubscriberConfirmationEmail.php:43
 #: templates/emails/Email.php:42 templates/emails/AdminEmail.php:43
 msgid "Customer Details"
 msgstr ""
@@ -101,12 +89,12 @@ msgstr ""
 msgid "Docs"
 msgstr ""
 
-#: templates/emails/SubscriberConfirmationEmail.php:47
+#: templates/emails/SubscriberConfirmationEmail.php:45
 #: templates/emails/Email.php:44 templates/emails/AdminEmail.php:45
 msgid "Email"
 msgstr ""
 
-#: templates/emails/SubscriberConfirmationEmail.php:43
+#: templates/emails/SubscriberConfirmationEmail.php:41
 #: templates/emails/Email.php:40 templates/emails/AdminEmail.php:41
 msgid "Following is the product link : "
 msgstr ""
@@ -127,7 +115,7 @@ msgid ""
 "available now. Product details are shown below for your reference:"
 msgstr ""
 
-#: templates/emails/SubscriberConfirmationEmail.php:16
+#: templates/emails/SubscriberConfirmationEmail.php:14
 #: templates/emails/plain/SubscriberConfirmationEmail.php:12
 msgid ""
 "Hi there. You have successfully subscribed to a product. We will inform you "
@@ -177,15 +165,11 @@ msgstr ""
 msgid "Please enter a valid email address."
 msgstr ""
 
-#: classes/Install.php:213
-msgid "Please enter a valid email ID and try again."
-msgstr ""
-
 #: classes/FrontEnd.php:79
 msgid "Please try again."
 msgstr ""
 
-#: templates/emails/SubscriberConfirmationEmail.php:25
+#: templates/emails/SubscriberConfirmationEmail.php:23
 #: templates/emails/Email.php:22 templates/emails/AdminEmail.php:23
 msgid "Price"
 msgstr ""
@@ -194,12 +178,12 @@ msgstr ""
 msgid "Processing..."
 msgstr ""
 
-#: templates/emails/SubscriberConfirmationEmail.php:24
+#: templates/emails/SubscriberConfirmationEmail.php:22
 #: templates/emails/Email.php:21 templates/emails/AdminEmail.php:22
 msgid "Product"
 msgstr ""
 
-#: templates/emails/SubscriberConfirmationEmail.php:20
+#: templates/emails/SubscriberConfirmationEmail.php:18
 #: templates/emails/Email.php:17 templates/emails/AdminEmail.php:18
 msgid "Product Details"
 msgstr ""
@@ -261,12 +245,6 @@ msgid ""
 "once it is back in stock."
 msgstr ""
 
-#: classes/Install.php:210
-msgid ""
-"Thank you for expressing interest in %product_title%. We will notify you via "
-"email once it is back in stock."
-msgstr ""
-
 #: classes/Utill.php:44
 msgid "Thank you for your interest."
 msgstr ""
@@ -278,17 +256,8 @@ msgid ""
 "then activate the plugin."
 msgstr ""
 
-#: classes/Install.php:219
-msgid ""
-"This email address is ban in our site, kindly use another email address."
-msgstr ""
-
 #: classes/Utill.php:66
 msgid "This email address is banned."
-msgstr ""
-
-#: classes/Install.php:218
-msgid "This email domain is ban in our site, kindly use another email domain."
 msgstr ""
 
 #: classes/Utill.php:65
