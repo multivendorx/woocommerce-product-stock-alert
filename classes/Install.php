@@ -190,11 +190,11 @@ class Install {
             
             // Form customization settings
             'email_placeholder_text' => __( 'Enter your email', 'woocommerce-stock-manager' ), 
-            'alert_text' => __( 'Receive in-stock notifications for this.', 'woocommerce-stock-manager' ), 
+            'alert_text' => 'Receive in-stock notifications for this.', 
             'unsubscribe_button_text' => __( 'Unsubscribe', 'woocommerce-stock-manager' ), 
             'alert_text_color' => '', 
             'customize_btn' => [
-                'button_text' => __( 'Notify me', 'woocommerce-stock-manager' ), 
+                'button_text' => 'Notify me', 
                 'button_background_color' => '', 
                 'button_border_color' => '', 
                 'button_text_color' => '', 

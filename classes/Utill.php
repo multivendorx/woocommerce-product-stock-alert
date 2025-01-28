@@ -47,11 +47,11 @@ class Utill {
             'valid_email' => __( 'Please enter a valid email address.', 'woocommerce-stock-manager' ),
             'alert_unsubscribe_message' => __( '%customer_email% is successfully unsubscribed.', 'woocommerce-stock-manager' ),
             'email_placeholder_text' => __( 'Enter your email', 'woocommerce-stock-manager' ),
-            'alert_text' => __( 'Receive notifications when back in stock.', 'woocommerce-stock-manager' ),
+            'alert_text' => 'Receive notifications when back in stock.',
             'unsubscribe_button_text' => __( 'Unsubscribe', 'woocommerce-stock-manager' ),
             'alert_text_color' => '', // Default value
             'customize_btn' => [
-                'button_text' => __( 'Notify me', 'woocommerce-stock-manager' ),
+                'button_text' => 'Notify me',
                 'button_background_color' => '', // Default value
                 'button_border_color' => '', // Default value
                 'button_text_color' => '', // Default value
