@@ -49,5 +49,5 @@ $is_prices_including_tax = get_option( 'woocommerce_prices_include_tax' );
 </p>
 
 </p>
-<?php do_action( 'send_unsubscribe_confirmation' , $confirm_page_id , $product->get_id() , $encoded_email ); ?>
+<?php do_action( 'woocommerce_email_footer_link' , $confirm_page_id , $product->get_id() , $encoded_email ); ?>
 <?php do_action( 'woocommerce_email_footer' ); ?>

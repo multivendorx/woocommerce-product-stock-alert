@@ -182,16 +182,16 @@ class Install {
             'is_enable_no_interest' => false, 
             'is_double_optin' => false, 
             'is_remove_admin_email' => false, 
-            'double_opt_in_success' => __( 'Kindly check your inbox to confirm the subscription.', 'woocommerce-stock-manager' ), 
+            'double_opt_in_success' => 'Kindly check your inbox to confirm the subscription.', 
             'shown_interest_text' => __( 'Kindly check your inbox to confirm the subscription.', 'woocommerce-stock-manager' ), 
             'additional_alert_email' => get_option( 'admin_email' ),
             'is_guest_subscriptions_enable' => ['is_guest_subscriptions_enable'],
             'lead_time_format'  => 'static',
             
             // Form customization settings
-            'email_placeholder_text' => __( 'Enter your email', 'woocommerce-stock-manager' ), 
+            'email_placeholder_text' => 'Enter your email', 
             'alert_text' => 'Receive in-stock notifications for this.', 
-            'unsubscribe_button_text' => __( 'Unsubscribe', 'woocommerce-stock-manager' ), 
+            'unsubscribe_button_text' => 'Unsubscribe', 
             'alert_text_color' => '', 
             'customize_btn' => [
                 'button_text' => 'Notify me', 

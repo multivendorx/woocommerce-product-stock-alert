@@ -40,15 +40,15 @@ class Utill {
     public static function get_form_settings_array() {
         // Initialize the settings keys with default values
         $setting_keys = [
-            'double_opt_in_success' => __( 'Kindly check your inbox to confirm the subscription.', 'woocommerce-stock-manager' ),
+            'double_opt_in_success' => 'Kindly check your inbox to confirm the subscription.',
             'shown_interest_text' => __( 'Thank you for your interest.', 'woocommerce-stock-manager' ),
             'alert_success' => __( 'Thank you for expressing interest in %product_title%. We will notify you once it is back in stock.', 'woocommerce-stock-manager' ),
             'alert_email_exist' => __( '%customer_email% is already registered for %product_title%.', 'woocommerce-stock-manager' ),
             'valid_email' => __( 'Please enter a valid email address.', 'woocommerce-stock-manager' ),
             'alert_unsubscribe_message' => __( '%customer_email% is successfully unsubscribed.', 'woocommerce-stock-manager' ),
-            'email_placeholder_text' => __( 'Enter your email', 'woocommerce-stock-manager' ),
+            'email_placeholder_text' => 'Enter your email',
             'alert_text' => 'Receive notifications when back in stock.',
-            'unsubscribe_button_text' => __( 'Unsubscribe', 'woocommerce-stock-manager' ),
+            'unsubscribe_button_text' => 'Unsubscribe',
             'alert_text_color' => '', // Default value
             'customize_btn' => [
                 'button_text' => 'Notify me',
