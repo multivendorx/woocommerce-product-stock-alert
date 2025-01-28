@@ -8,9 +8,8 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-$encoded_email = base64_encode( $customer_email );
 $confirm_page_id = get_option( 'stock_manager_confirmation' );
-
+$product_id = $product->get_id();
 do_action( 'woocommerce_email_header', $email_heading, $email ); ?>
 
 <p><?php printf( esc_html__( "Hi there. You have successfully subscribed to a product. We will inform you when the product becomes available. Product details are shown below for your reference:", 'woocommerce-stock-manager' ) );
@@ -49,5 +48,5 @@ $is_prices_including_tax = get_option( 'woocommerce_prices_include_tax' );
 </p>
 
 </p>
-<?php do_action( 'woocommerce_email_footer_link' , $confirm_page_id , $product->get_id() , $encoded_email ); ?>
+<?php do_action( 'woocommerce_email_footer_link' , $confirm_page_id , $product_id , base64_encode( $customer_email ) ); ?>
 <?php do_action( 'woocommerce_email_footer' ); ?>
