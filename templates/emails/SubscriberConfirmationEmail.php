@@ -8,7 +8,6 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-$product_id = $product->get_id();
 do_action( 'woocommerce_email_header', $email_heading, $email ); ?>
 
 <p><?php printf( esc_html__( "Hi there. You have successfully subscribed to a product. We will inform you when the product becomes available. Product details are shown below for your reference:", 'woocommerce-stock-manager' ) );
@@ -43,9 +42,9 @@ $is_prices_including_tax = get_option( 'woocommerce_prices_include_tax' );
 <h3><?php esc_html_e( 'Customer Details', 'woocommerce-stock-manager' ); ?></h3>
 <p>
 	<strong><?php esc_html_e( 'Email', 'woocommerce-stock-manager' ); ?> : </strong>
-	<a target="_blank" href="mailto:<?php echo esc_html( $customer_email ); ?>"><?php echo esc_html( $customer_email ); ?></a>
+	<a target="_blank" href="mailto:<?php echo esc_html( $email->get_recipient() ); ?>"><?php echo esc_html( $email->get_recipient() ); ?></a>
 </p>
 
 </p>
-<?php do_action( 'woocommerce_stock_alert_email_footer_link' , $product_id , base64_encode( $customer_email ) ); ?>
-<?php do_action( 'woocommerce_email_footer' ); ?>
+<?php do_action( 'stock_manager_email_footer' , $product->get_id(), $email->get_recipient() );
+do_action( 'woocommerce_email_footer' ); 
