@@ -233,7 +233,7 @@ class Subscriber {
      */
     static function is_already_subscribed( $subscriber_email, $product_id ) {
         global $wpdb;
-
+			
         // Get the result from custom subscribers table. 
         return $wpdb->get_var(
             $wpdb->prepare(
