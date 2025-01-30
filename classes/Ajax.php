@@ -31,8 +31,8 @@ class Ajax {
 			wp_send_json_error( 'Invalid security token sent.' );
 			wp_die();
 		} 
-        $recaptcha_secret = isset( $_POST[ 'captcha_secret' ] ) ? sanitize_text_field( $_POST[ 'captcha_secret' ] ) : '';
-        $recaptcha_response = isset( $_POST[ 'captcha_response' ] ) ? sanitize_text_field( $_POST[ 'captcha_response' ] ) : '';
+		$recaptcha_secret   = filter_input( INPUT_POST, 'captcha_secret', FILTER_SANITIZE_SPECIAL_CHARS );
+		$recaptcha_response = filter_input( INPUT_POST, 'captcha_response', FILTER_SANITIZE_SPECIAL_CHARS );		
         $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
 
         $recaptcha =  wp_remote_get( $recaptcha_url . '?secret=' . $recaptcha_secret . '&response=' . $recaptcha_response );
@@ -127,10 +127,10 @@ class Ajax {
 			wp_die();
 		}
 		
-		$customer_email = isset( $_POST[ 'customer_email' ] ) ? sanitize_email( $_POST[ 'customer_email' ] ) : '';
-		$product_id = isset( $_POST[ 'product_id' ] ) ? absint( $_POST[ 'product_id' ] ) : '';
-		$variation_id = isset( $_POST[ 'var_id' ] ) ? absint( $_POST[ 'var_id' ] ) : 0;
-
+		$customer_email = filter_input( INPUT_POST, 'customer_email', FILTER_SANITIZE_EMAIL );
+		$product_id     = filter_input( INPUT_POST, 'product_id', FILTER_VALIDATE_INT );
+		$variation_id   = filter_input( INPUT_POST, 'var_id', FILTER_VALIDATE_INT ) ?: 0;
+		
 		$success = false;
 
 		if ( $product_id && !empty( $product_id ) && !empty( $customer_email ) ) {
@@ -155,9 +155,9 @@ class Ajax {
 			wp_die();
 		}
 
-		$customer_email = isset( $_POST[ 'email' ] ) ? sanitize_email( $_POST[ 'email' ] ) : '';
-		$product_id 	= isset( $_POST[ 'product_id' ] ) ? absint( $_POST[ 'product_id' ] ) : '';
-		$variation_id 	= isset( $_POST[ 'variation_id' ] ) ? absint( $_POST[ 'variation_id' ] ) : 0;
+		$customer_email = filter_input( INPUT_POST, 'email', FILTER_SANITIZE_EMAIL );
+        $product_id     = filter_input( INPUT_POST, 'product_id', FILTER_VALIDATE_INT );
+        $variation_id   = filter_input( INPUT_POST, 'variation_id', FILTER_VALIDATE_INT ) ?: 0;
 		$status 		= '';
 
 		/**
@@ -199,8 +199,8 @@ class Ajax {
 			wp_send_json_error( 'Invalid security token sent.' );
 			wp_die();
 		} 
-		$product_id = isset( $_POST[ 'product_id' ] ) ? absint( $_POST[ 'product_id' ] ) : '';
-		$child_id = isset( $_POST[ 'variation_id' ] ) ? absint( $_POST[ 'variation_id' ] ) : '';
+		$product_id = filter_input( INPUT_POST, 'product_id', FILTER_VALIDATE_INT ) ?: '';
+        $child_id   = filter_input( INPUT_POST, 'variation_id', FILTER_VALIDATE_INT ) ?: '';
 		$product = wc_get_product( $product_id );
 		$child_obj = null;
 		if ( $child_id && !empty( $child_id ) ) {
