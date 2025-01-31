@@ -42,9 +42,9 @@ $is_prices_including_tax = get_option( 'woocommerce_prices_include_tax' );
 <h3><?php esc_html_e( 'Customer Details', 'woocommerce-stock-manager' ); ?></h3>
 <p>
 	<strong><?php esc_html_e( 'Email', 'woocommerce-stock-manager' ); ?> : </strong>
-	<a target="_blank" href="mailto:<?php echo esc_html( $email->get_recipient() ); ?>"><?php echo esc_html( $email->get_recipient() ); ?></a>
+	<a target="_blank" href="mailto:<?php echo esc_html( $customer_email ); ?>"><?php echo esc_html( $customer_email ); ?></a>
 </p>
 
 </p>
-<?php do_action( 'stock_manager_email_footer' , $product->get_id(), $email->get_recipient() );
+<?php do_action( 'stock_manager_email_footer' , $product->get_id(), $customer_email );
 do_action( 'woocommerce_email_footer' ); 
