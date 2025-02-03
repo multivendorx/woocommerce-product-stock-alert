@@ -103,11 +103,11 @@ jQuery(function ($) {
 
             // Request data for subscription
             let requestData = {
-                action:      'alert_ajax',
-                nonce:        localizeData.nonce,
-                email:        customerEmail,
-                product_id:   productId,
-                variation_id: variationId
+                action:         'alert_ajax',
+                nonce:           localizeData.nonce,
+                customer_email:  customerEmail,
+                product_id:      productId,
+                variation_id:    variationId
             }
 
             // Add additional fields data 
@@ -165,7 +165,7 @@ jQuery(function ($) {
             nonce:          localizeData.nonce,
             customer_email: form.find('.subscribed_email').val(),
             product_id:     form.find('.product_id').val(),
-            var_id:         form.find('.variation_id').val(),
+            variation_id:   form.find('.variation_id').val(),
         };
 
         // Prepare success message on subscribe.
