@@ -236,7 +236,7 @@ export default {
             label: __("Recipient email for new subscriber", "woocommerce-stock-manager"),
         },
         {
-            key:  'sample_blocktext',
+            key:  'note_blocktext',
             type:  'blocktext',
             label: 'no_label',
             blocktext: "Note: You can't change this text using the Loco plugin. To update the text in any language, make the changes directly in this setting.",
