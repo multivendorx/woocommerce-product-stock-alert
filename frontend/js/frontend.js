@@ -44,8 +44,8 @@ jQuery(function ($) {
             const recaptcha_request = {
                 action:           'recaptcha_validate_ajax',
                 nonce:            localizeData.nonce,
-                captcha_secret:   recaptcha_secret,
-                captcha_response: recaptcha_response
+                recaptcha_secret:   recaptcha_secret,
+                recaptcha_response: recaptcha_response
             }
 
             // Request for recaptcha validation

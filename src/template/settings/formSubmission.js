@@ -13,7 +13,7 @@ export default {
             type: "textarea",
             class: "woo-setting-wpeditor-class",
             // Translators: This message display dynamic product title and emails.
-            desc: __("Tip: Utilize %product_title% for dynamic product titles and %customer_email% for personalized customer email addresses in your messages.<b>(*)</b>", "woocommerce-stock-manager"),
+            desc: __("Tip: Utilize %product_title% for dynamic product titles and %customer_email% for personalized customer email addresses in your messages.", "woocommerce-stock-manager"),
             label: __("Successful form submission", "woocommerce-stock-manager"),
         },
         {
@@ -26,7 +26,7 @@ export default {
             type: "textarea",
             class: "woo-setting-wpeditor-class",
             // Translators: This message display dynamic product title and emails.
-            desc: __("Tip: Enhance personalization by incorporating %product_title% for dynamic product titles and %customer_email% for individual customer emails.<b>(*)</b>", "woocommerce-stock-manager"),
+            desc: __("Tip: Enhance personalization by incorporating %product_title% for dynamic product titles and %customer_email% for individual customer emails.", "woocommerce-stock-manager"),
             label: __("Repeated subscription alert", "woocommerce-stock-manager"),
         },
         {
@@ -38,7 +38,7 @@ export default {
             key: "valid_email",
             type: "textarea",
             class: "woo-setting-wpeditor-class",
-            desc: __("Personalize the message shown to users when they try to subscribe with an invalid email address.<b>(*)</b>", "woocommerce-stock-manager"),
+            desc: __("Personalize the message shown to users when they try to subscribe with an invalid email address.", "woocommerce-stock-manager"),
             label: __("Email validation error", "woocommerce-stock-manager"),
         },
         {
@@ -50,8 +50,14 @@ export default {
             key: "alert_unsubscribe_message",
             type: "textarea",
             class: "woo-setting-wpeditor-class",
-            desc: __("Modify the text that confirms user that they have successful unsubscribe.<b>(*)</b><br><br><b>*Note:</b>You can't change this text using the Loco plugin. To update the text in any language, make the changes directly in this setting.", "woocommerce-stock-manager"),
+            desc: __("Modify the text that confirms user that they have successful unsubscribe.", "woocommerce-stock-manager"),
             label: __("Unsubscribe confirmation", "woocommerce-stock-manager"),
         },
+        {
+            key:  'sample_blocktext',
+            type:  'blocktext',
+            label: 'no_label',
+            blocktext: "Note: You can't change this text using the Loco plugin. To update the text in any language, make the changes directly in this setting.",
+        }
     ]
 };

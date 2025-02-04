@@ -26,7 +26,7 @@ export default {
             key: "ban_email_domain_text",
             type: "textarea",
             label: __("Blocked domain alert message", "woocommerce-stock-manager"),
-            desc: __(" Create an alert message for users attempting to subscribe from blocked domains.<b>(*)</b>", "woocommerce-stock-manager"),
+            desc: __(" Create an alert message for users attempting to subscribe from blocked domains.", "woocommerce-stock-manager"),
             proSetting: true,
         },
         {
@@ -51,8 +51,14 @@ export default {
             key: "ban_email_address_text",
             type: "textarea",
             label: __("Blocked email alert message", "woocommerce-stock-manager"),
-            desc: __("Create an alert message for users attempting to subscribe from blocked Email ID.<b>(*)</b><br><br><b>*Note:</b>You can't change this text using the Loco plugin. To update the text in any language, make the changes directly in this setting.", "woocommerce-stock-manager"),
+            desc: __("Create an alert message for users attempting to subscribe from blocked Email ID.", "woocommerce-stock-manager"),
             proSetting: true,
         },
+        {
+            key:  'sample_blocktext',
+            type:  'blocktext',
+            label: 'no_label',
+            blocktext: "Note: You can't change this text using the Loco plugin. To update the text in any language, make the changes directly in this setting.",
+        }
     ]
 };

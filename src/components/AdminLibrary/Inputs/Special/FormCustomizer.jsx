@@ -99,12 +99,6 @@ const FormCustomizer = (props) => {
                     </div>
                 </div>
             </div>
-            {
-                props.description &&
-                <p className={props.descClass} dangerouslySetInnerHTML={{ __html: props.description }}>
-
-                </p>
-            }
         </>
     )
 }

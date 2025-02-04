@@ -826,8 +826,6 @@ const DynamicForm = (props) => {
               value={value}
               buttonText={setting.customize_btn.button_text || 'Submit'}
               proSetting={isProSetting(inputField.proSetting)}
-              descClass="settings-metabox-description"
-              description={inputField.desc}
               onChange={(e, key) => {
                 if ( ! proSettingChanged( inputField.proSetting ) ) {
                   settingChanged.current = true;
