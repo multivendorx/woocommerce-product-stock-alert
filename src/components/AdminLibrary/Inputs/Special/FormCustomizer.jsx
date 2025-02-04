@@ -65,7 +65,6 @@ const FormCustomizer = (props) => {
                                             <button onClick={(e) => {
                                                 e.preventDefault();
                                                 setCurrentEditSection('');
-
                                             }} className="wrapper-close"><i class="admin-font adminLib-cross"></i></button>
                                             <div className="setting-section-dev">
                                                 <span class="label">Placeholder text</span>
@@ -81,7 +80,6 @@ const FormCustomizer = (props) => {
                                     }
                                 </>
                             }
-
                         </div>
                         <div className='button-section'>
                             <ButtonCustomizer
