@@ -10,7 +10,8 @@ export default {
         {
             key: "subscribe_form",
             type: "stock-alert-form-customizer",
-            label: __("Personalize Layout", "woocommerce-stock-manager")
+            label: __("Personalize Layout", "woocommerce-stock-manager"),
+            desc: __("<b>*Note:</b>You can't change this text using the Loco plugin. To update the text in any language, make the changes directly in this setting.", "woocommerce-stock-manager"),
         },
         {
             key: 'separator_content',
@@ -21,7 +22,7 @@ export default {
             key: "unsubscribe_button_text",
             type: "text",
             label: __('"Unsubscribe" Button Caption ', "woocommerce-stock-manager"),
-            desc: __("Modify the un-subscribe button text. By default we display \"Unsubscribe\".", "woocommerce-stock-manager"),
+            desc: __("Modify the un-subscribe button text. By default we display \"Unsubscribe\".<b>(*)</b>", "woocommerce-stock-manager"),
             placeholder: __("Unsubscribe", "woocommerce-stock-manager"),
             classes: 'unsubcribe-button-section',
         },
@@ -177,7 +178,7 @@ export default {
             key: 'double_opt_in_success',
             type: 'textarea',
             class: 'woo-setting-wpeditor-class',
-            desc: __("Default: Kindly check your inbox to confirm the subscription.", "woocommerce-stock-manager-pro"),
+            desc: __("Default: Kindly check your inbox to confirm the subscription.<b>(*)</b>", "woocommerce-stock-manager-pro"),
             label: __("Double opt-in success message", "woocommerce-stock-manager-pro"),
             dependent: {
                 key: "is_double_optin",
