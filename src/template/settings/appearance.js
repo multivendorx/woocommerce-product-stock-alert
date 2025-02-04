@@ -235,5 +235,11 @@ export default {
             desc: __("Set the email address to receive notifications when a user subscribes to an out-of-stock product. You can add multiple comma-separated emails.<br/> Default: The admin\'s email is set as the receiver. Exclude the admin\'s email from the list to exclude admin from receiving these notifications.", "woocommerce-stock-manager"),
             label: __("Recipient email for new subscriber", "woocommerce-stock-manager"),
         },
+        {
+            key:  'note_blocktext',
+            type:  'blocktext',
+            label: 'no_label',
+            blocktext: "Disclaimer – Loco Translator Compatibility: This plugin allows you to customize certain frontend text settings and descriptions. Default texts are Loco Translator-ready, but any changes made in the corresponding custom text box will no longer be available for translation via Loco Translator. Hence, please enter the customized text in your desired language only.",
+        }
     ]
 };

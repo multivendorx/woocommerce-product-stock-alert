@@ -53,5 +53,11 @@ export default {
             desc: __("Modify the text that confirms user that they have successful unsubscribe.", "woocommerce-stock-manager"),
             label: __("Unsubscribe confirmation", "woocommerce-stock-manager"),
         },
+        {
+            key:  'note_blocktext',
+            type:  'blocktext',
+            label: 'no_label',
+            blocktext: "Disclaimer – Loco Translator Compatibility: This plugin allows you to customize certain frontend text settings and descriptions. Default texts are Loco Translator-ready, but any changes made in the corresponding custom text box will no longer be available for translation via Loco Translator. Hence, please enter the customized text in your desired language only.",
+        }
     ]
 };

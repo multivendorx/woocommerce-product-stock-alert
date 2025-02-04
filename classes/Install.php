@@ -190,8 +190,8 @@ class Install {
             
             // Form customization settings
             'email_placeholder_text' => __( 'Enter your email', 'woocommerce-stock-manager' ), 
-            'alert_text' => __( 'Receive in-stock notifications for this.', 'woocommerce-stock-manager' ), 
-            'unsubscribe_button_text' => __( 'Unsubscribe', 'woocommerce-stock-manager' ), 
+            'alert_text' => __( 'Receive in-stock notifications for this.', 'woocommerce-stock-manager' ),
+            'unsubscribe_button_text' => __( 'Unsubscribe', 'woocommerce-stock-manager' ),
             'alert_text_color' => '', 
             'customize_btn' => [
                 'button_text' => __( 'Notify me', 'woocommerce-stock-manager' ), 
@@ -212,7 +212,7 @@ class Install {
             'alert_email_exist' => __( '%customer_email% is already registered for %product_title%. Please attempt a different email address.', 'woocommerce-stock-manager' ), 
             'valid_email' => __( 'Please enter a valid email ID and try again.', 'woocommerce-stock-manager' ), 
             // Translators: This message display user sucessfully unregistered
-            'alert_unsubscribe_message' => __( '%customer_email% is successfully unregistered.', 'woocommerce-stock-manager' ), 
+            'alert_unsubscribe_message' => __( '%customer_email% is successfully unregistered.', 'woocommerce-stock-manager' ),
         ];
         $email_settings = [
             'ban_email_domain_text' => __( 'This email domain is ban in our site, kindly use another email domain.', 'woocommerce-stock-manager' ), 
