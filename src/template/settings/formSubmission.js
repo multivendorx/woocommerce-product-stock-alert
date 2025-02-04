@@ -57,7 +57,7 @@ export default {
             key:  'note_blocktext',
             type:  'blocktext',
             label: 'no_label',
-            blocktext: "Note: You can't change this text using the Loco plugin. To update the text in any language, make the changes directly in this setting.",
+            blocktext: "Note: Changes made to the text through the customized text box will not be translated using the Loco plugin. To update the text in any language, make the changes directly from customized text box.",
         }
     ]
 };
