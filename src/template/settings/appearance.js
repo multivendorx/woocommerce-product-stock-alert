@@ -10,7 +10,7 @@ export default {
         {
             key: "subscribe_form",
             type: "stock-alert-form-customizer",
-            label: __("Personalize Layout", "woocommerce-stock-manager"),
+            label: __("Personalize Layout", "woocommerce-stock-manager")
         },
         {
             key: 'separator_content',
