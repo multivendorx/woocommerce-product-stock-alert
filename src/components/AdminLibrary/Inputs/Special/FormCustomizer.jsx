@@ -65,6 +65,7 @@ const FormCustomizer = (props) => {
                                             <button onClick={(e) => {
                                                 e.preventDefault();
                                                 setCurrentEditSection('');
+                                                    
                                             }} className="wrapper-close"><i class="admin-font adminLib-cross"></i></button>
                                             <div className="setting-section-dev">
                                                 <span class="label">Placeholder text</span>
@@ -72,7 +73,7 @@ const FormCustomizer = (props) => {
                                                     <input
                                                         type="text"
                                                         value={setting.email_placeholder_text}
-                                                        onChange={ (e)=> props.onChange('email_placeholder_text', e.target.value)}
+                                                        onChange={ (e)=> props.onChange('email_placeholder_text', e.target.value)} 
                                                     />
                                                 </div>
                                             </div>
@@ -80,6 +81,7 @@ const FormCustomizer = (props) => {
                                     }
                                 </>
                             }
+                            
                         </div>
                         <div className='button-section'>
                             <ButtonCustomizer
