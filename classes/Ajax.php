@@ -31,8 +31,8 @@ class Ajax {
 			wp_send_json_error( 'Invalid security token sent.' );
 			wp_die();
 		} 
-        $captcha_secret   = filter_input( INPUT_POST, 'captcha_secret', FILTER_SANITIZE_SPECIAL_CHARS );
-        $captcha_response = filter_input( INPUT_POST, 'captcha_response', FILTER_SANITIZE_SPECIAL_CHARS );
+        $captcha_secret   = filter_input( INPUT_POST, 'captcha_secret', FILTER_SANITIZE_SPECIAL_CHARS ) ?: '';
+        $captcha_response = filter_input( INPUT_POST, 'captcha_response', FILTER_SANITIZE_SPECIAL_CHARS ) ?: '';
         $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
 
         $recaptcha =  wp_remote_get( $recaptcha_url . '?secret=' . $captcha_secret . '&response=' . $captcha_response );
@@ -127,8 +127,8 @@ class Ajax {
 			wp_die();
 		}
 		
-		$customer_email = filter_input( INPUT_POST, 'customer_email', FILTER_SANITIZE_EMAIL );
-		$product_id     = filter_input( INPUT_POST, 'product_id', FILTER_VALIDATE_INT );
+		$customer_email = filter_input( INPUT_POST, 'customer_email', FILTER_SANITIZE_EMAIL ) ?: '';
+		$product_id     = filter_input( INPUT_POST, 'product_id', FILTER_VALIDATE_INT ) ?: '';
 		$variation_id   = filter_input( INPUT_POST, 'variation_id', FILTER_VALIDATE_INT ) ?: 0;
 
 		$success = false;
@@ -155,8 +155,8 @@ class Ajax {
 			wp_die();
 		}
 
-		$customer_email = filter_input( INPUT_POST, 'customer_email', FILTER_SANITIZE_EMAIL );
-		$product_id 	= filter_input( INPUT_POST, 'product_id', FILTER_VALIDATE_INT );
+		$customer_email = filter_input( INPUT_POST, 'customer_email', FILTER_SANITIZE_EMAIL ) ?: '';
+		$product_id 	= filter_input( INPUT_POST, 'product_id', FILTER_VALIDATE_INT ) ?: '';
 		$variation_id 	= filter_input( INPUT_POST, 'variation_id', FILTER_VALIDATE_INT ) ?: 0;
 		$status 		= '';
 
