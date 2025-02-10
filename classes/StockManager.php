@@ -150,10 +150,11 @@ class StockManager {
      * @return void
      */
     public function load_plugin_textdomain() {
-        $locale = is_admin() && function_exists( 'get_user_locale' ) ? get_user_locale() : get_locale();
-        $locale = apply_filters( 'plugin_locale', $locale, 'woocommerce-stock-manager' );
-        load_textdomain( 'woocommerce-stock-manager', WP_LANG_DIR . '/woocommerce-product-stock-alert/woocommerce-product-stock-alert-' . $locale . '.mo' );
-        load_plugin_textdomain( 'woocommerce-stock-manager', false, plugin_basename( dirname( dirname( __FILE__ ) ) ) . '/languages' );
+        if ( version_compare( $GLOBALS['wp_version'], '6.7', '<' ) ) {
+            load_plugin_textdomain( 'woocommerce-stock-manager', false, plugin_basename( dirname( dirname( __FILE__ ) ) ) . '/languages' );
+        } else {
+            load_textdomain( 'woocommerce-stock-manager', WP_LANG_DIR . '/woocommerce-product-stock-alert/woocommerce-product-stock-alert-' . determine_locale() . '.mo' );
+        }
     } 
 
     /**
