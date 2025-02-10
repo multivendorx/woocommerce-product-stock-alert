@@ -143,7 +143,7 @@ Manual installation method requires downloading the [Product Stock Manager & Not
 
 == Changelog ==
 
-= 2.5.16 - 2025-02-10 =
+= 2.5.16 - 2025-02-11 =
 * Added - WooCommerce 9.6.1 compatibility.
 * Fixed - Issue with the load_text_domain notice.
 * Dev - Added `stock_manager_email_footer` action.
