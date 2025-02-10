@@ -26,6 +26,7 @@ class StockManager {
         $this->container[ 'rest_namespace' ] = STOCK_MANAGER_REST_NAMESPACE;
         $this->container[ 'text_domain' ]    = STOCK_MANAGER_TEXT_DOMAIN;
         
+        add_action( 'init', [ $this, 'set_default_value' ] );
         // Activation Hooks
         register_activation_hook( $file, [ $this, 'activate' ] );
         // Deactivation Hooks
@@ -39,7 +40,39 @@ class StockManager {
         add_action( 'woocommerce_loaded', [ $this, 'init_plugin' ] );
         add_action( 'plugins_loaded', [ $this, 'is_woocommerce_loaded' ] );
         add_filter( 'plugin_row_meta', [ $this, 'plugin_row_meta' ], 10, 2 );
-    } 
+    }
+
+    public function set_default_value() {
+        $default_value = [
+            'double_opt_in_success' => __( 'Kindly check your inbox to confirm the subscription.', 'woocommerce-stock-manager' ), 
+            'shown_interest_text' => __( 'Kindly check your inbox to confirm the subscription.', 'woocommerce-stock-manager' ),
+            'email_placeholder_text' => __( 'Enter your email', 'woocommerce-stock-manager' ),
+            'alert_text' => __( 'Receive in-stock notifications for this.', 'woocommerce-stock-manager' ),
+            'unsubscribe_button_text' => __( 'Unsubscribe', 'woocommerce-stock-manager' ),
+            'alert_text_color' => '',
+            'customize_btn' => [
+                'button_text' => __( 'Notify me', 'woocommerce-stock-manager' ), 
+                'button_background_color' => '', 
+                'button_border_color' => '', 
+                'button_text_color' => '', 
+                'button_background_color_onhover' => '', 
+                'button_text_color_onhover' => '', 
+                'button_border_color_onhover' => '', 
+                'button_font_size' => '', 
+                'button_border_radious' => '', 
+                'button_border_size' => ''
+            ],
+            'alert_success'  => __( 'Thank you for expressing interest in %product_title%. We will notify you via email once it is back in stock.', 'woocommerce-stock-manager' ), 
+            // Translators: This message display already registered user to display already registered message
+            'alert_email_exist' => __( '%customer_email% is already registered for %product_title%. Please attempt a different email address.', 'woocommerce-stock-manager' ), 
+            'valid_email' => __( 'Please enter a valid email ID and try again.', 'woocommerce-stock-manager' ), 
+            // Translators: This message display user sucessfully unregistered
+            'alert_unsubscribe_message' => __( '%customer_email% is successfully unsubscribed.', 'woocommerce-stock-manager' ),
+            'ban_email_domain_text' => __( 'This email domain is ban in our site, kindly use another email domain.', 'woocommerce-stock-manager' ), 
+            'ban_email_address_text' => __( 'This email address is ban in our site, kindly use another email address.', 'woocommerce-stock-manager' )
+        ];
+        $this->container[ 'default_value' ]    = $default_value;
+    }
 
     /**
      * Add Metadata in plugin row.

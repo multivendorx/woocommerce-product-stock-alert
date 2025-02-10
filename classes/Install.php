@@ -182,41 +182,29 @@ class Install {
             'is_enable_no_interest' => false, 
             'is_double_optin' => false, 
             'is_remove_admin_email' => false, 
-            'double_opt_in_success' => __( 'Kindly check your inbox to confirm the subscription.', 'woocommerce-stock-manager' ), 
-            'shown_interest_text' => __( 'Kindly check your inbox to confirm the subscription.', 'woocommerce-stock-manager' ), 
+            'double_opt_in_success' => SM()->default_value['double_opt_in_success'], 
+            'shown_interest_text' => SM()->default_value['shown_interest_text'], 
             'additional_alert_email' => get_option( 'admin_email' ),
             'is_guest_subscriptions_enable' => ['is_guest_subscriptions_enable'],
             'lead_time_format'  => 'static',
             
             // Form customization settings
-            'email_placeholder_text' => __( 'Enter your email', 'woocommerce-stock-manager' ), 
-            'alert_text' => __( 'Receive in-stock notifications for this.', 'woocommerce-stock-manager' ),
-            'unsubscribe_button_text' => __( 'Unsubscribe', 'woocommerce-stock-manager' ),
-            'alert_text_color' => '', 
-            'customize_btn' => [
-                'button_text' => __( 'Notify me', 'woocommerce-stock-manager' ), 
-                'button_background_color' => '', 
-                'button_border_color' => '', 
-                'button_text_color' => '', 
-                'button_background_color_onhover' => '', 
-                'button_text_color_onhover' => '', 
-                'button_border_color_onhover' => '', 
-                'button_font_size' => '', 
-                'button_border_radious' => '', 
-                'button_border_size' => ''
-            ]
+            'email_placeholder_text' => SM()->default_value['email_placeholder_text'], 
+            'alert_text' => SM()->default_value['alert_text'],
+            'unsubscribe_button_text' => SM()->default_value['unsubscribe_button_text'],
+            'alert_text_color' => SM()->default_value['alert_text_color'], 
+            'customize_btn' => SM()->default_value['customize_btn']
         ];
         $submit_settings = [
-            'alert_success'  => __( 'Thank you for expressing interest in %product_title%. We will notify you via email once it is back in stock.', 'woocommerce-stock-manager' ), 
-            // Translators: This message display already registered user to display already registered message
-            'alert_email_exist' => __( '%customer_email% is already registered for %product_title%. Please attempt a different email address.', 'woocommerce-stock-manager' ), 
-            'valid_email' => __( 'Please enter a valid email ID and try again.', 'woocommerce-stock-manager' ), 
+            'alert_success'  => SM()->default_value['alert_success'], 
+            'alert_email_exist' => SM()->default_value['alert_email_exist'], 
+            'valid_email' => SM()->default_value['valid_email'], 
             // Translators: This message display user sucessfully unregistered
-            'alert_unsubscribe_message' => __( '%customer_email% is successfully unregistered.', 'woocommerce-stock-manager' ),
+            'alert_unsubscribe_message' => SM()->default_value['alert_unsubscribe_message'],
         ];
         $email_settings = [
-            'ban_email_domain_text' => __( 'This email domain is ban in our site, kindly use another email domain.', 'woocommerce-stock-manager' ), 
-            'ban_email_address_text' => __( 'This email address is ban in our site, kindly use another email address.', 'woocommerce-stock-manager' )
+            'ban_email_domain_text' => SM()->default_value['ban_email_domain_text'], 
+            'ban_email_address_text' => SM()->default_value['ban_email_address_text']
         ];
 
         if ( version_compare( $previous_version, '2.5.0', '<' ) ) {
