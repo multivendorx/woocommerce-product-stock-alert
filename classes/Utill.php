@@ -40,30 +40,19 @@ class Utill {
     public static function get_form_settings_array() {
         // Initialize the settings keys with default values
         $setting_keys = [
-            'double_opt_in_success' => __( 'Kindly check your inbox to confirm the subscription.', 'woocommerce-stock-manager' ),
-            'shown_interest_text' => __( 'Thank you for your interest.', 'woocommerce-stock-manager' ),
-            'alert_success' => __( 'Thank you for expressing interest in %product_title%. We will notify you once it is back in stock.', 'woocommerce-stock-manager' ),
-            'alert_email_exist' => __( '%customer_email% is already registered for %product_title%.', 'woocommerce-stock-manager' ),
-            'valid_email' => __( 'Please enter a valid email address.', 'woocommerce-stock-manager' ),
-            'alert_unsubscribe_message' => __( '%customer_email% is successfully unsubscribed.', 'woocommerce-stock-manager' ),
-            'email_placeholder_text' => __( 'Enter your email', 'woocommerce-stock-manager' ),
-            'alert_text' => __( 'Receive notifications when back in stock.', 'woocommerce-stock-manager' ),
-            'unsubscribe_button_text' => __( 'Unsubscribe', 'woocommerce-stock-manager' ),
-            'alert_text_color' => '', // Default value
-            'customize_btn' => [
-                'button_text' => __( 'Notify me', 'woocommerce-stock-manager' ),
-                'button_background_color' => '', // Default value
-                'button_border_color' => '', // Default value
-                'button_text_color' => '', // Default value
-                'button_background_color_onhover' => '', // Default value
-                'button_text_color_onhover' => '', // Default value
-                'button_border_color_onhover' => '', // Default value
-                'button_font_size' => '', // Default value
-                'button_border_size' => '', // Default value
-                'button_border_radious' => '', // Default value
-            ],
-            'ban_email_domain_text' => __( 'This email domain is not allowed.', 'woocommerce-stock-manager' ),
-            'ban_email_address_text' => __( 'This email address is banned.', 'woocommerce-stock-manager' ),
+            'double_opt_in_success' => SM()->default_value['double_opt_in_success'],
+            'shown_interest_text' => SM()->default_value['shown_interest_text'],
+            'alert_success' => SM()->default_value['alert_success'],
+            'alert_email_exist' => SM()->default_value['alert_email_exist'],
+            'valid_email' => SM()->default_value['valid_email'],
+            'alert_unsubscribe_message' => SM()->default_value['alert_unsubscribe_message'],
+            'email_placeholder_text' => SM()->default_value['email_placeholder_text'],
+            'alert_text' => SM()->default_value['alert_text'],
+            'unsubscribe_button_text' => SM()->default_value['unsubscribe_button_text'],
+            'alert_text_color' => SM()->default_value['alert_text_color'],
+            'customize_btn' => SM()->default_value['customize_btn'],
+            'ban_email_domain_text' => SM()->default_value['ban_email_domain_text'],
+            'ban_email_address_text' =>  SM()->default_value['ban_email_address_text'],
         ];
     
         $form_settings = [];
