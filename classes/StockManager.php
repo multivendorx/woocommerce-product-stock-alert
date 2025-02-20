@@ -187,7 +187,7 @@ class StockManager {
         if ( version_compare( $GLOBALS['wp_version'], '6.7', '<' ) ) {
             load_plugin_textdomain( 'woocommerce-stock-manager', false, plugin_basename( dirname( dirname( __FILE__ ) ) ) . '/languages' );
         } else {
-            load_textdomain( 'woocommerce-stock-manager', WP_LANG_DIR . '/woocommerce-product-stock-alert/woocommerce-product-stock-alert-' . determine_locale() . '.mo' );
+            load_textdomain( 'woocommerce-stock-manager', WP_LANG_DIR . '/plugins/woocommerce-product-stock-alert-' . determine_locale() . '.mo' );
         }
     } 
 
