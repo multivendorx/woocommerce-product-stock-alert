@@ -99,6 +99,7 @@ class StockManager {
      */
     public function activate() {
         update_option( 'stock_manager_installed', 1 );
+        $this->set_default_value();
         $this->container[ 'install' ] = new Install();
     }
 
