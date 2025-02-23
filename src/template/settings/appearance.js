@@ -33,7 +33,7 @@ export default {
         {
             key: 'is_guest_subscriptions_enable',
             type: 'checkbox',
-            label: __("Guest Subscriptions", "woocommerce-stock-manager-pro"),
+            label: __("Guest Subscriptions", "woocommerce-stock-manager"),
             desc: __("Allow guests (non-logged-in users) to subscribe to notifications for out-of-stock products.", "woocommerce-stock-manager"),
             class: 'woo-toggle-checkbox',
             options: [
@@ -177,8 +177,8 @@ export default {
             key: 'double_opt_in_success',
             type: 'textarea',
             class: 'woo-setting-wpeditor-class',
-            desc: __("Default: Kindly check your inbox to confirm the subscription.", "woocommerce-stock-manager-pro"),
-            label: __("Double opt-in success message", "woocommerce-stock-manager-pro"),
+            desc: __("Default: Kindly check your inbox to confirm the subscription.", "woocommerce-stock-manager"),
+            label: __("Double opt-in success message", "woocommerce-stock-manager"),
             dependent: {
                 key: "is_double_optin",
                 set: true,
@@ -193,7 +193,7 @@ export default {
         {
             key: 'is_recaptcha_enable',
             type: 'checkbox',
-            label: __("Enable  reCaptcha", "woocommerce-stock-manager-pro"),
+            label: __("Enable  reCaptcha", "woocommerce-stock-manager"),
             class: 'woo-toggle-checkbox',
             desc : ! appLocalizer.khali_dabba ? appLocalizer.is_recaptcha_enable_free : appLocalizer.is_recaptcha_enable_pro,
             options: [
@@ -208,7 +208,7 @@ export default {
         {
             key: 'v3_site_key',
             type: 'text',
-            label: __("Site Key", "woocommerce-stock-manager-pro"),
+            label: __("Site Key", "woocommerce-stock-manager"),
             dependent: {
                 key: "is_recaptcha_enable",
                 set: true,
@@ -217,7 +217,7 @@ export default {
         {
             key: 'v3_secret_key',
             type: 'text',
-            label: __("Secret Key", "woocommerce-stock-manager-pro"),
+            label: __("Secret Key", "woocommerce-stock-manager"),
             dependent: {
                 key: "is_recaptcha_enable",
                 set: true,
