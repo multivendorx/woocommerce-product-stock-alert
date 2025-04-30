@@ -26,6 +26,9 @@ class Admin {
         add_filter( 'handle_bulk_actions-edit-product', [ $this, 'subscribers_bulk_action_handler' ], 10, 3 );
         add_action( 'admin_notices', [ $this, 'subscribers_bulk_action_admin_notice' ] );
         add_action( 'admin_print_styles-plugins.php', [ $this, 'admin_plugin_page_style' ] );
+
+        // replace textdomain in translation file
+	add_filter( 'load_script_translation_file', [ $this, 'load_script_translation_file' ], 10, 3 );
     }
 
     /**
@@ -258,5 +261,18 @@ class Admin {
             </p>
             <?php
         } 
+    }
+
+    /**
+     * Function to replace textdomain with woocommerce-product-stock-alert in translation file
+     */
+    public function load_script_translation_file( $file, $handle, $domain ) {
+        if ( 'woocommerce-stock-manager' !== $domain ) {
+            return $file;
+	}
+
+	$data = explode( '/', $file );
+	$data[ count( $data ) - 1 ] = preg_replace( '/woocommerce-stock-manager/', 'woocommerce-product-stock-alert', $data[ count( $data ) - 1 ], 1 );
+	return implode( '/', $data );
     }
 }
