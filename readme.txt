@@ -1,7 +1,7 @@
 === Notifima – WooCommerce Stock Manager, Inventory Management, Wishlist ===
 
 Contributors: wcmp
-Tags: woocommerce stock manager, low stock email, woocommerce inventory management, stock waitlist, in stock alert
+Tags: woocommerce stock manager, woocommerce stock management, woocommerce inventory management, stock waitlist, in stock alert
 Requires at least: 5.4
 Tested up to: 6.7.2
 Requires PHP: 8.0
@@ -10,7 +10,7 @@ Donate link: https://multivendorx.com/donate/
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Boost sales with a powerful WooCommerce stock alert system, engage subscribers with real-time updates, and manage inventory through a dedicated dashboard.
+WooCommerce stock manager plugin that increases sales with low stock alerts, back-in-stock notifications, wishlist reminders, and advanced inventory management.
 
 == Description ==
 **Empower your WooCommerce store with automatic out-of-stock subscriptions and in-stock alerts, ensuring customers never miss their desired products.**
