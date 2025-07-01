@@ -1,4 +1,4 @@
-=== Notifima - WooCommerce Stock Manager & Back In Stock Notifier | Waitlist Product Management ===
+=== Notifima – WooCommerce Stock Manager, Inventory Management, Wishlist ===
 
 Contributors: wcmp
 Tags: woocommerce stock manager, low stock email, woocommerce inventory management, stock waitlist, in stock alert
@@ -17,9 +17,9 @@ Boost sales with a powerful WooCommerce stock alert system, engage subscribers w
 
 The ultimate solution to keep your customers engaged and informed when products are out of stock. Automatically notify subscribers when products are back in stock. Elevate sales with instant stock alerts, engage customers with real-time updates. Track demand and convert subscribers into loyal customers. 
 
-🌐 Explore our [Document](https://notifima.com/docs/?utm_source=wporg&utm_medium=plugindescription&utm_campaign=stockmanagerwporg)
+🌐 Explore our [Document](https://notifima.com/docs/?utm_source=wporg&utm_medium=plugindescription&utm_campaign=notifimawporg)
 
-🌟 Learn More About [Pro](https://notifima.com/pricing/?utm_source=wporg&utm_medium=plugindescription&utm_campaign=stockmanagerwporg)
+🌟 Learn More About [Pro](https://notifima.com/pricing/?utm_source=wporg&utm_medium=plugindescription&utm_campaign=notifimawporg)
 
 ==📦Supported Product Types of WooCommerce ==
 👉Simple
@@ -71,7 +71,7 @@ Are you tired of losing potential sales because your customers can't buy the out
 **🆕 Instant Updates**: Get real-time updates on your subscribers and their preferences. 
 
 
-👉 UPGRADE TO [**Notifima PRO**](https://notifima.com/pricing/?utm_source=wporg&utm_medium=plugindescription&utm_campaign=stockmanagerwporg)  
+👉 UPGRADE TO [**Notifima PRO**](https://notifima.com/pricing/?utm_source=wporg&utm_medium=plugindescription&utm_campaign=notifimawporg)  
 
 ✔️ **Double Opt In [PRO]**: Double opt-in for stock alert subscription is a two-step confirmation process that ensures subscribers genuinely want to receive notifications about product availability. 
 
@@ -94,7 +94,7 @@ Are you tired of losing potential sales because your customers can't buy the out
 
 
 ## 👩‍🏫 Learn More About Pro
-[Notifima Pro](https://notifima.com/pricing/?utm_source=wporg&utm_medium=plugindescription&utm_campaign=stockmanagerwporg)
+[Notifima Pro](https://notifima.com/pricing/?utm_source=wporg&utm_medium=plugindescription&utm_campaign=notifimawporg)
 
 ## Shortcodes
 - **[display_stock_manager_form]**: You can display stock alert form anywhere using this shortcode.
