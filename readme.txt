@@ -1,7 +1,7 @@
-=== Back In Stock Notifier for WooCommerce | Manage Inventory and Waitlist Product for WooCommerce ===
+=== Notifima - WooCommerce Stock Manager & Back In Stock Notifier | Waitlist Product Management ===
 
 Contributors: wcmp
-Tags: woocommerce stock, out of stock, in stock, stock alert, alert email
+Tags: woocommerce stock manager, low stock email, woocommerce inventory management, stock waitlist, in stock alert
 Requires at least: 5.4
 Tested up to: 6.7.2
 Requires PHP: 8.0
@@ -17,9 +17,9 @@ Boost sales with a powerful WooCommerce stock alert system, engage subscribers w
 
 The ultimate solution to keep your customers engaged and informed when products are out of stock. Automatically notify subscribers when products are back in stock. Elevate sales with instant stock alerts, engage customers with real-time updates. Track demand and convert subscribers into loyal customers. 
 
-🌐 Explore our [Document](https://multivendorx.com/docs/knowledgebase/products-stock-manager-notifier-for-woocommerce/?utm_source=wporg&utm_medium=plugindescription&utm_campaign=stockmanagerwporg)
+🌐 Explore our [Document](https://notifima.com/docs/?utm_source=wporg&utm_medium=plugindescription&utm_campaign=stockmanagerwporg)
 
-🌟 Learn More About [Pro](https://multivendorx.com/woocommerce-product-stock-manager-notifier-pro/?utm_source=wporg&utm_medium=plugindescription&utm_campaign=stockmanagerwporg)
+🌟 Learn More About [Pro](https://notifima.com/pricing/?utm_source=wporg&utm_medium=plugindescription&utm_campaign=stockmanagerwporg)
 
 ==📦Supported Product Types of WooCommerce ==
 👉Simple
@@ -55,7 +55,7 @@ The ultimate solution to keep your customers engaged and informed when products 
 * 🔒 Enhance security and data integrity with ReCAPTCHA for reliable out-of-stock alerts.  **[PRO]** 
 
 
-👉 Official Demo Link: Try out Free and Pro **Stock Alert & Notifier** [Demo site](https://multivendordemo.com/stockmanager/)
+👉 Official Demo Link: Try out Free and Pro **Notifima** [Demo site](https://multivendordemo.com/stockmanager/)
 
 
 ## 🌟 Comprehensive Features:
@@ -71,7 +71,7 @@ Are you tired of losing potential sales because your customers can't buy the out
 **🆕 Instant Updates**: Get real-time updates on your subscribers and their preferences. 
 
 
-👉 UPGRADE TO [**WOOCOMMERCE PRODUCT STOCK MANAGER & NOTIFIER PRO**](https://multivendorx.com/woocommerce-product-stock-manager-notifier-pro/?utm_source=wporg&utm_medium=plugindescription&utm_campaign=stockmanagerwporg)  
+👉 UPGRADE TO [**Notifima PRO**](https://notifima.com/pricing/?utm_source=wporg&utm_medium=plugindescription&utm_campaign=stockmanagerwporg)  
 
 ✔️ **Double Opt In [PRO]**: Double opt-in for stock alert subscription is a two-step confirmation process that ensures subscribers genuinely want to receive notifications about product availability. 
 
@@ -94,7 +94,7 @@ Are you tired of losing potential sales because your customers can't buy the out
 
 
 ## 👩‍🏫 Learn More About Pro
-[WooCommerce Product Stock Manager & Notifier Pro](https://multivendorx.com/woocommerce-product-stock-manager-notifier-pro/?utm_source=wporg&utm_medium=plugindescription&utm_campaign=stockmanagerwporg)
+[Notifima Pro](https://notifima.com/pricing/?utm_source=wporg&utm_medium=plugindescription&utm_campaign=stockmanagerwporg)
 
 ## Shortcodes
 - **[display_stock_manager_form]**: You can display stock alert form anywhere using this shortcode.
