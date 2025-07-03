@@ -55,7 +55,7 @@ The ultimate solution to keep your customers engaged and informed when products 
 * 🔒 Enhance security and data integrity with ReCAPTCHA for reliable out-of-stock alerts.  **[PRO]** 
 
 
-👉 Official Demo Link: Try out Free and Pro **Notifima** [Demo site](https://multivendordemo.com/stockmanager/)
+👉 Official Demo Link: Try out Free and Pro **Notifima** [Demo site](https://multivendordemo.com/notifima/)
 
 
 ## 🌟 Comprehensive Features:
